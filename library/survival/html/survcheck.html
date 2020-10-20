@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Checks of a survival data set</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for survcheck {survival}"><tr><td>survcheck {survival}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Checks of a survival data set</h2>
+
+<h3>Description</h3>
+
+<p>Perform a set of consistency checks on survival data
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+survcheck(formula, data, id, istate, istate0="(s0)", timefix=TRUE,...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>a model formula with a <code>Surv</code> object as the
+response</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>data frame in which to find the <code>id</code>,
+<code>istate</code> and formula variables</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>an identifier that labels unique subjects</p>
+</td></tr>
+<tr valign="top"><td><code>istate</code></td>
+<td>
+<p>an optional vector giving the initial state for each
+observation, i.e., the state at the start of each interval</p>
+</td></tr>
+<tr valign="top"><td><code>istate0</code></td>
+<td>
+<p>default label for the initial state when <code>istate</code>
+is missing</p>
+</td></tr>
+<tr valign="top"><td><code>timefix</code></td>
+<td>
+<p>process times through the <code>aeqSurv</code> function to
+eliminate potential roundoff issues.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments, which are ignored (but won't give an
+error if someone added <code>weights</code> for instance)</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This routine will examine a multi-state data set for consistency of
+the data.  The basic rules are that if a subject is at risk they have
+to be somewhere, can not be two states at once, and should make
+sensible transitions from state to state.  It reports the number of
+instances of the following conditions:
+</p>
+
+<dl>
+<dt>overlap</dt><dd><p>two observations for the same subject that overlap in
+time, e.g. intervals of (0, 100) and (90, 120).  
+If <code>y</code> is simple (time, status) survival observation
+intervals implicitly start at 0, so in that case any duplicate
+identifiers will generate an overlap.</p>
+</dd>
+<dt>jump</dt><dd><p>a hole in a subject's timeline, where they are in one
+state at the end of the prior interval, but a new state in the
+at the start subsequent interval.</p>
+</dd>
+<dt>gap</dt><dd><p>one or more gaps in a subject's timeline; they are presumably
+in the same state at their return as when they left.</p>
+</dd>
+<dt>teleport</dt><dd><p>two adjacent intervals for a subject, with the
+first interval ending in one state and the subsequent interval
+starting in another.  They have instantaneously changed states
+with experiencing a transition.</p>
+</dd>
+</dl>
+
+<p>The total number of occurences of each is present in the <code>flags</code>
+vector. Optional components give the location and identifiers of the
+flagged observations.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a list with components
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>states</code></td>
+<td>
+<p>the vector of possible states</p>
+</td></tr>
+<tr valign="top"><td><code>transitions</code></td>
+<td>
+<p>a matrix giving the count of transitions from one
+state to another</p>
+</td></tr>
+<tr valign="top"><td><code>statecount</code></td>
+<td>
+<p>table of the number of visits per state, e.g., 18
+subjects had 2 visits to the &quot;infection&quot; state</p>
+</td></tr>
+<tr valign="top"><td><code>flags</code></td>
+<td>
+<p>a vector giving the counts of each check</p>
+</td></tr>
+<tr valign="top"><td><code>istate</code></td>
+<td>
+<p>a revised initial state vector</p>
+</td></tr>
+<tr valign="top"><td><code>overlap</code></td>
+<td>
+<p>a list with the row number and id of overlaps (not
+present if there are no overlaps)</p>
+</td></tr>
+<tr valign="top"><td><code>gaps</code></td>
+<td>
+<p>a list with the row number and id of gaps (not present if
+there are no gaps)</p>
+</td></tr>
+<tr valign="top"><td><code>teleport</code></td>
+<td>
+<p>a list with the row number and id of inconsistent
+rows (not present if there are none)</p>
+</td></tr>
+<tr valign="top"><td><code>jumps</code></td>
+<td>
+<p>a list with the row number and id of jumps (not present
+if there are no jumps</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Terry Therneau and Beth Atkinson</p>
+
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.1-8 <a href="00Index.html">Index</a>]</div>
+</body></html>
