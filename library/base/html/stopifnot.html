@@ -19,7 +19,7 @@ an error message indicating the <em>first</em> expression which was not
 <h3>Usage</h3>
 
 <pre>
-stopifnot(..., exprs, local = TRUE)
+stopifnot(..., exprs, exprObject, local = TRUE)
 </pre>
 
 
@@ -28,10 +28,9 @@ stopifnot(..., exprs, local = TRUE)
 <table summary="R argblock">
 <tr valign="top"><td><code>..., exprs</code></td>
 <td>
-<p>any number of (typically but not necessarily
-<code><a href="logical.html">logical</a></code>) <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> expressions, which should each evaluate to
-(a logical vector of all)
-<code><a href="logical.html">TRUE</a></code>.  Use <em>either</em> <code>...</code> <em>or</em>
+<p>any number of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> expressions, which should each
+evaluate to (a logical vector of all) <code><a href="logical.html">TRUE</a></code>.  Use
+<em>either</em> <code>...</code> <em>or</em>
 <code>exprs</code>, the latter typically an unevaluated expression of the
 form </p>
 <pre>{
@@ -39,12 +38,28 @@ form </p>
    expr2
    ....
 }</pre>
+<p>Note that e.g., positive numbers are <em>not</em> <code>TRUE</code>, even when
+they are coerced to <code>TRUE</code>, e.g., inside <code>if(.)</code> or in
+arithmetic computations in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>.
+</p>
+<p>If names are provided to <code>...</code>, they will be used in lieu of
+the default error message.
+</p>
+</td></tr>
+<tr valign="top"><td><code>exprObject</code></td>
+<td>
+<p>alternative to <code>exprs</code> or <code>...</code>:
+an &lsquo;expression-like&rsquo; object, typically an
+<code><a href="expression.html">expression</a></code>, but also a <code><a href="call.html">call</a></code>, a
+<code><a href="name.html">name</a></code>, or atomic constant such as <code>TRUE</code>.
+</p>
 </td></tr>
 <tr valign="top"><td><code>local</code></td>
 <td>
 <p>(only when <code>exprs</code> is used:) indicates the
 <code><a href="environment.html">environment</a></code> in which the expressions should be
-evaluated; by default the one where <code>stopifnot()</code> has been called from.</p>
+evaluated; by default the one from where <code>stopifnot()</code> has been
+called.</p>
 </td></tr>
 </table>
 
@@ -129,20 +144,34 @@ stopifnot(m == t(m), diag(m) == rep(1, 2)) # all(.) |=&gt;  TRUE
 op &lt;- options(error = expression(NULL))
 # "disabling stop(.)"  &lt;&lt; Use with CARE! &gt;&gt;
 
-stopifnot(all.equal(pi, 3.141593),  2 &lt; 2, all(1:10 &lt; 12), "a" &lt; "b")
+stopifnot(length(10)) # gives an error: '1' is *not* TRUE
+## even when   if(1) "ok"   works
+
+stopifnot(all.equal(pi, 3.141593),  2 &lt; 2, (1:10 &lt; 12), "a" &lt; "b")
 ## More convenient for interactive "line by line" evaluation:
 stopifnot(exprs = {
   all.equal(pi, 3.1415927)
   2 &lt; 2
-  all(1:10 &lt; 12)
+  1:10 &lt; 12
   "a" &lt; "b"
 })
+
+eObj &lt;- expression(2 &lt; 3, 3 &lt;= 3:6, 1:10 &lt; 2)
+stopifnot(exprObject = eObj)
+stopifnot(exprObject = quote(3 == 3))
+stopifnot(exprObject = TRUE)
+
 
 # long all.equal() error messages are abbreviated:
 stopifnot(all.equal(rep(list(pi),4), list(3.1, 3.14, 3.141, 3.1415)))
 
+# The default error message can be overridden to be more informative:
+m[1,2] &lt;- 12
+stopifnot("m must be symmetric"= m == t(m))
+#=&gt; Error: m must be symmetric
+
 options(op)  # revert to previous error handler
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

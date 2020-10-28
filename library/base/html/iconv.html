@@ -45,7 +45,8 @@ vector by <code><a href="character.html">as.character</a></code>, or a list with
 <p>character string.  If not <code>NA</code> it is used to replace
 any non-convertible bytes in the input.  (This would normally be a
 single character, but can be more.)  If <code>"byte"</code>, the indication is
-<code>"&lt;xx&gt;"</code> with the hex code of the byte.</p>
+<code>"&lt;xx&gt;"</code> with the hex code of the byte.  If <code>"Unicode"</code>
+and converting from UTF-8, the Unicode point in the form <code>"&lt;U+xxxx&gt;"</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>mark</code></td>
 <td>
@@ -92,6 +93,9 @@ encodings into account.
 <p>Note that implementations of <code>iconv</code> typically do not do much
 validity checking and will often mis-convert inputs which are invalid
 in encoding <code>from</code>.
+</p>
+<p>If <code>sub = "Unicode"</code> is used for a non-UTF-8 input it is the same
+as <code>sub = "byte"</code>.
 </p>
 
 
@@ -217,6 +221,7 @@ iconv(x, "latin1", "ASCII")          #   NA
 iconv(x, "latin1", "ASCII", "?")     # "fa?ile"
 iconv(x, "latin1", "ASCII", "")      # "faile"
 iconv(x, "latin1", "ASCII", "byte")  # "fa&lt;e7&gt;ile"
+iconv(xx, "UTF-8", "ASCII", "Unicode") # "fa&lt;U+00E7&gt;ile"
 
 ## Extracts from old R help files (they are nowadays in UTF-8)
 x &lt;- c("Ekstr\xf8m", "J\xf6reskog", "bi\xdfchen Z\xfcrcher")
@@ -229,5 +234,5 @@ str(xx &lt;- iconv(x, "latin1", "UTF-16LE", toRaw = TRUE))
 iconv(xx, "UTF-16LE", "UTF-8")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

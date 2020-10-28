@@ -9,8 +9,8 @@
 
 <h3>Description</h3>
 
-<p>Writes an ASCII text representation of an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object to a file
-or connection, or uses one to recreate the object.
+<p>Writes an ASCII text representation of an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object to a file, the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>
+console, or a connection, or uses one to recreate the object.
 </p>
 
 
@@ -86,10 +86,10 @@ set <code>options(keep.source = FALSE</code>) when calling <code>source</code>.
 <h3>Note</h3>
 
 <p>This is <b>not</b> a good way to transfer objects between <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> sessions.
-<code><a href="dump.html">dump</a></code> is better, but the function <code><a href="save.html">save</a></code> is
-designed to be used for transporting <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> data, and will work with <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>
-objects that <code>dput</code> does not handle correctly as well as being
-much faster.
+<code><a href="dump.html">dump</a></code> is better, but the functions <code><a href="save.html">save</a></code> and
+<code><a href="readRDS.html">saveRDS</a></code> are designed to be used for transporting <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> data,
+and will work with <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> objects that <code>dput</code> does not handle correctly
+as well as being much faster.
 </p>
 <p>To avoid the risk of a source attribute out of sync with the actual
 function definition, the source attribute of a function will never
@@ -149,5 +149,5 @@ dput(xn, control = "S_compat") # no names
 dput(xn, control = c("keepNA", "keepInteger", "showAttributes"))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

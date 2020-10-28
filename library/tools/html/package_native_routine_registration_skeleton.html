@@ -125,31 +125,35 @@ silently ignored.
 <h3>Extracting C/C++ prototypes</h3>
 
 <p>There are several tools available to extract function declarations
-from C or C++ code.  For example,
+from C or C++ code.
 </p>
 <p>For C code one can use <code>cproto</code>
-(<a href="http://invisible-island.net/cproto/cproto.html">http://invisible-island.net/cproto/cproto.html</a>; Windows
+(<a href="https://invisible-island.net/cproto/cproto.html">https://invisible-island.net/cproto/cproto.html</a>; Windows
 executables are available), for
-example</p>
+example
+</p>
 <pre>
     cproto -I/path/to/R/include -e *.c
   </pre>
 <p><code>ctags</code> (commonly distributed with the OS)
-covers C and C++., listing all function usages by something
-like</p>
+covers C and C++., using something like
+</p>
 <pre>
     ctags -x *.c
-  </pre><p>.  (The &lsquo;Exuberant&rsquo; version allows a lot more control.)
+  </pre>
+<p>to list all function usages.
+(The &lsquo;Exuberant&rsquo; version allows a lot more control.)
 </p>
 
 
 <h3>Extracting Fortran prototypes</h3>
 
 <p><code>gfortran</code> 9.2 and later can extract C prototypes for Fortran
-subroutines with a special flag:</p>
+subroutines with a special flag:
+</p>
 <pre>
     gfortran -c -fc-prototypes-external file.f
-</pre>
+  </pre>
 <p>although ironically not for functions declared <code>bind(C)</code>.
 </p>
 
@@ -163,15 +167,18 @@ e.g. <code>.Call</code> calls used directly in examples, tests <em>etc</em>.
 <em>will</em> find those in parts of the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> code &lsquo;commented out&rsquo;
 by inclusion in <code>if(FALSE) { ... }</code>.
 On the other hand, it will fail to find the entry points in
-constructs like </p>
+constructs like
+</p>
 <pre>
     .Call(if(int) "rle_i" else "rle_d", i, force)
   </pre>
-<p>and does not know the value of variables in calls like </p>
+<p>and does not know the value of variables in calls like
+</p>
 <pre>
     .Call (cfunction, ...)
     .Call(..., PACKAGE="sparseLTSEigen")
-  </pre><p> (but if <code>character_only</code> is false, will extract the first as
+  </pre>
+<p>(but if <code>character_only</code> is false, will extract the first as
 <code>"cfunction"</code>).  Calls which have not been fully resolved will be
 noted <em>via</em> comments in the output file.
 </p>
@@ -219,5 +226,5 @@ void R_init_splines(DllInfo *dll)
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>tools</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>tools</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

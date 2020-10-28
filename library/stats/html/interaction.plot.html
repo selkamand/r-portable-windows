@@ -19,9 +19,9 @@ combinations of factors, thereby illustrating possible interactions.
 <pre>
 interaction.plot(x.factor, trace.factor, response, fun = mean,
                  type = c("l", "p", "b", "o", "c"), legend = TRUE,
-                 trace.label = deparse(substitute(trace.factor)),
+                 trace.label = deparse1(substitute(trace.factor)),
                  fixed = FALSE,
-                 xlab = deparse(substitute(x.factor)),
+                 xlab = deparse1(substitute(x.factor)),
                  ylab = ylabel,
                  ylim = range(cells, na.rm = TRUE),
                  lty = nc:1, col = 1, pch = c(1:9, 0, letters),
@@ -188,5 +188,5 @@ with(esophNA, {
 rm(esophNA) # to clear up
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -18,7 +18,8 @@
 <pre>
 Rprof(filename = "Rprof.out", append = FALSE, interval = 0.02,
        memory.profiling = FALSE, gc.profiling = FALSE,
-       line.profiling = FALSE, numfiles = 100L, bufsize = 10000L)
+       line.profiling = FALSE, filter.callframes = FALSE,
+       numfiles = 100L, bufsize = 10000L)
 </pre>
 
 
@@ -55,6 +56,11 @@ Set to <code>NULL</code> or <code>""</code> to disable profiling.
 <tr valign="top"><td><code>line.profiling</code></td>
 <td>
 <p>logical:  write line locations to the file?</p>
+</td></tr>
+<tr valign="top"><td><code>filter.callframes</code></td>
+<td>
+<p>logical: filter out intervening call frames
+of the call tree. See the filtering out call frames section.</p>
 </td></tr>
 <tr valign="top"><td><code>numfiles, bufsize</code></td>
 <td>
@@ -113,6 +119,76 @@ discussion of source references.  By default the statement locations
 are not shown in <code><a href="summaryRprof.html">summaryRprof</a></code>, but see that help page
 for options to enable the display.
 </p>
+
+
+<h3>Filtering Out Call Frames</h3>
+
+<p>Lazy evaluation makes the call stack more complex because intervening
+call frames are created between the time arguments are applied to a
+function, and the time they are effectively evaluated. When the call
+stack is represented as a tree, these intervening frames appear as
+sibling nodes. For instance, evaluating <code>try(EXPR)</code> produces the
+following call tree, at the time <code>EXPR</code> gets evaluated:
+</p>
+<pre>
+1. +-base::try(EXPR)
+2. | \-base::tryCatch(...)
+3. |   \-base:::tryCatchList(expr, classes, parentenv, handlers)
+4. |     \-base:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
+5. |       \-base:::doTryCatch(return(expr), name, parentenv, handler)
+6. \-EXPR
+</pre>
+<p>Lines 2 to 5 are intervening call frames, the last of which finally
+triggered evaluation of <code>EXPR</code>. Setting <code>filter.callframes</code>
+to <code>TRUE</code> simplifies the profiler output by removing all sibling
+nodes of intervening frames.
+</p>
+<p>The same kind of call frame filtering is applied with <code>eval()</code>
+frames.  When you call <code>eval()</code>, two frames are pushed on the
+stack to ensure a continuity between frames. Say we have these
+definitions:
+</p>
+<pre>
+calling &lt;- function() evaluator(quote(called()), environment())
+evaluator &lt;- function(expr, env) eval(expr, env)
+called &lt;- function() EXPR()
+</pre>
+<p><code>calling()</code> calls <code>called()</code> in its own environment, via
+<code>eval()</code>. The latter is called indirectly through
+<code>evaluator()</code>. The net effect of this code is identical to just
+calling <code>called()</code> directly, without the intermediaries. However,
+the full call stack looks like this:
+</p>
+<pre>
+1. calling()
+2. \-evaluator(quote(called()), environment())
+3.   \-base::eval(expr, env)
+4.     \-base::eval(expr, env)
+5.       \-called()
+6.         \-EXPR()
+</pre>
+<p>When call frame filtering is turned on, the true calling environment
+of <code>called()</code> is looked up, and the filtered call stack looks like
+this:
+</p>
+<pre>
+1. calling()
+5. \-called()
+6.   \-EXPR()
+</pre>
+<p>If the calling environment is not on the stack, the function called by
+<code>eval()</code> becomes a root node. Say we have:
+</p>
+<pre>
+calling &lt;- function() evaluator(quote(called()), new.env())
+</pre>
+<p>With call frame filtering we then get the following filtered call
+stack:
+</p>
+<pre>
+5. called()
+6. \-EXPR()
+</pre>
 
 
 <h3>Note</h3>
@@ -176,5 +252,5 @@ Rprof(NULL)
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

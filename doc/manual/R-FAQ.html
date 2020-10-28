@@ -4,6 +4,7 @@
 <head>
 <title>R FAQ</title>
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="R FAQ">
 <meta name="keywords" content="R FAQ">
 <meta name="resource-type" content="document">
@@ -117,8 +118,9 @@ ul.menu {
 
 
 
+
 <h2>Frequently Asked Questions on R</h2>
-<h3 style="text-align: center;">Version 2018-10-18</h3>
+<h3 style="text-align: center;">Version 2020-08-03</h3>
 <h3 style="text-align: center;">Kurt Hornik</h3>
 <hr>
 <a name="SEC_Contents"></a>
@@ -177,9 +179,8 @@ ul.menu {
     <ul class="no-bullet">
       <li><a name="toc-Add_002don-packages-in-R-1" href="#Add_002don-packages-in-R">5.1.1 Add-on packages in R</a></li>
       <li><a name="toc-Add_002don-packages-from-CRAN-1" href="#Add_002don-packages-from-CRAN">5.1.2 Add-on packages from <acronym>CRAN</acronym></a></li>
-      <li><a name="toc-Add_002don-packages-from-Omegahat-1" href="#Add_002don-packages-from-Omegahat">5.1.3 Add-on packages from Omegahat</a></li>
-      <li><a name="toc-Add_002don-packages-from-Bioconductor-1" href="#Add_002don-packages-from-Bioconductor">5.1.4 Add-on packages from Bioconductor</a></li>
-      <li><a name="toc-Other-add_002don-packages-1" href="#Other-add_002don-packages">5.1.5 Other add-on packages</a></li>
+      <li><a name="toc-Add_002don-packages-from-Bioconductor-1" href="#Add_002don-packages-from-Bioconductor">5.1.3 Add-on packages from Bioconductor</a></li>
+      <li><a name="toc-Other-add_002don-packages-1" href="#Other-add_002don-packages">5.1.4 Other add-on packages</a></li>
     </ul></li>
     <li><a name="toc-How-can-add_002don-packages-be-installed_003f-1" href="#How-can-add_002don-packages-be-installed_003f">5.2 How can add-on packages be installed?</a></li>
     <li><a name="toc-How-can-add_002don-packages-be-used_003f-1" href="#How-can-add_002don-packages-be-used_003f">5.3 How can add-on packages be used?</a></li>
@@ -323,7 +324,7 @@ Next: <a href="#Obtaining-this-document" accesskey="n" rel="next">Obtaining this
 <a name="Legalese-1"></a>
 <h3 class="section">1.1 Legalese</h3>
 
-<p>This document is copyright &copy; 1998&ndash;2018 by Kurt
+<p>This document is copyright &copy; 1998&ndash;2020 by Kurt
 Hornik.
 </p>
 <p>This document is free software; you can redistribute it and/or modify it
@@ -381,14 +382,14 @@ Next: <a href="#Notation" accesskey="n" rel="next">Notation</a>, Previous: <a hr
 <h3 class="section">1.3 Citing this document</h3>
 
 <p>In publications, please refer to this <acronym>FAQ</acronym> as Hornik
-(2018), &ldquo;The R <acronym>FAQ</acronym>&rdquo;, and give the above,
+(2020), &ldquo;The R <acronym>FAQ</acronym>&rdquo;, and give the above,
 <em>official</em> <acronym>URL</acronym>:
 </p>
 <div class="example">
 <pre class="example">@Misc{,
   author        = {Kurt Hornik},
   title         = {{R} {FAQ}},
-  year          = {2018},
+  year          = {2020},
   url           = {https://CRAN.R-project.org/doc/FAQ/R-FAQ.html}
 }
 </pre></div>
@@ -485,7 +486,7 @@ script files.
 </p>
 <p>The design of R has been heavily influenced by two existing languages:
 Becker, Chambers &amp; Wilks&rsquo; S (see <a href="#What-is-S_003f">What is S?</a>) and Sussman&rsquo;s
-<a href="https://www.cs.indiana.edu/scheme-repository/home.html">Scheme</a>.
+<a href="http://community.schemewiki.org/?scheme-faq">Scheme</a>.
 Whereas the resulting language is very similar in appearance to S, the
 underlying implementation and semantics are derived from Scheme.
 See <a href="#What-are-the-differences-between-R-and-S_003f">What are the differences between R and S?</a>, for further details.
@@ -586,7 +587,7 @@ CVS).
 </p>
 <p>Tarballs with daily snapshots of the r-devel and r-patched development
 versions of R can be found at
-<a href="https://stat.ethz.ch/R/daily">https://stat.ethz.ch/R/daily</a>.
+<a href="https://stat.ethz.ch/R/daily/">https://stat.ethz.ch/R/daily/</a>.
 </p>
 
 
@@ -823,11 +824,7 @@ LaTeX, see <a href="#How-can-R-be-installed_003f">How can R be installed?</a>.  
 version is always available for web browsing at
 <a href="https://stat.ethz.ch/R-manual/">https://stat.ethz.ch/R-manual/</a>.
 </p>
-<p>Printed copies of the R reference manual for some version(s) are
-available from Network Theory Ltd, at
-<a href="http://www.network-theory.co.uk/R/base/">http://www.network-theory.co.uk/R/base/</a>.  For each set of manuals
-sold, the publisher donates USD 10 to the R Foundation (see <a href="#What-is-the-R-Foundation_003f">What is the R Foundation?</a>).
-</p>
+
 <p>The R distribution also comes with the following manuals.
 </p>
 <ul>
@@ -871,7 +868,7 @@ Springer, ISBN 978-0-387-79053-4,
 </p>
 <p>Robert Gentleman (2008), &ldquo;R Programming for Bioinformatics&rdquo;.  Chapman
 &amp; Hall/CRC, Boca Raton, FL, ISBN 978-1-420-06367-7,
-<a href="https://www.bioconductor.org/pub/RBioinf/">https://www.bioconductor.org/pub/RBioinf/</a>.
+<a href="https://master.bioconductor.org/help/publications/books/r-programming-for-bioinformatics/">https://master.bioconductor.org/help/publications/books/r-programming-for-bioinformatics/</a>.
 </p>
 <p>Stefano M. Iacus (2008), &ldquo;Simulation and Inference for Stochastic
 Differential Equations: With R Examples&rdquo;. Springer, New York, ISBN
@@ -898,9 +895,9 @@ S and S-Plus&rdquo;. Springer, ISBN 0-387-98957-0.
 
 <p>Last, but not least, Ross&rsquo; and Robert&rsquo;s experience in designing and
 implementing R is described in Ihaka &amp; Gentleman (1996), &ldquo;R: A Language
-for Data Analysis and Graphics&rdquo;,
-<a href="http://www.amstat.org/publications/jcgs/"><em>Journal of
-Computational and Graphical Statistics</em></a>, <strong>5</strong>, 299&ndash;314.
+for Data Analysis and Graphics&rdquo;, <em>Journal of Computational and
+Graphical Statistics</em>, <strong>5</strong>, 299&ndash;314
+(doi:&nbsp;<a href="https://doi.org/10.1080/10618600.1996.10474713">10.1080/10618600.1996.10474713</a>).
 </p>
 <hr>
 <a name="Citing-R"></a>
@@ -1001,9 +998,7 @@ include information on the system and version of R being used.  See
 <p>See <a href="https://www.R-project.org/mail.html">https://www.R-project.org/mail.html</a> for more information on
 the R mailing lists.
 </p>
-<p>The R Core Team can be reached at <a href="mailto:R-core@lists.R-project.org">R-core@lists.R-project.org</a>
-for comments and reports.
-</p>
+
 
 <hr>
 <a name="What-is-CRAN_003f"></a>
@@ -1055,10 +1050,10 @@ Next: <a href="#Why-is-R-named-R_003f" accesskey="n" rel="next">Why is R named R
 <h3 class="section">2.11 Can I use R for commercial purposes?</h3>
 
 <p>R is released under the
-<a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html"><acronym>GNU</acronym> General Public License (<acronym>GPL</acronym>), version 2</a>.  If
-you have any questions regarding the legality of using R in any
-particular situation you should bring it up with your legal counsel.  We
-are in no position to offer legal advice.
+<a href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html"><acronym>GNU</acronym> General Public License (<acronym>GPL</acronym>), version 2 or
+version 3</a>.  If you have any questions regarding the legality of using R
+in any particular situation you should bring it up with your legal
+counsel.  We are in no position to offer legal advice.
 </p>
 <p>It is the opinion of the R Core Team that one can use R for commercial
 purposes (e.g., in business or in consulting).  The <acronym>GPL</acronym>, like
@@ -1237,7 +1232,7 @@ Next: <a href="#What-are-the-differences-between-R-and-S_003f" accesskey="n" rel
 <h3 class="section">3.2 What is <small>S-PLUS</small>?</h3>
 
 <p><small>S-PLUS</small> is a value-added version of S currently sold by
-<a href="http://www.tibco.com/">TIBCO Software Inc</a> as &lsquo;TIBCO Spotfire S+&rsquo;.
+<a href="https://www.tibco.com/">TIBCO Software Inc</a> as &lsquo;TIBCO Spotfire S+&rsquo;.
 See <a href="https://en.wikipedia.org/wiki/S-PLUS">https://en.wikipedia.org/wiki/S-PLUS</a> for more information.
 </p>
 <hr>
@@ -1446,8 +1441,9 @@ Sussman) is obtained by typing <kbd>demo(&quot;scoping&quot;)</kbd> at the R pro
 Further information is provided in the standard R reference &ldquo;R: A
 Language for Data Analysis and Graphics&rdquo; (see <a href="#What-documentation-exists-for-R_003f">What documentation exists for R?</a>) and in Robert Gentleman and Ross Ihaka (2000), &ldquo;Lexical
 Scope and Statistical Computing&rdquo;,
-<a href="http://www.amstat.org/publications/jcgs/"><em>Journal of
-Computational and Graphical Statistics</em></a>, <strong>9</strong>, 491&ndash;508.
+<em>Journal of
+Computational and Graphical Statistics</em>, <strong>9</strong>, 491&ndash;508
+(doi:&nbsp;<a href="https://doi.org/10.1080/10618600.2000.10474895">10.1080/10618600.2000.10474895</a>).
 </p>
 <p>Nested lexically scoped functions also imply a further major difference.
 Whereas S stores all objects as separate files in a directory somewhere
@@ -1710,8 +1706,9 @@ annotation in plot texts, via input expressions reminiscent of TeX
 constructs.  See the help page for <code>plotmath</code>, which features an
 impressive on-line example.  More details can be found in Paul Murrell
 and Ross Ihaka (2000), &ldquo;An Approach to Providing Mathematical
-Annotation in Plots&rdquo;, <a href="http://www.amstat.org/publications/jcgs/"><em>Journal of Computational and Graphical Statistics</em></a>, <strong>9</strong>,
-582&ndash;599.
+Annotation in Plots&rdquo;, <em>Journal of Computational and Graphical
+Statistics</em>, <strong>9</strong>, 582&ndash;599
+(doi:&nbsp;<a href="https://doi.org/10.1080/10618600.2000.10474900">10.1080/10618600.2000.10474900</a>).
 </p>
 <hr>
 <a name="What-is-R_002dplus_003f"></a>
@@ -1724,13 +1721,10 @@ Previous: <a href="#Is-there-anything-R-can-do-that-S_002dPLUS-cannot_003f" acce
 
 <p>For a very long time, there was no such thing.
 </p>
-<p><a href="http://www.xlsolutions-corp.com/">XLSolutions Corporation</a> is
-currently beta testing a commercially supported version of R named R+
-(read R plus).
-</p>
-<p><a href="http://www.revolution-computing.com/">Revolution Analytics</a> has
-released REvolution R, now available as Microsoft R (see
-<a href="http://blog.revolutionanalytics.com/2016/01/microsoft-r-open.html">http://blog.revolutionanalytics.com/2016/01/microsoft-r-open.html</a>
+
+<p>Revolution Analytics has released REvolution R, now available as
+Microsoft R (see
+<a href="https://blog.revolutionanalytics.com/2016/01/microsoft-r-open.html">https://blog.revolutionanalytics.com/2016/01/microsoft-r-open.html</a>
 for more information).
 </p>
 
@@ -1755,14 +1749,14 @@ information on R web interface packages.
 <p>Early references on R web interfaces include
 Jeff Banfield (1999),
 &ldquo;Rweb: Web-based Statistical Analysis&rdquo;
-(<a href="https://www.jstatsoft.org/v004/i01">https://www.jstatsoft.org/v004/i01</a>),
+(doi:&nbsp;<a href="https://doi.org/10.18637/jss.v004.i01">10.18637/jss.v004.i01</a>),
 David Firth (2003),
 &ldquo;CGIwithR: Facilities for processing web forms using R&rdquo;
-(<a href="https://www.jstatsoft.org/v008/i10">https://www.jstatsoft.org/v008/i10</a>), 
+(doi:&nbsp;<a href="https://doi.org/10.18637/jss.v008.i10">10.18637/jss.v008.i10</a>),
 and
 Angelo Mineo and Alfredo Pontillo (2006),
 &ldquo;Using R via PHP for Teaching Purposes: R-php&rdquo;
-(<a href="https://www.jstatsoft.org/v017/i04">https://www.jstatsoft.org/v017/i04</a>).
+(doi:&nbsp;<a href="https://doi.org/10.18637/jss.v017.i04">10.18637/jss.v017.i04</a>).
 </p>
 <hr>
 <a name="R-Add_002dOn-Packages"></a>
@@ -1802,11 +1796,9 @@ Next: <a href="#How-can-add_002don-packages-be-installed_003f" accesskey="n" rel
 </td></tr>
 <tr><td align="left" valign="top">&bull; <a href="#Add_002don-packages-from-CRAN" accesskey="2">Add-on packages from CRAN</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
 </td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#Add_002don-packages-from-Omegahat" accesskey="3">Add-on packages from Omegahat</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+<tr><td align="left" valign="top">&bull; <a href="#Add_002don-packages-from-Bioconductor" accesskey="3">Add-on packages from Bioconductor</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
 </td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#Add_002don-packages-from-Bioconductor" accesskey="4">Add-on packages from Bioconductor</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
-</td></tr>
-<tr><td align="left" valign="top">&bull; <a href="#Other-add_002don-packages" accesskey="5">Other add-on packages</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+<tr><td align="left" valign="top">&bull; <a href="#Other-add_002don-packages" accesskey="4">Other add-on packages</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
 </td></tr>
 </table>
 
@@ -1880,7 +1872,7 @@ recommended package <a href="https://CRAN.R-project.org/package=MASS"><strong>MA
 <a name="Add_002don-packages-from-CRAN"></a>
 <div class="header">
 <p>
-Next: <a href="#Add_002don-packages-from-Omegahat" accesskey="n" rel="next">Add-on packages from Omegahat</a>, Previous: <a href="#Add_002don-packages-in-R" accesskey="p" rel="prev">Add-on packages in R</a>, Up: <a href="#Which-add_002don-packages-exist-for-R_003f" accesskey="u" rel="up">Which add-on packages exist for R?</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+Next: <a href="#Add_002don-packages-from-Bioconductor" accesskey="n" rel="next">Add-on packages from Bioconductor</a>, Previous: <a href="#Add_002don-packages-in-R" accesskey="p" rel="prev">Add-on packages in R</a>, Up: <a href="#Which-add_002don-packages-exist-for-R_003f" accesskey="u" rel="up">Which add-on packages exist for R?</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
 <a name="Add_002don-packages-from-CRAN-1"></a>
 <h4 class="subsection">5.1.2 Add-on packages from <acronym>CRAN</acronym></h4>
@@ -1958,40 +1950,17 @@ contributed packages page</a> for more information.
 to browse packages by topic and providing tools to automatically install
 all packages for special areas of interest.
 </p>
-<p>Some <acronym>CRAN</acronym> packages that do not build out of the box on Windows,
-require additional software, or are shipping third party libraries for
-Windows cannot be made available on <acronym>CRAN</acronym> in form of a Windows binary
-packages.  Nevertheless, some of these packages are available at the
-&ldquo;<acronym>CRAN</acronym> extras&rdquo; repository at
-<a href="https://www.stats.ox.ac.uk/pub/RWin/">https://www.stats.ox.ac.uk/pub/RWin/</a> kindly provided by Brian
-D. Ripley.  Note that this repository is a default repository for recent
-versions of R for Windows.
-</p>
-<hr>
-<a name="Add_002don-packages-from-Omegahat"></a>
-<div class="header">
-<p>
-Next: <a href="#Add_002don-packages-from-Bioconductor" accesskey="n" rel="next">Add-on packages from Bioconductor</a>, Previous: <a href="#Add_002don-packages-from-CRAN" accesskey="p" rel="prev">Add-on packages from CRAN</a>, Up: <a href="#Which-add_002don-packages-exist-for-R_003f" accesskey="u" rel="up">Which add-on packages exist for R?</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
-</div>
-<a name="Add_002don-packages-from-Omegahat-1"></a>
-<h4 class="subsection">5.1.3 Add-on packages from Omegahat</h4>
 
-<p>The <a href="http://www.omegahat.net/">Omega Project for Statistical
-Computing</a> provides a variety of open-source software for statistical
-applications, with special emphasis on web-based software, Java, the
-Java virtual machine, and distributed computing.  A <acronym>CRAN</acronym> style
-R package repository is available via <a href="http://www.omegahat.net/R/">http://www.omegahat.net/R/</a>.
-See <a href="http://www.omegahat.net/">http://www.omegahat.net/</a> for information on most R packages
-available from the Omega project.
-</p>
+
+
 <hr>
 <a name="Add_002don-packages-from-Bioconductor"></a>
 <div class="header">
 <p>
-Next: <a href="#Other-add_002don-packages" accesskey="n" rel="next">Other add-on packages</a>, Previous: <a href="#Add_002don-packages-from-Omegahat" accesskey="p" rel="prev">Add-on packages from Omegahat</a>, Up: <a href="#Which-add_002don-packages-exist-for-R_003f" accesskey="u" rel="up">Which add-on packages exist for R?</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+Next: <a href="#Other-add_002don-packages" accesskey="n" rel="next">Other add-on packages</a>, Previous: <a href="#Add_002don-packages-from-CRAN" accesskey="p" rel="prev">Add-on packages from CRAN</a>, Up: <a href="#Which-add_002don-packages-exist-for-R_003f" accesskey="u" rel="up">Which add-on packages exist for R?</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
 <a name="Add_002don-packages-from-Bioconductor-1"></a>
-<h4 class="subsection">5.1.4 Add-on packages from Bioconductor</h4>
+<h4 class="subsection">5.1.3 Add-on packages from Bioconductor</h4>
 
 <p><a href="https://www.bioconductor.org/">Bioconductor</a> is an open source and
 open development software project for the analysis and comprehension of
@@ -2003,7 +1972,7 @@ project has matured, the functional scope of the software packages
 broadened to include the analysis of all types of genomic data, such as
 SAGE, sequence, or SNP data.  In addition, there are metadata
 (annotation, CDF and probe) and experiment data packages.  See
-<a href="https://www.bioconductor.org/download/">https://www.bioconductor.org/download/</a> for available packages and a
+<a href="https://master.bioconductor.org/install/">https://master.bioconductor.org/install/</a> for available packages and a
 complete taxonomy via BioC Views.
 </p>
 <hr>
@@ -2013,7 +1982,7 @@ complete taxonomy via BioC Views.
 Previous: <a href="#Add_002don-packages-from-Bioconductor" accesskey="p" rel="prev">Add-on packages from Bioconductor</a>, Up: <a href="#Which-add_002don-packages-exist-for-R_003f" accesskey="u" rel="up">Which add-on packages exist for R?</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
 <a name="Other-add_002don-packages-1"></a>
-<h4 class="subsection">5.1.5 Other add-on packages</h4>
+<h4 class="subsection">5.1.4 Other add-on packages</h4>
 
 <p>Many more packages are available from places other than the three
 default repositories discussed above (<acronym>CRAN</acronym>, Bioconductor and
@@ -2191,7 +2160,7 @@ package subdirectory may also contain files <samp>INDEX</samp>,
 <samp>NAMESPACE</samp>, <samp>configure</samp>, <samp>cleanup</samp>, <samp>LICENSE</samp>,
 <samp>LICENCE</samp>, <samp>COPYING</samp> and <samp>NEWS</samp>.
 </p>
-<p>See <a href="R-exts.html#Creating-R-packages">Creating R packages</a> in <cite>Writing R
+<p>See <a href="http://cran.r-project.org/doc/manuals/R-exts.html#Creating-R-packages">Creating R packages</a> in <cite>Writing R
 Extensions</cite>, for details.
 </p>
 <p>R version 1.3.0 has added the function <code>package.skeleton()</code> which
@@ -2299,7 +2268,12 @@ Next: <a href="#Debugging-R-from-within-Emacs" accesskey="n" rel="next">Debuggin
 <a name="Should-I-run-R-from-within-Emacs_003f-1"></a>
 <h3 class="section">6.2 Should I run R from within Emacs?</h3>
 
-<p>Yes, <em>definitely</em>.  Inferior R mode provides a readline/history
+<p>Yes, instead of just running it in a console, <em>definitely</em>.  As an
+alternative to other IDE&rsquo;s such as Rstudio, <em>possibly</em>, notably if you
+are interested to use Emacs for other computer interaction.
+You&rsquo;d be using <acronym>ESS</acronym>, Emacs Speaks Statistics, see previous FAQ.
+</p>
+<p>Inferior R mode provides a readline/history
 mechanism, object name completion, and syntax-based highlighting of the
 interaction buffer using Font Lock mode, as well as a very convenient
 interface to the R help system.
@@ -3075,7 +3049,7 @@ Ghostscript you can use <code>bitmap()</code>, which produces a PostScript or
 PDF file then converts it to any bitmap format supported by Ghostscript.
 On some installations this produces ugly output, on others it is
 perfectly satisfactory.  Many systems now come with Xvfb from
-<a href="http://www.x.org/">X.Org</a> (possibly as an optional
+<a href="https://www.x.org/">X.Org</a> (possibly as an optional
 install), which is an X11 server that does not require a screen; and
 there is the <a href="https://CRAN.R-project.org/package=GDD"><strong>GDD</strong></a> package from <acronym>CRAN</acronym>, which produces PNG,
 JPEG and GIF bitmaps without X11.
@@ -3208,7 +3182,7 @@ Java <em>and</em> JavaScript need to be enabled in your browser.
 </p>
 <p>There have been a number of compatibility issues with versions of Java
 and of browsers.  
-See <a href="R-admin.html#Enabling-search-in-HTML-help">Enabling search in HTML help</a> in <cite>R Installation and Administration</cite>, for further details.
+See <a href="http://cran.r-project.org/doc/manuals/R-admin.html#Enabling-search-in-HTML-help">Enabling search in HTML help</a> in <cite>R Installation and Administration</cite>, for further details.
 </p>
 <hr>
 <a name="Why-did-my-_002eRprofile-stop-working-when-I-updated-R_003f"></a>
@@ -3388,7 +3362,7 @@ carefully.
 753&ndash;771 of <em>Statistical Analysis and Data Display: An Intermediate
 Course with Examples in R</em>, Richard M. Heiberger and Burt Holland
 (Springer 2015, second edition).  This appendix is a free download from
-<a href="http://link.springer.com/content/pdf/bbm%3A978-1-4939-2122-5%2F1.pdf">http://link.springer.com/content/pdf/bbm%3A978-1-4939-2122-5%2F1.pdf</a>.
+<a href="https://link.springer.com/content/pdf/bbm%3A978-1-4939-2122-5%2F1.pdf">https://link.springer.com/content/pdf/bbm%3A978-1-4939-2122-5%2F1.pdf</a>.
 </p>
 <p>For more information, see e.g. David Goldberg (1991), &ldquo;What Every
 Computer Scientist Should Know About Floating-Point Arithmetic&rdquo;,
@@ -3915,7 +3889,7 @@ Next: <a href="#How-can-I-inspect-R-objects-when-debugging_003f" accesskey="n" r
 <p>Roughly speaking, you need to start R inside the debugger, load the
 code, send an interrupt, and then set the required breakpoints.
 </p>
-<p>See <a href="R-exts.html#Finding-entry-points">Finding entry points in dynamically loaded
+<p>See <a href="http://cran.r-project.org/doc/manuals/R-exts.html#Finding-entry-points">Finding entry points in dynamically loaded
 code</a> in <cite>Writing R Extensions</cite>.
 </p>
 <hr>
@@ -3930,7 +3904,7 @@ Next: <a href="#How-can-I-change-compilation-flags_003f" accesskey="n" rel="next
 <p>The most convenient way is to call <code>R_PV</code> from the symbolic
 debugger.
 </p>
-<p>See <a href="R-exts.html#Inspecting-R-objects">Inspecting R objects when debugging</a> in <cite>Writing R Extensions</cite>.
+<p>See <a href="http://cran.r-project.org/doc/manuals/R-exts.html#Inspecting-R-objects">Inspecting R objects when debugging</a> in <cite>Writing R Extensions</cite>.
 </p>
 <hr>
 <a name="How-can-I-change-compilation-flags_003f"></a>
@@ -3947,13 +3921,13 @@ Next: <a href="#How-can-I-debug-S4-methods_003f" accesskey="n" rel="next">How ca
 </p>
 <p>Starting with R 2.1.0, users can provide personal Makevars configuration
 files in <samp>$<code>HOME</code>/.R</samp> to override the default flags.
-See <a href="R-admin.html#Add_002don-packages">Add-on packages</a> in <cite>R Installation and Administration</cite>.
+See <a href="http://cran.r-project.org/doc/manuals/R-admin.html#Add_002don-packages">Add-on packages</a> in <cite>R Installation and Administration</cite>.
 </p>
 <p>For earlier versions of R, you could change the file
 <samp><var>R_HOME</var>/etc/Makeconf</samp> to reflect your preferences, or (at
 least for systems using <acronym>GNU</acronym> Make) override them by the
 environment variable <code>MAKEFLAGS</code>.
-See <a href="R-exts.html#Creating-shared-objects">Creating shared objects</a> in <cite>Writing R Extensions</cite>.
+See <a href="http://cran.r-project.org/doc/manuals/R-exts.html#Creating-shared-objects">Creating shared objects</a> in <cite>Writing R Extensions</cite>.
 </p>
 <hr>
 <a name="How-can-I-debug-S4-methods_003f"></a>

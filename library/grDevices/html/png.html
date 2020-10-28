@@ -19,24 +19,28 @@
 bmp(filename = "Rplot%03d.bmp",
     width = 480, height = 480, units = "px", pointsize = 12,
     bg = "white", res = NA, family = "", restoreConsole = TRUE,
-    type = c("windows", "cairo"), antialias)
+    type = c("windows", "cairo"), antialias,
+    symbolfamily="default")
 
 jpeg(filename = "Rplot%03d.jpg",
      width = 480, height = 480, units = "px", pointsize = 12,
      quality = 75,
      bg = "white", res = NA, family = "", restoreConsole = TRUE,
-     type = c("windows", "cairo"), antialias)
+     type = c("windows", "cairo"), antialias,
+     symbolfamily="default")
 
 png(filename = "Rplot%03d.png",
     width = 480, height = 480, units = "px", pointsize = 12,
     bg = "white", res = NA, family = "", restoreConsole = TRUE,
-    type = c("windows", "cairo", "cairo-png"), antialias)
+    type = c("windows", "cairo", "cairo-png"), antialias,
+    symbolfamily="default")
 
 tiff(filename = "Rplot%03d.tif",
      width = 480, height = 480, units = "px", pointsize = 12,
      compression = c("none", "rle", "lzw", "jpeg", "zip", "lzw+p", "zip+p"),
      bg = "white", res = NA, family = "", restoreConsole = TRUE,
-     type = c("windows", "cairo"), antialias)
+     type = c("windows", "cairo"), antialias,
+     symbolfamily="default")
 </pre>
 
 
@@ -45,7 +49,7 @@ tiff(filename = "Rplot%03d.tif",
 <table summary="R argblock">
 <tr valign="top"><td><code>filename</code></td>
 <td>
-<p>the name of the output file, up to 511 characters.  The
+<p>the path of the output file, up to 511 characters.  The
 page number is substituted if a C integer format is included in the
 character string, as in the default, and tilde-expansion is
 performed (see <code><a href="../../base/html/path.expand.html">path.expand</a></code>).   (The result must be less than
@@ -121,6 +125,14 @@ argument is missing the default is taken from
 </p>
 <p>For allowed values and their effect (on fonts and lines, but not
 fills) with <code>type = "cairo"</code> see <code><a href="cairo.html">svg</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>symbolfamily</code></td>
+<td>
+<p>  For cairographics only:
+a length-one character string that specifies the font family to
+be used as the &quot;symbol&quot; font (e.g., for <a href="plotmath.html">plotmath</a> output).
+The default value is &quot;default&quot;, which means that R will choose
+a default &quot;symbol&quot; font based on the graphics device capabilities.</p>
 </td></tr>
 </table>
 
@@ -315,5 +327,5 @@ dev.off()
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

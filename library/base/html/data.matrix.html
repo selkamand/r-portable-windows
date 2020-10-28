@@ -29,7 +29,7 @@ data.matrix(frame, rownames.force = NA)
 <tr valign="top"><td><code>frame</code></td>
 <td>
 <p>a data frame whose components are logical vectors,
-factors or numeric vectors.</p>
+factors or numeric or character vectors.</p>
 </td></tr>
 <tr valign="top"><td><code>rownames.force</code></td>
 <td>
@@ -44,7 +44,8 @@ zero-row data frame.</p>
 
 <h3>Details</h3>
 
-<p>Logical and factor columns are converted to integers.  Any other
+<p>Logical and factor columns are converted to integers.  Character
+columns are first converted to factors and then to integers. Any other
 column which is not numeric (according to <code><a href="numeric.html">is.numeric</a></code>) is
 converted by <code><a href="numeric.html">as.numeric</a></code> or, for S4 objects,
 <code><a href="../../methods/html/as.html">as</a>(, "numeric")</code>.  If all columns are integer (after
@@ -98,5 +99,5 @@ data.matrix(DF[1:2])
 data.matrix(DF)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Simple posterior simulation with gam fits</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for gam.mh {mgcv}"><tr><td>gam.mh {mgcv}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Simple posterior simulation with gam fits</h2>
+
+<h3>Description</h3>
+
+<p>GAM coefficients can be simulated directly from the Gaussian approximation to the posterior for the coefficients, or using a simple Metropolis Hastings sampler. See also <code><a href="ginla.html">ginla</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+gam.mh(b,ns=10000,burn=1000,t.df=40,rw.scale=.25,thin=1)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>b</code></td>
+<td>
+<p>a fitted model object from <code><a href="gam.html">gam</a></code>. <code><a href="bam.html">bam</a></code> fits are not supported.</p>
+</td></tr>
+<tr valign="top"><td><code>ns</code></td>
+<td>
+<p>the number of samples to generate.</p>
+</td></tr>
+<tr valign="top"><td><code>burn</code></td>
+<td>
+<p>the length of any initial burn in period to discard (in addition to codens).</p>
+</td></tr>
+<tr valign="top"><td><code>t.df</code></td>
+<td>
+<p>degrees of freedom for static multivariate t proposal. Lower for heavier tailed proposals.</p>
+</td></tr>
+<tr valign="top"><td><code>rw.scale</code></td>
+<td>
+<p>Factor by which to scale posterior covariance matrix when generating random walk proposals. Negative or non finite to skip the random walk step.  </p>
+</td></tr>
+<tr valign="top"><td><code>thin</code></td>
+<td>
+<p>retain only every <code>thin</code> samples.</p>
+</td></tr> 
+</table>
+
+
+<h3>Details</h3>
+
+<p>Posterior simulation is particularly useful for making inferences about non-linear functions of the model coefficients. Simulate random draws from the posterior, compute the function for each draw, and you have a draw from the posterior for the function. In many cases the Gaussian approximation to the posterior of the model coefficients is accurate, and samples generated from it can be treated as samples from the posterior for the coefficients. See example code below. This approach is computationally very efficient.
+</p>
+<p>In other cases the Gaussian approximation can become poor. A typical example is in a spatial model with a log or logit link when there is a large area of observations containing only zeroes. In this case the linear predictor is poorly identified and the Gaussian approximation can become useless (an example is provided below). In that case it can sometimes be useful to simulate from the posterior using a Metropolis Hastings sampler. A simple approach alternates fixed proposals, based on the Gaussian approximation to the posterior, with random walk proposals, based on a shrunken version of the approximate posterior covariane matrix. <code>gam.mh</code> implements this. The fixed proposal often promotes rapid mixing, while the random walk component ensures that the chain does not become stuck in regions for which the fixed Gaussian proposal density is much lower than the posterior density.    
+</p>
+<p>The function reports the acceptance rate of the two types of step. If the random walk acceptance probability is higher than a quarter then <code>rw.step</code> should probably be increased. Similarly if the acceptance rate is too low, it should be decreased. The random walk steps can be turned off altogether (see above), but it is important to check the chains for stuck sections if this is done. 
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list containing the retained simulated coefficients in matrix <code>bs</code> and two entries for the acceptance probabilities.</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Simon N. Wood <a href="mailto:simon.wood@r-project.org">simon.wood@r-project.org</a></p>
+
+
+<h3>References</h3>
+
+<p>Wood, S.N.  (2015) Core Statistics, Cambridge
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(mgcv)
+set.seed(3);n &lt;- 400
+
+############################################
+## First example: simulated Tweedie model...
+############################################
+
+dat &lt;- gamSim(1,n=n,dist="poisson",scale=.2)
+dat$y &lt;- rTweedie(exp(dat$f),p=1.3,phi=.5) ## Tweedie response
+b &lt;- gam(y~s(x0)+s(x1)+s(x2)+s(x3),family=tw(),
+          data=dat,method="REML")
+
+## simulate directly from Gaussian approximate posterior...
+br &lt;- rmvn(1000,coef(b),vcov(b))
+
+## Alternatively use MH sampling...
+br &lt;- gam.mh(b,thin=2,ns=2000,rw.scale=.15)$bs
+## If 'coda' installed, can check effective sample size
+## require(coda);effectiveSize(as.mcmc(br))
+
+## Now compare simulation results and Gaussian approximation for
+## smooth term confidence intervals...
+x &lt;- seq(0,1,length=100)
+pd &lt;- data.frame(x0=x,x1=x,x2=x,x3=x)
+X &lt;- predict(b,newdata=pd,type="lpmatrix")
+par(mfrow=c(2,2))
+for(i in 1:4) {
+  plot(b,select=i,scale=0,scheme=1)
+  ii &lt;- b$smooth[[i]]$first.para:b$smooth[[i]]$last.para
+  ff &lt;- X[,ii]
+  fq &lt;- apply(ff,1,quantile,probs=c(.025,.16,.84,.975))
+  lines(x,fq[1,],col=2,lty=2);lines(x,fq[4,],col=2,lty=2)
+  lines(x,fq[2,],col=2);lines(x,fq[3,],col=2)
+}
+
+###############################################################
+## Second example, where Gaussian approximation is a failure...
+###############################################################
+
+y &lt;- c(rep(0, 89), 1, 0, 1, 0, 0, 1, rep(0, 13), 1, 0, 0, 1, 
+       rep(0, 10), 1, 0, 0, 1, 1, 0, 1, rep(0,4), 1, rep(0,3),  
+       1, rep(0, 3), 1, rep(0, 10), 1, rep(0, 4), 1, 0, 1, 0, 0, 
+       rep(1, 4), 0, rep(1, 5), rep(0, 4), 1, 1, rep(0, 46))
+set.seed(3);x &lt;- sort(c(0:10*5,rnorm(length(y)-11)*20+100))
+b &lt;- gam(y ~ s(x, k = 15),method = 'REML', family = binomial)
+br &lt;- gam.mh(b,thin=2,ns=2000,rw.scale=.4)$bs
+X &lt;- model.matrix(b)
+par(mfrow=c(1,1))
+plot(x, y, col = rgb(0,0,0,0.25), ylim = c(0,1))
+ff &lt;- X
+linv &lt;- b$family$linkinv
+## Get intervals for the curve on the response scale...
+fq &lt;- linv(apply(ff,1,quantile,probs=c(.025,.16,.5,.84,.975)))
+lines(x,fq[1,],col=2,lty=2);lines(x,fq[5,],col=2,lty=2)
+lines(x,fq[2,],col=2);lines(x,fq[4,],col=2)
+lines(x,fq[3,],col=4)
+## Compare to the Gaussian posterior approximation
+fv &lt;- predict(b,se=TRUE)
+lines(x,linv(fv$fit))
+lines(x,linv(fv$fit-2*fv$se.fit),lty=3)
+lines(x,linv(fv$fit+2*fv$se.fit),lty=3)
+## ... Notice the useless 95% CI (black dotted) based on the
+## Gaussian approximation!
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-33 <a href="00Index.html">Index</a>]</div>
+</body></html>

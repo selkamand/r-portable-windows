@@ -83,7 +83,7 @@ vertices.
 </dd>
 <dt>nb</dt><dd><p>is a named list defining the neighbourhood structure. <code>names(nb)</code> must correspond to the 
 levels of the covariate of the smooth (i.e. the area labels), but can be in any order. <code>nb[[i]]</code> 
-is a numeric vector indexing the neighbours of the ith area.
+is a numeric vector indexing the neighbours of the ith area (and should not include <code>i</code>).
 All indices are relative to <code>nb</code> itself, but can be translated using <code>names(nb)</code>. See example code.
 As an alternative each <code>nb[[i]]</code> can be an array of the names of the neighbours, but these will be
 converted to the arrays of numeric indices internally. 
@@ -182,5 +182,5 @@ b1 ## fit unchanged
 plot(b1) ## but now there is no information with which to plot the mrf
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-31 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-33 <a href="00Index.html">Index</a>]</div>
 </body></html>

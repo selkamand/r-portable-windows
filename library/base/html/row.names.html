@@ -9,12 +9,12 @@
 
 <h3>Description</h3>
 
-<p>All data frames have a row names attribute, a character vector of
+<p>All data frames have row names, a character vector of
 length the number of rows with no duplicates nor missing values.
 </p>
-<p>For convenience, these are generic functions for which users can write
-other methods, and there are default methods for arrays.  The
-description here is for the <code>data.frame</code> method.
+<p>There are generic functions for getting and setting row names,
+with default methods for arrays.
+The description here is for the <code>data.frame</code> method.
 </p>
 <p><code>`.rowNamesDF&lt;-`</code> is a (non-generic replacement) function to set
 row names for data frames, with extra argument <code>make.names</code>.
@@ -99,7 +99,7 @@ deparsing but never via <code>row.names</code> or
 sort are marked as &lsquo;automatic&rsquo; and handled differently by
 <code><a href="matrix.html">as.matrix</a></code> and <code><a href="data.matrix.html">data.matrix</a></code> (and potentially
 other functions).  (All zero-row data frames are regarded as having
-automatic row.names.)
+automatic row names.)
 </p>
 
 
@@ -119,5 +119,21 @@ eds J. M. Chambers and T. J. Hastie, Wadsworth &amp; Brooks/Cole.
 <p><code>.row_names_info</code> for the internal representations.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+
+<h3>Examples</h3>
+
+<pre>
+## To illustrate the note:
+df &lt;- data.frame(x = c(TRUE, FALSE, NA, NA), y = c(12, 34, 56, 78))
+row.names(df) &lt;- 1 : 4
+attr(df, "row.names")
+deparse(df)
+## (Compact storage, not regarded as automatic.)
+row.names(df) &lt;- NULL
+attr(df, "row.names")
+deparse(df)
+## (Compact storage, regarded as automatic.)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -157,7 +157,11 @@ no arguments.  This is the easiest and most common case, with the
 functions <code><a href="browser.html">browser</a></code> and <code><a href="../../utils/html/recover.html">recover</a></code> the
 likeliest candidates; the former browses in the frame of the function
 being traced, and the latter allows browsing in any of the currently
-active calls.
+active calls. The arguments <code>tracer</code> and <code>exit</code> are evaluated to
+see whether they are functions, but only their names are used in the
+tracing expressions.  The lookup is done again when the traced function
+executes, so it may not be <code>tracer</code> or <code>exit</code> that will be called
+while tracing.
 </p>
 <p>The <code>tracer</code> or <code>exit</code> argument can also be an unevaluated
 expression (such as returned by a call to <code><a href="substitute.html">quote</a></code> or
@@ -398,5 +402,5 @@ trace(lm, exit = recover, where = asNamespace("nlme"))
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

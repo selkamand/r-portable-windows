@@ -10,6 +10,7 @@ as.raster               Create a Raster Object
 axisTicks               Compute Pretty Axis Tick Scales
 boxplot.stats           Box Plot Statistics
 bringToTop              Assign Focus to a Window
+cairoSymbolFont         Specify a Symbol Font
 check.options           Set Options with Consistency Checks
 chull                   Compute Convex Hull of a Set of Points
 cm                      Unit Transformation
@@ -44,7 +45,7 @@ hcl                     HCL Color Specification
 hsv                     HSV Color Specification
 make.rgb                Create colour spaces
 msgWindow               Manipulate a Window
-n2mfrow                 Compute Default mfrow From Number of Plots
+n2mfrow                 Compute Default 'mfrow' From Number of Plots
 nclass.Sturges          Compute the Number of Classes for a Histogram
 palette                 Set or View the Graphics Palette
 pdf                     PDF Graphics Device

@@ -26,7 +26,7 @@ isS3stdGeneric(f)
 <table summary="R argblock">
 <tr valign="top"><td><code>f</code></td>
 <td>
-<p>A function object</p>
+<p>a function object</p>
 </td></tr>
 </table>
 
@@ -38,14 +38,18 @@ in its body calls <code><a href="../../base/html/UseMethod.html">UseMethod</a></
 operations before calling <code>UseMethod</code> will not be considered
 &ldquo;standard&rdquo; S3 generics.
 </p>
+<p>If <code>f</code> is currently being traced, i.e., inheriting from class
+<code>"traceable"</code>, the definition of the original untraced version of
+the function is used instead.
+</p>
 
 
 <h3>Value</h3>
 
-<p>If <code>f</code> is an S3 generic, a logical vector containing <code>TRUE</code>
+<p>If <code>f</code> is an S3 generic, a logical containing <code>TRUE</code>
 with the name of the S3 generic (the string passed to
 <code>UseMethod</code>). Otherwise, <code>FALSE</code> (unnamed).
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

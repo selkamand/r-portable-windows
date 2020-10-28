@@ -160,7 +160,8 @@ since ISO 8601 allows these.</p>
 </dd>
 <dt><code>%I</code></dt><dd><p>Hours as decimal number (01&ndash;12).</p>
 </dd>
-<dt><code>%j</code></dt><dd><p>Day of year as decimal number (001&ndash;366).</p>
+<dt><code>%j</code></dt><dd><p>Day of year as decimal number (001&ndash;366):  For
+input, 366 is only valid in a leap year.</p>
 </dd>
 <dt><code>%m</code></dt><dd><p>Month as decimal number (01&ndash;12).</p>
 </dd>
@@ -223,14 +224,14 @@ first Monday of the year as day 1 of week 1).  The UK convention.</p>
 </dd>
 <dt><code>%y</code></dt><dd><p>Year without century (00&ndash;99).  On input, values
 00 to 68 are prefixed by 20 and 69 to 99 by 19 &ndash; that is the
-behaviour specified by the 2004 and 2008 POSIX standards, but they do
+behaviour specified by the 2018 POSIX standard, but it does
 also say &lsquo;it is expected that in a future version the
 default century inferred from a 2-digit year will change&rsquo;.</p>
 </dd>
 <dt><code>%Y</code></dt><dd><p>Year with century.  Note that whereas there was no
 zero in the original Gregorian calendar, ISO 8601:2004 defines it
 to be valid (interpreted as 1BC): see
-<a href="https://en.wikipedia.org/wiki/0_(year)">https://en.wikipedia.org/wiki/0_(year)</a>.  Note that the standards
+<a href="https://en.wikipedia.org/wiki/0_(year)">https://en.wikipedia.org/wiki/0_(year)</a>.  However, the standards
 also say that years before 1582 in its calendar should only be used
 with agreement of the parties involved.
 </p>
@@ -426,11 +427,14 @@ used by <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b
 <h3>References</h3>
 
 <p>International Organization for Standardization (2004, 2000, ...)
-<em>ISO 8601.  Data elements and interchange formats &ndash;
-Information interchange &ndash; Representation of dates and times.</em>
+&lsquo;ISO 8601.  Data elements and interchange formats &ndash;
+Information interchange &ndash; Representation of dates and times.&rsquo;,
+slightly updated to International Organization for Standardization (2019)
+&lsquo;ISO 8601-1:2019.  Date and time &ndash; Representations for
+information interchange &ndash; Part 1: Basic rules&rsquo;.
 For links to versions available on-line see (at the time of writing)
 <a href="https://dotat.at/tmp/ISO_8601-2004_E.pdf">https://dotat.at/tmp/ISO_8601-2004_E.pdf</a> and
-<a href="http://www.qsl.net/g1smd/isopdf.htm">http://www.qsl.net/g1smd/isopdf.htm</a>; for information on the
+<a href="https://www.qsl.net/g1smd/isopdf.htm">https://www.qsl.net/g1smd/isopdf.htm</a>; for information on the
 current official version, see <a href="https://www.iso.org/iso/iso8601">https://www.iso.org/iso/iso8601</a>.
 </p>
 <p>The POSIX 1003.1 standard, which is in some respects stricter than ISO 8601.
@@ -496,5 +500,5 @@ format(seq.Date(as.Date('1978-01-01'), by = 'day', len = 7), "%a")
 format(seq.Date(as.Date('2000-01-01'), by = 'month', len = 12), "%b")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

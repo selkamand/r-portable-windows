@@ -108,8 +108,9 @@ of <code>lm.influence</code> differ from those computed by S.
 Rather than returning the coefficients which result
 from dropping each case, we return the changes in the coefficients.
 This is more directly useful in many diagnostic measures.<br />
-Since these need <i>O(n^2 p)</i> computing time, they can be omitted by
-<code>do.coef = FALSE</code>.
+Since these need <i>O(n p^2)</i> computing time, they can be omitted by
+<code>do.coef = FALSE</code>. (Prior to R 4.0.0, this was much worse, using
+an <i>O(n^2 p)</i> algorithm.)
 </p>
 <p>Note that cases with <code>weights == 0</code> are <em>dropped</em> (contrary
 to the situation in S).
@@ -157,5 +158,5 @@ utils::str(lmI &lt;- lm.influence(lm.SR))
 ## For more "user level" examples, use example(influence.measures)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

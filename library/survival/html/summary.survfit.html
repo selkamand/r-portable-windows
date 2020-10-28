@@ -67,7 +67,7 @@ days, <code>scale = 365.25</code> would scale the output to years.
 <p>logical value: if TRUE, prints information for all specified <code>times</code>, 
 even if there are no subjects left at the end of the specified
 <code>times</code>. 
-This is only valid if the <code>times</code> argument is present. 
+This is only used if the <code>times</code> argument is present. 
 </p>
 </td></tr>
 <tr valign="top"><td><code>rmean</code></td>
@@ -198,6 +198,20 @@ The levels of <code>strata</code> (a factor) are the labels for the curves.
 </table>
 
 
+<h3>Details</h3>
+
+<p>This routine has two uses: printing out a survival curve at specified
+time points (often yearly), or extracting the values at specified time
+points for further processing.
+In the first case we normally want <code>extend=FALSE</code>, i.e., don't print out
+data past the end of the curve.  If the <code>times</code> option only
+contains values beyond the last point in the curve then there is nothing
+to print and an error message will result.
+For the second usage we almost always want <code>extend=TRUE</code>, so that the
+results will have a predictable length.
+</p>
+
+
 <h3>See Also</h3>
 
 <p><code><a href="survfit.html">survfit</a></code>,  <code><a href="print.summary.survfit.html">print.summary.survfit</a></code>   
@@ -211,5 +225,5 @@ summary( survfit( Surv(futime, fustat)~1, data=ovarian))
 summary( survfit( Surv(futime, fustat)~rx, data=ovarian))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.1-8 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-7 <a href="00Index.html">Index</a>]</div>
 </body></html>

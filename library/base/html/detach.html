@@ -76,11 +76,16 @@ quoted name of an item on the search list such as <code>package:tools</code>.
 <p>If a package has a namespace, detaching it does not by default unload
 the namespace (and may not even with <code>unload = TRUE</code>), and
 detaching will not in general unload any dynamically loaded compiled
-code (DLLs).  Further, registered S3 methods from the namespace will
-not be removed.  If you use <code><a href="library.html">library</a></code> on a package whose
+code (DLLs); see <code><a href="getLoadedDLLs.html">getLoadedDLLs</a></code> and
+<code><a href="library.dynam.html">library.dynam.unload</a></code>.  Further, registered S3 methods
+from the namespace will not be removed, and because S3 methods are
+not tagged to their source on registration, it is in general not
+possible to safely un-register the methods associated with a given
+package. If you use <code><a href="library.html">library</a></code> on a package whose
 namespace is loaded, it attaches the exports of the already loaded
 namespace.  So detaching and re-attaching a package may not refresh
-some or all components of the package, and is inadvisable.
+some or all components of the package, and is inadvisable. The most
+reliable way to completely detach a package is to restart <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>.
 </p>
 
 
@@ -154,7 +159,7 @@ detach(2) # 'pos' used for 'name'
 ## and of detaching a database named by a character vector
 attach_and_detach &lt;- function(db, pos = 2)
 {
-   name &lt;- deparse(substitute(db))
+   name &lt;- deparse1(substitute(db))
    attach(db, pos = pos, name = name)
    print(search()[pos])
    detach(name, character.only = TRUE)
@@ -162,5 +167,5 @@ attach_and_detach &lt;- function(db, pos = 2)
 attach_and_detach(women, pos = 3)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

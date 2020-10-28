@@ -20,6 +20,8 @@ deparse(expr, width.cutoff = 60L,
         backtick = mode(expr) %in% c("call", "expression", "(", "function"),
         control = c("keepNA", "keepInteger", "niceNames", "showAttributes"),
         nlines = -1L)
+
+deparse1(expr, collapse = " ", width.cutoff = 500L, ...)
 </pre>
 
 
@@ -50,13 +52,22 @@ See <code><a href="deparseOpts.html">.deparseOpts</a></code>.</p>
 <p>integer: the maximum number of lines to produce.
 Negative values indicate no limit.</p>
 </td></tr>
+<tr valign="top"><td><code>collapse</code></td>
+<td>
+<p>a string, passed to <code><a href="paste.html">paste</a>()</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments passed to <code>deparse()</code>.</p>
+</td></tr>
 </table>
 
 
 <h3>Details</h3>
 
-<p>This function turns unevaluated expressions (where &lsquo;expression&rsquo;
-is taken in a wider sense than the strict concept of a vector of mode
+<p>These functions turn unevaluated expressions (where &lsquo;expression&rsquo;
+is taken in a wider sense than the strict concept of a vector of
+<code><a href="mode.html">mode</a></code> and type (<code><a href="typeof.html">typeof</a></code>)
 <code>"expression"</code> used in <code><a href="expression.html">expression</a></code>) into character
 strings (a kind of inverse to <code><a href="parse.html">parse</a></code>).
 </p>
@@ -70,18 +81,27 @@ to the function <code>myplot</code>.
 symbols but only composite expressions.  This is a compromise to
 avoid breaking existing code.
 </p>
-<p>Using <code>control = "all"</code> comes closest to making <code>deparse()</code>
-an inverse of <code>parse()</code>.  However, not all objects are
-deparse-able even with this option and a warning will be issued if the
-function recognizes that it is being asked to do the impossible.
+<p>Using <code>control = c("all", "hexDigits")</code> comes closest to making <code>deparse()</code>
+an inverse of <code>parse()</code> (but we have not yet seen an example where
+<code>"all"</code>, now including <code>"digits17"</code>, would not have been as
+good).  However, not all objects are deparse-able even with these options
+and a warning will be issued if the function recognizes that it is being
+asked to do the impossible.
 </p>
-<p>Numeric and complex vectors are converted using 15 significant digits:
+<p>Unless <code>control</code> contains <code>"digits17"</code> or <code>"hexDigits"</code>,
+(or <code>"all"</code> or <code>"exact"</code> which include one of these), numeric
+and complex vectors are converted using 15 significant digits:
 see <code><a href="character.html">as.character</a></code> for more details.
 </p>
 <p><code>width.cutoff</code> is a lower bound for the line lengths: deparsing a
 line proceeds until at least <code>width.cutoff</code> <em>bytes</em> have
 been output and e.g. <code>arg = value</code> expressions will not be split
 across lines.
+</p>
+<p><code>deparse1()</code> is a simple utility added in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 4.0.0 to ensure a
+string result (<code><a href="character.html">character</a></code> vector of length one),
+typically used in name construction, as
+<code>deparse1(<a href="substitute.html">substitute</a>(.))</code>.
 </p>
 
 
@@ -108,6 +128,10 @@ Wadsworth &amp; Brooks/Cole.
 
 <h3>See Also</h3>
 
+<p><code><a href="deparseOpts.html">.deparseOpts</a></code> for available <code>control</code> settings;
+<code><a href="dput.html">dput</a>()</code> and <code><a href="dump.html">dump</a>()</code> for related functions using
+identical internal deparsing functionality.
+</p>
 <p><code><a href="substitute.html">substitute</a></code>,
 <code><a href="parse.html">parse</a></code>,
 <code><a href="expression.html">expression</a></code>.
@@ -123,11 +147,12 @@ require(stats); require(graphics)
 
 deparse(args(lm))
 deparse(args(lm), width = 500)
-myplot &lt;-
-function(x, y) {
-    plot(x, y, xlab = deparse(substitute(x)),
-        ylab = deparse(substitute(y)))
+
+myplot &lt;- function(x, y) {
+    plot(x, y, xlab = deparse1(substitute(x)),
+               ylab = deparse1(substitute(y)))
 }
+
 e &lt;- quote(`foo bar`)
 deparse(e)
 deparse(e, backtick = TRUE)
@@ -136,5 +161,5 @@ deparse(e)
 deparse(e, control = "all") # wraps it w/ quote( . )
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

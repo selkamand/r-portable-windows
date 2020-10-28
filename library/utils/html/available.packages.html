@@ -22,8 +22,8 @@ from a local mirror).
 available.packages(contriburl = contrib.url(repos, type), method,
                    fields = NULL, type = getOption("pkgType"),
                    filters = NULL, repos = getOption("repos"),
-                   ignore_repo_cache =  FALSE, max_repo_cache_age,
-                   ...)
+                   ignore_repo_cache = FALSE, max_repo_cache_age,
+                   quiet = TRUE, ...)
 </pre>
 
 
@@ -86,11 +86,17 @@ never used (see &lsquo;Details&rsquo;).
 will be ignored. See &lsquo;Details&rsquo;.
 </p>
 </td></tr>
+<tr valign="top"><td><code>quiet</code></td>
+<td>
+<p>logical, passed to <code><a href="download.file.html">download.file</a>()</code>; change
+only if you know what you are doing.</p>
+</td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
 
 <p>allow additional arguments to be passed from callers (which might be
-arguments to future versions of this function).
+arguments to future versions of this function).  Currently these are
+all passed to <code><a href="download.file.html">download.file</a>()</code>.
 </p>
 </td></tr>
 </table>
@@ -226,5 +232,5 @@ options(available_packages_filters =
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

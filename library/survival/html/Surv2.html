@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a survival object</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Surv2 {survival}"><tr><td>Surv2 {survival}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a survival object</h2>
+
+<h3>Description</h3>
+
+<p>Create a survival object from a timeline style data set. This will
+almost always be the response variable in a formula.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+Surv2(time, event)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>time</code></td>
+<td>
+<p>a timeline variable, such as age, time from enrollment,
+date, etc.</p>
+</td></tr>
+<tr valign="top"><td><code>event</code></td>
+<td>
+<p>the outcome at that time.  This can be a 0/1 variable,
+TRUE/FALSE, or a factor.
+If the latter, the first level of the factor corresponds to
+&lsquo;no event was observed at this time&rsquo;.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>When used in a <code>coxph</code> or <code>survfit</code> model,
+Surv2 acts as a trigger to internally convert a timeline style data
+set into counting process style data, which is then acted on by the
+routine.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>Surv2</code>.  There are methods for <code>print</code>,
+<code>is.na</code> and subscripting.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="coxph.html">coxph</a></code>,  
+<code><a href="survfit.html">survfit</a></code>  
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-7 <a href="00Index.html">Index</a>]</div>
+</body></html>

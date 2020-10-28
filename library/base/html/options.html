@@ -132,8 +132,13 @@ Default <code>60</code>.
 </p>
 </dd>
 <dt><code>deparse.max.lines</code>:</dt><dd><p>controls the number of lines used
-when deparsing in <code><a href="traceback.html">traceback</a></code>, <code><a href="browser.html">browser</a></code>,
-and upon entry to a function whose debugging flag is set.
+when deparsing in <code><a href="browser.html">browser</a></code>, upon entry to a function
+whose debugging flag is set, and if option <code>traceback.max.lines</code>
+is unset, of <code><a href="traceback.html">traceback</a>()</code>.  Initially unset, and only
+used if set to a positive integer.</p>
+</dd>
+<dt><code>traceback.max.lines</code>:</dt><dd><p>controls the number of lines used
+when deparsing in <code><a href="traceback.html">traceback</a></code>, if set.
 Initially unset, and only used if set to a positive integer.</p>
 </dd>
 <dt><code>digits</code>:</dt><dd><p>controls the number of <em>significant</em> (see <code><a href="Round.html">signif</a></code>) digits to
@@ -157,7 +162,7 @@ is chosen: see <code><a href="../../utils/html/download.file.html">download.file
 </dd>
 <dt><code>echo</code>:</dt><dd><p>logical.  Only used in non-interactive mode,
 when it controls whether input is echoed.  Command-line option
-<span class="option">--slave</span> sets this to <code>FALSE</code>, but otherwise
+<span class="option">--no-echo</span> sets this to <code>FALSE</code>, but otherwise
 it starts the session as <code>TRUE</code>.</p>
 </dd>
 <dt><code>encoding</code>:</dt><dd><p>The name of an encoding, default
@@ -238,9 +243,9 @@ values it uses an unoptimized 3-loop algorithm for inputs that may
 contain <code>NaN</code> or <code>Inf</code> values.  When deemed
 beneficial for performance, <code>"default"</code> may call the
 3-loop algorithm unconditionally, i.e., without checking the
-input for NaN/Inf values.  The 3-loop algorithm uses (only) a
-<code>double</code> accumulator for summation, which is consistent
-with the reference BLAS implementation.</p>
+input for <code>NaN</code>/<code>Inf</code> values.  The 3-loop algorithm uses
+(only) a <code>double</code> accumulator for summation, which is
+consistent with the reference BLAS implementation.</p>
 </dd>
 <dt><code>"blas"</code></dt><dd><p>uses BLAS unconditionally without any
 checks and should be used with extreme caution.  BLAS
@@ -251,8 +256,8 @@ libraries do not propagate <code><a href="is.finite.html">NaN</a></code> or
 <dt><code>"default.simd"</code></dt><dd><p>is experimental and will likely be
 removed in future versions of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>.  It provides the same behavior
 as <code>"default"</code>, but the check whether the input contains
-NaN/Inf values is faster on some SIMD hardware.  On older
-systems it will run correctly, but may be much slower than
+<code>NaN</code>/<code>Inf</code> values is faster on some SIMD hardware.
+On older systems it will run correctly, but may be much slower than
 <code>"default"</code>.</p>
 </dd>
 </dl>
@@ -311,26 +316,33 @@ Canadian locales.</p>
 </dd>
 <dt><code>PCRE_limit_recursion</code>:</dt><dd><p>Logical: should
 <code><a href="grep.html">grep</a>(perl = TRUE)</code> and similar limit the maximal
-recursion allowed when matching?  PCRE can be built not to use a
-recursion stack (see <code><a href="pcre_config.html">pcre_config</a></code>, but it is by
-default with a recursion limit of 10000000 which potentially needs
-a very large C stack: see the discussion at
+recursion allowed when matching?  Only relevant for PCRE1 and
+PCRE2 &lt;= 10.23.
+</p>
+<p>PCRE can be built not to use a recursion stack (see
+<code><a href="pcre_config.html">pcre_config</a></code>), but it uses recursion by default with
+a recursion limit of 10000000 which potentially needs a very large
+C stack: see the discussion at
 <a href="http://www.pcre.org/original/doc/html/pcrestack.html">http://www.pcre.org/original/doc/html/pcrestack.html</a>.  If
 true, the limit is reduced using <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>'s estimate of the C stack size
 available (if known), otherwise 10000.  If <code>NA</code>, the limit is
-imposed only if any input string has 1000 or more bytes.</p>
+imposed only if any input string has 1000 or more bytes.  The
+limit has no effect when PCRE's Just-in-Time compiler is used.</p>
 </dd>
 <dt><code>PCRE_study</code>:</dt><dd><p>Logical or integer: should
 <code><a href="grep.html">grep</a>(perl = TRUE)</code> and similar &lsquo;study&rsquo; the
 patterns?  Either logical or a numerical threshold for the minimum
 number of strings to be matched for the pattern to be studied (the
 default is <code>10</code>)).  Missing values and negative numbers are
-treated as false.</p>
+treated as false.  This option is ignored with PCRE2 (PCRE version &gt;=
+10.00) which does not have a separate study phase and patterns are
+automatically optimized when possible.</p>
 </dd>
 <dt><code>PCRE_use_JIT</code>:</dt><dd><p>Logical: should <code><a href="grep.html">grep</a>(perl =
 	TRUE)</code>, <code><a href="strsplit.html">strsplit</a>(perl = TRUE)</code> and similar make use
-of PCRE's Just-In-Time compiler for studied patterns, if
-available?  Missing values are treated as false.</p>
+of PCRE's Just-In-Time compiler if available? (This applies only to
+studied patterns with PCRE1.)  Default: true.  Missing values are
+treated as false.</p>
 </dd>
 <dt><code>pdfviewer</code>:</dt><dd><p>default PDF viewer.
 The default is set from the environment variable <span class="env">R_PDFVIEWER</span>,
@@ -423,9 +435,13 @@ necessary, that environment variable can be set to
 </dd> </dl>
 
 </dd>
-<dt><code>timeout</code>:</dt><dd><p>integer.  The timeout for some Internet
-operations, in seconds.  Default 60 seconds.  See
-<code><a href="../../utils/html/download.file.html">download.file</a></code> and <code><a href="connections.html">connections</a></code>.</p>
+<dt><code>timeout</code>:</dt><dd><p>positive integer.  The timeout for some
+Internet operations, in seconds.  Default 60 (seconds) but can be
+set from environment variable
+<span class="env">R_DEFAULT_INTERNET_TIMEOUT</span>. (Invalid values of the option or
+the variable are silently ignored: non-integer numeric values will
+be truncated.)  See <code><a href="../../utils/html/download.file.html">download.file</a></code> and
+<code><a href="connections.html">connections</a></code>.</p>
 </dd>
 <dt><code>topLevelEnvironment</code>:</dt><dd><p>see <code><a href="ns-topenv.html">topenv</a></code> and
 <code><a href="sys.source.html">sys.source</a></code>.</p>
@@ -444,7 +460,7 @@ rendering text help (see <code><a href="../../tools/html/Rd2HTML.html">Rd2txt</a
 on progress?  Set to <code>TRUE</code> by the command-line option
 <span class="option">--verbose</span>.</p>
 </dd>
-<dt><code>warn</code>:</dt><dd><p>sets the handling of warning messages.  If
+<dt><code>warn</code>:</dt><dd><p>integer value to set the handling of warning messages.  If
 <code>warn</code> is negative all warnings are ignored.  If <code>warn</code>
 is zero (the default) warnings are stored until the top&ndash;level
 function returns.  If 10 or fewer warnings were signalled they
@@ -827,12 +843,13 @@ Possible values are platform dependently
 <p><code>"win.binary"</code>, <code>"source"</code> and
 <code>"both"</code> (the default).</p>
 </dd>
-<dt>on unix-alikes</dt><dd><p><code>"source"</code> (the default except under a
-CRAN macOS build), <code>"mac.binary.el-capitan"</code> and
+<dt>on Unix-alikes</dt><dd><p><code>"source"</code> (the default except under a
+CRAN macOS build), <code>"mac.binary"</code> and
 <code>"both"</code> (the default for CRAN macOS builds).
-(<code>"mac.binary.mavericks"</code>, <code>"mac.binary.leopard"</code>,
-<code>"mac.binary.universal"</code> are no longer in use.)</p>
-</dd>
+(<code>"mac.binary.el-capitan"</code>,
+<code>"mac.binary.mavericks"</code>, <code>"mac.binary.leopard"</code>
+and <code>"mac.binary.universal"</code> are no longer in use.)</p>
+</dd> 
 </dl>
 
 <p>Value <code>"binary"</code> is a synonym for the native binary type (if
@@ -1002,5 +1019,5 @@ if(tmp)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

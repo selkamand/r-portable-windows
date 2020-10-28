@@ -9,7 +9,8 @@
 
 <h3>Description</h3>
 
-<p>Waits for the first of several socket connections to become available.
+<p>Waits for the first of several socket connections and server sockets
+to become available.
 </p>
 
 
@@ -25,13 +26,14 @@ socketSelect(socklist, write = FALSE, timeout = NULL)
 <table summary="R argblock">
 <tr valign="top"><td><code>socklist</code></td>
 <td>
-<p>list of open socket connections</p>
+<p>list of open socket connections and server sockets.</p>
 </td></tr>
 <tr valign="top"><td><code>write</code></td>
 <td>
 <p>logical.  If <code>TRUE</code> wait for corresponding socket to
 become available for writing; otherwise wait for it to become
-available for reading.</p>
+available for reading or for accepting an incoming
+connection (server sockets).</p>
 </td></tr>
 <tr valign="top"><td><code>timeout</code></td>
 <td>
@@ -57,6 +59,7 @@ writing.
 <p>Logical the same length as <code>socklist</code> indicating
 whether the corresponding socket connection is available for
 output or input, depending on the corresponding value of <code>write</code>.
+Server sockets can only become available for input.
 </p>
 
 
@@ -70,5 +73,5 @@ socketSelect(list(s, s), c(TRUE, FALSE), timeout = 0)
 ## End(Not run)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

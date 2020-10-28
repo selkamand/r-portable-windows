@@ -99,11 +99,13 @@ lines starting with <code>#</code>, or lines of the form
 variable <code><var>name</var></code> to <code><var>value</var></code>, overriding an
 existing value.  If <code><var>value</var></code> contains an expression of the
 form <code>${foo-bar}</code>, the value is that of the environmental
-variable <code>foo</code> if that exists and is set to a non-empty value,
-otherwise <code>bar</code>.  (If it is of the form <code>${foo}</code>, the
-default is <code>""</code>.)  This construction can be nested, so <code>bar</code>
-can be of the same form (as in <code>${foo-${bar-blah}}</code>).  Note that
-the braces are essential: for example <code>$HOME</code> will not be interpreted.
+variable <code>foo</code> if that is set, otherwise <code>bar</code>.  For
+<code>${foo:-bar}</code>, the value is that of <code>foo</code> if that is set to
+a non-empty value, otherwise <code>bar</code>.  (If it is of the form
+<code>${foo}</code>, the default is <code>""</code>.)  This construction can be
+nested, so <code>bar</code> can be of the same form (as in
+<code>${foo-${bar-blah}}</code>).  Note that the braces are essential: for
+example <code>$HOME</code> will not be interpreted.
 </p>
 <p>Leading and trailing white space in <code><var>value</var></code> are stripped.
 <code><var>value</var></code> is then processed in a similar way to a Unix shell:
@@ -147,6 +149,10 @@ child <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b><
 <code>R CMD build</code>), set the appropriate environment variable
 <span class="env">R_ENVIRON_USER</span> or <span class="env">R_PROFILE_USER</span> to (if possible, which it
 is not on Windows) <code>""</code> or to the name of a non-existent file.
+</p>
+<p>Prior to <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 4.0.0, <code>${foo-bar}</code> in an environment file skipped an
+empty <code>foo</code>: this has been changed to match the POSIX rules for
+parameter substitution in shells.
 </p>
 
 
@@ -222,5 +228,5 @@ FOOBAR="coo\bar"doh\ex"abc\"def'"
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

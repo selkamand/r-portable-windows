@@ -20,19 +20,20 @@ the cairo graphics API.
 svg(filename = if(onefile) "Rplots.svg" else "Rplot%03d.svg",
     width = 7, height = 7, pointsize = 12,
     onefile = FALSE, family = "sans", bg = "white",
-    antialias = c("default", "none", "gray", "subpixel"))
+    antialias = c("default", "none", "gray", "subpixel"),
+    symbolfamily)
 
 cairo_pdf(filename = if(onefile) "Rplots.pdf" else "Rplot%03d.pdf",
           width = 7, height = 7, pointsize = 12,
           onefile = FALSE, family = "sans", bg = "white",
           antialias = c("default", "none", "gray", "subpixel"),
-          fallback_resolution = 300)
+          fallback_resolution = 300, symbolfamily)
 
 cairo_ps(filename = if(onefile) "Rplots.ps" else "Rplot%03d.ps",
          width = 7, height = 7, pointsize = 12,
          onefile = FALSE, family = "sans", bg = "white",
          antialias = c("default", "none", "gray", "subpixel"),
-         fallback_resolution = 300)
+         fallback_resolution = 300, symbolfamily)
 </pre>
 
 
@@ -90,6 +91,12 @@ defaults to <code>"default"</code>.</p>
 <p>numeric: the resolution in dpi used when
 falling back to bitmap output.  Prior to <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.3.0 this depended on
 the cairo implementation but was commonly 300.</p>
+</td></tr>
+<tr valign="top"><td><code>symbolfamily</code></td>
+<td>
+
+<p>a length-one character string that specifies the font family to
+be used as the &quot;symbol&quot; font (e.g., for <a href="plotmath.html">plotmath</a> output).</p>
 </td></tr>
 </table>
 
@@ -191,5 +198,5 @@ XQuartz) may need to be installed.
 <p><code><a href="../../base/html/capabilities.html">capabilities</a></code> to see if cairo is supported.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

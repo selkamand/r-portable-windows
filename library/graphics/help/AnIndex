@@ -77,7 +77,7 @@ persp	persp
 persp.default	persp
 pie	pie
 piechart	graphics-defunct
-plot	plot
+plot	plot.default
 plot.data.frame	plot.dataframe
 plot.default	plot.default
 plot.design	plot.design

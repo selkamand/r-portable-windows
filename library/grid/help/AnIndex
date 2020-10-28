@@ -199,7 +199,9 @@ unit.c	unit.c
 unit.length	unit.length
 unit.pmax	unit.pmin
 unit.pmin	unit.pmin
+unit.psum	unit.pmin
 unit.rep	unit.rep
+unitType	unitType
 upViewport	viewports
 valid.just	valid.just
 validDetails	validDetails

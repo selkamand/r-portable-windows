@@ -100,7 +100,7 @@ depends on the platform:
 <ul>
 <li><p> On a Unix-alike method <code>"libcurl"</code> is used except
 <code>"internal"</code> for <span class="samp">file://</span> URLs, where <code>"libcurl"</code>
-uses the library of that name (<a href="http://curl.haxx.se/libcurl/">http://curl.haxx.se/libcurl/</a>).
+uses the library of that name (<a href="https://curl.haxx.se/libcurl/">https://curl.haxx.se/libcurl/</a>).
 </p>
 </li>
 <li><p> On Windows the <code>"wininet"</code> method is used apart from for
@@ -111,7 +111,7 @@ uses the library of that name (<a href="http://curl.haxx.se/libcurl/">http://cur
 <p>Support for method <code>"libcurl"</code> is optional on Windows: use
 <code><a href="../../base/html/capabilities.html">capabilities</a>("libcurl")</code> to see if it is supported on
 your build.  It uses an external library of that name
-(<a href="http://curl.haxx.se/libcurl/">http://curl.haxx.se/libcurl/</a>) against which <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> can be compiled.
+(<a href="https://curl.haxx.se/libcurl/">https://curl.haxx.se/libcurl/</a>) against which <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> can be compiled.
 </p>
 </li></ul>
 
@@ -162,7 +162,10 @@ in URLs (see <code><a href="URLencode.html">URLencode</a></code>), but it seems 
 and <code>"libcurl"</code> methods only.
 </p>
 <p>The timeout for many parts of the transfer can be set by the option
-<code>timeout</code> which defaults to 60 seconds.
+<code>timeout</code> which defaults to 60 seconds.  This is often
+insufficient for downloads of large files (hundreds of MB or more) and
+so should be increased when <code>download.file</code> is used in packages
+to do so.
 </p>
 <p>The level of detail provided during transfer can be set by the
 <code>quiet</code> argument and the <code>internet.info</code> option: the details
@@ -226,7 +229,7 @@ appending when the file should be unchanged.
 
 <p>For the Windows-only method <code>"wininet"</code>, the &lsquo;Internet
 Options&rsquo; of the system are used to choose proxies and so on; these are
-set in the Control Panel and are those used for Internet Explorer.
+set in the Control Panel and are those used for system browsers.
 </p>
 <p>The next two paragraphs apply to the internal code only.
 </p>
@@ -262,7 +265,7 @@ further prompt per download.
 <span class="env">no_proxy</span>, <span class="env">http_proxy</span> and <span class="env">ftp_proxy</span>, and for the last
 two a contents of <code>[user:password@]machine[:port]</code> where the
 parts in brackets are optional.  See
-<a href="http://curl.haxx.se/libcurl/c/libcurl-tutorial.html">http://curl.haxx.se/libcurl/c/libcurl-tutorial.html</a> for details.
+<a href="https://curl.haxx.se/libcurl/c/libcurl-tutorial.html">https://curl.haxx.se/libcurl/c/libcurl-tutorial.html</a> for details.
 </p>
 
 
@@ -272,7 +275,7 @@ parts in brackets are optional.  See
 try to verify the site certificates.  This is usually done using the CA
 root certificates installed by the OS (although we have seen instances
 in which these got removed rather than updated). For further information
-see <a href="http://curl.haxx.se/docs/sslcerts.html">http://curl.haxx.se/docs/sslcerts.html</a>.
+see <a href="https://curl.haxx.se/docs/sslcerts.html">https://curl.haxx.se/docs/sslcerts.html</a>.
 </p>
 <p>This is an issue for <code>method = "libcurl"</code> on Windows, where the
 OS does not provide a suitable CA certificate bundle, so by default on
@@ -284,7 +287,7 @@ installation of <span style="font-family: Courier New, Courier; color: #666666;"
 &lsquo;<span class="file"><var>R_HOME</var>/etc/curl-ca-bundle.crt</span>&rsquo; and sets
 <span class="env">CURL_CA_BUNDLE</span> to point to it if that environment variable is not
 already set.)  For an updated certificate bundle, see
-<a href="http://curl.haxx.se/docs/sslcerts.html">http://curl.haxx.se/docs/sslcerts.html</a>.
+<a href="https://curl.haxx.se/docs/sslcerts.html">https://curl.haxx.se/docs/sslcerts.html</a>.
 Currently one can download a copy from
 <a href="https://raw.githubusercontent.com/bagder/ca-bundle/master/ca-bundle.crt">https://raw.githubusercontent.com/bagder/ca-bundle/master/ca-bundle.crt</a>
 and set <span class="env">CURL_CA_BUNDLE</span> to the full path to the downloaded file.
@@ -342,7 +345,7 @@ configuration file for <code>wget</code>.
 installed on Unix-alikes (but not macOS).  Windows binaries are
 available from Cygwin, gnuwin32 and elsewhere.
 </p>
-<p><code>curl</code> (<a href="http://curl.haxx.se/">http://curl.haxx.se/</a>) is installed on macOS and
+<p><code>curl</code> (<a href="https://curl.haxx.se/">https://curl.haxx.se/</a>) is installed on macOS and
 commonly on Unix-alikes.  Windows binaries are available at that URL.
 </p>
 
@@ -361,5 +364,5 @@ and <code>internet.info</code> options used by some of the methods.
 comprehensive facilities to download from URLs.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

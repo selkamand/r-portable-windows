@@ -278,7 +278,7 @@ Where \code{data1} is the starting data set and additions to the data are
 taken from \code{data2}.
 The idea behind the function is that each addition will be ``slipped in''
 to the original data in the same way that one
-would slide a new card into an existing deck of cards. 
+would add a new folder into a file cabinet.
 It is a complex function, and we illustrate it below with a set of
 examples that sequentially reveal its features.
 
@@ -326,7 +326,7 @@ process form.
 \begin{itemize}
   \item Each row of the resulting data set represents a time interval
     (time1, time2] which is open on the left and closed on the right.
-    Covariate values for that row are the covariate values that apply
+    Covariate values for each row are the covariate values that apply
     over that interval.
   \item The event variable for each row $i$ is 1 if the time interval ends
     with an event and 0 otherwise.
@@ -366,7 +366,7 @@ more bit of information to the data set.
   \item Each additional call then adds either an endpoint or a covariate,
     splitting individual rows of the input in two as necessary.
     An \code{event} or \code{cumevent} directive adds events, while
-    a \code{tdc} or \code{cumtdc} one adds a time dependent covariate.
+    a \code{tdc} or \code{cumtdc} command adds a time dependent covariate.
     Events happen at the ends of intervals and time-dependent covariates 
     change at the start of an interval.  
   \item Additions from \code{data2} with a missing time value are ignored.
@@ -417,8 +417,8 @@ all.equal(newcgd, test)
 
 \subsection{Stanford heart transplant}
 The \code{jasa} data set contains information from the Stanford heart
-transplant study, in the form that it appeared in the 
-paper of Crowley and Hu \cite{Crowley77}.
+transplant study, in the form that it appeared in the J American Statistical
+Association paper of Crowley and Hu \cite{Crowley77}.
 The data set has one line per subject
 which contains the baseline covariates along with
 dates of enrollment, transplant, and death or last follow-up.
@@ -439,7 +439,7 @@ that need to be dealt with when setting up an analysis data set.
     treatment for days 1--10 and as transplanted starting on day 11.
     That is, except for patient 38 who died on the same day as their procedure.
     They should be treated as a transplant death; the problem is resolved by
-    moving this transplant back .5 day.
+    moving this forward in time by .5 day.
 
   \item The treatment coefficients in table 6.1 of the 
     definitive analysis found in
@@ -465,6 +465,10 @@ tdata <- with(jasa, data.frame(subject = subject,
                                               (tx.date - accept.dt)),
                                fustat = fustat
                              ))
+xdata <- tmerge(jasa, tdata, id=subject,
+                  death = event(futime, fustat),
+                  transplant   =  tdc(txtime), 
+                  options= list(idname="subject"))
 
 sdata <- tmerge(jasa, tdata, id=subject,
                   death = event(futime, fustat),
@@ -485,30 +489,35 @@ created variable is an event then the time range for each subject is
 inferred to be from 0 to the event time: explicit \code{tstop} 
 and \code{tstart} arguments are not required.
 It also makes use of a two argument form of \code{event}.
-Each of the \code{event}, \code{cumevent}, \code{tdc} and \code{cumtdc}
-functions
+Each of the \code{event} and \code{cumevent} functions
 may have a second argument, which if present will be used as the value
-for the event code or time dependent covariate.
+for the event code.
 If this second argument is not present a value of 1 is used.
-
-If a created variable is not already in data1, 
-the starting value \emph{before} the first definition of that
-variable is a NA for a
-\code{tdc} or \code{cumtdc} call that has two arguments and 0
-in all other cases.
-If the variable being created is already a part of data1, 
-then our updates make changes to that variable.
-Be careful of this.  This feature is what allowed for the 
+If an event variable is already a part of data1, 
+then our updates make changes to that variable, possibly adding more events.
+This feature is what allowed for the 
 \code{infection} indicator to be build up incrementally in the cgd
-example above, but quite surprising results can occur when you
-think a new variable is being created de novo but its name is already
-in use.  For example, if we name the new variable
-`transplant' in the third line of \code{sdata} above it collides
-with an existing variable in the \code{jasa} data set; the result
-is to not create a time-dependent transplant variable at all.
-(The author made this mistake himself when creating this vignette,
- and then spent several hours searching the tmerge
-code for an error that wasn't there.)
+example above.
+
+The \code{tdc} and \code{cumtdc} arguments can have 1, 2 or three
+arguments.
+The first is always the time point, the second, if present, is the
+value to be inserted, and an optional third argument is the initial value.
+If the \code{tdc} call has a single argument the result is always a
+0/1 variable, 0 before the time point and 1 after.
+For the 2 or three argument form, the starting value \emph{before} the 
+first definition of the new variable (before the first time point)
+will be the initial value.
+The default for the initial value is NA, the value of the 
+\code{tdcstart} option.
+If the \code{tdc} variable being created is already a part of data1,
+the old value is replaced wholesale, it is not updated.
+This differs from the behavior for events.
+Although there is a use case for updating an existing time-dependent value, 
+say from a new data source, our experience had been that the much more
+common case was accidental reuse of an existing name, resulting in
+a chimeric mishmash between an existing baseline covariate and the additions,
+and creating a column which was valid for neither.
 
 The \code{tcount} table for the above fit shows all the deaths at the
 trailing edge of their interval, which is expected since the time

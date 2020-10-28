@@ -56,10 +56,19 @@ not be canonical.  Even where <code>realpath</code> is used the canonical
 path need not be unique, for example <em>via</em> hard links or
 multiple mounts.
 </p>
-<p>On Windows it converts relative paths to absolute paths, converts
-short names for path elements to long names and ensures the separator
-is that specified by <code>winslash</code>.  It will match paths
-case-insensitively and return the canonical case.
+<p>On Windows it converts relative paths to absolute paths, resolves symbolic
+links, converts short names for path elements to long names and ensures the
+separator is that specified by <code>winslash</code>.  It will match each path
+element case-insensitively or case-sensitively as during the usual name
+lookup and return the canonical case. It relies on Windows API function
+<code>GetFinalPathNameByHandle</code> and in case of an error (such as
+insufficient permissions) it currently falls back to the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.6 (and
+older) implementation, which relies on <code>GetFullPathName</code> and
+<code>GetLongPathName</code> with limitations described in the Notes section.
+An attempt is made not to introduce UNC paths in presence of mapped drives
+or symbolic links: if <code>GetFinalPathNameByHandle</code> returns a UNC path,
+but <code>GetLongPathName</code> returns a path starting with a drive letter, R
+falls back to the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.6 (and older) implementation.
 UTF-8-encoded paths not valid in the current locale can be used.
 </p>
 <p><code>mustWork = FALSE</code> is useful for expressing paths for use in
@@ -109,7 +118,10 @@ length of a file path.
 on macOS absolute paths such as &lsquo;<span class="file">/tmp</span>&rsquo; and &lsquo;<span class="file">/var</span>&rsquo; are
 symbolic links. On Linux, a path produced by bash process substitution is
 a symbolic link (such as &lsquo;<span class="file">/proc/fd/63</span>&rsquo;) to a pipe and there is no
-canonical form of such path.
+canonical form of such path. In <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.6 and older on Windows, symlinks will
+not be resolved and the long names for path elements will be returned with
+the case in which they are in <code>path</code>, which may not be canonical in
+case-insensitive folders.
 </p>
 
 
@@ -125,5 +137,5 @@ canonical form of such path.
 cat(normalizePath(c(R.home(), tempdir())), sep = "\n")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

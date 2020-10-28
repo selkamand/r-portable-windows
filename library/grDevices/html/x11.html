@@ -30,7 +30,7 @@ machines/accounts that have access to an X server.
 </p>
 <p>The <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> function is a wrapper for two devices, one based on Xlib
 (<a href="https://en.wikipedia.org/wiki/Xlib">https://en.wikipedia.org/wiki/Xlib</a>) and one using cairographics
-(<a href="http://www.cairographics.org">http://www.cairographics.org</a>).</p>
+(<a href="https://www.cairographics.org">https://www.cairographics.org</a>).</p>
 </dd>
 </dl>
 
@@ -40,7 +40,7 @@ machines/accounts that have access to an X server.
 
 <pre>
 X11(display = "", width, height, pointsize, gamma, bg, canvas,
-    fonts, family, xpos, ypos, title, type, antialias)
+    fonts, family, xpos, ypos, title, type, antialias, symbolfamily)
 
 X11.options(..., reset = FALSE)
 </pre>
@@ -131,6 +131,14 @@ on macOS, otherwise <code>"Xlib"</code>.</p>
 <td>
 <p>for cairo types, the type of anti-aliasing (if any)
 to be used.  One of <code>c("default", "none", "gray", "subpixel")</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>symbolfamily</code></td>
+<td>
+<p>for cairo-based devices only:
+a length-one character string that specifies the font family to
+be used as the &quot;symbol&quot; font (e.g., for <a href="plotmath.html">plotmath</a> output).
+The default value is &quot;default&quot;, which means that R will choose
+a default &quot;symbol&quot; font based on the graphics device capabilities.</p>
 </td></tr>
 <tr valign="top"><td><code>reset</code></td>
 <td>
@@ -280,6 +288,12 @@ should if you have them installed are <code>"Arial"</code>,
 <code>"FreeSans"</code>).  For those who prefer fonts with serifs, try
 <code>"Times New Roman"</code>, <code>"DejaVu Serif"</code> and <code>"Liberation
   Serif"</code>.  To match LaTeX text, use something like <code>"CM Roman"</code>.
+</p>
+<p>Fedora systems from version 31 on do not like the default <code>"symbol"</code>
+font family for rendering symbols (e.g., <a href="plotmath.html">plotmath</a>).  For those
+systems, users should specify a different font via
+<code>symbolfamily</code>.  The default can also be changed via
+<code>X11.options</code>. 
 </p>
 
 <p>Problems with incorrect rendering of symbols (e.g., of
@@ -437,5 +451,5 @@ setHook(packageEvent("grDevices", "onLoad"),
 }
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

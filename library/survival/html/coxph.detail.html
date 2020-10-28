@@ -19,7 +19,7 @@ matrix, at each unique event time.
 <h3>Usage</h3>
 
 <pre>
-coxph.detail(object, riskmat=FALSE)
+coxph.detail(object, riskmat=FALSE, rorder=c("data", "time"))
 </pre>
 
 
@@ -36,6 +36,12 @@ coxph.detail(object, riskmat=FALSE)
 <td>
 
 <p>include the at-risk indicator matrix in the output?
+</p>
+</td></tr>
+<tr valign="top"><td><code>rorder</code></td>
+<td>
+<p>if <code>riskmat=TRUE</code>, the rows of riskmat will be in the
+original data order, otherwise sorted by time within strata.
 </p>
 </td></tr>
 </table>
@@ -126,9 +132,12 @@ were contributed by each of the strata.
 <tr valign="top"><td><code>riskmat</code></td>
 <td>
 
-<p>a matrix with one row for each time and one column for each observation
+<p>a matrix with one row for each observation and one colum for each
+unique event time,
 containing a 0/1 value to indicate whether that observation was (1) or
-was not (0) at risk at the given time point.
+was not (0) at risk at the given time point.  Rows are in the order
+of the original data (after removal of any missings by
+<code>coxph</code>), or in time order.
 </p>
 </td></tr>
 </table>
@@ -156,5 +165,5 @@ indx   &lt;- match(etime, fitd$time)
 schoen &lt;- fit$x[events,] - fitd$means[indx,]
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.1-8 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-7 <a href="00Index.html">Index</a>]</div>
 </body></html>

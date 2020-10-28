@@ -87,7 +87,7 @@ i.e.,
 <p style="text-align: center;"><i>
     Fn(t) = #{xi &lt;= t}/n  =  1/n sum(i=1,n) Indicator(xi &lt;= t).</i></p>
 
-<p>The function <code>plot.ecdf</code> which implements the <code><a href="../../graphics/html/plot.html">plot</a></code>
+<p>The function <code>plot.ecdf</code> which implements the <code><a href="../../graphics/html/plot.default.html">plot</a></code>
 method for <code>ecdf</code> objects, is implemented via a call to
 <code><a href="plot.stepfun.html">plot.stepfun</a></code>; see its documentation.
 </p>
@@ -154,7 +154,7 @@ summary.stepfun(Fn12)
 
 ## Advanced: What's inside the function closure?
 ls(environment(Fn12))
-##[1] "f"  "method"  "n"  "x"  "y"  "yleft"  "yright"
+## "f"     "method" "na.rm"  "nobs"   "x"     "y"    "yleft"  "yright"
 utils::ls.str(environment(Fn12))
 stopifnot(all.equal(quantile(Fn12), quantile(y)))
 
@@ -188,5 +188,5 @@ title("via  simple  plot.ecdf(x)", adj = 1)
 par(op)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

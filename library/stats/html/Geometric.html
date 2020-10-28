@@ -84,15 +84,15 @@ is zero, with a warning.
 </p>
 <p>The length of the result is determined by <code>n</code> for
 <code>rgeom</code>, and is the maximum of the lengths of the
-numerical arguments for the other functions.  
+numerical arguments for the other functions.
 </p>
 <p>The numerical arguments other than <code>n</code> are recycled to the
 length of the result.  Only the first elements of the logical
 arguments are used.
 </p>
-<p><code>rgeom</code> returns a vector of type <a href="../../base/html/integer.html">integer</a>: if generated
-values exceed the maximum representable integer they are returned as
-<code>NA</code> and a warning is given.
+<p><code>rgeom</code> returns a vector of type <a href="../../base/html/integer.html">integer</a> unless generated
+values exceed the maximum representable integer when <code><a href="../../base/html/double.html">double</a></code>
+values are returned since R version 4.0.0.
 </p>
 
 
@@ -125,5 +125,5 @@ qgeom((1:9)/10, prob = .2)
 Ni &lt;- rgeom(20, prob = 1/4); table(factor(Ni, 0:max(Ni)))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

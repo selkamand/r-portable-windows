@@ -55,5 +55,5 @@ Author: Martin Maechler [aut, cre] (<https://orcid.org/0000-0002-8685-9910>),
   Keefe Murphy [ctb] (volume.ellipsoid({d >= 3}))
 Repository: CRAN
 Date/Publication: 2019-06-19 11:10:03 UTC
-Built: R 3.6.3; x86_64-w64-mingw32; 2020-02-29 09:43:05 UTC; windows
+Built: R 4.0.3; x86_64-w64-mingw32; 2020-10-10 12:54:32 UTC; windows
 Archs: i386, x64

@@ -18,7 +18,7 @@
 mosaicplot(x, ...)
 
 ## Default S3 method:
-mosaicplot(x, main = deparse(substitute(x)),
+mosaicplot(x, main = deparse1(substitute(x)),
            sub = NULL, xlab = NULL, ylab = NULL,
            sort = NULL, off = NULL, dir = NULL,
            color = NULL, shade = FALSE, margin = NULL,
@@ -27,7 +27,7 @@ mosaicplot(x, main = deparse(substitute(x)),
 
 ## S3 method for class 'formula'
 mosaicplot(formula, data = NULL, ...,
-           main = deparse(substitute(data)), subset,
+           main = deparse1(substitute(data)), subset,
            na.action = stats::na.omit)
 </pre>
 
@@ -264,5 +264,5 @@ mosaicplot(~ gear + carb, data = mtcars, color = TRUE, las = 1)
 mosaicplot(~ gear + carb, data = mtcars, color = 2:3, las = 1)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>graphics</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

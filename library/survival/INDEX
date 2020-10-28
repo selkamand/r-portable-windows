@@ -1,5 +1,8 @@
 Math.Surv               Methods for Surv objects
 Surv                    Create a Survival Object
+Surv2                   Create a survival object
+Surv2data               Convert data from timecourse to (time1,time2)
+                        style
 aareg                   Aalen's additive regression model for censored
                         data
 aeqSurv                 Adjudicate near ties in a Surv object
@@ -35,6 +38,8 @@ finegray                Create data for a Fine-Gray model
 flchain                 Assay of serum free light chain for 7874
                         subjects.
 frailty                 Random effects terms
+gbsg                    Breast cancer data sets used in Royston and
+                        Altman (2013)
 heart                   Stanford Heart Transplant data
 is.ratetable            Verify that an object is of class ratetable.
 kidney                  Kidney catheter data
@@ -79,6 +84,10 @@ residuals.survreg       Compute Residuals for 'survreg' Objects
 retinopathy             Diabetic Retinopathy
 rhDNase                 rhDNASE data set
 ridge                   Ridge regression
+rotterdam               Breast cancer data set used in Royston and
+                        Altman (2013)
+royston                 Compute Royston's D for a Cox model
+rttright                Compute redistribute-to-the-right weights
 solder                  Data from a soldering experiment
 stanford2               More Stanford Heart Transplant data
 statefig                Draw a state space figure.

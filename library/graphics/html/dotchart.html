@@ -16,7 +16,7 @@
 <h3>Usage</h3>
 
 <pre>
-dotchart(x, labels = NULL, groups = NULL, gdata = NULL,
+dotchart(x, labels = NULL, groups = NULL, gdata = NULL, offset = 1/8,
          ann = par("ann"), xaxt = par("xaxt"), frame.plot = TRUE, log = "",
          cex = par("cex"), pt.cex = cex,
          pch = 21, gpch = 21, bg = par("bg"),
@@ -56,6 +56,11 @@ of <code>x</code>.</p>
 <p>data values for the groups.
 This is typically a summary such as the median or mean
 of each group.</p>
+</td></tr>
+<tr valign="top"><td><code>offset</code></td>
+<td>
+<p>offset in inches of <code>ylab</code> and <code>labels</code>; was
+hardwired to 0.4 before <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 4.0.0.</p>
 </td></tr>
 <tr valign="top"><td><code>ann</code></td>
 <td>
@@ -164,11 +169,13 @@ Monterey, CA: Wadsworth.
 
 <pre>
 dotchart(VADeaths, main = "Death Rates in Virginia - 1940")
+
 op &lt;- par(xaxs = "i")  # 0 -- 100%
 dotchart(t(VADeaths), xlim = c(0,100), bg = "skyblue",
-         main = "Death Rates in Virginia - 1940")
+         main = "Death Rates in Virginia - 1940", xlab = "rate [ % ]",
+         ylab = "Grouping:  Age  x   Urbanity . Gender")
 par(op)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>graphics</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

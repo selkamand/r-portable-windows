@@ -18,7 +18,7 @@ argument in e.g., <code><a href="coplot.html">coplot</a></code> or <code><a href
 
 <pre>
 panel.smooth(x, y, col = par("col"), bg = NA, pch = par("pch"),
-             cex = 1, col.smooth = "red", span = 2/3, iter = 3,
+             cex = 1, col.smooth = 2, span = 2/3, iter = 3,
              ...)
 </pre>
 
@@ -69,8 +69,8 @@ is typically used;
 
 <pre>
 pairs(swiss, panel = panel.smooth, pch = ".")  # emphasize the smooths
-pairs(swiss, panel = panel.smooth, lwd = 2, cex = 1.5, col = "blue")  # hmm...
+pairs(swiss, panel = panel.smooth, lwd = 2, cex = 1.5, col = 4)  # hmm...
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>graphics</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

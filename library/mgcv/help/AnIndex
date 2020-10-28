@@ -25,9 +25,11 @@ cSplineDes	cSplineDes
 cubic.regression.spline	smooth.construct.cr.smooth.spec
 cyclic.cubic.spline	smooth.construct.cr.smooth.spec
 cyclic.p.spline	smooth.construct.ps.smooth.spec
+d.mvt	rmvn
 dDeta	dDeta
 diagXVXd	XWXd
 Dim.pdIdnot	pdIdnot
+dmvn	rmvn
 Duchon.spline	smooth.construct.ds.smooth.spec
 exclude.too.far	exclude.too.far
 extract.lme.cov	extract.lme.cov
@@ -54,6 +56,7 @@ gam.convergence	gam.convergence
 gam.fit	gam.fit
 gam.fit3	gam.fit3
 gam.fit5.post.proc	gam.fit5.post.proc
+gam.mh	gam.mh
 gam.models	gam.models
 gam.outer	gam.outer
 gam.performance	gam.convergence
@@ -75,6 +78,7 @@ get.var	get.var
 gevlss	gevlss
 ginla	ginla
 gp.smooth	smooth.construct.gp.smooth.spec
+gumbls	gumbls
 identifiability	identifiability
 in.out	in.out
 influence.gam	influence.gam
@@ -129,6 +133,7 @@ persp.gam	vis.gam
 place.knots	place.knots
 plot.gam	plot.gam
 polys.plot	polys.plot
+posterior.simulation	gam.mh
 predict.bam	predict.bam
 predict.gam	predict.gam
 Predict.matrix	Predict.matrix
@@ -155,7 +160,9 @@ PredictMat	smoothCon
 print.anova.gam	anova.gam
 print.gam	print.gam
 print.summary.gam	summary.gam
+psum.chisq	psum.chisq
 qq.gam	qq.gam
+r.mvt	rmvn
 random.effects	random.effects
 residuals.gam	residuals.gam
 rig	rig
@@ -166,6 +173,7 @@ s	s
 scat	scat
 sdiag	sdiag
 sdiag<-	sdiag
+shash	shash
 signal.regression	linear.functional.terms
 sim2jam	jagam
 single.index	single.index
@@ -196,6 +204,7 @@ smooth.construct.tensor.smooth.spec	smooth.construct.tensor.smooth.spec
 smooth.construct.tp.smooth.spec	smooth.construct.tp.smooth.spec
 smooth.construct.ts.smooth.spec	smooth.construct.tp.smooth.spec
 smooth.construct2	smooth.construct
+smooth.info	smooth.info
 smooth.terms	smooth.terms
 smooth2random	smooth2random
 smoothCon	smoothCon

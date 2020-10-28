@@ -52,9 +52,9 @@ using namespace std;
 /*-- Mathlib as part of R --  define this for standalone : */
 /* #undef MATHLIB_STANDALONE */
 
-#define R_VERSION_STRING "3.6.3"
+#define R_VERSION_STRING "4.0.3"
 
-// Legacy defines -- C99 functions which R >= 3.5.0 reauires
+// Legacy defines -- C99 functions which R >= 3.5.0 requires
 #ifndef HAVE_EXPM1
 # define HAVE_EXPM1 1
 #endif

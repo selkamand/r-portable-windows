@@ -10,7 +10,7 @@
 <h3>Description</h3>
 
 <p>Produce model matrices or penalty matrices for a tensor product smooth from the model matrices or
-penalty matrices for the marginal bases of the smooth. The model matrix construction uses row Kronecker products.
+penalty matrices for the marginal bases of the smooth (marginals and results can be sparse). The model matrix construction uses row Kronecker products.
 </p>
 
 
@@ -28,7 +28,7 @@ a%.%b
 <table summary="R argblock">
 <tr valign="top"><td><code>X</code></td>
 <td>
-<p>a list of model matrices for the marginal bases of a smooth</p>
+<p>a list of model matrices for the marginal bases of a smooth. Items can be class <code>"matrix"</code> or <code>"dgCMatrix"</code>, but not a mixture of the two.</p>
 </td></tr> 
 <tr valign="top"><td><code>S</code></td>
 <td>
@@ -73,8 +73,7 @@ constructing tensor product smooths.
 
 <h3>Value</h3>
 
-<p> Either a single model matrix for a tensor product smooth, or a list of penalty terms for a tensor
-product smooth.   
+<p> Either a single model matrix for a tensor product smooth (of the same class as the marginals), or a list of penalty terms for a tensor product smooth.   
 </p>
 
 
@@ -99,14 +98,22 @@ Generalized Additive Mixed Models. Biometrics 62(4):1025-1036
 
 <pre>
 require(mgcv)
-X &lt;- list(matrix(1:4,2,2),matrix(5:10,2,3))
+## Dense row Kronecker product example...
+X &lt;- list(matrix(0:3,2,2),matrix(c(5:8,0,0),2,3))
 tensor.prod.model.matrix(X)
 X[[1]]%.%X[[2]]
 
-S&lt;-list(matrix(c(2,1,1,2),2,2),matrix(c(2,1,0,1,2,1,0,1,2),3,3))
-tensor.prod.penalties(S)
+## sparse equivalent...
+Xs &lt;- lapply(X,as,"dgCMatrix")
+tensor.prod.model.matrix(Xs)
+Xs[[1]]%.%Xs[[2]]
 
+S &lt;- list(matrix(c(2,1,1,2),2,2),matrix(c(2,1,0,1,2,1,0,1,2),3,3))
+tensor.prod.penalties(S)
+## Sparse equivalent...
+Ss &lt;- lapply(S,as,"dgCMatrix")
+tensor.prod.penalties(Ss)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-31 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-33 <a href="00Index.html">Index</a>]</div>
 </body></html>

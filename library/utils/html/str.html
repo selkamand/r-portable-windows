@@ -41,9 +41,11 @@ str(object, max.level = NA,
                        collapse = ".."),
     comp.str = "$ ", no.list = FALSE, envir = baseenv(),
     strict.width = strO$strict.width,
-    formatNum = strO$formatNum, list.len = 99, ...)
+    formatNum = strO$formatNum, list.len = strO$list.len,
+    deparse.lines = strO$deparse.lines, ...)
 
 strOptions(strict.width = "no", digits.d = 3, vec.len = 4,
+           list.len = 99, deparse.lines = NULL,
            drop.deparse.attr = TRUE,
            formatNum = function(x, ...)
                        format(x, trim = TRUE, drop0trailing = TRUE, ...))
@@ -161,6 +163,13 @@ component of option <code>"str"</code>, see &ldquo;Usage&rdquo; of
 <p>numeric; maximum number of list elements to display
 within a level.</p>
 </td></tr>
+<tr valign="top"><td><code>deparse.lines</code></td>
+<td>
+<p>numeric or <code>NULL</code> as by default, determining the
+<code>nlines</code> argument to <code><a href="../../base/html/deparse.html">deparse</a>()</code> when <code>object</code> is
+a <code><a href="../../base/html/call.html">call</a></code>.  When <code>NULL</code>, the <code>nchar.max</code> and
+<code>width</code> arguments are used to determine a smart default.</p>
+</td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
 <p>potential further arguments (required for Method/Generic
@@ -268,5 +277,5 @@ str(fit)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

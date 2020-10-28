@@ -9,8 +9,8 @@
 
 <h3>Description</h3>
 
-<p>These functions take the output of the <code><a href="parse_Rd.html">parse_Rd</a></code> function
-and produce a help page from it.  As they are mainly
+<p>These functions take the output of <code><a href="parse_Rd.html">parse_Rd</a>()</code>, an
+<code>Rd</code> object, and produce a help page from it.  As they are mainly
 intended for internal use, their interfaces are subject to change.
 </p>
 
@@ -47,7 +47,9 @@ Rd2ex(Rd, out = "", defines = .Platform$OS.type,
 </td></tr>
 <tr valign="top"><td><code>out</code></td>
 <td>
-<p> a filename or connection object to which to write the output. </p>
+<p>a filename or connection object to which to write the
+output.  The default <code>out = ""</code> is equivalent to
+<code>out = <a href="../../base/html/showConnections.html">stdout</a>()</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>package</code></td>
 <td>
@@ -134,12 +136,9 @@ conversions or checks.
 links are looked in them in turn, so lazy-evaluation can be used to
 only do a second-level search for links if required.
 </p>
-<p>Note that the default for <code>Rd2latex</code> is to output ASCII,
-including using the second option of <code style="white-space: pre;">\enc</code> markup.  This was
-chosen because use of UTF-8 in LaTeX requires version
-&lsquo;2005/12/01&rsquo; or later, and even with that version the coverage
-of UTF-8 glyphs is not extensive (and not even as complete as
-Latin-1).
+<p>Before <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.6.0, the default for <code>Rd2latex</code> was <code>outputEncoding = "ASCII"</code>,
+including using the second option of <code style="white-space: pre;">\enc</code> markup, because LaTeX
+versions did not provide enough coverage of UTF-8 glyphs for a long time.
 </p>
 <p><code>Rd2txt</code> will format text paragraphs to a width determined by
 <code>width</code>, with appropriate margins.  The default is to be close to
@@ -153,7 +152,7 @@ usually double-width, which looks wrong with English text.)
 </p>
 <p>Various aspects of formatting by <code>Rd2txt</code> are controlled by the
 <code>options</code> argument, documented with the <code><a href="Rd2txt_options.html">Rd2txt_options</a></code>
-function. Changes made using <code>options</code> are temporary, those
+function.  Changes made using <code>options</code> are temporary, those
 made with <code><a href="Rd2txt_options.html">Rd2txt_options</a></code> are persistent.
 </p>
 <p>When <code>fragment = TRUE</code>, the <code>Rd</code> file will be rendered
@@ -207,15 +206,15 @@ page is converted to a readable format).
 
 <ol>
 <li><p> built on
-2020-02-29 at 09:38:30,
+2020-10-10 at 13:49:43,
 </p>
 </li>
 <li><p> installed on
-2020-02-29 at 09:38:30, and
+2020-10-10 at 13:49:43, and
 </p>
 </li>
 <li><p> rendered on
-2020-02-29 at 09:38:48.
+2020-10-10 at 13:50:03.
 </p>
 </li></ol>
 
@@ -260,5 +259,5 @@ checkRd(Rd) # A stricter test than Rd2HTML uses
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>tools</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>tools</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -20,7 +20,7 @@
 ## Default S3 method:
 print(x, digits = NULL, quote = TRUE,
       na.print = NULL, print.gap = NULL, right = FALSE,
-      max = NULL, useSource = TRUE, ...)
+      max = NULL, width = NULL, useSource = TRUE, ...)
 </pre>
 
 
@@ -67,8 +67,15 @@ right aligned.  The default is left alignment.</p>
 <td>
 <p>a non-null value for <code>max</code> specifies the approximate
 maximum number of entries to be printed.  The default, <code>NULL</code>,
-uses <code><a href="options.html">getOption</a>("max.print")</code>; see that help page for more
+uses <code><a href="options.html">getOption</a>("max.print")</code>: see that help page for more
 details.</p>
+</td></tr>
+<tr valign="top"><td><code>width</code></td>
+<td>
+<p>controls the maximum number of columns on a line used in
+printing vectors, matrices, etc.  The default, <code>NULL</code>, uses
+<code><a href="options.html">getOption</a>("width")</code>: see that help page for more
+details including allowed values.</p>
 </td></tr>
 <tr valign="top"><td><code>useSource</code></td>
 <td>
@@ -107,8 +114,8 @@ arrays, and option <code>deparse.cutoff</code> controls the printing of
 <a href="is.language.html">language objects</a> such as calls and formulae.
 </p>
 <p>When the <span class="pkg">methods</span> package is attached, <code>print</code> will call
-<code><a href="../../methods/html/show.html">show</a></code> for <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> objects with formal classes if called
-with no optional arguments.
+<code><a href="../../methods/html/show.html">show</a></code> for <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> objects with formal classes (&lsquo;S4&rsquo;)
+if called with no optional arguments.
 </p>
 
 
@@ -141,7 +148,8 @@ locale.)
 <p>In all locales, the characters in the ASCII range (<span class="samp">0x00</span> to
 <span class="samp">0x7f</span>) are printed in the same way, as-is if printable, otherwise
 via ANSI escape sequences or 3-digit octal escapes as described for
-single-byte locales.
+single-byte locales. Whether a character is printable depends on the
+current locale and the operating system (C library).
 </p>
 <p>Multi-byte non-printing characters are printed as an escape sequence
 of the form <span class="samp">\uxxxx</span> (in hexadecimal). This is the Unicode code
@@ -178,5 +186,5 @@ utils::head(M)        # makes more sense than
 print(M, max = 1000)  # prints 90 rows and a message about omitting 910
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

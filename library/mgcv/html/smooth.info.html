@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Generic function to provide extra information about smooth...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for smooth.info {mgcv}"><tr><td>smooth.info {mgcv}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Generic function to provide extra information about smooth specification</h2>
+
+<h3>Description</h3>
+
+<p>Takes a smooth specification object and adds extra basis specific information to it before smooth constructor called. Default method returns supplied object unmodified.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+smooth.info(object)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p> is a smooth specification object</p>
+</td></tr> 
+</table>
+
+
+<h3>Details</h3>
+
+<p>Sometimes it is necessary to know something about a smoother before it is constructed, beyond what is in the initial smooth specification object.
+For example, some smooth terms could be set up as tensor product smooths and it is useful for <code><a href="bam.html">bam</a></code> to take advantage of this when discrete covariate methods are used. However, <code><a href="bam.html">bam</a></code> needs to know whether a smoother falls into this category before it is constructed in order to discretize its covariates marginally instead of jointly. Rather than <code><a href="bam.html">bam</a></code> having a hard coded list of such smooth classes it is preferable for the smooth specification object to report this themselves. <code>smooth.info</code> method functions are the means for achieving this. When interpreting a gam formula the <code>smooth.info</code> function is applied to each smooth specification object as soon as it is produced (in <code>interpret.gam0</code>). 
+</p>
+
+
+<h3>Value</h3>
+
+<p> A smooth specification object, which may be modified in some way.</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Simon N. Wood <a href="mailto:simon.wood@r-project.org">simon.wood@r-project.org</a></p>
+
+
+<h3>References</h3>
+
+ 
+<p>Wood S.N. (2017) Generalized Additive Models: An Introduction with R (2nd edition). Chapman
+and Hall/CRC Press.
+</p>
+
+
+<h3>See Also</h3>
+
+ <p><code><a href="bam.html">bam</a></code>,
+<code><a href="smooth.construct.html">smooth.construct</a></code>, <code><a href="smoothCon.html">PredictMat</a></code> </p>
+
+
+<h3>Examples</h3>
+
+<pre># See smooth.construct examples
+spec &lt;- s(a,bs="re")
+class(spec)
+spec$tensor.possible
+spec &lt;- smooth.info(spec)
+spec$tensor.possible
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-33 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,5 +1,5 @@
 
-R version 3.6.2 Patched (2020-02-12 r77795) -- "Dark and Stormy Night"
+R version 4.0.3 RC (2020-10-06 r79305) -- "Bunny-Wunnies Freak Out"
 Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -66,6 +66,16 @@ Type 'q()' to quit R.
 > 
 > 
 > ## Incorrect use of %b should work even though abbreviation does match
-> old <- Sys.setlocale("LC_TIME", "C") # to be sure
+> Sys.setlocale("LC_TIME", "C") # to be sure
+[1] "C"
 > stopifnot(!is.na(strptime("11-August-1903", "%d-%b-%Y")))
+> 
+> ## Prior to R 4.0.0 this oveflowed an array.  Now gives a warning
+> 
+> z <- paste("2017", c(1,365,366), sep = "-")
+> (zz <- strptime(z, "%Y-%j"))
+[1] "2017-01-01 EST" "2017-12-31 EST" NA              
+Warning message:
+In strptime(z, "%Y-%j") : day-of-year 366 in year 2017 is invalid
+> stopifnot(identical(is.na(zz), c(FALSE, FALSE, TRUE)))
 > 

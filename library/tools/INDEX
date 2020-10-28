@@ -3,6 +3,7 @@ Adobe_glyphs            Conversion Tables between Character Sets
 CRAN_package_db         CRAN Package Repository Tools
 HTMLheader              Generate a Standard HTML Header for R Help
 QC                      QC Checks for R Code and/or Documentation
+R_user_dir              R User Directories
 Rcmd                    R CMD Interface
 Rd2HTML                 Rd Converters
 Rd2txt_options          Set Formatting Options for Text Help
@@ -11,7 +12,7 @@ Rd_db                   Rd Utilities
 Rdiff                   Difference R Output Files
 Rdindex                 Generate Index from Rd Files
 SweaveTeXFilter         Strip R Code out of Sweave File
-add_datalist            Add a 'datalist' File to a Package
+add_datalist            Add a 'datalist' File to a Source Package
 assertCondition         Asserting Error Conditions
 bibstyle                Select or Define a Bibliography Style
 buildVignette           Build One Vignette

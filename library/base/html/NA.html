@@ -77,9 +77,12 @@ It behaves differently for factors, for example.
 <p>Numerical computations using <code>NA</code> will normally result in
 <code>NA</code>: a possible exception is where <code><a href="is.finite.html">NaN</a></code> is also
 involved, in which case either might result (which may depend on
-the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> platform).  Logical computations treat <code>NA</code> as a missing
-<code>TRUE/FALSE</code> value, and so may return <code>TRUE</code> or <code>FALSE</code>
-if the expression does not depend on the <code>NA</code> operand.
+the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> platform).  However, this is not guaranteed and future CPUs
+and/or compilers may behave differently. 
+</p>
+<p>Logical computations treat <code>NA</code> as a missing <code>TRUE/FALSE</code>
+value, and so may return <code>TRUE</code> or <code>FALSE</code> if the expression
+does not depend on the <code>NA</code> operand.
 </p>
 <p>The default method for <code>anyNA</code> handles atomic vectors without a
 class and <code>NULL</code>.  It calls <code>any(is.na(x))</code> on objects with
@@ -178,5 +181,5 @@ anyNA(dd) # FALSE
 anyNA(dN) # TRUE
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

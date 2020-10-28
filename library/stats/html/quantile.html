@@ -121,9 +121,10 @@ function of <i>p</i>, with <i>m = 0</i> when <i>i = 1</i> and <i>i =
 <i>&gamma; = 0</i> if <i>g = 0</i>, and 1 otherwise.</p>
 </dd>
 <dt>Type 2</dt><dd><p>Similar to type 1 but with averaging at discontinuities.
-<i>&gamma; = 0.5</i> if <i>g = 0</i>, and 1 otherwise.</p>
+<i>&gamma; = 0.5</i> if <i>g = 0</i>, and 1 otherwise (SAS default, see
+Wicklin(2017)).</p>
 </dd>
-<dt>Type 3</dt><dd><p>SAS definition: nearest even order statistic.
+<dt>Type 3</dt><dd><p>Nearest even order statistic (SAS default till ca. 2010).
 <i>&gamma; = 0</i> if <i>g = 0</i> and <i>j</i> is even,
 and 1 otherwise.</p>
 </dd>
@@ -179,6 +180,9 @@ the expected order statistics if <code>x</code> is normally distributed.
 
 <p>Further details are provided in Hyndman and Fan (1996) who recommended type 8.
 The default method is type 7, as used by S and by <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> &lt; 2.0.0.
+Makkonen argues for type 6, also as already proposed by Weibull in 1939.
+The Wikipedia page contains further information about availability of
+these 9 types in software.
 </p>
 
 
@@ -197,6 +201,15 @@ Wadsworth &amp; Brooks/Cole.
 <p>Hyndman, R. J. and Fan, Y. (1996) Sample quantiles in statistical
 packages, <em>American Statistician</em> <b>50</b>, 361&ndash;365.
 doi: <a href="https://doi.org/10.2307/2684934">10.2307/2684934</a>.
+</p>
+<p>Wicklin, R. (2017) Sample quantiles: A comparison of 9 definitions; SAS Blog.
+<a href="https://blogs.sas.com/content/iml/2017/05/24/definitions-sample-quantiles.html">https://blogs.sas.com/content/iml/2017/05/24/definitions-sample-quantiles.html</a>
+</p>
+
+
+
+
+<p>Wikipedia: <a href="https://en.wikipedia.org/wiki/Quantile#Estimating_quantiles_from_a_sample">https://en.wikipedia.org/wiki/Quantile#Estimating_quantiles_from_a_sample</a>
 </p>
 
 
@@ -217,13 +230,18 @@ quantile(x,  probs = c(0.1, 0.5, 1, 2, 5, 10, 50, NA)/100)
 
 ### Compare different types
 quantAll &lt;- function(x, prob, ...)
-  t(vapply(1:9, function(typ) quantile(x, prob=prob, type = typ, ...), quantile(x, prob, type=1)))
+  t(vapply(1:9, function(typ) quantile(x, prob=prob, type = typ, ...),
+           quantile(x, prob, type=1, ...)))
 p &lt;- c(0.1, 0.5, 1, 2, 5, 10, 50)/100
 signif(quantAll(x, p), 4)
+
+## 0% and 100% are equal to min(), max() for all types:
+stopifnot(t(quantAll(x, prob=0:1)) == range(x))
+
 ## for complex numbers:
 z &lt;- complex(re=x, im = -10*x)
 signif(quantAll(z, p), 4)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

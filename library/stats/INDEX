@@ -28,6 +28,7 @@ NLSstRtAsymptote        Horizontal Asymptote on the Right Side
 NegBinomial             The Negative Binomial Distribution
 Normal                  The Normal Distribution
 PP.test                 Phillips-Perron Test for Unit Roots
+Pair                    Construct paired-data object
 Poisson                 The Poisson Distribution
 SSD                     SSD Matrix and Estimated Variance Matrix in
                         Multivariate Models
@@ -341,5 +342,5 @@ weighted.mean           Weighted Arithmetic Mean
 weighted.residuals      Compute Weighted Residuals
 weights                 Extract Model Weights
 wilcox.test             Wilcoxon Rank Sum and Signed Rank Tests
-window                  Time Windows
+window                  Time (Series) Windows
 xtabs                   Cross Tabulation

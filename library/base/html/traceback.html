@@ -13,7 +13,7 @@
 uncaught error, i.e., the sequence of calls that lead to the error.
 This is useful when an error occurs with an unidentifiable error
 message.  It can also be used to print the current stack or
-arbitrary lists of deparsed calls.
+arbitrary lists of calls.
 </p>
 <p><code>.traceback()</code> now <em>returns</em> the above call stack (and
 <code>traceback(x, *)</code> can be regarded as convenience function for
@@ -24,8 +24,10 @@ printing the result of <code>.traceback(x)</code>).
 <h3>Usage</h3>
 
 <pre>
-traceback(x = NULL, max.lines = getOption("deparse.max.lines"))
-.traceback(x = NULL)
+ traceback(x = NULL, max.lines = getOption("traceback.max.lines",
+                                           getOption("deparse.max.lines", -1L)))
+.traceback(x = NULL, max.lines = getOption("traceback.max.lines",
+                                           getOption("deparse.max.lines", -1L)))
 </pre>
 
 
@@ -36,12 +38,14 @@ traceback(x = NULL, max.lines = getOption("deparse.max.lines"))
 <td>
 <p><code>NULL</code> (default, meaning <code>.Traceback</code>), or an
 integer count of calls to skip in the current stack, or a list or
-pairlist of deparsed calls.  See the details.</p>
+pairlist of calls.  See the details.</p>
 </td></tr>
 <tr valign="top"><td><code>max.lines</code></td>
 <td>
-<p>The maximum number of lines to be printed
-<em>per call</em>.  The default is unlimited.</p>
+<p>a number, the maximum number of lines to be printed
+<em>per call</em>.  The default is unlimited.  Applies only when <code>x</code>
+is <code>NULL</code>, a <code><a href="list.html">list</a></code> or a <code><a href="list.html">pairlist</a></code> of
+calls, see the details.</p>
 </td></tr>
 </table>
 
@@ -49,9 +53,9 @@ pairlist of deparsed calls.  See the details.</p>
 <h3>Details</h3>
 
 <p>The default display is of the stack of the last uncaught error as
-stored as a list of deparsed calls in <code>.Traceback</code>, which
+stored as a list of <code><a href="call.html">call</a></code>s in <code>.Traceback</code>, which
 <code>traceback</code> prints in a user-friendly format.  The stack of
-deparsed calls always contains all function calls and all foreign
+calls always contains all function calls and all foreign
 function calls (such as <code><a href="CallExternal.html">.Call</a></code>): if profiling is in
 progress it will include calls to some primitive functions.  (Calls
 to builtins are included, but not to specials.)
@@ -65,28 +69,38 @@ for the last error.
 <code>x</code> entries at the top of the stack.  For example,
 <code>options(error = function() traceback(3))</code> will print the stack
 at the time of the error, skipping the call to <code>traceback()</code> and
-<code>.traceback()</code> 
+<code>.traceback()</code>
 and the error function that called it.
 </p>
-<p>Otherwise, <code>x</code> is assumed to be a list or pairlist of deparsed
-calls and will be displayed in the same way.
+<p>Otherwise, <code>x</code> is assumed to be a list or pairlist of calls or
+deparsed calls and will be displayed in the same way.
+</p>
+<p><code>.traceback()</code> and by extension <code>traceback()</code> may trigger
+deparsing of <code><a href="call.html">call</a></code>s.  This is an expensive operation
+for large calls so it may be advisable to set <code>max.lines</code>
+to a reasonable value when such calls are on the call stack.
 </p>
 
 
 <h3>Value</h3>
 
-<p><code>traceback()</code> prints the deparsed call stack deepest call
-first, and returns it invisibly.  The calls may print on more than
-one line, and the first line for each call is labelled by the frame
-number.  The number of lines printed per call can be limited via
-<code>max.lines</code>.
+<p><code>.traceback()</code> returns the deparsed call stack deepest call
+first as a list or pairlist.  The number of lines deparsed from
+the call can be limited via <code>max.lines</code>.  Calls for which
+<code>max.lines</code> results in truncated output will gain a
+<code>"truncated"</code> attribute.
+</p>
+<p><code>traceback()</code> formats, prints, and returns the call stack
+produced by <code>.traceback()</code> invisibly.
 </p>
 
 
 <h3>Warning</h3>
 
 <p>It is undocumented where <code>.Traceback</code> is stored nor that it is
-visible, and this is subject to change.
+visible, and this is subject to change.  As of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 4.0.0
+<code>.Traceback</code> contains the <code><a href="call.html">call</a></code>s as language
+objects, whereas previously these calls were deparsed.
 </p>
 
 
@@ -116,5 +130,5 @@ bar
 options(error = function() traceback(3))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

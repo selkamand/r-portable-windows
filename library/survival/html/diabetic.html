@@ -74,9 +74,9 @@ caused by death, dropout, or end of the study.
 <pre>
 # juvenile diabetes is defined as and age less than 20
 juvenile &lt;- 1*(diabetic$age &lt; 20)
-coxph(Surv(time, status) ~ trt + juvenile + cluster(id),
+coxph(Surv(time, status) ~ trt + juvenile, cluster= id,
             data= diabetic)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.1-8 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-7 <a href="00Index.html">Index</a>]</div>
 </body></html>

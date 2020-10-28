@@ -121,7 +121,7 @@ p {
 
 
 
-<h2>Version for <tt>R-3.6.3</tt></h2>
+<h2>Version for <tt>R-4.0.3</tt></h2>
 <address>B. D. Ripley and D. J. Murdoch</address>
 <hr>
 
@@ -145,7 +145,7 @@ p {
   <li><a name="toc-How-can-I-keep-workspaces-for-different-projects-in-different-directories_003f-1" href="#How-can-I-keep-workspaces-for-different-projects-in-different-directories_003f">2.10 How can I keep workspaces for different projects in different directories?</a></li>
   <li><a name="toc-How-do-I-print-from-R_003f-1" href="#How-do-I-print-from-R_003f">2.11 How do I print from R?</a></li>
   <li><a name="toc-Can-I-use-R-CMD-BATCH_003f-1" href="#Can-I-use-R-CMD-BATCH_003f">2.12 Can I use <code>R CMD BATCH</code>?</a></li>
-  <li><a name="toc-Can-I-use-R_002d3_002e6_002e3-with-ESS-and-Emacs_003f-1" href="#Can-I-use-R_002d3_002e6_002e3-with-ESS-and-Emacs_003f">2.13 Can I use R-3.6.3 with ESS and Emacs?</a></li>
+  <li><a name="toc-Can-I-use-R_002d4_002e0_002e3-with-ESS-and-Emacs_003f-1" href="#Can-I-use-R_002d4_002e0_002e3-with-ESS-and-Emacs_003f">2.13 Can I use R-4.0.3 with ESS and Emacs?</a></li>
   <li><a name="toc-What-are-HOME-and-working-directories_003f-1" href="#What-are-HOME-and-working-directories_003f">2.14 What are HOME and working directories?</a></li>
   <li><a name="toc-How-do-I-set-environment-variables_003f-1" href="#How-do-I-set-environment-variables_003f">2.15 How do I set environment variables?</a></li>
   <li><a name="toc-R-can_0027t-find-my-file_002c-but-I-know-it-is-there_0021" href="#R-can_0027t-find-my-file">2.16 R can&rsquo;t find my file, but I know it is there!</a></li>
@@ -177,7 +177,7 @@ p {
 <li><a name="toc-Packages-1" href="#Packages">4 Packages</a>
 <ul class="no-bullet">
   <li><a name="toc-Can-I-install-packages-into-libraries-in-this-version_003f-1" href="#Can-I-install-packages-into-libraries-in-this-version_003f">4.1 Can I install packages into libraries in this version?</a></li>
-  <li><a name="toc-I-don_0027t-have-permission-to-write-to-the-R_002d3_002e6_002e3_005clibrary-directory_002e" href="#I-don_0027t-have-permission-to-write-to-the-R_002d3_002e6_002e3_005clibrary-directory">4.2 I don&rsquo;t have permission to write to the <samp>R-3.6.3\library</samp> directory.</a></li>
+  <li><a name="toc-I-don_0027t-have-permission-to-write-to-the-R_002d4_002e0_002e3_005clibrary-directory_002e" href="#I-don_0027t-have-permission-to-write-to-the-R_002d4_002e0_002e3_005clibrary-directory">4.2 I don&rsquo;t have permission to write to the <samp>R-4.0.3\library</samp> directory.</a></li>
   <li><a name="toc-The-packages-I-installed-do-not-appear-in-the-HTML-help-system_002e" href="#The-packages-I-installed-do-not-appear-in-the-HTML-help-system">4.3 The packages I installed do not appear in the HTML help system.</a></li>
   <li><a name="toc-My-functions-are-not-found-by-the-HTML-help-search-system_002e-1" href="#My-functions-are-not-found-by-the-HTML-help-search-system_002e">4.4 My functions are not found by the HTML help search system.</a></li>
   <li><a name="toc-Loading-a-package-fails_002e-1" href="#Loading-a-package-fails_002e">4.5 Loading a package fails.</a></li>
@@ -246,8 +246,8 @@ that version.  The main R FAQ can be found at
 <pre class="display"><a href="https://CRAN.R-project.org/doc/FAQ/R-FAQ.html">https://CRAN.R-project.org/doc/FAQ/R-FAQ.html</a>.
 </pre></div>
 
-<p>The information here applies only to recent versions of R for Windows,
-(&lsquo;<samp>3.1.0</samp>&rsquo; or later).  It is biased towards users of 64-bit Windows.
+<p>The information here applies only to recent versions of R for Windows.
+It is biased towards users of 64-bit Windows.
 </p>
 
 <hr><hr>
@@ -265,7 +265,7 @@ that version.  The main R FAQ can be found at
 <p>Go to any CRAN site (see <a href="https://cran.r-project.org/mirrors.html">https://cran.r-project.org/mirrors.html</a>
 for a list), navigate to the <samp>bin/windows/base</samp> directory and
 collect the file(s) you need.  The current release is distributed as an
-installer &lsquo;<samp>R-3.6.3-win.exe</samp>&rsquo; of about 65MB.
+installer &lsquo;<samp>R-4.0.3-win.exe</samp>&rsquo; of about 65MB.
 </p>
 <p>There are also links on that page to the &lsquo;<samp>r-patched</samp>&rsquo; and
 &lsquo;<samp>r-devel</samp>&rsquo; snapshots.  These are frequently updated builds of
@@ -279,9 +279,9 @@ as changes that are planned to eventually make it into the next
 <a name="How-do-I-install-R-for-Windows_003f-1"></a>
 <h3 class="section">2.2 How do I install R for Windows?</h3>
 
-<p>Current binary versions of R are known to run on Windows 7 or later, including on
-64-bit versions: See <a href="#Can-I-use-R-on-64_002dbit-Windows_003f">Can I use R on 64-bit Windows?</a>. The last version
-known to run on Windows 2000 was 2.12.2.  Windows XP is no longer supported.
+<p>Current binary versions of R are known to run on Windows 7 or later,
+including on 64-bit versions: See <a href="#Can-I-use-R-on-64_002dbit-Windows_003f">Can I use R on 64-bit Windows?</a>.
+Windows XP is no longer supported.
 </p>
 
 <p>We only test on versions of Windows currently supported by Microsoft,
@@ -293,14 +293,14 @@ up to 150MB of disk space.
 </p>
 <p>If you want to be able to build packages from sources, we recommend that
 you choose an installation path not containing spaces.  (Using a path
-with spaces in will probably work, but is little-tested.)  Users of
-Vista/Windows 7/8/Server 2008/2012 installing for a single user using an
-account with administrator rights<a name="DOCF1" href="#FOOT1"><sup>1</sup></a> should consider installing into a non-system area (such as
-<samp>C:\R</samp>).  Installing to a network share (a filepath starting with
-<code>\\machine\...</code>) is not supported: such paths will need to mapped
-to a network drive.
+with spaces in will probably work, but is little-tested.)  Users
+installing for a single user using an account with administrator
+rights<a name="DOCF1" href="#FOOT1"><sup>1</sup></a> should consider
+installing into a non-system area (such as <samp>C:\R</samp>).  Installing to
+a network share (a filepath starting with <code>\\machine\...</code>) is not
+supported: such paths will need to mapped to a network drive.
 </p>
-<p>To install use &lsquo;<samp>R-3.6.3-win.exe</samp>&rsquo;.  Just double-click on the icon
+<p>To install use &lsquo;<samp>R-4.0.3-win.exe</samp>&rsquo;.  Just double-click on the icon
 and follow the instructions.  If you have an account with Administrator
 privileges you will be able to install R in the <samp>Program Files</samp>
 area and to set all the optional registry entries; otherwise you will
@@ -327,10 +327,7 @@ environment variables at the end of the Target field, for example
 <code>R_LIBS=p:/myRlib</code>, and if you want to ensure that menus and
 messages are in (American) English, <code>LANGUAGE=en</code>.
 </p>
-<p>It is also possible to install from an MSI file, which will be of
-interest only for system administrators.  For how to build the MSI file,
-see the &lsquo;R Installation and Administration Manual&rsquo;.
-</p>
+
 
 <hr>
 <a name="How-do-I-check-an-installation_003f"></a>
@@ -459,8 +456,8 @@ versions around if you wish.
 <p>For those with a personal library (folder <samp>R\win-library\<var>x.y</var></samp>
 of your home directory, <samp>R\win64-library\<var>x.y</var></samp> on 64-bit
 builds), you will need to update that too when the minor version of R
-changes (e.g. from 3.0.2 to 3.1.0).  A simple way to do so is to
-copy (say) <samp>R\win-library\3.0</samp> to <samp>R\win-library\3.1</samp> before
+changes (e.g. from 4.0.2 to 4.1.0).  A simple way to do so is to
+copy (say) <samp>R\win-library\4.0</samp> to <samp>R\win-library\4.1</samp> before
 running <code>update.packages(checkBuilt=TRUE, ask=FALSE)</code>.
 </p>
 
@@ -553,9 +550,9 @@ same file as normal output.
 </p>
 
 <hr>
-<a name="Can-I-use-R_002d3_002e6_002e3-with-ESS-and-Emacs_003f"></a>
-<a name="Can-I-use-R_002d3_002e6_002e3-with-ESS-and-Emacs_003f-1"></a>
-<h3 class="section">2.13 Can I use R-3.6.3 with ESS and Emacs?</h3>
+<a name="Can-I-use-R_002d4_002e0_002e3-with-ESS-and-Emacs_003f"></a>
+<a name="Can-I-use-R_002d4_002e0_002e3-with-ESS-and-Emacs_003f-1"></a>
+<h3 class="section">2.13 Can I use R-4.0.3 with ESS and Emacs?</h3>
 
 <p>Yes.  ESS has for a long time supported R under Windows: it does so by
 running <code>Rterm.exe</code> without a visible console.
@@ -637,7 +634,7 @@ which these options are listed, that is the command line then
 
 <p>How did you specify it?  Backslashes have to be doubled in R character
 strings, so for example one needs
-&lsquo;<samp>&quot;d:\\R-3.6.3\\library\\xgobi\\scripts\\xgobi.bat&quot;</samp>&rsquo;.  You can make
+&lsquo;<samp>&quot;d:\\R-4.0.3\\library\\xgobi\\scripts\\xgobi.bat&quot;</samp>&rsquo;.  You can make
 life easier for yourself by using forward slashes as path separators:
 they do work under Windows.  You should include the file extension
 (e.g. &lsquo;<samp>&quot;xgobi.bat&quot;</samp>&rsquo; rather than just &lsquo;<samp>&quot;xgobi&quot;</samp>&rsquo;); sometimes
@@ -672,9 +669,9 @@ Administrator installs) &lsquo;<samp>Associate R with .RData files</samp>&rsquo;
 Windows registry:
 </p><ul>
 <li> <code>HKEY_LOCAL_MACHINE\Software\R-core\R\Current Version</code>  
-    contains the version number, currently 3.6.3.
+    contains the version number, currently 4.0.3.
 </li><li> <code>HKEY_LOCAL_MACHINE\Software\R-core\R\[version]\InstallPath</code>
-    (where <code>[version]</code> is currently 3.6.3) contains the path to the R 
+    (where <code>[version]</code> is currently 4.0.3) contains the path to the R 
     home directory.
 </li></ul>
 <p>If you do not have administrative privileges on the machine while
@@ -859,7 +856,7 @@ just the Administrator group).
 install R.
 
 <p>For an installation to be used by a single user, the simplest way is to
-make use of a &lsquo;personal library&rsquo;: See <a href="#I-don_0027t-have-permission-to-write-to-the-R_002d3_002e6_002e3_005clibrary-directory">I don't have permission to write to the R-3.6.3\library directory</a>.
+make use of a &lsquo;personal library&rsquo;: See <a href="#I-don_0027t-have-permission-to-write-to-the-R_002d4_002e0_002e3_005clibrary-directory">I don't have permission to write to the R-4.0.3\library directory</a>.
 </p>
 <p>For a site installation, you can create a site-wide library directory
 anywhere convenient, and add it to the default package search path for
@@ -881,11 +878,7 @@ permissions no longer work reliably.  <code>file.access</code> was re-written
 to work with Windows NT-based security and the new version seems much
 more reliable with these OSes (but still not 100% correct).
 </p>
-<p>On suitably recent hardware Vista and later can prevent the execution of
-code from data areas via &lsquo;Data Execution Prevention&rsquo; (from a tab in
-System Properties -&gt; Advanced -&gt; Performance), and sysadmins can turn
-this on for all programs.  R runs correctly with DEP enabled.
-</p>
+
 
 <hr>
 <a name="Quotes-don_0027t-come-out-right-on-the-console_002fterminal_002fpager"></a>
@@ -1038,7 +1031,7 @@ edit the <code>PATH</code>.
 <p>The element you want to add to the path is something like
 </p>
 <div class="example">
-<pre class="example">c:\Program Files\R\R-3.1.0\bin\x64
+<pre class="example">c:\Program Files\R\R-4.0.0\bin\x64
 </pre></div>
 
 <p>for 64-bit <code>Rcmd.exe</code>, replacing <code>x64</code> by <code>i386</code> for
@@ -1251,13 +1244,10 @@ packages).
 CRAN or from a local <code>.zip</code> file by using <code>install.packages</code>:
 see its help page.  There are menu items on the <code>Packages</code> menu to
 provide a point-and-click interface to package installation.  The
-packages for each minor (3.x.?) version will be stored in a separate area,
-so for R 3.1.? the files are in <samp>bin/windows/contrib/3.1</samp>.
+packages for each minor (4.x.?) version will be stored in a separate area,
+so for R 4.0.? the files are in <samp>bin/windows/contrib/4.0</samp>.
 </p>
-<p>Note that the binary versions on CRAN are unsupported: see
-<a href="https://cran.r-project.org/bin/windows/contrib/3.1/ReadMe">https://cran.r-project.org/bin/windows/contrib/3.1/ReadMe</a>,
-which also gives the locations of a few other binary packages.
-</p>
+
 <p>If there is no binary package or that is not up-to-date or you prefer
 compiling from source, read the &lsquo;R Installation and Administration&rsquo;
 manual section on &lsquo;Add-on Packages&rsquo;.  Source packages which contain no
@@ -1282,9 +1272,9 @@ system, you can try the automated Windows binary package builder
 documented at <a href="https://win-builder.r-project.org">https://win-builder.r-project.org</a>.
 </p>
 <hr>
-<a name="I-don_0027t-have-permission-to-write-to-the-R_002d3_002e6_002e3_005clibrary-directory"></a>
-<a name="I-don_0027t-have-permission-to-write-to-the-R_002d3_002e6_002e3_005clibrary-directory_002e"></a>
-<h3 class="section">4.2 I don&rsquo;t have permission to write to the <samp>R-3.6.3\library</samp> directory.</h3>
+<a name="I-don_0027t-have-permission-to-write-to-the-R_002d4_002e0_002e3_005clibrary-directory"></a>
+<a name="I-don_0027t-have-permission-to-write-to-the-R_002d4_002e0_002e3_005clibrary-directory_002e"></a>
+<h3 class="section">4.2 I don&rsquo;t have permission to write to the <samp>R-4.0.3\library</samp> directory.</h3>
 
 <p>You can install packages anywhere and use the environment variable
 <code>R_LIBS</code> (see <a href="#How-do-I-set-environment-variables_003f">How do I set environment variables?</a>) to point to
@@ -1351,8 +1341,7 @@ replaced.
 <h3 class="section">4.5 Loading a package fails.</h3>
 
 <p>Is the package installed for this version of R?   Packages need to have
-prepared for R 2.10.0 or later, and packages containing compiled code
-for R 2.12.0 or later.
+prepared for R 4.0.0 or later.
 </p>
 <p>You can tell the version the package was compiled for by looking at the
 &lsquo;<samp>Built:</samp>&rsquo; line in its <samp>DESCRIPTION</samp> file.
@@ -1360,7 +1349,7 @@ for R 2.12.0 or later.
 <p>For a small number of binary packages you need to install additional
 software and have its DLLs in your <code>PATH</code>.  Windows will normally
 give an informative message about a certain DLL not being found.  See
-<a href="https://cran.r-project.org/bin/windows/contrib/3.1/ReadMe">https://cran.r-project.org/bin/windows/contrib/3.1/ReadMe</a> for a
+<a href="https://cran.r-project.org/bin/windows/contrib/4.0/ReadMe">https://cran.r-project.org/bin/windows/contrib/4.0/ReadMe</a> for a
 listing of some of these packages (notably <code>RGtk2</code>,
 <code>cairoDevice</code>, <code>rggobi</code>, <code>rJava</code>, <code>rjags</code> and some
 of the packages connecting to databases).
@@ -1516,19 +1505,19 @@ volunteers.
 </p>
 <p>You are simply impatient, and need to wait until the binary package has
 been built and propagated to the CRAN mirror you are using.  This
-normally (but not always) happens within 24 hours.  Sometimes mirrors
-do get behind (especially unofficial ones), so you could try another
-mirror.  (Mirror statistics are linked near the top of the CRAN mirror
-page at <a href="https://cran.r-project.org/mirrors.html">https://cran.r-project.org/mirrors.html</a>.)
+normally (but not always) happens within 24 hours.  Sometimes mirrors do
+get behind, so you could try another mirror.
 </p>
 <p>The latest version of the package might require a later version of R
 than the one you are using.  You can check on the package&rsquo;s HTML page on
 CRAN, and update your R if needed.
 </p>
-<p>Your R might be too old.  Binary packages for the 3.x series are built
-(if possible) whilst 3.(x+1) is current, but building stops once 3.(x+2)
-reaches alpha (pre-release, about a month before release).  You can
-always try installing from the sources.
+<p>Your R might be too old.  Binary packages for the 3.6 series will be
+built until about Mar 2021, and were discontinued for earlier versions by
+early 2020.  Packages for R 4.x are built (if possible) whilst 4.(x+1)
+is current, but building stops once 4.(x+2) reaches alpha (pre-release,
+about a month before release).  You can always try installing from the
+sources.
 </p>
 <hr>
 <a name="No-binary-packages-appear-to-be-available-for-my-version-of-R"></a>
@@ -1536,7 +1525,8 @@ always try installing from the sources.
 <h3 class="section">4.14 No binary packages appear to be available for my version of R</h3>
 
 <p>How old is it?  The CRAN policy is to archive binary packages two years
-after the 2.x series is closed.  Other repositories may do so sooner.
+after the 3.x or 4.x series is closed.  Other repositories may do so
+sooner.
 </p>
 <p>If you are using an R version that old we advise you to update your R,
 but you do also have the option of installing packages from their
@@ -1610,7 +1600,7 @@ of <code>shell()</code>.
 <a name="I-hear-about-some-nifty-features_003a-please-tell-me-about-them_0021"></a>
 <h3 class="section">5.2 I hear about some nifty features: please tell me about them!</h3>
 
-<p>You have read the file <samp>README.R-3.6.3</samp>? There are file menus on
+<p>You have read the file <samp>README.R-4.0.3</samp>? There are file menus on
 the R console, pager and graphics windows.  You can source and save from
 those menus, and copy the graphics to <code>png</code>, <code>jpeg</code>,
 <code>bmp</code>, <code>postscript</code>, <code>PDF</code> or <code>metafile</code>.  There are
@@ -1620,7 +1610,7 @@ toolbars with buttons giving shortcuts to frequent operations.
 <p>If you resize the R console the <code>options(width=)</code> is automatically
 set to the console width (unless disabled in the configuration file).
 </p>
-<p>The graphics has a history mechanism.  As <samp>README.R-3.6.3</samp> says:
+<p>The graphics has a history mechanism.  As <samp>README.R-4.0.3</samp> says:
 </p>
 <blockquote>
 <p>&lsquo;The History menu allows the recording of plots.  When plots have been
@@ -1755,16 +1745,16 @@ function <code>setwd</code>: see its help page.
 <h3 class="section">6.3 Can I load workspaces saved under Unix/GNU-Linux or Mac macOS?</h3>
 
 <p>Yes.  All ports of R use the same format for saved workspaces, so they
-are interchangeable (for the same 3.x.? version of R, at least).
+are interchangeable (for the same 4.x.? version of R, at least).
 </p>
 <p>Note though that character data in a workspace will be in a particular
-encoding that is not recorded in the workspace, so workspaces containing
-non-<acronym>ASCII</acronym> character data may not be interchangeable even on
-the same OS.  Since R marks character data when it knows it to be in
-UTF-8 or Latin-1 (including its Windows superset, CP1252), strings in
-those encodings are likely to be transferred correctly: fortunately this
-covers most of the common cases (macOS normally uses UTF-8, and Linux
-users are likely to use UTF-8 or perhaps Latin-1).
+encoding that may not be recorded in the workspace, so workspaces
+containing non-<acronym>ASCII</acronym> character data may not be interchangeable
+even on the same OS.  Since R marks character data when it knows it to
+be in UTF-8 or Latin-1 (including its Windows superset, CP1252), strings
+in those encodings are likely to be transferred correctly: fortunately
+this covers most of the common cases (macOS normally uses UTF-8, and
+Linux users are likely to use UTF-8 or perhaps Latin-1).
 </p>
 <p>It is possible to save references to package namespaces when saving the
 workspace: if that happens the package will need to be installed on the
@@ -1844,20 +1834,9 @@ chips are available on CRAN in directory
 <samp>bin/windows/contrib/ATLAS</samp>.  See the R Installation and
 Administration&rsquo; manual for how to build an ATLAS <samp>Rblas.dll</samp> tuned
 to your system using the R sources.  Unfortunately the process has been
-less successful when tried for the common current chips such as Intel&rsquo;s
-Core 2.
+less successful when tried for the common current CPUs.
 </p>
-<p>Versions of Dr Kazushige Goto&rsquo;s BLAS (see
-<a href="https://en.wikipedia.org/wiki/Kazushige_Goto">https://en.wikipedia.org/wiki/Kazushige_Goto</a>) for 64-bit Windows
-by Ei-Ji Nakama can be found at
-<a href="http://prs.ism.ac.jp/~nakama/SurviveGotoBLAS2/binary/windows/x64/">http://prs.ism.ac.jp/~nakama/SurviveGotoBLAS2/binary/windows/x64/</a>.
-Just download the file <samp>Rblas.dll</samp> appropriate to your CPU and
-replace <samp><var>R_HOME</var>/bin/x64/Rblas.dll</samp>.  (There is also a generic
-version called &lsquo;<samp>DYNAMIC_ARCH</samp>&rsquo; that tries to adapt itself to the CPU
-found &ndash; however if you know the exact CPU used it is better to download
-the CPU-specific version.  Note that development of that BLAS was frozen
-in 2010 so you will not find versions for recent CPUs.)
-</p>
+
 <p>Note that fast BLAS implementations may give different (and often
 slightly less accurate) results than the reference BLAS included in R.
 </p>
@@ -1911,15 +1890,15 @@ make DEBUG=T
 compiler.  Then you can debug by
 </p>
 <div class="example">
-<pre class="example">gdb /path/to/R-3.6.3/bin/x64/Rgui.exe
+<pre class="example">gdb /path/to/R-4.0.3/bin/x64/Rgui.exe
 </pre></div>
 
 <p>(or use <code>Rterm.exe</code>.)  However, note
 </p>
 <ul>
 <li> <code>gdb</code> may only be able to find the source code if we run in the
-location where the source was compiled (<samp>R-3.6.3/src/gnuwin32</samp> for
-the main system, <samp>R-3.6.3/src/library/mypkg/src</samp> for a package),
+location where the source was compiled (<samp>R-4.0.3/src/gnuwin32</samp> for
+the main system, <samp>R-4.0.3/src/library/mypkg/src</samp> for a package),
 unless told otherwise by the <code>directory</code> command.  It is most
 convenient to set a list of code locations via <code>directory</code> commands
 in the file <samp>.gdbinit</samp> in the directory from which <code>gdb</code> is
@@ -2044,9 +2023,8 @@ Last edited 2015-08-13: comments to
 <h4 class="footnotes-heading">Footnotes</h4>
 
 <h3><a name="FOOT1" href="#DOCF1">(1)</a></h3>
-<p>Non-administrator accounts
-will automatically be offered a default installation directory in the
-user area.</p>
+<p>Non-administrator accounts will automatically be offered
+a default installation directory in the user area.</p>
 <h3><a name="FOOT2" href="#DOCF2">(2)</a></h3>
 <p>what Windows calls x64 for x86-64 CPUs, not the very
 rare ia64 Windows for Itanium CPUs.</p>

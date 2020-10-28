@@ -129,8 +129,8 @@ c(mode(e.s.e), typeof(e.s.e)) #  "expression", "expression"
 substitute(x &lt;- x + 1, list(x = 1)) # nonsense
 
 myplot &lt;- function(x, y)
-    plot(x, y, xlab = deparse(substitute(x)),
-         ylab = deparse(substitute(y)))
+    plot(x, y, xlab = deparse1(substitute(x)),
+               ylab = deparse1(substitute(y)))
 
 ## Simple examples about lazy evaluation, etc:
 
@@ -144,5 +144,5 @@ s2(a)  # a
 typeof(s2(a))  # "symbol"
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

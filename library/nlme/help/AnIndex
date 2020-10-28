@@ -92,10 +92,10 @@ corClasses	corClasses
 corCompSymm	corCompSymm
 corExp	corExp
 corFactor	corFactor
-corFactor.compSymm	corFactor.corStruct
 corFactor.corAR1	corFactor.corStruct
 corFactor.corARMA	corFactor.corStruct
 corFactor.corCAR1	corFactor.corStruct
+corFactor.corCompSymm	corFactor.corStruct
 corFactor.corNatural	corFactor.corStruct
 corFactor.corSpatial	corFactor.corStruct
 corFactor.corStruct	corFactor.corStruct
@@ -104,7 +104,6 @@ corGaus	corGaus
 corIdent	corClasses
 corLin	corLin
 corMatrix	corMatrix
-corMatrix.compSymm	corMatrix.corStruct
 corMatrix.corAR1	corMatrix.corStruct
 corMatrix.corARMA	corMatrix.corStruct
 corMatrix.corCAR1	corMatrix.corStruct

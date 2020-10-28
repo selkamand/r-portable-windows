@@ -21,6 +21,7 @@ bold	plotmath
 bolditalic	plotmath
 boxplot.stats	boxplot.stats
 bringToTop	bringToTop
+cairoSymbolFont	cairoSymbolFont
 cairo_pdf	cairo
 cairo_ps	cairo
 check.options	check.options
@@ -97,6 +98,8 @@ nclass.scott	nclass
 nclass.Sturges	nclass
 over	plotmath
 palette	palette
+palette.colors	palette
+palette.pals	palette
 pdf	pdf
 pdf.options	pdf.options
 pdfFonts	postscriptFonts

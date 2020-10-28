@@ -115,11 +115,10 @@ the missing coefficients are treated as zeros.
 </td></tr>
 <tr valign="top"><td><code>robust</code></td>
 <td>
-
-<p>this argument has been deprecated, use a cluster term in the model
-instead.  (The two options accomplish the same goal &ndash; creation of a
-robust variance &ndash; but the second
-is more flexible).
+<p>should a robust variance be computed.
+The default is TRUE if: there is a <code>cluster</code> argument, there
+are case weights that are not 0 or 1, or there are <code>id</code> values
+with more than one event. 
 </p>
 </td></tr>
 <tr valign="top"><td><code>id</code></td>
@@ -138,8 +137,8 @@ This variable will normally be found in <code>data</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>istate</code></td>
 <td>
-<p>optional variable giving the intial state for each
-subject. This variable will normally be found in <code>data</code>.</p>
+<p>optional variable giving the current state at the start
+each interval. This variable will normally be found in <code>data</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>statedata</code></td>
 <td>
@@ -269,6 +268,22 @@ this case the <code>tt</code> argument will be a function or a list of
 functions (if there are more than one tt() term in the model) giving the
 appropriate transform.   See the examples below.
 </p>
+<p>One user mistake that has recently arisen is to slavishly follow the
+advice of some coding guides and prepend <code>survival::</code> onto
+everthing, including the special terms, e.g.,
+<code>survival::coxph(survival:Surv(time, status) ~ age +
+    survival::cluster(inst), data=lung)</code>
+First, this is unnecessary: arguments within the <code>coxph</code> call will
+be evaluated within the survival namespace, so another package's Surv or
+cluster function would not be noticed.
+(Full qualification of the coxph call itself may be protective, however.)
+Second, and more importantly, the call just above will not give the
+correct answer.  The specials are recognized by their name, and
+&lsquo;survival::cluster&rsquo; is not the same as &lsquo;cluster&rsquo;; the above model would
+treat <code>inst</code> as an ordinary variable.
+A similar issue arises from using <code>stats::offset</code> as a term, in
+either survival or glm models.
+</p>
 
 
 <h3>Convergence</h3>
@@ -281,10 +296,10 @@ routine: either the log likelihood converges, the information matrix
 becomes effectively singular, an argument to exp becomes too large for 
 the computer hardware, or the maximum number of interactions is
 exceeded.
-(Nearly always the first occurs.)
+(Most often number 1 is the first to occur.)
 The routine attempts to detect when this has happened,
 not always successfully.
-The primary consequence for he user is that the Wald statistic =
+The primary consequence for the user is that the Wald statistic =
 coefficient/se(coefficient) is not valid in this case and should be
 ignored; the likelihood ratio and score tests remain valid however.
 </p>
@@ -317,7 +332,7 @@ for this task, but even with this the computation can be insufferably
 long.  With (start, stop) data it is much worse since the recursion
 needs to start anew for each unique start time.
 </p>
-<p>A second issue is that of artificial ties due to floating-point
+<p>A separate issue is that of artificial ties due to floating-point
 imprecision. See the vignette on this topic for a full explanation or
 the <code>timefix</code> option in <code>coxph.control</code>.
 Users may need to add <code>timefix=FALSE</code> for simulated data sets.
@@ -385,13 +400,13 @@ summary( coxph( Surv(start, stop, event) ~ x, test2))
 # Fit a stratified model, clustered on patients 
 
 bladder1 &lt;- bladder[bladder$enum &lt; 5, ] 
-coxph(Surv(stop, event) ~ (rx + size + number) * strata(enum) + 
-      cluster(id), bladder1)
+coxph(Surv(stop, event) ~ (rx + size + number) * strata(enum),
+      cluster = id, bladder1)
 
 # Fit a time transform model using current age
 coxph(Surv(time, status) ~ ph.ecog + tt(age), data=lung,
      tt=function(x,t,...) pspline(x + t/365.25))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.1-8 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-7 <a href="00Index.html">Index</a>]</div>
 </body></html>

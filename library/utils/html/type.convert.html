@@ -43,9 +43,9 @@ missing values in logical, integer, numeric or complex vectors.</p>
 </td></tr>
 <tr valign="top"><td><code>as.is</code></td>
 <td>
-<p>whether to convert factors to character vectors. The
-default is to convert character vectors to factors.  See
-&lsquo;Details&rsquo;.</p>
+<p>whether convert to <code><a href="../../base/html/factor.html">factor</a></code>s.  When false (as by
+default currently, but planned <b>to be changed!</b>), convert
+character vectors to factors.  See &lsquo;Details&rsquo;.</p>
 </td></tr>
 <tr valign="top"><td><code>dec</code></td>
 <td>
@@ -91,8 +91,8 @@ recursively for each column or list element.
 </p>
 <p>Given a vector, the function attempts to convert it to logical,
 integer, numeric or complex, and failing that converts a character
-vector to factor unless <code>as.is = TRUE</code>.  The first type that can
-accept all the non-missing values is chosen.
+vector to <code><a href="../../base/html/factor.html">factor</a></code> unless <code>as.is = TRUE</code>.  The first
+type that can accept all the non-missing values is chosen.
 </p>
 <p>Vectors which are entirely missing values are converted to logical,
 since <code>NA</code> is primarily logical.
@@ -160,5 +160,5 @@ type.convert(chr, as.is = TRUE) # -&gt; character
 type.convert(fac, as.is = TRUE) # -&gt; character
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

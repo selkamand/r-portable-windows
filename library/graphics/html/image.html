@@ -14,6 +14,9 @@ corresponding to the values in <code>z</code>.  This can be used to display
 three-dimensional or spatial data aka <em>images</em>.
 This is a generic function.
 </p>
+<p><em>NOTE:</em> the grid is drawn as a set of rectangles by default;
+see the <code>useRaster</code> argument to draw the grid as a raster image.
+</p>
 <p>The function <code><a href="../../grDevices/html/palettes.html">hcl.colors</a></code> provides a broad range of sequential
 color palettes that are suitable for displaying ordered data, with
 <code>n</code> giving the number of colors desired.
@@ -111,7 +114,7 @@ not specified, see &lsquo;Details&rsquo;.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
-<p><a href="par.html">graphical parameters</a> for <code><a href="plot.html">plot</a></code> may also be
+<p><a href="par.html">graphical parameters</a> for <code><a href="plot.default.html">plot</a></code> may also be
 passed as arguments to this function, as can the plot aspect ratio
 <code>asp</code> and <code>axes</code> (see <code><a href="plot.window.html">plot.window</a></code>).</p>
 </td></tr>
@@ -222,5 +225,5 @@ box()
 title(main = "Maunga Whau Volcano", font.main = 4)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>graphics</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

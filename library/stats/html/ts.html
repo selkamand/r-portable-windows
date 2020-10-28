@@ -38,7 +38,8 @@ values. A data frame will be coerced to a numeric matrix via
 <tr valign="top"><td><code>start</code></td>
 <td>
 <p>the time of the first observation.  Either a single
-number or a vector of two integers, which specify a natural time
+number or a vector of two numbers (the second of which is an integer),
+which specify a natural time
 unit and a (1-based) number of samples into the time unit.  See
 the examples for the use of the second form.</p>
 </td></tr>
@@ -106,14 +107,17 @@ There is a method for <code><a href="../../base/html/t.html">t</a></code> that t
 matrix (a one-column matrix if a vector) and hence returns a result
 that does not inherit from class <code>"ts"</code>.
 </p>
-<p>The value of argument <code>frequency</code> is used when the series is
-sampled an integral number of times in each unit time interval.  For
+<p>Argument <code>frequency</code> indicates the sampling frequency of the
+time series, with the default value <code>1</code> indicating one sample in
+each unit time interval.  For
 example, one could use a value of <code>7</code> for <code>frequency</code> when
 the data are sampled daily, and the natural time period is a week, or
 <code>12</code> when the data are sampled monthly and the natural time
 period is a year.  Values of <code>4</code> and <code>12</code> are assumed in
 (e.g.) <code>print</code> methods to imply a quarterly and monthly series
-respectively.
+respectively.  As from <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 4.0.0, <code>frequency</code> need not be a whole
+number.  For example, <code>frequency = 0.2</code> would imply sampling
+once every five time units.
 </p>
 <p><code>as.ts</code> is generic.  Its default method will use the
 <code><a href="tsp.html">tsp</a></code> attribute of the object if it has one to set the
@@ -175,5 +179,5 @@ plot(nhtemp, lag(nhtemp, 1), cex = .8, col = "blue",
      main = "Lag plot of New Haven temperatures")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -40,7 +40,7 @@ for details.  If supplied separately, they must be of the same length.</p>
 <tr valign="top"><td><code>type</code></td>
 <td>
 <p>1-character string giving the type of plot desired.  The
-following values are possible, for details, see <code><a href="plot.html">plot</a></code>:
+following values are possible, for details, see <code><a href="plot.default.html">plot</a></code>:
 <code>"p"</code> for points, <code>"l"</code> for lines,
 <code>"b"</code> for both points and lines,
 <code>"c"</code> for empty points joined by lines,
@@ -180,6 +180,11 @@ plotting functions: <code>plot.default</code> calls in turn some of
 individually, or by calling <code>plot(type = "n")</code> and adding further
 elements.
 </p>
+<p>The <code>plot</code> generic was moved from the <span class="pkg">graphics</span> package to
+the <span class="pkg">base</span> package in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 4.0.0. It is currently re-exported from
+the <span class="pkg">graphics</span> namespace to allow packages importing it from there
+to continue working, but this may change in future versions of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>.
+</p>
 
 
 <h3>References</h3>
@@ -198,7 +203,7 @@ Monterey, CA: Wadsworth.
 
 <h3>See Also</h3>
 
-<p><code><a href="plot.html">plot</a></code>, <code><a href="plot.window.html">plot.window</a></code>, <code><a href="../../grDevices/html/xy.coords.html">xy.coords</a></code>.
+<p><code><a href="plot.default.html">plot</a></code>, <code><a href="plot.window.html">plot.window</a></code>, <code><a href="../../grDevices/html/xy.coords.html">xy.coords</a></code>.
 For thousands of points, consider using <code><a href="smoothScatter.html">smoothScatter</a></code>
 instead.
 </p>
@@ -246,5 +251,5 @@ axis(2, at = at.y, col.axis = "red", las = 1,
 par(op)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>graphics</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

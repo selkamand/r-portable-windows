@@ -23,7 +23,7 @@ difftime(time1, time2, tz,
          units = c("auto", "secs", "mins", "hours",
                    "days", "weeks"))
 
-as.difftime(tim, format = "%X", units = "auto")
+as.difftime(tim, format = "%X", units = "auto", tz = "UTC")
 
 ## S3 method for class 'difftime'
 format(x, ...)
@@ -166,5 +166,5 @@ as.numeric(z, units = "hours")
 format(z)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

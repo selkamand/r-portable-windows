@@ -104,15 +104,15 @@ should be drawn, see <code><a href="plot.default.html">plot.default</a></code>.<
 </td></tr>
 <tr valign="top"><td><code>col</code></td>
 <td>
-<p>color for the lines drawn.</p>
+<p>colour(s) for the lines drawn.</p>
 </td></tr>
 <tr valign="top"><td><code>lty</code></td>
 <td>
-<p>line type for the lines drawn.</p>
+<p>line type(s) for the lines drawn.</p>
 </td></tr>
 <tr valign="top"><td><code>lwd</code></td>
 <td>
-<p>line width for the lines drawn.</p>
+<p>line width(s) for the lines drawn.</p>
 </td></tr>
 <tr valign="top"><td><code>add</code></td>
 <td>
@@ -148,6 +148,9 @@ help for <code><a href="text.html">text</a></code> and <code><a href="../../grDe
 number and the y axis to column number, with column 1 at the bottom,
 i.e. a 90 degree counter-clockwise rotation of the conventional textual
 layout.
+</p>
+<p>Vector (of length <i>&gt; 1</i>) <code>col</code>, <code>lty</code>, and <code>lwd</code> are
+applied along <code>levels</code> and recycled, see the Examples.
 </p>
 <p>Alternatively, use <code><a href="../../lattice/html/levelplot.html">contourplot</a></code> from the
 <a href="https://CRAN.R-project.org/package=lattice"><span class="pkg">lattice</span></a> package where the <code><a href="../../stats/html/formula.html">formula</a></code> notation allows
@@ -199,6 +202,17 @@ contour(x, x, z, ylim = c(-6, 6), nlev = 20, lty = 2, method = "simple",
         main = "20 levels; \"simple\" labelling method")
 par(op)
 
+## Passing multiple colours / lty / lwd :
+op &lt;- par(mfrow = c(1, 2))
+z &lt;- outer(-9:25, -9:25)
+## Using default levels &lt;- pretty(range(z, finite = TRUE), 10),
+##  the first and last of which typically are *not* drawn:
+(levs &lt;- pretty(z, n=10)) # -300 -200 ... 600 700
+contour(z, col = 1:4)
+## Set levels explicitly; show that 'lwd' and 'lty' are recycled as well:
+contour(z, levels=levs[-c(1,length(levs))], col = 1:5, lwd = 1:3 *1.5, lty = 1:3)
+par(op)
+
 ## Persian Rug Art:
 x &lt;- y &lt;- seq(-4*pi, 4*pi, len = 27)
 r &lt;- sqrt(outer(x^2, y^2, "+"))
@@ -231,5 +245,5 @@ invisible(lapply(line.list, lines, lwd=3, col=adjustcolor(2, .3)))
 par(opar)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>graphics</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

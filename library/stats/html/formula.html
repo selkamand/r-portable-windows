@@ -158,6 +158,25 @@ environment.
 </p>
 
 
+<h3>Note</h3>
+
+<p>In <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> versions up to 3.6.0, <code><a href="../../base/html/character.html">character</a></code> <code>x</code> of length
+more than one were parsed as separate lines of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> code and the first
+complete expression was evaluated into a formula when possible.  This
+silently truncates such vectors of characters inefficiently and to some
+extent inconsistently as this behaviour had been undocumented.  For this
+reason, such use has been deprecated.  If you must work via character
+<code>x</code>, do use a string, i.e., a character vector of length one.
+</p>
+<p>E.g., <code>eval(call("~", quote(foo + bar)))</code> has been an order of magnitude
+more efficient 
+than <code>formula(c("~", "foo + bar"))</code>.
+</p>
+<p>Further, character &ldquo;expressions&rdquo; needing an <code><a href="../../base/html/eval.html">eval</a>()</code>
+to return a formula are now deprecated.
+</p>
+
+
 <h3>References</h3>
 
 <p>Chambers, J. M. and Hastie, T. J. (1992)
@@ -195,5 +214,5 @@ xnam &lt;- paste0("x", 1:25)
 (fmla &lt;- as.formula(paste("y ~ ", paste(xnam, collapse= "+"))))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

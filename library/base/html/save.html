@@ -87,7 +87,8 @@ for workspace format version 1.</p>
 <td>
 <p>integer: the level of compression to be
 used.  Defaults to <code>6</code> for <code>gzip</code> compression and to
-<code>9</code> for <code>bzip2</code> or <code>xz</code> compression.</p>
+<code>9</code> for <code>bzip2</code> or <code>xz</code> compression.  See the
+help for <code><a href="connections.html">file</a></code> for possible values and their merits.</p>
 </td></tr>
 <tr valign="top"><td><code>eval.promises</code></td>
 <td>
@@ -202,19 +203,20 @@ not be those found.
 conversion of end-of-line markers and of 8-bit characters.  The lines
 are delimited by LF on all platforms.
 </p>
-<p>Although the default version has not changed since <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 1.4.0, this
-does not mean that saved files are necessarily backwards compatible.
-You will be able to load a saved image into an earlier version of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>
-unless use is made of later additions (for example, raw vectors,
-external pointers and some S4 objects).
+<p>Although the default version was not changed between <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 1.4.0 and <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>
+3.4.4 nor since <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.5.0, this does not mean that saved files are
+necessarily backwards compatible.  You will be able to load a saved
+image into an earlier version of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> which supports its version unless
+use is made of later additions (for example for version 2, raw
+vectors, external pointers and some S4 objects).
 </p>
 <p>One such &lsquo;later addition&rsquo; was long vectors, introduced in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>
 3.0.0 and loadable only on 64-bit platforms.
 </p>
 <p>Loading files saved with <code>ASCII = NA</code> requires a C99-compliant C
 function <code>sscanf</code>: this is a problem on Windows, first worked
-around in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.1.2: they should be readable in earlier versions of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>
-on all other platforms.
+around in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.1.2: version-2 files in that format should be readable
+in earlier versions of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> on all other platforms.
 </p>
 
 
@@ -270,5 +272,5 @@ unlink(".RData")
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

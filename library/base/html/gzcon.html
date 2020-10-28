@@ -87,7 +87,7 @@ structure.  It has binary mode.
 
 <pre>
 ## Uncompress a data file from a URL
-z &lt;- gzcon(url("http://www.stats.ox.ac.uk/pub/datasets/csb/ch12.dat.gz"))
+z &lt;- gzcon(url("https://www.stats.ox.ac.uk/pub/datasets/csb/ch12.dat.gz"))
 # read.table can only read from a text-mode connection.
 raw &lt;- textConnection(readLines(z))
 close(z)
@@ -117,5 +117,5 @@ close(zz)
 unlink(zzfil2)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

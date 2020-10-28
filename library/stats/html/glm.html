@@ -23,9 +23,9 @@ glm(formula, family = gaussian, data, weights, subset,
     control = list(...), model = TRUE, method = "glm.fit",
     x = FALSE, y = TRUE, singular.ok = TRUE, contrasts = NULL, ...)
 
-glm.fit(x, y, weights = rep(1, nobs),
+glm.fit(x, y, weights = rep.int(1, nobs),
         start = NULL, etastart = NULL, mustart = NULL,
-        offset = rep(0, nobs), family = gaussian(),
+        offset = rep.int(0, nobs), family = gaussian(),
         control = list(), intercept = TRUE, singular.ok = TRUE)
 
 ## S3 method for class 'glm'
@@ -488,7 +488,7 @@ way to fit GLMs to large datasets (especially those with many cases).
 counts &lt;- c(18,17,15,20,10,20,25,13,12)
 outcome &lt;- gl(3,1,9)
 treatment &lt;- gl(3,3)
-print(d.AD &lt;- data.frame(treatment, outcome, counts))
+data.frame(treatment, outcome, counts) # showing data
 glm.D93 &lt;- glm(counts ~ outcome + treatment, family = poisson())
 anova(glm.D93)
 summary(glm.D93)
@@ -531,5 +531,5 @@ demo(glm.vr)
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

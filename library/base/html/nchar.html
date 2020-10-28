@@ -12,7 +12,7 @@
 <p><code>nchar</code> takes a character vector as an argument and
 returns a vector whose elements contain the sizes of
 the corresponding elements of <code>x</code>. Internally, it is a generic,
-for which methods can be defined.
+for which methods can be defined (see <a href="InternalMethods.html">InternalMethods</a>).
 </p>
 <p><code>nzchar</code> is a fast way to find out if elements of a character
 vector are non-empty strings.
@@ -70,7 +70,7 @@ three ways (corresponding to the <code>type</code> argument):
 <dt><code>bytes</code></dt><dd><p>The number of bytes needed to store the string
 (plus in C a final terminator which is not counted).</p>
 </dd>
-<dt><code>chars</code></dt><dd><p>The number of human-readable characters.</p>
+<dt><code>chars</code></dt><dd><p>The number of characters.</p>
 </dd>
 <dt><code>width</code></dt><dd><p>The number of columns <code><a href="cat.html">cat</a></code> will use to
 print the string in a monospaced font.  The same as <code>chars</code>
@@ -212,5 +212,5 @@ stopifnot(apply(ncT, 1, function(.) length(unique(.))) == 1,
           apply(ncF, 1, function(.) length(unique(.))) == 1)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

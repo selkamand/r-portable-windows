@@ -68,14 +68,18 @@ the time zone colloquially known as <span class="samp">GMT</span> (see
 If it is unset or empty the <em>system</em> time zone is used (the one
 returned by <code>Sys.timezone</code>).
 </p>
-<p>Time zones did not come into use until the second half of the
-nineteenth century and were not widely adopted until the twentieth,
-and <em>daylight saving time</em> (DST, also known as <em>summer
-time</em>) was first introduced in the early twentieth century, most
-widely in 1916.  Over the last 100 years places have changed their
-affiliation between major time zones, have opted out of (or in to) DST
-in various years or adopted DST rule changes late or not at all.  (The
-UK experimented with DST throughout 1971, only.)
+
+<p>Time zones did not come into use until the middle of the nineteenth
+century and were not widely adopted until the twentieth, and
+<em>daylight saving time</em> (DST, also known as <em>summer time</em>)
+was first introduced in the early twentieth century, most widely in
+1916.  Over the last 100 years places have changed their affiliation
+between major time zones, have opted out of (or in to) DST in various
+years or adopted DST rule changes late or not at all.  (The UK
+experimented with DST throughout 1971, only.)  In a few countries (one
+is the Irish Republic) it is the summer time which is the
+&lsquo;standard&rsquo; time and a different name is used in winter.  And
+there can be multiple changes during a year, for example for Ramadan.
 </p>
 <p>A quite common system implementation of <code>POSIXct</code> is as signed
 32-bit integers and so only goes back to the end of 1901: on such
@@ -84,9 +88,8 @@ as they were in 1902.  Most of the world had not adopted time zones by
 1902 (so used local &lsquo;mean time&rsquo; based on longitude) but for a
 few places there had been time-zone changes before then.  64-bit
 representations are becoming common; unfortunately on some 64-bit OSes
-(notably macOS) the database information is 32-bit and so only
-available for the range 1901&ndash;2038, and incompletely for the end
-years.
+the database information is 32-bit and so only available for the range
+1901&ndash;2038, and incompletely for the end years.
 </p>
 <p>As from <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.5.0, when a time zone location is first found in a
 session, its value is cached in object <code>.sys.timezone</code> in the
@@ -111,7 +114,7 @@ e.g. <span class="samp">PST8PDT</span> is an alias for
 </p>
 <p><code>OlsonNames</code> returns a character vector, see the examples for
 typical cases.  It may have an attribute <code>"Version"</code>, something
-like <span class="samp">"2017c"</span>.
+like <span class="samp">"2020a"</span>.
 </p>
 
 
@@ -124,7 +127,7 @@ platforms.
 for the C function <code>tzset</code> can be helpful, but it can also be
 inaccurate.  There is a cumbersome POSIX specification (listed under
 environment variable <span class="env">TZ</span> at
-<a href="http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap08.html#tag_08">http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap08.html#tag_08</a>),
+<a href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap08.html#tag_08">https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap08.html#tag_08</a>),
 which is often at least partially supported, but there are other more
 user-friendly ways to specify time zones.
 </p>
@@ -170,13 +173,18 @@ example <code>EST5EDT</code>).  See also
 <a href="https://en.wikipedia.org/wiki/Zone.tab">https://en.wikipedia.org/wiki/Zone.tab</a>.
 </p>
 <p>Where <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> was configured with option <span class="option">--with-internal-tzcode</span>
-(the default on macOS and Windows: recommended on Solaris), the database at
+(the default on Windows: recommended on Solaris), the database at
 <code>file.path(R.home("share"), "zoneinfo")</code> is used by default: file
-&lsquo;<span class="file">VERSION</span>&rsquo; in that directory states the version.  Environment
-variable <span class="env">TZDIR</span> can be used to point to a different
-&lsquo;<span class="file">zoneinfo</span>&rsquo; database: this is also supported by the native
-services on some OSes, e.g. Linux using <code>glibc</code> except in
-secure modes.
+&lsquo;<span class="file">VERSION</span>&rsquo; in that directory states the version.  That option is
+also the default on macOS but there whichever is more recent of the
+system database at &lsquo;<span class="file">/var/db/timezone/zoneinfo</span>&rsquo; and that
+distributed with <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> is used by default.  Environment variable
+<span class="env">TZDIR</span> can be used to point to a different &lsquo;<span class="file">zoneinfo</span>&rsquo;
+database: value <code>"internal"</code> indicates that the database from the
+<span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> sources and <code>"macOS"</code> indicates the system database.
+</p>
+<p>Setting <span class="env">TZDIR</span> is also supported by the native services on some
+OSes, e.g. Linux using <code>glibc</code> except in secure modes.
 
 </p>
 <p>Time zones given by name (<em>via</em> environment variable <span class="env">TZ</span>, in
@@ -241,11 +249,11 @@ and most databases are pretty complete.
 <h3>Note</h3>
 
 <p>Since 2007 there has been considerable disruption over changes to the
-timings of the DST transitions, aimed at energy conservation.  These
-often have short notice and time-zone databases may not be up to date.
-(Morocco in 2013 announced a change to the end of DST at <em>a days</em>
-notice, and in 2015 North Korea gave imprecise information about a
-change a week in advance.)
+timings of the DST transitions, originally aimed at energy
+conservation.  These often have short notice and time-zone databases
+may not be up to date.  (Morocco in 2013 announced a change to the end
+of DST at <em>a days</em> notice, and in 2015 North Korea gave imprecise
+information about a change a week in advance.)
 </p>
 <p>On platforms with case-insensitive file systems, time zone names will be
 case-insensitive.  They may or may not be on other platforms and so,
@@ -288,5 +296,5 @@ table(lengths(Osl))# most are pairs, some triplets
 str(Osl[lengths(Osl) &gt;= 3])# "America" South and North ...
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

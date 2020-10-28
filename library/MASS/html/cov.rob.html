@@ -64,11 +64,11 @@ respectively.
 <td>
 
 <p>the number of samples or <code>"best"</code> or <code>"exact"</code> or
-<code>"sample"</code>.
+<code>"sample"</code>.  The limit
 If <code>"sample"</code> the number chosen is <code>min(5*p, 3000)</code>, taken
 from Rousseeuw and Hubert (1997). If <code>"best"</code> exhaustive
 enumeration is done up to 5000 samples: if <code>"exact"</code>
-exhaustive enumeration will be attempted however many samples are needed.
+exhaustive enumeration will be attempted.
 </p>
 </td></tr>
 <tr valign="top"><td><code>seed</code></td>
@@ -109,6 +109,10 @@ by the covariance matrix of <code>p</code> of the data points. For method
 van Driessen (1999) is used, in which once a subset of size
 <code>quantile.used</code> is selected, an ellipsoid based on its covariance
 is tested (as this will have no larger a determinant, and may be smaller).
+</p>
+<p>There is a hard limit on the allowed number of samples, <i>2^31 - 1</i>.  However, practical limits are likely to be much lower
+and one might check the number of samples used for exhaustive
+enumeration, <code>combn(NROW(x), NCOL(x) + 1)</code>, before attempting it.
 </p>
 
 
@@ -202,5 +206,5 @@ cov.rob(stackloss)
 cov.rob(stack.x, method = "mcd", nsamp = "exact")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>MASS</em> version 7.3-51.5 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>MASS</em> version 7.3-53 <a href="00Index.html">Index</a>]</div>
 </body></html>

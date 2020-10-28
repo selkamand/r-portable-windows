@@ -17,7 +17,7 @@ from the object produced by <code>gam.setup</code>.
 <h3>Usage</h3>
 
 <pre>
-Sl.setup(G,cholesky=FALSE)
+Sl.setup(G,cholesky=FALSE,no.repara=FALSE,sparse=FALSE)
 </pre>
 
 
@@ -31,6 +31,14 @@ Sl.setup(G,cholesky=FALSE)
 <tr valign="top"><td><code>cholesky</code></td>
 <td>
 <p>re-parameterize using Cholesky only.</p>
+</td></tr>
+<tr valign="top"><td><code>no.repara</code></td>
+<td>
+<p>set to <code>TRUE</code> to turn off all initial reparameterization.</p>
+</td></tr>
+<tr valign="top"><td><code>sparse</code></td>
+<td>
+<p>sparse setup?</p>
 </td></tr>
 </table>
 
@@ -73,5 +81,5 @@ and <code>b.orig = D%*%b.repara</code> (where <code>b.orig</code> is the origina
 <p>Simon N. Wood &lt;simon.wood@r-project.org&gt;.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-31 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-33 <a href="00Index.html">Index</a>]</div>
 </body></html>

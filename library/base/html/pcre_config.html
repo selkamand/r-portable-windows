@@ -35,7 +35,8 @@ pcre_config()
 <tr valign="top"><td><code>Unicode properties</code></td>
 <td>
 <p>Support for <span class="samp">\p{xx}</span> and <span class="samp">\P{xx}</span>
-in regular expressions.  Desirable and used by some CRAN packages.</p>
+in regular expressions.  Desirable and used by some CRAN packages.
+As of PCRE2, always present with support for UTF-8.</p>
 </td></tr>
 <tr valign="top"><td><code>JIT</code></td>
 <td>
@@ -45,10 +46,12 @@ architectures).</p>
 </td></tr>
 <tr valign="top"><td><code>stack</code></td>
 <td>
-<p>Does match recursion use a stack (<code>TRUE</code>, the PCRE
-default) or a heap?  See the discussion at
-<a href="http://www.pcre.org/original/doc/html/pcrestack.html">http://www.pcre.org/original/doc/html/pcrestack.html</a>.  (Added
-in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.4.0.)</p>
+<p>Does match recursion use a stack (<code>TRUE</code>, the default
+for PCRE1 and PCRE2 older than 10.30) or a heap?  See the discussion at
+<a href="http://www.pcre.org/original/doc/html/pcrestack.html">http://www.pcre.org/original/doc/html/pcrestack.html</a>  (Added
+in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 3.4.0.). No longer relevant and always <code>FALSE</code> in PCRE2
+since version 10.30 which no longer uses function recursion to remember
+backtracking positions.</p>
 </td></tr> 
 </table>
 
@@ -65,5 +68,5 @@ in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></sp
 pcre_config()
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

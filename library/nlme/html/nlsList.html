@@ -169,11 +169,13 @@ fm1 &lt;- nlsList(uptake ~ SSasympOff(conc, Asym, lrc, c0),
    data = CO2, start = c(Asym = 30, lrc = -4.5, c0 = 52))
 summary(fm1)
 cfm1 &lt;- confint(fm1) # via profiling each % FIXME: only *one* message instead of one *each*
-stopifnot((i.ok &lt;- which(sapply(cfm1, class) == "matrix"))
-          %in% c(2:4,6:9, 12))
+mat.class &lt;- class(matrix(1)) # ("matrix", "array") for R &gt;= 4.0.0;  ("matrix" in older R)
+i.ok &lt;- which(vapply(cfm1,
+                function(r) identical(class(r), mat.class), NA))
+stopifnot(length(i.ok) &gt; 0, !anyNA(match(c(2:4, 6:9, 12), i.ok)))
 ## where as (some of) the others gave errors during profile re-fitting :
 str(cfm1[- i.ok])
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>nlme</em> version 3.1-144 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>nlme</em> version 3.1-149 <a href="00Index.html">Index</a>]</div>
 </body></html>

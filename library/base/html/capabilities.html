@@ -17,7 +17,8 @@ build of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</
 <h3>Usage</h3>
 
 <pre>
-capabilities(what = NULL)
+capabilities(what = NULL,
+             Xchk = any(nas %in% c("X11", "jpeg", "png", "tiff")))
 </pre>
 
 
@@ -28,6 +29,13 @@ capabilities(what = NULL)
 <td>
 <p>character vector or <code>NULL</code>, specifying
 required components.  <code>NULL</code> implies that all are required.</p>
+</td></tr>
+<tr valign="top"><td><code>Xchk</code></td>
+<td>
+<p><code><a href="logical.html">logical</a></code> with a smart default, indicating if
+X11-related capabilities should be fully checked, notably on macOS.
+If set to false, may avoid a warning &ldquo;No protocol specified&rdquo;
+and e.g., the &quot;X11&quot; capability may be returned as <code>NA</code>.</p>
 </td></tr>
 </table>
 
@@ -156,8 +164,11 @@ capabilities()
 if(!capabilities("ICU"))
    warning("ICU is not available")
 
+## Does not call the internal X11-checking function:
+capabilities(Xchk = FALSE)
+
 ## See also the examples for 'connections'.
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

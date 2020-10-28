@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compute Royston's D for a Cox model</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for royston {survival}"><tr><td>royston {survival}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compute Royston's D for a Cox model</h2>
+
+<h3>Description</h3>
+
+<p>Compute the D statistic and R^2 for a coxph model, proposed by
+Royston and Sauerbrei
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+royston(fit, newdata, ties = TRUE, adjust = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>fit</code></td>
+<td>
+<p>a coxph fit</p>
+</td></tr>
+<tr valign="top"><td><code>newdata</code></td>
+<td>
+<p>optional validation data set</p>
+</td></tr>
+<tr valign="top"><td><code>ties</code></td>
+<td>
+<p>make a correction for ties in the risk score</p>
+</td></tr>
+<tr valign="top"><td><code>adjust</code></td>
+<td>
+<p>adjust for possible overfitting</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The adjustment is based on the ratio
+r= (number of events)/(number of coefficients). For models which have
+sufficient sample size (r&gt;20) the adjustment will be small.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a vector containing the value of D, <i>R^2_D</i> and
+the estimated standard error of D.
+</p>
+
+
+<h3>References</h3>
+
+<p>P. Royston and W. Sauerbrei, A new measure of prognostic separation in
+survival data.  Statistics in Medicine 23:723-748, 2004.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# one of the examples from the paper
+pbc2 &lt;- na.omit(pbc)  # no missing values
+cfit &lt;- coxph(Surv(time, status==2) ~ age + log(bili) + edema + albumin +
+                   stage + copper, data=pbc2, ties="breslow")
+royston(cfit)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-7 <a href="00Index.html">Index</a>]</div>
+</body></html>

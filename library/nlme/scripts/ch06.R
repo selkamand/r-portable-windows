@@ -97,5 +97,6 @@ fm2Pheno.nlme <-
 
 # cleanup
 
+summary(warnings())
 proc.time()
 

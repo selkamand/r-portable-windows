@@ -78,10 +78,14 @@ regular expression <span class="samp">[0123456789]</span> matches any single dig
 <span class="samp">b</span> or <span class="samp">c</span>.  A range of characters may be specified by
 giving the first and last characters, separated by a hyphen.  (Because
 their interpretation is locale- and implementation-dependent,
-character ranges are best avoided.)  The only portable way to specify
-all ASCII letters is to list them all as the character class<br />
+character ranges are best avoided.  Some but not all implementations
+include both cases in ranges when doing caseless matching.)  The only
+portable way to specify all ASCII letters is to list them all as the
+character class<br />
 <span class="samp">[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz]</span>.<br /> (The
-current implementation uses numerical order of the encoding.)
+current implementation uses numerical order of the encoding, normally a
+single-byte encoding or Unicode points.)
+
 </p>
 <p>Certain named classes of characters are predefined.  Their
 interpretation depends on the <em>locale</em> (see <a href="locales.html">locales</a>); the
@@ -220,14 +224,16 @@ to the PCRE library that implements regular expression pattern
 matching using the same syntax and semantics as Perl 5.x,
 with just a few differences.
 </p>
-<p>For complete details please consult the man pages for PCRE (and not
-PCRE2), especially <code>man pcrepattern</code> and <code>man
-  pcreapi</code>, on your system or from the sources at
-<a href="http://www.pcre.org">http://www.pcre.org</a>.  (The version in use can be found by
-calling <code><a href="extSoftVersion.html">extSoftVersion</a></code>.  It need not be the version
-described in the system's man page.  As PCRE has been feature-frozen
-for some time (essentially 2012), the man pages at
-<a href="http://www.pcre.org/original/doc/html/">http://www.pcre.org/original/doc/html/</a> should be a good match.)
+<p>For complete details please consult the man pages for PCRE, especially
+<code>man pcrepattern</code> and <code>man pcreapi</code>, on your system or
+from the sources at <a href="http://www.pcre.org">http://www.pcre.org</a>.  (The version in use can be
+found by calling <code><a href="extSoftVersion.html">extSoftVersion</a></code>.  It need not be the version
+described in the system's man page.  PCRE1 (reported as version &lt; 10.00 by
+<code><a href="extSoftVersion.html">extSoftVersion</a></code>) has been feature-frozen for some time
+(essentially 2012), the man pages at
+<a href="http://www.pcre.org/original/doc/html/">http://www.pcre.org/original/doc/html/</a> should be a good match.
+PCRE2 (PCRE version &gt;= 10.00) has man pages at
+<a href="http://www.pcre.org/current/doc/html/">http://www.pcre.org/current/doc/html/</a>).
 </p>
 <p>Perl regular expressions can be computed byte-by-byte or
 (UTF-8) character-by-character: the latter is used in all multibyte
@@ -303,7 +309,15 @@ end of the previous match).  <span class="samp">\C</span> matches a single
 byte, including a newline, but its use is warned against.  In UTF-8
 mode, <span class="samp">\R</span> matches any Unicode newline character (not just CR),
 and <span class="samp">\X</span> matches any number of Unicode characters that form an
-extended Unicode sequence.
+extended Unicode sequence. <span class="samp">\X</span>, <span class="samp">\R</span> and <span class="samp">\B</span> cannot be
+used inside a character class (with PCRE1, they are treated as characters
+<span class="samp">X</span>, <span class="samp">R</span> and <span class="samp">B</span>; with PCRE2 they cause an error).
+</p>
+<p>A hyphen (minus) inside a character class is treated as a range, unless it
+is first or last character in the class definition.  It can be quoted to
+represent the hyphen literal (<span class="samp">\-</span>).  PCRE1 allows an unquoted hyphen
+at some other locations inside a character class where it cannot represent
+a valid range, but PCRE2 reports an error in such cases.
 </p>
 <p>In UTF-8 mode, some Unicode properties may be supported via
 <span class="samp">\p{xx}</span> and <span class="samp">\P{xx}</span> which match characters with and
@@ -312,7 +326,8 @@ properties see the PCRE documentation, but for example <span class="samp">Lu</sp
 &lsquo;upper case letter&rsquo; and <span class="samp">Sc</span> is &lsquo;currency symbol&rsquo;.
 (This support depends on the PCRE library being compiled with
 &lsquo;Unicode property support&rsquo; which can be checked <em>via</em>
-<code><a href="pcre_config.html">pcre_config</a></code>.)
+<code><a href="pcre_config.html">pcre_config</a></code>. PCRE2 when compiled with Unicode support always
+supports also Unicode properties.)
 </p>
 <p>The sequence <span class="samp">(?#</span> marks the start of a comment which continues
 up to the next closing parenthesis.  Nested parentheses are not
@@ -347,7 +362,7 @@ and recursive patterns are not covered here.
 <h3>Author(s)</h3>
 
 <p>This help page is based on the TRE documentation and the POSIX
-standard, and the <code>pcrepattern</code> man page from PCRE 8.36.
+standard, and the <code>pcre2pattern</code> man page from PCRE2 10.35
 </p>
 
 
@@ -358,15 +373,16 @@ standard, and the <code>pcrepattern</code> man page from PCRE 8.36.
 <code><a href="ls.html">ls</a></code> and <code><a href="strsplit.html">strsplit</a></code>.
 </p>
 <p>The TRE documentation at
-<a href="http://laurikari.net/tre/documentation/regex-syntax/">http://laurikari.net/tre/documentation/regex-syntax/</a>.
+<a href="https://laurikari.net/tre/documentation/regex-syntax/">https://laurikari.net/tre/documentation/regex-syntax/</a>.
 </p>
 <p>The POSIX 1003.2 standard at
-<a href="http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap09.html">http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap09.html</a>.
+<a href="https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap09.html">https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap09.html</a>.
 </p>
-<p>The <code>pcrepattern</code> <code>man</code> page (found as part of
-<a href="http://www.pcre.org/original/pcre.txt">http://www.pcre.org/original/pcre.txt</a>), and details of Perl's own
-implementation at <a href="http://perldoc.perl.org/perlre.html">http://perldoc.perl.org/perlre.html</a>.
+<p>The <code>pcre2pattern</code> or <code>pcrepattern</code> <code>man</code> page
+(found as part of <a href="http://www.pcre.org/original/pcre.txt">http://www.pcre.org/original/pcre.txt</a>), and
+details of Perl's own implementation at
+<a href="https://perldoc.perl.org/perlre.html">https://perldoc.perl.org/perlre.html</a>.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

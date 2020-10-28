@@ -14,10 +14,15 @@ endif
 DLLFLAGS+= -static-libgcc
 LINKFLAGS+= -static-libgcc
 
-## Things which are substituted by fixed/Makefile (and also -O3 -> -O2)
+## The rtools40 installer sets RTOOLS40_HOME, default to standard install path
+RTOOLS40_HOME ?= c:/rtools40
+RTOOLS40_ROOT ?= $(subst \,/,$(RTOOLS40_HOME))
+
+## Things which are substituted by fixed/Makefile (and also -O2 -> -O2)
 WIN = 32
-BINPREF ?= c:/Rtools/mingw_32/bin/
-COMPILED_BY = gcc-4.9.3
+MINGW_PREFIX = /mingw$(WIN)
+BINPREF ?= "$(RTOOLS40_ROOT)/mingw32/bin/"
+COMPILED_BY = gcc-8.3.0
 # SYMPAT = 's/^.* [BCDRT] _/ /p' for 32-bit
 # SYMPAT = 's/^.* [BCDRT] / /p' for 64-bit
 SYMPAT = 's/^.* [BCDRT] _/ /p'
@@ -28,7 +33,7 @@ DT_ARCH =
 RC_ARCH = 
 # Used by packages tcltk and tkrplot
 TCL_HOME = $(R_HOME)/Tcl
-#LOCAL_SOFT
+LOCAL_SOFT ?= 
 NM_FILTER = 
 
 ifneq ($(strip $(LOCAL_SOFT)),)
@@ -66,29 +71,34 @@ AR = $(BINPREF)ar
 BLAS_LIBS = -L"$(R_HOME)/$(IMPDIR)" -lRblas
 C_VISIBILITY = 
 CC = $(BINPREF)gcc $(M_ARCH)
-CFLAGS = -O3 -Wall $(DEBUGFLAG) -std=gnu99 -mtune=core2
+CFLAGS = -O2 -Wall $(DEBUGFLAG) -std=gnu99 -mfpmath=sse -msse2 -mstackrealign
 CPICFLAGS = 
 CPPFLAGS =
 CXX = $(BINPREF)g++ -std=gnu++11 $(M_ARCH)
 CXXCPP = $(CXX) -E
-CXXFLAGS = -O2 -Wall $(DEBUGFLAG) -mtune=core2
+CXXFLAGS = -O2 -Wall $(DEBUGFLAG) -mfpmath=sse -msse2 -mstackrealign
 CXXPICFLAGS =
-CXX98 = $(BINPREF)g++ $(M_ARCH)
-CXX98FLAGS = -O2 -Wall $(DEBUGFLAG) -mtune=core2
-CXX98PICFLAGS = 
-CXX98STD = -std=gnu++98
+#CXX98 = $(BINPREF)g++ $(M_ARCH)
+#CXX98FLAGS = -O2 -Wall $(DEBUGFLAG) -mfpmath=sse -msse2 -mstackrealign
+#CXX98PICFLAGS = 
+#CXX98STD = -std=gnu++98
 CXX11 = $(BINPREF)g++ $(M_ARCH)
-CXX11FLAGS = -O2 -Wall $(DEBUGFLAG) -mtune=core2
+CXX11FLAGS = -O2 -Wall $(DEBUGFLAG) -mfpmath=sse -msse2 -mstackrealign
 CXX11PICFLAGS =
 CXX11STD = -std=gnu++11
-CXX14 = 
-CXX14FLAGS = 
+## these settings are for gcc >= 8
+CXX14 = $(CXX11)
+CXX14FLAGS = $(CXX11FLAGS)
 CXX14PICFLAGS =
-CXX14STD = 
-CXX17 = 
-CXX17FLAGS = 
+CXX14STD = -std=gnu++14
+CXX17 = $(CXX11)
+CXX17FLAGS = $(CXX11FLAGS)
 CXX17PICFLAGS =
-CXX17STD = 
+CXX17STD = -std=gnu++17
+CXX20 = $(CXX11)
+CXX20FLAGS = $(CXX11FLAGS)
+CXX20PICFLAGS =
+CXX20STD = -std=gnu++2a
 DYLIB_EXT = .dll
 DYLIB_LD = $(DLL)
 DYLIB_LDFLAGS = -shared
@@ -101,12 +111,12 @@ ECHO_T =
 F_VISIBILITY = 
 ## FC is the compiler used for all Fortran as from R 3.6.0
 FC = $(BINPREF)gfortran $(M_ARCH)
-FCFLAGS = -O3 $(DEBUGFLAG) -mtune=core2
+FCFLAGS = -O2 $(DEBUGFLAG) -mfpmath=sse -msse2 -mstackrealign
 ## additional libs needed when linking with $(FC), e.g. on some Oracle compilers
 FCLIBS_XTRA =
 F77 = $(BINPREF)gfortran $(M_ARCH)
 F77_VISIBILITY = 
-FFLAGS = -O3 $(DEBUGFLAG) -mtune=core2
+FFLAGS = -O2 $(DEBUGFLAG) -mfpmath=sse -msse2 -mstackrealign
 FLIBS = -lgfortran -lm -lquadmath
 FCPICFLAGS =
 FPICFLAGS = 
@@ -156,18 +166,17 @@ SHLIB_CXXFLAGS =
 SHLIB_CXXLD = $(CXX)
 ## ideally -shared -static-libstdc++, but not for gcc 4.2.1
 SHLIB_CXXLDFLAGS = -shared
-SHLIB_CXX98LD = $(CXX98)
-SHLIB_CXX98LDFLAGS = -shared
+#SHLIB_CXX98LD = $(CXX98)
+#SHLIB_CXX98LDFLAGS = -shared
 SHLIB_CXX11LD = $(CXX11)
 SHLIB_CXX11LDFLAGS = -shared
 SHLIB_CXX14LD = $(CXX14)
 SHLIB_CXX14LDFLAGS = -shared
 SHLIB_CXX17LD = $(CXX17)
 SHLIB_CXX17LDFLAGS = -shared
+SHLIB_CXX20LD = $(CXX20)
+SHLIB_CXX20LDFLAGS = -shared
 SHLIB_EXT = .dll
-SHLIB_FCLD = $(FC)
-## ideally -shared -static-libgfortran, but not for gcc 4.2.1
-SHLIB_FCLDFLAGS = -shared
 SHLIB_FFLAGS = 
 SHLIB_LD = $(CC)
 SHLIB_LDFLAGS = -shared
@@ -183,12 +192,17 @@ STRIP_STATIC_LIB = $(BINPREF)strip --strip-debug
 TCLTK_CPPFLAGS = -I "$(TCL_HOME)/include" -DWin32
 TCLTK_LIBS = -L"$(TCL_HOME)/bin" -ltcl$(TCL_VERSION) -ltk$(TCL_VERSION)
 
+## Legacy settings: these might be used in a src/Makefile
+SHLIB_FCLD = $(FC)
+## ideally -shared -static-libgfortran, but not for gcc 4.2.1
+SHLIB_FCLDFLAGS = -shared
+
 STATIC_LIBR =
 
 R_XTRA_CFLAGS =
 R_XTRA_CPPFLAGS = -I"$(R_HOME)/include" -DNDEBUG
 R_XTRA_CXXFLAGS = 
-R_XTRA_FFLAGS = 
+R_XTRA_FFLAGS =  -fno-optimize-sibling-calls
 
 ALL_CFLAGS = $(R_XTRA_CFLAGS) $(PKG_CFLAGS) $(CPICFLAGS) $(SHLIB_CFLAGS) $(CFLAGS)
 ALL_CPPFLAGS = $(R_XTRA_CPPFLAGS) $(PKG_CPPFLAGS) $(CLINK_CPPFLAGS) $(CPPFLAGS) $($*-CPPFLAGS) $(LOCAL_CPPFLAGS)

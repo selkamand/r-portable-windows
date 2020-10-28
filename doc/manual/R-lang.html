@@ -1,8 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- This manual is for R, version 3.6.3 (2020-02-29).
+<!-- This manual is for R, version 4.0.3 (2020-10-10).
 
-Copyright (C) 2000-2018 R Core Team
+Copyright (C) 2000-2020 R Core Team
 
 Permission is granted to make and distribute verbatim copies of this
 manual provided the copyright notice and this permission notice are
@@ -21,6 +21,7 @@ approved by the R Core Team. -->
 <head>
 <title>R Language Definition</title>
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="R Language Definition">
 <meta name="keywords" content="R Language Definition">
 <meta name="resource-type" content="document">
@@ -342,9 +343,9 @@ Next: <a href="#Introduction" accesskey="n" rel="next">Introduction</a> &nbsp; [
 parsing, object oriented programming, computing on the language, and so
 forth.
 </p>
-<p>This manual is for R, version 3.6.3 (2020-02-29).
+<p>This manual is for R, version 4.0.3 (2020-10-10).
 </p>
-<p>Copyright &copy; 2000&ndash;2018 R Core Team
+<p>Copyright &copy; 2000&ndash;2020 R Core Team
 </p>
 <blockquote>
 <p>Permission is granted to make and distribute verbatim copies of this
@@ -449,8 +450,8 @@ preferred usage.
 </p>
 <p>Some familiarity with R is assumed.  This is not an introduction to
 R but rather a programmers&rsquo; reference manual.  Other manuals provide
-complementary information: in particular <a href="R-intro.html#Preface">Preface</a> in <cite>An
-Introduction to R</cite> provides an introduction to R and <a href="R-exts.html#System-and-foreign-language-interfaces">System and
+complementary information: in particular <a href="http://cran.r-project.org/doc/manuals/R-intro.html#Preface">Preface</a> in <cite>An
+Introduction to R</cite> provides an introduction to R and <a href="http://cran.r-project.org/doc/manuals/R-exts.html#System-and-foreign-language-interfaces">System and
 foreign language interfaces</a> in <cite>Writing R Extensions</cite> details
 how to extend R using compiled code.
 </p>
@@ -2716,7 +2717,7 @@ if they want to, change the system level functions to functions that
 they find more appropriate.
 </p>
 <p>R also provides facilities that make it easy to document any
-functions that you have created.  See <a href="R-exts.html#Writing-R-documentation">Writing R documentation</a> in <cite>Writing R Extensions</cite>.
+functions that you have created.  See <a href="http://cran.r-project.org/doc/manuals/R-exts.html#Writing-R-documentation">Writing R documentation</a> in <cite>Writing R Extensions</cite>.
 </p>
 <table summary="" class="menu" border="0" cellspacing="0">
 <tr><td align="left" valign="top">&bull; <a href="#Syntax-and-examples" accesskey="1">Syntax and examples</a>:</td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
@@ -3108,13 +3109,7 @@ h(3)
 
 <a name="index-evaluation-3"></a>
 <p>A rather interesting question is what happens when <code>h</code> is
-evaluated.  To describe this we need a bit more notation.  Within a
-<a name="index-function-23"></a>
-function body variables can be bound, local or unbound.  The bound
-variables are those that match the formal arguments to the function.
-The local variables are those that were created or defined within the
-function body.  The unbound variables are those that are neither local
-nor bound.  When a function body is evaluated there is no problem
+evaluated. When a function body is evaluated there is no problem
 determining values for local variables or for bound variables.  Scoping
 rules determine how the language will find values for the unbound
 variables.
@@ -3160,7 +3155,7 @@ information.  An object in the language must be an instance of some
 class.  Programming is based on objects or instances of classes.
 </p>
 <p>Computations are carried out via <em>methods</em>.  Methods are basically
-<a name="index-function-24"></a>
+<a name="index-function-23"></a>
 functions that are specialized to carry out specific calculations on
 objects, usually of a specific class.  This is what makes the language
 object oriented.  In R, <em>generic functions</em> are used to
@@ -3282,7 +3277,7 @@ idea to always write a default method.  Note that the functions
 <code>mean.foo</code> etc. are referred to, in this context, as methods.
 </p>
 <p><code>NextMethod</code> provides another mechanism for dispatching.  A
-<a name="index-function-25"></a>
+<a name="index-function-24"></a>
 function may have a call to <code>NextMethod</code> anywhere in it.  The
 determination of which method should then be invoked is based primarily
 on the current values of <code>.Class</code> and <code>.Generic</code>.  This is
@@ -4134,7 +4129,7 @@ Next: <a href="#Manipulation-of-functions" accesskey="n" rel="next">Manipulation
 <h3 class="section">6.5 Manipulation of function calls</h3>
 
 <p>It is possible for a
-<a name="index-function-26"></a>
+<a name="index-function-25"></a>
 function to find out how it has been called by
 looking at the result of <code>sys.call</code> as in the following example of
 a function that simply returns its own call:
@@ -4300,7 +4295,7 @@ Previous: <a href="#Manipulation-of-function-calls" accesskey="p" rel="prev">Man
 <h3 class="section">6.6 Manipulation of functions</h3>
 
 <p>It is often useful to be able to manipulate the components of a
-<a name="index-function-27"></a>
+<a name="index-function-26"></a>
 function
 or closure.  R provides a set of interface functions for this
 purpose.
@@ -4345,7 +4340,7 @@ environment of the function, using code along the lines of <code>evalq(x
 &lt;- 5, environment(f))</code>.
 </p>
 <p>It is also possible to convert a
-<a name="index-function-28"></a>
+<a name="index-function-27"></a>
 function to a list using
 <code>as.list</code>.  The result is the concatenation of the list of formal
 arguments with the function body.  Conversely such a list can be
@@ -4478,7 +4473,7 @@ Next: <a href="#g_t_002eInternal-and-_002ePrimitive" accesskey="n" rel="next">.I
 <a name="index-_002eCall"></a>
 <a name="index-_002eExternal"></a>
 
-<p>See <a href="R-exts.html#System-and-foreign-language-interfaces">System and foreign language interfaces</a> in <cite>Writing R
+<p>See <a href="http://cran.r-project.org/doc/manuals/R-exts.html#System-and-foreign-language-interfaces">System and foreign language interfaces</a> in <cite>Writing R
 Extensions</cite> for the details of adding functionality to R via compiled
 code.
 </p>
@@ -4504,7 +4499,7 @@ Previous: <a href="#Foreign-language-interfaces" accesskey="p" rel="prev">Foreig
 
 <p>The <code>.Internal</code> and <code>.Primitive</code> interfaces are used to call
 <strong>C</strong> code compiled into R at build time.
-See <a href="R-ints.html#g_t_002eInternal-vs-_002ePrimitive">.Internal vs .Primitive</a> in <cite>R Internals</cite>.
+See <a href="http://cran.r-project.org/doc/manuals/R-ints.html#g_t_002eInternal-vs-_002ePrimitive">.Internal vs .Primitive</a> in <cite>R Internals</cite>.
 </p>
 
 <hr>
@@ -4935,7 +4930,7 @@ Next: <a href="#Deparsing" accesskey="n" rel="next">Deparsing</a>, Previous: <a 
 tree.  A fuller description of such objects can be found in
 <a href="#Language-objects">Language objects</a> and <a href="#Expression-objects">Expression objects</a>.  Briefly, every
 elementary R expression is stored in
-<a name="index-function-29"></a>
+<a name="index-function-28"></a>
 function call form, as a list
 with the first element containing the function name and the remainder
 containing the arguments, which may in turn be further R expressions.
@@ -5372,7 +5367,7 @@ Next: <a href="#Infix-and-prefix-operators" accesskey="n" rel="next">Infix and p
 <a name="Function-calls-2"></a>
 <h4 class="subsection">10.4.1 Function calls</h4>
 
-<a name="index-function-30"></a>
+<a name="index-function-29"></a>
 <p>A function call takes the form of a function reference followed by a
 comma-separated list of arguments within a set of parentheses.
 </p>
@@ -5429,8 +5424,8 @@ $ @
 | ||
 ~                  <span class="roman">(unary and binary)</span>
 -&gt; -&gt;&gt;
-=                  <span class="roman">(as assignment)</span>
 &lt;- &lt;&lt;-
+=                  <span class="roman">(as assignment)</span>
 </pre></div>
 <p>Note that <code>:</code> precedes binary +/-, but not <code>^</code>. Hence,
 <code>1:3-1</code> is <em>0 1 2</em>, but <code>1:2^3</code> is <code>1:8</code>. 
@@ -5578,7 +5573,7 @@ Previous: <a href="#Flow-control-elements" accesskey="p" rel="prev">Flow control
 <h4 class="subsection">10.4.6 Function definitions</h4>
 
 <p>A
-<a name="index-function-31"></a>
+<a name="index-function-30"></a>
 function definition is of the form
 </p>
 <div class="example">
@@ -6039,15 +6034,14 @@ Next: <a href="#References" accesskey="n" rel="next">References</a>, Previous: <
 <tr><td></td><td valign="top"><a href="#index-function-20">function</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Argument-evaluation">Argument evaluation</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-function-21">function</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Scope">Scope</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-function-22">function</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Scope">Scope</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-function-23">function</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Scope">Scope</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-function-24">function</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Object_002doriented-programming">Object-oriented programming</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-function-25">function</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Definition">Definition</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-function-26">function</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Manipulation-of-function-calls">Manipulation of function calls</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-function-23">function</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Object_002doriented-programming">Object-oriented programming</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-function-24">function</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Definition">Definition</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-function-25">function</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Manipulation-of-function-calls">Manipulation of function calls</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-function-26">function</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Manipulation-of-functions">Manipulation of functions</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-function-27">function</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Manipulation-of-functions">Manipulation of functions</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-function-28">function</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Manipulation-of-functions">Manipulation of functions</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-function-29">function</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Internal-representation">Internal representation</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-function-30">function</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Function-calls-_0028expressions_0029">Function calls (expressions)</a></td></tr>
-<tr><td></td><td valign="top"><a href="#index-function-31">function</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Function-definitions">Function definitions</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-function-28">function</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Internal-representation">Internal representation</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-function-29">function</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Function-calls-_0028expressions_0029">Function calls (expressions)</a></td></tr>
+<tr><td></td><td valign="top"><a href="#index-function-30">function</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Function-definitions">Function definitions</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-function-argument">function argument</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Promise-objects">Promise objects</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-function-argument-1">function argument</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Dot_002ddot_002ddot">Dot-dot-dot</a></td></tr>
 <tr><td></td><td valign="top"><a href="#index-function-arguments">function arguments</a>:</td><td>&nbsp;</td><td valign="top"><a href="#Function-calls">Function calls</a></td></tr>

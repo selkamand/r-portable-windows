@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Sinh-arcsinh location scale and shape model family</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for shash {mgcv}"><tr><td>shash {mgcv}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Sinh-arcsinh location scale and shape model family</h2>
+
+<h3>Description</h3>
+
+<p>The <code>shash</code> family implements the four-parameter sinh-arcsinh (shash) distribution of 
+Jones and Pewsey (2009). The location, scale, skewness and kurtosis of the density can depend 
+on additive smooth predictors. Useable only with gam, the linear predictors are specified 
+via a list of formulae. It is worth carefully considering whether the data are sufficient to support
+estimation of such a flexible model before using it.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+shash(link = list("identity", "logeb", "identity", "identity"), 
+      b = 1e-2, phiPen = 1e-3)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>link</code></td>
+<td>
+<p>vector of four characters indicating the link function for location, scale, skewness and kurtosis parameters.</p>
+</td></tr>
+<tr valign="top"><td><code>b</code></td>
+<td>
+<p>positive parameter of the logeb link function, see Details.</p>
+</td></tr>
+<tr valign="top"><td><code>phiPen</code></td>
+<td>
+<p>positive multiplier of a ridge penalty on kurtosis parameter. Do not touch it unless you know what you are doing, see Details.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The density function of the shash family is 
+</p>
+<p style="text-align: center;"><i>p(y|&mu;,&sigma;,&epsilon;,&delta;)=C(z) exp{-S(z)^2/2} / &sigma;{2&pi;(1+z^2)}^1/2, </i></p>
+
+<p>where <i> C(z)={1+S(z)^2}^1/2 </i>, <i> S(z)=sinh{&delta; sinh^(-1)(z)-&epsilon;} </i> and
+<i>z=(y-&mu;)/(&sigma;&delta;)</i>. Here <i>&mu;</i> and <i>&sigma; &gt; 0</i> control, respectively, location and 
+scale, <i>&epsilon;</i> determines skewness, while <i>&delta; &gt; 0</i> controls tailweight.
+<code>shash</code> can model skewness to either side, depending on the sign of <i>&epsilon;</i>. 
+Also, shash can have tails that are lighter (<i>&delta;&gt;1</i>) or heavier (<i>0&lt;&delta;&lt;1</i>) that a normal.
+For fitting purposes, here we are using <i>&tau; = log(&sigma;)</i> and <i>&phi; = log(&delta;)</i>.
+</p>
+<p>The link function used for <i>&tau;</i> is logeb with is <i>&eta; = log{exp(&tau;)-b}</i> so that the inverse link is
+<i>&tau; = log(&sigma;) = log{exp(&eta;)+b}</i>. The point is that we are don't allow <i>&sigma;</i> to become smaller
+than a small constant b. The likelihood includes a ridge penalty <i>- phiPen * &phi;^2</i>, which shrinks <i>&phi;</i> toward zero. When sufficient data is available the ridge penalty does not change the fit much, but it is useful to include it when fitting the model to small data sets, to avoid <i>&phi;</i> diverging to +infinity (a problem already identified by Jones and Pewsey (2009)). 
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object inheriting from class <code>general.family</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Matteo Fasiolo &lt;matteo.fasiolo@gmail.com&gt; and Simon N. Wood.
+</p>
+
+
+<h3>References</h3>
+
+<p>Jones, M. and A. Pewsey (2009). Sinh-arcsinh distributions. Biometrika 96 (4), 761-780.
+Wood, S.N., N. Pya and B. Saefken (2016), Smoothing parameter and
+model selection for general smooth models.
+Journal of the American Statistical Association 111, 1548-1575
+<a href="https://dx.doi.org/10.1080/01621459.2016.1180986">https://dx.doi.org/10.1080/01621459.2016.1180986</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+###############
+# Shash dataset
+###############
+##  Simulate some data from shash
+set.seed(847)
+n &lt;- 1000
+x &lt;- seq(-4, 4, length.out = n)
+
+X &lt;- cbind(1, x, x^2)
+beta &lt;- c(4, 1, 1)
+mu &lt;- X %*% beta 
+
+sigma =  .5+0.4*(x+4)*.5            # Scale
+eps = 2*sin(x)                      # Skewness
+del = 1 + 0.2*cos(3*x)              # Kurtosis
+
+dat &lt;-  mu + (del * sigma) * sinh((1/del) * asinh(qnorm(runif(n))) + (eps/del))
+dataf &lt;- data.frame(cbind(dat, x))
+names(dataf) &lt;- c("y", "x")
+plot(x, dat, xlab = "x", ylab = "y")
+
+## Fit model
+fit &lt;- gam(list(y ~ s(x), # &lt;- model for location 
+                  ~ s(x),   # &lt;- model for log-scale
+                  ~ s(x),   # &lt;- model for skewness
+                  ~ s(x, k = 20)), # &lt;- model for log-kurtosis
+           data = dataf, 
+           family = shash, # &lt;- new family 
+           optimizer = "efs")
+
+## Plotting truth and estimates for each parameters of the density 
+muE &lt;- fit$fitted[ , 1]
+sigE &lt;- exp(fit$fitted[ , 2])
+epsE &lt;- fit$fitted[ , 3]
+delE &lt;- exp(fit$fitted[ , 4])
+
+par(mfrow = c(2, 2))
+plot(x, muE, type = 'l', ylab = expression(mu(x)), lwd = 2)
+lines(x, mu, col = 2, lty = 2, lwd = 2)
+legend("top", c("estimated", "truth"), col = 1:2, lty = 1:2, lwd = 2)
+
+plot(x, sigE, type = 'l', ylab = expression(sigma(x)), lwd = 2)
+lines(x, sigma, col = 2, lty = 2, lwd = 2)
+
+plot(x, epsE, type = 'l', ylab = expression(epsilon(x)), lwd = 2)
+lines(x, eps, col = 2, lty = 2, lwd = 2)
+
+plot(x, delE, type = 'l', ylab = expression(delta(x)), lwd = 2)
+lines(x, del, col = 2, lty = 2, lwd = 2)
+
+## Plotting true and estimated conditional density
+par(mfrow = c(1, 1))
+plot(x, dat, pch = '.', col = "grey", ylab = "y", ylim = c(-35, 70))
+for(qq in c(0.001, 0.01, 0.1, 0.5, 0.9, 0.99, 0.999)){
+  est &lt;- fit$family$qf(p=qq, mu = fit$fitted)
+  true &lt;- mu + (del * sigma) * sinh((1/del) * asinh(qnorm(qq)) + (eps/del))
+  lines(x, est, type = 'l', col = 1, lwd = 2)
+  lines(x, true, type = 'l', col = 2, lwd = 2, lty = 2)
+}
+legend("topleft", c("estimated", "truth"), col = 1:2, lty = 1:2, lwd = 2)
+
+#####################
+## Motorcycle example
+#####################
+
+# Here shash is overkill, in fact the fit is not good, relative
+# to what we would get with mgcv::gaulss
+library(MASS)
+
+b &lt;- gam(list(accel~s(times, k=20, bs = "ad"), ~ s(times, k = 10), ~ 1, ~ 1),
+         data=mcycle, family=shash)
+
+par(mfrow = c(1, 1))
+xSeq &lt;- data.frame(cbind("accel" = rep(0, 1e3), "times" = seq(2, 58, length.out = 1e3)))
+pred &lt;- predict(b, newdata = xSeq)
+plot(mcycle$times, mcycle$accel, ylim = c(-180, 100))
+for(qq in c(0.1, 0.3, 0.5, 0.7, 0.9)){
+  est &lt;- b$family$qf(p=qq, mu = pred)
+  lines(xSeq$times, est, type = 'l', col = 2)
+}
+
+plot(b, pages = 1, scale = FALSE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-33 <a href="00Index.html">Index</a>]</div>
+</body></html>

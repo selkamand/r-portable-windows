@@ -42,7 +42,7 @@ see <code><a href="path.expand.html">path.expand</a></code>.</p>
 <p>A character vector of the same length as <code>paths</code>.  The
 entries are the path of the file linked to, <code>""</code> if the path is
 not a symbolic link, and <code>NA</code> if there is an error (e.g., the
-path does not exist).
+path does not exist or cannot be converted to the native encoding).
 </p>
 <p>On platforms without the <code>readlink</code> system call, all elements are
 <code>""</code>.
@@ -65,5 +65,5 @@ is.symlink &lt;- function(paths) isTRUE(nzchar(Sys.readlink(paths), keepNA=TRUE)
 is.symlink("/foo/bar")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

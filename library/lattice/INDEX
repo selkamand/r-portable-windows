@@ -7,7 +7,7 @@ barchart.table          table methods for barchart and dotplot
 barley                  Yield data from a Minnesota barley trial
 cloud                   3d Scatter Plot and Wireframe Surface Plot
 current.row             Accessing Auxiliary Information During Plotting
-draw.colorkey           Produce a Colorkey for levelplot
+draw.colorkey           Produce a colorkey typically for levelplot
 draw.key                Produce a Legend or Key
 environmental           Atmospheric environmental conditions in New
                         York City

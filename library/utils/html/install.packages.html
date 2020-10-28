@@ -232,7 +232,9 @@ additional options, with names the respective package names.
 <tr valign="top"><td><code>quiet</code></td>
 <td>
 
-<p>logical: if true, reduce the amount of output.
+<p>logical: if true, reduce the amount of output.  This is <em>not</em>
+passed to <code><a href="available.packages.html">available.packages</a>()</code> in case that is called, on
+purpose.
 </p>
 </td></tr>
 <tr valign="top"><td><code>keep_outputs</code></td>
@@ -248,9 +250,10 @@ Ignored when installing from local files.
 <tr valign="top"><td><code>...</code></td>
 <td>
 
-<p>Arguments to be passed to <code><a href="download.file.html">download.file</a></code> or to the
-functions for binary installs on macOS and Windows (which accept
-an argument <code>"lock"</code>: see the section on &lsquo;Locking&rsquo;).
+<p>Arguments to be passed to <code><a href="download.file.html">download.file</a></code>,
+<code><a href="available.packages.html">available.packages</a></code>, or to the functions for binary
+installs on macOS and Windows (which accept an argument <code>"lock"</code>:
+see the section on &lsquo;Locking&rsquo;).
 </p>
 </td></tr>
 </table>
@@ -338,7 +341,7 @@ source installation.  (It is safe to always set the latter when
 installing from a repository or tarballs, although it will be a little
 slower.)
 </p>
-<p>When installing a binary package, <code>install.packages</code> will abort
+<p>When installing a package on Windows, <code>install.packages</code> will abort
 the install if it detects that the package is already installed and is
 currently in use.  In some circumstances (e.g., multiple instances of
 <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> running at the same time and sharing a library) it will not detect a
@@ -436,6 +439,31 @@ not restore previous versions.
 </p>
 
 
+<h3>Version requirements on source installs</h3>
+
+<p>If you are not running an up-to-date version of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> you may see a
+message like
+</p>
+<pre>
+   package 'RODBC' is not available (for R version 3.5.3)
+</pre>
+<p>One possibility is that the package is not available in any of the
+selected repositories; another is that is available but only for
+current or recent versions of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>.  For <acronym><span class="acronym">CRAN</span></acronym> packages take
+a look at the package's CRAN page (e.g.,
+<a href="https://cran.r-project.org/package=RODBC">https://cran.r-project.org/package=RODBC</a>). If that indicates in
+the <span class="samp">Depends</span> field a dependence on a later version of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> you
+will need to look in the <span class="samp">Old sources</span> section and select the URL
+of a version of comparable age to your <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>.  Then you can supply that
+URL as the first argument of <code>install.packages()</code>: you may
+need to first manually install its dependencies.
+</p>
+<p>For other repositories, using <code>available.packages(filters =
+    "OS_type")[<var>pkgname</var>, ]</code> will show if the package is available
+for any <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> version (for your OS).
+</p>
+
+
 <h3>Note</h3>
 
 
@@ -495,5 +523,5 @@ install.packages(c("ncdf4", "RNetCDF"),
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

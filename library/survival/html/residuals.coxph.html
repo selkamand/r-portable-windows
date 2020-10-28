@@ -23,11 +23,11 @@ Cox proportional hazards model.
 residuals(object,
        type=c("martingale", "deviance", "score", "schoenfeld",
 	      "dfbeta", "dfbetas", "scaledsch","partial"),
-       collapse=FALSE, weighted=FALSE, ...)
+       collapse=FALSE, weighted= (type %in% c("dfbeta", "dfbetas")), ...)
 ## S3 method for class 'coxph.null'
 residuals(object,
        type=c("martingale", "deviance","score","schoenfeld"),
-       collapse=FALSE, weighted=FALSE, ...)
+       collapse=FALSE, weighted= FALSE, ...)
 </pre>
 
 
@@ -124,5 +124,5 @@ for survival models&quot;, <em>Biometrika</em>, March 1990.
  mresid &lt;- resid(fit, collapse=heart$id)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.1-8 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-7 <a href="00Index.html">Index</a>]</div>
 </body></html>

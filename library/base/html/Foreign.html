@@ -143,6 +143,7 @@ difference matters on most 64-bit platforms, where <code>int</code> is
 <p><em>Note:</em> The Fortran type corresponding to <code>logical</code> is
 <code>integer</code>, not <code>logical</code>: the difference matters on some
 Fortran compilers.
+
 </p>
 <p>Numeric vectors in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> will be passed as type <code>double *</code> to C
 (and as <code>double precision</code> to Fortran) unless the argument has
@@ -175,7 +176,7 @@ up to 255 characters of the string are passed back.  (How well this
 works, and even if it works at all, depends on the C and Fortran
 compilers and the platform.)
 </p>
-<p>Lists, functions are other <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> objects can (for historical reasons) be
+<p>Lists, functions or other <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> objects can (for historical reasons) be
 passed to <code>.C</code>, but the <code><a href="CallExternal.html">.Call</a></code> interface is much
 preferred.  All inputs apart from atomic vectors should be regarded as
 read-only, and all apart from vectors (including lists), functions and
@@ -252,5 +253,5 @@ Wadsworth &amp; Brooks/Cole.
 <p>The &lsquo;Writing R Extensions&rsquo; manual.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

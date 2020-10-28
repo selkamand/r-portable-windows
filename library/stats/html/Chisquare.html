@@ -69,7 +69,10 @@ degrees of freedom has density
 </p>
 <p style="text-align: center;"><i>f_n(x) = 1 / (2^(n/2) &Gamma;(n/2))  x^(n/2-1) e^(-x/2)</i></p>
 
-<p>for <i>x &gt; 0</i>.  The mean and variance are <i>n</i> and <i>2n</i>.
+<p>for <i>x &gt; 0</i>, where <i>f_0(x) := \lim_{n \to 0} f_n(x) =
+  &delta;_0(x)</i>, a point mass at zero, is not a density function proper, but
+a &ldquo;<i>&delta;</i> distribution&rdquo;.<br />
+The mean and variance are <i>n</i> and <i>2n</i>.
 </p>
 <p>The non-central chi-squared distribution with <code>df</code><i>= n</i>
 degrees of freedom and non-centrality parameter <code>ncp</code>
@@ -95,7 +98,7 @@ a continuous part, and <code>dchisq()</code> is <em>not</em> a density with
 respect to that mixture measure but rather the limit of the density
 for <i>df -&gt; 0</i>.
 </p>
-<p>Note that <code>ncp</code> values larger than about 1e5 may give inaccurate
+<p>Note that <code>ncp</code> values larger than about 1e5 (and even smaller)  may give inaccurate
 results with many warnings for <code>pchisq</code> and <code>qchisq</code>.
 </p>
 
@@ -174,6 +177,10 @@ and 29 (volume 2). Wiley, New York.
 is the same as a Gamma distribution with <code>shape</code> <i>a = n/2</i> and <code>scale</code> <i>s = 2</i>.  Hence, see
 <code><a href="GammaDist.html">dgamma</a></code> for the Gamma distribution.
 </p>
+<p>The central chi-squared distribution with 2 d.f. is identical to the
+exponential distribution with rate 1/2: <i>&chi;^2_2 = Exp(1/2)</i>, see
+<code><a href="Exponential.html">dexp</a></code>.
+</p>
 
 
 <h3>Examples</h3>
@@ -218,5 +225,5 @@ stopifnot(all.equal(p00, exp(-lam/2)),
           all.equal(p.0, exp(-lam/2)))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

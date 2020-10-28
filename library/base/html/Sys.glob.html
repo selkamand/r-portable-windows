@@ -41,8 +41,9 @@ have a slash appended?  May not be supported on all platforms.</p>
 
 <h3>Details</h3>
 
-<p>The <code>glob</code> system call is not part of Windows, and we supply a
-partial emulation.
+<p>This expands tilde (see <a href="path.expand.html">tilde expansion</a>) and wildcards in file paths. 
+The <code>glob</code> system call is not part of Windows, and we supply a
+partial emulation for wildcards expansion.
 </p>
 <p>Wildcards are <code>*</code> (match zero or more characters) and <code>?</code> (match
 a single character).  If a filename starts with <code>.</code> this must be
@@ -105,5 +106,5 @@ accessible file paths (but not necessarily accessible files).
 Sys.glob(file.path(R.home(), "library", "*", "R", "*.rdx"))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

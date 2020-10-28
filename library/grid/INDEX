@@ -86,6 +86,7 @@ unit.c                  Combine Unit Objects
 unit.length             Length of a Unit Object
 unit.pmin               Parallel Unit Minima and Maxima
 unit.rep                Replicate Elements of Unit Objects
+unitType                Return the Units of a Unit Object
 valid.just              Validate a Justification
 validDetails            Customising grid grob Validation
 viewport                Create a Grid Viewport

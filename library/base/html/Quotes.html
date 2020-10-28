@@ -123,6 +123,15 @@ when outputting non-printable characters (including backslash).
 (such as <span class="samp">\0</span>) for a nul will result in the string being
 truncated at that point (usually with a warning).
 </p>
+<p>Raw character constants are also available using a syntax similar to
+the one used in C++: <code>r"(...)"</code> with <code>...</code> any character
+sequence, except that it must not contain the closing sequence
+<span class="samp">)"</span>. The delimiter pairs <code>[]</code> and <code>{}</code> can also be
+used, and <code>R</code> can be used in place of <code>r</code>. For  additional
+flexibility, a number of dashes can be placed between the opening quote
+and the opening delimiter, as long as the same number of dashes appear
+between the closing delimiter and the closing quote.
+</p>
 
 
 <h3>Names and Identifiers</h3>
@@ -236,7 +245,15 @@ stopifnot(identical(nn, n2))
   "foo\u0000bar" # same error
 
 ## End(Not run)
+
+## A Windows path written as a raw string constant:
+r"(c:\Program files\R)"
+
+## More raw strings:
+r"{(\1\2)}"
+r"(use both "double" and 'single' quotes)"
+r"---(\1--)-)---"
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

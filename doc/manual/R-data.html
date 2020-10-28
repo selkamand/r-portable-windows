@@ -1,8 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- This manual is for R, version 3.6.3 (2020-02-29).
+<!-- This manual is for R, version 4.0.3 (2020-10-10).
 
-Copyright (C) 2000-2018 R Core Team
+Copyright (C) 2000-2020 R Core Team
 
 Permission is granted to make and distribute verbatim copies of this
 manual provided the copyright notice and this permission notice are
@@ -21,6 +21,7 @@ approved by the R Core Team. -->
 <head>
 <title>R Data Import/Export</title>
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="R Data Import/Export">
 <meta name="keywords" content="R Data Import/Export">
 <meta name="resource-type" content="document">
@@ -241,9 +242,9 @@ Next: <a href="#Acknowledgements" accesskey="n" rel="next">Acknowledgements</a> 
 
 <p>This is a guide to importing and exporting data to and from R.
 </p>
-<p>This manual is for R, version 3.6.3 (2020-02-29).
+<p>This manual is for R, version 4.0.3 (2020-10-10).
 </p>
-<p>Copyright &copy; 2000&ndash;2018 R Core Team
+<p>Copyright &copy; 2000&ndash;2020 R Core Team
 </p>
 <blockquote>
 <p>Permission is granted to make and distribute verbatim copies of this
@@ -309,27 +310,83 @@ of this manual was Brian Ripley.
 principal authors of the packages mentioned are
 </p>
 <blockquote>
-<table summary="">
-<tr><td><a href="https://CRAN.R-project.org/package=DBI"><strong>DBI</strong></a></td><td>David A. James</td></tr>
-<tr><td><a href="https://CRAN.R-project.org/package=dataframes2xls"><strong>dataframes2xls</strong></a></td><td>Guido van Steen</td></tr>
-<tr><td><a href="https://CRAN.R-project.org/package=foreign"><strong>foreign</strong></a></td><td>Thomas Lumley, Saikat DebRoy, Douglas Bates, Duncan Murdoch and Roger Bivand</td></tr>
-<tr><td><a href="https://CRAN.R-project.org/package=gdata"><strong>gdata</strong></a></td><td>Gregory R. Warnes</td></tr>
-<tr><td><a href="https://CRAN.R-project.org/package=ncdf4"><strong>ncdf4</strong></a></td><td>David Pierce</td></tr>
-<tr><td><a href="https://CRAN.R-project.org/package=rJava"><strong>rJava</strong></a></td><td>Simon Urbanek</td></tr>
-<tr><td><a href="https://CRAN.R-project.org/package=RJDBC"><strong>RJDBC</strong></a></td><td>Simon Urbanek</td></tr>
-<tr><td><a href="https://CRAN.R-project.org/package=RMySQL"><strong>RMySQL</strong></a></td><td>David James and Saikat DebRoy</td></tr>
-<tr><td><a href="https://CRAN.R-project.org/package=RNetCDF"><strong>RNetCDF</strong></a></td><td>Pavel Michna</td></tr>
-<tr><td><a href="https://CRAN.R-project.org/package=RODBC"><strong>RODBC</strong></a></td><td>Michael Lapsley and Brian Ripley</td></tr>
-<tr><td><a href="https://CRAN.R-project.org/package=ROracle"><strong>ROracle</strong></a></td><td>David A, James</td></tr>
-<tr><td><a href="https://CRAN.R-project.org/package=RPostgreSQL"><strong>RPostgreSQL</strong></a></td><td>Sameer Kumar Prayaga and Tomoaki Nishiyama</td></tr>
-<tr><td><strong>RSPerl</strong></td><td>Duncan Temple Lang</td></tr>
-<tr><td><strong>RSPython</strong></td><td>Duncan Temple Lang</td></tr>
-<tr><td><a href="https://CRAN.R-project.org/package=RSQLite"><strong>RSQLite</strong></a></td><td>David A, James</td></tr>
-<tr><td><strong>SJava</strong></td><td>John Chambers and Duncan Temple Lang</td></tr>
-<tr><td><a href="https://CRAN.R-project.org/package=WriteXLS"><strong>WriteXLS</strong></a></td><td>Marc Schwartz</td></tr>
-<tr><td><a href="https://CRAN.R-project.org/package=XLConnect"><strong>XLConnect</strong></a></td><td>Mirai Solutions GmbH</td></tr>
-<tr><td><a href="https://CRAN.R-project.org/package=XML"><strong>XML</strong></a></td><td>Duncan Temple Lang</td></tr>
-</table>
+<dl compact="compact">
+<dt><a href="https://CRAN.R-project.org/package=DBI"><strong>DBI</strong></a>:</dt>
+<dd><p>David A. James
+</p>
+</dd>
+<dt><a href="https://CRAN.R-project.org/package=dataframes2xls"><strong>dataframes2xls</strong></a>:</dt>
+<dd><p>Guido van Steen
+</p>
+</dd>
+<dt><a href="https://CRAN.R-project.org/package=foreign"><strong>foreign</strong></a>:</dt>
+<dd><p>Thomas Lumley, Saikat DebRoy, Douglas Bates, Duncan Murdoch and Roger Bivand
+</p>
+</dd>
+<dt><a href="https://CRAN.R-project.org/package=gdata"><strong>gdata</strong></a>:</dt>
+<dd><p>Gregory R. Warnes
+</p>
+</dd>
+<dt><a href="https://CRAN.R-project.org/package=ncdf4"><strong>ncdf4</strong></a>:</dt>
+<dd><p>David Pierce
+</p>
+</dd>
+<dt><a href="https://CRAN.R-project.org/package=rJava"><strong>rJava</strong></a>:</dt>
+<dd><p>Simon Urbanek
+</p>
+</dd>
+<dt><a href="https://CRAN.R-project.org/package=RJDBC"><strong>RJDBC</strong></a>:</dt>
+<dd><p>Simon Urbanek
+</p>
+</dd>
+<dt><a href="https://CRAN.R-project.org/package=RMySQL"><strong>RMySQL</strong></a>:</dt>
+<dd><p>David James and Saikat DebRoy
+</p>
+</dd>
+<dt><a href="https://CRAN.R-project.org/package=RNetCDF"><strong>RNetCDF</strong></a>:</dt>
+<dd><p>Pavel Michna
+</p>
+</dd>
+<dt><a href="https://CRAN.R-project.org/package=RODBC"><strong>RODBC</strong></a>:</dt>
+<dd><p>Michael Lapsley and Brian Ripley
+</p>
+</dd>
+<dt><a href="https://CRAN.R-project.org/package=ROracle"><strong>ROracle</strong></a>:</dt>
+<dd><p>David A. James
+</p>
+</dd>
+<dt><a href="https://CRAN.R-project.org/package=RPostgreSQL"><strong>RPostgreSQL</strong></a>:</dt>
+<dd><p>Sameer Kumar Prayaga and Tomoaki Nishiyama
+</p>
+</dd>
+<dt><strong>RSPerl</strong>:</dt>
+<dd><p>Duncan Temple Lang
+</p>
+</dd>
+<dt><strong>RSPython</strong>:</dt>
+<dd><p>Duncan Temple Lang
+</p>
+</dd>
+<dt><a href="https://CRAN.R-project.org/package=RSQLite"><strong>RSQLite</strong></a>:</dt>
+<dd><p>David A. James
+</p>
+</dd>
+<dt><strong>SJava</strong>:</dt>
+<dd><p>John Chambers and Duncan Temple Lang
+</p>
+</dd>
+<dt><a href="https://CRAN.R-project.org/package=WriteXLS"><strong>WriteXLS</strong></a>:</dt>
+<dd><p>Marc Schwartz
+</p>
+</dd>
+<dt><a href="https://CRAN.R-project.org/package=XLConnect"><strong>XLConnect</strong></a>:</dt>
+<dd><p>Mirai Solutions GmbH
+</p>
+</dd>
+<dt><a href="https://CRAN.R-project.org/package=XML"><strong>XML</strong></a>:</dt>
+<dd><p>Duncan Temple Lang
+</p></dd>
+</dl>
 </blockquote>
 
 <p>Brian Ripley is the author of the support for connections.
@@ -370,9 +427,7 @@ here.
 <p>There are packages to allow functionality developed in languages such as
 <code>Java</code>, <code>perl</code> and <code>python</code> to be directly integrated
 with R code, making the use of facilities in these languages even
-more appropriate.  (See the <a href="https://CRAN.R-project.org/package=rJava"><strong>rJava</strong></a> package from <acronym>CRAN</acronym>
-and the <strong>SJava</strong>, <strong>RSPerl</strong> and <strong>RSPython</strong> packages from the
-Omegahat project, <a href="http://www.omegahat.net">http://www.omegahat.net</a>.)
+more appropriate.  (See the <a href="https://CRAN.R-project.org/package=rJava"><strong>rJava</strong></a> package from <acronym>CRAN</acronym>.)
 </p>
 
 <a name="index-Unix-tools"></a>
@@ -1389,7 +1444,7 @@ Previous: <a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat" accesskey=
 <a name="index-read_002eoctave"></a>
 
 <p>Octave is a numerical linear algebra system
-(<a href="http://www.octave.org">http://www.octave.org</a>), and function <code>read.octave</code> in
+(<a href="https://www.gnu.org/software/octave/">https://www.gnu.org/software/octave/</a>), and function <code>read.octave</code> in
 package <a href="https://CRAN.R-project.org/package=foreign"><strong>foreign</strong></a> can read in files in Octave text data format
 created using the Octave command <code>save -ascii</code>, with support for
 most of the common types of variables, including the standard atomic
@@ -1482,9 +1537,11 @@ Next: <a href="#R-interface-packages" accesskey="n" rel="next">R interface packa
 <h3 class="section">4.2 Overview of RDBMSs</h3>
 
 <p>Traditionally there had been large (and expensive) commercial RDBMSs
-(<a href="http://www.informix.com">Informix</a>; <a href="https://www.oracle.com">Oracle</a>; <a href="http://www.sybase.com">Sybase</a>;
-<a href="http://www.ibm.com/db2">IBM&rsquo;s DB2</a>;
-<a href="https://www.microsoft.com/SQL/default.mspx">Microsoft <acronym>SQL</acronym>
+(<a href="https://www.ibm.com/software/data/informix/">Informix</a>;
+<a href="https://www.oracle.com">Oracle</a>; 
+Sybase;
+<a href="https://www.ibm.com/db2">IBM&rsquo;s DB2</a>;
+<a href="https://www.microsoft.com/sql-server/">Microsoft <acronym>SQL</acronym>
 Server</a> on Windows) and academic and small-system databases (such as
 MySQL<a name="DOCF4" href="#FOOT4"><sup>4</sup></a>, PostgreSQL, Microsoft
 Access, &hellip;), the former marked out by much greater emphasis on data
@@ -1665,7 +1722,7 @@ data frame or in pieces (usually as groups of rows).
 </p>
 <p>All except <a href="https://CRAN.R-project.org/package=RODBC"><strong>RODBC</strong></a> are tied to one DBMS, but there has been a
 proposal for a unified &lsquo;front-end&rsquo; package <a href="https://CRAN.R-project.org/package=DBI"><strong>DBI</strong></a>
-(<a href="https://developer.r-project.org/db">https://developer.r-project.org/db</a>) in conjunction with a
+(<a href="https://developer.r-project.org/db/">https://developer.r-project.org/db/</a>) in conjunction with a
 &lsquo;back-end&rsquo;, the most developed of which is <a href="https://CRAN.R-project.org/package=RMySQL"><strong>RMySQL</strong></a>.  Also on
 <acronym>CRAN</acronym> are the back-ends <a href="https://CRAN.R-project.org/package=ROracle"><strong>ROracle</strong></a>,
 <a href="https://CRAN.R-project.org/package=RPostgreSQL"><strong>RPostgreSQL</strong></a> and <a href="https://CRAN.R-project.org/package=RSQLite"><strong>RSQLite</strong></a> (which works with the
@@ -1674,7 +1731,7 @@ bundled DBMS <code>SQLite</code>, <a href="https://www.sqlite.org">https://www.s
 JDBC driver).
 </p>
 
-<p><strong>PL/R</strong> (<a href="http://www.joeconway.com/plr/"><code>http://www.joeconway.com/plr/</code></a>) is a project to embed R into
+<p><strong>PL/R</strong> (<a href="http://joeconway.com/plr/"><code>http://joeconway.com/plr</code></a>) is a project to embed R into
 PostgreSQL.
 </p>
 <p>Package <a href="https://CRAN.R-project.org/package=RMongo"><strong>RMongo</strong></a> provides an R interface to a Java client for
@@ -2003,7 +2060,7 @@ Next: <a href="#dBase-files-_0028DBF_0029" accesskey="n" rel="next">dBase files 
 HDF5 (Hierarchical Data Format, see
 <a href="https://www.hdfgroup.org/HDF5/">https://www.hdfgroup.org/HDF5/</a>) and to UCAR&rsquo;s netCDF data files
 (network Common Data Form, see
-<a href="http://www.unidata.ucar.edu/software/netcdf/">http://www.unidata.ucar.edu/software/netcdf/</a>).
+<a href="https://www.unidata.ucar.edu/software/netcdf/">https://www.unidata.ucar.edu/software/netcdf/</a>).
 </p>
 <p>Both of these are systems to store scientific data in array-oriented
 ways, including descriptions, labels, formats, units, &hellip;.  HDF5 also
@@ -2035,14 +2092,15 @@ Borland which has a binary flat-file format that became popular, with
 file extension <samp>.dbf</samp>.  It has been adopted for the &rsquo;Xbase&rsquo; family
 of databases, covering dBase, Clipper, FoxPro and their Windows
 equivalents Visual dBase, Visual Objects and Visual FoxPro (see
-<a href="http://www.e-bachmann.dk/docs/xbase.htm">http://www.e-bachmann.dk/docs/xbase.htm</a>).  A dBase file contains
+<a href="https://www.clicketyclick.dk/databases/xbase/format">https://www.clicketyclick.dk/databases/xbase/format</a>).
+A dBase file contains
 a header and then a series of fields and so is most similar to an R
 data frame.  The data itself is stored in text format, and can include
 character, logical and numeric fields, and other types in later versions
 (see for example
-<a href="http://www.digitalpreservation.gov/formats/fdd/fdd000325.shtml">http://www.digitalpreservation.gov/formats/fdd/fdd000325.shtml</a>
+<a href="https://www.loc.gov/preservation/digital/formats/fdd/fdd000325.shtml">https://www.loc.gov/preservation/digital/formats/fdd/fdd000325.shtml</a>
 and
-<a href="http://www.clicketyclick.dk/databases/xbase/format/index.html">http://www.clicketyclick.dk/databases/xbase/format/index.html</a>).
+<a href="https://www.clicketyclick.dk/databases/xbase/format/index.html">https://www.clicketyclick.dk/databases/xbase/format/index.html</a>).
 </p>
 <a name="index-read_002edbf"></a>
 <a name="index-write_002edbf"></a>
@@ -2696,7 +2754,7 @@ with C++.</em> Addison-Wesley.
 </p>
 <p>B. Momjian (2000) <em>PostgreSQL: Introduction and Concepts.</em>
 Addison-Wesley.
-Also available at <a href="http://momjian.us/main/writings/pgsql/aw_pgsql_book/">http://momjian.us/main/writings/pgsql/aw_pgsql_book/</a>.
+Also available at <a href="https://momjian.us/main/writings/pgsql/aw_pgsql_book/">https://momjian.us/main/writings/pgsql/aw_pgsql_book/</a>.
 </p>
 <p>B. D. Ripley (2001) Connections. <em>R News</em>, <strong>1/1</strong>, 16&ndash;7.
   <a href="https://www.r-project.org/doc/Rnews/Rnews_2001-1.pdf">https://www.r-project.org/doc/Rnews/Rnews_2001-1.pdf</a>

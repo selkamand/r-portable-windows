@@ -19,6 +19,7 @@ including errors and warnings.
 <pre>
 tryCatch(expr, ..., finally)
 withCallingHandlers(expr, ...)
+globalCallingHandlers(...)
 
 signalCondition(cond)
 
@@ -51,6 +52,7 @@ withRestarts(expr, ...)
 computeRestarts(cond = NULL)
 findRestart(name, cond = NULL)
 invokeRestart(r, ...)
+tryInvokeRestart(r, ...)
 invokeRestartInteractively(r)
 
 isRestart(x)
@@ -186,6 +188,27 @@ handler stack.  If the handler returns, then the next handler is
 tried; once the last handler has been tried, <code>signalCondition</code>
 returns <code>NULL</code>.
 </p>
+<p><code>globalCallingHandlers</code> establishes calling handlers globally.
+These handlers are only called as a last resort, after the other
+handlers dynamically registered with <code>withCallingHandlers</code> have
+been invoked. They are called before the <code>error</code> global option
+(which is the legacy interface for global handling of errors).
+Registering the same handler multiple times moves that handler on
+top of the stack, which ensures that it is called first. Global
+handlers are a good place to define a general purpose logger (for
+instance saving the last error object in the global workspace) or a
+general recovery strategy (e.g. installing missing packages via the
+<code>retry_loadNamespace</code> restart).
+</p>
+<p>Like <code>withCallingHandlers</code> and <code>tryCatch</code>,
+<code>globalCallingHandlers</code> takes named handlers. Unlike these
+functions, it also has an <code><a href="options.html">options</a></code>-like interface: you
+can establish handlers by passing a single list of named handlers.
+To unregister all global handlers, supply a single 'NULL'. The list
+of deleted handlers is returned invisibly. Finally, calling
+<code>globalCallingHandlers</code> without arguments returns the list of
+currently established handlers, visibly.
+</p>
 <p>User interrupts signal a condition of class <code>interrupt</code> that
 inherits directly from class <code>condition</code> before executing the
 default interrupt action.
@@ -205,7 +228,19 @@ specified restart was established and calls the restart's handler with the
 arguments, if any, given as additional arguments to
 <code>invokeRestart</code>.  The restart argument to <code>invokeRestart</code>
 can be a character string, in which case <code>findRestart</code> is used
-to find the restart.
+to find the restart. If no restart is found, an error is thrown.
+</p>
+<p><code>tryInvokeRestart</code> is a variant of <code>invokeRestart</code> that
+returns silently when the restart cannot be found with
+<code>findRestart</code>. Because a condition of a given class might be
+signalled with arbitrary protocols (error, warning, etc), it is
+recommended to use this permissive variant whenever you are handling
+conditions signalled from a foreign context. For instance, invocation
+of a <code>"muffleWarnings"</code> restart should be optional because the
+warning might have been signalled by the user or from a different
+package with the <code>stop</code> or <code>message</code> protocols. Only use
+<code>invokeRestart</code> when you have control of the signalling context,
+or when it is a logical error if the restart is not available.
 </p>
 <p>New restarts for <code>withRestarts</code> can be specified in several ways.
 The simplest is in <code>name = function</code> form where the function is
@@ -283,5 +318,5 @@ withRestarts(invokeRestart("foo", 1, 2), foo = function(x, y) {x + y})
 ##--&gt;   demo(error.catching)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

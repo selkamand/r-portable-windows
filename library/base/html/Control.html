@@ -50,13 +50,14 @@ if possible, ignoring any class.
 <td>
 <p>An expression evaluating to a vector (including a list and
 an <a href="expression.html">expression</a>) or to a <a href="list.html">pairlist</a> or <code>NULL</code>.  A
-factor value will be coerced to a character vector.</p>
+factor value will be coerced to a character vector.  As from <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>
+4.0.0 this can be a long vector.</p>
 </td></tr>
 <tr valign="top"><td><code>expr, cons.expr, alt.expr</code></td>
 <td>
 
 <p>An <em>expression</em> in a formal sense.  This is either a
-simple expression or a so called <em>compound expression</em>, usually
+simple expression or a so-called <em>compound expression</em>, usually
 of the form <code>{ expr1 ; expr2 }</code>.
 </p>
 </td></tr>
@@ -133,5 +134,5 @@ f &lt;- factor(sample(letters[1:5], 10, replace = TRUE))
 for(i in unique(f)) print(i)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>
