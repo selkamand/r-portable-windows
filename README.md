@@ -24,5 +24,12 @@ This repo contains a portable version of R (normal R installed with no registry 
 ### Current R Version
 R 4.0.3
 
+### How do I install packages?
+
+You can install binary packages you can install using `install.packages('packagename')` as normal.
+
+Packages that require compilation from source, may require Rtools to be installed.
+Rtools does not come with the Rportable (its quite large). If you're trying to put together a R-portable with some piece of software preinstalled, my advice is to install rtools on your system, and install all the source packages you'll need. Rtools is only needed for the original compilation, and so you R portable stays portable.
+
 ### Who do I talk to? ###
 * Repo owner: selkamand@ccia.org.au
