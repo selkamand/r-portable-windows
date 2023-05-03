@@ -45,6 +45,9 @@ containing the length of each element in <code>x</code>.  Effectively,
 <code>length(x[[i]])</code> is called for all <code>i</code>, so any methods on
 <code>length</code> are considered.
 </p>
+<p><code>lengths</code> is generic: you can write methods to handle
+specific classes of objects, see <a href="InternalMethods.html">InternalMethods</a>.
+</p>
 
 
 <h3>Value</h3>
@@ -101,5 +104,5 @@ dates &lt;- split(as.POSIXlt(Sys.time() + 1:10), f)
 stopifnot(identical(lengths(dates), vapply(dates, length, integer(1L))))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

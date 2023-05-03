@@ -23,7 +23,7 @@ data.frame(..., row.names = NULL, check.rows = FALSE,
            check.names = TRUE, fix.empty.names = TRUE,
            stringsAsFactors = default.stringsAsFactors())
 
-default.stringsAsFactors()
+default.stringsAsFactors() # &lt;&lt; this is deprecated !
 </pre>
 
 
@@ -66,9 +66,11 @@ rather name <code>""</code>.  Needs to be set to <code>FALSE</code> even when
 <tr valign="top"><td><code>stringsAsFactors</code></td>
 <td>
 <p>logical: should character vectors be converted
-to factors?  The &lsquo;factory-fresh&rsquo; default is <code>TRUE</code>, but
-this can be changed by setting <code><a href="options.html">options</a>(stringsAsFactors
-      = FALSE)</code>.</p>
+to factors?  The &lsquo;factory-fresh&rsquo; default has been <code>TRUE</code>
+previously but has been changed to <code>FALSE</code> for <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 4.0.0.
+Only as short time workaround, you can revert by setting
+<code><a href="options.html">options</a>(stringsAsFactors = TRUE)</code> which now warns about
+its deprecation.</p>
 </td></tr>
 </table>
 
@@ -121,7 +123,8 @@ not a column (by name or number).
 <p><code>default.stringsAsFactors</code> is a utility that takes
 <code><a href="options.html">getOption</a>("stringsAsFactors")</code> and ensures the result is
 <code>TRUE</code> or <code>FALSE</code> (or throws an error if the value is not
-<code>NULL</code>).
+<code>NULL</code>).  This function is <b>deprecated</b> now and will no longer
+be available in the future.
 </p>
 
 
@@ -174,7 +177,8 @@ and <code>I(matrix(..))</code> examples;
 <code><a href="groupGeneric.html">Math.data.frame</a></code> etc, about
 <em>Group</em> methods for <code>data.frame</code>s;
 <code><a href="../../utils/html/read.table.html">read.table</a></code>,
-<code><a href="make.names.html">make.names</a></code>.
+<code><a href="make.names.html">make.names</a></code>,
+<code><a href="list2DF.html">list2DF</a></code> for creating data frames from lists of variables.
 </p>
 
 
@@ -200,5 +204,5 @@ stopifnot(1:10 == row.names(d))  # {coercion}
 (d00 &lt;- d0[FALSE, ])  # data frame with 0 columns and 0 rows
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -139,8 +139,29 @@ routine.
 </td></tr>
 <tr valign="top"><td><code>timefix</code></td>
 <td>
-<p>the value of the timefix option used in the fit
+<p>the value of the timefix option used in the fit</p>
+</td></tr>
+<tr valign="top"><td><code>cmap</code></td>
+<td>
+<p>the coefficient map, present for multi-state coxph fits. There
+a column for each transition and a row for each coefficient, the value
+maps that transition/coefficient pair to a position in the coefficient
+vector.
+If a particular covariate is not used by the transition the matrix
+will contain a zero, if two transitions share a coefficient the matrix
+will contain repeats.</p>
+</td></tr>
+<tr valign="top"><td><code>stratum_map</code></td>
+<td>
+<p>stratum mapping, present for multi-state coxph fits.
+The row labeled &lsquo;(Baseline)&rsquo; identifies transitions that do or do not
+share a baseline stratum.  Further rows correspond to strata() terms
+in the model, each of which may apply to some transitions and not others.
 </p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+
 <p>The object will also contain the following, for documentation see the <code>lm</code> 
 object: <code>terms</code>, <code>assign</code>, <code>formula</code>, <code>call</code>, and, optionally, <code>x</code>, <code>y</code>, 
 and/or <code>frame</code>. 
@@ -161,5 +182,5 @@ object.
 <p><code><a href="coxph.html">coxph</a></code>,  <code><a href="coxph.detail.html">coxph.detail</a></code>,  <code><a href="cox.zph.html">cox.zph</a></code>,  <code><a href="residuals.coxph.html">residuals.coxph</a></code>,  <code><a href="survfit.html">survfit</a></code>,  <code><a href="survreg.html">survreg</a></code>.   
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.1-8 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-7 <a href="00Index.html">Index</a>]</div>
 </body></html>

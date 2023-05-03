@@ -62,7 +62,10 @@ directory tree in a portable way: see the system-specific help for the
 <code>zip</code> command for other possibilities.
 </p>
 <p>Argument <code>extras</code> can be used to specify <code>-x</code> or <code>-i</code>
-followed by a list of filepaths to exclude or include.
+followed by a list of filepaths to exclude or include. Since
+<code>extras</code> will be treated as if passed to <code><a href="../../base/html/system.html">system</a></code>, if
+the filepaths contain spaces they must be quoted e.g. by
+<code><a href="../../base/html/shQuote.html">shQuote</a></code>.
 </p>
 
 
@@ -78,5 +81,5 @@ followed by a list of filepaths to exclude or include.
 <code><a href="untar.html">untar</a></code> for (un)packing tar archives.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

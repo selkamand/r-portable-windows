@@ -35,7 +35,8 @@ topenv(envir = parent.frame(),
 any other criterion is satisfied.  The default, the option
 <span class="samp">topLevelEnvironment</span>, is set by <code><a href="sys.source.html">sys.source</a></code>,
 which treats a specific environment as the top level environment.
-Supplying the argument as <code>NULL</code> means it will never match.</p>
+Supplying the argument as <code>NULL</code> or <code>emptyenv()</code> means
+it will never match.</p>
 </td></tr>
 </table>
 
@@ -43,7 +44,8 @@ Supplying the argument as <code>NULL</code> means it will never match.</p>
 <h3>Details</h3>
 
 <p><code>topenv</code> returns the first top level <code><a href="environment.html">environment</a></code>
-found when searching <code>envir</code> and its enclosing environments.  An
+found when searching <code>envir</code> and its enclosing environments. If no
+top level environment is found, <code><a href="environment.html">.GlobalEnv</a></code> is returned.  An
 environment is considered top level if it is the internal environment
 of a namespace, a package environment in the <code><a href="search.html">search</a></code>
 path, or <code><a href="environment.html">.GlobalEnv</a></code> .
@@ -68,5 +70,5 @@ topenv(environment(lm))# namespace:stats
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

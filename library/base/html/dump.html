@@ -64,7 +64,7 @@ See <code><a href="deparseOpts.html">.deparseOpts</a></code> for their descripti
 omitted, with a warning.  If <code>file</code> is a file and no objects
 exist then no file is created.
 </p>
-<p><code>source</code>ing may not produce an identical copy of
+<p><code><a href="source.html">source</a></code>ing may not produce an identical copy of
 <code>dump</code>ed objects.  A warning is issued if it is likely that
 problems will arise, for example when dumping exotic or complex
 objects (see the Note).
@@ -73,7 +73,8 @@ objects (see the Note).
 than expected, which may indicate a full or corrupt file system.
 </p>
 <p>A <code>dump</code> file can be <code><a href="source.html">source</a></code>d into another <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> (or
-perhaps S) session, but the function <code><a href="save.html">save</a></code> is designed to
+perhaps S) session, but the functions <code><a href="save.html">save</a></code> and
+<code><a href="readRDS.html">saveRDS</a></code> are designed to
 be used for transporting <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> data, and will work with <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> objects that
 <code>dump</code> does not handle.  For maximal reproducibility use
 <code>control = c("all", "hexNumeric")</code>.
@@ -132,8 +133,15 @@ Wadsworth &amp; Brooks/Cole.
 
 <h3>See Also</h3>
 
-<p><code><a href="dput.html">dput</a></code>, <code><a href="dput.html">dget</a></code>, <code><a href="write.html">write</a></code>.<br />
-<code><a href="save.html">save</a></code> for a more reliable way to save <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> objects.
+<p><code><a href="deparseOpts.html">.deparseOpts</a></code> for available <code>control</code> settings;
+<code><a href="dput.html">dput</a>()</code>, <code><a href="dput.html">dget</a>()</code> and <code><a href="deparse.html">deparse</a>()</code>
+for related functions using identical internal deparsing functionality.
+</p>
+<p><code><a href="write.html">write</a></code>, <code><a href="../../utils/html/write.table.html">write.table</a></code>, etc for &ldquo;dumping&rdquo;
+data to (text) files.
+</p>
+<p><code><a href="save.html">save</a></code> and <code><a href="readRDS.html">saveRDS</a></code> for a more reliable way to
+save <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> objects.
 </p>
 
 
@@ -147,5 +155,5 @@ print(.Last.value)
 unlink(fil)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

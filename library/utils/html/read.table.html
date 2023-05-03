@@ -125,10 +125,9 @@ The default is to use <code>"V"</code> followed by the column number.</p>
 </td></tr>
 <tr valign="top"><td><code>as.is</code></td>
 <td>
-<p>the default behavior of <code>read.table</code> is to convert
-character variables (which are not converted to logical, numeric or
-complex) to factors.  The variable <code>as.is</code> controls the
-conversion of columns not otherwise specified by <code>colClasses</code>.
+<p>controls conversion of character variables (insofar as
+they are not converted to logical, numeric or complex) to factors,
+if not otherwise specified by <code>colClasses</code>.
 Its value is either a vector of logicals (values are recycled if
 necessary), or a vector of numeric or character indices which
 specify which columns should not be converted to factors.
@@ -428,5 +427,5 @@ a b
 ")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

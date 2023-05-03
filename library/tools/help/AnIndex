@@ -102,6 +102,7 @@ readNEWS	tools-defunct
 resaveRdaFiles	checkRdaFiles
 R_DISABLE_HTTPD	startDynamicHelp
 R_GSCMD	find_gs_cmd
+R_user_dir	userdir
 showNonASCII	showNonASCII
 showNonASCIIfile	showNonASCII
 SIGCHLD	pskill

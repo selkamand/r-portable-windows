@@ -65,8 +65,7 @@ The source code is in &lsquo;<span class="file"><var><a href="../../base/html/Rh
 
 <h3>Value</h3>
 
-<p>A list of contours.
-Each contour is a list with elements:
+<p>A <code><a href="../../base/html/list.html">list</a></code> of contours, each itself a <code>list</code> with elements:
 </p>
 <table summary="R valueblock">
 <tr valign="top"><td><code>level </code></td>
@@ -89,7 +88,9 @@ Each contour is a list with elements:
 <p><code><a href="../../base/html/options.html">options</a>("max.contour.segments")</code> for the maximal
 complexity of a single contour line.
 </p>
-<p><code><a href="../../graphics/html/contour.html">contour</a></code>.
+<p><code><a href="../../graphics/html/contour.html">contour</a></code>: Its &lsquo;Examples&rsquo; demonstrate how
+<code>contourLines()</code> can be drawn and are the same (as those from
+<code>contour()</code>).
 </p>
 
 
@@ -98,8 +99,18 @@ complexity of a single contour line.
 <pre>
 x &lt;- 10*1:nrow(volcano)
 y &lt;- 10*1:ncol(volcano)
-contourLines(x, y, volcano)
+cl &lt;- contourLines(x, y, volcano)
+## summarize the sizes of each the contour lines :
+cbind(lev = vapply(cl, `[[`, .5, "level"),
+       n  = vapply(cl, function(l) length(l$x), 1))
+
+z &lt;- outer(-9:25, -9:25)
+pretty(range(z), 10) # -300 -200 ... 600 700
+utils::str(c2 &lt;- contourLines(z))
+   # no segments for {-300, 700};
+   #  2 segments for {-200, -100, 0}
+   #  1 segment  for  100:600
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

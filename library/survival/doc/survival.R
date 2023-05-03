@@ -262,7 +262,7 @@ mdata[1:7, c("id", "trt", "tstart", "tstop", "event", "priorcr", "priortx")]
 
 
 ###################################################
-### code chunk number 21: survival.Rnw:992-993
+### code chunk number 21: survival.Rnw:978-979
 ###################################################
 survcheck(Surv(tstart, tstop, event) ~1, mdata, id=id)
 
@@ -719,16 +719,19 @@ ndata <- tmerge(nafld1[,1:8], nafld1, id=id, death= event(futime, status))
 ndata <- tmerge(ndata, subset(nafld3, event=="nafld"), id, 
                 nafld= tdc(days))
 ndata <- tmerge(ndata, subset(nafld3, event=="diabetes"), id = id,
-                diabetes = tdc(days), e1= event(days))
+                diabetes = tdc(days), e1= cumevent(days))
 ndata <- tmerge(ndata, subset(nafld3, event=="htn"),  id = id,
-                htn = tdc(days), e2 = event(days))
+                htn = tdc(days), e2 = cumevent(days))
 ndata <- tmerge(ndata, subset(nafld3, event=="dyslipidemia"), id=id,
-                lipid = tdc(days), e3= event(days))
+                lipid = tdc(days), e3= cumevent(days))
+ndata <- tmerge(ndata, subset(nafld3, event %in% c("diabetes", "htn", 
+                                                   "dyslipidemia")), 
+                id=id, comorbid= cumevent(days))
 attr(ndata, "tcount")
 
 
 ###################################################
-### code chunk number 54: survival.Rnw:2002-2005
+### code chunk number 54: survival.Rnw:2038-2041
 ###################################################
 tc <- attr(ndata, 'tcount')   # shorter name for use in Sexpr below
 icount <- table(table(nafld3$id)) #number with 1, 2, ... intervals
@@ -738,20 +741,18 @@ ncount <- sum(nafld3$event=="nafld")
 ###################################################
 ### code chunk number 55: nafld2
 ###################################################
-ndata$cstate <- with(ndata, diabetes + htn + lipid)
-temp <- with(ndata, e1 + e2 + e3)
-temp2 <- with(ndata, ifelse(death, 4, 
-              ifelse(temp ==0, 0, cstate + temp)))
-ndata$event <- factor(temp2, 0:4, 
+with(ndata, if (any(e1>1 | e2>1 | e3>1)) stop("multiple events"))
+ndata$cstate <- with(ndata, factor(diabetes + htn + lipid, 0:3, 
+                                   c("0mc", "1mc", "2mc", "3mc")))
+temp <- with(ndata, ifelse(death, 4, comorbid))
+ndata$event <- factor(temp, 0:4, 
          c("censored", "1mc", "2mc", "3mc", "death"))
-ndata$cstate <- factor(ndata$cstate, 0:3,
-                       c("0mc", "1mc", "2mc", "3mc"))
 ndata$age1 <- ndata$age + ndata$tstart/365.25   # analysis on age scale
 ndata$age2 <- ndata$age + ndata$tstop/365.25
 
-temp3 <- survcheck(Surv(age1, age2, event) ~ nafld, data=ndata, 
+check1 <- survcheck(Surv(age1, age2, event) ~ nafld + male, data=ndata, 
                    id=id, istate=cstate)
-temp3
+check1
 
 
 ###################################################
@@ -766,31 +767,142 @@ temp3
 nfit1 <- coxph(list(Surv(age1, age2, event) ~ nafld + male,
                     "0mc":state("1mc", "2mc", "3mc") ~ nafld+ male / common,
                      2:3 + 2:4   ~ nafld + male / common,
-                     0: "death" ~ male / common),
+                     0:"death" ~ male / common),
                data=ndata, id=id, istate=cstate)
 nfit1$states
-round(coef(nfit1), 3)
 nfit1$cmap
 
 
 ###################################################
-### code chunk number 58: nafld5
+### code chunk number 58: nafld5b
+###################################################
+print(coef(nfit1), digits=3)
+print(coef(nfit1, matrix=TRUE), digits=3)  # alternate form
+
+
+###################################################
+### code chunk number 59: nafld5
 ###################################################
 options(show.signif.stars = FALSE) # display statistical maturity
-print(summary(nfit1, digits =3))
-
 print(nfit1, digits =3)
 
 
 ###################################################
-### code chunk number 59: survival.Rnw:2177-2179 (eval = FALSE)
+### code chunk number 60: survival.Rnw:2242-2243
+###################################################
+summary(nfit1, digits=3)
+
+
+###################################################
+### code chunk number 61: timeline1
+###################################################
+ctime <- with(mgus2, ifelse(pstat==1, ptime, futime))
+cstat <- with(mgus2, ifelse(pstat==1, 1, 2*death))
+cstat <- factor(cstat, 0:2, c("censor", "PCM", "death"))
+tdata <- data.frame(id=mgus2$id, days=ctime, cstat=cstat)
+
+# counting process
+mdata1 <- tmerge(mgus2[,1:7], tdata, id, state=event(days, cstat))
+mfit1 <- coxph(Surv(tstart, tstop, state) ~ age + sex, id=id, mdata1)
+
+# timeline
+mdata2 <- data.frame(mgus2[,1:7], days=0)
+mdata2 <- merge(mdata2, tdata, all=TRUE)
+mfit2 <-  coxph(Surv2(days, cstat) ~ age + sex, id=id, mdata2)
+all.equal(coef(mfit1), coef(mfit2))
+
+
+###################################################
+### code chunk number 62: timeline1b
+###################################################
+mdata1[1:3,]
+print(mdata2[1:6,], na.print='.')
+
+
+###################################################
+### code chunk number 63: timeline2
+###################################################
+tldata <- data.frame(nafld1[,1:7],
+                    days= 0,  death=0, iage=nafld1$age, nafld=0)
+tldata <- merge(tldata, with(nafld1, data.frame(id=id, days=futime, death=status)),
+               all=TRUE)
+
+# Add in the comorbidities of interest.  None of these 4 happen to have
+#  duplicates (MI does, for instance).  
+# Start by removing the the 13 rows with a "confirmed NAFLD" (actual NAFLD + 1 year)
+#  that is after the actual last follow-up date.
+# Treat diabetes before day 0 as diabetes on day 0.
+badrow <- which(nafld3$days > nafld1$futime[match(nafld3$id, nafld1$id)])
+fixnf3 <- nafld3[-badrow,]
+
+tldata <- merge(tldata, with(subset(fixnf3, event=="diabetes"),
+                           data.frame(id=id, days=pmax(0,days), diabetes=1)),
+                   all=TRUE, by=c("id", "days"))
+tldata <- merge(tldata, with(subset(fixnf3, event=="htn"),
+                           data.frame(id=id, days=pmax(0,days), htn=1)),
+                     all=TRUE, by=c("id", "days"))
+tldata <- merge(tldata, with(subset(fixnf3, event=="dyslipidemia"),
+                           data.frame(id=id, days= pmax(0, days), dyslipid=1)),
+                       all=TRUE, by=c("id", "days"))
+tldata <- merge(tldata, with(subset(fixnf3, event=="nafld"),
+                           data.frame(id=id, days= pmax(0,days), nafld=1)),
+                    by=c("id", "days"), all=TRUE)
+
+tldata$nafld <- with(tldata, ifelse(is.na(nafld.y), nafld.x, nafld.y))
+
+
+###################################################
+### code chunk number 64: timeline3
+###################################################
+#
+# For cumulative events within subject we use a helper function
+cumevent <- function(id, time, status, istate) {
+    # do all the work on ordered data
+    ord <- order(id, time)
+    id2 <- id[ord]
+    time2 <- time[ord]
+    stat2 <- ifelse(is.na(status[ord]), 0, status[ord])
+    firstid <- !duplicated(id)
+    csum <- cumsum(stat2)
+    indx <- match(id2, id2)
+    cstat<- csum + stat2[indx] - csum[indx]  
+    cstat[stat2==0] <- 0
+          
+    if (!missing(istate)) cstat[firstid] <- istate
+
+    keep <- (firstid | (!is.na(stat2)& stat2 !=0))
+    newdata <- data.frame(id=id2[keep], time=time2[keep], status=cstat[keep])
+    newdata
+}
+
+temp1 <- rowSums(tldata[,c('diabetes', 'htn', 'dyslipid')], na.rm=TRUE)
+temp2 <- with(tldata, cumevent(id, days, pmax(temp1, 4*death, na.rm=TRUE)))
+state <- factor(pmin(temp2$status, 4), -1:4,
+                 c("censor", paste0(0:3, "mc"), "death"))
+tldata <- merge(tldata, data.frame(id=temp2$id, days=temp2$time, state=state),
+               all=TRUE)
+
+tldata$age <- with(tldata, days/365.25 + age[match(id, id)])
+check2 <- survcheck(Surv2(days, state) ~ 1, id=id, tldata)
+check2$transitions
+
+nfit2 <- coxph(list(Surv2(age, state) ~ nafld + male,
+                    "0mc":state("1mc", "2mc", "3mc") ~ nafld+ male / common,
+                     2:3 + 2:4   ~ nafld + male / common,
+                     0:"death" ~ male / common),  
+               data=tldata, id=id)
+round(coef(nfit2), 3)
+
+
+###################################################
+### code chunk number 65: survival.Rnw:2435-2437 (eval = FALSE)
 ###################################################
 ## fit2 <- coxph(Surv(time, status) ~ trt + trt*time + celltype + karno,
 ##                 data = veteran)
 
 
 ###################################################
-### code chunk number 60: zphcheck1
+### code chunk number 66: zphcheck1
 ###################################################
 dtime <- unique(veteran$time[veteran$status==1]) # unique times
 newdata <- survSplit(Surv(time, status) ~ trt + celltype + karno,
@@ -809,7 +921,7 @@ fit2b <- coxph(Surv(tstart, time, status) ~ trt + celltype + karno +
 
 
 ###################################################
-### code chunk number 61: zph2
+### code chunk number 67: zph2
 ###################################################
 fit2 <- coxph(Surv(tstart, time, status) ~ trt + celltype + karno +
               tt(karno), data =newdata,
@@ -817,7 +929,7 @@ fit2 <- coxph(Surv(tstart, time, status) ~ trt + celltype + karno +
 
 
 ###################################################
-### code chunk number 62: zph2
+### code chunk number 68: zph2
 ###################################################
 getOption("SweaveHooks")[["fig"]]()
 zp0 <- cox.zph(fit0, transform='identity')
@@ -831,13 +943,13 @@ par(oldpar)
 
 
 ###################################################
-### code chunk number 63: survival.Rnw:2365-2366
+### code chunk number 69: survival.Rnw:2623-2624
 ###################################################
 with(subset(aml, x=="Nonmaintained"), Surv(time, status))
 
 
 ###################################################
-### code chunk number 64: coarsen
+### code chunk number 70: coarsen
 ###################################################
 getOption("SweaveHooks")[["fig"]]()
 tdata <- subset(colon, etype==1)   # progression or death

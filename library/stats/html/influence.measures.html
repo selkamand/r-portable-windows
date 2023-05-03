@@ -210,7 +210,7 @@ Sage Publ.
 <p>Fox, J. and Weisberg, S. (2011).
 <em>An R Companion to Applied Regression</em>, second edition.
 Sage Publ;
-<a href="http://socserv.socsci.mcmaster.ca/jfox/Books/Companion/">http://socserv.socsci.mcmaster.ca/jfox/Books/Companion/</a>.
+<a href="https://socialsciences.mcmaster.ca/jfox/Books/Companion/">https://socialsciences.mcmaster.ca/jfox/Books/Companion/</a>.
 </p>
 
 
@@ -242,7 +242,7 @@ plot(lm.SR, which = 5) # an enhanced version of that via plot(&lt;lm&gt;)
 ## The 'infl' argument is not needed, but avoids recomputation:
 rs &lt;- rstandard(lm.SR)
 iflSR &lt;- influence(lm.SR)
-identical(rs, rstandard(lm.SR, infl = iflSR))
+all.equal(rs, rstandard(lm.SR, infl = iflSR), tol = 1e-10)
 ## to "see" the larger values:
 1000 * round(dfbetas(lm.SR, infl = iflSR), 3)
 cat("PRESS :"); (PRESS &lt;- sum( rstandard(lm.SR, type = "predictive")^2 ))
@@ -282,5 +282,5 @@ stopifnot(all.equal(imI$infmat[,"cook.d"],
           cooks.distance(glmI)))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

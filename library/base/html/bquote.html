@@ -11,14 +11,15 @@
 
 <p>An analogue of the LISP backquote macro.  <code>bquote</code> quotes its
 argument except that terms wrapped in <code>.()</code> are evaluated in the
-specified <code>where</code> environment.
+specified <code>where</code> environment. If <code>splice = TRUE</code> then
+terms wrapped in <code>..()</code> are evaluated and spliced into a call.
 </p>
 
 
 <h3>Usage</h3>
 
 <pre>
-bquote(expr, where = parent.frame())
+bquote(expr, where = parent.frame(), splice = FALSE)
 </pre>
 
 
@@ -32,6 +33,10 @@ bquote(expr, where = parent.frame())
 <tr valign="top"><td><code>where</code></td>
 <td>
 <p>An environment.</p>
+</td></tr>
+<tr valign="top"><td><code>splice</code></td>
+<td>
+<p>Logical; if <code>TRUE</code> splicing is enabled.</p>
 </td></tr>
 </table>
 
@@ -66,7 +71,10 @@ plot(1:10, a*(1:10), main = bquote(a == .(a)))
 ## to set a function default arg
 default &lt;- 1
 bquote( function(x, y = .(default)) x+y )
+
+exprs &lt;- expression(x &lt;- 1, y &lt;- 2, x + y)
+bquote(function() {..(exprs)}, splice = TRUE)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

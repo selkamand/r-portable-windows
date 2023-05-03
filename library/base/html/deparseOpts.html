@@ -101,7 +101,8 @@ instead of <code>structure(1, .Names = "A")</code>, independently of the
 </dd>
 <dt><code>"all"</code>:</dt><dd>
 <p>An abbreviated way to specify all of the options
-listed above.  This is the default for <code>dump</code>, and the options
+listed above <em>plus</em> <code>"digits17"</code> (since <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> version 4.0.0).
+This is the default for <code>dump</code>, and, without <code>"digits17"</code>, the options
 used by <code><a href="../../utils/html/edit.html">edit</a></code> (which are fixed).
 </p>
 </dd>
@@ -134,6 +135,11 @@ problems on Windows are worked around as from <span style="font-family: Courier 
 (but the output will depend on the platform and there may be loss
 of precision when read back).  Complex numbers with one or both
 non-finite components are output as if this option were not set.
+</p>
+</dd>
+<dt><code>"exact"</code>:</dt><dd>
+<p>An abbreviated way to specify <code>control = c("all", "hexNumeric")</code>
+which is guaranteed to be exact for numbers, see also below.
 </p>
 </dd>
 </dl>
@@ -182,9 +188,18 @@ int2bits &lt;- function(x, base = 2L,
 }
 int2bits(iOpt.all)
 ## what options does  "all" contain ?
-(oa &lt;- ..deparseOpts[-1][int2bits(iOpt.all) == 1])
+depO.indiv &lt;- setdiff(..deparseOpts, c("all", "exact"))
+(oa &lt;- depO.indiv[int2bits(iOpt.all) == 1])
 stopifnot(identical(iOpt.all, .deparseOpts(oa)))
+
+## ditto for "exact" instead of "all":
+int2bits(iOpt.X &lt;- .deparseOpts("exact"))
+(oX &lt;- depO.indiv[int2bits(iOpt.X) == 1])
+diffXall &lt;- oa != oX
+stopifnot(identical(iOpt.X, .deparseOpts(oX)),
+          identical(oX[diffXall], "hexNumeric"),
+          identical(oa[diffXall], "digits17"))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

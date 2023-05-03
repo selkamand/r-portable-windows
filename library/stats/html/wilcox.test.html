@@ -23,7 +23,8 @@ wilcox.test(x, ...)
 wilcox.test(x, y = NULL,
             alternative = c("two.sided", "less", "greater"),
             mu = 0, paired = FALSE, exact = NULL, correct = TRUE,
-            conf.int = FALSE, conf.level = 0.95, ...)
+            conf.int = FALSE, conf.level = 0.95,
+            tol.root = 1e-4, digits.rank = Inf, ...)
 
 ## S3 method for class 'formula'
 wilcox.test(formula, data, subset, na.action, ...)
@@ -78,11 +79,24 @@ should be computed.</p>
 <td>
 <p>confidence level of the interval.</p>
 </td></tr>
+<tr valign="top"><td><code>tol.root</code></td>
+<td>
+<p>(when <code>conf.int</code> is true:) a positive numeric
+tolerance, used in <code><a href="uniroot.html">uniroot</a>(*, tol=tol.root)</code> calls.</p>
+</td></tr>
+<tr valign="top"><td><code>digits.rank</code></td>
+<td>
+<p>a number; if finite, <code><a href="../../base/html/rank.html">rank</a>(<a href="../../base/html/Round.html">signif</a>(r, digits.rank))</code>
+will be used to compute ranks for the test statistic instead of (the
+default) <code>rank(r)</code>.</p>
+</td></tr>
 <tr valign="top"><td><code>formula</code></td>
 <td>
 <p>a formula of the form <code>lhs ~ rhs</code> where <code>lhs</code>
-is a numeric variable giving the data values and <code>rhs</code> a factor
-with two levels giving the corresponding groups.</p>
+is a numeric variable giving the data values and <code>rhs</code> either
+<code>1</code> for a one-sample or paired test or a factor
+with two levels giving the corresponding groups. If <code>lhs</code> is of
+class <code>"Pair"</code> and <code>rhs</code> is <code>1</code>, a paired test is done</p>
 </td></tr>
 <tr valign="top"><td><code>data</code></td>
 <td>
@@ -131,6 +145,10 @@ of <code>y</code>).
 <p>By default (if <code>exact</code> is not specified), an exact p-value
 is computed if the samples contain less than 50 finite values and
 there are no ties.  Otherwise, a normal approximation is used.
+</p>
+<p>For stability reasons, it may be advisable to use rounded data or to set
+<code>digits.rank = 7</code>, say, such that determination of ties does not
+depend on very small numeric differences (see the example).
 </p>
 <p>Optionally (if argument <code>conf.int</code> is true), a nonparametric
 confidence interval and an estimator for the pseudomedian (one-sample
@@ -288,6 +306,12 @@ wilcox.test(y - x, alternative = "less",
             exact = FALSE, correct = FALSE) # H&amp;W large sample
                                             # approximation
 
+## Formula interface to one-sample and paired tests
+
+depression &lt;- data.frame(first = x, second = y, change = y - x)
+wilcox.test(change ~ 1, data = depression)
+wilcox.test(Pair(first, second) ~ 1, data = depression)
+
 ## Two-sample test.
 ## Hollander &amp; Wolfe (1973), 69f.
 ## Permeability constants of the human chorioamnion (a placental
@@ -307,7 +331,12 @@ wilcox.test(rnorm(10), rnorm(10, 2), conf.int = TRUE)
 boxplot(Ozone ~ Month, data = airquality)
 wilcox.test(Ozone ~ Month, data = airquality,
             subset = Month %in% c(5, 8))
+
+## accuracy in ties determination via 'digits.rank':
+wilcox.test( 4:2,      3:1,     paired=TRUE) # Warning:  cannot compute exact p-value with ties
+wilcox.test((4:2)/10, (3:1)/10, paired=TRUE) # no ties =&gt; *no* warning
+wilcox.test((4:2)/10, (3:1)/10, paired=TRUE, digits.rank = 9) # same ties as (4:2, 3:1)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

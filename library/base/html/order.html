@@ -11,7 +11,7 @@
 
 <p><code>order</code> returns a permutation which rearranges its first
 argument into ascending or descending order, breaking ties by further
-arguments. <code>sort.list</code> is the same, using only one argument.<br />
+arguments.  <code>sort.list</code> does the same, using only one argument.<br />
 See the examples for how to use these functions to sort data frames,
 etc.
 </p>
@@ -38,7 +38,10 @@ vectors, all of the same length, or a classed <span style="font-family: Courier 
 </td></tr>
 <tr valign="top"><td><code>x</code></td>
 <td>
-<p>an atomic vector.</p>
+<p>an atomic vector for <code>method</code>s <code>"shell"</code> and
+<code>"quick"</code>.  When <code>x</code> is a non-atomic <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object, the default
+<code>"auto"</code> and <code>"radix"</code> methods may work if <code>order(x,..)</code>
+does.</p>
 </td></tr>
 <tr valign="top"><td><code>partial</code></td>
 <td>
@@ -238,5 +241,5 @@ system.time(o &lt;- sort.list(xx, method = "quick", na.last = NA)) # 0.1 sec
 system.time(o &lt;- sort.list(xx, method = "radix")) # 0.05 sec, 2X faster
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

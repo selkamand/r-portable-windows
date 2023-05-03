@@ -1,6 +1,6 @@
 
-R Under development (unstable) (2018-06-26 r74934) -- "Unsuffered Consequences"
-Copyright (C) 2018 The R Foundation for Statistical Computing
+R Under development (unstable) (2020-06-04 r78640) -- "Unsuffered Consequences"
+Copyright (C) 2020 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -38,6 +38,7 @@ Type 'q()' to quit R.
 > tests$ff <- factor(tests$onoff, 0:1, letters[4:5])
 > tests$fchar <- as.character(tests$ff)
 > tests$logic <- as.logical(tests$onoff)
+> tests$num <- rep(1:3, length=nrow(tests))
 > 
 > mydata <- tmerge(mydata, tests, id=idd, fgrp= tdc(date, ff),
 +                  chgrp = tdc(date, fchar), 
@@ -57,21 +58,35 @@ Type 'q()' to quit R.
 +                            FALSE, FALSE, TRUE, FALSE))
 [1] TRUE
 > 
-> # Multiple chained calls.  
+> mydat3 <- tmerge(mydata, tests, id=idd,
++                  xx = tdc(date, num), options=list(tdcstart=5))
+> all.equal(mydat3$xx, c(5,5,3,2,1,2,5,1,3,5,1))
+[1] TRUE
+> temp <- tmerge(mydata, tests, id=idd, xx=tdc(date, num, 5)) # alternate default
+> all.equal(mydat3$xx, temp$xx)
+[1] TRUE
+> 
+> # Multiple chained calls. 
+> temp <- outer(cgd0$id, 100*0:6, "+")
+> colnames(temp) <- paste0("x", 1:7)   # add a time dependent covariate too 
+> test <- cbind(cgd0, temp)
+> 
 > newcgd <- tmerge(data1=cgd0[, 1:13], data2=cgd0, id=id, tstop=futime)
-> newcgd <- tmerge(newcgd, cgd0, id=id, infect = event(etime1)) 
-> newcgd <- tmerge(newcgd, cgd0, id=id, infect = event(etime2)) 
-> newcgd <- tmerge(newcgd, cgd0, id=id, infect = event(etime3)) 
-> newcgd <- tmerge(newcgd, cgd0, id=id, infect = event(etime4)) 
-> newcgd <- tmerge(newcgd, cgd0, id=id, infect = event(etime5)) 
-> newcgd <- tmerge(newcgd, cgd0, id=id, infect = event(etime6)) 
-> newcgd <- tmerge(newcgd, cgd0, id=id, infect = event(etime7)) 
+> newcgd <- tmerge(newcgd, test, id=id, infect = event(etime1), xx=tdc(etime1, x1)) 
+> newcgd <- tmerge(newcgd, test, id=id, infect = event(etime2), xx=tdc(etime2, x2)) 
+> newcgd <- tmerge(newcgd, test, id=id, infect = event(etime3), xx=tdc(etime3, x3)) 
+> newcgd <- tmerge(newcgd, test, id=id, infect = event(etime4), xx=tdc(etime4, x4)) 
+> newcgd <- tmerge(newcgd, test, id=id, infect = event(etime5), xx=tdc(etime5, x5)) 
+> newcgd <- tmerge(newcgd, test, id=id, infect = event(etime6), xx=tdc(etime6, x6)) 
+> newcgd <- tmerge(newcgd, test, id=id, infect = event(etime7), xx=tdc(etime7, x7)) 
 > newcgd <- tmerge(newcgd, newcgd, id, enum=cumtdc(tstart))
-> all.equal(dim(newcgd), c(203,17))
+> all.equal(dim(newcgd), c(203,18))
 [1] TRUE
 > all.equal(as.vector(table(newcgd$infect)), c(127, 76))
 [1] TRUE
-> 
+> temp <- with(newcgd, ifelse(enum==1, NA, (enum-2)*100))
+> all.equal(newcgd$xx, newcgd$id + temp)
+[1] TRUE
 > tcount <- attr(newcgd, "tcount")
 > all(tcount[,1:3] ==0)  # no early, late, or gap
 [1] TRUE
@@ -83,7 +98,7 @@ Type 'q()' to quit R.
 > counts <- sapply(temp, function(x) 
 +     as.vector(table(factor(x>= cgd0$futime, c(FALSE, TRUE)))))
 > 
-> all(tcount[1:7, c("within", "trailing")] == t(counts))
+> all(tcount[c(1,3,5,7,9,11,13), c("within", "trailing")] == t(counts))
 [1] TRUE
 > 
 > 
@@ -107,4 +122,4 @@ Type 'q()' to quit R.
 > 
 > proc.time()
    user  system elapsed 
-  0.972   0.048   1.017 
+  0.892   0.047   0.929 

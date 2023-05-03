@@ -9,15 +9,20 @@
 
 <h3>Description</h3>
 
-<p>For each element of <code>nvec</code> the sequence <code><a href="seq.html">seq_len</a>(nvec[i])</code>
-is created.  These are concatenated and the result returned.
+<p>The default method for <code>sequence</code> generates the sequence
+<code><a href="seq.html">seq</a>(from[i], by = by[i], length.out = nvec[i])</code> for each
+element <code>i</code> in the parallel (and recycled) vectors <code>from</code>,
+<code>by</code> and <code>nvec</code>. It then returns the result of concatenating
+those sequences.
 </p>
 
 
 <h3>Usage</h3>
 
 <pre>
-sequence(nvec)
+sequence(nvec, ...)
+## Default S3 method:
+sequence(nvec, from = 1L, by = 1L, ...)
 </pre>
 
 
@@ -26,20 +31,42 @@ sequence(nvec)
 <table summary="R argblock">
 <tr valign="top"><td><code>nvec</code></td>
 <td>
-<p>a non-negative integer vector each element of which
-specifies the end point of a sequence.</p>
+<p>coerced to a non-negative integer vector each element of which
+specifies the length of a sequence.</p>
+</td></tr>
+<tr valign="top"><td><code>from</code></td>
+<td>
+<p>coerced to an integer vector each element of which
+specifies the first element of a sequence.</p>
+</td></tr>
+<tr valign="top"><td><code>by</code></td>
+<td>
+<p>coerced to an integer vector each element of which
+specifies the step size between elements of a sequence.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arguments passed to methods.</p>
 </td></tr>
 </table>
 
 
 <h3>Details</h3>
 
-<p>Earlier versions of <code>sequence</code> used to work for 0 or negative inputs as
-<code>seq(x) == 1:x</code>.
+<p>Negative values are supported for <code>from</code> and
+<code>by</code>. <code>sequence(nvec, from, by=0L)</code> is equivalent to
+<code>rep(from, each=nvec)</code>.
 </p>
-<p>Note that <code>sequence &lt;- function(nvec) unlist(lapply(nvec, seq_len))</code>
-and it mainly exists in reverence to the very early history of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>.
+<p>This function was originally implemented in R with fewer features, but
+it has since become more flexible, and the default method is
+implemented in C for speed.
 </p>
+
+
+<h3>Author(s)</h3>
+
+<p>Of the current version, Michael Lawrence based on code from the
+S4Vectors Bioconductor package</p>
 
 
 <h3>See Also</h3>
@@ -53,7 +80,13 @@ and it mainly exists in reverence to the very early history of <span style="font
 <pre>
 sequence(c(3, 2)) # the concatenated sequences 1:3 and 1:2.
 #&gt; [1] 1 2 3 1 2
+sequence(c(3, 2), from=2L)
+#&gt; [1] 2 3 4 2 3
+sequence(c(3, 2), from=2L, by=2L)
+#&gt; [1] 2 4 6 2 4
+sequence(c(3, 2), by=c(-1L, 1L))
+#&gt; [1] 1 0 -1 1 2
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

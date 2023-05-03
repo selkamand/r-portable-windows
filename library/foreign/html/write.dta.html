@@ -74,8 +74,8 @@ Missing values are handled correctly.
 <p>There are four options for handling factors.  The default is to use
 Stata &lsquo;value labels&rsquo; for the factor levels.  With
 <code>convert.factors = "string"</code>, the factor levels are written as
-strings (the name of the value label is taken from the 
-<code>"val.labels"</code> attribute if it exists or the variable name 
+strings (the name of the value label is taken from the
+<code>"val.labels"</code> attribute if it exists or the variable name
 otherwise).  With <code>convert.factors = "numeric"</code> the numeric values
 of the levels are written, or <code>NA</code> if they cannot be coerced to
 numeric.  Finally, <code>convert.factors = "codes"</code> writes the
@@ -91,16 +91,16 @@ name from <code>"val.labels"</code>) then these will be written out as well.
 as the dataset label otherwise the dataset label is <code>"Written by R."</code>.
 </p>
 <p>If the <code>"expansion.table"</code> attribute exists expansion fields are
-written. This attribute should contain a list where each element is 
-string vector of length three. The first vector element contains the 
+written.  This attribute should contain a <code><a href="../../base/html/list.html">list</a></code> where each element is
+<code><a href="../../base/html/character.html">character</a></code> vector of length three.  The first vector element contains the
 name of a variable or &quot;_dta&quot; (meaning the dataset). The second element
 contains the characeristic name. The third contains the associated data.
 </p>
-<p>If the <code>"val.labels"</code> attribute contains a string vector with a
-string label for each variable then this is written as the variable
-labels.  Otherwise the variable names are repeated as variable labels.
+<p>If the <code>"val.labels"</code> attribute contains a <code><a href="../../base/html/character.html">character</a></code> vector with a
+string label for each value then this is written as the value
+labels.  Otherwise the variable names are used. 
 </p>
-<p>If the <code>"var.labels"</code> attribute contains a string vector with a
+<p>If the <code>"var.labels"</code> attribute contains a <code><a href="../../base/html/character.html">character</a></code> vector with a
 string label for each variable then this is written as the variable
 labels.  Otherwise the variable names are repeated as variable labels.
 </p>
@@ -182,5 +182,5 @@ write.dta(swiss, swissfile &lt;- tempfile())
 read.dta(swissfile)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>foreign</em> version 0.8-75 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>foreign</em> version 0.8-80 <a href="00Index.html">Index</a>]</div>
 </body></html>

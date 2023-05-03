@@ -62,6 +62,7 @@ frailty	frailty
 frailty.gamma	frailty
 frailty.gaussian	frailty
 frailty.t	frailty
+gbsg	gbsg
 genfan	reliability
 head.Surv	Survmethods
 heart	heart
@@ -159,7 +160,10 @@ retinopathy	retinopathy
 rev.Surv	Survmethods
 rhDNase	rhDNase
 ridge	ridge
+rotterdam	rotterdam
+royston	royston
 rsurvreg	dsurvreg
+rttright	rttright
 solder	solder
 sort.Surv	xtfrm.Surv
 stanford2	stanford2
@@ -175,6 +179,8 @@ summary.survexp	summary.survexp
 summary.survfit	summary.survfit
 summary.survreg	survreg.object
 Surv	Surv
+Surv2	Surv2
+Surv2data	Surv2data
 survcheck	survcheck
 survConcordance	survConcordance-deprecated
 survConcordance.fit	survConcordance-deprecated

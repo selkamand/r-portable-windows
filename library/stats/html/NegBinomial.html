@@ -128,9 +128,9 @@ numerical arguments for the other functions.
 length of the result.  Only the first elements of the logical
 arguments are used.
 </p>
-<p><code>rnbinom</code> returns a vector of type <a href="../../base/html/integer.html">integer</a>: if generated
-values exceed the maximum representable integer they are returned as
-<code>NA</code> and a warning is given.
+<p><code>rnbinom</code> returns a vector of type <a href="../../base/html/integer.html">integer</a> unless generated
+values exceed the maximum representable integer when <code><a href="../../base/html/double.html">double</a></code>
+values are returned since R version 4.0.0.
 </p>
 
 
@@ -193,5 +193,5 @@ barplot(rbind(h1$counts, h2$counts, h3$counts),
         names.arg = round(h1$breaks[-length(h1$breaks)]))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

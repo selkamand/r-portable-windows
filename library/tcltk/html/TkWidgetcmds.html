@@ -154,8 +154,7 @@ tkpack(txt.w &lt;- tktext(tt))
 tkinsert(txt.w, "0.0", "plot(1:10)")
 
 # callback function
-eval.txt &lt;- function()
-   eval(parse(text = tclvalue(tkget(txt.w, "0.0", "end"))))
+eval.txt &lt;- function() eval(str2lang(tclvalue(tkget(txt.w, "0.0", "end"))))
 tkpack(but.w &lt;- tkbutton(tt, text = "Submit", command = eval.txt))
 
 ## Try pressing the button, edit the text and when finished:
@@ -166,5 +165,5 @@ tkdestroy(tt)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>tcltk</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>tcltk</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

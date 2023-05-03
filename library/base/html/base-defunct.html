@@ -85,23 +85,22 @@ manglePackageName(pkgName, pkgVersion)
 .Import(...)
 .ImportFrom(name, ...)
 .Export(...)
-.S3method(generic, class, method)
 
 # Defunct in 2.14.0
 .First.lib(lib, pkg)
 
-# Defunct in 2.15.0
+# Defunct in 2.15.0, removed for 4.0.0
 mem.limits(nsize = NA, vsize = NA)
 .saveRDS(...)
 .readRDS(...)
-Sys.putenv(...)
+Sys.putenv(...) # (removed much earlier)
 
 # Defunct in 3.0.0
 real(length = 0)
 as.real(x, ...)
 is.real(x)
 
-# Defunct in 3.1.0
+# Defunct in 3.1.0, removed for 4.1.0
 .find.package(...)
 .path.package(...)
 </pre>
@@ -201,9 +200,8 @@ here for experimental purposes.
 <p><code>manglePackageName</code> was part of the defunct support for versioned
 installs.
 </p>
-<p><code>.Import</code>, <code>.ImportFrom</code>, <code>.Export</code> and
-<code>.S3method</code> were part of an experimental alternative way to
-specify namespaces.
+<p><code>.Import</code>, <code>.ImportFrom</code>, and <code>.Export</code> were part of an
+experimental alternative way to specify namespaces.
 </p>
 <p><code>.First.lib</code> was the load/attach hook for packages without
 namespaces: use <code><a href="ns-hooks.html">.onLoad</a></code> or <code><a href="ns-hooks.html">.onAttach</a></code> instead.
@@ -214,7 +212,7 @@ except by overall memory limits.
 </p>
 <p><code>.readRDS</code> and <code>.saveRDS</code>, were internal-only versions (and
 the only versions available prior to <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 2.13.0) of
-<code><a href="base-defunct.html">.readRDS</a></code> and <code><a href="base-defunct.html">.saveRDS</a></code>.
+<code><a href="readRDS.html">readRDS</a></code> and <code><a href="readRDS.html">saveRDS</a></code>.
 </p>
 <p><code>Sys.putenv</code> was a synonym for <code><a href="Sys.setenv.html">Sys.setenv</a></code>,
 deprecated since <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 2.5.0.
@@ -233,5 +231,5 @@ versions prior to <span style="font-family: Courier New, Courier; color: #666666
 <p><code><a href="Defunct.html">Defunct</a></code>, <code><a href="base-deprecated.html">base-deprecated</a></code>
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -26,11 +26,11 @@ file.path(..., fsep = .Platform$file.sep)
 <table summary="R argblock">
 <tr valign="top"><td><code>...</code></td>
 <td>
-<p>character vectors.</p>
+<p>character vectors.  Long vectors are not supported.</p>
 </td></tr>
 <tr valign="top"><td><code>fsep</code></td>
 <td>
-<p>the path separator to use.</p>
+<p>the path separator to use (assumed to be ASCII).</p>
 </td></tr>
 </table>
 
@@ -45,7 +45,7 @@ file.path(..., fsep = .Platform$file.sep)
 </p>
 <p>Trailing path separators are invalid for Windows file paths apart from
 &lsquo;<span class="file">/</span>&rsquo; and &lsquo;<span class="file">d:/</span>&rsquo; (although some functions/utilities do accept
-them), so a trailing <code>/</code> or <code>\</code> is removed.
+them), so a trailing <code>/</code> or <code>\</code> is removed there.
 </p>
 
 
@@ -55,6 +55,11 @@ them), so a trailing <code>/</code> or <code>\</code> is removed.
 separated by <code>fsep</code> if all arguments have positive length;
 otherwise, an empty character vector (unlike <code><a href="paste.html">paste</a></code>).
 </p>
+<p>An element of the result will be marked (see <code><a href="Encoding.html">Encoding</a></code> as
+UTF-8 if run in a UTF-8 locale (when marked inputs are converted to
+UTF-8) or if an component of the result is marked as UTF-8, or as
+Latin-1 in a non-Latin-1 locale.
+</p>
 
 
 <h3>Note</h3>
@@ -63,5 +68,5 @@ otherwise, an empty character vector (unlike <code><a href="paste.html">paste</a
 (not <code>\</code>) on Windows.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -48,6 +48,12 @@ socketConnection(host = "localhost", port, server = FALSE,
                  encoding = getOption("encoding"),
                  timeout = getOption("timeout"))
 
+serverSocket(port)
+
+socketAccept(socket, blocking = FALSE, open = "a+",
+             encoding = getOption("encoding"),
+             timeout = getOption("timeout"))
+
 open(con, ...)
 ## S3 method for class 'connection'
 open(con, open = "r", blocking = TRUE, ...)
@@ -60,6 +66,8 @@ flush(con)
 
 isOpen(con, rw = "")
 isIncomplete(con)
+
+socketTimeout(socket, timeout = -1)
 </pre>
 
 
@@ -138,6 +146,10 @@ supported.</p>
 <td>
 <p>logical.  Should the socket be a client or a server?</p>
 </td></tr>
+<tr valign="top"><td><code>socket</code></td>
+<td>
+<p>a server socket listening for connections.</p>
+</td></tr>
 <tr valign="top"><td><code>con</code></td>
 <td>
 <p>a connection.</p>
@@ -160,8 +172,10 @@ partial matches allowed.</p>
 
 <h3>Details</h3>
 
-<p>The first nine functions create connections.  By default the
-connection is not opened (except for a <code>socketConnection</code>), but may
+<p>The first eleven functions create connections.  By default the
+connection is not opened (except for a socket connection created by
+<code>socketConnection</code> or <code>socketAccept</code> and for server socket
+connection created by <code>serverSocket</code>), but may
 be opened by setting a non-empty value of argument <code>open</code>.
 </p>
 <p>For <code>file</code> the description is a path to the file to be opened or
@@ -181,7 +195,7 @@ filename of the null device.
 connections were introduced, method <code>"wininet"</code> is only available
 on Windows (it uses the WinINet functions of that OS) and method
 <code>"libcurl"</code> (using the library of that name:
-<a href="http://curl.haxx.se/libcurl/">http://curl.haxx.se/libcurl/</a>) is required on a Unix-alike but
+<a href="https://curl.haxx.se/libcurl/">https://curl.haxx.se/libcurl/</a>) is required on a Unix-alike but
 optional on Windows.  Method <code>"default"</code> uses method
 <code>"internal"</code> for <span class="samp">file:</span> URLs and <code>"libcurl"</code> for
 <code>ftps:</code> URLs.  On a Unix-alike it uses <code>"libcurl"</code> for
@@ -242,12 +256,24 @@ the description is <code>""</code>, the file/fifo is immediately opened (in
 from the file system.  This provides a temporary file/fifo to write to
 and then read from.
 </p>
+<p><code>socketConnection(server=TRUE)</code> creates a new temporary server socket
+listening on the given port.  As soon as a new socket connection is
+accepted on that port, the server socket is automatically closed. 
+<code>serverSocket</code> creates a listening server socket which can be used
+for accepting multiple socket connections by <code>socketAccept</code>.  To stop
+listening for new connections, a server socket needs to be closed
+explicitly by <code>close</code>.
+</p>
+<p><code>socketTimeout</code> sets connection timeout of a socket connection.  A
+negative <code>timeout</code> can be given to query the old value.
+</p>
 
 
 <h3>Value</h3>
 
 <p><code>file</code>, <code>pipe</code>, <code>fifo</code>, <code>url</code>, <code>gzfile</code>,
-<code>bzfile</code>, <code>xzfile</code>, <code>unz</code> and <code>socketConnection</code>
+<code>bzfile</code>, <code>xzfile</code>, <code>unz</code>, <code>socketConnection</code>,
+<code>socketAccept</code> and <code>serverSocket</code>
 return a connection object which inherits from class
 <code>"connection"</code> and has a first more specific class.
 </p>
@@ -266,6 +292,8 @@ currently open.
 <p><code>isIncomplete</code> returns a logical value, whether the last read
 attempt was blocked, or for an output text connection whether there is
 unflushed output.
+</p>
+<p><code>socketTimeout</code> returns the old timeout value of a socket connection. 
 </p>
 
 
@@ -723,5 +751,5 @@ A &lt;- read.table(con &lt;- file("students", encoding = "UCS-2LE")); close(con)
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

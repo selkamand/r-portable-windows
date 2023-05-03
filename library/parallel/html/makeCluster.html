@@ -96,15 +96,15 @@ machine as <span class="samp">somename.local</span>, a name known only to itself
 default taken from the environment variable <span class="env">R_PARALLEL_PORT</span>,
 then a randomly chosen port in the range <code>11000:11999</code>.</p>
 </dd>
+<dt><code>timeout</code></dt><dd><p>The timeout in seconds for that port.  This is
+the maximum time of zero communication between master and worker
+before failing.  Default is 30 days (and the POSIX standard only
+requires values up to 31 days to be supported).</p>
+</dd>
 <dt><code>setup_timeout</code></dt><dd><p>The maximum number of seconds a worker
 attempts to connect to master before failing.  Default is 2
 minutes.  The waiting time before the next attempt starts at
 0.1 seconds and is incremented 50% after each retry.</p>
-</dd>
-<dt><code>timeout</code></dt><dd><p>The timeout in seconds for that port.  This is
-the maximum time of zero communication between master and worker
-before failing. Default is 30 days (and the POSIX standard only
-requires values up to 31 days to be supported).</p>
 </dd>
 <dt><code>outfile</code></dt><dd><p>Where to direct the <code><a href="../../base/html/showConnections.html">stdout</a></code> and
 <code><a href="../../base/html/showConnections.html">stderr</a></code> connection output from the workers.
@@ -115,14 +115,9 @@ possibility is a file path on the worker's host.
 Files will be opened in append mode, as all workers log to the
 same file.</p>
 </dd>
-<dt><code>homogeneous</code></dt><dd><p>Logical.  Are all the hosts running
-identical setups, so <code>Rscript</code> can be launched using
-the same path on each?  Otherwise <code>Rscript</code> has to be in
-the default path on the workers.</p>
+<dt><code>homogeneous</code></dt><dd><p>Logical, default true.  See &lsquo;Note&rsquo;.</p>
 </dd>
-<dt><code>rscript</code></dt><dd><p>The path to <code>Rscript</code> on the workers,
-used if <code>homogeneous</code> is true. Defaults to the full path on
-the master.</p>
+<dt><code>rscript</code></dt><dd><p>See &lsquo;Note&rsquo;.</p>
 </dd>
 <dt><code>rscript_args</code></dt><dd><p>Character vector of additional
 arguments for <code>Rscript</code> such as <span class="option">--no-environ</span>.</p>
@@ -179,6 +174,28 @@ cluster or <code>NULL</code> if there is no such cluster.
 </p>
 
 
+<h3>Note</h3>
+
+<p>Option <code>homogeneous = TRUE</code> was for years documented as
+&lsquo;Are all the hosts running identical setups?&rsquo;, but this was
+apparently more restrictive than its author intended and not required
+by the code.
+</p>
+<p>The current interpretation of <code>homogeneous = TRUE</code> is that
+<code>Rscript</code> can be launched using the same path on each worker.
+That path is given by the option <code>rscript</code> and defaults to the
+full path to <code>Rscript</code> on the master.  (The workers are not
+required to be running the same version of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> as the master, nor even
+as each other.)
+</p>
+<p>For <code>homogeneous = FALSE</code>, <code>Rscript</code> on the workers is
+found on their default shell's path.
+</p>
+<p>For the very common usage of running both master and worker on a
+single multi-core host, the default settings are the appropriate ones.
+</p>
+
+
 <h3>Author(s)</h3>
 
 <p>Luke Tierney and R Core.
@@ -186,5 +203,5 @@ cluster or <code>NULL</code> if there is no such cluster.
 <p>Derived from the <a href="https://CRAN.R-project.org/package=snow"><span class="pkg">snow</span></a> package.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>parallel</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>parallel</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

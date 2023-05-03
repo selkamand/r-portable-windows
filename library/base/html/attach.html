@@ -18,7 +18,7 @@ the database can be accessed by simply giving their names.
 <h3>Usage</h3>
 
 <pre>
-attach(what, pos = 2L, name = deparse(substitute(what), backtick=FALSE),
+attach(what, pos = 2L, name = deparse1(substitute(what), backtick=FALSE),
        warn.conflicts = TRUE)
 </pre>
 
@@ -96,7 +96,7 @@ by <code><a href="search.html">search</a></code> and can be used as the argument
 </p>
 <p>There are hooks to attach user-defined table objects of class
 <code>"UserDefinedDatabase"</code>, supported by the Omegahat package
-<span class="pkg">RObjectTables</span>.  See <a href="http://www.omegahat.net/RObjectTables/">http://www.omegahat.net/RObjectTables/</a>.
+<span class="pkg">RObjectTables</span>.
 </p>
 
 
@@ -178,5 +178,5 @@ sys.source("myfuns.R", envir = attach(NULL, name = "myfuns"))
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

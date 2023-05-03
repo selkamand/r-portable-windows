@@ -18,13 +18,13 @@
 <pre>
 ## S3 method for class 'POSIXt'
 hist(x, breaks, ...,
-     xlab = deparse(substitute(x)),
+     xlab = deparse1(substitute(x)),
      plot = TRUE, freq = FALSE,
      start.on.monday = TRUE, format, right = TRUE)
 
 ## S3 method for class 'Date'
 hist(x, breaks, ...,
-     xlab = deparse(substitute(x)),
+     xlab = deparse1(substitute(x)),
      plot = TRUE, freq = FALSE,
      start.on.monday = TRUE, format, right = TRUE)
 </pre>
@@ -128,5 +128,5 @@ random.dates &lt;- as.Date("2001/1/1") + 70*stats::runif(100)
 hist(random.dates, "weeks", format = "%d %b")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>graphics</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

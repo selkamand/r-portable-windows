@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Gumbel location-scale model family</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for gumbls {mgcv}"><tr><td>gumbls {mgcv}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Gumbel location-scale model family</h2>
+
+<h3>Description</h3>
+
+<p>The <code>gumbls</code> family implements Gumbel location scale additive models in which the location and scale parameters (see details) can depend on additive smooth predictors. Useable only with <code><a href="gam.html">gam</a></code>, the linear predictors are specified via a list of formulae.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+gumbls(link=list("identity","log"),b=-7)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>link</code></td>
+<td>
+<p>two item list specifying the link for the location <i>m</i> and log scale parameter <i>B</i>. See details for meaning, which may not be intuitive.</p>
+</td></tr>
+<tr valign="top"><td><code>b</code></td>
+<td>
+<p>The minumum log scale parameter.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Let <i>z = (y - m)exp(-B)</i>, then the log Gumbel density is <i>l = -B - z - exp(-z)</i>. The expected value of a Gumbel r.v. is <i>m + g exp(B)</i> where <i>g</i> is Eulers constant (about 0.57721566). The corresponding variance is <i>pi^2 exp(2B)/6</i>.
+</p>
+<p><code>gumbls</code> is used with <code><a href="gam.html">gam</a></code> to fit Gumbel location - scale models parameterized in terms of scale parameter <i>m</i> and the log scale parameter <i>B</i>. Note that <code>identity</code> link for the scale parameter means that the corresponding linear predictor gives <i>B</i> directly. By default the <code>log</code> link for the scale parameter simply forces the log scale parameter to have a lower limit given by argument <code>b</code>: if <i>l</i> is the linear predictor for the log scale parameter, <i>B</i>, then <i>B = b + log(1+e^l)</i>.
+</p>
+<p><code>gam</code> is called with 
+a list containing 2 formulae, the first specifies the response on the left hand side and the structure of the linear predictor for location parameter, <i>m</i>, on the right hand side. The second is one sided, specifying the linear predictor for the lg scale, <i>B</i>, on the right hand side. 
+</p>
+<p>The fitted values for this family will be a two column matrix. The first column is the mean, and the second column is the log scale parameter, <i>B</i>. Predictions using <code><a href="predict.gam.html">predict.gam</a></code> will also produce 2 column matrices for <code>type</code> <code>"link"</code> and <code>"response"</code>. The first column is on the original data scale when <code>type="response"</code> and on the log mean scale of the linear predictor when <code>type="link"</code>. The second column when <code>type="response"</code> is again the log scale parameter, but is on the linear predictor when <code>type="link"</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object inheriting from class <code>general.family</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Wood, S.N., N. Pya and B. Saefken (2016), Smoothing parameter and
+model selection for general smooth models.
+Journal of the American Statistical Association 111, 1548-1575
+<a href="https://dx.doi.org/10.1080/01621459.2016.1180986">https://dx.doi.org/10.1080/01621459.2016.1180986</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(mgcv)
+## simulate some data
+f0 &lt;- function(x) 2 * sin(pi * x)
+f1 &lt;- function(x) exp(2 * x)
+f2 &lt;- function(x) 0.2 * x^11 * (10 * (1 - x))^6 + 10 * 
+            (10 * x)^3 * (1 - x)^10
+n &lt;- 400;set.seed(9)
+x0 &lt;- runif(n);x1 &lt;- runif(n);
+x2 &lt;- runif(n);x3 &lt;- runif(n);
+mu &lt;- f0(x0)+f1(x1)
+beta &lt;- exp(f2(x2)/5)
+y &lt;- mu - beta*log(-log(runif(n))) ## Gumbel quantile function
+
+b &lt;- gam(list(y~s(x0)+s(x1),~s(x2)+s(x3)),family=gumbls)
+plot(b,pages=1,scale=0)
+summary(b)
+gam.check(b)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-33 <a href="00Index.html">Index</a>]</div>
+</body></html>

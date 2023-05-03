@@ -34,8 +34,9 @@ qqnorm(y, ylim, main = "Normal Q-Q Plot",
 qqline(y, datax = FALSE, distribution = qnorm,
        probs = c(0.25, 0.75), qtype = 7, ...)
 
-qqplot(x, y, plot.it = TRUE, xlab = deparse(substitute(x)),
-       ylab = deparse(substitute(y)), ...)
+qqplot(x, y, plot.it = TRUE,
+       xlab = deparse1(substitute(x)),
+       ylab = deparse1(substitute(y)), ...)
 </pre>
 
 
@@ -139,5 +140,5 @@ mtext("qqline(*, dist = qchisq(., df=3), prob = c(0.1, 0.6))")
 ## qqline(qtype = 5) might be preferable.) 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

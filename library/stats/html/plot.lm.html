@@ -37,7 +37,7 @@ plot(x, which = c(1,2,3,5),
      id.n = 3, labels.id = names(residuals(x)), cex.id = 0.75,
      qqline = TRUE, cook.levels = c(0.5, 1.0),
      add.smooth = getOption("add.smooth"),
-     iter.smooth = if(isGlm &amp;&amp; binomialLike) 0 else 3,
+     iter.smooth = if(isGlm) 0 else 3,
      label.pos = c(4,2),
      cex.caption = 1, cex.oma.main = 1.25)
 </pre>
@@ -125,8 +125,10 @@ most plots; see also <code>panel</code> above.</p>
 <td>
 <p>the number of robustness iterations, the argument
 <code>iter</code> in <code><a href="../../graphics/html/panel.smooth.html">panel.smooth</a>()</code>; the default uses no such
-iterations for <code><a href="glm.html">glm</a>(*, family=binomial)</code> fits which is
-particularly desirable for the (predominant) case of binary observations.</p>
+iterations for <code><a href="glm.html">glm</a></code> fits which is
+particularly desirable for the (predominant) case of binary
+observations, but also for other models where the response
+distribution can be highly skewed.</p>
 </td></tr>
 <tr valign="top"><td><code>label.pos</code></td>
 <td>
@@ -177,6 +179,10 @@ the x-axis.  (The factor levels are ordered by mean fitted value.)
 standardized residuals (<code><a href="influence.measures.html">rstandard</a>(.)</code>) that are equal in
 magnitude are lines through the origin.  The contour lines are
 labelled with the magnitudes.
+</p>
+<p>Notice that some plots may not make much sense for the <code>glm</code>
+case; e.g., the normal Q-Q plot only makes sense if the distribution
+is approximately normal.
 </p>
 
 
@@ -252,5 +258,5 @@ plot(lm.SR, which = 1:2, sub.caption = "Saving Rates, n=50, p=5")
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

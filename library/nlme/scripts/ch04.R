@@ -198,5 +198,6 @@ fm1Machine <-
 
 # cleanup
 
+summary(warnings())
 proc.time()
 

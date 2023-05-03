@@ -57,6 +57,7 @@ gam.fit                 GAM P-IRLS estimation with GCV/UBRE smoothness
 gam.fit3                P-IRLS GAM estimation with GCV & UBRE/AIC or
                         RE/ML derivative calculation
 gam.fit5.post.proc      Post-processing output of gam.fit5
+gam.mh                  Simple posterior simulation with gam fits
 gam.models              Specifying generalized additive models
 gam.outer               Minimize GCV or UBRE score of a GAM using
                         'outer' iteration
@@ -84,6 +85,7 @@ gevlss                  Generalized Extreme Value location-scale model
                         family
 ginla                   GAM Integrated Nested Laplace Approximation
                         Newton Enhanced
+gumbls                  Gumbel location-scale model family
 identifiability         Identifiability constraints
 in.out                  Which of a set of points lie within a polygon
                         defined region
@@ -143,15 +145,20 @@ polys.plot              Plot geographic regions defined as polygons
 predict.bam             Prediction from fitted Big Additive Model model
 predict.gam             Prediction from fitted GAM model
 print.gam               Print a Generalized Additive Model object.
+psum.chisq              Evaluate the c.d.f. of a weighted sum of
+                        chi-squared deviates
 qq.gam                  QQ plots for gam model residuals
 rTweedie                Generate Tweedie random deviates
 random.effects          Random effects in GAMs
 residuals.gam           Generalized Additive Model residuals
 rig                     Generate inverse Gaussian random deviates
-rmvn                    Generate multivariate normal deviates
+rmvn                    Generate from or evaluate multivariate normal
+                        or t densities.
 s                       Defining smooths in GAM formulae
 scat                    GAM scaled t family for heavy tailed data
 sdiag                   Extract or modify diagonals of a matrix
+shash                   Sinh-arcsinh location scale and shape model
+                        family
 single.index            Single index models with mgcv
 slanczos                Compute truncated eigen decomposition of a
                         symmetric matrix
@@ -184,6 +191,8 @@ smooth.construct.tensor.smooth.spec
                         Tensor product smoothing constructor
 smooth.construct.tp.smooth.spec
                         Penalized thin plate regression splines in GAMs
+smooth.info             Generic function to provide extra information
+                        about smooth specification
 smooth.terms            Smooth terms in GAM
 smooth2random           Convert a smooth to a form suitable for
                         estimating as random effect
@@ -211,6 +220,7 @@ uniquecombs             find the unique rows in a matrix
 vcov.gam                Extract parameter (estimator) covariance matrix
                         from GAM fit
 vis.gam                 Visualization of GAM objects
-ziP                     GAM zero-inflated Poisson regression family
-ziplss                  Zero inflated Poisson location-scale model
+ziP                     GAM zero-inflated (hurdle) Poisson regression
                         family
+ziplss                  Zero inflated (hurdle) Poisson location-scale
+                        model family

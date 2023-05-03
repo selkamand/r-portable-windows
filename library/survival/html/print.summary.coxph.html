@@ -20,7 +20,7 @@ Print method for summary.coxph objects
 <pre>
 ## S3 method for class 'summary.coxph'
 print(x, digits=max(getOption("digits") - 3, 3),
-signif.stars = getOption("show.signif.stars"), ...)
+  signif.stars = getOption("show.signif.stars"), expand=FALSE, ...)
 </pre>
 
 
@@ -43,11 +43,16 @@ signif.stars = getOption("show.signif.stars"), ...)
 <p>Show stars to highlight small p-values
 </p>
 </td></tr>
+<tr valign="top"><td><code>expand</code></td>
+<td>
+<p>if the summary is for a multi-state coxph fit, print the
+results in an expanded format.</p>
+</td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
 <p>For future methods</p>
 </td></tr>
 </table>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.1-8 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-7 <a href="00Index.html">Index</a>]</div>
 </body></html>

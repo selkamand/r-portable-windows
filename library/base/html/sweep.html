@@ -26,12 +26,14 @@ sweep(x, MARGIN, STATS, FUN = "-", check.margin = TRUE, ...)
 <table summary="R argblock">
 <tr valign="top"><td><code>x</code></td>
 <td>
-<p>an array.</p>
+<p>an array, including a matrix.</p>
 </td></tr>
 <tr valign="top"><td><code>MARGIN</code></td>
 <td>
 <p>a vector of indices giving the extent(s) of <code>x</code>
-which correspond to <code>STATS</code>.</p>
+which correspond to <code>STATS</code>.
+Where <code>x</code> has named dimnames, it can be a character
+vector selecting dimension names.</p>
 </td></tr>
 <tr valign="top"><td><code>STATS</code></td>
 <td>
@@ -117,7 +119,15 @@ sweep(A, 1, 6:1)  # STATS is longer
 ## exact recycling:
 sweep(A, 1, 1:2)  # no warning
 sweep(A, 1, as.array(1:2))  # warning
+
+## Using named dimnames
+
+dimnames(A) &lt;- list(fee=1:4, fie=1:3, fum=1:2)
+
+mn_fum_fie &lt;- apply(A, c("fum", "fie"), mean)
+mn_fum_fie
+sweep(A, c("fum", "fie"), mn_fum_fie)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

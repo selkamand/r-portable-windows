@@ -33,11 +33,13 @@ shell.exec(file)
 
 <h3>Details</h3>
 
-<p>The path in <code>file</code> is interpreted relative to the current working
-directory.
+<p>The path in <code>file</code> should be a full path.
 </p>
-<p><span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> versions 2.13.0 and earlier interpreted <code>file</code> relative to
-the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> home directory, so a complete path was usually needed.
+<p>If the path in <code>file</code> is not a full path, it is interpreted relative
+to the current working directory, but in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> versions 2.13.0 and earlier it
+was interpreted relative to the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> home directory. To be interpreted as
+relative, the path also needs to use backslashes as separators (at least
+in Windows 10).
 </p>
 <p>Encoded <span class="samp">file://</span> URLs should be in the Windows standard form,
 e.g. <code>"file:///c:/path/to/file.txt"</code>.
@@ -71,5 +73,5 @@ shell.exec("file:///C:/Program Files/BreezeSys/BreezeBrowser/Breezebrowser.htm")
 
 ## End(Not run)</pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

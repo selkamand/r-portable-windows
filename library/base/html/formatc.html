@@ -396,13 +396,14 @@ options(op)
 
 ## The  '  flag :
 doLC &lt;- FALSE # &lt;= R warns, so change to TRUE manually if you want see the effect
-if(doLC)
-  oldLC &lt;- Sys.setlocale("LC_NUMERIC", "de_CH.UTF-8")
+if(doLC) {
+  oldLC &lt;- Sys.getlocale("LC_NUMERIC")
+           Sys.setlocale("LC_NUMERIC", "de_CH.UTF-8") }
 formatC(1.234 + 10^(0:4), format = "fg", width = 11, flag = "'")
 ## --&gt;  .....  "      1'001" "     10'001"   on supported platforms
 if(doLC) ## revert, typically to  "C"  :
   Sys.setlocale("LC_NUMERIC", oldLC)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

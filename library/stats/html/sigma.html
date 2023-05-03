@@ -57,11 +57,13 @@ methods.  Passed to <code><a href="deviance.html">deviance</a>(*, ...)</code> fo
 <p>The <span class="pkg">stats</span> package provides the S3 generic and a default method.
 The latter is correct typically for (asymptotically / approximately)
 generalized gaussian (&ldquo;least squares&rdquo;) problems, since it is
-defined as </p>
+defined as
+</p>
 <pre>
    sigma.default &lt;- function (object, use.fallback = TRUE, ...)
-                      sqrt( deviance(object, ...) / (NN - PP) )
- </pre><p> where <code>NN &lt;- <a href="nobs.html">nobs</a>(object, use.fallback = use.fallback)</code>
+       sqrt( deviance(object, ...) / (NN - PP) )
+ </pre>
+<p>where <code>NN &lt;- <a href="nobs.html">nobs</a>(object, use.fallback = use.fallback)</code>
 and <code>PP &lt;- sum(!is.na(<a href="coef.html">coef</a>(object)))</code> &ndash; where in older <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>
 versions this was <code>length(coef(object))</code> which is too large in
 case of undetermined coefficients, e.g., for rank deficient model fits.
@@ -143,5 +145,5 @@ sqrt(diag(estVar(mlmfit)))
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

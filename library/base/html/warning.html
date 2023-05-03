@@ -19,7 +19,7 @@
 <pre>
 warning(..., call. = TRUE, immediate. = FALSE, noBreaks. = FALSE,
         domain = NULL)
-suppressWarnings(expr)
+suppressWarnings(expr, classes = "warning")
 </pre>
 
 
@@ -55,6 +55,11 @@ be output as a single line when <code>options(warn = 1)</code>.</p>
 <td>
 <p>see <code><a href="gettext.html">gettext</a></code>.  If <code>NA</code>, messages will
 not be translated, see also the note in <code><a href="stop.html">stop</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>classes</code></td>
+<td>
+<p>character, indicating which classes of warnings should
+be suppressed.</p>
 </td></tr>
 </table>
 
@@ -135,5 +140,5 @@ suppressWarnings(warning("testit"))
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

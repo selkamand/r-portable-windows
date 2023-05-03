@@ -71,8 +71,10 @@ variance is used to estimate the variance otherwise the Welch
 <tr valign="top"><td><code>formula</code></td>
 <td>
 <p>a formula of the form <code>lhs ~ rhs</code> where <code>lhs</code>
-is a numeric variable giving the data values and <code>rhs</code> a factor
-with two levels giving the corresponding groups.</p>
+is a numeric variable giving the data values and <code>rhs</code> either 
+<code>1</code> for a one-sample or paired test or a factor
+with two levels giving the corresponding groups. If <code>lhs</code> is of 
+class <code>"Pair"</code> and <code>rhs</code> is <code>1</code>, a paired test is done</p>
 </td></tr>
 <tr valign="top"><td><code>data</code></td>
 <td>
@@ -101,10 +103,8 @@ the data contain <code>NA</code>s.  Defaults to
 
 <h3>Details</h3>
 
-<p>The formula interface is only applicable for the 2-sample tests.
-</p>
 <p><code>alternative = "greater"</code> is the alternative that <code>x</code> has a
-larger mean than <code>y</code>.
+larger mean than <code>y</code>. For the one-sample case: that the mean is positive.
 </p>
 <p>If <code>paired</code> is <code>TRUE</code> then both <code>x</code> and <code>y</code> must
 be specified and they must be the same length.  Missing values are
@@ -192,9 +192,19 @@ t.test(1:10, y = c(7:20, 200)) # P = .1245    -- NOT significant anymore
 plot(extra ~ group, data = sleep)
 ## Traditional interface
 with(sleep, t.test(extra[group == 1], extra[group == 2]))
+
 ## Formula interface
 t.test(extra ~ group, data = sleep)
+
+## Formula interface to one-sample test
+t.test(extra ~ 1, data = sleep)
+
+## Formula interface to paired test
+## The sleep data are actually paired, so could have been in wide format:
+sleep2 &lt;- reshape(sleep, direction = "wide", 
+                  idvar = "ID", timevar = "group")
+t.test(Pair(extra.1, extra.2) ~ 1, data = sleep2)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -10,8 +10,8 @@
 <h3>Description</h3>
 
 <p>Evaluates its arguments with the output being returned as a character
-string or sent to a file.  Related to <code><a href="../../base/html/sink.html">sink</a></code> in the same
-way that <code><a href="../../base/html/with.html">with</a></code> is related to <code><a href="../../base/html/attach.html">attach</a></code>.
+string or sent to a file.  Related to <code><a href="../../base/html/sink.html">sink</a></code> similarly to how
+<code><a href="../../base/html/with.html">with</a></code> is related to <code><a href="../../base/html/attach.html">attach</a></code>.
 </p>
 
 
@@ -50,6 +50,10 @@ connection, append or overwrite?</p>
 
 <h3>Details</h3>
 
+<p>It works via <code><a href="../../base/html/sink.html">sink</a>(&lt;file connection&gt;)</code> and hence the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> code
+in <code>dots</code> must <em>not</em> interfere with the connection (e.g., by
+calling <code><a href="../../base/html/showConnections.html">closeAllConnections</a>()</code>).
+</p>
 <p>An attempt is made to write output as far as possible to <code>file</code>
 if there is an error in evaluating the expressions, but for
 <code>file = NULL</code> all output will be lost.
@@ -91,5 +95,5 @@ close(pdf); options(op) ; system("evince tempout.pdf &amp;")
 ## End(Not run)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

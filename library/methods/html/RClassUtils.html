@@ -40,7 +40,7 @@ isVirtualClass(Class, where)
 
 newBasic(Class, ...)
 
-makeExtends(Class, to, coerce, test, replace, by, package, slots,
+makeExtends(Class, coerce, test, replace, by, package, slots,
             classDef1, classDef2)
 
 reconcilePropertiesAndPrototype(name, properties, prototype,
@@ -206,7 +206,8 @@ result will be set to <code>Class</code>.
 </p>
 </dd>
 <dt><code>makeExtends</code>:</dt><dd>
-<p>convert the argument to a list defining the extension mechanism.
+<p>Construct an SClassExtension object representing the relationship
+from <code>Class</code> to the class defined by <code>classDef2</code>. 
 </p>
 </dd>
 <dt><code>reconcilePropertiesAndPrototype</code>:</dt><dd>
@@ -380,5 +381,5 @@ stopifnot(TRUE
 if(get4) detach("package:stats4")
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>methods</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>methods</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

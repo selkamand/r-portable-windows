@@ -175,11 +175,12 @@ explains individual observations exactly).  Also, minus twice log-likelihood.
 <h3>Examples</h3>
 
 <pre>
-options(contrasts = c("contr.treatment", "contr.poly"))
+oc &lt;- options(contrasts = c("contr.treatment", "contr.poly"))
 library(MASS)
 example(birthwt)
 (bwt.mu &lt;- multinom(low ~ ., bwt))
+options(oc)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>nnet</em> version 7.3-12 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>nnet</em> version 7.3-14 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -7,11 +7,11 @@ hills$grad <- hills$climb/hills$dist
 
 ## weighted fit
 fit0 <- rlm(time ~ dist + climb - 1, data = hills,
-            weights = 1/dist^2, method="MM")
-summary(fit0, cor=FALSE)
+            weights = 1/dist^2, method = "MM")
+summary(fit0, cor = FALSE)
 ## equivalent to
-fit1 <- rlm(ispeed ~ grad, data = hills, method="MM")
-summary(fit1, cor=FALSE)
+fit1 <- rlm(ispeed ~ grad, data = hills, method = "MM")
+summary(fit1, cor = FALSE)
 
 cf0 <- coef(summary(fit0))
 cf1 <- coef(summary(fit1))
@@ -21,10 +21,10 @@ stopifnot(all.equal(weighted.residuals(fit0), residuals(fit1)))
 
 # test other cases
 fit0 <- rlm(time ~ dist + climb - 1, data = hills, weights = 1/dist^2)
-summary(fit0, cor=FALSE)
+summary(fit0, cor = FALSE)
 ## equivalent to
 fit1 <- rlm(ispeed ~ grad, data = hills)
-summary(fit1, cor=FALSE)
+summary(fit1, cor = FALSE)
 
 cf0 <- coef(summary(fit0))
 cf1 <- coef(summary(fit1))
@@ -34,10 +34,10 @@ stopifnot(all.equal(weighted.residuals(fit0), residuals(fit1)))
 
 fit0 <- rlm(time ~ dist + climb - 1, data = hills, weights = 1/dist^2,
             scale.est = "Huber")
-summary(fit0, cor=FALSE)
+summary(fit0, cor = FALSE)
 ## equivalent to
 fit1 <- rlm(ispeed ~ grad, data = hills, scale.est = "Huber")
-summary(fit1, cor=FALSE)
+summary(fit1, cor = FALSE)
 
 cf0 <- coef(summary(fit0))
 cf1 <- coef(summary(fit1))
@@ -60,9 +60,9 @@ h2 <- hills[rep(1:35, times=wts), ]
 fit4 <- lm(ispeed ~ grad, data = hills, weights = wts)
 fit5 <- lm(ispeed ~ grad, data = h2)
 ## same coefs, different se's.
-fit6 <- rlm(ispeed ~ grad, data = h2, acc=1e-10)
+fit6 <- rlm(ispeed ~ grad, data = h2, acc = 1e-10)
 fit7 <- rlm(ispeed ~ grad, data = hills,
-            weights = wts, wt.method="case", acc=1e-10)
+            weights = wts, wt.method = "case", acc = 1e-10)
 summary(fit6)
 summary(fit7)
 stopifnot(all.equal(coef(summary(fit6)), coef(summary(fit7))))
@@ -70,9 +70,9 @@ summary(fit6, "XtWX")
 summary(fit7, "XtWX")
 stopifnot(all.equal(coef(summary(fit6, "XtWX")), coef(summary(fit7, "XtWX"))))
 
-fit8 <- rlm(ispeed ~ grad, data = h2, scale.est = "Huber", acc=1e-10)
+fit8 <- rlm(ispeed ~ grad, data = h2, scale.est = "Huber", acc = 1e-10)
 fit9 <- rlm(ispeed ~ grad, data = hills, scale.est = "Huber",
-            weights = wts, wt.method="case", acc=1e-10)
+            weights = wts, wt.method = "case", acc = 1e-10)
 summary(fit8)
 summary(fit9)
 stopifnot(all.equal(coef(summary(fit8)), coef(summary(fit9))))
@@ -95,3 +95,19 @@ dat <- data.frame(trt = factor(rep(LETTERS[1:2], each=3)),resp = rt(6, df=3))
 fit <- lqs(resp ~ trt, data = dat, contrasts = list(trt = "contr.sum"))
 stopifnot(identical(predict(fit), predict(fit, newdata = dat)))
 
+
+### Andr\'e Gillibert 2020-08-14, models with offset() term:
+df <- data.frame(outcome=1:10, off = rep(100, 10))
+## NB: lm(outome ~ 1, data=df, offset = off) would be different.
+fit_lm <- lm(outcome ~ offset(off), data = df)
+fit_rlm <- rlm(outcome ~ offset(off), data = df)
+
+## prediction of fit_rlm and fit_lm are identical for this simple model
+stopifnot(all.equal(predict(fit_rlm, newdata=df), predict(fit_lm, newdata=df)))
+
+## but predict of fit_rlm was not consistent with itself
+## when using the same dataset with newdata
+stopifnot(all.equal(predict(fit_rlm), predict(fit_rlm, newdata=df)))
+
+# similarly, fitted()+resid() was inconsistent for fit_rlm
+stopifnot(all.equal(df$outcome, unname(fitted(fit_rlm)+resid(fit_rlm))))

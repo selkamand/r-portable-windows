@@ -352,9 +352,11 @@ knots plus 2.</p>
 <h3>Note</h3>
 
 <p>The number of unique <code>x</code> values, <i>nx</i>, are
-determined by the <code>tol</code> argument, equivalently to </p>
+determined by the <code>tol</code> argument, equivalently to
+</p>
 <pre>
-    nx &lt;- length(x)  -  sum(duplicated( round((x - mean(x)) / tol) ))</pre>
+    nx &lt;- length(x) - sum(duplicated( round((x - mean(x)) / tol) ))
+  </pre>
 <p>The default <code>all.knots = FALSE</code> and <code>nknots = .nknots.smspl</code>,
 entails using only <i>O(nx ^ 0.2)</i>
 knots instead of <i>nx</i> for <i>nx &gt; 49</i>.  This cuts
@@ -471,5 +473,5 @@ lines(predict(s02, xx), col = 3); mtext(deparse(s02$call), col = 3)
 ## both above do quite similarly (Df = 8.5 +- 0.2)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

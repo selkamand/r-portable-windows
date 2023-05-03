@@ -25,6 +25,7 @@ inherits(x, what, which = FALSE)
 
 oldClass(x)
 oldClass(x) &lt;- value
+.class2(x)
 </pre>
 
 
@@ -69,8 +70,21 @@ where the following extra classes exist for the corresponding function
 <code>if</code>, <code>while</code>, <code>for</code>, <code>=</code>, <code>&lt;-</code>, <code>(</code>,
 <code>{</code>, <code>call</code>.
 </p>
-<p>Note that <code><a href="NULL.html">NULL</a></code> objects cannot have attributes (hence not
-classes) and attempting to assign a class is an error.
+<p>Note that for objects <code>x</code> of an implicit (or an S4) class, when a
+(S3) generic function <code>foo(x)</code> is called, method dispatch may use
+more classes than are returned by <code>class(x)</code>, e.g., for a numeric
+matrix, the <code>foo.numeric()</code> method may apply.  The exact full
+<code><a href="character.html">character</a></code> vector of the classes which
+<code><a href="UseMethod.html">UseMethod</a>()</code> uses, is available as <code>.class2(x)</code> since
+<span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> version 4.0.0.  (This also applies to S4 objects when S3 dispatch is
+considered, see below.)
+</p>
+<p>Beware that using <code>.class2()</code> for other reasons than didactical,
+diagnostical or for debugging may rather be a misuse than smart.
+</p>
+<p><code><a href="NULL.html">NULL</a></code> objects (of implicit class <code>"NULL"</code>) cannot have
+attributes (hence no <code>class</code> attribute) and attempting to assign a
+class is an error.
 </p>
 <p>When a generic function <code>fun</code> is applied to an object with class
 attribute <code>c("first", "second")</code>, the system searches for a
@@ -175,7 +189,10 @@ class( quote(sin(pi*x)) )    # "call"
 class( quote(x &lt;- 1) )       # "&lt;-"
 class( quote((1 &lt; 2)) )      # "("
 class( quote( if(8&lt;3) pi ) ) # "if"
+
+.class2(pi)               # "double" "numeric"
+.class2(matrix(1:6, 2,3)) # "matrix" "array" "integer" "numeric"
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

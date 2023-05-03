@@ -20,6 +20,7 @@ saveRDS(object, file = "", ascii = FALSE, version = NULL,
         compress = TRUE, refhook = NULL)
 
 readRDS(file, refhook = NULL)
+infoRDS(file)
 </pre>
 
 
@@ -63,26 +64,33 @@ be used.  Ignored if <code>file</code> is a connection.</p>
 
 <h3>Details</h3>
 
-<p>These functions provide the means to save a single <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object to a
-connection (typically a file) and to restore the object, quite
-possibly under a different name.  This differs from <code><a href="save.html">save</a></code>
-and <code><a href="load.html">load</a></code>, which save and restore one or more named
-objects into an environment.  They are widely used by <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> itself, for
-example to store metadata for a package and to store the
-<code><a href="../../utils/html/help.search.html">help.search</a></code> databases: the <code>".rds"</code> file extension
-is most often used.
+<p><code>saveRDS</code> and <code>readRDS</code> provide the means to save a single <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>
+object to a connection (typically a file) and to restore the object, quite
+possibly under a different name.  This differs from <code><a href="save.html">save</a></code> and
+<code><a href="load.html">load</a></code>, which save and restore one or more named objects into
+an environment.  They are widely used by <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> itself, for example to store
+metadata for a package and to store the <code><a href="../../utils/html/help.search.html">help.search</a></code>
+databases: the <code>".rds"</code> file extension is most often used.
 </p>
 <p>Functions <code><a href="serialize.html">serialize</a></code> and <code><a href="serialize.html">unserialize</a></code>
 provide a slightly lower-level interface to serialization: objects
 serialized to a connection by <code>serialize</code> can be read back by
 <code>readRDS</code> and conversely.
 </p>
-<p>All of these interfaces use the same serialization format, which has
-been used since <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 1.4.0 (but extended from time to time as new
-object types have been added to <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>).  However, <code>save</code> writes a
-single line header (typically <code>"RDXs\n"</code>) before the
+<p>Function <code>infoRDS</code> retrieves meta-data about serialization produced
+by <code>saveRDS</code> or <code>serialize</code>. <code>infoRDS</code> cannot be used to
+detect whether a file is a serialization nor whether it is valid.
+</p>
+<p>All of these interfaces use the same serialization format, but <code>save</code>
+writes a single line header (typically <code>"RDXs\n"</code>) before the
 serialization of a single object (a pairlist of all the objects to be
 saved).
+</p>
+<p>If <code>file</code> is a file name, it is opened by <code><a href="connections.html">gzfile</a></code>
+except for <code>save(compress = FALSE)</code> which uses
+<code><a href="connections.html">file</a></code>.  Only for the exception are marked encodings of
+<code>file</code> which cannot be translated to the native encoding handled
+on Windows.
 </p>
 <p>Compression is handled by the connection opened when <code>file</code> is a
 file name, so is only possible when <code>file</code> is a connection if
@@ -101,6 +109,17 @@ non-ASCII saves.
 <p>For <code>readRDS</code>, an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object.
 </p>
 <p>For <code>saveRDS</code>, <code>NULL</code> invisibly.
+</p>
+<p>For <code>infoRDS</code>, an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> list with elements <code>version</code> (version
+number, currently 2 or 3), <code>writer_version</code> (version of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> that
+produced the serialization), <code>min_reader_version</code> (minimum version of
+<span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> that can read the serialization), <code>format</code> (data representation)
+and <code>native_encoding</code> (native encoding of the session that produced
+the serialization, available since version 3).  The data representation is
+given as <code>"xdr"</code> for big-endian binary representation, <code>"ascii"</code>
+for ASCII representation (produced via <code>ascii = TRUE</code> or <code>ascii
+  = NA</code>) or <code>"binary"</code> (binary representation with native
+&lsquo;endianness&rsquo; which can be produced by <code><a href="serialize.html">serialize</a></code>).
 </p>
 
 
@@ -151,5 +170,5 @@ identical(women, readRDS(fil3))
 unlink(c(fil, fil2, fil3))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

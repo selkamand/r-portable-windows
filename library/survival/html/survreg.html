@@ -24,7 +24,7 @@ accelerated failure time models.
 survreg(formula, data, weights, subset, 
         na.action, dist="weibull", init=NULL, scale=0, 
         control,parms=NULL,model=FALSE, x=FALSE,
-        y=TRUE, robust=FALSE, score=FALSE, ...)
+        y=TRUE, robust=FALSE, cluster, score=FALSE, ...)
 
 </pre>
 
@@ -119,10 +119,17 @@ successful convergence.)
 </td></tr>
 <tr valign="top"><td><code>robust</code></td>
 <td>
-<p>Use robust 'sandwich' standard errors, based on
-independence of individuals if there is no <code>cluster()</code> term in
-the formula, based on independence of clusters if there is.</p>
+<p>Use robust sandwich error instead of the asymptotic
+formula.  Defaults to TRUE if there is a <code>cluster</code> argument.</p>
 </td></tr>
+<tr valign="top"><td><code>cluster</code></td>
+<td>
+<p>Optional variable that identifies groups of subjects,
+used in computing the robust variance.  Like <code>model</code> variables,
+this is searched for in the dataset pointed to by the <code>data</code>
+argument.
+</p>
+</td></tr>  
 <tr valign="top"><td><code>...</code></td>
 <td>
 
@@ -191,5 +198,5 @@ tobinfit &lt;- survreg(Surv(durable, durable&gt;0, type='left') ~ age + quant,
 	            data=tobin, dist='gaussian')
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.1-8 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-7 <a href="00Index.html">Index</a>]</div>
 </body></html>

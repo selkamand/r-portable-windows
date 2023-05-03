@@ -29,7 +29,7 @@ pdf(file = if(onefile) "Rplots.pdf" else "Rplot%03d.pdf",
 <table summary="R argblock">
 <tr valign="top"><td><code>file</code></td>
 <td>
-<p>a character string giving the name of the file.
+<p>a character string giving the file path.
 If it is of the form <code>"|cmd"</code>, the output is piped to the
 command given by <code>cmd</code>.  If it is <code>NULL</code>,
 then no external file is created (effectively, no drawing occurs),
@@ -39,7 +39,9 @@ but the device may still be queried (e.g., for size of text).
 as <code>"Rplot%03d.pdf"</code> (the default in that case).
 (See <code><a href="postscript.html">postscript</a></code> for further details.)
 </p>
-<p>Tilde expansion (see <code><a href="../../base/html/path.expand.html">path.expand</a></code>) is done.
+<p>Tilde expansion (see <code><a href="../../base/html/path.expand.html">path.expand</a></code>) is done. An input with
+a marked encoding is converted to the native encoding or an error is
+given.
 </p>
 </td></tr>
 <tr valign="top"><td><code>width, height</code></td>
@@ -128,13 +130,14 @@ currently allowed values are <code>"srgb"</code>, <code>"gray"</code> (or
 <tr valign="top"><td><code>useDingbats</code></td>
 <td>
 <p>logical.  Should small circles be rendered
-<em>via</em> the Dingbats font?  Defaults to <code>TRUE</code>, which produces
-smaller and better output.  Setting this to <code>FALSE</code> can work
-around font display problems in broken PDF viewers: although this
+<em>via</em> the Dingbats font?  Defaults to <code>FALSE</code>.
+If <code>TRUE</code>, this can produce smaller and better output, but
+there can font display problems in broken PDF viewers: although this
 font is one of the 14 guaranteed to be available in all PDF viewers,
 that guarantee is not always honoured.
 </p>
-<p>On Unix-alikes (incl. Mac), see the &lsquo;Note&rsquo; for a possible fix for some viewers.</p>
+<p>For Unix-alikes (including macOS) see the &lsquo;Note&rsquo; for a
+possible fix for some viewers.</p>
 </td></tr>
 <tr valign="top"><td><code>useKerning</code></td>
 <td>
@@ -282,8 +285,8 @@ graphics devices set out in the &ldquo;R Internals Manual&rdquo;.
 of 0.01 enforced.
 </p>
 </li>
-<li><p> Circles of any radius are allowed.  Unless <code>useDingbats =
-      FALSE</code>, opaque circles of less than 10 big points radius are
+<li><p> Circles of any radius are allowed.  If <code>useDingbats =
+      TRUE</code>, opaque circles of less than 10 big points radius are
 rendered using char 108 in the Dingbats font: all semi-transparent
 and larger circles using a Bézier curve for each
 quadrant.
@@ -333,8 +336,9 @@ they may be offered for download as needed).
 </p>
 
 <dl>
-<dt>On some Unix-alike systems</dt><dd><p>the default plotting character
-<code>pch = 1</code> was
+<dt>On some Unix-alike systems:</dt><dd>
+<p>If <code>useDingbats = TRUE</code>,
+the default plotting character <code>pch = 1</code> was
 displayed in some PDF viewers incorrectly as a <code>"q"</code>
 character.  (These seem to be viewers based on the <span class="samp">poppler</span> PDF
 rendering library).  This may be due to incorrect or incomplete mapping
@@ -365,9 +369,9 @@ manage to display Dingbats.
 </dd>
 </dl>
 
-<p>There is a different font bug in the <code>pdf.js</code> viewer included
-in Firefox 19 and later: that maps Dingbats to the Symbol font and so
-displays symbols such <code>pch = 1</code> as lambda.
+<p>There was a different font bug in the <code>pdf.js</code> viewer included
+in Firefox: that mapped Dingbats to the Symbol font and so displayed
+symbols such <code>pch = 1</code> as lambda.
 </p>
 
 
@@ -417,5 +421,5 @@ TestChars("ISOLatin2", family = "URWHelvetica")
 ## works well for viewing in gs-based viewers, and often in xpdf.
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

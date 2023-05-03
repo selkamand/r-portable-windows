@@ -135,15 +135,18 @@ Wadsworth &amp; Brooks/Cole.
 <h3>Examples</h3>
 
 <pre>
-as.numeric(c("-.1"," 2.7 ","B")) # (-0.1, 2.7, NA)  +  warning
+## Conversion does trim whitespace; non-numeric strings give NA + warning
+as.numeric(c("-.1"," 2.7 ","B"))
 
-as.numeric(factor(5:10)) # not what you'd expect
-f &lt;- factor(1:5)
+## Numeric values are sometimes accidentally converted to factors.
+## Converting them back to numeric is trickier than you'd expect.
+f &lt;- factor(5:10)
+as.numeric(f) # not what you might expect, probably not what you want
 ## what you typically meant and want:
 as.numeric(as.character(f))
-## the same, considerably (for long factors) more efficient:
+## the same, considerably more efficient (for long vectors):
 as.numeric(levels(f))[f]
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

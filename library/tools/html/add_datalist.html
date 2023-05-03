@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add a 'datalist' File to a Package</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add a 'datalist' File to a Source Package</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="R.css" />
 </head><body>
@@ -6,7 +6,7 @@
 <table width="100%" summary="page for add_datalist {tools}"><tr><td>add_datalist {tools}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
 <h2>
-Add a &lsquo;<span class="file">datalist</span>&rsquo; File to a Package
+Add a &lsquo;<span class="file">datalist</span>&rsquo; File to a Source Package
 </h2>
 
 <h3>Description</h3>
@@ -22,7 +22,7 @@ supplying &lsquo;<span class="file">data/datalist</span>&rsquo; file.
 <h3>Usage</h3>
 
 <pre>
-add_datalist(pkgpath, force = FALSE)
+add_datalist(pkgpath, force = FALSE, small.size = 1024^2)
 </pre>
 
 
@@ -38,17 +38,22 @@ add_datalist(pkgpath, force = FALSE)
 <p>logical: can an existing &lsquo;<span class="file">data/datalist</span>&rsquo; file be
 over-written?</p>
 </td></tr>
+<tr valign="top"><td><code>small.size</code></td>
+<td>
+<p>number: a &lsquo;<span class="file">data/datalist</span>&rsquo; file is created only if
+the total size of the data files is larger than <code>small.size</code> bytes.</p>
+</td></tr>
 </table>
 
 
 <h3>Details</h3>
 
 <p><code>R CMD build</code> will call this function to add a data list to
-packages with 1MB or more of data.
+packages with 1MB or more of file in the &lsquo;<span class="file">data</span>&rsquo; directory.
 </p>
-<p>It is also helpful to give a &lsquo;<span class="file">data/datalist</span>&rsquo; file in packages
-whose datasets have many dependencies, including loading the packages
-itself (and maybe others).
+<p>It can also be also helpful to give a &lsquo;<span class="file">data/datalist</span>&rsquo; file in
+packages whose datasets have many dependencies, including loading the
+packages itself (and maybe others).
 </p>
 
 
@@ -59,5 +64,5 @@ itself (and maybe others).
 <p>The &lsquo;Writing R Extensions&rsquo; manual.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>tools</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>tools</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

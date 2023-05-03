@@ -49,11 +49,14 @@ handle these correctly so they should be avoided.  Most platforms
 allow setting an environment variable to <code>""</code>, but Windows does
 not, and there <code>Sys.setenv(FOO = "")</code> unsets <span class="env">FOO</span>.
 </p>
-<p>There may be system-specific limits on the maximum length of the values
-of individual environment variables or of all environment variables.
-Windows has a limit of 32,767 characters on the environment block, and
-<code>cmd.exe</code> has a limit of 2047 (Windows 2000) or 8192 characters
-(XP and later) for each value.
+<p>There may be system-specific limits on the maximum length of the
+values of individual environment variables or of names+values of all
+environment variables.
+
+Recent versions of Windows have a maximum length of 32,767 characters for a
+environment variable; however <code>cmd.exe</code> has a limit of 8192
+characters for a command line, hence <code>set</code> can only set 8188.
+
 </p>
 
 
@@ -86,5 +89,5 @@ Sys.unsetenv("R_TEST")
 Sys.getenv("R_TEST", unset = NA)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

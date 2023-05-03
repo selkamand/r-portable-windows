@@ -83,6 +83,10 @@ basic step being Gauss&ndash;Kronrod quadrature.
 <p><code>rel.tol</code> cannot be less than <code>max(50*.Machine$double.eps,
     0.5e-28)</code> if <code>abs.tol &lt;= 0</code>.
 </p>
+<p>Note that the comments in the C source code in
+&lsquo;<span class="file">&lt;R&gt;/src/appl/integrate.c</span>&rsquo; give more details, particularly about
+reasons for failure (internal error code <code>ier &gt;= 1</code>).
+</p>
 <p>In <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> versions <i>&lt;=</i> 3.2.x, the first entries of
 <code>lower</code> and <code>upper</code> were used whereas an error is signalled
 now if they are not of length one.
@@ -190,5 +194,5 @@ integrate(dnorm, 0:1, 20) #-&gt; error!
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

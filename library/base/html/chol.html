@@ -42,7 +42,8 @@ applies to numeric (or logical) symmetric, positive-definite matrices.</p>
 </td></tr>
 <tr valign="top"><td><code>LINPACK</code></td>
 <td>
-<p>logical.  Should LINPACK be used (now ignored)?</p>
+<p>logical.  Should LINPACK be used (defunct, ignored with
+a warning)?</p>
 </td></tr>
 <tr valign="top"><td><code>tol</code></td>
 <td>
@@ -110,7 +111,7 @@ by construction.
 <p>This is an interface to the LAPACK routines <code>DPOTRF</code> and
 <code>DPSTRF</code>,
 </p>
-<p>LAPACK is from <a href="http://www.netlib.org/lapack">http://www.netlib.org/lapack</a> and its guide is listed
+<p>LAPACK is from <a href="http://www.netlib.org/lapack/">http://www.netlib.org/lapack/</a> and its guide is listed
 in the references.
 </p>
 
@@ -169,5 +170,5 @@ try(chol(m))  # fails
 crossprod(Q)  # not equal to m
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

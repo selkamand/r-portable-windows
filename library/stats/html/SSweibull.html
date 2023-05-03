@@ -96,7 +96,9 @@ SSweibull(Chick.6$Time, 160, 115, -5.5, 2.5)   # response only
 local({ Asym &lt;- 160; Drop &lt;- 115; lrc &lt;- -5.5; pwr &lt;- 2.5
   SSweibull(Chick.6$Time, Asym, Drop, lrc, pwr) # response _and_ gradient
 })
+## IGNORE_RDIFF_BEGIN
 getInitial(weight ~ SSweibull(Time, Asym, Drop, lrc, pwr), data = Chick.6)
+## IGNORE_RDIFF_END
 ## Initial values are in fact the converged values
 fm1 &lt;- nls(weight ~ SSweibull(Time, Asym, Drop, lrc, pwr), data = Chick.6)
 summary(fm1)
@@ -107,5 +109,5 @@ lines(x, do.call(SSweibull, c(list(x=x), coef(fm1))), col = "red", lwd=2)
 As &lt;- coef(fm1)[["Asym"]]; abline(v = 0, h = c(As, As - coef(fm1)[["Drop"]]), lty = 3)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

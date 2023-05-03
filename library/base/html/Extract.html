@@ -226,9 +226,8 @@ deletes the corresponding item of the list.  To set entries to
 </p>
 <p>When <code>$&lt;-</code> is applied to a <code>NULL</code> <code>x</code>, it first coerces
 <code>x</code> to <code>list()</code>.  This is what also happens with <code>[[&lt;-</code>
-if the replacement value <code>value</code> is of length greater than one:
-if <code>value</code> has length 1 or 0, <code>x</code> is first coerced to a
-zero-length vector of the type of <code>value</code>.
+where in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> versions less than 4.y.z, a length one value resulted in a
+length one (atomic) <em>vector</em>.
 </p>
 
 
@@ -400,5 +399,5 @@ stopifnot( identical(li$p, pi), #-- a warning
 if(is.null(op[[1]])) op[[1]] &lt;- FALSE; options(op)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

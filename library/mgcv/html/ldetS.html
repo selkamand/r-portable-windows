@@ -17,7 +17,8 @@
 <h3>Usage</h3>
 
 <pre>
-ldetS(Sl, rho, fixed, np, root = FALSE, repara = TRUE, nt = 1,deriv=2)
+ldetS(Sl, rho, fixed, np, root = FALSE, repara = TRUE,
+      nt = 1,deriv=2,sparse=FALSE)
 </pre>
 
 
@@ -42,7 +43,7 @@ ldetS(Sl, rho, fixed, np, root = FALSE, repara = TRUE, nt = 1,deriv=2)
 </td></tr>
 <tr valign="top"><td><code>root</code></td>
 <td>
-<p>indicates whether or not to return the matrix square root, E, of the total penalty S_tot.</p>
+<p>indicates whether or not to return the matrix square root, <code>E</code>, of the total penalty S_tot.</p>
 </td></tr>
 <tr valign="top"><td><code>repara</code></td>
 <td>
@@ -56,6 +57,10 @@ a re-parameterization object supplied in the returned object.</p>
 <tr valign="top"><td><code>deriv</code></td>
 <td>
 <p>order of derivative to use</p>
+</td></tr>
+<tr valign="top"><td><code>sparse</code></td>
+<td>
+<p>should <code>E</code> be sparse?</p>
 </td></tr>
 </table>
 
@@ -91,5 +96,5 @@ a re-parameterization object supplied in the returned object.</p>
 <p>Simon N. Wood &lt;simon.wood@r-project.org&gt;.
 </p>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-31 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-33 <a href="00Index.html">Index</a>]</div>
 </body></html>

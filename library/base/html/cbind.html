@@ -22,7 +22,7 @@ cbind(..., deparse.level = 1)
 rbind(..., deparse.level = 1)
 ## S3 method for class 'data.frame'
 rbind(..., deparse.level = 1, make.row.names = TRUE,
-      stringsAsFactors = default.stringsAsFactors(), factor.exclude = NA)
+      stringsAsFactors = default.stringsAsFactors(), factor.exclude = TRUE)
 </pre>
 
 
@@ -60,7 +60,7 @@ only has an effect when the <code>...</code> arguments contain a
 </td></tr>
 <tr valign="top"><td><code>factor.exclude</code></td>
 <td>
-<p>if the data frames contain factors,
+<p>if the data frames contain factors, the default
 <code>TRUE</code> ensures that <code>NA</code> levels of factors are kept, see
 <a href="https://bugs.R-project.org/bugzilla3/show_bug.cgi?id=17562">PR#17562</a> and the &lsquo;Data frame methods&rsquo;.  In <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> versions up
 to 3.6.x, <code>factor.exclude = NA</code> has been implicitly hardcoded
@@ -191,13 +191,15 @@ memberships from the class attribute.
 applicable method.
 </p>
 </li>
-<li><p> If we find an applicable method we make sure that it is
-identical to any method determined for prior arguments.
-If it is identical, we proceed, otherwise we immediately
-drop through to the default code.
+<li><p> If we find a method, we use it.  Otherwise, if there was an S4
+object among the arguments, we try S4 dispatch; otherwise, we use
+the default code.
 </p>
 </li></ol>
 
+<p>(Before <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 4.0.0, an applicable method found was used only if
+identical to any method determined for prior arguments.)
+</p>
 <p>If you want to combine other objects with data frames, it may be
 necessary to coerce them to data frames first.  (Note that this
 algorithm can result in calling the data frame method if all the
@@ -258,5 +260,5 @@ stopifnot(identical(df1, rbind(df,  new, make.row.names=FALSE)),
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

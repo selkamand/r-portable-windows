@@ -166,7 +166,8 @@ other axis is drawn (with <code>lty = 0</code>) and labeled.</p>
 </td></tr>
 <tr valign="top"><td><code>cex.axis</code></td>
 <td>
-<p>expansion factor for numeric axis labels.</p>
+<p>expansion factor for numeric axis labels (see
+<code><a href="par.html">par</a>('cex')</code>).</p>
 </td></tr>
 <tr valign="top"><td><code>cex.names</code></td>
 <td>
@@ -188,7 +189,8 @@ adjacent (non-stacked!) bars will be drawn.  Only applies when
 </td></tr>
 <tr valign="top"><td><code>axis.lty</code></td>
 <td>
-<p>the graphics parameter <code>lty</code> applied to the axis
+<p>the graphics parameter <code>lty</code> (see
+<code><a href="par.html">par</a>('lty')</code>) applied to the axis
 and tick marks of the categorical (default horizontal) axis.  Note
 that by default the axis is suppressed.</p>
 </td></tr>
@@ -218,12 +220,14 @@ names.  Only used if <code>legend.text</code> is supplied.</p>
 <td>
 <p>a formula where the <code>y</code> variables are numeric data
 to plot against the categorical <code>x</code> variables.  The formula
-can have one of three forms: </p>
+can have one of three forms:
+</p>
 <pre>
       y ~ x
       y ~ x1 + x2
-      cbind(y1, y2) ~ x</pre><p>,
-see the examples.</p>
+      cbind(y1, y2) ~ x
+    </pre>
+<p>(see the examples).</p>
 </td></tr>
 <tr valign="top"><td><code>data</code></td>
 <td>
@@ -281,7 +285,7 @@ Wadsworth &amp; Brooks/Cole.
 
 <h3>See Also</h3>
 
-<p><code><a href="plot.html">plot</a>(..., type = "h")</code>, <code><a href="dotchart.html">dotchart</a></code>;
+<p><code><a href="plot.default.html">plot</a>(..., type = "h")</code>, <code><a href="dotchart.html">dotchart</a></code>;
 <code><a href="hist.html">hist</a></code> for bars of a <em>continuous</em> variable.
 <code><a href="mosaicplot.html">mosaicplot</a>()</code>, more sophisticated to visualize
 <em>several</em> categorical variables.
@@ -368,5 +372,5 @@ barplot(height = cbind(x = c(465, 91) / 465 * 100,
         args.legend = list(x = "topleft"))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>graphics</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

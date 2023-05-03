@@ -25,7 +25,7 @@ hist(x, ...)
 hist(x, breaks = "Sturges",
      freq = NULL, probability = !freq,
      include.lowest = TRUE, right = TRUE,
-     density = NULL, angle = 45, col = NULL, border = NULL,
+     density = NULL, angle = 45, col = "lightgray", border = NULL,
      main = paste("Histogram of" , xname),
      xlim = range(breaks), ylim = NULL,
      xlab = xname, ylab,
@@ -265,7 +265,7 @@ Wadsworth &amp; Brooks/Cole.
 <a href="https://CRAN.R-project.org/package=MASS"><span class="pkg">MASS</span></a>.
 </p>
 <p>Typical plots with vertical bars are <em>not</em> histograms.  Consider
-<code><a href="barplot.html">barplot</a></code> or <code><a href="plot.html">plot</a>(*, type = "h")</code>
+<code><a href="barplot.html">barplot</a></code> or <code><a href="plot.default.html">plot</a>(*, type = "h")</code>
 for such bar plots.
 </p>
 
@@ -313,5 +313,5 @@ curve(dchisq(x, df = 4), col = 2, lty = 2, lwd = 2, add = TRUE)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>graphics</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

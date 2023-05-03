@@ -28,7 +28,7 @@ boxplot(formula, data = NULL, ..., subset, na.action = NULL,
 ## Default S3 method:
 boxplot(x, ..., range = 1.5, width = NULL, varwidth = FALSE,
         notch = FALSE, outline = TRUE, names, plot = TRUE,
-        border = par("fg"), col = NULL, log = "",
+        border = par("fg"), col = "lightgray", log = "",
         pars = list(boxwex = 0.8, staplewex = 0.5, outwex = 0.5),
          ann = !add, horizontal = FALSE, add = FALSE, at = NULL)
 </pre>
@@ -227,7 +227,7 @@ have the same class attribute, so will this component.</p>
 </td></tr>
 <tr valign="top"><td><code>n</code></td>
 <td>
-<p>a vector with the number of observations in each group.</p>
+<p>a vector with the number of (non-<code><a href="../../base/html/NA.html">NA</a></code>) observations in each group.</p>
 </td></tr>
 <tr valign="top"><td><code>conf</code></td>
 <td>
@@ -336,5 +336,5 @@ boxplot(len ~ dose:supp, data = ToothGrowth,
 ## more examples in  help(bxp)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>graphics</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>graphics</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

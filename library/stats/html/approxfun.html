@@ -18,10 +18,10 @@ or a function performing the linear (or constant) interpolation.
 
 <pre>
 approx   (x, y = NULL, xout, method = "linear", n = 50,
-          yleft, yright, rule = 1, f = 0, ties = mean)
+          yleft, yright, rule = 1, f = 0, ties = mean, na.rm = TRUE)
 
 approxfun(x, y = NULL,       method = "linear",
-          yleft, yright, rule = 1, f = 0, ties = mean)
+          yleft, yright, rule = 1, f = 0, ties = mean, na.rm = TRUE)
 </pre>
 
 
@@ -89,13 +89,22 @@ right-continuous for <code>f == 0</code> and left-continuous for <code>f
 taking a single vector argument and returning a single number
 or a <code><a href="../../base/html/list.html">list</a></code> of both, e.g.,
 <code>list("ordered", mean)</code>, see &lsquo;Details&rsquo;.</p>
-</td></tr> 
+</td></tr>
+<tr valign="top"><td><code>na.rm</code></td>
+<td>
+<p>logical specifying how missing values (<code><a href="../../base/html/NA.html">NA</a></code>'s)
+should be handled.  Setting <code>na.rm=FALSE</code> will propagate
+<code>NA</code>'s in <code>y</code> to the interpolated values, also depending on
+the <code>rule</code> set.  Note that in this case, <code>NA</code>'s in <code>x</code>
+are invalid, see also the examples.</p>
+</td></tr>
 </table>
 
 
 <h3>Details</h3>
 
-<p>The inputs can contain missing values which are deleted, so at least
+<p>The inputs can contain missing values which are deleted (if <code>na.rm</code>
+is true, i.e., by default), so at least
 two complete <code>(x, y)</code> pairs are required (for <code>method =
   "linear"</code>, one otherwise).  If there are duplicated (tied) <code>x</code>
 values and <code>ties</code> contains a function it is applied to the <code>y</code>
@@ -178,6 +187,37 @@ curve(fc(x), 0, 10, col = "darkblue", add = TRUE)
 plot(approxfun(x, y, rule = 2:1), 0, 11,
      col = "tomato", add = TRUE, lty = 3, lwd = 2)
 
+### Treatment of 'NA's -- are kept if  na.rm=FALSE :
+
+xn &lt;- 1:4
+yn &lt;- c(1,NA,3:4)
+xout &lt;- (1:9)/2
+## Default behavior (na.rm = TRUE): NA's omitted; extrapolation gives NA
+data.frame(approx(xn,yn, xout))
+data.frame(approx(xn,yn, xout, rule = 2))# -&gt; *constant* extrapolation
+## New (2019-2020)  na.rm = FALSE: NA's are "kept"
+data.frame(approx(xn,yn, xout, na.rm=FALSE, rule = 2))
+data.frame(approx(xn,yn, xout, na.rm=FALSE, rule = 2, method="constant"))
+
+## NA's in x[] are not allowed:
+stopifnot(inherits( try( approx(yn,yn, na.rm=FALSE) ), "try-error"))
+
+## Give a nice overview of all possibilities  rule * method * na.rm :
+##             -----------------------------  ====   ======   =====
+## extrapolations "N":= NA;   "C":= Constant :
+rules &lt;- list(N=1, C=2, NC=1:2, CN=2:1)
+methods &lt;- c("constant","linear")
+ry &lt;- sapply(rules, function(R) {
+       sapply(methods, function(M)
+        sapply(setNames(,c(TRUE,FALSE)), function(na.)
+                 approx(xn, yn, xout=xout, method=M, rule=R, na.rm=na.)$y),
+        simplify="array")
+   }, simplify="array")
+names(dimnames(ry)) &lt;- c("x = ", "na.rm", "method", "rule")
+dimnames(ry)[[1]] &lt;- format(xout)
+ftable(aperm(ry, 4:1)) # --&gt; (4 * 2 * 2) x length(xout)  =  16 x 9 matrix
+
+
 ## Show treatment of 'ties' :
 
 x &lt;- c(2,2:4,4,4,5,5,7,7,7)
@@ -185,15 +225,13 @@ y &lt;- c(1:6, 5:4, 3:1)
 (amy &lt;- approx(x, y, xout = x)$y) # warning, can be avoided by specifying 'ties=':
 op &lt;- options(warn=2) # warnings would be error
 stopifnot(identical(amy, approx(x, y, xout = x, ties=mean)$y))
-options(op) # revert
-(ay  &lt;- approx(x, y, xout = x, ties = "ordered")$y)
+(ay &lt;- approx(x, y, xout = x, ties = "ordered")$y)
 stopifnot(amy == c(1.5,1.5, 3, 5,5,5, 4.5,4.5, 2,2,2),
           ay  == c(2, 2,    3, 6,6,6, 4, 4,    1,1,1))
 approx(x, y, xout = x, ties = min)$y
 approx(x, y, xout = x, ties = max)$y
-
-
+options(op) # revert 'warn'ing level
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

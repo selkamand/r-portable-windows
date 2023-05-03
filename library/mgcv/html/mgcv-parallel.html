@@ -14,7 +14,7 @@
 </p>
 <p><code><a href="bam.html">bam</a></code> can use an openMP based parallelization approach alongside discretisation of covariates to achieve substantial speed ups. This is selected using the <code>discrete=TRUE</code> option to <code>bam</code>, withthe number of threads controlled via the <code>nthreads</code> argument. This is the approach that scales best. See example below.
 </p>
-<p>Alternatively, function <code><a href="bam.html">bam</a></code> can use the facilities provided in the <a href="../../parallel/html/parallel.html">parallel</a> package. See examples below. Note that most multi-core machines are memory bandwidth limited, so parallel speed up tends to be rather variable. 
+<p>Alternatively, function <code><a href="bam.html">bam</a></code> can use the facilities provided in the <a href="../../parallel/html/parallel-package.html">parallel</a> package. See examples below. Note that most multi-core machines are memory bandwidth limited, so parallel speed up tends to be rather variable. 
 </p>
 <p>Function <code><a href="gam.html">gam</a></code> can use parallel threads on a (shared memory) multi-core 
 machine via <code>openMP</code> (where this is supported). To do this, set the desired number of threads by setting <code>nthreads</code> to the number of cores to use, in the <code>control</code> argument of <code><a href="gam.html">gam</a></code>. Note that, for the most part, only the dominant <i>O(np^2)</i> steps are parallelized (n is number of data, p number of parameters). For additive Gaussian models estimated by GCV, the speed up can be disappointing as these employ an <i>O(p^3)</i> SVD step that can also have substantial cost in practice. 
@@ -91,5 +91,5 @@ system.time(b4 &lt;- bam(y ~ s(x0,bs=bs,k=7)+s(x1,bs=bs,k=7)+s(x2,bs=bs,k=k)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-31 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-33 <a href="00Index.html">Index</a>]</div>
 </body></html>

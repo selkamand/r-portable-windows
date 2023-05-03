@@ -40,9 +40,9 @@ gammals(link=list("identity","log"),b=-7)
 <p>Used with <code><a href="gam.html">gam</a></code> to fit gamma location - scale models parameterized in terms of the log mean and the log scale parameter (the response variance is the mean multiplied by the scale parameter). Note that <code>identity</code> links mean that the linear predictors give the log mean and scale directly. By default the <code>log</code> link for the scale parameter simply forces the log scale parameter to have a lower limit given by argument <code>b</code>: if <i>l</i> is the linear predictor for the log scale parameter, <i>s</i>, then <i>log(s) = b + log(1+e^l)</i>. 
 </p>
 <p><code>gam</code> is called with 
-a list containing 2 formulae, the first specifies the response on the left hand side and the structure of the linear predictor for the log mean on the right hand side. The second is one sided, specifying the linear predictor for the log sscale on the right hand side. 
+a list containing 2 formulae, the first specifies the response on the left hand side and the structure of the linear predictor for the log mean on the right hand side. The second is one sided, specifying the linear predictor for the log scale on the right hand side. 
 </p>
-<p>The fitted values for this family will be a two column matrix. The first column is the mean (on origianl, not log, scale), and the second column is the log scale. Predictions using <code><a href="predict.gam.html">predict.gam</a></code> will also produce 2 column matrices for <code>type</code> <code>"link"</code> and <code>"response"</code>. The first column is on the original data scale when <code>type="response"</code> and on the log mean scale of the linear predictor when <code>type="link"</code>. The second column when <code>type="response"</code> is again the log scale parameter, but is on the linear predictor when <code>type="link"</code>.
+<p>The fitted values for this family will be a two column matrix. The first column is the mean (on original, not log, scale), and the second column is the log scale. Predictions using <code><a href="predict.gam.html">predict.gam</a></code> will also produce 2 column matrices for <code>type</code> <code>"link"</code> and <code>"response"</code>. The first column is on the original data scale when <code>type="response"</code> and on the log mean scale of the linear predictor when <code>type="link"</code>. The second column when <code>type="response"</code> is again the log scale parameter, but is on the linear predictor when <code>type="link"</code>.
 </p>
 <p>The null deviance reported for this family computed by setting the fitted values to the mean response, but using the model estimated scale. 
 </p>
@@ -59,7 +59,7 @@ a list containing 2 formulae, the first specifies the response on the left hand 
 <p>Wood, S.N., N. Pya and B. Saefken (2016), Smoothing parameter and
 model selection for general smooth models.
 Journal of the American Statistical Association 111, 1548-1575
-<a href="http://dx.doi.org/10.1080/01621459.2016.1180986">http://dx.doi.org/10.1080/01621459.2016.1180986</a>
+<a href="https://dx.doi.org/10.1080/01621459.2016.1180986">https://dx.doi.org/10.1080/01621459.2016.1180986</a>
 </p>
 
 
@@ -89,5 +89,5 @@ plot(log(th),fitted(b1)[,2]);abline(0,1,col=2)
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-31 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-33 <a href="00Index.html">Index</a>]</div>
 </body></html>

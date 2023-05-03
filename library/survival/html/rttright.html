@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compute redistribute-to-the-right weights</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for rttright {survival}"><tr><td>rttright {survival}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compute redistribute-to-the-right weights</h2>
+
+<h3>Description</h3>
+
+<p>For many survival estimands, one approach is to redistribute each
+censored observation's weight to those other observations with a longer
+survival time (think of distributing an estate to the heirs). Then
+compute on the remaining, uncensored data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+rttright(formula, data, weights, subset, na.action, time, id, timefix = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>formula</code></td>
+<td>
+
+<p>a formula object, which must have a 
+<code>Surv</code> object as the  
+response on the left of the <code>~</code> operator and, if desired, terms  
+separated by + operators on the right. 
+Each unique combination of predictors will define a separate strata.
+</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+
+<p>a data frame in which to interpret the variables named in the formula, 
+<code>subset</code> and <code>weights</code> arguments. 
+</p>
+</td></tr>
+<tr valign="top"><td><code>weights</code></td>
+<td>
+
+<p>The weights must be nonnegative and it is strongly recommended that  
+they be strictly positive, since zero weights are ambiguous, compared 
+to use of the <code>subset</code> argument.
+</p>
+</td></tr>
+<tr valign="top"><td><code>subset</code></td>
+<td>
+
+<p>expression saying that only a subset of the rows of the data 
+should be used in the fit. 
+</p>
+</td></tr>
+<tr valign="top"><td><code>na.action</code></td>
+<td>
+
+<p>a missing-data filter function, applied to the model frame, after any 
+<code>subset</code> argument has been used. 
+Default is <code>options()$na.action</code>. 
+</p>
+</td></tr>
+<tr valign="top"><td><code>time</code></td>
+<td>
+<p>a vector of time points, for which to return updated
+weights.  If missing, a time after the largest time in the data is
+assumed.</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>optional: if the data set has multiple rows per subject, a
+a variable containing the subect identifier of each row.</p>
+</td></tr>
+<tr valign="top"><td><code>timefix</code></td>
+<td>
+<p>correct for possible round-off error</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The <code>formula</code> argument is treated exactly the same as in the
+<code>survfit</code> function.
+</p>
+<p>Redistribution is recursive: redistribute the weight of the smallest
+censored observation to all those with longer time, which may include
+other censored observations.  Then redistribute the next smallest and
+etc. up to the specified <code>time</code> value.
+After re-distributing the weight for a censored observation to other
+observations that are not censored, ordinary non-censored methods can
+often be applied.  For example, redistribution of the weights,
+followed by computation of the weighted cumulative distribution
+function, reprises the Kaplan-Meier estimator.
+</p>
+<p>A primary use of this routine is illustration of methods or
+exploration of new methods.  Methods that use RTTR directly, such as
+the Brier score, will normally do these compuations internally.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a vector or matrix of weights, with one column for each requested time</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="survfit.html">survfit</a></code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+afit &lt;- survfit(Surv(time, status) ~1, data=aml)
+rwt  &lt;- rttright(Surv(time, status) ~1, data=aml)
+
+index &lt;- order(aml$time)
+cdf &lt;- cumsum(rwt[index])  # weighted CDF
+cdf &lt;- cdf[!duplicated(aml$time[index], fromLast=TRUE)]  # remove duplicates
+cbind(time=afit$time, KM= afit$surv, RTTR= 1-cdf)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-7 <a href="00Index.html">Index</a>]</div>
+</body></html>

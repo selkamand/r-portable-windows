@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Time Windows</title>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Time (Series) Windows</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="R.css" />
 </head><body>
 
 <table width="100%" summary="page for window {stats}"><tr><td>window {stats}</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2>Time Windows</h2>
+<h2>Time (Series) Windows</h2>
 
 <h3>Description</h3>
 
@@ -25,7 +25,7 @@ window(x, ...)
 window(x, ...)
 ## Default S3 method:
 window(x, start = NULL, end = NULL,
-      frequency = NULL, deltat = NULL, extend = FALSE, ...)
+      frequency = NULL, deltat = NULL, extend = FALSE, ts.eps = getOption("ts.eps"), ...)
 
 window(x, ...) &lt;- value
 ## S3 replacement method for class 'ts'
@@ -58,6 +58,12 @@ window(x, start, end, frequency, deltat, ...) &lt;- value
 <p>logical.  If true, the <code>start</code> and <code>end</code> values
 are allowed to extend the series.  If false, attempts to extend the
 series give a warning and are ignored.</p>
+</td></tr>
+<tr valign="top"><td><code>ts.eps</code></td>
+<td>
+<p>time series comparison tolerance.  Frequencies are
+considered equal if their absolute difference is less than
+<code>ts.eps</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -124,5 +130,5 @@ window(pres, c(1945,4), c(1949,4), frequency = 1) &lt;- 85:89
 pres
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>stats</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>stats</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

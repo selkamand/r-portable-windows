@@ -189,5 +189,6 @@ anova(fm3Wheat2, L = c(-1, 0, 1))
 
 # cleanup
 
+summary(warnings())
 proc.time()
 

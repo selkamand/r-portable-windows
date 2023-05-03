@@ -28,7 +28,10 @@ pictex(file = "Rplots.tex", width = 5, height = 4, debug = FALSE,
 <table summary="R argblock">
 <tr valign="top"><td><code>file</code></td>
 <td>
-<p>the file where output will appear.</p>
+<p>the file path where output will appear.
+Tilde expansion (see <code><a href="../../base/html/path.expand.html">path.expand</a></code>) is done. An input with
+a marked encoding is converted to the native encoding or an error is given.
+</p>
 </td></tr>
 <tr valign="top"><td><code>width</code></td>
 <td>
@@ -166,5 +169,5 @@ unlink("Rplots.tex")
 
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>grDevices</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

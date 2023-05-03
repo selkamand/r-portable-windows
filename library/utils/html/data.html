@@ -217,10 +217,16 @@ for the session.
 <p>One can take advantage of the search order and the fact that a
 &lsquo;<span class="file">.R</span>&rsquo; file will change directory.  If raw data are stored in
 &lsquo;<span class="file">mydata.txt</span>&rsquo; then one can set up &lsquo;<span class="file">mydata.R</span>&rsquo; to read
-&lsquo;<span class="file">mydata.txt</span>&rsquo; and pre-process it, e.g., using <code>transform</code>.
+&lsquo;<span class="file">mydata.txt</span>&rsquo; and pre-process it, e.g., using <code><a href="../../base/html/transform.html">transform</a>()</code>.
 For instance one can convert numeric vectors to factors with the
 appropriate labels.  Thus, the &lsquo;<span class="file">.R</span>&rsquo; file can effectively contain
 a metadata specification for the plaintext formats.
+</p>
+<p>In older versions of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>, up to 3.6.x, both <code>package = "base"</code> and
+<code>package = "stats"</code> were using <code>package = "datasets"</code>, (with a
+warning), as before 2004, (most of) the datasets in <span class="pkg">datasets</span> were
+either in <span class="pkg">base</span> or <span class="pkg">stats</span>.  For these packages, the result
+is now empty as they contain no data sets.
 </p>
 
 
@@ -248,5 +254,5 @@ ds &lt;- c("USArrests", "VADeaths"); data(list = ds)
 help(USArrests)                # give information on data set 'USArrests'
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

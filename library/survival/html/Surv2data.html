@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Convert data from timecourse to (time1,time2) style</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Surv2data {survival}"><tr><td>Surv2data {survival}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Convert data from timecourse to (time1,time2) style
+</h2>
+
+<h3>Description</h3>
+
+<p>The multi-state survival functions <code>coxph</code> and <code>survfit</code>
+allow for two forms of input data.  This routine converts between them.
+The function is normally called behind the scenes when <code>Surv2</code> is
+as the response. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+Surv2data(formula, data, subset, id)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>formula</code></td>
+<td>
+<p>a model formula</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>a data frame</p>
+</td></tr>
+<tr valign="top"><td><code>subset</code></td>
+<td>
+<p>optional, selects rows of the data to be retained</p>
+</td></tr>
+<tr valign="top"><td><code>id</code></td>
+<td>
+<p>a variable that identified multiple rows for the same
+subject, normally found in the referenced data set</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>For timeline style data, each row is uniquely identified by an
+(identifier, time) pair.  The time could be a date, time from entry to a
+study, age, etc, (there may often be more than one time variable).
+The identifier and time cannot be missing.
+The remaining covariates represent values that were observed at that
+time point. Often, a given covariate is observed at only a subset of
+times and is missing at others.  At the time of death, in particular,
+often only the identifier, time, and status indicator are known.
+</p>
+<p>In the resulting data set missing covariates are replaced by their
+last known value, and the response y will be a Surv(time1, time2,
+endpoint) object.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a list with elements
+</p>
+<table summary="R valueblock">
+<tr valign="top"><td><code>mf</code></td>
+<td>
+<p>an updated model frame (fewer rows, unchanged columns)</p>
+</td></tr>
+<tr valign="top"><td><code>S2.y</code></td>
+<td>
+<p>the constructed response variable</p>
+</td></tr>
+<tr valign="top"><td><code>S2.state</code></td>
+<td>
+<p>the current state for each of the rows</p>
+</td></tr>
+</table>
+
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-7 <a href="00Index.html">Index</a>]</div>
+</body></html>

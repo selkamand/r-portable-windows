@@ -41,7 +41,7 @@ produced.</p>
 </p>
 
 <ul>
-<li><p> If given as a one-sided formula, a <code><a href="../../lattice/html/dotplot.html">dotplot</a>()</code>
+<li><p> If given as a one-sided formula, a <code><a href="../../lattice/html/xyplot.html">dotplot</a>()</code>
 of the estimated random effects (coefficients) grouped according to
 all combinations of the levels of the factors named in <code>form</code>
 is returned.
@@ -102,7 +102,7 @@ margin parameters for the x-axis (default is <code>c(2, 0.5, 0)</code>).</p>
 <tr valign="top"><td><code>strip</code></td>
 <td>
 <p>a <code><a href="../../base/html/function.html">function</a></code> or <code>FALSE</code>, see
-<code><a href="../../lattice/html/dotplot.html">dotplot</a>()</code> from package <a href="https://CRAN.R-project.org/package=lattice"><span class="pkg">lattice</span></a>.</p>
+<code><a href="../../lattice/html/xyplot.html">dotplot</a>()</code> from package <a href="https://CRAN.R-project.org/package=lattice"><span class="pkg">lattice</span></a>.</p>
 </td></tr>
 <tr valign="top"><td><code>...</code></td>
 <td>
@@ -115,7 +115,7 @@ function.</p>
 <h3>Details</h3>
 
 <p>If <code>form</code> is missing, or is given as a one-sided formula, a
-Trellis dot-plot (via <code><a href="../../lattice/html/dotplot.html">dotplot</a>()</code> from pkg
+Trellis dot-plot (via <code><a href="../../lattice/html/xyplot.html">dotplot</a>()</code> from pkg
 <a href="https://CRAN.R-project.org/package=lattice"><span class="pkg">lattice</span></a>) of the random effects is generated, with a different
 panel for each random effect (coefficient).  Rows in the dot-plot are
 determined by the <code>form</code> argument (if not missing) or by the row
@@ -167,5 +167,5 @@ plot(fm1RE, form = ~ Sex)
 plot(fm1RE, form = age ~ Sex) # "connected" boxplots
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>nlme</em> version 3.1-144 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>nlme</em> version 3.1-149 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -30,5 +30,5 @@ URL: https://github.com/bethatkinson/rpart,
 BugReports: https://github.com/bethatkinson/rpart/issues
 Packaged: 2019-04-11 15:59:38 UTC; atkinson
 Date/Publication: 2019-04-12 14:32:39 UTC
-Built: R 3.6.3; x86_64-w64-mingw32; 2020-02-29 09:43:22 UTC; windows
+Built: R 4.0.3; x86_64-w64-mingw32; 2020-10-10 12:54:52 UTC; windows
 Archs: i386, x64

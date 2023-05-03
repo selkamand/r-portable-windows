@@ -39,7 +39,6 @@ panel.smooth            Simple Panel Plot
 par                     Set or Query Graphical Parameters
 persp                   Perspective Plots
 pie                     Pie Charts
-plot                    Generic X-Y Plotting
 plot.data.frame         Plot Method for Data Frames
 plot.default            The Default Scatterplot Function
 plot.design             Plot Univariate Effects of a Design or Model

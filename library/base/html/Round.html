@@ -113,6 +113,14 @@ especially with <code>floor</code> and <code>ceiling</code>.  For example, we
 <code>1</code>, but <code>0</code> has been seen on an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> platform.  It is
 normally necessary to use a tolerance.
 </p>
+<p>Rounding to decimal digits in binary arithmetic is non-trivial (when
+<code>digits != 0</code>) and may be surprising.  Be aware that most decimal
+fractions are <em>not</em> exactly representable in binary double precision.
+In <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 4.0.0, the algorithm for <code>round(x, d)</code>, for <i>d &gt; 0</i>, has
+been improved to <em>measure</em> and round &ldquo;to nearest even&rdquo;,
+contrary to earlier versions of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> (or also to <code><a href="sprintf.html">sprintf</a>()</code>
+or <code><a href="format.html">format</a>()</code> based rounding).
+</p>
 
 
 <h3>References</h3>
@@ -123,7 +131,7 @@ normally necessary to use a tolerance.
 <p>The ISO/IEC/IEEE 60559:2011 standard is available for money from
 <a href="https://www.iso.org">https://www.iso.org</a>.
 </p>
-<p>The IEEE 745:2008 standard is more openly documented, e.g, at
+<p>The IEEE 754:2008 standard is more openly documented, e.g, at
 <a href="https://en.wikipedia.org/wiki/IEEE_754">https://en.wikipedia.org/wiki/IEEE_754</a>.
 </p>
 
@@ -131,6 +139,9 @@ normally necessary to use a tolerance.
 <h3>See Also</h3>
 
 <p><code><a href="integer.html">as.integer</a></code>.
+Package <a href="https://CRAN.R-project.org/package=round"><span class="pkg">round</span></a>'s <code><a href="../../round/html/roundX.html">roundX</a>()</code> for several
+versions or implementations of rounding, including some previous and the
+current <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> version (as <code>version = "3d.C"</code>).
 </p>
 
 
@@ -151,5 +162,5 @@ round(x2, 3)
 signif(x2, 3)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

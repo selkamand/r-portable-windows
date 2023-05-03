@@ -23,7 +23,7 @@ Predictions for a Cox model
 predict(object, newdata,
 type=c("lp", "risk", "expected", "terms", "survival"),
 se.fit=FALSE, na.action=na.pass, terms=names(object$assign), collapse,
-reference=c("strata", "sample"),  ...)
+reference=c("strata", "sample", "zero"),  ...)
 </pre>
 
 
@@ -106,28 +106,28 @@ entry per observation.
 <p>The Cox model is a <em>relative</em> risk model; predictions
 of type &quot;linear predictor&quot;, &quot;risk&quot;, and &quot;terms&quot; are all
 relative to the sample from which they came.  By default, the reference
-value for each of these is the mean covariate within strata.  The
-primary underlying
-reason is statistical: a Cox model only predicts relative risks
+value for each of these is the mean covariate within strata.
+The underlying reason is both statistical and practial.
+First, a Cox model only predicts relative risks
 between pairs of subjects within the same strata, and hence the addition
 of a constant to any covariate, either overall or only within a
 particular stratum, has no effect on the fitted results.
-Using the <code>reference="strata"</code> option causes this to be true for
-predictions as well.
-(There have been occasional requests for reference=&quot;zero&quot;, i.e., a
-hypothetical subject with all covariates equal to zero, in order to
-match certain other packages' results.
-The issue is that the results are often silly, e.g., risk relative to
-a subject with height, weight, or blood pressure of zero.)
-</p>
-<p>When the results of <code>predict</code> are used in further calculations it
-may be desirable to use a fixed reference level.
+Second, downstream calculations depend on the risk score exp(linear
+predictor), which will fall prey to numeric overflow for a linear
+predictor greater than <code>.Machine\$double.max.exp</code>.
+The <code>coxph</code> routines try to approximately center the predictors out
+of self protection.
+Using the <code>reference="strata"</code> option is the safest centering,
+since strata occassionally have different means.
+When the results of <code>predict</code> are used in further calculations it
+may be desirable to use a single reference level for all observations.
 Use of <code>reference="sample"</code> will use the overall means, and agrees
 with the <code>linear.predictors</code> component of the coxph object (which
 uses the overall mean for backwards compatability with older code).
 Predictions of <code>type="terms"</code> are almost invariably passed
 forward to further calculation, so for these we default to using
 the sample as the reference.
+A reference of <code>"zero"</code> causes no centering to be done.
 </p>
 <p>Predictions of type &quot;expected&quot; incorporate the baseline hazard and are
 thus absolute instead of relative; the
@@ -195,5 +195,5 @@ pzero &lt;- function(fit)
   predict(fit, reference="sample") + sum(coef(fit) * fit$means, na.rm=TRUE)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.1-8 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>survival</em> version 3.2-7 <a href="00Index.html">Index</a>]</div>
 </body></html>

@@ -20,7 +20,7 @@ characters.
 <h3>Usage</h3>
 
 <pre>
-parseLatex(text, filename = deparse(substitute(text)),
+parseLatex(text, filename = deparse1(substitute(text)),
            verbose = FALSE,
            verbatim = c("verbatim", "verbatim*",
                         "Sinput", "Soutput"))
@@ -113,5 +113,5 @@ latex &lt;- parseLatex("fa\\c{c}ile")
 deparseLatex(latexToUtf8(latex))
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>tools</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>tools</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

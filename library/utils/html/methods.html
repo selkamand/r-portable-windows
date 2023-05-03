@@ -21,6 +21,8 @@ methods(generic.function, class)
 .S3methods(generic.function, class, envir=parent.frame())
 
 ## S3 method for class 'MethodsFunction'
+format(x, byclass = attr(x, "byclass"), ...)
+## S3 method for class 'MethodsFunction'
 print(x, byclass = attr(x, "byclass"), ...)
 </pre>
 
@@ -46,7 +48,7 @@ character string.</p>
 </td></tr>
 <tr valign="top"><td><code>x</code></td>
 <td>
-<p>typically the result of <code>methods(..)</code>, an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object of 
+<p>typically the result of <code>methods(..)</code>, an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> object of S3
 class <code>"MethodsFunction"</code>, see &lsquo;Value&rsquo; below.</p>
 </td></tr>
 <tr valign="top"><td><code>byclass</code></td>
@@ -154,6 +156,8 @@ eds J. M. Chambers and T. J. Hastie, Wadsworth &amp; Brooks/Cole.
 <h3>Examples</h3>
 
 <pre>
+methods(class = "MethodsFunction") # format and print
+
 require(stats)
 
 methods(summary)
@@ -166,11 +170,14 @@ methods("$&lt;-")            # replacement function
 methods("+")              # binary operator
 methods("Math")           # group generic
 require(graphics)
-methods("axis")           # looks like a generic, but is not
+methods(axis)             # looks like a generic, but is not
+
+mf &lt;- methods(format)     # quite a few; ... the last few :
+tail(cbind(meth = format(mf)))
 
 if(require(Matrix)) {
 print(methods(class = "Matrix"))  # S4 class
-m &lt;- methods("dim")       # S3 and S4 methods
+m &lt;- methods(dim)         # S3 and S4 methods
 print(m)
 print(attr(m, "info"))    # more extensive information
 
@@ -178,5 +185,5 @@ print(attr(m, "info"))    # more extensive information
 }
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>utils</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>utils</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

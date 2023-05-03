@@ -16,8 +16,8 @@
 <h3>Usage</h3>
 
 <pre>
-paste (..., sep = " ", collapse = NULL)
-paste0(..., collapse = NULL)
+paste (..., sep = " ", collapse = NULL, recycle0 = FALSE)
+paste0(...,            collapse = NULL, recycle0 = FALSE)
 </pre>
 
 
@@ -38,6 +38,14 @@ paste0(..., collapse = NULL)
 <p>an optional character string to separate the results.  Not
 <code><a href="NA.html">NA_character_</a></code>.</p>
 </td></tr>
+<tr valign="top"><td><code>recycle0</code></td>
+<td>
+<p><code><a href="logical.html">logical</a></code> indicating if zero-length
+character arguments should lead to the zero-length
+<code><a href="character.html">character</a>(0)</code> after the <code>sep</code>-phase (which turns into
+<code>""</code> in the <code>collapse</code>-phase, i.e., when <code>collapse</code> is
+not <code>NULL</code>).</p>
+</td></tr>
 </table>
 
 
@@ -48,7 +56,9 @@ paste0(..., collapse = NULL)
 them (separating them by the string given by <code>sep</code>).  If the
 arguments are vectors, they are concatenated term-by-term to give a
 character vector result.  Vector arguments are recycled as needed,
-with zero-length arguments being recycled to <code>""</code>.
+with zero-length arguments being recycled to <code>""</code> only if
+<code>recycle0</code> is not true <em>or</em> <code>collapse</code> is not
+<code>NULL</code>.
 </p>
 <p>Note that <code>paste()</code> coerces <code><a href="NA.html">NA_character_</a></code>, the
 character missing value, to <code>"NA"</code> which may seem
@@ -67,8 +77,8 @@ separated by the value of <code>collapse</code>.
 <h3>Value</h3>
 
 <p>A character vector of the concatenated values.  This will be of length
-zero if all the objects are, unless <code>collapse</code> is non-NULL in
-which case it is a single empty string.
+zero if all the objects are, unless <code>collapse</code> is non-NULL, in which
+case it is <code>""</code> (a single empty string).
 </p>
 <p>If any input into an element of the result is in UTF-8 (and none are
 declared with encoding <code>"bytes"</code>, see <code><a href="Encoding.html">Encoding</a></code>),
@@ -145,7 +155,21 @@ paste(month.abb, nth, sep = ": ", collapse = "; ")
     "Stopping distance of cars (ft) vs. speed (mph) from Ezekiel (1930)",
     width = 30), collapse = "\n"))
 plot(dist ~ speed, cars, main = title)
+
+## 'recycle0 = TRUE' allows more vectorized behaviour, i.e. zero-length recycling :
+valid &lt;- FALSE
+val &lt;- pi
+paste("The value is", val[valid], "-- not so good!")
+paste("The value is", val[valid], "-- good: empty!", recycle0=TRUE) # -&gt; character(0)
+## When  'collapse = &lt;string&gt;',  the result is a length-1 string :
+paste("foo", {}, "bar", collapse="|")                  # |--&gt;  "foo  bar"
+paste("foo", {}, "bar", collapse="|", recycle0 = TRUE) # |--&gt;  ""
+## all empty args
+paste(	  collapse="|")                  # |--&gt;  ""  as do all these:
+paste(	  collapse="|", recycle0 = TRUE)
+paste({}, collapse="|")
+paste({}, collapse="|", recycle0 = TRUE)
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

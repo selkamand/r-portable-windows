@@ -9,7 +9,7 @@
 
 <h3>Description</h3>
 
-<p>Most BLAS implementations are thread safe, but some verions of OpenBLAS, for example are not. This routne is a diagnostic helper function, which you will never need if you don't set <code>nthreads&gt;1</code>, and even then are unlikely to need.   
+<p>Most BLAS implementations are thread safe, but some versions of OpenBLAS, for example, are not. This routine is a diagnostic helper function, which you will never need if you don't set <code>nthreads&gt;1</code>, and even then are unlikely to need.   
 </p>
 
 
@@ -40,7 +40,7 @@ blas.thread.test(n=1000,nt=4)
 </p>
 <p>A multi-threaded BLAS is often no faster than a single-threaded BLAS, while judicious use of threading in the code calling the BLAS can still deliver a modest speed improvement. For this reason it is often better to use a single threaded BLAS and the codenthreads options to <code><a href="bam.html">bam</a></code> or <code><a href="gam.html">gam</a></code>. For <code>bam(...,discrete=TRUE)</code> using several threads can be a substantial benefit, especially with the reference BLAS.
 </p>
-<p>The MKL BLAS is mutlithreaded by default. Under linux seting evironment variable <code>MKL_NUM_THREADS=1</code> before starting R gives single threaded operation. 
+<p>The MKL BLAS is mutlithreaded by default. Under linux setting environment variable <code>MKL_NUM_THREADS=1</code> before starting R gives single threaded operation. 
 </p>
 
 
@@ -48,5 +48,5 @@ blas.thread.test(n=1000,nt=4)
 
 <p> Simon N. Wood <a href="mailto:simon.wood@r-project.org">simon.wood@r-project.org</a></p>
 
-<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-31 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>mgcv</em> version 1.8-33 <a href="00Index.html">Index</a>]</div>
 </body></html>

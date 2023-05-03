@@ -1,7 +1,7 @@
 
-R Under development (unstable) (2019-07-31 r76909) -- "Unsuffered Consequences"
-Copyright (C) 2019 The R Foundation for Statistical Computing
-Platform: x86_64-pc-linux-gnu (64-bit)
+R Under development (unstable) (2020-03-24 r78051) -- "Unsuffered Consequences"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin19.3.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -477,8 +477,8 @@ Warning messages:
  $ factor_s_undeclared      : Factor w/ 3 levels "no","perhaps",..: 3 1 2 NA 3
  $ factor_s_undeclared2     : Factor w/ 2 levels "no","yes": NA NA NA NA NA
  $ date                     : num  1.27e+10 1.37e+10 1.37e+10 NA NA
- - attr(*, "variable.labels")= Named chr  "numeric variable" "numeric variable with long label: this variable hat five observations (one is missing). All values between 1 an"| __truncated__ "numeric factor with missing range" "numeric factor with long value labels" ...
-  ..- attr(*, "names")= chr  "numeric" "numeric_long_label" "factor_numeric" "factor_n_long_value_label" ...
+ - attr(*, "variable.labels")= Named chr [1:17] "numeric variable" "numeric variable with long label: this variable hat five observations (one is missing). All values between 1 an"| __truncated__ "numeric factor with missing range" "numeric factor with long value labels" ...
+  ..- attr(*, "names")= chr [1:17] "numeric" "numeric_long_label" "factor_numeric" "factor_n_long_value_label" ...
  - attr(*, "codepage")= int 65001
 > x.append <- read.spss(file=sav, to.data.frame = TRUE, 
 +     add.undeclared.levels = "append", reencode="UTF-8")
@@ -653,4 +653,4 @@ A wonderful serenity has taken possession of my entire soul, like
 > 
 > proc.time()
    user  system elapsed 
-  0.253   0.023   0.270 
+  0.345   0.055   0.391 

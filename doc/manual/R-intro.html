@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- This manual is for R, version 3.6.3 (2020-02-29).
+<!-- This manual is for R, version 4.0.3 (2020-10-10).
 
 Copyright (C) 1990 W. N. Venables
 
@@ -10,7 +10,7 @@ Copyright (C) 1997 R. Gentleman & R. Ihaka
 
 Copyright (C) 1997, 1998 M. Maechler
 
-Copyright (C) 1999-2018 R Core Team
+Copyright (C) 1999-2020 R Core Team
 
 Permission is granted to make and distribute verbatim copies of this
 manual provided the copyright notice and this permission notice are
@@ -29,6 +29,7 @@ approved by the R Core Team. -->
 <head>
 <title>An Introduction to R</title>
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="An Introduction to R">
 <meta name="keywords" content="An Introduction to R">
 <meta name="resource-type" content="document">
@@ -404,13 +405,13 @@ analysis, classification, clustering, ...).
 <p>This manual provides information on data types, programming elements,
 statistical modelling and graphics.
 </p>
-<p>This manual is for R, version 3.6.3 (2020-02-29).
+<p>This manual is for R, version 4.0.3 (2020-10-10).
 </p>
 <p>Copyright &copy; 1990 W. N. Venables<br>
 Copyright &copy; 1992 W. N. Venables &amp; D. M. Smith<br>
 Copyright &copy; 1997 R. Gentleman &amp; R. Ihaka<br>
 Copyright &copy; 1997, 1998 M. Maechler<br>
-Copyright &copy; 1999&ndash;2018 R Core Team
+Copyright &copy; 1999&ndash;2020 R Core Team
 </p>
 <blockquote>
 <p>Permission is granted to make and distribute verbatim copies of this
@@ -495,7 +496,7 @@ for granting permission to distribute this modified version of the notes
 in this way, and for being a supporter of R from way back.
 </p>
 <p>Comments and corrections are always welcome.  Please address email
-correspondence to <a href="mailto:R-core@R-project.org">R-core@R-project.org</a>.
+correspondence to <a href="mailto:R-help@R-project.org">R-help@R-project.org</a>.
 </p>
 <a name="Suggestions-to-the-reader"></a>
 <h4 class="subheading">Suggestions to the reader</h4>
@@ -1426,7 +1427,7 @@ of characters delimited by the double quote character, e.g.,
 <p>Character strings are entered using either matching double (<code>&quot;</code>) or
 single (<code>'</code>) quotes, but are printed using double quotes (or
 sometimes without quotes).  They use C-style escape sequences, using
-<code>\</code> as the escape character, so <code>\\</code> is entered and printed as
+<code>\</code> as the escape character, so <code>\</code> is entered and printed as
 <code>\\</code>, and inside double quotes <code>&quot;</code> is entered as <code>\&quot;</code>.
 Other useful escape sequences are <code>\n</code>, newline, <code>\t</code>, tab and
 <code>\b</code>, backspace&mdash;see <code>?Quotes</code> for a full list.
@@ -7308,11 +7309,11 @@ facilities are available in the system GGobi by Swayne, Cook and Buja
 available from
 </p>
 <blockquote>
-<p><a href="http://www.ggobi.org/">http://www.ggobi.org/</a>
+<p><a href="http://ggobi.org/">http://ggobi.org/</a>
 </p></blockquote>
 
 <p>and these can be accessed from R via the package <a href="https://CRAN.R-project.org/package=rggobi"><strong>rggobi</strong></a>, described at
-<a href="http://www.ggobi.org/rggobi">http://www.ggobi.org/rggobi</a>.
+<a href="http://ggobi.org/rggobi.html">http://ggobi.org/rggobi.html</a>.
 </p>
 <p>Also, package <a href="https://CRAN.R-project.org/package=rgl"><strong>rgl</strong></a> provides ways to interact with 3D plots, for example
 of surfaces.
@@ -7332,7 +7333,7 @@ when a package is loaded are its contents available.  This is done both
 for efficiency (the full list would take more memory and would take
 longer to search than a subset), and to aid package developers, who are
 protected from name clashes with other code.  The process of developing
-packages is described in <a href="R-exts.html#Creating-R-packages">Creating R
+packages is described in <a href="http://cran.r-project.org/doc/manuals/R-exts.html#Creating-R-packages">Creating R
 packages</a> in <cite>Writing R Extensions</cite>.  Here, we will describe them
 from a user&rsquo;s point of view.
 </p>
@@ -7352,7 +7353,7 @@ command like
 
 <p>Users connected to the Internet can use the <code>install.packages()</code>
 and <code>update.packages()</code> functions (available through the
-<code>Packages</code> menu in the Windows and macOS GUIs, see <a href="R-admin.html#Installing-packages">Installing
+<code>Packages</code> menu in the Windows and macOS GUIs, see <a href="http://cran.r-project.org/doc/manuals/R-admin.html#Installing-packages">Installing
 packages</a> in <cite>R Installation and Administration</cite>) to install
 and update packages.
 </p>
@@ -7424,7 +7425,7 @@ packages) are distributed with every binary distribution of R.  Most
 are available for download from <acronym>CRAN</acronym>
 (<a href="https://CRAN.R-project.org/">https://CRAN.R-project.org/</a> and its mirrors) and other
 repositories such as Bioconductor (<a href="https://www.bioconductor.org/">https://www.bioconductor.org/</a>).
-and Omegahat (<a href="http://www.omegahat.net/">http://www.omegahat.net/</a>).  The <em>R FAQ</em>
+The <em>R FAQ</em>
 contains a list of CRAN packages current at the time of release, but the
 collection of available packages changes very frequently.
 </p>
@@ -7839,7 +7840,7 @@ suitably coded.
 </p>
 </dd>
 <dt><code>attach(mm)</code></dt>
-<dd><p>Make the data frame visible at position 3 (the default).
+<dd><p>Make the data frame visible at position 2 (the default).
 </p>
 </dd>
 <dt><code>plot(Expt, Speed, main=&quot;Speed of Light Data&quot;, xlab=&quot;Experiment No.&quot;)</code></dt>
@@ -8192,7 +8193,7 @@ maximum allowed on that version of Windows.
 <dd><p>Do not print out the initial copyright and welcome messages.
 </p>
 </dd>
-<dt><samp>--slave</samp></dt>
+<dt><samp>--no-echo</samp></dt>
 <dd><p>Make R run as quietly as possible.  This option is intended to
 support programs which use R to compute results for them.  It implies
 <samp>--quiet</samp> and <samp>--no-save</samp>.
@@ -8558,7 +8559,7 @@ Pinard) is to use a <em>here document</em> like
 <div class="example">
 <pre class="example">#!/bin/sh
 [environment variables can be set here]
-R --slave [other options] &lt;&lt;EOF
+R --no-echo [other options] &lt;&lt;EOF
 
    R program goes here...
 
@@ -8601,9 +8602,10 @@ used by the inbuilt command line editor: this used to happen on macOS.
 file <samp>README.Rterm</samp> for command-line editing under
 <code>Rterm.exe</code>.
 </p>
-<p>When using R with GNU<a name="DOCF28" href="#FOOT28"><sup>28</sup></a> <strong>readline</strong> capabilities, the functions described
-below are available, as well as others (probably) documented in
-<code>man readline</code> or <code>info readline</code> on your system.
+<p>When using R with GNU<a name="DOCF28" href="#FOOT28"><sup>28</sup></a> <strong>readline</strong>
+capabilities, the functions described below are available, as well as
+others (probably) documented in <code>man readline</code> or <code>info
+readline</code> on your system.
 </p>
 <p>Many of these use either Control or Meta characters.  Control
 characters, such as <kbd>Control-m</kbd>, are obtained by holding the
@@ -9592,8 +9594,8 @@ on most 64-bit versions of Windows.</p>
 <h3><a name="FOOT28" href="#DOCF28">(28)</a></h3>
 <p>It is possible to build R using an
 emulation of GNU <strong>readline</strong>, such as one based on NetBSD&rsquo;s
-<strong>editline</strong>, it which case only a subset of the capabilities may
-be provided.</p>
+<strong>editline</strong> (also known as <strong>libedit</strong>), it which case only a
+subset of the capabilities may be provided.</p>
 <h3><a name="FOOT29" href="#DOCF29">(29)</a></h3>
 <p>On a PC keyboard this is usually the
 Alt key, occasionally the &lsquo;Windows&rsquo; key.  On a Mac keyboard normally no

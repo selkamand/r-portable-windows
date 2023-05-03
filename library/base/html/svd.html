@@ -42,7 +42,7 @@ This must be between <code>0</code> and <code>p = ncol(x)</code>.</p>
 </td></tr>
 <tr valign="top"><td><code>LINPACK</code></td>
 <td>
-<p>logical.  Defunct and ignored.</p>
+<p>logical.  Defunct and ignored with a warning.</p>
 </td></tr>
 </table>
 
@@ -110,7 +110,7 @@ right vector gives an equivalent decomposition.
 <p>The main functions used are the LAPACK routines <code>DGESDD</code> and
 <code>ZGESDD</code>.
 </p>
-<p>LAPACK is from <a href="http://www.netlib.org/lapack">http://www.netlib.org/lapack</a> and its guide is
+<p>LAPACK is from <a href="http://www.netlib.org/lapack/">http://www.netlib.org/lapack/</a> and its guide is
 listed in the references.
 </p>
 
@@ -148,5 +148,5 @@ s$u %*% D %*% t(s$v) #  X = U D V'
 t(s$u) %*% X %*% s$v #  D = U' X V
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>

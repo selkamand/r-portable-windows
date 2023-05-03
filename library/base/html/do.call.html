@@ -113,9 +113,9 @@ f &lt;- function(x) print(x)
 f(A)                                      # 2
 do.call("f", list(A))                     # 2
 do.call("f", list(A), envir = env)        # 4
-do.call(f, list(A), envir = env)          # 2
+do.call( f,  list(A), envir = env)        # 2
 do.call("f", list(quote(A)), envir = env) # 100
-do.call(f, list(quote(A)), envir = env)   # 10
+do.call( f,  list(quote(A)), envir = env) # 10
 do.call("f", list(as.name("A")), envir = env) # 100
 
 eval(call("f", A))                      # 2
@@ -124,5 +124,5 @@ eval(call("f", A), envir = env)         # 4
 eval(call("f", quote(A)), envir = env)  # 100
 </pre>
 
-<hr /><div style="text-align: center;">[Package <em>base</em> version 3.6.3 <a href="00Index.html">Index</a>]</div>
+<hr /><div style="text-align: center;">[Package <em>base</em> version 4.0.3 <a href="00Index.html">Index</a>]</div>
 </body></html>
