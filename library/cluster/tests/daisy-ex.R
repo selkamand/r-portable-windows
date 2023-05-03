@@ -2,10 +2,7 @@
 
 require(cluster)
 
-if(interactive()) {
-    (pkgPath <- .find.package("cluster", verbose = TRUE))
-    (verC <- readLines(Dfile <- file.path(pkgPath, "DESCRIPTION"), n = 2)[2])
-}
+if(interactive()) print(packageDescription("cluster"))
 
 ## trivial cases should 'work':
 daisy(cbind(1))

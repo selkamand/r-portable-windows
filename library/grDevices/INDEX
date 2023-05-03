@@ -36,6 +36,7 @@ embedFonts              Embed Fonts in PostScript and PDF
 extendrange             Extend a Numerical Range by a Small Percentage
 getGraphicsEvent        Wait for a mouse or keyboard event from a
                         graphics window
+glyphInfo               Describe a Set of Typeset Glyphs.
 grDevices-package       The R Graphics Devices and Support for Colours
                         and Fonts
 grSoftVersion           Report Versions of Graphics Software

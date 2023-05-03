@@ -1,5 +1,7 @@
 ## tests from David Firth 2004-Oct-13
 
+pdf("polr.pdf")
+
 library(MASS)
 y <- structure(as.integer(c(1, 2, 3, 1, 2, 3)), .Label = c("1", "2", "3"),
                class = c("ordered", "factor"))

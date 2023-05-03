@@ -13,6 +13,7 @@ bug.reports.mgcv	bug.reports.mgcv
 choldrop	chol.down
 cholup	chol.down
 choose.k	choose.k
+cnorm	cnorm
 coef.pdIdnot	pdIdnot
 coef.pdTens	pdTens
 columb	columb
@@ -26,15 +27,18 @@ cubic.regression.spline	smooth.construct.cr.smooth.spec
 cyclic.cubic.spline	smooth.construct.cr.smooth.spec
 cyclic.p.spline	smooth.construct.ps.smooth.spec
 d.mvt	rmvn
+d.spline	smooth.construct.bs.smooth.spec
 dDeta	dDeta
 diagXVXd	XWXd
 Dim.pdIdnot	pdIdnot
 dmvn	rmvn
+dpnorm	dpnorm
 Duchon.spline	smooth.construct.ds.smooth.spec
 exclude.too.far	exclude.too.far
 extract.lme.cov	extract.lme.cov
 extract.lme.cov2	extract.lme.cov
-factor.smooth.interaction	smooth.construct.fs.smooth.spec
+factor.smooth	factor.smooth
+factor.smooth.interaction	factor.smooth
 family.mgcv	family.mgcv
 FFdes	FFdes
 fix.family.link	fix.family.link
@@ -151,6 +155,7 @@ Predict.matrix.sf	Predict.matrix.soap.film
 Predict.matrix.soap.film	Predict.matrix.soap.film
 Predict.matrix.sos.smooth	smooth.construct.sos.smooth.spec
 Predict.matrix.sw	Predict.matrix.soap.film
+Predict.matrix.sz.interaction	smooth.construct.sz.smooth.spec
 Predict.matrix.t2.smooth	Predict.matrix.cr.smooth
 Predict.matrix.tensor.smooth	Predict.matrix.cr.smooth
 Predict.matrix.tprs.smooth	Predict.matrix.cr.smooth
@@ -199,6 +204,7 @@ smooth.construct.sf.smooth.spec	smooth.construct.so.smooth.spec
 smooth.construct.so.smooth.spec	smooth.construct.so.smooth.spec
 smooth.construct.sos.smooth.spec	smooth.construct.sos.smooth.spec
 smooth.construct.sw.smooth.spec	smooth.construct.so.smooth.spec
+smooth.construct.sz.smooth.spec	smooth.construct.sz.smooth.spec
 smooth.construct.t2.smooth.spec	smooth.construct.t2.smooth.spec
 smooth.construct.tensor.smooth.spec	smooth.construct.tensor.smooth.spec
 smooth.construct.tp.smooth.spec	smooth.construct.tp.smooth.spec
@@ -208,6 +214,7 @@ smooth.info	smooth.info
 smooth.terms	smooth.terms
 smooth2random	smooth2random
 smoothCon	smoothCon
+smooths	smooth.terms
 soap	smooth.construct.so.smooth.spec
 solve.pdIdnot	pdIdnot
 sp.vcov	sp.vcov
@@ -225,6 +232,7 @@ te	te
 tensor.prod.model.matrix	tensor.prod.model.matrix
 tensor.prod.penalties	tensor.prod.model.matrix
 ti	te
+Tobit	cnorm
 totalPenaltySpace	totalPenaltySpace
 tprs	smooth.construct.tp.smooth.spec
 trichol	trichol
@@ -240,4 +248,5 @@ Xbd	XWXd
 XWXd	XWXd
 XWyd	XWXd
 ziP	ziP
+zipll	ziplss
 ziplss	ziplss

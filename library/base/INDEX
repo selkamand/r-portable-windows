@@ -14,7 +14,7 @@
 .standard_regexps       Miscellaneous Internal/Programming Utilities
 :                       Colon Operator
 ::                      Double Colon and Triple Colon Operators
-@                       Extract or Replace A Slot
+@                       Extract or Replace a Slot or Property
 Arithmetic              Arithmetic Operators
 AsIs                    Inhibit Interpretation/Conversion of Objects
 Bessel                  Bessel Functions
@@ -56,6 +56,7 @@ Rdconv                  Utilities for Processing Rd Files
 Recall                  Recursive Calling
 Reserved                Reserved Words in R
 Special                 Special Functions of Mathematics
+StackOverflows          Stack Overflow Errors
 Startup                 Initialization at Start of an R Session
 Syntax                  Operator Syntax and Precedence
 Sys.getenv              Get Environment Variables
@@ -88,6 +89,7 @@ append                  Vector Merging
 apply                   Apply Functions Over Array Margins
 args                    Argument List of a Function
 array                   Multi-way Arrays
+array2DF                Convert array to data frame
 as.Date                 Date Conversion Functions to and from Character
 as.POSIXct              Date-time Conversion Functions
 as.data.frame           Coerce to a Data Frame
@@ -102,6 +104,8 @@ attr                    Object Attributes
 attributes              Object Attribute Lists
 autoload                On-demand Loading of Packages
 backsolve               Solve an Upper or Lower Triangular System
+balancePOSIXlt          Balancing "Ragged" and Out-of-range POSIXlt
+                        Date-Times
 base-package            The R Base Package
 basename                Manipulate File Paths
 bindenv                 Binding and Environment Locking, Active
@@ -124,14 +128,15 @@ cat                     Concatenate and Print
 cbind                   Combine R Objects by Rows or Columns
 ceiling                 Rounding of Numbers
 char.expand             Expand a String with Respect to a Target Table
-charToRaw               Convert to or from Raw Vectors
+charToRaw               Convert to or from (Bit/Packed) Raw Vectors
 character               Character Vectors
 charmatch               Partial String Matching
 chartr                  Character Translation and Casefolding
 chkDots                 Warn About Extraneous Arguments in the "..." of
                         Its Caller
-chol                    The Choleski Decomposition
-chol2inv                Inverse from Choleski (or QR) Decomposition
+chol                    The Cholesky Decomposition
+chol2inv                Inverse from Cholesky (or QR) Decomposition
+chooseOpsMethod         Choose the Appropriate Method for Ops
 class                   Object Classes
 col                     Column Indexes
 colSums                 Form Row and Column Sums and Means
@@ -155,7 +160,7 @@ data.frame              Data Frames
 data.matrix             Convert a Data Frame to a Numeric Matrix
 date                    System Date and Time
 debug                   Debug a Function
-delayedAssign           Delay Evaluation
+delayedAssign           Delay Evaluation and Promises
 deparse                 Expression Deparsing
 det                     Calculate the Determinant of a Matrix
 detach                  Detach Objects from the Search Path
@@ -229,7 +234,7 @@ grepRaw                 Pattern Matching for Raw Vectors
 groupGeneric            S3 Group Generic Functions
 grouping                Grouping Permutation
 gzcon                   (De)compress I/O Through Connections
-hexmode                 Display Numbers in Hexadecimal
+hexmode                 Integer Numbers Displayed in Hexadecimal
 iconv                   Convert Character Vector between Encodings
 icuSetCollate           Setup Collation by ICU
 identical               Test Objects for Exact Equality
@@ -297,6 +302,7 @@ merge                   Merge Two Data Frames
 message                 Diagnostic Messages
 missing                 Does a Formal Argument have a Value?
 mode                    The (Storage) Mode of an Object
+mtfrm                   Auxiliary Function for Matching
 name                    Names and Symbols
 names                   The Names of an Object
 nargs                   The Number of Arguments to a Function
@@ -310,7 +316,7 @@ normalizePath           Express File Paths in Canonical Form
 nrow                    The Number of Rows/Columns of an Array
 numeric                 Numeric Vectors
 numeric_version         Numeric Versions
-octmode                 Display Numbers in Octal
+octmode                 Integer Numbers Displayed in Octal
 on.exit                 Function Exit Code
 options                 Options Settings
 order                   Ordering Permutation
@@ -319,6 +325,7 @@ parse                   Parse R Expressions
 paste                   Concatenate Strings
 path.expand             Expand File Paths
 pcre_config             Report Configuration Options for PCRE
+pipeOp                  Forward Pipe Operator
 plot                    Generic X-Y Plotting
 pmatch                  Partial String Matching
 polyroot                Find Zeros of a Real or Complex Polynomial
@@ -359,7 +366,7 @@ rep                     Replicate Elements of Vectors and Lists
 replace                 Replace Values in a Vector
 rev                     Reverse Elements
 rle                     Run Length Encoding
-round.POSIXt            Round / Truncate Data-Time Objects
+round.POSIXt            Round / Truncate Date-Time Objects
 row                     Row Indexes
 row.names               Get and Set Row Names for Data Frames
 rownames                Row and Column Names
@@ -442,13 +449,14 @@ try                     Try an Expression Allowing Error Recovery
 typeof                  The Type of an Object
 union                   Set Operations
 unique                  Extract Unique Elements
+units                   Units
 unlink                  Delete Files and Directories
 unlist                  Flatten Lists
 unname                  Remove 'names' or 'dimnames'
 utf8ToInt               Convert Integer Vectors to or from
                         UTF-8-encoded Character Vectors
 validUTF8               Check if a Character Vector is Validly Encoded
-vector                  Vectors
+vector                  Vectors - Creation, Coercion, etc
 warning                 Warning Messages
 warnings                Print Warning Messages
 weekdays                Extract Parts of a POSIXt or Date Object

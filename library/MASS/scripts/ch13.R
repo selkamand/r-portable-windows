@@ -164,8 +164,9 @@ coxph(Surv(start, stop, event) ~ transplant*
 
 stan1 <- coxph(Surv(start, stop, event) ~ strata(transplant) +
     year + year:transplant + age + surgery, heart)
-par(mfrow=c(1,2), pty="s")
-plot(survfit(stan1), conf.int = TRUE, log = TRUE, lty = c(1, 3), col = 2:3)
+par(mfrow = c(1,2), pty = "s")
+## failed 2022-07
+## plot(survfit(stan1), conf.int = TRUE, log = TRUE, lty = c(1, 3), col = 2:3)
 #legend(locator(1), c("before", "after"), lty = c(1, 3), col= 2:3)
 
 attach(heart)
@@ -238,10 +239,11 @@ plot(aids2.surv[c(1, 5, 6, 8)], mark.time = FALSE, lty = 1:4, col = 2:5,
 #legend(locator(1), levels(T.categ)[c(1, 5, 6, 8)], lty = 1:4, col = 2:5)
 par(mfrow=c(1,1), pty="m")
 
-cases <- diff(c(0,idno)) != 0
-aids.res <- residuals(aids.cox, collapse = idno)
-scatter.smooth(age[cases], aids.res, xlab = "age",
-  ylab="martingale residual")
+## fails 2022-07
+#cases <- diff(c(0,idno)) != 0
+#aids.res <- residuals(aids.cox, collapse = idno)
+#scatter.smooth(age[cases], aids.res, xlab = "age",
+#  ylab = "martingale residual")
 
 age2 <- cut(age, c(-1, 15, 30, 40, 50, 60, 100))
 c.age <- factor(as.numeric(age2), labels = c("0-15", "16-30",

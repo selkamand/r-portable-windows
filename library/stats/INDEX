@@ -46,6 +46,7 @@ SSmicmen                Self-Starting Nls Michaelis-Menten Model
 SSweibull               Self-Starting Nls Weibull Growth Curve Model
 SignRank                Distribution of the Wilcoxon Signed Rank
                         Statistic
+Smirnov                 Distribution of the Smirnov Statistic
 StructTS                Fit Structural Time Series
 TDist                   The Student t Distribution
 Tukey                   The Studentized Range Distribution
@@ -226,7 +227,7 @@ plot.acf                Plot Autocovariance and Autocorrelation
                         Functions
 plot.density            Plot Method for Kernel Density Estimation
 plot.isoreg             Plot Method for isoreg Objects
-plot.lm                 Plot Diagnostics for an lm Object
+plot.lm                 Plot Diagnostics for an 'lm' Object
 plot.ppr                Plot Ridge Functions for Projection Pursuit
                         Regression Fit
 plot.profile.nls        Plot a profile.nls Object
@@ -324,7 +325,7 @@ terms                   Model Terms
 terms.formula           Construct a terms Object from a Formula
 terms.object            Description of Terms Objects
 time                    Sampling Times of Time Series
-toeplitz                Form Symmetric Toeplitz Matrix
+toeplitz                Create Symmetric and Asymmetric Toeplitz Matrix
 ts                      Time-Series Objects
 ts.plot                 Plot Multiple Time Series
 ts.union                Bind Two or More Time Series

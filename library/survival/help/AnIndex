@@ -1,6 +1,7 @@
 aareg	aareg
 aeqSurv	aeqSurv
 agexact.fit	survival-internal
+aggregate.survfit	aggregate.survfit
 agreg.fit	agreg.fit
 aml	aml
 anova.coxph	anova.coxph
@@ -18,9 +19,13 @@ attrassign	attrassign
 attrassign.default	attrassign
 attrassign.lm	attrassign
 basehaz	basehaz
+bcloglog	blogit
 bladder	bladder
 bladder1	bladder
 bladder2	bladder
+blog	blogit
+blogit	blogit
+bprobit	blogit
 c.Surv	Survmethods
 cancer	lung
 capacitor	reliability
@@ -49,6 +54,7 @@ coxph.getdata	coxph
 coxph.object	coxph.object
 coxph.penalty	coxph
 coxph.wtest	coxph.wtest
+coxphms.object	coxphms.object
 coxsurv.fit	coxsurv.fit
 cracks	reliability
 diabetic	diabetic
@@ -91,6 +97,7 @@ Math.ratetable	is.ratetable
 Math.Surv	Survmethods
 mean.Surv	Survmethods
 median.Surv	Survmethods
+median.survfit	quantile.survfit
 mgus	mgus
 mgus1	mgus
 mgus2	mgus2
@@ -98,12 +105,14 @@ model.frame.coxph	model.frame.coxph
 model.frame.survreg	survreg
 model.matrix.coxph	model.matrix.coxph
 myeloid	myeloid
+myeloma	myeloma
 nafld1	nafld
 nafld2	nafld
 nafld3	nafld
 names.Surv	Survmethods
 names<-.Surv	Survmethods
 neardate	neardate
+nsk	nsk
 nwtco	nwtco
 Ops.ratetable	is.ratetable
 Ops.Surv	Survmethods
@@ -125,7 +134,6 @@ print.cox.zph	cox.zph
 print.coxph	coxph.object
 print.coxph.null	coxph
 print.coxph.penal	coxph
-print.ratetable	ratetable
 print.summary.coxph	print.summary.coxph
 print.summary.survexp	print.summary.survexp
 print.summary.survfit	print.summary.survfit
@@ -135,6 +143,7 @@ print.survexp	survexp
 print.survfit	print.survfit
 print.survreg	survreg.object
 print.survreg.penal	survreg
+pseudo	pseudo
 pspline	pspline
 psplineinverse	pspline
 psurvreg	dsurvreg
@@ -154,6 +163,8 @@ rep_len.Surv	Survmethods
 residuals.coxph	residuals.coxph
 residuals.coxph.null	residuals.coxph
 residuals.coxph.penal	residuals.coxph
+residuals.coxphms	residuals.coxph
+residuals.survfit	residuals.survfit
 residuals.survreg	residuals.survreg
 residuals.survreg.penal	residuals.survreg
 retinopathy	retinopathy
@@ -173,7 +184,6 @@ summary.aareg	summary.aareg
 summary.coxph	summary.coxph
 summary.coxph.penal	coxph
 summary.pyears	summary.pyears
-summary.ratetable	ratetable
 Summary.Surv	Survmethods
 summary.survexp	summary.survexp
 summary.survfit	summary.survfit
@@ -182,8 +192,9 @@ Surv	Surv
 Surv2	Surv2
 Surv2data	Surv2data
 survcheck	survcheck
-survConcordance	survConcordance-deprecated
-survConcordance.fit	survConcordance-deprecated
+survConcordance	survival-deprecated
+survConcordance.fit	survival-deprecated
+survcondense	survcondense
 survdiff	survdiff
 survdiff.fit	survival-internal
 survexp	survexp
@@ -194,6 +205,7 @@ survexp.us	survexp.us
 survexp.usr	survexp.us
 survfit	survfit
 survfit.coxph	survfit.coxph
+survfit.coxphms	survfit.coxph
 survfit.formula	survfit.formula
 survfit.matrix	survfit.matrix
 survfit.object	survfit.object
@@ -202,6 +214,7 @@ survfitCI	survival-internal
 survfitcoxph.fit	survfitcoxph.fit
 survfitKM	survival-internal
 survfitms.object	survfit.object
+survival-deprecated	survival-deprecated
 survival-internal	survival-internal
 survobrien	survobrien
 survpenal.fit	survival-internal
@@ -219,7 +232,6 @@ tcut	tcut
 tmerge	tmerge
 tobin	tobin
 transplant	transplant
-transplant2	transplant
 turbine	reliability
 udca	udca
 udca1	udca
@@ -236,7 +248,6 @@ yates	yates
 yates_setup	yates_setup
 [.cox.zph	cox.zph
 [.coxph.penalty	survival-internal
-[.ratetable	ratetable
 [.Surv	Surv
 [.survfit	survfit.formula
 [.tcut	tcut

@@ -2,7 +2,7 @@ require("splines")
 
 ## Bug report PR#16549 - 'bad value from splineDesign'
 ## Date: Wed, 30 Sep 2015 12:12:47 +0000
-## https://bugs.r-project.org/bugzilla/show_bug.cgi?id=16549
+## https://bugs.r-project.org/show_bug.cgi?id=16549
 
 ## Reporter: roconnor@health.usf.edu  (extended original example code)
 
@@ -61,7 +61,8 @@ chkSum <- function(knots, n = 1 + 2^9, ord = 4) {
 	cat("non-finite at x = "); dput(x[iBad])
     } else if(length(bb)) { # only when bb[] is not 0-dimensional
 	eps <- 3*.Machine$double.eps
-	stopifnot(abs(1 - sumB[is.x.in]) <= 2*eps, 0 <= sumB+eps, sumB-2*eps <= 1)
+	stopifnot(abs(1 - sumB[is.x.in]) <= 2*eps, 0 <= sumB+eps, sumB-2*eps <= 1,
+		  allow.logical0=TRUE)
 	## TODO: now also check derivatives
     }
     invisible(bb)
@@ -275,3 +276,21 @@ stopifnot(identical(coef(mns),  c("(Intercept)" = 5, "ns(u)" = NA))
 	, identical(residuals(mbs), c(`1` = 0))
 	, identical(residuals(mbs1),c(`1` = 0))
 	  )
+
+
+## [Bug 18442] ns() fails when quantiles end up on the boundary  (2022-12-05)
+##  =========  ---- 1st example ===> <R>/tests/reg-tests-1e.R  'ns(nn,4)'
+##
+## a (more extreme) example where bs() is affected similarly:
+require(splines)
+##
+x <- c(rep(0L, 44), 1:10, 2L*(6:15), as.integer(round(1.25^(15:22))))
+y <- 10L*x + c(-1L,1L)
+B <- bs(x, df = 7)
+summary(m <- lm(y ~ B))
+stopifnot(exprs = {
+    qr(B)$rank == 7
+    all.equal(c(0, 0.03265, 20.53, 21.79, 73.27, 519.8, 964.3, 1361),
+              unname(coef(m)), tol = 1e-4)
+})
+## rank was 5, and coef(m) had 3 NA's in R <= 4.2.x

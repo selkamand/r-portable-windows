@@ -25,6 +25,7 @@ flower	flower
 lower.to.upper.tri.inds	lower.to.upper.tri.inds
 maxSE	clusGap
 meanabsdev	cluster-internal
+medoids	medoids
 mona	mona
 mona.object	mona.object
 pam	pam

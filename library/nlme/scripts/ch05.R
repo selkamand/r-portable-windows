@@ -3,7 +3,9 @@
 # initialization
 
 library(nlme)
-options(width = 65, digits = 5)
+options(width = 65,
+        ## reduce platform dependence in printed output when testing
+        digits = if(nzchar(Sys.getenv("R_TESTS"))) 3 else 5)
 options(contrasts = c(unordered = "contr.helmert", ordered = "contr.poly"))
 pdf(file = "ch05.pdf")
 
@@ -46,7 +48,9 @@ fm2Dial.lme
 anova(fm1Dial.lme, fm2Dial.lme)
 plot(fm2Dial.lme, resid(., type = "p") ~ pressure,
      abline = 0)
+## IGNORE_RDIFF_BEGIN
 intervals(fm2Dial.lme)
+## IGNORE_RDIFF_END
 plot(fm2Dial.lme, resid(.) ~ pressure|QB, abline = 0)
 fm3Dial.lme <- update(fm2Dial.lme,
                       weights=varPower(form = ~ pressure | QB))
@@ -116,7 +120,9 @@ Variogram(fm2BW.lme, form = ~ Time)
 plot(Variogram(fm2BW.lme, form = ~ Time, maxDist = 42))
 fm3BW.lme <- update(fm2BW.lme,
                     correlation = corExp(form = ~ Time))
+## IGNORE_RDIFF_BEGIN
 intervals(fm3BW.lme)
+## IGNORE_RDIFF_END
 anova(fm2BW.lme, fm3BW.lme)
 fm4BW.lme <-
       update(fm3BW.lme, correlation = corExp(form =  ~ Time,
@@ -134,7 +140,9 @@ fm1Orth.gls <- gls(distance ~ Sex * I(age - 11), Orthodont,
                    correlation = corSymm(form = ~ 1 | Subject),
                    weights = varIdent(form = ~ 1 | age))
 fm1Orth.gls
+## IGNORE_RDIFF_BEGIN
 intervals(fm1Orth.gls)
+## IGNORE_RDIFF_END
 fm2Orth.gls <-
    update(fm1Orth.gls, corr = corCompSymm(form = ~ 1 | Subject))
 anova(fm1Orth.gls, fm2Orth.gls)
@@ -190,5 +198,4 @@ anova(fm3Wheat2, L = c(-1, 0, 1))
 # cleanup
 
 summary(warnings())
-proc.time()
 

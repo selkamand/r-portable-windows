@@ -16,12 +16,13 @@ barley	barley
 bwplot	xyplot
 bwplot.formula	xyplot
 bwplot.numeric	xyplot
-canonical.theme	trellis.device
+canonical.theme	standard.theme
+classic.theme	standard.theme
 cloud	cloud
 cloud.formula	cloud
 cloud.matrix	cloud
 cloud.table	cloud
-col.whitebg	trellis.device
+col.whitebg	standard.theme
 contourplot	levelplot
 contourplot.array	levelplot
 contourplot.formula	levelplot
@@ -30,6 +31,7 @@ contourplot.table	levelplot
 current.column	panel.number
 current.panel.limits	panel.axis
 current.row	panel.number
+custom_theme	standard.theme
 densityplot	histogram
 densityplot.formula	histogram
 densityplot.numeric	histogram
@@ -80,6 +82,7 @@ ltext.default	llines
 ltransform3dMatrix	utilities.3d
 ltransform3dto3d	utilities.3d
 make.groups	make.groups
+makeShadePalette	panel.cloud
 melanoma	melanoma
 oneway	oneway
 packet.number	panel.number
@@ -182,7 +185,7 @@ splom	splom
 splom.data.frame	splom
 splom.formula	splom
 splom.matrix	splom
-standard.theme	trellis.device
+standard.theme	standard.theme
 strip.custom	strip.default
 strip.default	strip.default
 stripplot	xyplot

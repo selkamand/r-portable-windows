@@ -160,3 +160,17 @@ stopifnot(
     all.equal(as.vector(n2prD0), n2prD01[,"predict.fixed"], tolerance= 1e-15),
     all.equal(as.vector(n1prD1), n1prD01[,"predict.TreeID"],tolerance= 1e-15),
     all.equal(as.vector(n2prD1), n2prD01[,"predict.TreeID"],tolerance= 1e-15))
+
+## new data with factor levels stored as character
+stopifnot(all.equal(predict(fit2, data.frame(SP="A", age=2), level = 0),
+                    predict(fit2, level = 0)[1], check.attributes = FALSE))
+## in nlme <= 3.1-155, failed with
+## Error in `contrasts<-`(`*tmp*`, value = contr.funs[1 + isOF[nn]]) : 
+##   contrasts can be applied only to factors with 2 or more levels
+
+## model without intercept
+fit3 <- update(fit2, fixed = a + b ~ SP - 1)
+stopifnot(all.equal(predict(fit3, head(df, 3)),
+                    head(predict(fit3), 3), check.attributes = FALSE))
+## in nlme <= 3.1-155, prediction failed if not all levels occurred
+## Error in f %*% beta[fmap[[nm]]] : non-conformable arguments

@@ -1,0 +1,263 @@
+
+R Under development (unstable) (2022-02-28 r81832) -- "Unsuffered Consequences"
+Copyright (C) 2022 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ## run reproduction scripts from the installed "mlbook" chapters
+> testdir <- system.file("mlbook", package = "nlme", mustWork = TRUE)
+> scripts <- dir(testdir, pattern = "^ch[0-9]*\\.R$")
+> for(f in scripts) {
++     writeLines(c("", strrep("=", nchar(f)), basename(f), strrep("=", nchar(f))))
++     set.seed(1)
++     options(warn = 1, digits = 5)
++     source(file.path(testdir, f), echo = TRUE,
++            max.deparse.length = Inf, keep.source = TRUE)
++ }
+
+======
+ch04.R
+======
+
+> library(nlme)
+
+> # data(bdf)
+> ## Fit the null model
+> ## Compare with Table 4.1, p. 47
+> fm1 <- lme(langPOST ~ 1, data = bdf, random = ~ 1 | schoolNR)
+
+> VarCorr(fm1)
+schoolNR = pdLogChol(1) 
+            Variance StdDev
+(Intercept) 19.633   4.4309
+Residual    64.564   8.0352
+
+> -2*c(logLik(fm1))                       # deviance
+[1] 16253
+
+> ## Fit model with fixed IQ term and random intercept
+> ## Compare with Table 4.2, p. 49
+> ## From the results in Tables 4.2 and 4.4, it appears that
+> ##  maximum likelihood fits are used, not REML fits.
+> fm2 <- update(fm1, langPOST ~ IQ.ver.cen)
+
+> summary(fm2)
+Linear mixed-effects model fit by REML
+  Data: bdf 
+    AIC   BIC  logLik
+  15264 15287 -7627.9
+
+Random effects:
+ Formula: ~1 | schoolNR
+        (Intercept) Residual
+StdDev:      3.0987   6.4996
+
+Fixed effects:  langPOST ~ IQ.ver.cen 
+             Value Std.Error   DF t-value p-value
+(Intercept) 40.608  0.308186 2155 131.766       0
+IQ.ver.cen   2.488  0.070081 2155  35.496       0
+ Correlation: 
+           (Intr)
+IQ.ver.cen 0.018 
+
+Standardized Within-Group Residuals:
+      Min        Q1       Med        Q3       Max 
+-4.093938 -0.637456  0.057947  0.706070  3.144829 
+
+Number of Observations: 2287
+Number of Groups: 131 
+
+> VarCorr(fm2)
+schoolNR = pdLogChol(1) 
+            Variance StdDev
+(Intercept)  9.6017  3.0987
+Residual    42.2445  6.4996
+
+> -2 * c(logLik(fm2))                     # deviance
+[1] 15256
+
+> ## Purely fixed-effects model for comparison
+> ## Compare with Table 4.3, p. 51
+> fm3 <- lm(langPOST ~ IQ.ver.cen, data = bdf)
+
+> summary(fm3)
+
+Call:
+lm(formula = langPOST ~ IQ.ver.cen, data = bdf)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-28.702  -4.394   0.606   5.260  26.221 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  40.9348     0.1492   274.3   <2e-16 ***
+IQ.ver.cen    2.6539     0.0722    36.8   <2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 7.14 on 2285 degrees of freedom
+Multiple R-squared:  0.372,	Adjusted R-squared:  0.372 
+F-statistic: 1.35e+03 on 1 and 2285 DF,  p-value: <2e-16
+
+
+> -2 * c(logLik(fm3))                     # deviance
+[1] 15478
+
+> ## Model with average IQ for the school
+> ## Compare with Table 4.4, p. 55
+> fm4 <- update(fm2, langPOST ~ IQ.ver.cen + avg.IQ.ver.cen)
+
+> summary(fm4)
+Linear mixed-effects model fit by REML
+  Data: bdf 
+    AIC   BIC  logLik
+  15242 15271 -7616.1
+
+Random effects:
+ Formula: ~1 | schoolNR
+        (Intercept) Residual
+StdDev:      2.8082    6.494
+
+Fixed effects:  langPOST ~ IQ.ver.cen + avg.IQ.ver.cen 
+                Value Std.Error   DF t-value p-value
+(Intercept)    40.741  0.286595 2155 142.155       0
+IQ.ver.cen      2.415  0.071676 2155  33.690       0
+avg.IQ.ver.cen  1.589  0.314772  129   5.049       0
+ Correlation: 
+               (Intr) IQ.vr.
+IQ.ver.cen      0.000       
+avg.IQ.ver.cen  0.077 -0.228
+
+Standardized Within-Group Residuals:
+      Min        Q1       Med        Q3       Max 
+-4.130749 -0.642218  0.060944  0.702342  3.152993 
+
+Number of Observations: 2287
+Number of Groups: 131 
+
+> VarCorr(fm4)
+schoolNR = pdLogChol(1) 
+            Variance StdDev
+(Intercept)  7.8859  2.8082
+Residual    42.1723  6.4940
+
+> -2 * c(logLik(fm4))                     # deviance
+[1] 15232
+
+======
+ch05.R
+======
+
+> library(nlme)
+
+> # data(bdf)
+> ## Model with random slope for IQ.ver.cen
+> ## Compare with Table 5.1, p. 71.
+> fm5 <- lme(langPOST ~ IQ.ver.cen + avg.IQ.ver.cen,
++            data = bdf, random = ~ IQ.ver.cen, method = "ML")
+
+> summary(fm5)
+Linear mixed-effects model fit by maximum likelihood
+  Data: bdf 
+    AIC   BIC  logLik
+  15228 15268 -7606.8
+
+Random effects:
+ Formula: ~IQ.ver.cen | schoolNR
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev  Corr  
+(Intercept) 2.81410 (Intr)
+IQ.ver.cen  0.44728 -0.652
+Residual    6.43043       
+
+Fixed effects:  langPOST ~ IQ.ver.cen + avg.IQ.ver.cen 
+                Value Std.Error   DF t-value p-value
+(Intercept)    40.750   0.28610 2155 142.433       0
+IQ.ver.cen      2.459   0.08324 2155  29.541       0
+avg.IQ.ver.cen  1.405   0.32168  129   4.368       0
+ Correlation: 
+               (Intr) IQ.vr.
+IQ.ver.cen     -0.274       
+avg.IQ.ver.cen  0.028 -0.214
+
+Standardized Within-Group Residuals:
+     Min       Q1      Med       Q3      Max 
+-4.17512 -0.63982  0.06693  0.70462  2.71089 
+
+Number of Observations: 2287
+Number of Groups: 131 
+
+> VarCorr(fm5)
+schoolNR = pdLogChol(IQ.ver.cen) 
+            Variance StdDev  Corr  
+(Intercept)  7.91916 2.81410 (Intr)
+IQ.ver.cen   0.20006 0.44728 -0.652
+Residual    41.35049 6.43043       
+
+> -2 * c(logLik(fm5))                     # deviance
+[1] 15214
+
+> ## Add centered class size and interaction
+> ## Compare with Table 5.2, p. 75
+> fm6 <- update(fm5, langPOST ~ avg.IQ.ver.cen + IQ.ver.cen * grpSiz.cen)
+
+> summary(fm6)
+Linear mixed-effects model fit by maximum likelihood
+  Data: bdf 
+    AIC   BIC  logLik
+  15226 15278 -7604.2
+
+Random effects:
+ Formula: ~IQ.ver.cen | schoolNR
+ Structure: General positive-definite, Log-Cholesky parametrization
+            StdDev  Corr  
+(Intercept) 2.76882 (Intr)
+IQ.ver.cen  0.42132 -0.658
+Residual    6.43136       
+
+Fixed effects:  langPOST ~ avg.IQ.ver.cen + IQ.ver.cen + grpSiz.cen + IQ.ver.cen:grpSiz.cen 
+                       Value Std.Error   DF t-value p-value
+(Intercept)           40.893   0.29249 2153 139.809  0.0000
+avg.IQ.ver.cen         1.246   0.32642  129   3.818  0.0002
+IQ.ver.cen             2.443   0.08233 2153  29.674  0.0000
+grpSiz.cen             0.057   0.03691 2153   1.556  0.1198
+IQ.ver.cen:grpSiz.cen -0.022   0.01091 2153  -1.989  0.0468
+ Correlation: 
+                      (Intr) a.IQ.. IQ.vr. grpSz.
+avg.IQ.ver.cen        -0.024                     
+IQ.ver.cen            -0.276 -0.195              
+grpSiz.cen             0.249 -0.175 -0.086       
+IQ.ver.cen:grpSiz.cen -0.118  0.169  0.032 -0.233
+
+Standardized Within-Group Residuals:
+      Min        Q1       Med        Q3       Max 
+-4.163071 -0.639694  0.063419  0.710478  2.687724 
+
+Number of Observations: 2287
+Number of Groups: 131 
+
+> VarCorr(fm6)
+schoolNR = pdLogChol(IQ.ver.cen) 
+            Variance StdDev  Corr  
+(Intercept)  7.66638 2.76882 (Intr)
+IQ.ver.cen   0.17751 0.42132 -0.658
+Residual    41.36242 6.43136       
+
+> -2 * c(logLik(fm6))                     # deviance
+[1] 15208
+> 
+> proc.time()
+   user  system elapsed 
+  0.514   0.024   0.531 

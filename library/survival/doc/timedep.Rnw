@@ -101,10 +101,10 @@ A covariate may change in any way based on past data or outcomes, but it
 may not reach forward in time.
 In the above simple data set this means that we cannot add a linear
 interpolation between the creatinine values 0.9 and 1.5 to get a
-predicted value of 1.1 on day 100; on day 100 the later value of 1.5 has
+predicted value of 1.2 on day 45; on day 45 the later value of 1.5 has
 not yet been seen.
 
-A an example consider a recent analysis from the Mayo Clinic
+As an example consider a recent analysis from the Mayo Clinic
 study of aging (MCSA), a study which enrolled a stratified random sample from
 the population of Olmsted County and then has followed them forward in
 time.  The occurrence of mild cognitive impairment (MCI), dementia, and
@@ -154,9 +154,9 @@ with a p-value of less than 1 in 1000.
 The alarm about this incorrect approach has been sounded often
 \cite{Anderson83, Buyse96, Suissa08} but the analysis is routinely 
 re-discovered.
-A slightly subtler form of the error is discussed in Redmond et al
+A slightly subtler form of the error is discussed in Redmond et al.
 \cite{Redmond83}.  The exploration was motivated by a flawed analysis presented
-in Bonadonna et. al \cite{Bref} which looked at the effect of total dose.
+in Bonadonna et al. \cite{Bonadonna81} which looked at the effect of total dose.
 Breast cancer chemotherapy patients were
 divided into three groups based on whether the patient eventually
 received $>85$\%, 65--85\% or $<65$\% of the dose planned at the start of
@@ -172,7 +172,7 @@ This false result actively harmed patients.
 Redmond looked at a variant of this: create a variable $p$ for each subject
 which
 is the fraction of the target dose \emph{up to} the last entry for that subject.
-A subject who died after recieving only 6 weeks of a planned 12 week regimen
+A subject who died after receiving only 6 weeks of a planned 12 week regimen
 could still score 100\%.
 This looks like it should cure the bias issue,
 but as it turns out it leads to bias in the other direction.  The reason
@@ -243,7 +243,7 @@ This corresponds to being simultaneously at risk for two distinct outcomes.
 \subsection{The function}
 A useful function for building data sets is \code{tmerge}, which is
 part of the survival library.
-The idea is to build up a time dependent data set one endpoint at at time.
+The idea is to build up a time dependent data set one endpoint at a time.
 The primary arguments are
 \begin{itemize}
   \item data1: the base data set that will be added onto
@@ -347,9 +347,9 @@ newcgd <- tmerge(newcgd, cgd0, id=id, infect = event(etime7))
 newcgd <- tmerge(newcgd, newcgd, id, enum=cumtdc(tstart))
 dim(newcgd)
 newcgd[1:5,c(1, 4:6, 13:17)]
-attr(newcgd, "tcount")
-coxph(Surv(tstart, tstop, infect) ~ treat + inherit + steroids +
-      + cluster(id), newcgd)
+summary(newcgd)
+coxph(Surv(tstart, tstop, infect) ~ treat + inherit + steroids,
+      data =newcgd, cluster = id)
 @ 
 
 These lines show the canonical way to use tmerge: each call adds one
@@ -364,7 +364,7 @@ more bit of information to the data set.
     This first result has \Sexpr{nrow(cgd0)} rows, the same number as
     \code{cgd0}.
   \item Each additional call then adds either an endpoint or a covariate,
-    splitting individual rows of the input in two as necessary.
+    splitting individual rows of the input into two as necessary.
     An \code{event} or \code{cumevent} directive adds events, while
     a \code{tdc} or \code{cumtdc} command adds a time dependent covariate.
     Events happen at the ends of intervals and time-dependent covariates 
@@ -372,7 +372,7 @@ more bit of information to the data set.
   \item Additions from \code{data2} with a missing time value are ignored.
   \item The result of \code{tmerge} is a data frame with a few extra
     attributes. One of these, tcount, is designed to help visualize
-    the process and was printed out after the last step above.
+    the process, it is printed out by the summary function.
     Assume that a subject already had 3 intervals of (2,5), (5,10)
     and (14,40).
     A new event added at time 1 would be ``early'' while one at time 50
@@ -380,16 +380,18 @@ more bit of information to the data set.
     An event at
     time 3 is within an interval, one at 5 is on the border of two
     intervals, one at 14 is at the leading edge of an interval, one at
-    time 10 in on the trailing edge and at time 11 is in a gap.
+    time 10 in on the trailing edge, and one at time 11 is in a gap.
     In this data set all new additions fell strictly within prior intervals.
     We also see that etime6 and etime7 each added only a single event to 
-    the data.
+    the data.  Only one subject had more than 5 infections.
   \item If two observations in data2 for a single person share exactly
     the same time, the created value will be the later contribution for
     tdc() or event() calls, cumtdc() and cumevent() will add.
     The ``tied'' column tells how often this happened; in some
     data sets this behavior might not be desired and one would need to
     break the ties before calling tmerge.
+  \item If there are observations in \code{data2} that do not match any
+    of the identifiers in \code{data1} they count in the `missid' column.
   \item The last tmerge call adds a
     simple time-dependent variable \code{enum} which is a running observation
     count for each subject.  This can often be a useful variable in later
@@ -397,9 +399,11 @@ more bit of information to the data set.
     for each subject.
   \item The extra attributes of the data frame are ephemeral: they will be
     lost as soon as any further manipulation is done.  This is intentional.
+    The reason is that these may be invalid if, for instance, a subset of
+    the data was selected.
   \item One can verify that the resulting data set is equivalent to
     \code{cgd}, a (start, stop] version of the CGD data in the
-    survival library which had been created by hand several years earlier.
+    survival library, which had been created by hand several years earlier.
 \end{itemize}
 
 The \code{tmerge} function processes arguments sequentially, and the 
@@ -413,6 +417,27 @@ test  <- tmerge(cgd0[, 1:13], cgd0, id=id, tstop=futime,
                  infect = event(etime7))
 test <- tmerge(test, test,  id= id, enum = cumtdc(tstart))
 all.equal(newcgd, test)
+@ 
+
+This example is atypical in that we have used a \emph{wide} data set, one with
+multiple outcomes per subject on a single line.
+The \code{tmerge} function was primarily designed to work with long data.
+An underlying issue is that when you create a new variable with \code{tmerge}
+from multiple source variables, and those variables are not of exactly the 
+same structure, then \code{tmerge} can become confused.  If \code{etime1}
+was numeric and \code{etime2} had a difftime class for example. 
+If issues arise create a long form data set and merge that in, as shown
+below.  Both the data.table and tidyr libraries have well regarded functions
+to do this; below we use the reshape function from base R.
+
+<<cgd1c>>=
+# create a long data set with the recurrences
+temp <- reshape(cgd0[c(1, 14:20)], varying= 2:8, v.names="etime",
+                 idvar="id", direction="long")
+cgdrecur <- subset(temp, !is.na(etime))  # toss missings (not essential)
+
+newcgd <- tmerge(data1=cgd0[, 1:13], data2=cgd0, id=id, tstop=futime)
+newcgd <- tmerge(newcgd, cgdrecur, id=id, infect= event(etime))
 @ 
 
 \subsection{Stanford heart transplant}
@@ -486,7 +511,7 @@ coxph(Surv(tstart, tstop, death) ~ age*trt + surgery + year,
 This example shows a special case for the \code{tmerge} function that 
 is quite common: if the first
 created variable is an event then the time range for each subject is
-inferred to be from 0 to the event time: explicit \code{tstop} 
+inferred to be from 0 to that event time: explicit \code{tstop} 
 and \code{tstart} arguments are not required.
 It also makes use of a two argument form of \code{event}.
 Each of the \code{event} and \code{cumevent} functions
@@ -518,6 +543,8 @@ say from a new data source, our experience had been that the much more
 common case was accidental reuse of an existing name, resulting in
 a chimeric mishmash between an existing baseline covariate and the additions,
 and creating a column which was valid for neither.
+Equally, some examples showed that we can not reliably update a tdc, i.e., 
+cases where the correct answer is unclear.
 
 The \code{tcount} table for the above fit shows all the deaths at the
 trailing edge of their interval, which is expected since the time
@@ -608,7 +635,7 @@ a boundary of two intervals.
 Another \Sexpr{atemp[1, 'late']} non-missing alkaline phosphotase
 values occurred after the last follow-up date
 of the pbc data set and are ignored.  
-Bilirubin is missing on no subjects, so it's addition creates a few more
+Bilirubin is missing on no subjects, so its addition creates a few more
 unique break points in the follow-up, namely those clinical visits for
 which the ascites value was missing.
 
@@ -809,42 +836,57 @@ below.
   \lambda(t) &= \lambda_0(t) e^{\beta X(t)} \label{tdcovar} \\
   \lambda(t) &= \lambda_0(t) e^{\beta(t) X} \label{tdbeta} 
 \end{align}
-Equation \eqref{tdcovar} is a time dependent covariate, a commonly used
+Equation \eqref{tdcovar} is a time dependent covariate, a common
 and well understood usage.
 Equation \eqref{tdbeta} has a time dependent coefficient.
 These models are much less common, but represent one way to deal with
 non-proportional hazards -- the proportional hazard assumption is
-precisely that the coefficient does not change over time: $\beta(t) = c$.
+precisely that  $\beta(t) = \beta$, i.e., the coefficient does not change 
+over time.
 The \code{cox.zph} function will plot an estimate of $\beta(t)$ for
 a study and is used to diagnose and understand non-proportional
 hazards.
-Here for example is a test case using the veterans cancer data.
+The code below shows a test case using the veterans cancer data, with the
+results plotted in figure \ref{veteran1b}.
 
-<<veteran1, fig=TRUE>>=
-options(show.signif.stars = FALSE)  # display user intelligence
+<<veteran1>>=
+options(show.signif.stars = FALSE)  # display statistical intelligence
 vfit <- coxph(Surv(time, status) ~ trt + prior + karno, veteran)
 vfit
 quantile(veteran$karno)
 
 zp <- cox.zph(vfit, transform= function(time) log(time +20))
 zp
-plot(zp[3])    # a plot for the 3rd variable in the fit
-abline(0,0, col=2)
-abline(h= vfit$coef[3], col=3, lwd=2, lty=2)
+@
+
+\begin{figure}
+<<veteran1b, fig=TRUE, echo=FALSE>>=
+plot(zp[3], resid=FALSE)    # a plot for the 3rd variable in the fit
+abline(0,0, lty=3)
+abline(h= vfit$coef[3], lwd=2, lty=3)
 @ 
+ \caption{Solid line = the estimated effect if Karnofsy score, versus time, 
+   in the Veteran's cancer data set, as estimated by \code{cox.zph}, along
+   with confidence intervals.  Dotted lines are the overall estimate from
+   a Cox model with karno as a time-fixed effect, and a reference line at 0.}
+ \label{veteran1b}
+\end{figure}
 
 Karnofsky score is a very important predictor, but its effect is not
 constant over time as shown by both the test and the plot. 
 Early on it has a large negative
 effect: the risk of someone at the first quartile is
-approximately exp(35*.03377) = 3.2 fold times that of someone at
+approximately exp(35*.05) = 5.7 fold times that of someone at
 the third quartile, but by 200 days this has waned and is not much
 different from zero.  
 One explanation is that, in this very acute illness, any measure
 that is over 6 months old is no longer relevant.
+Another is that a large portion of subjects with the lowest Karnofsky
+values have been lost; at 200 days 4\% of the remaining subjects have
+a value $\le 40$ versus 28\% at the start.
 
 The proportional hazards model estimates an average hazard over time,
-the value of which is shown by the dashed horizontal line.
+the value of which is shown by the dotted horizontal line.
 The use of an average hazard is often reasonable, the proportional hazards
 assumption is after all never precisely true.
 In this case, however, the departure is quite large and a time dependent
@@ -904,7 +946,7 @@ Each has the appropriate values for the time dependent covariate \code{tgroup},
 which is 1, 2, 3 over 0--90, 90--180 and 180+ days, respectively.
 We will draw curves for the first year.
 
-<<split4>>=
+<<split4, fig=TRUE>>=
 quantile(veteran$karno)
 cdata <- data.frame(tstart= rep(c(0,90,180), 2),
                     time =  rep(c(90,180, 365), 2),
@@ -943,8 +985,8 @@ further above of $\log(t + 20)$ was chosen
 to make the first 200 days of the plot roughly linear.
 Per the figure this simple linear model does not fit over the entire range, 
 but we will forge ahead and use it as an example anyway.
-(After all, most who fit the log(t) form have not bothered to even 
-look at a plot.)
+(After all, most users who fit the log(t) form, based on seeing it a paper,
+don't bother to even look at a plot.)
 An obvious but incorrect approach is
 <<vfit3, echo=TRUE, eval=FALSE>>=
 vfit3 <- coxph(Surv(time, status) ~ trt + prior + karno +
@@ -970,6 +1012,7 @@ vfit3 <-  coxph(Surv(time, status) ~ trt + prior + karno + tt(karno),
                 tt = function(x, t, ...) x * log(t+20))
 vfit3
 @ 
+
 The time dependent coefficient is estimated to be
 $\beta(t) =$ \Sexpr{round(coef(vfit3)[3], 3)} + 
   \Sexpr{round(coef(vfit3)[4], 3)} * log(t + 20).
@@ -981,9 +1024,10 @@ by the p-value for the slope term in \code{vfit3}.
 (The p-value for that term from cox.zph is nearly identical, as it
 must be, since the tests in cox.zph are for a linear effect on the
 chosen time scale.)
+
 <<vet3b, fig=TRUE>>=
 plot(zp[3])
-abline(coef(vfit3)[3:4], col=2)
+abline(coef(vfit3)[3:4], lwd=2, lty=3, col=2)
 @ 
 
 This same coding dichotomy exists in SAS phreg, by the way.  Adding
@@ -993,7 +1037,32 @@ while a programming statement within phreg that
 uses \code{time} as a variable will generate time-dependent objects.
 The error is less likely there because phreg's model statement is less
 flexible than R, i.e., you cannot simply write
-``log(time)'' on the right hand side.
+``log(time)'' on the right hand side of a formula.
+
+A more general approach is to allow a flexible fit on the right hand
+side, as shown in the following code.
+(The Boundary.knots=FALSE argument simply says that the \code{knots} argument
+contains \emph{all} the knots, i.e., don't separate them into two sets.)
+
+<<vet4>>=
+vfit4 <-  coxph(Surv(time, status) ~ trt + prior + karno + tt(karno),
+                data=veteran,
+                tt = function(x, t, ...) x* nsk(t, knots=c(5, 100, 200, 400),
+                                                Boundary.knots = FALSE))
+vfit4
+@ 
+
+The \code{nsk} function is a variant if \code{ns} such that the coefficients
+are the predicted values at knots 2, 3, \ldots - the predicted value at knot
+1, the \code{Boundary= FALSE} argument omits addition of extra knots at the 
+boundary times of t=1 and 999.
+We see a large decrease in effect from time= 5 to time 100,
+a coefficient of essentially -.060 + .048 = -.012 for Karnofsky at this later
+point, with minimal changes thereafter.
+Unfortunately, follow-on functions such as \code{cox.zph} within the 
+survival package do not work reliably.  We will come back to this example
+in the next section, using another approach.
+@ 
 
 The use of programming statements to create a yes/no variable deserves
 extra comment because of a common error.
@@ -1026,9 +1095,11 @@ they are completely different.
 The issue is subject 7 whose time to diabetes falls exactly at one of the
 event times.  In fit1 their diabetes covariate effectively changes just 
 after the event at time 30,
-in fit2 it changes before the event.  The second is incorrect.
-Stated in the gambling context, all bets must be placed
-\emph{before} the roulette ball lands.
+in fit2 it changes at the event.  The second is incorrect.
+Stated in the gambling context, all roulette bets must be placed
+\emph{before} the ball lands in the slot, or they apply to the next spin of
+the wheel.  
+Likewise, a change in diabetes status needs to apply to the next event time.
 
 When a data set is expanded into a start, stop format using the
 \code{tmerge} function ties are dealt with correctly.
@@ -1045,7 +1116,8 @@ c(coef(fit1), coef(fit2), coef(fit3))
 Occasionally one has a time-dependent covariate whose values in the future
 are predictable.
 The most obvious of these is patient age, occasionally this may also be
-true for the cumulative dose of a drug.
+true for the cumulative dose of a drug; say that subjects are assigned to
+take one 5mg tablet a day (and they keep their schedule).
 If age is entered as a linear term in the model, then the effect of changing
 age can be ignored in a Cox model, due to the structure of the partial
 likelihood.  Assume that subject $i$ has an event at time $t_i$, with other
@@ -1055,7 +1127,7 @@ The partial likelihood term is
   \frac{e^{\beta * a_i}}{\sum_{j \in R_i} e^{\beta* a_j}} =
   \frac{e^{\beta * (a_i + t_i)}}{\sum_{j \in R_i} e^{\beta* (a_j + t_i)}} 
 \end{equation*}
-We see that using time-dependent age (the right hand version) or age at
+We see that using current age (the right hand version) or age at
 baseline (left hand), the partial likelihood term is identical since
 $\exp(\beta t_i)$ cancels out of the fraction.
 However, if the effect of age on risk is \emph{non-linear}, this
@@ -1066,7 +1138,7 @@ data set to completely capture the effect, one interval
 per day to match the usual resolution for death times.
 In practice this level of resolution is not necessary; though we all
 grow older, risk does not increase so rapidly that we need to know
-our age to the day!  
+our age to the day. 
 
 One method to create a time-changing covariate is to use the
 \emph{time-transform} feature of coxph.  Below is an example using
@@ -1083,7 +1155,7 @@ pfit2 <- coxph(Surv(time, status==2) ~ log(bili) + ascites + tt(age),
                 data=pbc,
                 tt=function(x, t, ...) {
                     age <- x + t/365.25 
-                    cbind(age=age, age2= (age-50)^2, age3= (age-50)^3)
+                    cbind(cage=age, cage2= (age-50)^2, cage3= (age-50)^3)
                 })
 pfit2
 anova(pfit2)
@@ -1123,7 +1195,7 @@ set directly and then do an ordinary \code{coxph} call on the expanded
 data. The disadvantage of this is the very large data set, of course, but
 it is no larger than the internal one created by the \code{tt} call.
 An advantage is that further processing of the model is available, such as
-residuals or survival curves. 
+residuals, the anova function, or survival curves. 
 The following reprises the above \code{tt} call.
 
 <<expand>>=
@@ -1138,11 +1210,12 @@ rbind(coef(pfit2), coef(pfit3))
 The above expansion has resulted in a data set of 
 \Sexpr{nrow(tdata)} observations, as compared to the \Sexpr{nrow(pbc)}
 observations of the starting \code{pbc} data.
+
 A sensible fit can often be obtained with a coarser time grid: in the pbc data
 there is an event on day 41 and 43, is it really necessary to update all the
 subject ages by 2/365 at the second of these to reflect an increased risk?
 Instead divide the \code{max(dtimes)/365.25} = 11.5 years of total follow
-up into years.
+up into single years.
 
 <<expand2>>=
 dtime2 <- 1:11 * 365.25
@@ -1164,16 +1237,49 @@ refine it.
 In this data set we reasoned that although risk increases with age, a
 age change of less than one year would have minimal impact.
 
-The Cox model requires computation of a weighted mean and variance of
+For the veteran data set 131/137 of the observation times are 13 months or
+less.  Look at cutting this into 14 different points:the interval starting at
+0, at 1 month, at 2 months, \ldots, 13 for construction of the time-dependent
+Karnofsy coefficient.  This does not categorize the follow-up times themselves,
+only the time-dependent effect, so we don't lose precision in the response.
+
+<<veteran3, fig=TRUE>>=
+dtime <- round(1:13 * 30.5)
+vdata2 <- survSplit(Surv(time, status) ~ ., veteran, cut=dtime,
+                    episode= "month")
+vfit1 <- coxph(Surv(tstart, time, status) ~ trt + prior + karno, vdata2)
+vfit5 <- coxph(Surv(tstart, time, status) ~ trt + prior + karno + 
+                   karno:nsk(month, df=3), vdata2)
+anova(vfit1, vfit5)
+
+tdata <- expand.grid(trt=0, prior=0, karno=30, month=seq(1,13, length=50))
+yhat <- predict(vfit5, newdata=tdata, se.fit=TRUE, reference="zero")
+yy <- yhat$fit+ outer(yhat$se.fit, c(0, -1.96, 1.96), '*')
+matplot(seq(1,13, length=50), yy, type='l', lty=c(1,2,2), col=1, lwd=c(1,2,2),
+        xlab="Month of fu", ylab="Effect, Karnofsky 60 vs 90")
+@ 
+
+Because the spline is now a direct part of the model downstream
+functions such as \code{anova} work properly, and it is straightforward to
+create a plot of the of the fit.
+A Cox model produces \emph{relative} risk, and the default for the predict
+function is to use the mean covariates as our reference.  We wanted to
+assess the effect of a 30 point change in Karnofsy, holding the other covariates
+fixed: values of 0 plus a reference of 0 accomplished this.
+
+For these small data sets the tt() approach and a subset of times are both
+feasable, but for a large data set the first can become very slow, or even
+run out of resources.  The reason is that a
+a Cox model fit requires computation of a weighted mean and variance of
 the covariates at each event time, a process that is inherently 
 $O(ndp^2)$ where $n$ = the sample size, $d$ = the number of events and $p$=
 the number of covariates.  
-Much of the algorithmic effort in the underlying code is to use 
+Much of the algorithmic effort in the underlying code is to use clever 
 updating methods for
-the mean and variance matrices, reducing the compute time to $O((n+d) p^2)$.
-Updating is not possible across a time split and the compuatation starts
-anew, for a \code{tt} term we never update at all; for even moderate size
-data sets the impact of $nd$ versus $n+d$ can be surprising.
+the mean and variance matrices, reducing the compute time to $O(np + d p^2)$.
+For a large data set the tt() approach can produce an intermediate data
+set with $O(nd)$ rows, however, overcoming the computation.
+For even moderate data sets the impact of $(nd)p$ vs $np$ can be surprising.
 
 There are other interesting uses for the time-transform capability.
 One example is O'Brien's logit-rank test procedure \cite{obrien78}.
@@ -1205,10 +1311,10 @@ function(x, t, riskset, weights)
 @ 
 The score statistic for this model is $(C-D)/2$, where $C$ and $D$ are the
 number of concordant and discordant pairs, see the
-survConcordance function.  
+concordance function.  
 The score statistic from this fit is then a test for significance of the
-concordance statistic, and is in fact the basis for the standard error
-reported by survConcordance.  
+concordance statistic, and is in fact the basis for an approximate 
+standard error for the concordance.
 The O'Brien test can be viewed as concordance statistic that gives equal  %'
 weight to each event time, whereas the standard concordance weights each
 event proportionally to the size of the risk set.

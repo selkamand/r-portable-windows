@@ -13,7 +13,7 @@
 \title{Design Issues in Matrix package Development}
 \author{Martin Maechler and Douglas Bates\\R Core Development Team
   \\\email{maechler@stat.math.ethz.ch}, \email{bates@r-project.org}}
-\date{Spring 2008 ({\tiny typeset on \tiny\today})}
+\date{Spring 2008; Aug~2022 ({\tiny typeset on \tiny\today})}
 %
 \begin{document}
 \maketitle
@@ -36,14 +36,73 @@ Functions and Methods:
 %% Note: These are explained in '?RweaveLatex' :
 <<preliminaries, echo=FALSE>>=
 options(width=75)
+library(Matrix)
 @
-
 
 \section{The Matrix class structures}
 \label{sec:classes}
 
-Take Martin's DSC 2007 talk to depict class hierarchy.
-\\ --- --- --- %% \hrule[1pt]{\textwidth}
+Take Martin's DSC 2007 talk to depict the Matrix class hierarchy;
+available from {\small
+  \url{https://stat.ethz.ch/~maechler/R/DSC-2007_MatrixClassHierarchies.pdf}} .
+% ~/R/Meetings-Kurse-etc/2007-DSC/talk.tex Matrix-classes.Rnw
+
+ --- --- --- %% \hrule[1pt]{\textwidth}
+
+From far, there are \textbf{three} separate class hierarchies, and every \pkg{Matrix} package
+matrix has an actual (or ``factual'') class inside these three hierarchies:
+% ~/R/Meetings-Kurse-etc/2007-DSC/Matrix-classes.Rnw
+More formally, we have three (\ 3 \ ) main ``class classifications'' for our Matrices, i.e.,\\
+three ``orthogonal'' partitions of  ``Matrix space'', and every Matrix
+object's class corresponds to an \emph{intersection} of these three partitions;
+i.e., in R's S4 class system: We have three independent inheritance
+schemes for every Matrix, and each such Matrix class is simply defined to
+\texttt{contain} three \emph{virtual} classes (one from each partitioning
+scheme), e.g,
+
+The three partioning schemes are
+\begin{enumerate}
+\item Content \texttt{type}: Classes \code{dMatrix}, \code{lMatrix},
+  \code{nMatrix},
+  (\code{iMatrix}, \code{zMatrix}) for entries of type \textbf{d}ouble,
+  \textbf{l}ogical, patter\textbf{n} (and not yet \textbf{i}nteger and
+  complex) Matrices.
+
+  \code{nMatrix} only stores the
+  \emph{location} of non-zero matrix entries (where as logical Matrices
+  can also have \code{NA} entries!)
+
+\item structure: general, triangular, symmetric, diagonal Matrices
+
+\item sparsity: \code{denseMatrix}, \code{sparseMatrix}
+
+\end{enumerate}
+
+For example in the most used sparseMatrix class, \code{"dgCMatrix"},
+the three initial letters \code{dgC} each codes for one of the three hierarchies:
+\begin{description}
+\item{d: } \textbf{d}ouble
+\item{g: } \textbf{g}eneral
+\item{C: } \textbf{C}sparseMatrix, where \textbf{C} is for \textbf{C}olumn-compressed.
+\end{description}
+Part of this is visible from printing \code{getClass("\emph{<classname>}")}:
+<<dgC-ex>>=
+getClass("dgCMatrix")
+@
+
+Another example is the \code{"nsTMatrix"} class, where \code{nsT} stands for
+\begin{description}
+\item{n: } \textbf{n} is for ``patter\textbf{n}'', boolean content where
+  only the \emph{locations} of the non-zeros need to be stored.
+\item{t: } \textbf{t}riangular matrix; either \textbf{U}pper, or \textbf{L}ower.
+\item{T: } \textbf{T}sparseMatrix, where \textbf{T} is for \textbf{T}riplet,
+  the simplest but least efficient way to store a sparse matrix.
+\end{description}
+From R itself, via \code{getClass(.)}:
+<<dgC-ex>>=
+getClass("ntTMatrix")
+@
+
 
 \subsection{Diagonal Matrices}
 \label{ssec:diagMat}
@@ -54,7 +113,6 @@ The typical constructor is \Rfun{Diagonal} whereas the accessor
 (as for traditional matrices), \Rfun{diag} simply returns the
 \emph{vector} of diagonal entries:
 <<diag-class>>=
-library(Matrix)
 (D4 <- Diagonal(4, 10*(1:4)))
 str(D4)
 diag(D4)
@@ -77,8 +135,9 @@ getClass("diagonalMatrix") ## extending "sparseMatrix"
 Originally, we had implemented diagonal matrices as \emph{dense} rather than sparse
 matrices.  After several years it became clear that this had not been
 helpful really both from a user and programmer point of view.
-So now, indeed the \code{"diagonalMatrix"} class does extend the
-\code{"sparseMatrix"} one.  However, we do \emph{not} store explicitly
+So now, indeed the \code{"diagonalMatrix"} class does also extend
+\code{"sparseMatrix"}, i.e., is a subclass of it.
+However, we do \emph{not} store explicitly
 where the non-zero entries are, and the class does \emph{not} extend any of
 the typical sparse matrix classes, \code{"CsparseMatrix"},
 \code{"TsparseMatrix"}, or \code{"RsparseMatrix"}.

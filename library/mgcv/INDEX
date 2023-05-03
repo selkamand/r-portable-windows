@@ -28,16 +28,21 @@ bug.reports.mgcv        Reporting mgcv bugs.
 cSplineDes              Evaluate cyclic B spline basis
 choldrop                Deletion and rank one Cholesky factor update
 choose.k                Basis dimension choice for smooths
+cnorm                   GAM censored normal family for log-normal AFT
+                        and Tobit models
 columb                  Reduced version of Columbus OH crime data
 concurvity              GAM concurvity measures
 cox.ph                  Additive Cox Proportional Hazard Model
 cox.pht                 Additive Cox proportional hazard models with
                         time varying covariates
 dDeta                   Obtaining derivative w.r.t. linear predictor
+dpnorm                  Stable evaluation of difference between normal
+                        c.d.f.s
 exclude.too.far         Exclude prediction grid points too far from
                         data
 extract.lme.cov         Extract the data covariance matrix from an lme
                         object
+factor.smooth           Factor smooth interactions in GAMs
 family.mgcv             Distribution families in mgcv
 fix.family.link         Modify families for use in GAM fitting and
                         checking
@@ -54,7 +59,7 @@ gam.control             Setting GAM fitting defaults
 gam.convergence         GAM convergence and performance issues
 gam.fit                 GAM P-IRLS estimation with GCV/UBRE smoothness
                         estimation
-gam.fit3                P-IRLS GAM estimation with GCV & UBRE/AIC or
+gam.fit3                P-IRLS GAM estimation with GCV, UBRE/AIC or
                         RE/ML derivative calculation
 gam.fit5.post.proc      Post-processing output of gam.fit5
 gam.mh                  Simple posterior simulation with gam fits
@@ -185,6 +190,8 @@ smooth.construct.so.smooth.spec
                         Soap film smoother constructer
 smooth.construct.sos.smooth.spec
                         Splines on the sphere
+smooth.construct.sz.smooth.spec
+                        Constrained factor smooth interactions in GAMs
 smooth.construct.t2.smooth.spec
                         Tensor product smoothing constructor
 smooth.construct.tensor.smooth.spec

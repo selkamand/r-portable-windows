@@ -1,3 +1,7 @@
+## NB: These NLME-book chapter scripts are now (2022-02) run as part of
+##    'R CMD check nlme'  *only*   if(nlme:::doExtras())
+## --> ../../tests/extras/scripts.R
+
 library(nlme)
 if(requireNamespace("sfsmisc")) {
     print(sfsmisc::sessionInfoX(pkgs = c("Matrix", "nlme")))

@@ -6,6 +6,81 @@
 \newcommand{\CRANpkg}{\href{http://CRAN.R-project.org/package=#1}{\pkg{#1}}}
 %% NB: The date (yyyy-mm-dd) is the "Packaged:" date in ../DESCRIPTION
 
+\section{Changes in version 2.1.4 (2022-08-19, svn r8119)}{
+  \subsection{New Features}{
+    \itemize{
+      \item New \code{medoids()} to compute \code{pam}-consistent medoids,
+      given a clustering (and data).
+    }
+  }
+  \subsection{Bug Fixes}{
+    \itemize{
+      \item \code{help(dissimilarity.object)} % ../man/dissimilarity.object.Rd
+      now correctly describes the meaning of a \code{method = "gower"}
+      result type \code{"T"}.
+      Also, \code{help(daisy)} now extensively documents the different
+      options for \code{type = *}, notably \code{"ordratio"} and
+      \code{"logratio"}.
+
+      \item \code{pam(x, diss=TRUE)} uses \code{inherits(x, "dissimilarity")} instead
+      of semi-deprecated \code{data.class(x) == "dissimilarity")} to check.
+
+      \item Using \code{deparse1()} from \R version 4.0.0 and newer (even
+      when \pkg{cluster} is installed into an older versions of R),
+      e.g., in plot default titles.
+    }
+  }
+}
+
+\section{Changes in version 2.1.3 (2022-03-28, svn r8062)}{
+  \subsection{New Features}{
+    \itemize{
+      \item \code{as.data.frame(<silhouette>)} now works; suggested by
+	Jonathan Marshall (@Massey, NZ).
+    }
+  }
+  \subsection{Translations}{
+    \itemize{
+      \item Updated German translations (Detlef Steuer)
+    }
+  }
+  \subsection{Tweaks}{
+    \itemize{
+      \item use explicit cast, quieting \code{-Wconversion}.
+    }
+  }
+}
+
+\section{Changes in version 2.1.2 (2021-04-16, svn r7959)}{% CRAN published 2021-04-17; R 4.1.0
+  \subsection{New Features}{
+    \itemize{
+      \item Updated the Italian translations (by Daniele Medri), the
+      French (by Philippe Grosjean) and the German (by Detlef Steuer).
+      New Lithuanian translations by Gabriele Stupuriene & Rimantas Zakauskas.
+    }
+  }
+}
+
+\section{Changes in version 2.1.1 (2021-02-11, svn r7925)}{
+  \subsection{New Features}{
+    \itemize{
+      \item Added Italian translations from Daniele Medri, and updated the
+      French ones from Philippe Grosjean.
+
+      \item \code{clara()} gains a \code{cluster.only} argument, entirely
+      \dQuote{in parallel} to \code{pam()}.
+
+      \item the \code{silhouette()} method for \code{clara} now allows
+      \code{full} to be a number in [0,1] instead of just a logical and it gains
+      gains new optional argument \code{subset} to specify the indices of
+      observations for which silhouette values shold be computed.
+
+      \item Faster \code{pam()} - \sQuote{fasterPAM} from Erich Schubert.
+      New optional arguments \code{medoids = "random"}, \code{nstart}, and
+      \code{variant}, notably \code{variant = "faster"}.
+    }
+  }
+}
 
 \section{Changes in version 2.1.0 (2019-06-07, svn r7674)}{
   \subsection{Bug Fixes}{
@@ -452,4 +527,3 @@
     }
   }
 }
-

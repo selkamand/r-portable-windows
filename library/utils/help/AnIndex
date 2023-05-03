@@ -1,10 +1,13 @@
 utils-package	utils-package
 $.person	person
+.AtNames	rcompgen
+.AtNames.default	rcompgen
 .DollarNames	rcompgen
 .DollarNames.default	rcompgen
 .DollarNames.environment	rcompgen
 .DollarNames.list	rcompgen
 .romans	roman
+.RtangleCodeLabel	SweaveUtils
 .S3methods	methods
 ?	Question
 ??	help.search
@@ -17,9 +20,9 @@ arrangeWindows	arrangeWindows
 as.character.person	person
 as.person	person
 as.person.default	person
-as.personList	person
-as.personList.default	person
-as.personList.person	person
+as.personList	personList
+as.personList.default	personList
+as.personList.person	personList
 as.relistable	relist
 as.roman	roman
 asDateBuilt	packageDescription
@@ -44,6 +47,7 @@ build	PkgUtils
 c.person	person
 capture.output	capture.output
 changedFiles	changedFiles
+charClass	charClass
 check	PkgUtils
 checkCRAN	mirrorAdmin
 choose.dir	choose.dir
@@ -55,12 +59,13 @@ citation	citation
 cite	cite
 citeNatbib	cite
 citEntry	citEntry
-citFooter	citEntry
-citHeader	citEntry
+citFooter	citation
+citHeader	citation
 clipboard	clipboard
 close.socket	close.socket
 close.txtProgressBar	txtProgressBar
 close.winProgressBar	winProgressBar
+clrhash	hashtab
 combn	combn
 compareVersion	compareVersion
 COMPILE	COMPILE
@@ -73,9 +78,9 @@ data	data
 data.entry	dataentry
 dataentry	dataentry
 de	dataentry
-de.ncols	dataentry
-de.restore	dataentry
-de.setup	dataentry
+de.ncols	utils-internal
+de.restore	utils-internal
+de.setup	utils-internal
 debugcall	debugcall
 debugger	debugger
 demo	demo
@@ -95,12 +100,15 @@ fileSnapshot	changedFiles
 file_test	filetest
 Filters	choose.files
 find	apropos
+findCRANmirror	findCRANmirror
 findLineNum	findLineNum
+findMatches	rcompgen
 fix	fix
 fixInNamespace	getFromNamespace
 flush.console	flush.console
 format.bibentry	bibentry
 format.citation	bibentry
+format.hashtab	hashtab
 format.MethodsFunction	methods
 format.object_size	object.size
 format.person	person
@@ -111,6 +119,7 @@ getBioCmirrors	chooseBioCmirror
 getClipboardFormats	clipboard
 getCRANmirrors	chooseCRANmirror
 getFromNamespace	getFromNamespace
+gethash	hashtab
 getIdentification	setWindowTitle
 getParseData	getParseData
 getParseText	getParseData
@@ -126,6 +135,7 @@ getWindowTitle	setWindowTitle
 getWinProgressBar	winProgressBar
 glob2rx	glob2rx
 globalVariables	globalVariables
+hashtab	hashtab
 hasName	hasName
 head	head
 head.data.frame	head
@@ -144,10 +154,12 @@ hsearch_db_keywords	hsearch-utils
 INSTALL	INSTALL
 install.packages	install.packages
 installed.packages	installed.packages
+is.hashtab	hashtab
 is.relistable	relist
 isS3method	isS3method
 isS3stdGeneric	isS3stdGen
-limitedLabels	recover
+length.hashtab	hashtab
+limitedLabels	debugger
 LINK	LINK
 loadhistory	savehistory
 loadRconsole	Rconsole
@@ -158,6 +170,7 @@ maintainer	maintainer
 make.packages.html	make.packages.html
 make.socket	make.socket
 makeRweaveLatexCodeRunner	SweaveUtils
+maphash	hashtab
 memory.limit	memory.size
 memory.size	memory.size
 menu	menu
@@ -168,6 +181,7 @@ modifyList	modifyList
 new.packages	update.packages
 news	news
 nsl	nsl
+numhash	hashtab
 object.size	object.size
 old.packages	update.packages
 Ops.roman	roman
@@ -181,7 +195,7 @@ packageStatus	packageStatus
 packageVersion	packageDescription
 page	page
 person	person
-personList	person
+personList	personList
 pico	edit
 print.bibentry	bibentry
 print.Bibtex	toLatex
@@ -190,6 +204,7 @@ print.changedFiles	changedFiles
 print.citation	bibentry
 print.fileSnapshot	changedFiles
 print.getAnywhere	getAnywhere
+print.hashtab	hashtab
 print.hsearch	help.search
 print.Latex	toLatex
 print.ls_str	ls_str
@@ -236,6 +251,7 @@ relist.default	relist
 relist.factor	relist
 relist.list	relist
 relist.matrix	relist
+remhash	hashtab
 REMOVE	REMOVE
 remove.packages	remove.packages
 removeSource	removeSource
@@ -247,6 +263,8 @@ RShowDoc	RShowDoc
 RSiteSearch	RSiteSearch
 rtags	rtags
 Rtangle	Rtangle
+RtangleFinish	SweaveUtils
+RtangleRuncode	SweaveUtils
 RtangleSetup	Rtangle
 RtangleWritedoc	SweaveUtils
 RweaveChunkPrefix	SweaveUtils
@@ -258,12 +276,15 @@ RweaveLatexSetup	RweaveLatex
 RweaveLatexWritedoc	SweaveUtils
 RweaveTryStop	SweaveUtils
 R_AVAILABLE_PACKAGES_CACHE_CONTROL_MAX_AGE	available.packages
+R_BIOC_VERSION	setRepositories
 R_INSTALL_STAGED	INSTALL
 R_INSTALL_TAR	INSTALL
+R_REPOSITORIES	setRepositories
 savehistory	savehistory
 select.list	select.list
 sessionInfo	sessionInfo
 setBreakpoint	findLineNum
+sethash	hashtab
 setInternet2	utils-defunct
 setRepositories	setRepositories
 setStatusBar	setWindowTitle
@@ -280,6 +301,7 @@ Stangle	Sweave
 str	str
 str.data.frame	str
 str.default	str
+str.hashtab	hashtab
 strcapture	strcapture
 strOptions	str
 summary.packageStatus	packageStatus
@@ -303,6 +325,7 @@ tail.table	head
 tar	tar
 timestamp	savehistory
 toBibtex	toLatex
+toBibtex.bibentry	bibentry
 toBibtex.person	person
 toLatex	toLatex
 toLatex.sessionInfo	sessionInfo
@@ -311,6 +334,7 @@ type.convert	type.convert
 type.convert.data.frame	type.convert
 type.convert.default	type.convert
 type.convert.list	type.convert
+typhash	hashtab
 undebugcall	debugcall
 unlist.relistable	relist
 unstack	stack
@@ -320,7 +344,7 @@ untar	untar
 unzip	unzip
 update.packages	update.packages
 update.packageStatus	packageStatus
-upgrade	packageStatus
+upgrade	upgrade
 upgrade.packageStatus	packageStatus
 url.show	url.show
 URLdecode	URLencode
@@ -356,3 +380,5 @@ zip.file.extract	utils-defunct
 zip.unpack	utils-defunct
 [.getAnywhere	getAnywhere
 [.person	person
+[[.hashtab	hashtab
+[[<-.hashtab	hashtab

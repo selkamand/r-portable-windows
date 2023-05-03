@@ -13,7 +13,7 @@ options(contrasts=c("contr.treatment", "contr.poly")) #reset default
 ### code chunk number 2: mplot
 ###################################################
 getOption("SweaveHooks")[["fig"]]()
-require(survival)
+library(survival)
 mfit <- coxph(Surv(futime, death) ~ sex + pspline(age, df=4), data=mgus)
 mfit
 termplot(mfit, term=2, se=TRUE, col.term=1, col.se=1)
@@ -99,7 +99,7 @@ options(show.signif.stars=FALSE) # display intelligence
 fit1 <- coxph(Surv(futime, death) ~ sex + pspline(age, 3), data=flchain)
 fit1
 termplot(fit1, term=2, se=TRUE, col.term=1, col.se=1,
-         ylab="log hazard")
+         ylab="log hazard ratio")
 
 
 ###################################################

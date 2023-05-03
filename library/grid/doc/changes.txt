@@ -1,9 +1,91 @@
 
+Changes from grid_4.2.* to grid_4.3.0:
+-------------------------------------
+
+1.  New isClosed() function so can provide (sensible) default for 'closed'
+    argument in grobCoords().
+
+2.  Bug fix:  grid.display.list(TRUE) incorrectly initialised the 'grid'
+    display list.  Thanks to Kaiguang Zhao for the bug report.
+
+3.  Bug fix:  fix for "polygon edge not found" (at least when font
+    cannot be found).  Fixes ggplot2 issue 2252 (hopefully).
+
+4.  Improvements to polygonEdge() for very tall and thin or wide and short
+    polygons; fix to textRect() so that it returns vertices anti-clockwise;
+    changes to L_textBounds() so that edgex/edgey are not calculated if theta is
+    NA (which is set by, e.g., widthDetails()).  May also have positive
+    impact for ggplot2 issue 2252.
+
+
+Changes from grid_4.1.* to grid_4.2.0:
+-------------------------------------
+
+1.  New 'vpPath' argument to grid.grep() so that we can ask for
+    matching grobs WITH vpPaths WITHOUT having to ask for matching
+    viewports, e.g., grid.grep("path", vpPath=TRUE).
+
+    The value of 'vpPath' defaults to the value of 'viewports', so ...
+
+    grid.grep("path", viewports=TRUE)
+
+    ... behaves as before.
+
+2.  New grid.group(), grid.define(), and grid.use() functions for
+    defining and using "isolated groups" (on supported devices).
+    These can be used to draw content in isolation before combining
+    the content with the main image, to apply compositing operators
+    other than "over", and to apply affine transformations to
+    content.
+
+3.  New grid.stroke(), grid.fill(), and grid.fillStroke() functions
+    for defining a path (based on a grob) and then stroking and/or
+    filling that path.
+
+4.  viewport(clip) can now be a path, from as.path().  This defines a
+    clipping path and allows the fill rule for the path to be
+    specified.
+
+5.  Text and raster content can now be included in patterns,
+    (clipping) paths, and masks (and groups).  (On supported devices.)
+
+6.  The fixed limit on the number of patterns, clipping paths, and/or
+    masks on Cairo-based devices has been removed.
+
+7.  Fix for reinitialising gpar settings when pushViewport() then
+    grid.newpage() WITHOUT up/popViewport().
+
+8.  Clipping paths and masks are turned off (initially) when resolving
+    a pattern.
+
+9.  Stricter rules to disallow pattern, clipping path, mask, group, or
+    path within clipping path or path.
+
+10. Fix for replayPlot() of an "empty" 'grid' "plot"
+    (where recordPlot() was called with 'grid' loaded, 
+     but with no 'grid' drawing performed).
+
+    Bug 18237 (Thanks to Kevin Ushey for bug report).
+
+
 Changes from grid_4.0.* to grid_4.1.0:
 -------------------------------------
 
 1.  Bug fix for grid.curve() with vertical or horizontal "curve".
     Thanks to Patrick Breheney for the report.
+
+2.  Bug fix for grid.pack(side="[left|top]").
+    Thanks to Deepayan Sarkar for the report.
+
+3.  New editViewport() function.
+
+4.  gpar(fill) can now be a linearGradient() or radialGradient() or 
+    pattern().
+
+5.  viewport(clip) can now be a grob (that defines a clipping path).
+
+6.  New viewport(mask) argument that can be "none", "inherit", or
+    a grob (that defines a mask).
 
 
 Changes from grid_3.6.* to grid_4.0.0:

@@ -1,10 +1,14 @@
 ####--- S4 Methods (and Classes)  --- see also ../src/library/methods/tests/
+
+#### Instead of adding more tests depending on recommended packages,
+#### re-facror into a separate script and treat like eval-etc-2.R
+
 options(useFancyQuotes=FALSE)
 require(methods)
 assertError <- tools::assertError # "import"
 ##too fragile: showMethods(where = "package:methods")
 
-## When this test comes too late, it fails too early in R <= 3.2.2
+## When this test comes too late, it failed too early in R <= 3.2.2
 require(stats4)
 detach("package:methods")
 require("methods")
@@ -400,7 +404,7 @@ stopifnot(unlist(lapply(ggm, function(g) !is.null(getGeneric(g, where = em)))),
 	  )
 ## the last failed in R 2.7.0 : was not showing  "show"
 
-if(require("Matrix", lib.loc = .Library)) {
+if(require("Matrix", lib.loc = .Library, quietly = TRUE)) {
     D5. <- Diagonal(x = 5:1)
     D5N <- D5.; D5N[5,5] <- NA
     stopifnot(isGeneric("dim", where=as.environment("package:Matrix")),
@@ -414,11 +418,12 @@ if(require("Matrix", lib.loc = .Library)) {
 	      identical(pmin(1, D5.), pmin(1, as.matrix(D5.))),
 	      identical(D5N, pmax(D5N, -1)),
 	      identical(D5N, pmin(D5N, 5)),
-	      identical(unname(as.matrix(pmin(D5N+1, 3))),
-			       pmin(as.matrix(D5N)+1, 3)),
+	      identical(as.matrix(pmin(D5N +1, 3)),
+			pmin(as.matrix(D5N)+1, 3)),
 	      ##
 	      TRUE)
-}
+} else
+    message("skipping tests requiring the Matrix package")
 
 
 ## containing "array" ("matrix", "ts", ..)
@@ -550,12 +555,12 @@ problNames <- c("names", "dimnames", "row.names",
 myTry <- function(expr, ...) tryCatch(expr, error = function(e) e)
 tstSlotname <- function(nm) {
     r <- myTry(setClass("foo", representation =
-                        structure(list("character"), .Names = nm)))
+                        structure(list("character"), names = nm)))
     if(is(r, "error")) return(r$message)
     ## else
     ch <- LETTERS[1:5]
     ## instead of  new("foo", <...> = ch):
-    x <- myTry(do.call(new, structure(list("foo", ch), .Names=c("", nm))))
+    x <- myTry(do.call(new, structure(list("foo", ch), names=c("", nm))))
     if(is(x, "error")) return(x$message)
     y <- myTry(new("foo"));		 if(is(y, "error")) return(y$message)
     r <- myTry(capture.output(show(x))); if(is(r, "error")) return(r$message)
@@ -946,12 +951,13 @@ stopifnot(identical(f2(a=1), 1))
 
 
 ## R's internal C  R_check_class_and_super()  was not good enough
-if(require("Matrix")) withAutoprint({
+if(require("Matrix", lib.loc = .Library, quietly = TRUE)) { withAutoprint({
     setClass("Z", representation(zz = "list"))
     setClass("C", contains = c("Z", "dgCMatrix"))
     setClass("C2", contains = "C")
     setClass("C3", contains = "C2")
     m <- matrix(c(0,0,2:0), 3,5, dimnames = list(NULL,NULL))
+    m2 <- matrix(c(0,0,2:0), 3,5)
     (mC <- as(m, "dgCMatrix"))
     (cc <- as(mC, "C"))
      c2 <- as(mC, "C2")
@@ -959,12 +965,14 @@ if(require("Matrix")) withAutoprint({
     stopifnot(
         identical(capture.output(c2),
                   sub("C3","C2", capture.output(c3)))
-      , identical(as(cc, "matrix"), m)
-      , identical(as(c2, "matrix"), m)
-      , identical(as(c3, "matrix"), m)
+      , identical(as(cc, "matrix"), m2) # changed for Matrix 1.5-x
+      , identical(as(c2, "matrix"), m2)
+      , identical(as(c3, "matrix"), m2)
     )
     invisible(lapply(c("Z","C","C2","C3"), removeClass))
-})
+ })
+} else
+    message("skipping tests requiring the Matrix package")
 
 
 ## Automatic coerce method creation:
@@ -991,14 +999,15 @@ o3 <- structure(1:7, class = c("foo", "bar"))
 stopifnot( canCoerce(o3, "A") )
 ## failed in R <= 3.6.1
 
-if(require("Matrix")) withAutoprint({
-    (sci <- names(getClass("integer")@contains))
+if(require("Matrix", lib.loc = .Library, quietly = TRUE)) { withAutoprint({
+    sci <- names(getClass("integer")@contains)
     # These 2 classes have *nothing* to do with Matrix:
     setClass("MyClass")
-    setClassUnion("NumOrMyClass", c("numeric", "MyClass"))
-    (nsci <- names(getClass("integer")@contains))
+    ncl <- "NumOrMyClass"
+    setClassUnion(ncl, c("numeric", "MyClass"))
+    nsci <- names(getClass("integer")@contains)
     ## failed in R <= 3.6.2
-    stopifnot(sci %in% nsci)
+    stopifnot(sci %in% nsci, identical(setdiff(nsci, sci), ncl))
 
     setClassUnion('dMatrixOrMatrix', members = c('dMatrix', 'matrix'))
     ## failed in R <= 3.6.2
@@ -1007,6 +1016,8 @@ if(require("Matrix")) withAutoprint({
     invisible(lapply(c("NumOrMyClass", "MyClass", "dMatrixOrMatrix"),
                      removeClass))
 })
+} else
+    message("skipping tests requiring the Matrix package")
 
 setClass("foo", slots = c(y = "numeric"))
 setClass("bar", contains = "foo")

@@ -41,6 +41,7 @@ loadRdMacros            Load User-defined Rd Help System Macros
 make_translations_pkg   Package the Current Translations in the R
                         Sources
 makevars_user           User and Site Compilation Variables
+matchConcordance        Concordance between source and target lines.
 md5sum                  Compute MD5 Checksums
 package_dependencies    Computations on the Dependency Hierarchy of
                         Packages

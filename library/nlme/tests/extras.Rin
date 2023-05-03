@@ -1,0 +1,11 @@
+###-*- R -*-
+###--- This script adds extra test scripts (and reference output)
+###--- from the extras subdir as files extras_*.R[out.save]
+###--- during R CMD check *only if* nlme:::doExtras()
+
+if (!nlme:::doExtras()) q("no")
+
+extrafiles <- list.files("extras", pattern = "\\.R(out.save)?$")
+if (any(!file.copy(file.path("extras", extrafiles),
+                   paste0("extras_", extrafiles))))
+    stop("failed to copy extra test script")

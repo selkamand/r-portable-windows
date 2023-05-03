@@ -44,6 +44,30 @@ logistInit <- function(mCall, LHS, data) {
 }
 logist <- selfStart(logist, initial = logistInit) ##-> Error in R 1.5.0
 str(logist)
+## with parameters  and  getInitial():
+logist <- selfStart(logist, initial = logistInit,
+                    parameters = c("Asym", "xmid", "scal"))
+tools::assertWarning(verbose = TRUE,
+ in1 <- getInitial(circumference ~ logist(age, Asym, xmid, scal), Orange)
+) # no warning previously
+## but this then failed, now gives the same warning:
+tools::assertWarning(verbose = TRUE,
+ fm <- nls(circumference ~ logist(age, Asym, xmid, scal), Orange)
+)
+## in R 4.1.{0,1,2} gave
+## Error in (attr(object, "initial"))(mCall = mCall, data = data, LHS = LHS,  :
+##  unused arguments (control = list(.......), trace = FALSE)
+## IGNORE_RDIFF_BEGIN
+coef(summary(fm))
+## IGNORE_RDIFF_END
+
+## getInitial.formula() gets selfStart function from environment(formula)
+plogis <- stats::SSlogis
+in2 <- getInitial(circumference ~ plogis(age, Asym, xmid, scal), Orange)
+## in R <= 4.2.x gave Error:
+##   no 'getInitial' method found for "function" objects
+rm(plogis)
+
 
 ## lower and upper in algorithm="port"
 set.seed(123)
@@ -52,10 +76,14 @@ a <- b <- 1; c <- -0.1
 y <- a+b*x+c*x^2+rnorm(200, sd=0.05)
 plot(x,y)
 curve(a+b*x+c*x^2, add = TRUE)
+## IGNORE_RDIFF_BEGIN
 nls(y ~ a+b*x+c*I(x^2), start = c(a=1, b=1, c=0.1), algorithm = "port")
 (fm <- nls(y ~ a+b*x+c*I(x^2), start = c(a=1, b=1, c=0.1),
            algorithm = "port", lower = c(0, 0, 0)))
-if(have_MASS) print(confint(fm))
+## IGNORE_RDIFF_END
+if(have_MASS) {
+    print(confint(fm))
+} else message("skipping tests requiring the MASS package")
 
 ## weighted nls fit
 set.seed(123)
@@ -65,11 +93,9 @@ wts <- rep(c(1, 2), length = 10); wts[5] <- 0
 fit0 <- lm(yeps ~ x, weights = wts)
 ## IGNORE_RDIFF_BEGIN
 summary(fit0, cor = TRUE)
-## IGNORE_RDIFF_END
 cf0 <- coef(summary(fit0))[, 1:2]
 fit <- nls(yeps ~ a + b*x, start = list(a = 0.12345, b = 0.54321),
            weights = wts, trace = TRUE)
-## IGNORE_RDIFF_BEGIN
 summary(fit, cor = TRUE)
 ## IGNORE_RDIFF_END
 stopifnot(all.equal(residuals(fit), residuals(fit0), tolerance = 1e-5,
@@ -237,18 +263,22 @@ test <- function(trace=TRUE)
 	 suppressWarnings(
 	     nls(y ~ myf(x,A,B,n), data=xy)))
 }
-t1 <- test(); t1$with.start
+## IGNORE_RDIFF_BEGIN
+t1 <- test()
+## IGNORE_RDIFF_END
+t1$with.start
 ##__with.start:
 ## failed to find n in 2.2.x
 ## found wrong n in 2.3.x
 ## finally worked in 2.4.0
 ##__no.start: failed in 3.0.2
 ## 2018-09 fails on macOS with Accelerate framework.
-stopifnot(all.equal(.n(t1[[1]]), .n(t1[[2]])))
+stopifnot(all.equal(.n(t1[[1]]), .n(t1[[2]]), check.environment = FALSE))
 rm(a,b)
 t2 <- test(FALSE)
 stopifnot(all.equal(lapply(t1, .n),
-		    lapply(t2, .n), tolerance = 0.16))# different random error
+		    lapply(t2, .n), tolerance = 0.16, # different random error
+                    check.environment = FALSE))
 
 
 ## list 'start'
@@ -320,3 +350,40 @@ options(op) # warnings about missing 'start' ok:
 f.1 <- nls(y ~ a) # failed in R 3.4.x
 stopifnot(all.equal(noC(f.1), noC(fi1)),
 	  all.equal(coef(f.1), c(a = mean(y))))
+
+
+##--- New option 'central' for numericDeriv() :
+
+## Continuing the  pnorm()  example from  example(numericDeriv):
+
+mkEnv <- function(n, from = -3, to = 3) {
+    stopifnot(is.numeric(n), n >= 2)
+    E <- new.env()
+    E$mean <- 0.
+    E$sd   <- 1.
+    E$x    <- seq(from, to, length.out = n)
+    E
+}
+
+pnEnv <- mkEnv(65) # is used inside  errE() :
+
+## varying eps (very platform dependent?):
+errE <- Vectorize(function(eps, central=FALSE) {
+  grad <- attr(numericDeriv(quote(pnorm(x, mean, sd)), c("mean", "sd"),
+                            pnEnv, eps=eps, central=central), "gradient")
+  target <- with(pnEnv, -dnorm(x) * cbind(1, x, deparse.level=0L))
+  ## return relative error {in the same sense as in all.equal()} :
+  sum(abs(target - grad)) / sum(abs(target))
+})
+
+curve(errE(x), 1e-9, 1e-4, log="xy", n=512, ylim = c(1.5e-11, 5e-7),
+      xlab = quote(epsilon), ylab=quote(errE(epsilon))) -> rex
+axis(1, at = 2^-(52/2), label = quote(sqrt(epsilon[c])), col=4, col.axis=4, line=-1/2)
+axis(1, at = 2^-(52/3), label = quote(epsilon[c]^{1/3}), col=4, col.axis=4, line=-1/2)
+curve(errE(x, central=TRUE), n=512, col=2, add = TRUE) -> rexC
+## IGNORE_RDIFF_BEGIN
+str(xy1 <- approx(rex , xout= sqrt(2^-52)) )
+str(xy2 <- approx(rexC, xout=(2^-52)^(1/3)))
+## IGNORE_RDIFF_END
+lines(xy1, type="h", col=4)
+lines(xy2, type="h", col=4)

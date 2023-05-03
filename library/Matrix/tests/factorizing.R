@@ -3,8 +3,10 @@
 library(Matrix)
 
 source(system.file("test-tools.R", package = "Matrix"))# identical3() etc
-doExtras
-(is64bit <- .Machine$sizeof.pointer == 8)
+options(warn = 0)
+is64bit <- .Machine$sizeof.pointer == 8
+cat("doExtras:", doExtras,";  is64bit:", is64bit, "\n")
+
 ### "sparseQR" : Check consistency of methods
 ##   --------
 data(KNex); mm <- KNex$mm; y <- KNex$y
@@ -12,109 +14,10 @@ stopifnot(is((Y <- Matrix(y)), "dgeMatrix"))
 md <- as(mm, "matrix")                  # dense
 
 (cS <- system.time(Sq <- qr(mm))) # 0.009
-(cD <- system.time(Dq <- qr(md))) # 0.499 (lynne, 2014 f)
+(cD <- system.time(Dq <- qr(md))) # 0.499 (lynne, 2014 f); 1.04 lynne 2019 ?????
 cD[1] / cS[1] # dense is  much ( ~ 100--170 times) slower
 
-## MM__FIXME__: move these functions to ../inst/test-tools.R
-chkQR <- function(a,
-                  y = seq_len(nrow(a)),## RHS: made to contain no 0
-                  a.qr = qr(a), tol = 1e-11, # 1e-13 failing very rarely (interesting)
-                  ##----------
-                  Qinv.chk = !sp.rank.def, QtQ.chk = !sp.rank.def,
-                  verbose = getOption("Matrix.verbose", FALSE), giveRE = verbose,
-                  quiet = FALSE)
-{
-    d <- dim(a)
-    stopifnot((n <- d[1]) >= (p <- d[2]), is.numeric(y))
-    kind <- if(is.qr(a.qr)) "qr"
-            else if(is(a.qr, "sparseQR")) "spQR"
-            else stop("unknown qr() class: ", class(a.qr))
-    if(!missing(verbose) && verbose) {
-	op <- options(Matrix.verbose = verbose)
-	on.exit(options(op))
-    }
-    ## rank.def <- switch(kind,
-    ##     	       "qr"  = a.qr$rank < length(a.qr$pivot),
-    ##     	       "spQR" = a.qr@V@Dim[1] > a.qr@Dim[1])
-    sp.rank.def <- (kind == "spQR") && (a.qr@V@Dim[1] > a.qr@Dim[1])
-    if(sp.rank.def && !quiet && (missing(Qinv.chk) || missing(QtQ.chk)))
-	message("is sparse *structurally* rank deficient:  Qinv.chk=",
-		Qinv.chk,", QtQ.chk=",QtQ.chk)
-    if(is.na(QtQ.chk )) QtQ.chk  <- !sp.rank.def
-    if(is.na(Qinv.chk)) Qinv.chk <- !sp.rank.def
-
-    if(Qinv.chk) { ## qr.qy and qr.qty should be inverses,  Q'Q y = y = QQ' y :
-        if(verbose) cat("Qinv.chk=TRUE: checking   Q'Q y = y = QQ' y :\n")
-	## FIXME: Fails for structurally rank deficient sparse a's, but never for classical
-	assert.EQ(drop(qr.qy (a.qr, qr.qty(a.qr, y))), y, giveRE=giveRE, tol = tol/64)
-	assert.EQ(drop(qr.qty(a.qr, qr.qy (a.qr, y))), y, giveRE=giveRE, tol = tol/64)
-    }
-
-    piv <- switch(kind,
-                  "qr" = a.qr$pivot,
-                  "spQR" = 1L + a.qr@q)# 'q', not 'p' !!
-    invP <- sort.list(piv)
-
-    .ckQR <- function(cmpl) { ## local function, using parent's variables
-        if(verbose) cat("complete = ",cmpl,": checking  X = Q R P*\n", sep="")
-        Q <- qr.Q(a.qr, complete=cmpl) # NB: Q is already "back permuted"
-        R <- qr.R(a.qr, complete=cmpl)
-        rr <- if(cmpl) n else p
-        stopifnot(dim(Q) == c(n,rr),
-                  dim(R) == c(rr,p))
-        assert.EQ.Mat(a, Q %*% R[, invP], giveRE=giveRE, tol=tol)
-        ##            =  ===============
-	if(QtQ.chk)
-	    assert.EQ.mat(crossprod(Q), diag(rr), giveRE=giveRE, tol=tol)
-        ##                ===========   ====
-    }
-    .ckQR(FALSE)
-    .ckQR(TRUE)
-    invisible(a.qr)
-}## end{chkQR}
-
-##' Check QR-consistency of dense and sparse
-chk.qr.D.S <- function(d., s., y, Y = Matrix(y), force = FALSE, tol = 1e-10) {
-    stopifnot(is.qr(d.), is(s., "sparseQR"))
-    cc <- qr.coef(d.,y)
-    rank.def <- any(is.na(cc)) && d.$rank < length(d.$pivot)
-    if(rank.def && force) cc <- mkNA.0(cc) ## set NA's to 0 .. ok, in some case
-
-    ## when system is rank deficient, have differing cases, not always just NA <-> 0 coef
-    ## FIXME though:  resid & fitted should be well determined
-    if(force || !rank.def) stopifnot(
-### FIXME: temporary:
-###	is.all.equal3(	    cc	     , drop(qr.coef  (s.,y)), drop(qr.coef  (s.,Y)), tol=tol),
-	is.all.equal3(	unname( cc ) , drop(qr.coef  (s.,y)), drop(qr.coef  (s.,Y)), tol=tol),
-### END{FIXME}
-	is.all.equal3(qr.resid (d.,y), drop(qr.resid (s.,y)), drop(qr.resid (s.,Y)), tol=tol),
-	is.all.equal3(qr.fitted(d.,y), drop(qr.fitted(s.,y)), drop(qr.fitted(s.,Y)), tol=tol)
-	)
-}
-
-##' "Combi" calling chkQR() on both "(sparse)Matrix" and 'traditional' version
-##' ------  and combine the two qr decompositions using chk.qr.D.S()
-##'
-##' @title check QR-decomposition, and compare sparse and dense one
-##' @param A a 'Matrix' , typically 'sparseMatrix'
-##' @param Qinv.chk
-##' @param QtQ.chk
-##' @param quiet
-##' @return list with 'qA' (sparse QR) and 'qa' (traditional (dense) QR)
-##' @author Martin Maechler
-checkQR.DS.both <- function(A, Qinv.chk, QtQ.chk=NA,
-                            quiet=FALSE, giveRE=TRUE, tol = 1e-13)
-{
-    stopifnot(is(A,"Matrix"))
-    if(!quiet) cat("classical: ")
-    qa <- chkQR(as(A, "matrix"), Qinv.chk=TRUE, QtQ.chk=TRUE, tol=tol, giveRE=giveRE)# works always
-    if(!quiet) cat("[Ok] ---  sparse: ")
-    qA <- chkQR(A, Qinv.chk=Qinv.chk, QtQ.chk=QtQ.chk, tol=tol, giveRE=giveRE)
-    validObject(qA)
-    if(!quiet) cat("[Ok]\n")
-    chk.qr.D.S(qa, qA, y = 10 + 1:nrow(A), tol = 256*tol)# ok [not done in rank deficient case!]
-    invisible(list(qA=qA, qa=qa))
-}
+## chkQR() in ../inst/test-tools-1.R ;
 
 if(doExtras) { ## ~ 20 sec {"large" example}   + 2x qr.R() warnings
     cat("chkQR( <KNex> ) .. takes time .. ")
@@ -124,16 +27,16 @@ if(doExtras) { ## ~ 20 sec {"large" example}   + 2x qr.R() warnings
 }
 
 ## consistency of results dense and sparse
+##	chk.qr.D.S() and  checkQR.DS.both() >>> ../inst/test-tools-Matrix.R
 chk.qr.D.S(Dq, Sq, y, Y)
 
 ## Another small example with pivoting (and column name "mess"):
 suppressWarnings(RNGversion("3.5.0")); set.seed(1)
 X <- rsparsematrix(9,5, 1/4, dimnames=list(paste0("r", 1:9), LETTERS[1:5]))
 qX <- qr(X); qd <- qr(as(X, "matrix"))
-## numbers are the same, but names of sparse case are wrongly permuted
-qr.coef(qX, 1:9)
-qr.coef(qd, 1:9)
-if(FALSE) ## error:
+## are the same (now, *including* names):
+assert.EQ(print(qr.coef(qX, 1:9)), qr.coef(qd, 1:9), tol=1e-14)
+if(FALSE) ## error: (FIXME ?)
 chk.qr.D.S(d. = qd, s. = qX, y = 1:9)
 
 
@@ -160,17 +63,19 @@ try( ## NOTE: *Both* checks  currently fail here:
 
 
 ## Larger Scale random testing
-oo <- options(Matrix.quiet.qr.R = TRUE, Matrix.verbose = TRUE)
+oo <- options(Matrix.quiet.qr.R = TRUE, Matrix.verbose = TRUE, nwarnings = 1e4)
 set.seed(101)
 
+quiet <- doExtras
 for(N in 1:(if(doExtras) 1008 else 24)) {
     A <- rsparsematrix(8,5, nnz = rpois(1, lambda=16))
-    cat(sprintf("%4d -", N))
-    checkQR.DS.both(A, Qinv.chk= NA, QtQ.chk=NA,
+    cat(sprintf(if(quiet) "%d " else "%4d -", N)); if(quiet && N %% 50 == 0) cat("\n")
+    checkQR.DS.both(A, Qinv.chk= NA, QtQ.chk=NA, quiet=quiet,
     ##                          --- => FALSE if struct. rank deficient
-		    giveRE = FALSE, tol = if(is64bit) 2e-13 else 1e-12)
+		    giveRE = FALSE, tol = 1e-12)
+    ## with doExtras = TRUE, 64bit (F34, R 4.3.0-dev. 2022-05): seen 8.188e-13
 }
-unique(warnings())
+summary(warnings())
 
 ## Look at single "hard" cases: --------------------------------------
 
@@ -239,16 +144,17 @@ try( checkQR.DS.both(A5,  TRUE, FALSE) )
 try( checkQR.DS.both(A5, FALSE,  TRUE) )
 
 
+quiet <- doExtras
 for(N in 1:(if(doExtras) 2^12 else 128)) {
     A <- round(100*rsparsematrix(5,3, nnz = min(15,rpois(1, lambda=10))))
     if(any(apply(A, 2, function(x) all(x == 0)))) ## "column of all 0"
         next
-    cat(sprintf("%4d -", N))
-    checkQR.DS.both(A, Qinv.chk=NA, giveRE=FALSE, tol = 1e-12)
+    cat(sprintf(if(quiet) "%d " else "%4d -", N)); if(quiet && N %% 50 == 0) cat("\n")
+    checkQR.DS.both(A, Qinv.chk=NA, giveRE=FALSE, tol = 1e-12, quiet = quiet)
     ##                         --- => FALSE if struct. rank deficient
 }
 
-unique(warnings())
+summary(warnings())
 
 
 options(oo)
@@ -265,7 +171,7 @@ for(nnn in 1:100) {
     y <- sample(x., replace=TRUE)
     m <- sample(2:6, 1)
     n <- sample(2:7, 1)
-    x <- suppressWarnings(matrix(y, m,n))
+    x <- matrix(seq_len(m*n), m,n)
     lux <- lu(x)# occasionally a warning about exact singularity
     xx <- with(expand(lux), (P %*% L %*% U))
     print(dim(xx))
@@ -284,7 +190,7 @@ Ppm <- pmLU@L %*% pmLU@U
 ## identical only as long as we don't keep the original class info:
 stopifnot(identical3(lu1, pmLU, pm@factors$LU),# TODO === por1@factors$LU
 	  identical(ppm, with(xp, P %*% pm %*% t(Q))),
-	  sapply(xp, is, class="Matrix"))
+	  sapply(xp, is, class2="Matrix"))
 
 Ipm <- solve(pm, sparse=FALSE)
 Spm <- solve(pm, sparse=TRUE)  # is not sparse at all, here
@@ -303,7 +209,7 @@ table(Ppm@x == 0)# (194, 123) - has 123 "zero" and 14 ``almost zero" entries
 m <- matrix(c(0, NA, 0, NA, NA, 0, 0, 0, 1), 3,3)
 m0 <- rbind(0,cbind(0,m))
 M <- as(m,"Matrix"); M ## "dsCMatrix" ...
-M0 <- rBind(0, cBind(0, M))
+M0 <- rbind(0, cbind(0, M))
 dM  <- as(M, "denseMatrix")
 dM0 <- as(M0,"denseMatrix")
 try( lum  <- lu(M) )# Err: "near-singular A"
@@ -332,8 +238,9 @@ for(n in c(5:12)) {
 	      all(with(rr, A == tcrossprod(L %*% sqrt(D)))))
     d <- rr$d.half
     A <- rr$A
+    .A <- as(A, "TsparseMatrix") # 'factors' slot is retained => do chol() _after_ coercion
     R <- chol(A)
-    assert.EQ.Mat(R, chol(as(A, "TsparseMatrix"))) # gave infinite recursion
+    assert.EQ.Mat(R, chol(.A)) # gave infinite recursion
     print(d. <- diag(R))
     D. <- Diagonal(x= d.^2)
     L. <- t(R) %*% Diagonal(x = 1/d.)
@@ -346,17 +253,17 @@ for(n in c(5:12)) {
     ## the inverse permutation:
     invP <- solve(P)@perm
     lDet <- sum(2* log(d))# the "true" value
-    ldetp  <-         Matrix:::.diag.dsC(Chx = CAp, res.kind = "sumLog")
-    ldetp. <- sum(log(Matrix:::.diag.dsC(Chx = CAp, res.kind = "diag") ))
+    ldetp  <-         .diag.dsC(Chx = CAp, res.kind = "sumLog")
+    ldetp. <- sum(log(.diag.dsC(Chx = CAp, res.kind = "diag") ))
     ##
     CA	<- Cholesky(A,perm=FALSE)
-    ldet <- Matrix:::.diag.dsC(Chx = CA, res.kind = "sumLog")
+    ldet <- .diag.dsC(Chx = CA, res.kind = "sumLog")
     ## not printing CAp : ends up non-integer for n >= 11
     mCAp <- as(CAp,"sparseMatrix")
     print(mCA  <- drop0(as(CA, "sparseMatrix")))
     stopifnot(identical(A[p,p], as(P %*% A %*% t(P),
 				   "symmetricMatrix")),
-	      relErr(d.^2, Matrix:::.diag.dsC(Chx= CA, res.kind="diag")) < 1e-14,
+	      relErr(d.^2, .diag.dsC(Chx= CA, res.kind="diag")) < 1e-14,
 	      relErr(A[p,p], tcrossprod(mCAp)) < 1e-14)
     if(FALSE)
         rbind(lDet,ldet, ldetp, ldetp.)
@@ -428,7 +335,7 @@ A1.8 <- A1; diag(A1.8) <- 8
 ##
 nT. <- as(AT <- as(A., "TsparseMatrix"),"nMatrix")
 stopifnot(all(nT.@i <= nT.@j),
-	  identical(qr(A1.8), qr(as(A1.8, "dgCMatrix"))))
+	  identical(qr(A1.8), qr(as(A1.8, "generalMatrix"))))
 CA <- Cholesky(A.)
 stopifnotValid(CAinv <- solve(CA), "dsCMatrix")
 MA <- as(CA, "Matrix") # with a confusing warning -- FIXME!
@@ -451,7 +358,7 @@ for(p in c(FALSE,TRUE))
             cat(if(inherits(r, "error")) " *** E ***" else
                 sprintf("%3d", r@type),"\n", sep="")
         }
-str(A., max=3) ## look at the 'factors'
+str(A., max.level=3) ## look at the 'factors'
 
 facs <- A.@factors
 names(facs) <- sub("Cholesky$", "", names(facs))
@@ -467,7 +374,7 @@ chkCholesky <- function(chmf, A) {
     stopifnot(is(chmf, "CHMfactor"),
               is(A, "Matrix"), isSymmetric(A))
     if(!is(A, "dsCMatrix"))
-        A <- as(A, "dsCMatrix")
+        A <- as(as(as(A, "CsparseMatrix"), "symmetricMatrix", "dMatrix"))
     L <- drop0(zapsmall(L. <- as(chmf, "Matrix")))
     cat("no. nonzeros in L {before / after drop0(zapsmall(.))}: ",
         c(nnzero(L.), nnzero(L)), "\n") ## 112, 95
@@ -559,6 +466,52 @@ Zt <- new("dgCMatrix", Dim = c(6L, 30L), x = 2*1:30,
           p = 0:30, Dimnames = list(LETTERS[1:6], NULL))
 cholCheck(0.78 * Zt, tol=1e-14)
 
+oo <- options(Matrix.quiet.qr.R = TRUE, warn = 2)# no warnings allowed
+qrZ <- qr(t(Zt))
+Rz <- qr.R(qrZ)
+stopifnot(exprs = {
+    inherits(qrZ, "sparseQR")
+    inherits(Rz, "sparseMatrix")
+    isTriangular(Rz)
+    isDiagonal(Rz) # even though formally a "dtCMatrix"
+    qr2rankMatrix(qrZ, do.warn=FALSE) == 6
+})
+options(oo)
+
+## problematic rank deficient rankMatrix() case -- only seen in large cases ??
+## MJ: NA in diag(<sparseQR>@R) not seen with Apple Clang 14.0.3
+Z. <- readRDS(system.file("external", "Z_NA_rnk.rds", package="Matrix"))
+(rnkZ. <- rankMatrix(Z., method = "qr")) # gave errors; now warns typically, but not on aarm64 (M1)
+qrZ. <- qr(Z.)
+options(warn=1)
+rnk2 <- qr2rankMatrix(qrZ.) # warning ".. only 684 out of 822 finite diag(R) entries"
+oo <- options(warn=2)# no warnings allowed from here
+di.NA <- anyNA(diag(qrZ.@R))
+stopifnot(is(qrZ, "sparseQR"),
+          identical(is.na(rnkZ.), di.NA),
+          identical(is.na(rnk2), di.NA))
+
+## The above bug fix was partly wrongly extended to  dense matrices for "qr.R":
+x <- cbind(1, rep(0:9, 18))
+qr.R(qr(x))              # one negative diagonal
+qr.R(qr(x, LAPACK=TRUE)) # two negative diagonals
+chkRnk <- function(x, rnk) {
+    stopifnot(exprs = {
+        rankMatrix(x) == rnk
+        rankMatrix(x, method="maybeGrad") == rnk ## but "useGrad" is not !
+        rankMatrix(x, method="qrLINPACK") == rnk
+        rankMatrix(x, method="qr.R"     ) == rnk
+    })# the last gave '0' and a warning in Matrix 1.3-0
+}
+chkRnk(   x,    2)
+chkRnk(diag(1), 1) # had "empty stopifnot" (-> Error in MM's experimental setup) +  warning 'min(<empty>)'
+(m3 <- cbind(2, rbind(diag(pi, 2), 8)))
+chkRnk(m3, 3)
+chkRnk(matrix(0, 4,3), 0)
+chkRnk(matrix(1, 5,5), 1) # had failed for "maybeGrad"
+chkRnk(matrix(1, 5,2), 1)
+
+
 showSys.time(
 for(i in 1:120) {
     set.seed(i)
@@ -595,7 +548,7 @@ checkSchur(Diagonal(x = 9:3))
 
 p <- 4L
 uTp <- new("dtpMatrix", x=c(2, 3, -1, 4:6, -2:1), Dim = c(p,p))
-(uT <- as(uTp, "dtrMatrix"))
+(uT <- as(uTp, "unpackedMatrix"))
 ## Schur ( <general> )  <--> Schur( <triangular> )
 Su <- Schur(uT) ;   checkSchur(uT, Su)
 gT <- as(uT,"generalMatrix")
@@ -604,9 +557,9 @@ Stg <- Schur(t(gT));checkSchur(t(gT), Stg)
 Stu <- Schur(t(uT));checkSchur(t(uT), Stu)
 
 stopifnot(identical3(Sg@T, uT, Su@T),
-          identical(Sg@Q, as(diag(p), "dgeMatrix")),
+          identical(Sg@Q, as(diag(p), "generalMatrix")),
           identical(Stg@T, as(t(gT[,p:1])[,p:1], "triangularMatrix")),
-          identical(Stg@Q, as(diag(p)[,p:1], "dgeMatrix")),
+          identical(Stg@Q, as(diag(p)[,p:1], "generalMatrix")),
           identical(Stu@T, Stg@T))
 assert.EQ.mat(Stu@Q, as(Stg@Q,"matrix"), tol=0)
 
@@ -628,6 +581,26 @@ assert.EQ.mat(     crossprod(chol2inv(chol(Diagonal(x = 5:1)))),
 stopifnot(all.equal(C, diag((5:1)^-2)))
 ## failed in some versions because of a "wrong" implicit generic
 
+U <- cbind(1:0, 2*(1:2))
+(sU <- as(U, "CsparseMatrix"))
+validObject(sS <- crossprod(sU))
+C. <- chol(sS)
+stopifnot(all.equal(C., sU, tolerance=1e-15))
+## chol(<triangular sparse which is diagonal>)
+tC7 <- .trDiagonal(7, 7:1)
+stopifnotValid(tC7, "dtCMatrix")
+ch7  <- chol(tC7) ## this (and the next 2) failed: 'no slot .. "factors" ..."dtCMatrix"'
+chT7 <- chol(tT7 <- as(tC7, "TsparseMatrix"))
+chR7 <- chol(tR7 <- as(tC7, "RsparseMatrix"))
+stopifnot(expr = {
+    isDiagonal(ch7)
+    identical(chT7, ch7) # "ddiMatrix" all of them
+    identical(chR7, ch7) # "ddiMatrix" all of them
+    all.equal(sqrt(7:1), diag(ch7 ))
+})
+
+
+
 ## From [Bug 14834] New: chol2inv *** caught segfault ***
 n <- 1e6 # was 595362
 A <- chol( D <- Diagonal(n) )
@@ -647,6 +620,67 @@ ia <- chol2inv(A)
 stopifnot(is(ia, "diagonalMatrix"),
 	  all.equal(ia@x, rep(2,n), tolerance = 1e-15))
 
+##------- Factor caches must be cleaned - even after scalar-Ops such as "2 *"
+set.seed(7)
+d <- 5
+S <- 10*Diagonal(d) + rsparsematrix(d,d, 1/4)
+class(M <- as(S, "denseMatrix")) # dgeMatrix
+m <- as.matrix(M)
+(dS <- determinant(S))
+stopifnot(exprs = {
+    all.equal(determinant(m), dS, tolerance=1e-15)
+    all.equal(dS, determinant(M), tolerance=1e-15)
+    ## These had failed, as the "LU" factor cache was kept unchanged in 2*M :
+    all.equal(determinant(2*S), determinant(2*M) -> d2M)
+    all.equal(determinant(S^2), determinant(M^2) -> dM2)
+    all.equal(determinant(m^2), dM2)
+    all.equal(d*log(2), c(d2M$modulus - dS$modulus))
+})
+
+## misc. bugs found in Matrix 1.4-1
+L. <- new("dtCMatrix", Dim = c(1L, 1L), uplo = "L",
+          p = c(0L, 1L), i = 0L, x = 1)
+S. <- forceSymmetric(L.)
+lu(S.)
+stopifnot(validObject(lu(L.)), # was invalid
+          identical(names(S.@factors), "LU")) # was "lu"
+
+## chol() should give matrix with 'Dimnames',
+## even if 'Dimnames' are not cached
+D. <- as(diag(3), "CsparseMatrix")
+D.@Dimnames <- dn <- list(zzz = letters[1:3], ZZZ = LETTERS[1:3])
+cd1 <- chol(D.) # "fresh"
+stopifnot(identical(cd1@Dimnames, rep(dn[2L], 2L)))
+cd2 <- chol(D.) # from cache
+stopifnot(identical(cd1, cd2))
+
+## lu(<m-by-0>), lu(<0-by-n>), BunchKaufman(<0-by-0>), chol(<0-by-0>)
+.NN <- list(NULL, NULL)
+## FIXME: denseLU should inherit from dgeMatrix in order to get
+##        proper 'Dimnames' prototype and initialize() method,
+##        analogously to Cholesky/dtrMatrix, pBunchKaufman/dtpMatrix, ...
+stopifnot(identical(lu(new("dgeMatrix", Dim = c(2L, 0L))),
+                    new("denseLU", Dim = c(2L, 0L), Dimnames = .NN)),
+          identical(lu(new("dgeMatrix", Dim = c(0L, 2L))),
+                    new("denseLU", Dim = c(0L, 2L), Dimnames = .NN)),
+          identical(BunchKaufman(new("dsyMatrix", uplo = "U")),
+                    new("BunchKaufman", uplo = "U")),
+          identical(BunchKaufman(new("dspMatrix", uplo = "L")),
+                    new("pBunchKaufman", uplo = "L")),
+          identical(chol(new("dpoMatrix", uplo = "U")),
+                    new("Cholesky", uplo = "U")),
+          identical(chol(new("dppMatrix", uplo = "L")),
+                    new("pCholesky", uplo = "U"))) # chol() always giving "U"!
+
+## determinant(<ds[yp]Matrix>) going via Bunch-Kaufman
+set.seed(15742)
+n <- 10L
+syU <- syL <- new("dsyMatrix", Dim = c(n, n), x = rnorm(n * n))
+spU <- spL <- new("dspMatrix", Dim = c(n, n), x = rnorm((n * (n + 1L)) %/% 2L))
+syL@uplo <- spL@uplo <- "L"
+for(m in list(syU, syL, spU, spL))
+    for(givelog in c(FALSE, TRUE))
+        stopifnot(all.equal(determinant(   m,            givelog),
+                            determinant(as(m, "matrix"), givelog)))
 
 cat('Time elapsed: ', proc.time(),'\n') # for ``statistical reasons''
-if(!interactive()) warnings()

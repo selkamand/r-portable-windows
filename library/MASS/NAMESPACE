@@ -7,7 +7,7 @@ export(addterm, area, as.fractions, bandwidth.nrd, bcv, boxcox,
        frequency.polygon, gamma.dispersion, gamma.shape, ginv,
        glm.convert, glm.nb, glmmPQL, hist.FD, hist.scott, huber,
        hubers, is.fractions, isoMDS, kde2d, lda, ldahist, lm.gls,
-       lm.ridge, lmwork, loglm, loglm1, logtrans, mca, mvrnorm,
+       lm.ridge, loglm, loglm1, logtrans, mca, mvrnorm,
        nclass.freq, neg.bin, negative.binomial, negexp.SSival, Null,
        parcoord, polr, psi.bisquare, psi.hampel, psi.huber, qda,
        rational, renumerate, rlm, rms.curv, rnegbin, sammon, select,
@@ -38,7 +38,6 @@ export(cov.mcd, cov.mve, cov.rob, lmsreg, lqs, lqs.formula, ltsreg)
 importFrom(grDevices, dev.flush, dev.hold, nclass.FD, nclass.scott, palette)
 importFrom(graphics, abline, axis, box, frame, hist, lines, matplot, mtext,
            pairs, par, plot, points, rect, segments, symbols, text)
-#import(stats) # triggers bug in wmtsa
 importFrom(stats, add1, anova, biplot, coef, confint, drop1,
 	   extractAIC, family, fitted, logLik, model.frame, nobs,
 	   predict, profile, residuals, se.contrast, simulate, terms,
@@ -56,7 +55,9 @@ importFrom(stats, add1, anova, biplot, coef, confint, drop1,
            napredict, naprint, naresid, optim, optimize, pcauchy,
            pchisq, pf, plogis, pnorm, qchisq, qf, qnorm, qt, quantile,
            rcauchy, rexp, rgamma, rlogis, rnorm, rpois, runif, sd,
-           spline, summary.glm, uniroot, update.formula, var)
+           spline, summary.glm, uniroot, update.formula, var,
+           ## added in 7.3-58
+           drop.terms, reformulate)
 
 S3method("[", fractions)
 S3method("[<-", fractions)
@@ -104,6 +105,7 @@ S3method(extractAIC, loglm)
 S3method(extractAIC, polr)
 S3method(family, negbin)
 S3method(fitted, loglm)
+S3method(formula, glmmPQL)
 S3method(gamma.shape, glm)
 S3method(lda, data.frame)
 S3method(lda, default)

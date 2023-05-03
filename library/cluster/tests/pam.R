@@ -103,10 +103,10 @@ showSys.time <- function(expr) {
     writeLines(paste("Time", capture.output(print(st))))
     invisible(st)
 }
-show5Ratios <- function(...) {
-    stopifnot(length(rgs <- list(...)) == 5,
+show6Ratios <- function(...) {
+    stopifnot(length(rgs <- list(...)) == 6,
               nchar(ns <- names(rgs)) > 0)
-    r <- round(cbind(..1, ..2, ..3, ..4, ..5)[c(1,5),], 5)
+    r <- round(cbind(..1, ..2, ..3, ..4, ..5, ..6)[c(1,5),], 5)
     dimnames(r) <- list(paste("Time ", rownames(r)), ns)
     r
 }
@@ -131,13 +131,15 @@ st0 <- showSys.time(pamx      <- pam(x, 4,               trace.lev=2))# 8.157   
 st1 <- showSys.time(pamxonce  <- pam(x, 4, pamonce=TRUE, trace.lev=2))# 6.122   0.024   6.181
 ## bswapPamOnceDistIndice
 st2 <- showSys.time(pamxonce2 <- pam(x, 4, pamonce = 2,  trace.lev=2))# 4.101   0.024   4.151
-## bswapPamSchubertPlus
+## bswapPamSchubert FastPAM1
 st3 <- showSys.time(pamxonce3 <- pam(x, 4, pamonce = 3,  trace.lev=2))#
-## bswapPamSchubertPlusPlus
+## bswapPamSchubert FastPAM2
 st4 <- showSys.time(pamxonce4 <- pam(x, 4, pamonce = 4,  trace.lev=2))#
-## bswapPamSchubertPlusPlus with linearized memory access
+## bswapPamSchubert FastPAM2 with linearized memory access
 st5 <- showSys.time(pamxonce5 <- pam(x, 4, pamonce = 5,  trace.lev=2))#
-show5Ratios('5:orig' = st5/st0, '4:orig' = st4/st0, '3:orig' = st3/st0, '2:orig' = st2/st0, '1:orig' = st1/st0)
+## bswapPamSchubert FasterPAM
+st6 <- showSys.time(pamxonce6 <- pam(x, 4, pamonce = 6,  trace.lev=2))#
+show6Ratios('6:orig' = st6/st0, '5:orig' = st5/st0, '4:orig' = st4/st0, '3:orig' = st3/st0, '2:orig' = st2/st0, '1:orig' = st1/st0)
 
 ## only call element is not equal
 (icall <- which(names(pamx) == "call"))
@@ -146,7 +148,8 @@ stopifnot(all.equal(pamx    [-icall],  pamxonce [-icall]),
 	  all.equal(pamxonce[-icall],  pamxonce2[-icall]),
 	  all.equal(pamxonce[-icall],  pamxonce3[-icall]),
 	  all.equal(pamxonce[-icall],  pamxonce4[-icall]),
-	  all.equal(pamxonce[-icall],  pamxonce5[-icall]))
+	  all.equal(pamxonce[-icall],  pamxonce5[-icall]),
+	  all.equal(pamxonce[-icall],  pamxonce6[-icall]))
 
 ## Same using specified medoids
 (med0 <- 1 + round(n* c(0,1, 2.5, 4)))#                                      lynne (~ 2010, AMD Phenom II X4 925)
@@ -156,14 +159,16 @@ st2 <- showSys.time(pamxonce2st <- pam(x, 4, medoids = med0, pamonce=2,    trace
 st3 <- showSys.time(pamxonce3st <- pam(x, 4, medoids = med0, pamonce=3,    trace.lev=2))#
 st4 <- showSys.time(pamxonce4st <- pam(x, 4, medoids = med0, pamonce=4,    trace.lev=2))#
 st5 <- showSys.time(pamxonce5st <- pam(x, 4, medoids = med0, pamonce=5,    trace.lev=2))#
-show5Ratios('5:orig' = st5/st0, '4:orig' = st4/st0, '3:orig' = st3/st0, '2:orig' = st2/st0, '1:orig' = st1/st0)
+st6 <- showSys.time(pamxonce6st <- pam(x, 4, medoids = med0, pamonce=6,    trace.lev=2))#
+show6Ratios('6:orig' = st6/st0, '5:orig' = st5/st0, '4:orig' = st4/st0, '3:orig' = st3/st0, '2:orig' = st2/st0, '1:orig' = st1/st0)
 
 ## only call element is not equal
 stopifnot(all.equal(pamxst    [-icall], pamxoncest [-icall]),
           all.equal(pamxoncest[-icall], pamxonce2st[-icall]),
           all.equal(pamxoncest[-icall], pamxonce3st[-icall]),
           all.equal(pamxoncest[-icall], pamxonce4st[-icall]),
-          all.equal(pamxoncest[-icall], pamxonce5st[-icall]))
+          all.equal(pamxoncest[-icall], pamxonce5st[-icall]),
+          all.equal(pamxoncest[-icall], pamxonce6st[-icall]))
 
 ## Different starting values
 med0 <- 1:4 #                                                               lynne (~ 2010, AMD Phenom II X4 925)
@@ -173,14 +178,16 @@ st2 <- showSys.time(pamxonce2st <- pam(x, 4, medoids = med0, pamonce=2,    trace
 st3 <- showSys.time(pamxonce3st <- pam(x, 4, medoids = med0, pamonce=3,    trace.lev=2))#
 st4 <- showSys.time(pamxonce4st <- pam(x, 4, medoids = med0, pamonce=4,    trace.lev=2))#
 st5 <- showSys.time(pamxonce5st <- pam(x, 4, medoids = med0, pamonce=5,    trace.lev=2))#
-show5Ratios('5:orig' = st5/st0, '4:orig' = st4/st0, '3:orig' = st3/st0, '2:orig' = st2/st0, '1:orig' = st1/st0)
+st6 <- showSys.time(pamxonce6st <- pam(x, 4, medoids = med0, pamonce=6,    trace.lev=2))#
+show6Ratios('6:orig' = st6/st0, '5:orig' = st5/st0, '4:orig' = st4/st0, '3:orig' = st3/st0, '2:orig' = st2/st0, '1:orig' = st1/st0)
 
 ## only call element is not equal
 stopifnot(all.equal(pamxst    [-icall], pamxoncest [-icall]),
           all.equal(pamxoncest[-icall], pamxonce2st[-icall]),
           all.equal(pamxoncest[-icall], pamxonce3st[-icall]),
           all.equal(pamxoncest[-icall], pamxonce4st[-icall]),
-          all.equal(pamxoncest[-icall], pamxonce5st[-icall]))
+          all.equal(pamxoncest[-icall], pamxonce5st[-icall]),
+          all.equal(pamxoncest[-icall], pamxonce6st[-icall]))
 
 
 ## Medoid bug  --- MM: Fixed, well "0L+ hack", in my pam.q, on 2012-01-31
@@ -203,11 +210,16 @@ stopifnot(identical(med0, 1:6))
 med0 <- (1:6)
 st5 <- showSys.time(pamxst.5 <- pam(x, 6, medoids = med0 , pamonce=5, trace.lev=2))
 stopifnot(identical(med0, 1:6))
+med0 <- (1:6)
+st6 <- showSys.time(pamxst.6 <- pam(x, 6, medoids = med0 , pamonce=6, trace.lev=2))
+stopifnot(identical(med0, 1:6))
 stopifnot(all.equal(pamxst[-icall], pamxst.1 [-icall]),
           all.equal(pamxst[-icall], pamxst.2 [-icall]),
           all.equal(pamxst[-icall], pamxst.3 [-icall]),
           all.equal(pamxst[-icall], pamxst.4 [-icall]),
           all.equal(pamxst[-icall], pamxst.5 [-icall]))
+# FasterPAM finds a better solution here, by chance
+stopifnot(pamxst$objective >= pamxst.6$objective)
 
 
 ## Last Line:

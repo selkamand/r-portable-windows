@@ -45,3 +45,14 @@ pm2.0 <- predict(fm2, Loblolly, level=0)## failed in nlme 3.1-123
 stopifnot(all.equal(head(pm2.0),
 		    c(3.64694, 11.0597, 27.2258, 40.5006, 51.4012, 60.3522),
 		    tol = 1e-5)) # 4e-7 {64b nb-mm4}
+
+## same as fm2 but fitted via nlme's formula interface
+fm3 <- nlme(height ~ SSasymp(age, Asym, R0, lrc),
+            data = Loblolly,
+            fixed = Asym + R0 + lrc ~ 1,
+            random = Asym ~ 1, groups = ~Seed)
+## explicitly specifying 'groups' failed in 3.1-153 with
+## Error in nlme::nlsList(model = height ~ SSasymp(age, Asym, R0, lrc), data = Loblolly,  : 
+##   unused argument (groups = ~Seed)
+fm2$origCall <- NULL
+stopifnot(all.equal(fm2, fm3))

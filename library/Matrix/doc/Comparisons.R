@@ -1,5 +1,4 @@
 ### R code from vignette source 'Comparisons.Rnw'
-### Encoding: UTF-8
 
 ###################################################
 ### code chunk number 1: preliminaries
@@ -83,7 +82,7 @@ stopifnot(all.equal(chol.sol, naive.sol))
 ###################################################
 ### code chunk number 11: MatrixKoenNg
 ###################################################
-mm <- as(KNex$mm, "dgeMatrix")
+mm <- as(KNex$mm, "denseMatrix")
 class(crossprod(mm))
 system.time(Mat.sol <- solve(crossprod(mm), crossprod(mm, y)))
 stopifnot(all.equal(naive.sol, unname(as(Mat.sol,"matrix"))))

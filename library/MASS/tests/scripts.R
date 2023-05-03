@@ -1,3 +1,7 @@
+### This requires packages not declared in Suggests (and not otherwise used)
+## GLMMGibbs Kernsmooth boot e1071 fastICA gee interp lattice mda
+## mgcv multcomp nlme nnet polsplin rpart spatial splines tree
+
 if(!nzchar(Sys.getenv("MASS_TESTING"))) q("no")
 unlink("scripts", recursive = TRUE)
 dir.create("scripts")

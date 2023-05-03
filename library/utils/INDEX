@@ -18,7 +18,7 @@ RweaveLatex             R/LaTeX Driver for Sweave
 SHLIB                   Build Shared Object/DLL for Dynamic Loading
 Sweave                  Automatic Generation of Reports
 SweaveSyntConv          Convert Sweave Syntax
-URLencode               Encode or Decode a (partial) URL
+URLencode               Encode or Decode (partial) URLs
 View                    Invoke a Data Viewer
 adist                   Approximate String Distances
 alarm                   Alert the User
@@ -40,6 +40,7 @@ build                   Utilities for Building and Checking Add-on
                         Packages
 capture.output          Send Output to a Character String or File
 changedFiles            Detect which Files Have Changed
+charClass               Character Classification
 choose.dir              Choose a Folder Interactively on MS Windows
 choose.files            Choose a List of Files Interactively on MS
                         Windows
@@ -70,6 +71,7 @@ edit.data.frame         Edit Data Frames and Matrices
 example                 Run an Examples Section from the Online Help
 file.edit               Edit One or More Files
 file_test               Shell-style Tests on Files
+findCRANmirror          Find CRAN Mirror Preference
 findLineNum             Find the Location of a Line of Source Code, or
                         Set a Breakpoint There
 fix                     Fix an Object
@@ -87,6 +89,7 @@ glob2rx                 Change Wildcard or Globbing Pattern into
                         Regular Expression
 globalVariables         Declarations Used in Checking a Package
 hasName                 Check for Name
+hashtab                 Hash Tables (Experimental)
 head                    Return the First or Last Parts of an Object
 help                    Documentation
 help.request            Send a Post to R-help
@@ -104,7 +107,6 @@ ls.str                  List Objects and their Structure
 maintainer              Show Package Maintainer
 make.packages.html      Update HTML Package List
 make.socket             Create a Socket Connection
-memory.size             Report on Memory Allocation (on Windows)
 menu                    Menu Interaction Function
 methods                 List Methods for S3 Generic Functions or
                         Classes
@@ -120,6 +122,7 @@ packageName             Find Package Associated with an Environment
 packageStatus           Package Management Tools
 page                    Invoke a Pager on an R Object
 person                  Persons
+personList              Collections of Persons (Older Interface)
 process.events          Trigger Event Handling
 prompt                  Produce Prototype of an R Documentation File
 promptData              Generate Outline Documentation for a Data Set
@@ -158,6 +161,7 @@ untar                   Extract or List Tar Archives
 unzip                   Extract or List Zip Archives
 update.packages         Compare Installed Packages with CRAN-like
                         Repositories
+upgrade                 Upgrade
 url.show                Display a Text URL
 utils-deprecated        Deprecated Functions in Package 'utils'
 utils-package           The R Utils Package

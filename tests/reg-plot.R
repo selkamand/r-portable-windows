@@ -1,4 +1,4 @@
-#### Regression tests for GRAPHICS & PLOTS
+#### Regression tests for GRAPHICS & PLOTS -- requiring strict PDF equality
 
 pdf("reg-plot.pdf", paper="a4r", encoding ="ISOLatin1.enc", compress = FALSE,
     useDingbats = TRUE)
@@ -160,6 +160,41 @@ plot(dates, 1:2, xlim = rev(dates),
      ann=FALSE, yaxt="n", frame.plot=FALSE)
 ## failed to label the dates in R <= 3.3.1
 
+## axis.Date() with various data types:
+x <- seq(as.Date("2022-01-20"), as.Date("2023-03-21"), by = "days")
+plot(data.frame(x, y = 1), xaxt = "n")
+axis.Date(1)
+axis.Date(3, at = "2022-04-01")
+axis.Date(3, at = as.Date("2022-07-01"))
+axis.Date(3, at = as.POSIXct(as.Date("2022-10-01")))
+axis.Date(3, at = as.POSIXlt(as.Date("2023-01-01")))
+axis.Date(3, at = as.integer(as.Date("2023-04-01")))
+## automatically extends the format:
+axis.Date(1, at = "2022-02-15", tck = -0.05, mgp = c(3,2,0))
+
+## axis.POSIXct() with various data types (2 minutes)
+x <- as.POSIXct("2022-10-01") + c(0, 60, 120)
+plot(data.frame(x, y = 1), xaxt="n")
+axis.POSIXct(1)
+axis.POSIXct(3, at = "2022-10-01 00:01")
+axis.POSIXct(3, at = as.Date("2022-10-01"))
+axis.POSIXct(3, at = as.POSIXct("2022-10-01 00:01:30"))
+axis.POSIXct(3, at = as.POSIXlt("2022-10-01 00:02"))
+axis.POSIXct(3, at = as.numeric(as.POSIXct("2022-10-01 00:00:30")))
+## automatically extends format (here: subseconds):
+axis.POSIXct(3, at = "2022-10-01 00:00:30.25", mgp = c(3,2,0))
+
+## axis.POSIXct: a few days, extending the format
+days <- seq(as.Date("2022-10-01"), as.Date("2022-12-21"), by="days")
+x <- as.POSIXct(as.character(days))
+plot(data.frame(x, y = 1), xaxt="n")
+axis.POSIXct(1, x)
+axis.POSIXct(1, x, at = as.Date("2022-10-12"), mgp = c(3,2,0), tck = -0.04)
+axis.POSIXct(3, x, at = as.POSIXct("2022-10-15"))
+axis.POSIXct(3, x, at = as.POSIXlt("2022-10-15"), mgp = c(3,2,0))
+axis.POSIXct(1, x, at = "2022-11-01 23:00", mgp = c(3,2,0), tck = -0.04)
+axis.POSIXct(3, x, at = "2022-11-01 06:00")
+axis.POSIXct(3, x, at = as.numeric(as.POSIXct("2022-12-01")))
 
 ## axis() -- labels only written when there's room
 plot2 <- function(at, wait=FALSE) {
@@ -236,7 +271,28 @@ plotNchk(y74[1:2]) #    (ditto)
 
 
 ## dotchart(*, pch=., groups=*) -- PR#16953
-x <- setNames(0:5, c('a','aa', 'aaa', 'b', 'bb', 'bbb'))
-y <- nchar(names(x)) # (minimal plot:)
-dotchart(x, color=y, pch=y, groups=y, xaxt="n", frame.plot=FALSE)
-## now pch and colors match groups
+## dotchart(*, ylab=.) for groups;
+g <- rep(1:3, each=2)
+dotchart(VADeaths[1:2, 1:3], color=g, pch=g,
+         ylab = "Grouping:  {Urbanity . Gender} x Age",
+         xaxt="n", frame.plot=FALSE)
+## now pch and colors match groups;
+## ylab placement; group (row) labels show again
+
+
+## non-integer mgp[3] -- PR#18194
+par(mar = c(5, 5, 5, 5))
+plot.new()
+plot.window(xlim = c(0, 5), ylim = 0:1)
+if(dev.interactive()) {
+    box(lty = 3)
+    ## 'axis' puts line and labels in right place when 'mgp[3]' is integer
+    mgp_bottom <- c(4, 2.5, 1) # 'mgp[1]' is arbitrary
+    axis(1, at=c(1,4), mgp = mgp_bottom)
+    mtext(c("labels", "line"), side = 1, line = mgp_bottom[2:3])
+}
+## Now, 'axis' puts line & labels in right place also when 'mgp[3]' is noninteger:
+mgp_top <- c(4, 2.5, 0.9)
+axis(3, at=c(1,4), mgp = mgp_top)
+mtext(c("labels are here", "line"), line = mgp_top[2:3])
+## They were one line too high in R <= 4.1.1

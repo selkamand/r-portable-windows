@@ -105,10 +105,10 @@ par(oldpar)
 ### code chunk number 5: mgus2
 ###################################################
 getOption("SweaveHooks")[["fig"]]()
-etime <- with(mgus2, ifelse(pstat==0, futime, ptime))
+mgus2$etime <- with(mgus2, ifelse(pstat==0, futime, ptime))
 event <- with(mgus2, ifelse(pstat==0, 2*death, 1))
-event <- factor(event, 0:2, labels=c("censor", "pcm", "death"))
-table(event)
+mgus2$event <- factor(event, 0:2, labels=c("censor", "pcm", "death"))
+table(mgus2$event)
 
 mfit2 <- survfit(Surv(etime, event) ~ sex, data=mgus2)
 print(mfit2, rmean=240, scale=12)
@@ -211,7 +211,7 @@ dim(csurv)
 ### code chunk number 13: PCMcurve2
 ###################################################
 getOption("SweaveHooks")[["fig"]]()
-plot(csurv[,,'pcm'], xmax=25*12, xscale=12, 
+plot(csurv[,'pcm'], xmax=25*12, xscale=12, 
      xlab="Years after MGUS diagnosis", ylab="PCM",
      col=1:2, lty=c(1,1,2,2), lwd=2)
 legend(10, .14, outer(c("female", "male   "), 

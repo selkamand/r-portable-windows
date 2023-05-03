@@ -1,9 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head><title>R: The R Base Package</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> The R Base Package
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
@@ -11,7 +12,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;base&rsquo; version 4.0.3</h2>
+</div><h2>Documentation for package &lsquo;base&rsquo; version 4.3.0</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 <li><a href="../demo">Code demos</a>.  Use <a href="../../utils/help/demo">demo()</a> to run them.</li>
@@ -50,14 +51,14 @@
 <a href="#misc">misc</a>
 </p>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="base-package.html">base-package</a></td>
 <td>The R Base Package</td></tr>
 </table>
 
-<h2><a name="A">-- A --</a></h2>
+<h2><a id="A">-- A --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="abbreviate.html">abbreviate</a></td>
 <td>Abbreviate Strings</td></tr>
 <tr><td style="width: 25%;"><a href="MathFun.html">abs</a></td>
@@ -120,6 +121,8 @@
 <td>Arithmetic Operators</td></tr>
 <tr><td style="width: 25%;"><a href="array.html">array</a></td>
 <td>Multi-way Arrays</td></tr>
+<tr><td style="width: 25%;"><a href="array2DF.html">array2DF</a></td>
+<td>Convert array to data frame</td></tr>
 <tr><td style="width: 25%;"><a href="which.html">arrayInd</a></td>
 <td>Which indices are TRUE?</td></tr>
 <tr><td style="width: 25%;"><a href="array.html">as.array</a></td>
@@ -133,11 +136,11 @@
 <tr><td style="width: 25%;"><a href="as.Date.html">as.character.Date</a></td>
 <td>Date Conversion Functions to and from Character</td></tr>
 <tr><td style="width: 25%;"><a href="hexmode.html">as.character.hexmode</a></td>
-<td>Display Numbers in Hexadecimal</td></tr>
+<td>Integer Numbers Displayed in Hexadecimal</td></tr>
 <tr><td style="width: 25%;"><a href="numeric_version.html">as.character.numeric_version</a></td>
 <td>Numeric Versions</td></tr>
 <tr><td style="width: 25%;"><a href="octmode.html">as.character.octmode</a></td>
-<td>Display Numbers in Octal</td></tr>
+<td>Integer Numbers Displayed in Octal</td></tr>
 <tr><td style="width: 25%;"><a href="strptime.html">as.character.POSIXt</a></td>
 <td>Date-time Conversion Functions to and from Character</td></tr>
 <tr><td style="width: 25%;"><a href="srcfile.html">as.character.srcref</a></td>
@@ -175,7 +178,7 @@
 <tr><td style="width: 25%;"><a href="as.function.html">as.function</a></td>
 <td>Convert Object to Function</td></tr>
 <tr><td style="width: 25%;"><a href="hexmode.html">as.hexmode</a></td>
-<td>Display Numbers in Hexadecimal</td></tr>
+<td>Integer Numbers Displayed in Hexadecimal</td></tr>
 <tr><td style="width: 25%;"><a href="integer.html">as.integer</a></td>
 <td>Integer Vectors</td></tr>
 <tr><td style="width: 25%;"><a href="list.html">as.list</a></td>
@@ -205,7 +208,7 @@
 <tr><td style="width: 25%;"><a href="numeric_version.html">as.numeric_version</a></td>
 <td>Numeric Versions</td></tr>
 <tr><td style="width: 25%;"><a href="octmode.html">as.octmode</a></td>
-<td>Display Numbers in Octal</td></tr>
+<td>Integer Numbers Displayed in Octal</td></tr>
 <tr><td style="width: 25%;"><a href="factor.html">as.ordered</a></td>
 <td>Factors</td></tr>
 <tr><td style="width: 25%;"><a href="numeric_version.html">as.package_version</a></td>
@@ -227,7 +230,7 @@
 <tr><td style="width: 25%;"><a href="table.html">as.table</a></td>
 <td>Cross Tabulation and Table Creation</td></tr>
 <tr><td style="width: 25%;"><a href="vector.html">as.vector</a></td>
-<td>Vectors</td></tr>
+<td>Vectors - Creation, Coercion, etc</td></tr>
 <tr><td style="width: 25%;"><a href="Trig.html">asin</a></td>
 <td>Trigonometric Functions</td></tr>
 <tr><td style="width: 25%;"><a href="Hyperbolic.html">asinh</a></td>
@@ -251,7 +254,7 @@
 <tr><td style="width: 25%;"><a href="Hyperbolic.html">atanh</a></td>
 <td>Hyperbolic Functions</td></tr>
 <tr><td style="width: 25%;"><a href="vector.html">atomic</a></td>
-<td>Vectors</td></tr>
+<td>Vectors - Creation, Coercion, etc</td></tr>
 <tr><td style="width: 25%;"><a href="attach.html">attach</a></td>
 <td>Attach Set of R Objects to Search Path</td></tr>
 <tr><td style="width: 25%;"><a href="ns-load.html">attachNamespace</a></td>
@@ -270,15 +273,17 @@
 <td>On-demand Loading of Packages</td></tr>
 </table>
 
-<h2><a name="B">-- B --</a></h2>
+<h2><a id="B">-- B --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="Quotes.html">backquote</a></td>
 <td>Quotes</td></tr>
 <tr><td style="width: 25%;"><a href="backsolve.html">backsolve</a></td>
 <td>Solve an Upper or Lower Triangular System</td></tr>
 <tr><td style="width: 25%;"><a href="Quotes.html">backtick</a></td>
 <td>Quotes</td></tr>
+<tr><td style="width: 25%;"><a href="balancePOSIXlt.html">balancePOSIXlt</a></td>
+<td>Balancing "Ragged" and Out-of-range POSIXlt Date-Times</td></tr>
 <tr><td style="width: 25%;"><a href="base-package.html">base</a></td>
 <td>The R Base Package</td></tr>
 <tr><td style="width: 25%;"><a href="environment.html">baseenv</a></td>
@@ -341,15 +346,17 @@
 <td>Functions to Manipulate Connections (Files, URLs, ...)</td></tr>
 </table>
 
-<h2><a name="C">-- C --</a></h2>
+<h2><a id="C">-- C --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="c.html">c</a></td>
 <td>Combine Values into a Vector or List</td></tr>
 <tr><td style="width: 25%;"><a href="Dates.html">c.Date</a></td>
 <td>Date Class</td></tr>
 <tr><td style="width: 25%;"><a href="difftime.html">c.difftime</a></td>
 <td>Time Intervals / Differences</td></tr>
+<tr><td style="width: 25%;"><a href="factor.html">c.factor</a></td>
+<td>Factors</td></tr>
 <tr><td style="width: 25%;"><a href="noquote.html">c.noquote</a></td>
 <td>Class for 'no quote' Printing of Character Strings</td></tr>
 <tr><td style="width: 25%;"><a href="numeric_version.html">c.numeric_version</a></td>
@@ -381,19 +388,19 @@
 <tr><td style="width: 25%;"><a href="charmatch.html">charmatch</a></td>
 <td>Partial String Matching</td></tr>
 <tr><td style="width: 25%;"><a href="rawConversion.html">charToRaw</a></td>
-<td>Convert to or from Raw Vectors</td></tr>
+<td>Convert to or from (Bit/Packed) Raw Vectors</td></tr>
 <tr><td style="width: 25%;"><a href="chartr.html">chartr</a></td>
 <td>Character Translation and Casefolding</td></tr>
-<tr><td style="width: 25%;"><a href="DateTimeClasses.html">check_tzones</a></td>
-<td>Date-Time Classes</td></tr>
 <tr><td style="width: 25%;"><a href="chkDots.html">chkDots</a></td>
 <td>Warn About Extraneous Arguments in the "..." of Its Caller</td></tr>
 <tr><td style="width: 25%;"><a href="chol.html">chol</a></td>
-<td>The Choleski Decomposition</td></tr>
+<td>The Cholesky Decomposition</td></tr>
 <tr><td style="width: 25%;"><a href="chol2inv.html">chol2inv</a></td>
-<td>Inverse from Choleski (or QR) Decomposition</td></tr>
+<td>Inverse from Cholesky (or QR) Decomposition</td></tr>
 <tr><td style="width: 25%;"><a href="Special.html">choose</a></td>
 <td>Special Functions of Mathematics</td></tr>
+<tr><td style="width: 25%;"><a href="chooseOpsMethod.html">chooseOpsMethod</a></td>
+<td>Choose the Appropriate Method for Ops</td></tr>
 <tr><td style="width: 25%;"><a href="class.html">class</a></td>
 <td>Object Classes</td></tr>
 <tr><td style="width: 25%;"><a href="pushBack.html">clearPushBack</a></td>
@@ -476,6 +483,8 @@
 <td>Trigonometric Functions</td></tr>
 <tr><td style="width: 25%;"><a href="crossprod.html">crossprod</a></td>
 <td>Matrix Crossproduct</td></tr>
+<tr><td style="width: 25%;"><a href="StackOverflows.html">CStackOverflowError</a></td>
+<td>Stack Overflow Errors</td></tr>
 <tr><td style="width: 25%;"><a href="Cstack_info.html">Cstack_info</a></td>
 <td>Report Information on C Stack Size and Usage</td></tr>
 <tr><td style="width: 25%;"><a href="cumsum.html">cummax</a></td>
@@ -494,9 +503,9 @@
 <td>Convert a Date or Date-Time Object to a Factor</td></tr>
 </table>
 
-<h2><a name="D">-- D --</a></h2>
+<h2><a id="D">-- D --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="data.class.html">data.class</a></td>
 <td>Object Classes</td></tr>
 <tr><td style="width: 25%;"><a href="data.frame.html">data.frame</a></td>
@@ -519,14 +528,12 @@
 <td>Debug a Function</td></tr>
 <tr><td style="width: 25%;"><a href="debug.html">debugonce</a></td>
 <td>Debug a Function</td></tr>
-<tr><td style="width: 25%;"><a href="data.frame.html">default.stringsAsFactors</a></td>
-<td>Data Frames</td></tr>
 <tr><td style="width: 25%;"><a href="Defunct.html">Defunct</a></td>
 <td>Marking Objects as Defunct</td></tr>
 <tr><td style="width: 25%;"><a href="Defunct.html">defunct</a></td>
 <td>Marking Objects as Defunct</td></tr>
 <tr><td style="width: 25%;"><a href="delayedAssign.html">delayedAssign</a></td>
-<td>Delay Evaluation</td></tr>
+<td>Delay Evaluation and Promises</td></tr>
 <tr><td style="width: 25%;"><a href="deparse.html">deparse</a></td>
 <td>Expression Deparsing</td></tr>
 <tr><td style="width: 25%;"><a href="deparse.html">deparse1</a></td>
@@ -563,6 +570,8 @@
 <td>Manipulation of Directories and File Permissions</td></tr>
 <tr><td style="width: 25%;"><a href="basename.html">dirname</a></td>
 <td>Manipulate File Paths</td></tr>
+<tr><td style="width: 25%;"><a href="EnvVar.html">DISPLAY</a></td>
+<td>Environment Variables</td></tr>
 <tr><td style="width: 25%;"><a href="getLoadedDLLs.html">DLLInfo</a></td>
 <td>Get DLLs Loaded in Current Session</td></tr>
 <tr><td style="width: 25%;"><a href="getLoadedDLLs.html">DLLInfoList</a></td>
@@ -603,11 +612,13 @@
 <td>Return the Value of a Named Object</td></tr>
 </table>
 
-<h2><a name="E">-- E --</a></h2>
+<h2><a id="E">-- E --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="eapply.html">eapply</a></td>
 <td>Apply a Function Over Values in an Environment</td></tr>
+<tr><td style="width: 25%;"><a href="EnvVar.html">EDITOR</a></td>
+<td>Environment Variables</td></tr>
 <tr><td style="width: 25%;"><a href="eigen.html">eigen</a></td>
 <td>Spectral Decomposition of a Matrix</td></tr>
 <tr><td style="width: 25%;"><a href="Control.html">else</a></td>
@@ -656,15 +667,17 @@
 <td>Logarithms and Exponentials</td></tr>
 <tr><td style="width: 25%;"><a href="expression.html">expression</a></td>
 <td>Unevaluated Expressions</td></tr>
+<tr><td style="width: 25%;"><a href="StackOverflows.html">expressionStackOverflowError</a></td>
+<td>Stack Overflow Errors</td></tr>
 <tr><td style="width: 25%;"><a href="Extract.html">Extract</a></td>
 <td>Extract or Replace Parts of an Object</td></tr>
 <tr><td style="width: 25%;"><a href="extSoftVersion.html">extSoftVersion</a></td>
 <td>Report Versions of Third-Party Software</td></tr>
 </table>
 
-<h2><a name="F">-- F --</a></h2>
+<h2><a id="F">-- F --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="logical.html">F</a></td>
 <td>Logical Vectors</td></tr>
 <tr><td style="width: 25%;"><a href="factor.html">factor</a></td>
@@ -748,7 +761,7 @@
 <tr><td style="width: 25%;"><a href="difftime.html">format.difftime</a></td>
 <td>Time Intervals / Differences</td></tr>
 <tr><td style="width: 25%;"><a href="hexmode.html">format.hexmode</a></td>
-<td>Display Numbers in Hexadecimal</td></tr>
+<td>Integer Numbers Displayed in Hexadecimal</td></tr>
 <tr><td style="width: 25%;"><a href="format.info.html">format.info</a></td>
 <td>format(.) Information</td></tr>
 <tr><td style="width: 25%;"><a href="library.html">format.libraryIQR</a></td>
@@ -756,7 +769,7 @@
 <tr><td style="width: 25%;"><a href="numeric_version.html">format.numeric_version</a></td>
 <td>Numeric Versions</td></tr>
 <tr><td style="width: 25%;"><a href="octmode.html">format.octmode</a></td>
-<td>Display Numbers in Octal</td></tr>
+<td>Integer Numbers Displayed in Octal</td></tr>
 <tr><td style="width: 25%;"><a href="library.html">format.packageInfo</a></td>
 <td>Loading/Attaching and Listing of Packages</td></tr>
 <tr><td style="width: 25%;"><a href="strptime.html">format.POSIXct</a></td>
@@ -777,9 +790,9 @@
 <td>Approximate String Matching (Fuzzy Matching)</td></tr>
 </table>
 
-<h2><a name="G">-- G --</a></h2>
+<h2><a id="G">-- G --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="Special.html">gamma</a></td>
 <td>Special Functions of Mathematics</td></tr>
 <tr><td style="width: 25%;"><a href="gc.html">gc</a></td>
@@ -832,6 +845,8 @@
 <td>Condition Handling and Recovery</td></tr>
 <tr><td style="width: 25%;"><a href="environment.html">globalenv</a></td>
 <td>Environment Access</td></tr>
+<tr><td style="width: 25%;"><a href="grep.html">gregexec</a></td>
+<td>Pattern Matching and Replacement</td></tr>
 <tr><td style="width: 25%;"><a href="grep.html">gregexpr</a></td>
 <td>Pattern Matching and Replacement</td></tr>
 <tr><td style="width: 25%;"><a href="grep.html">grep</a></td>
@@ -856,18 +871,18 @@
 <td>Functions to Manipulate Connections (Files, URLs, ...)</td></tr>
 </table>
 
-<h2><a name="H">-- H --</a></h2>
+<h2><a id="H">-- H --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="hexmode.html">hexmode</a></td>
-<td>Display Numbers in Hexadecimal</td></tr>
+<td>Integer Numbers Displayed in Hexadecimal</td></tr>
 <tr><td style="width: 25%;"><a href="EnvVar.html">HOME</a></td>
 <td>Environment Variables</td></tr>
 </table>
 
-<h2><a name="I">-- I --</a></h2>
+<h2><a id="I">-- I --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="AsIs.html">I</a></td>
 <td>Inhibit Interpretation/Conversion of Objects</td></tr>
 <tr><td style="width: 25%;"><a href="iconv.html">iconv</a></td>
@@ -915,7 +930,7 @@
 <tr><td style="width: 25%;"><a href="sets.html">intersection</a></td>
 <td>Set Operations</td></tr>
 <tr><td style="width: 25%;"><a href="rawConversion.html">intToBits</a></td>
-<td>Convert to or from Raw Vectors</td></tr>
+<td>Convert to or from (Bit/Packed) Raw Vectors</td></tr>
 <tr><td style="width: 25%;"><a href="utf8Conversion.html">intToUtf8</a></td>
 <td>Convert Integer Vectors to or from UTF-8-encoded Character Vectors</td></tr>
 <tr><td style="width: 25%;"><a href="rle.html">inverse.rle</a></td>
@@ -950,10 +965,14 @@
 <td>Factors</td></tr>
 <tr><td style="width: 25%;"><a href="is.finite.html">is.finite</a></td>
 <td>Finite, Infinite and NaN Numbers</td></tr>
+<tr><td style="width: 25%;"><a href="DateTimeClasses.html">is.finite.POSIXlt</a></td>
+<td>Date-Time Classes</td></tr>
 <tr><td style="width: 25%;"><a href="is.function.html">is.function</a></td>
 <td>Is an Object of Type (Primitive) Function?</td></tr>
 <tr><td style="width: 25%;"><a href="is.finite.html">is.infinite</a></td>
 <td>Finite, Infinite and NaN Numbers</td></tr>
+<tr><td style="width: 25%;"><a href="DateTimeClasses.html">is.infinite.POSIXlt</a></td>
+<td>Date-Time Classes</td></tr>
 <tr><td style="width: 25%;"><a href="integer.html">is.integer</a></td>
 <td>Integer Vectors</td></tr>
 <tr><td style="width: 25%;"><a href="is.language.html">is.language</a></td>
@@ -976,6 +995,8 @@
 <td>Names and Symbols</td></tr>
 <tr><td style="width: 25%;"><a href="is.finite.html">is.nan</a></td>
 <td>Finite, Infinite and NaN Numbers</td></tr>
+<tr><td style="width: 25%;"><a href="DateTimeClasses.html">is.nan.POSIXlt</a></td>
+<td>Date-Time Classes</td></tr>
 <tr><td style="width: 25%;"><a href="NULL.html">is.null</a></td>
 <td>The Null Object</td></tr>
 <tr><td style="width: 25%;"><a href="numeric.html">is.numeric</a></td>
@@ -1011,7 +1032,9 @@
 <tr><td style="width: 25%;"><a href="is.unsorted.html">is.unsorted</a></td>
 <td>Test if an Object is Not Sorted</td></tr>
 <tr><td style="width: 25%;"><a href="vector.html">is.vector</a></td>
-<td>Vectors</td></tr>
+<td>Vectors - Creation, Coercion, etc</td></tr>
+<tr><td style="width: 25%;"><a href="class.html">isa</a></td>
+<td>Object Classes</td></tr>
 <tr><td style="width: 25%;"><a href="showConnections.html">isatty</a></td>
 <td>Display Connections</td></tr>
 <tr><td style="width: 25%;"><a href="debug.html">isdebugged</a></td>
@@ -1040,27 +1063,27 @@
 <td>Logical Operators</td></tr>
 </table>
 
-<h2><a name="J">-- J --</a></h2>
+<h2><a id="J">-- J --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="jitter.html">jitter</a></td>
 <td>'Jitter' (Add Noise) to Numbers</td></tr>
 <tr><td style="width: 25%;"><a href="weekday.POSIXt.html">julian</a></td>
 <td>Extract Parts of a POSIXt or Date Object</td></tr>
 </table>
 
-<h2><a name="K">-- K --</a></h2>
+<h2><a id="K">-- K --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="kappa.html">kappa</a></td>
 <td>Compute or Estimate the Condition Number of a Matrix</td></tr>
 <tr><td style="width: 25%;"><a href="kronecker.html">kronecker</a></td>
 <td>Kronecker Products on Arrays</td></tr>
 </table>
 
-<h2><a name="L">-- L --</a></h2>
+<h2><a id="L">-- L --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="l10n_info.html">l10n_info</a></td>
 <td>Localization Information</td></tr>
 <tr><td style="width: 25%;"><a href="svd.html">La.svd</a></td>
@@ -1093,9 +1116,15 @@
 <td>Query or Set Aspects of the Locale</td></tr>
 <tr><td style="width: 25%;"><a href="locales.html">LC_CTYPE</a></td>
 <td>Query or Set Aspects of the Locale</td></tr>
+<tr><td style="width: 25%;"><a href="locales.html">LC_MEASUREMENT</a></td>
+<td>Query or Set Aspects of the Locale</td></tr>
+<tr><td style="width: 25%;"><a href="locales.html">LC_MESSAGES</a></td>
+<td>Query or Set Aspects of the Locale</td></tr>
 <tr><td style="width: 25%;"><a href="locales.html">LC_MONETARY</a></td>
 <td>Query or Set Aspects of the Locale</td></tr>
 <tr><td style="width: 25%;"><a href="locales.html">LC_NUMERIC</a></td>
+<td>Query or Set Aspects of the Locale</td></tr>
+<tr><td style="width: 25%;"><a href="locales.html">LC_PAPER</a></td>
 <td>Query or Set Aspects of the Locale</td></tr>
 <tr><td style="width: 25%;"><a href="locales.html">LC_TIME</a></td>
 <td>Query or Set Aspects of the Locale</td></tr>
@@ -1179,9 +1208,9 @@
 <td>List Objects</td></tr>
 </table>
 
-<h2><a name="M">-- M --</a></h2>
+<h2><a id="M">-- M --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="make.names.html">make.names</a></td>
 <td>Make Syntactically Valid Names</td></tr>
 <tr><td style="width: 25%;"><a href="make.unique.html">make.unique</a></td>
@@ -1224,6 +1253,8 @@
 <td>Matrix Multiplication</td></tr>
 <tr><td style="width: 25%;"><a href="matrix.html">matrix</a></td>
 <td>Matrices</td></tr>
+<tr><td style="width: 25%;"><a href="groupGeneric.html">matrixOps</a></td>
+<td>S3 Group Generic Functions</td></tr>
 <tr><td style="width: 25%;"><a href="Extremes.html">max</a></td>
 <td>Maxima and Minima</td></tr>
 <tr><td style="width: 25%;"><a href="maxCol.html">max.col</a></td>
@@ -1268,15 +1299,19 @@
 <td>Built-in Constants</td></tr>
 <tr><td style="width: 25%;"><a href="weekday.POSIXt.html">months</a></td>
 <td>Extract Parts of a POSIXt or Date Object</td></tr>
+<tr><td style="width: 25%;"><a href="mtfrm.html">mtfrm</a></td>
+<td>Auxiliary Function for Matching</td></tr>
 </table>
 
-<h2><a name="N">-- N --</a></h2>
+<h2><a id="N">-- N --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="NA.html">NA</a></td>
 <td>'Not Available' / Missing Values</td></tr>
 <tr><td style="width: 25%;"><a href="name.html">name</a></td>
 <td>Names and Symbols</td></tr>
+<tr><td style="width: 25%;"><a href="class.html">nameOfClass</a></td>
+<td>Object Classes</td></tr>
 <tr><td style="width: 25%;"><a href="names.html">names</a></td>
 <td>The Names of an Object</td></tr>
 <tr><td style="width: 25%;"><a href="DateTimeClasses.html">names.POSIXlt</a></td>
@@ -1315,6 +1350,8 @@
 <td>Translate Text Messages</td></tr>
 <tr><td style="width: 25%;"><a href="nlevels.html">nlevels</a></td>
 <td>The Number of Levels of a Factor</td></tr>
+<tr><td style="width: 25%;"><a href="StackOverflows.html">nodeStackOverflowError</a></td>
+<td>Stack Overflow Errors</td></tr>
 <tr><td style="width: 25%;"><a href="noquote.html">noquote</a></td>
 <td>Class for 'no quote' Printing of Character Strings</td></tr>
 <tr><td style="width: 25%;"><a href="norm.html">norm</a></td>
@@ -1339,17 +1376,21 @@
 <td>Numeric Constants</td></tr>
 <tr><td style="width: 25%;"><a href="numeric_version.html">numeric_version</a></td>
 <td>Numeric Versions</td></tr>
+<tr><td style="width: 25%;"><a href="rawConversion.html">numToBits</a></td>
+<td>Convert to or from (Bit/Packed) Raw Vectors</td></tr>
+<tr><td style="width: 25%;"><a href="rawConversion.html">numToInts</a></td>
+<td>Convert to or from (Bit/Packed) Raw Vectors</td></tr>
 <tr><td style="width: 25%;"><a href="nchar.html">nzchar</a></td>
 <td>Count the Number of Characters (or Bytes or Width)</td></tr>
 </table>
 
-<h2><a name="O">-- O --</a></h2>
+<h2><a id="O">-- O --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="ls.html">objects</a></td>
 <td>List Objects</td></tr>
 <tr><td style="width: 25%;"><a href="octmode.html">octmode</a></td>
-<td>Display Numbers in Octal</td></tr>
+<td>Integer Numbers Displayed in Octal</td></tr>
 <tr><td style="width: 25%;"><a href="class.html">oldClass</a></td>
 <td>Object Classes</td></tr>
 <tr><td style="width: 25%;"><a href="timezones.html">OlsonNames</a></td>
@@ -1388,9 +1429,9 @@
 <td>Outer Product of Arrays</td></tr>
 </table>
 
-<h2><a name="P">-- P --</a></h2>
+<h2><a id="P">-- P --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="userhooks.html">packageEvent</a></td>
 <td>Functions to Get and Set Hooks for Load, Attach, Detach and Unload</td></tr>
 <tr><td style="width: 25%;"><a href="find.package.html">packageNotFoundError</a></td>
@@ -1400,7 +1441,9 @@
 <tr><td style="width: 25%;"><a href="numeric_version.html">package_version</a></td>
 <td>Numeric Versions</td></tr>
 <tr><td style="width: 25%;"><a href="rawConversion.html">packBits</a></td>
-<td>Convert to or from Raw Vectors</td></tr>
+<td>Convert to or from (Bit/Packed) Raw Vectors</td></tr>
+<tr><td style="width: 25%;"><a href="EnvVar.html">PAGER</a></td>
+<td>Environment Variables</td></tr>
 <tr><td style="width: 25%;"><a href="list.html">pairlist</a></td>
 <td>Lists - Generic and Dotted Pairs</td></tr>
 <tr><td style="width: 25%;"><a href="Paren.html">Paren</a></td>
@@ -1425,6 +1468,8 @@
 <td>Built-in Constants</td></tr>
 <tr><td style="width: 25%;"><a href="connections.html">pipe</a></td>
 <td>Functions to Manipulate Connections (Files, URLs, ...)</td></tr>
+<tr><td style="width: 25%;"><a href="pipeOp.html">pipeOp</a></td>
+<td>Forward Pipe Operator</td></tr>
 <tr><td style="width: 25%;"><a href="plot.html">plot</a></td>
 <td>Generic X-Y Plotting</td></tr>
 <tr><td style="width: 25%;"><a href="pmatch.html">pmatch</a></td>
@@ -1450,6 +1495,8 @@
 <tr><td style="width: 25%;"><a href="DateTimeClasses.html">POSIXt</a></td>
 <td>Date-Time Classes</td></tr>
 <tr><td style="width: 25%;"><a href="pretty.html">pretty</a></td>
+<td>Pretty Breakpoints</td></tr>
+<tr><td style="width: 25%;"><a href="pretty.html">pretty.default</a></td>
 <td>Pretty Breakpoints</td></tr>
 <tr><td style="width: 25%;"><a href="formatc.html">prettyNum</a></td>
 <td>Formatting Using C-style Formats</td></tr>
@@ -1480,7 +1527,7 @@
 <tr><td style="width: 25%;"><a href="eigen.html">print.eigen</a></td>
 <td>Spectral Decomposition of a Matrix</td></tr>
 <tr><td style="width: 25%;"><a href="hexmode.html">print.hexmode</a></td>
-<td>Display Numbers in Hexadecimal</td></tr>
+<td>Integer Numbers Displayed in Hexadecimal</td></tr>
 <tr><td style="width: 25%;"><a href="library.html">print.libraryIQR</a></td>
 <td>Loading/Attaching and Listing of Packages</td></tr>
 <tr><td style="width: 25%;"><a href="getDLLRegisteredRoutines.html">print.NativeRoutineList</a></td>
@@ -1490,7 +1537,7 @@
 <tr><td style="width: 25%;"><a href="numeric_version.html">print.numeric_version</a></td>
 <td>Numeric Versions</td></tr>
 <tr><td style="width: 25%;"><a href="octmode.html">print.octmode</a></td>
-<td>Display Numbers in Octal</td></tr>
+<td>Integer Numbers Displayed in Octal</td></tr>
 <tr><td style="width: 25%;"><a href="library.html">print.packageInfo</a></td>
 <td>Loading/Attaching and Listing of Packages</td></tr>
 <tr><td style="width: 25%;"><a href="DateTimeClasses.html">print.POSIXct</a></td>
@@ -1520,13 +1567,15 @@
 <tr><td style="width: 25%;"><a href="prod.html">prod</a></td>
 <td>Product of Vector Elements</td></tr>
 <tr><td style="width: 25%;"><a href="delayedAssign.html">promise</a></td>
-<td>Delay Evaluation</td></tr>
+<td>Delay Evaluation and Promises</td></tr>
 <tr><td style="width: 25%;"><a href="delayedAssign.html">promises</a></td>
-<td>Delay Evaluation</td></tr>
+<td>Delay Evaluation and Promises</td></tr>
 <tr><td style="width: 25%;"><a href="proportions.html">prop.table</a></td>
 <td>Express Table Entries as Fraction of Marginal Table</td></tr>
 <tr><td style="width: 25%;"><a href="proportions.html">proportions</a></td>
 <td>Express Table Entries as Fraction of Marginal Table</td></tr>
+<tr><td style="width: 25%;"><a href="StackOverflows.html">protectStackOverflowError</a></td>
+<td>Stack Overflow Errors</td></tr>
 <tr><td style="width: 25%;"><a href="dimnames.html">provideDimnames</a></td>
 <td>Dimnames of an Object</td></tr>
 <tr><td style="width: 25%;"><a href="Special.html">psigamma</a></td>
@@ -1537,9 +1586,9 @@
 <td>Push Text Back on to a Connection</td></tr>
 </table>
 
-<h2><a name="Q">-- Q --</a></h2>
+<h2><a id="Q">-- Q --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="quit.html">q</a></td>
 <td>Terminate an R Session</td></tr>
 <tr><td style="width: 25%;"><a href="qr.html">qr</a></td>
@@ -1574,9 +1623,9 @@
 <td>Quotes</td></tr>
 </table>
 
-<h2><a name="R">-- R --</a></h2>
+<h2><a id="R">-- R --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="Rhome.html">R.home</a></td>
 <td>Return the R Home Directory</td></tr>
 <tr><td style="width: 25%;"><a href="Version.html">R.Version</a></td>
@@ -1600,11 +1649,11 @@
 <tr><td style="width: 25%;"><a href="rawConnection.html">rawConnectionValue</a></td>
 <td>Raw Connections</td></tr>
 <tr><td style="width: 25%;"><a href="rawConversion.html">rawShift</a></td>
-<td>Convert to or from Raw Vectors</td></tr>
+<td>Convert to or from (Bit/Packed) Raw Vectors</td></tr>
 <tr><td style="width: 25%;"><a href="rawConversion.html">rawToBits</a></td>
-<td>Convert to or from Raw Vectors</td></tr>
+<td>Convert to or from (Bit/Packed) Raw Vectors</td></tr>
 <tr><td style="width: 25%;"><a href="rawConversion.html">rawToChar</a></td>
-<td>Convert to or from Raw Vectors</td></tr>
+<td>Convert to or from (Bit/Packed) Raw Vectors</td></tr>
 <tr><td style="width: 25%;"><a href="cbind.html">rbind</a></td>
 <td>Combine R Objects by Rows or Columns</td></tr>
 <tr><td style="width: 25%;"><a href="cbind.html">rbind.data.frame</a></td>
@@ -1661,6 +1710,8 @@
 <td>Initialization at Start of an R Session</td></tr>
 <tr><td style="width: 25%;"><a href="rep.html">rep</a></td>
 <td>Replicate Elements of Vectors and Lists</td></tr>
+<tr><td style="width: 25%;"><a href="difftime.html">rep.difftime</a></td>
+<td>Time Intervals / Differences</td></tr>
 <tr><td style="width: 25%;"><a href="numeric_version.html">rep.numeric_version</a></td>
 <td>Numeric Versions</td></tr>
 <tr><td style="width: 25%;"><a href="Control.html">repeat</a></td>
@@ -1704,9 +1755,9 @@
 <tr><td style="width: 25%;"><a href="Round.html">round</a></td>
 <td>Rounding of Numbers</td></tr>
 <tr><td style="width: 25%;"><a href="round.POSIXt.html">round.Date</a></td>
-<td>Round / Truncate Data-Time Objects</td></tr>
+<td>Round / Truncate Date-Time Objects</td></tr>
 <tr><td style="width: 25%;"><a href="round.POSIXt.html">round.POSIXt</a></td>
-<td>Round / Truncate Data-Time Objects</td></tr>
+<td>Round / Truncate Date-Time Objects</td></tr>
 <tr><td style="width: 25%;"><a href="row.html">row</a></td>
 <td>Row Indexes</td></tr>
 <tr><td style="width: 25%;"><a href="row.names.html">row.names</a></td>
@@ -1727,6 +1778,8 @@
 <td>Environment Variables</td></tr>
 <tr><td style="width: 25%;"><a href="EnvVar.html">R_BROWSER</a></td>
 <td>Environment Variables</td></tr>
+<tr><td style="width: 25%;"><a href="Version.html">R_compiled_by</a></td>
+<td>Version Information</td></tr>
 <tr><td style="width: 25%;"><a href="EnvVar.html">R_COMPLETION</a></td>
 <td>Environment Variables</td></tr>
 <tr><td style="width: 25%;"><a href="options.html">R_C_BOUNDS_CHECK</a></td>
@@ -1779,6 +1832,8 @@
 <td>Environment Variables</td></tr>
 <tr><td style="width: 25%;"><a href="EnvVar.html">R_PLATFORM</a></td>
 <td>Environment Variables</td></tr>
+<tr><td style="width: 25%;"><a href="EnvVar.html">R_PRINTCMD</a></td>
+<td>Environment Variables</td></tr>
 <tr><td style="width: 25%;"><a href="Startup.html">R_PROFILE</a></td>
 <td>Initialization at Start of an R Session</td></tr>
 <tr><td style="width: 25%;"><a href="Startup.html">R_PROFILE_USER</a></td>
@@ -1793,6 +1848,8 @@
 <td>Numeric Versions</td></tr>
 <tr><td style="width: 25%;"><a href="EnvVar.html">R_TEXI2DVICMD</a></td>
 <td>Environment Variables</td></tr>
+<tr><td style="width: 25%;"><a href="EnvVar.html">R_TIDYCMD</a></td>
+<td>Environment Variables</td></tr>
 <tr><td style="width: 25%;"><a href="EnvVar.html">R_UNZIPCMD</a></td>
 <td>Environment Variables</td></tr>
 <tr><td style="width: 25%;"><a href="EnvVar.html">R_USER</a></td>
@@ -1801,9 +1858,9 @@
 <td>Environment Variables</td></tr>
 </table>
 
-<h2><a name="S">-- S --</a></h2>
+<h2><a id="S">-- S --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="groupGeneric.html">S3groupGeneric</a></td>
 <td>S3 Group Generic Functions</td></tr>
 <tr><td style="width: 25%;"><a href="UseMethod.html">S3Methods</a></td>
@@ -1942,6 +1999,10 @@
 <td>References to Source Files and Code</td></tr>
 <tr><td style="width: 25%;"><a href="srcfile.html">srcref-class</a></td>
 <td>References to Source Files and Code</td></tr>
+<tr><td style="width: 25%;"><a href="StackOverflows.html">stackOverflowError</a></td>
+<td>Stack Overflow Errors</td></tr>
+<tr><td style="width: 25%;"><a href="StackOverflows.html">StackOverflows</a></td>
+<td>Stack Overflow Errors</td></tr>
 <tr><td style="width: 25%;"><a href="standardGeneric.html">standardGeneric</a></td>
 <td>Formal Method System - Dispatching S4 Methods</td></tr>
 <tr><td style="width: 25%;"><a href="startsWith.html">startsWith</a></td>
@@ -2044,6 +2105,8 @@
 <td>Sweep out Array Summaries</td></tr>
 <tr><td style="width: 25%;"><a href="switch.html">switch</a></td>
 <td>Select One of a List of Alternatives</td></tr>
+<tr><td style="width: 25%;"><a href="name.html">symbol</a></td>
+<td>Names and Symbols</td></tr>
 <tr><td style="width: 25%;"><a href="Syntax.html">Syntax</a></td>
 <td>Operator Syntax and Precedence</td></tr>
 <tr><td style="width: 25%;"><a href="files2.html">Sys.chmod</a></td>
@@ -2074,6 +2137,8 @@
 <td>Set or Unset Environment Variables</td></tr>
 <tr><td style="width: 25%;"><a href="Sys.setFileTime.html">Sys.setFileTime</a></td>
 <td>Set File Time</td></tr>
+<tr><td style="width: 25%;"><a href="gettext.html">Sys.setLanguage</a></td>
+<td>Translate Text Messages</td></tr>
 <tr><td style="width: 25%;"><a href="locales.html">Sys.setlocale</a></td>
 <td>Query or Set Aspects of the Locale</td></tr>
 <tr><td style="width: 25%;"><a href="Sys.sleep.html">Sys.sleep</a></td>
@@ -2102,9 +2167,9 @@
 <td>Invoke a System Command</td></tr>
 </table>
 
-<h2><a name="T">-- T --</a></h2>
+<h2><a id="T">-- T --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="logical.html">T</a></td>
 <td>Logical Vectors</td></tr>
 <tr><td style="width: 25%;"><a href="t.html">t</a></td>
@@ -2178,9 +2243,9 @@
 <tr><td style="width: 25%;"><a href="Round.html">trunc</a></td>
 <td>Rounding of Numbers</td></tr>
 <tr><td style="width: 25%;"><a href="round.POSIXt.html">trunc.Date</a></td>
-<td>Round / Truncate Data-Time Objects</td></tr>
+<td>Round / Truncate Date-Time Objects</td></tr>
 <tr><td style="width: 25%;"><a href="round.POSIXt.html">trunc.POSIXt</a></td>
-<td>Round / Truncate Data-Time Objects</td></tr>
+<td>Round / Truncate Date-Time Objects</td></tr>
 <tr><td style="width: 25%;"><a href="seek.html">truncate</a></td>
 <td>Functions to Reposition Connections</td></tr>
 <tr><td style="width: 25%;"><a href="try.html">try</a></td>
@@ -2199,11 +2264,13 @@
 <td>Time Zones</td></tr>
 </table>
 
-<h2><a name="U">-- U --</a></h2>
+<h2><a id="U">-- U --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="files2.html">umask</a></td>
 <td>Manipulation of Directories and File Permissions</td></tr>
+<tr><td style="width: 25%;"><a href="balancePOSIXlt.html">unCfillPOSIXlt</a></td>
+<td>Balancing "Ragged" and Out-of-range POSIXlt Date-Times</td></tr>
 <tr><td style="width: 25%;"><a href="class.html">unclass</a></td>
 <td>Object Classes</td></tr>
 <tr><td style="width: 25%;"><a href="debug.html">undebug</a></td>
@@ -2220,8 +2287,8 @@
 <td>Date-Time Classes</td></tr>
 <tr><td style="width: 25%;"><a href="warnings.html">unique.warnings</a></td>
 <td>Print Warning Messages</td></tr>
-<tr><td style="width: 25%;"><a href="difftime.html">units</a></td>
-<td>Time Intervals / Differences</td></tr>
+<tr><td style="width: 25%;"><a href="units.html">units</a></td>
+<td>Units</td></tr>
 <tr><td style="width: 25%;"><a href="difftime.html">units.difftime</a></td>
 <td>Time Intervals / Differences</td></tr>
 <tr><td style="width: 25%;"><a href="unlink.html">unlink</a></td>
@@ -2256,9 +2323,9 @@
 <td>Convert Integer Vectors to or from UTF-8-encoded Character Vectors</td></tr>
 </table>
 
-<h2><a name="V">-- V --</a></h2>
+<h2><a id="V">-- V --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="validUTF8.html">validEnc</a></td>
 <td>Check if a Character Vector is Validly Encoded</td></tr>
 <tr><td style="width: 25%;"><a href="validUTF8.html">validUTF8</a></td>
@@ -2266,16 +2333,16 @@
 <tr><td style="width: 25%;"><a href="lapply.html">vapply</a></td>
 <td>Apply a Function over a List or Vector</td></tr>
 <tr><td style="width: 25%;"><a href="vector.html">vector</a></td>
-<td>Vectors</td></tr>
+<td>Vectors - Creation, Coercion, etc</td></tr>
 <tr><td style="width: 25%;"><a href="Vectorize.html">Vectorize</a></td>
 <td>Vectorize a Scalar Function</td></tr>
 <tr><td style="width: 25%;"><a href="Version.html">version</a></td>
 <td>Version Information</td></tr>
 </table>
 
-<h2><a name="W">-- W --</a></h2>
+<h2><a id="W">-- W --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="warning.html">warning</a></td>
 <td>Warning Messages</td></tr>
 <tr><td style="width: 25%;"><a href="conditions.html">warningCondition</a></td>
@@ -2316,9 +2383,9 @@
 <td>Write Lines to a Connection</td></tr>
 </table>
 
-<h2><a name="X">-- X --</a></h2>
+<h2><a id="X">-- X --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="Logic.html">xor</a></td>
 <td>Logical Operators</td></tr>
 <tr><td style="width: 25%;"><a href="xtfrm.html">xtfrm</a></td>
@@ -2329,22 +2396,22 @@
 <td>Functions to Manipulate Connections (Files, URLs, ...)</td></tr>
 </table>
 
-<h2><a name="Z">-- Z --</a></h2>
+<h2><a id="Z">-- Z --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="zapsmall.html">zapsmall</a></td>
 <td>Rounding of Numbers: Zapping Small Ones to Zero</td></tr>
 </table>
 
-<h2><a name="misc">-- misc --</a></h2>
+<h2><a id="misc">-- misc --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="Logic.html">!</a></td>
 <td>Logical Operators</td></tr>
 <tr><td style="width: 25%;"><a href="hexmode.html">!.hexmode</a></td>
-<td>Display Numbers in Hexadecimal</td></tr>
+<td>Integer Numbers Displayed in Hexadecimal</td></tr>
 <tr><td style="width: 25%;"><a href="octmode.html">!.octmode</a></td>
-<td>Display Numbers in Octal</td></tr>
+<td>Integer Numbers Displayed in Octal</td></tr>
 <tr><td style="width: 25%;"><a href="Comparison.html">!=</a></td>
 <td>Relational Operators</td></tr>
 <tr><td style="width: 25%;"><a href="Quotes.html">"</a></td>
@@ -2359,6 +2426,8 @@
 <td>Extract or Replace Parts of an Object</td></tr>
 <tr><td style="width: 25%;"><a href="Extract.data.frame.html">$&lt;-.data.frame</a></td>
 <td>Extract or Replace Parts of a Data Frame</td></tr>
+<tr><td style="width: 25%;"><a href="DateTimeClasses.html">$&lt;-.POSIXlt</a></td>
+<td>Date-Time Classes</td></tr>
 <tr><td style="width: 25%;"><a href="Arithmetic.html">%%</a></td>
 <td>Arithmetic Operators</td></tr>
 <tr><td style="width: 25%;"><a href="matmult.html">%*%</a></td>
@@ -2376,9 +2445,9 @@
 <tr><td style="width: 25%;"><a href="Logic.html">&amp;&amp;</a></td>
 <td>Logical Operators</td></tr>
 <tr><td style="width: 25%;"><a href="hexmode.html">&amp;.hexmode</a></td>
-<td>Display Numbers in Hexadecimal</td></tr>
+<td>Integer Numbers Displayed in Hexadecimal</td></tr>
 <tr><td style="width: 25%;"><a href="octmode.html">&amp;.octmode</a></td>
-<td>Display Numbers in Octal</td></tr>
+<td>Integer Numbers Displayed in Octal</td></tr>
 <tr><td style="width: 25%;"><a href="Quotes.html">'</a></td>
 <td>Quotes</td></tr>
 <tr><td style="width: 25%;"><a href="Paren.html">(</a></td>
@@ -2411,16 +2480,14 @@
 <td>..., '..1', etc used in Functions</td></tr>
 <tr><td style="width: 25%;"><a href="dots.html">...length</a></td>
 <td>..., '..1', etc used in Functions</td></tr>
+<tr><td style="width: 25%;"><a href="dots.html">...names</a></td>
+<td>..., '..1', etc used in Functions</td></tr>
 <tr><td style="width: 25%;"><a href="dots.html">..1</a></td>
 <td>..., '..1', etc used in Functions</td></tr>
 <tr><td style="width: 25%;"><a href="dots.html">..2</a></td>
 <td>..., '..1', etc used in Functions</td></tr>
 <tr><td style="width: 25%;"><a href="deparseOpts.html">..deparseOpts</a></td>
 <td>Options for Expression Deparsing</td></tr>
-<tr><td style="width: 25%;"><a href="agrep.html">.amatch_bounds</a></td>
-<td>Approximate String Matching (Fuzzy Matching)</td></tr>
-<tr><td style="width: 25%;"><a href="agrep.html">.amatch_costs</a></td>
-<td>Approximate String Matching (Fuzzy Matching)</td></tr>
 <tr><td style="width: 25%;"><a href="autoload.html">.Autoloaded</a></td>
 <td>On-demand Loading of Packages</td></tr>
 <tr><td style="width: 25%;"><a href="autoload.html">.AutoloadEnv</a></td>
@@ -2445,8 +2512,6 @@
 <td>Form Row and Column Sums and Means</td></tr>
 <tr><td style="width: 25%;"><a href="attach.html">.conflicts.OK</a></td>
 <td>Attach Set of R Objects to Search Path</td></tr>
-<tr><td style="width: 25%;"><a href="numeric_version.html">.decode_numeric_version</a></td>
-<td>Numeric Versions</td></tr>
 <tr><td style="width: 25%;"><a href="Defunct.html">.Defunct</a></td>
 <td>Marking Objects as Defunct</td></tr>
 <tr><td style="width: 25%;"><a href="deparseOpts.html">.deparseOpts</a></td>
@@ -2461,10 +2526,6 @@
 <td>Interactive Tracing and Debugging of Calls to a Function or Method</td></tr>
 <tr><td style="width: 25%;"><a href="library.dynam.html">.dynLibs</a></td>
 <td>Loading DLLs from Packages</td></tr>
-<tr><td style="width: 25%;"><a href="numeric_version.html">.encode_numeric_version</a></td>
-<td>Numeric Versions</td></tr>
-<tr><td style="width: 25%;"><a href="libPaths.html">.expand_R_libs_env_var</a></td>
-<td>Search Paths for Packages</td></tr>
 <tr><td style="width: 25%;"><a href="CallExternal.html">.External</a></td>
 <td>Modern Interfaces to C/C++ code</td></tr>
 <tr><td style="width: 25%;"><a href="Startup.html">.First</a></td>
@@ -2489,8 +2550,6 @@
 <td>References to Source Files and Code</td></tr>
 <tr><td style="width: 25%;"><a href="kappa.html">.kappa_tri</a></td>
 <td>Compute or Estimate the Condition Number of a Matrix</td></tr>
-<tr><td style="width: 25%;"><a href="kronecker.html">.kronecker</a></td>
-<td>Kronecker Products on Arrays</td></tr>
 <tr><td style="width: 25%;"><a href="quit.html">.Last</a></td>
 <td>Terminate an R Session</td></tr>
 <tr><td style="width: 25%;"><a href="ns-hooks.html">.Last.lib</a></td>
@@ -2499,6 +2558,8 @@
 <td>Terminate an R Session</td></tr>
 <tr><td style="width: 25%;"><a href="Last.value.html">.Last.value</a></td>
 <td>Value of Last Evaluated Expression</td></tr>
+<tr><td style="width: 25%;"><a href="locales.html">.LC.categories</a></td>
+<td>Query or Set Aspects of the Locale</td></tr>
 <tr><td style="width: 25%;"><a href="DateTimeClasses.html">.leap.seconds</a></td>
 <td>Date-Time Classes</td></tr>
 <tr><td style="width: 25%;"><a href="libPaths.html">.libPaths</a></td>
@@ -2511,8 +2572,8 @@
 <td>Numerical Characteristics of the Machine</td></tr>
 <tr><td style="width: 25%;"><a href="message.html">.makeMessage</a></td>
 <td>Diagnostic Messages</td></tr>
-<tr><td style="width: 25%;"><a href="numeric_version.html">.make_numeric_version</a></td>
-<td>Numeric Versions</td></tr>
+<tr><td style="width: 25%;"><a href="mapply.html">.mapply</a></td>
+<td>Apply a Function to Multiple List or Vector Arguments</td></tr>
 <tr><td style="width: 25%;"><a href="UseMethod.html">.Method</a></td>
 <td>Class Methods</td></tr>
 <tr><td style="width: 25%;"><a href="library.html">.noGenerics</a></td>
@@ -2535,18 +2596,16 @@
 <td>Initialization at Start of an R Session</td></tr>
 <tr><td style="width: 25%;"><a href="zpackages.html">.packages</a></td>
 <td>Listing of Packages</td></tr>
-<tr><td style="width: 25%;"><a href="message.html">.packageStartupMessage</a></td>
-<td>Diagnostic Messages</td></tr>
 <tr><td style="width: 25%;"><a href="Platform.html">.Platform</a></td>
 <td>Platform Specific Variables</td></tr>
+<tr><td style="width: 25%;"><a href="pretty.html">.pretty</a></td>
+<td>Pretty Breakpoints</td></tr>
 <tr><td style="width: 25%;"><a href="Primitive.html">.Primitive</a></td>
 <td>Look Up a Primitive Function</td></tr>
 <tr><td style="width: 25%;"><a href="Random.html">.Random.seed</a></td>
 <td>Random Number Generation</td></tr>
 <tr><td style="width: 25%;"><a href="Startup.html">.Renviron</a></td>
 <td>Initialization at Start of an R Session</td></tr>
-<tr><td style="width: 25%;"><a href="search.html">.rmpkg</a></td>
-<td>Give Search Path for R Objects</td></tr>
 <tr><td style="width: 25%;"><a href="row.html">.row</a></td>
 <td>Row Indexes</td></tr>
 <tr><td style="width: 25%;"><a href="colSums.html">.rowMeans</a></td>
@@ -2575,10 +2634,6 @@
 <td>Functions to Get and Set Hooks for Load, Attach, Detach and Unload</td></tr>
 <tr><td style="width: 25%;"><a href="factor.html">.valid.factor</a></td>
 <td>Factors</td></tr>
-<tr><td style="width: 25%;"><a href="cbind.html">.__H__.cbind</a></td>
-<td>Combine R Objects by Rows or Columns</td></tr>
-<tr><td style="width: 25%;"><a href="cbind.html">.__H__.rbind</a></td>
-<td>Combine R Objects by Rows or Columns</td></tr>
 <tr><td style="width: 25%;"><a href="Arithmetic.html">/</a></td>
 <td>Arithmetic Operators</td></tr>
 <tr><td style="width: 25%;"><a href="difftime.html">/.difftime</a></td>
@@ -2612,9 +2667,9 @@
 <tr><td style="width: 25%;"><a href="Comparison.html">&gt;=</a></td>
 <td>Relational Operators</td></tr>
 <tr><td style="width: 25%;"><a href="slotOp.html">@</a></td>
-<td>Extract or Replace A Slot</td></tr>
+<td>Extract or Replace a Slot or Property</td></tr>
 <tr><td style="width: 25%;"><a href="slotOp.html">@&lt;-</a></td>
-<td>Extract or Replace A Slot</td></tr>
+<td>Extract or Replace a Slot or Property</td></tr>
 <tr><td style="width: 25%;"><a href="Extract.html">[</a></td>
 <td>Extract or Replace Parts of an Object</td></tr>
 <tr><td style="width: 25%;"><a href="AsIs.html">[.AsIs</a></td>
@@ -2632,7 +2687,7 @@
 <tr><td style="width: 25%;"><a href="Extract.factor.html">[.factor</a></td>
 <td>Extract or Replace Parts of a Factor</td></tr>
 <tr><td style="width: 25%;"><a href="hexmode.html">[.hexmode</a></td>
-<td>Display Numbers in Hexadecimal</td></tr>
+<td>Integer Numbers Displayed in Hexadecimal</td></tr>
 <tr><td style="width: 25%;"><a href="Extract.html">[.listof</a></td>
 <td>Extract or Replace Parts of an Object</td></tr>
 <tr><td style="width: 25%;"><a href="noquote.html">[.noquote</a></td>
@@ -2640,7 +2695,7 @@
 <tr><td style="width: 25%;"><a href="numeric_version.html">[.numeric_version</a></td>
 <td>Numeric Versions</td></tr>
 <tr><td style="width: 25%;"><a href="octmode.html">[.octmode</a></td>
-<td>Display Numbers in Octal</td></tr>
+<td>Integer Numbers Displayed in Octal</td></tr>
 <tr><td style="width: 25%;"><a href="DateTimeClasses.html">[.POSIXct</a></td>
 <td>Date-Time Classes</td></tr>
 <tr><td style="width: 25%;"><a href="DateTimeClasses.html">[.POSIXlt</a></td>
@@ -2657,6 +2712,8 @@
 <td>Extract or Replace Parts of a Data Frame</td></tr>
 <tr><td style="width: 25%;"><a href="Dates.html">[&lt;-.Date</a></td>
 <td>Date Class</td></tr>
+<tr><td style="width: 25%;"><a href="difftime.html">[&lt;-.difftime</a></td>
+<td>Time Intervals / Differences</td></tr>
 <tr><td style="width: 25%;"><a href="Extract.factor.html">[&lt;-.factor</a></td>
 <td>Extract or Replace Parts of a Factor</td></tr>
 <tr><td style="width: 25%;"><a href="numeric_version.html">[&lt;-.numeric_version</a></td>
@@ -2688,12 +2745,14 @@
 <tr><td style="width: 25%;"><a href="Logic.html">|</a></td>
 <td>Logical Operators</td></tr>
 <tr><td style="width: 25%;"><a href="hexmode.html">|.hexmode</a></td>
-<td>Display Numbers in Hexadecimal</td></tr>
+<td>Integer Numbers Displayed in Hexadecimal</td></tr>
 <tr><td style="width: 25%;"><a href="octmode.html">|.octmode</a></td>
-<td>Display Numbers in Octal</td></tr>
+<td>Integer Numbers Displayed in Octal</td></tr>
+<tr><td style="width: 25%;"><a href="pipeOp.html">|&gt;</a></td>
+<td>Forward Pipe Operator</td></tr>
 <tr><td style="width: 25%;"><a href="Logic.html">||</a></td>
 <td>Logical Operators</td></tr>
 <tr><td style="width: 25%;"><a href="tilde.html">~</a></td>
 <td>Tilde Operator</td></tr>
 </table>
-</body></html>
+</div></body></html>

@@ -118,6 +118,8 @@ for(n in 0:7)
  for(diag in c(TRUE,FALSE))
   for(upper in c(TRUE,FALSE)) {
       stopifnotValid(ii <- Matrix:::abIindTri(n, diag=diag,upper=upper), "abIndex")
-      stopifnot(Matrix:::indTri(n, diag=diag,upper=upper) == as(ii, "numeric"))
+      if(n)
+      stopifnot(Matrix:::indTri(n, diag=diag,upper=upper) == as(ii, "numeric"),
+                allow.logical0=TRUE) # works also in R versions w/o it as formal argument
   }
 cat('Time elapsed: ', (.pt <- proc.time()),'\n') # "stats"

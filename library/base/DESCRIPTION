@@ -1,10 +1,11 @@
 Package: base
-Version: 4.0.3
+Version: 4.3.0
 Priority: base
 Title: The R Base Package
 Author: R Core Team and contributors worldwide
-Maintainer: R Core Team <R-core@r-project.org>
+Maintainer: R Core Team <do-use-Contact-address@r-project.org>
+Contact: R-help mailing list <r-help@r-project.org>
 Description: Base R functions.
-License: Part of R 4.0.3
+License: Part of R 4.3.0
 Suggests: methods
-Built: R 4.0.3; ; 2020-10-10 12:49:32 UTC; windows
+Built: R 4.3.0; ; 2023-04-21 09:22:06 UTC; windows

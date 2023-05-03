@@ -1,7 +1,7 @@
 
-R version 4.0.3 RC (2020-10-06 r79305) -- "Bunny-Wunnies Freak Out"
-Copyright (C) 2020 The R Foundation for Statistical Computing
-Platform: x86_64-pc-linux-gnu (64-bit)
+R Under development (unstable) (2022-12-02 r83397) -- "Unsuffered Consequences"
+Copyright (C) 2022 The R Foundation for Statistical Computing
+Platform: aarch64-apple-darwin22.1.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -16,12 +16,16 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > ####--- S4 Methods (and Classes)  --- see also ../src/library/methods/tests/
+> 
+> #### Instead of adding more tests depending on recommended packages,
+> #### re-facror into a separate script and treat like eval-etc-2.R
+> 
 > options(useFancyQuotes=FALSE)
 > require(methods)
 > assertError <- tools::assertError # "import"
 > ##too fragile: showMethods(where = "package:methods")
 > 
-> ## When this test comes too late, it fails too early in R <= 3.2.2
+> ## When this test comes too late, it failed too early in R <= 3.2.2
 > require(stats4)
 Loading required package: stats4
 > detach("package:methods")
@@ -601,7 +605,7 @@ An object of class "foo"
 + 	  )
 > ## the last failed in R 2.7.0 : was not showing  "show"
 > 
-> if(require("Matrix", lib.loc = .Library)) {
+> if(require("Matrix", lib.loc = .Library, quietly = TRUE)) {
 +     D5. <- Diagonal(x = 5:1)
 +     D5N <- D5.; D5N[5,5] <- NA
 +     stopifnot(isGeneric("dim", where=as.environment("package:Matrix")),
@@ -615,13 +619,13 @@ An object of class "foo"
 + 	      identical(pmin(1, D5.), pmin(1, as.matrix(D5.))),
 + 	      identical(D5N, pmax(D5N, -1)),
 + 	      identical(D5N, pmin(D5N, 5)),
-+ 	      identical(unname(as.matrix(pmin(D5N+1, 3))),
-+ 			       pmin(as.matrix(D5N)+1, 3)),
++ 	      identical(as.matrix(pmin(D5N +1, 3)),
++ 			pmin(as.matrix(D5N)+1, 3)),
 + 	      ##
 + 	      TRUE)
-+ }
-Loading required package: Matrix
-<sparse>[ <logic> ] : .M.sub.i.logical() maybe inefficient
++ } else
++     message("skipping tests requiring the Matrix package")
+<sparse>[ <logic> ]: .M.sub.i.logical() maybe inefficient
 > 
 > 
 > ## containing "array" ("matrix", "ts", ..)
@@ -771,12 +775,12 @@ NULL
 > myTry <- function(expr, ...) tryCatch(expr, error = function(e) e)
 > tstSlotname <- function(nm) {
 +     r <- myTry(setClass("foo", representation =
-+                         structure(list("character"), .Names = nm)))
++                         structure(list("character"), names = nm)))
 +     if(is(r, "error")) return(r$message)
 +     ## else
 +     ch <- LETTERS[1:5]
 +     ## instead of  new("foo", <...> = ch):
-+     x <- myTry(do.call(new, structure(list("foo", ch), .Names=c("", nm))))
++     x <- myTry(do.call(new, structure(list("foo", ch), names=c("", nm))))
 +     if(is(x, "error")) return(x$message)
 +     y <- myTry(new("foo"));		 if(is(y, "error")) return(y$message)
 +     r <- myTry(capture.output(show(x))); if(is(r, "error")) return(r$message)
@@ -1104,6 +1108,8 @@ Formal class 'signature' [package "methods"] with 3 slots
 > ## failed after an optimization patch
 > 
 > detach("package:methods", force=TRUE)
+Warning message:
+package 'methods' is required by 'Matrix', which may no longer work correctly 
 > C1@slot1 <- pi
 > stopifnot(identical(C1@slot1, pi))
 > stopifnot(require("methods"))
@@ -1146,6 +1152,8 @@ integer(0)
 > ## failed due to lack of prototype in R 3.6.0
 > 
 > detach("package:methods", force=TRUE)
+Warning message:
+package 'methods' is required by 'Matrix', which may no longer work correctly 
 > methods::setClass("test1", methods::representation(date="POSIXct"))
 > methods::setClass("test2", contains="test1")
 > test <- function(x) UseMethod('test', x)
@@ -1247,12 +1255,13 @@ Also defined by 'package2'
 > 
 > 
 > ## R's internal C  R_check_class_and_super()  was not good enough
-> if(require("Matrix")) withAutoprint({
+> if(require("Matrix", lib.loc = .Library, quietly = TRUE)) { withAutoprint({
 +     setClass("Z", representation(zz = "list"))
 +     setClass("C", contains = c("Z", "dgCMatrix"))
 +     setClass("C2", contains = "C")
 +     setClass("C3", contains = "C2")
 +     m <- matrix(c(0,0,2:0), 3,5, dimnames = list(NULL,NULL))
++     m2 <- matrix(c(0,0,2:0), 3,5)
 +     (mC <- as(m, "dgCMatrix"))
 +     (cc <- as(mC, "C"))
 +      c2 <- as(mC, "C2")
@@ -1260,17 +1269,20 @@ Also defined by 'package2'
 +     stopifnot(
 +         identical(capture.output(c2),
 +                   sub("C3","C2", capture.output(c3)))
-+       , identical(as(cc, "matrix"), m)
-+       , identical(as(c2, "matrix"), m)
-+       , identical(as(c3, "matrix"), m)
++       , identical(as(cc, "matrix"), m2) # changed for Matrix 1.5-x
++       , identical(as(c2, "matrix"), m2)
++       , identical(as(c3, "matrix"), m2)
 +     )
 +     invisible(lapply(c("Z","C","C2","C3"), removeClass))
-+ })
++  })
++ } else
++     message("skipping tests requiring the Matrix package")
 > setClass("Z", representation(zz = "list"))
 > setClass("C", contains = c("Z", "dgCMatrix"))
 > setClass("C2", contains = "C")
 > setClass("C3", contains = "C2")
 > m <- matrix(c(0, 0, 2:0), 3, 5, dimnames = list(NULL, NULL))
+> m2 <- matrix(c(0, 0, 2:0), 3, 5)
 > (mC <- as(m, "dgCMatrix"))
 3 x 5 sparse Matrix of class "dgCMatrix"
               
@@ -1286,8 +1298,8 @@ Also defined by 'package2'
 > c2 <- as(mC, "C2")
 > c3 <- as(mC, "C3")
 > stopifnot(identical(capture.output(c2), sub("C3", "C2", capture.output(c3))), 
-+     identical(as(cc, "matrix"), m), identical(as(c2, "matrix"), m), identical(as(c3, 
-+         "matrix"), m))
++     identical(as(cc, "matrix"), m2), identical(as(c2, "matrix"), m2), identical(as(c3, 
++         "matrix"), m2))
 > invisible(lapply(c("Z", "C", "C2", "C3"), removeClass))
 > 
 > 
@@ -1317,14 +1329,15 @@ value <- new("A")
 > stopifnot( canCoerce(o3, "A") )
 > ## failed in R <= 3.6.1
 > 
-> if(require("Matrix")) withAutoprint({
-+     (sci <- names(getClass("integer")@contains))
+> if(require("Matrix", lib.loc = .Library, quietly = TRUE)) { withAutoprint({
++     sci <- names(getClass("integer")@contains)
 +     # These 2 classes have *nothing* to do with Matrix:
 +     setClass("MyClass")
-+     setClassUnion("NumOrMyClass", c("numeric", "MyClass"))
-+     (nsci <- names(getClass("integer")@contains))
++     ncl <- "NumOrMyClass"
++     setClassUnion(ncl, c("numeric", "MyClass"))
++     nsci <- names(getClass("integer")@contains)
 +     ## failed in R <= 3.6.2
-+     stopifnot(sci %in% nsci)
++     stopifnot(sci %in% nsci, identical(setdiff(nsci, sci), ncl))
 + 
 +     setClassUnion('dMatrixOrMatrix', members = c('dMatrix', 'matrix'))
 +     ## failed in R <= 3.6.2
@@ -1333,20 +1346,14 @@ value <- new("A")
 +     invisible(lapply(c("NumOrMyClass", "MyClass", "dMatrixOrMatrix"),
 +                      removeClass))
 + })
-> (sci <- names(getClass("integer")@contains))
- [1] "double"              "numeric"             "vector"             
- [4] "data.frameRowLabels" "atomicVector"        "numericVector"      
- [7] "index"               "replValue"           "numLike"            
-[10] "number"              "Mnumeric"            "replValueSp"        
++ } else
++     message("skipping tests requiring the Matrix package")
+> sci <- names(getClass("integer")@contains)
 > setClass("MyClass")
-> setClassUnion("NumOrMyClass", c("numeric", "MyClass"))
-> (nsci <- names(getClass("integer")@contains))
- [1] "double"              "numeric"             "vector"             
- [4] "data.frameRowLabels" "atomicVector"        "numericVector"      
- [7] "index"               "replValue"           "numLike"            
-[10] "number"              "Mnumeric"            "NumOrMyClass"       
-[13] "replValueSp"        
-> stopifnot(sci %in% nsci)
+> ncl <- "NumOrMyClass"
+> setClassUnion(ncl, c("numeric", "MyClass"))
+> nsci <- names(getClass("integer")@contains)
+> stopifnot(sci %in% nsci, identical(setdiff(nsci, sci), ncl))
 > setClassUnion("dMatrixOrMatrix", members = c("dMatrix", "matrix"))
 > stopifnot("dMatrixOrMatrix" %in% names(getClass("dgCMatrix")@contains))
 > invisible(lapply(c("NumOrMyClass", "MyClass", "dMatrixOrMatrix"), removeClass))

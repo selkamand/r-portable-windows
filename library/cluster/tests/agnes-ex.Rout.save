@@ -1,6 +1,6 @@
 
-R version 3.5.0 alpha (2018-03-28 r74481)
-Copyright (C) 2018 The R Foundation for Statistical Computing
+R version 4.0.3 Patched (2021-01-18 r79850) -- "Bunny-Wunnies Freak Out"
+Copyright (C) 2021 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -19,8 +19,11 @@ Type 'q()' to quit R.
 > options(digits = 6)
 > data(votes.repub)
 > 
+> ## IGNORE_RDIFF_BEGIN
 > source(system.file("test-tools.R", package = "cluster"), keep.source = FALSE)
 Loading required package: tools
+doExtras <- cluster:::doExtras() :  TRUE
+> ## IGNORE_RDIFF_END
 > ## -> showProc.time() ...  & doExtras
 > 
 > agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)
@@ -483,7 +486,7 @@ List of 9
  - attr(*, "class")= chr [1:2] "agnes" "twins"
 > 
 > showProc.time()
-Time elapsed:  0.456 0.083 0.595 
+Time (user system elapsed): 0.602 0.061 0.667 
 > 
 > summary(ar2 <- agnes(ruspini, metric="manhattan", method = "weighted"))
 Object of class 'agnes' from call:
@@ -608,7 +611,7 @@ Available components:
 > stopifnot(all.equal(ar2[1:4], ar3[1:4], tol=1e-12))
 > 
 > showProc.time()
-Time elapsed:  0.002 0.003 0.005 
+Time (user system elapsed): 0.003 0.001 0.004 
 > 
 > ## Small example, testing "flexible" vs "single"
 > i8 <- -c(1:2, 9:10)
@@ -754,7 +757,7 @@ C agnes(n=75, method = 5, ..): 74 merging steps
 C agnes(n=75, method = 6, ..): 74 merging steps
 > 
 > showProc.time()
-Time elapsed:  0.029 0.006 0.036 
+Time (user system elapsed): 0.04 0.001 0.041 
 > 
 > ## an invalid "flexible" case - now must give error early:
 > x <- rbind(c( -6, -9), c(  0, 13),
@@ -779,4 +782,4 @@ Number of objects : 5
 > 
 > proc.time()
    user  system elapsed 
-  0.636   0.136   0.887 
+  0.767   0.094   0.859 

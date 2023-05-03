@@ -190,7 +190,7 @@ legend(730, .4, levels(fdata$group), lty=1, col=c(1,2,4),
 ### code chunk number 13: adjcurve.Rnw:553-562
 ###################################################
 id <- 1:nrow(fdata)
-cfit <- coxph(Surv(futime, death) ~ group + cluster(id), data=fdata, 
+cfit <- coxph(Surv(futime, death) ~ group, data=fdata, cluster=id,
               weight=rwt)
 summary(cfit)$robscore
 
@@ -263,9 +263,9 @@ wtscale <- table(fdata$group)/ tapply(fdata$rwt, fdata$group, sum)
 wt2 <- c(fdata$rwt * wtscale[fdata$group])
 c("rescaled cv"= sd(wt2)/mean(wt2), "rwt cv"=sd(fdata$rwt)/mean(fdata$rwt))
 
-cfit2a <- coxph(Surv(futime, death) ~ group + cluster(id),
+cfit2a <- coxph(Surv(futime, death) ~ group, cluster = id,
                 data=fdata, weight= rwt)
-cfit2b <- coxph(Surv(futime, death) ~ group + cluster(id),
+cfit2b <- coxph(Surv(futime, death) ~ group, cluster = id,
                 data=fdata, weight=wt2) 
 round(c(cfit2a$rscore, cfit2b$rscore),1)
 

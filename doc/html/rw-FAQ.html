@@ -1,7 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<!-- Created by GNU Texinfo 7.0.2, https://www.gnu.org/software/texinfo/ -->
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <title>R for Windows FAQ</title>
 
 <meta name="description" content="R for Windows FAQ">
@@ -9,36 +10,22 @@
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
 <meta name="Generator" content="texi2any">
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
 <link href="#Top" rel="start" title="Top">
 <link href="#SEC_Contents" rel="contents" title="Table of Contents">
 <link href="dir.html#Top" rel="up" title="(dir)">
+<link href="#Introduction" rel="next" title="Introduction">
+<link href="dir.html#Top" rel="prev" title="(dir)">
 <style type="text/css">
 <!--
-a.summary-letter {text-decoration: none}
-blockquote.smallquotation {font-size: smaller}
 div.display {margin-left: 3.2em}
 div.example {margin-left: 3.2em}
-div.indentedblock {margin-left: 3.2em}
-div.lisp {margin-left: 3.2em}
-div.smalldisplay {margin-left: 3.2em}
-div.smallexample {margin-left: 3.2em}
-div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
-div.smalllisp {margin-left: 3.2em}
-kbd {font-style:oblique}
-pre.display {font-family: inherit}
-pre.format {font-family: inherit}
-pre.menu-comment {font-family: serif}
-pre.menu-preformatted {font-family: serif}
-pre.smalldisplay {font-family: inherit; font-size: smaller}
-pre.smallexample {font-size: smaller}
-pre.smallformat {font-family: inherit; font-size: smaller}
-pre.smalllisp {font-size: smaller}
-span.nocodebreak {white-space:nowrap}
-span.nolinebreak {white-space:nowrap}
-span.roman {font-family:serif; font-weight:normal}
-span.sansserif {font-family:sans-serif; font-weight:normal}
-ul.no-bullet {list-style: none}
+kbd.kbd {font-style: oblique}
+kbd.key {font-style: normal}
+pre.display-preformatted {font-family: inherit}
+ul.mark-bullet {list-style-type: disc}
+ul.toc-numbered-mark {list-style: none}
 body {
     margin-left: 5%;
     margin-right: 5%;
@@ -108,272 +95,319 @@ p {
     margin-bottom: 1.2ex;
 }
 
+#Top > .header, #Top > h1 {     /* for Texinfo 6.8 */
+    display: none
+}
+
 -->
 </style>
 
 
 </head>
 
-<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
-<h1 class="settitle" align="center">R for Windows FAQ</h1>
+<body lang="en">
 
 
 
 
 
-<h2>Version for <tt>R-4.0.3</tt></h2>
-<address>B. D. Ripley and D. J. Murdoch</address>
+<h2>Version for <tt>R-4.3.0</tt></h2>
+<address>B. D. Ripley and D. J. Murdoch, updates by T. Kalibera</address>
 <hr>
 
-<a name="SEC_Contents"></a>
+
+
+
+
+<div class="top-level-extent" id="Top">
+<h1 class="top" id="R-for-Windows-FAQ">R for Windows FAQ</h1>
+
+
+
+<hr>
+<div class="element-contents" id="SEC_Contents">
 <h2 class="contents-heading">Table of Contents</h2>
 
 <div class="contents">
-<ul class="no-bullet">
-<li><a name="toc-Introduction-1" href="#Introduction">1 Introduction</a></li>
-<li><a name="toc-Installation-and-Usage-1" href="#Installation-and-Usage">2 Installation and Usage</a>
-<ul class="no-bullet">
-  <li><a name="toc-Where-can-I-find-the-latest-version_003f-1" href="#Where-can-I-find-the-latest-version_003f">2.1 Where can I find the latest version?</a></li>
-  <li><a name="toc-How-do-I-install-R-for-Windows_003f-1" href="#How-do-I-install-R-for-Windows_003f">2.2 How do I install R for Windows?</a></li>
-  <li><a name="toc-How-do-I-check-an-installation-is-not-corrupt_003f" href="#How-do-I-check-an-installation_003f">2.3 How do I check an installation is not corrupt?</a></li>
-  <li><a name="toc-Can-I-customize-the-installation_003f-1" href="#Can-I-customize-the-installation_003f">2.4 Can I customize the installation?</a></li>
-  <li><a name="toc-How-do-I-run-it_003f-1" href="#How-do-I-run-it_003f">2.5 How do I run it?</a></li>
-  <li><a name="toc-Can-I-run-R-from-a-CD-or-USB-drive_003f-1" href="#Can-I-run-R-from-a-CD-or-USB-drive_003f">2.6 Can I run R from a CD or USB drive?</a></li>
-  <li><a name="toc-How-do-I-UNinstall-R_003f-1" href="#How-do-I-UNinstall-R_003f">2.7 How do I UNinstall R?</a></li>
-  <li><a name="toc-What_0027s-the-best-way-to-upgrade_003f-1" href="#What_0027s-the-best-way-to-upgrade_003f">2.8 What&rsquo;s the best way to upgrade?</a></li>
-  <li><a name="toc-There-seems-to-be-a-limit-on-the-memory-it-uses_0021-1" href="#There-seems-to-be-a-limit-on-the-memory-it-uses_0021">2.9 There seems to be a limit on the memory it uses!</a></li>
-  <li><a name="toc-How-can-I-keep-workspaces-for-different-projects-in-different-directories_003f-1" href="#How-can-I-keep-workspaces-for-different-projects-in-different-directories_003f">2.10 How can I keep workspaces for different projects in different directories?</a></li>
-  <li><a name="toc-How-do-I-print-from-R_003f-1" href="#How-do-I-print-from-R_003f">2.11 How do I print from R?</a></li>
-  <li><a name="toc-Can-I-use-R-CMD-BATCH_003f-1" href="#Can-I-use-R-CMD-BATCH_003f">2.12 Can I use <code>R CMD BATCH</code>?</a></li>
-  <li><a name="toc-Can-I-use-R_002d4_002e0_002e3-with-ESS-and-Emacs_003f-1" href="#Can-I-use-R_002d4_002e0_002e3-with-ESS-and-Emacs_003f">2.13 Can I use R-4.0.3 with ESS and Emacs?</a></li>
-  <li><a name="toc-What-are-HOME-and-working-directories_003f-1" href="#What-are-HOME-and-working-directories_003f">2.14 What are HOME and working directories?</a></li>
-  <li><a name="toc-How-do-I-set-environment-variables_003f-1" href="#How-do-I-set-environment-variables_003f">2.15 How do I set environment variables?</a></li>
-  <li><a name="toc-R-can_0027t-find-my-file_002c-but-I-know-it-is-there_0021" href="#R-can_0027t-find-my-file">2.16 R can&rsquo;t find my file, but I know it is there!</a></li>
-  <li><a name="toc-Does-R-use-the-Registry_003f-1" href="#Does-R-use-the-Registry_003f">2.17 Does R use the Registry?</a></li>
-  <li><a name="toc-Does-R-support-automation-_0028OLE_002c-COM_0029_003f" href="#Does-R-support-automation_003f">2.18 Does R support automation (OLE, COM)?</a></li>
-  <li><a name="toc-The-Internet-download-functions-fail_002e-1" href="#The-Internet-download-functions-fail_002e">2.19 The Internet download functions fail.</a></li>
-  <li><a name="toc-Entering-certain-characters-crashes-Rgui_002e-1" href="#Entering-certain-characters-crashes-Rgui_002e">2.20 Entering certain characters crashes Rgui.</a></li>
-  <li><a name="toc-What-does-_0027DLL-attempted-to-change-FPU-control-word_0027-mean_003f-1" href="#What-does-_0027DLL-attempted-to-change-FPU-control-word_0027-mean_003f">2.21 What does &rsquo;DLL attempted to change FPU control word&rsquo; mean?</a></li>
-  <li><a name="toc-Other-strange-crashes_002e-1" href="#Other-strange-crashes_002e">2.22 Other strange crashes.</a></li>
-  <li><a name="toc-Why-does-R-never-use-more-than-50_0025-of-my-CPU_003f-1" href="#Why-does-R-never-use-more-than-50_0025-of-my-CPU_003f">2.23 Why does R never use more than 50% of my CPU?</a></li>
-  <li><a name="toc-Does-R-run-under-Windows-Vista_002f7_002f8_002fServer-2008_003f" href="#Does-R-run-under-Windows-Vista_003f">2.24 Does R run under Windows Vista/7/8/Server 2008?</a></li>
-  <li><a name="toc-Quotes-don_0027t-come-out-right-on-the-console_002fterminal_002fpager_002e" href="#Quotes-don_0027t-come-out-right-on-the-console_002fterminal_002fpager">2.25 Quotes don&rsquo;t come out right on the console/terminal/pager.</a></li>
-  <li><a name="toc-There-is-no-tilde-on-my-keyboard_0021" href="#There-is-no-tilde-on-my-keyboard">2.26 There is no tilde on my keyboard!</a></li>
-  <li><a name="toc-Can-I-use-R-on-64_002dbit-Windows_003f-1" href="#Can-I-use-R-on-64_002dbit-Windows_003f">2.27 Can I use R on 64-bit Windows?</a></li>
-  <li><a name="toc-Should-I-run-32_002dbit-or-64_002dbit-R_003f-1" href="#Should-I-run-32_002dbit-or-64_002dbit-R_003f">2.28 Should I run 32-bit or 64-bit R?</a></li>
-  <li><a name="toc-Can-both-32_002d-and-64_002dbit-R-be-installed-on-the-same-machine_003f-1" href="#Can-both-32_002d-and-64_002dbit-R-be-installed-on-the-same-machine_003f">2.29 Can both 32- and 64-bit R be installed on the same machine?</a></li>
-  <li><a name="toc-Rcmd-is-not-found-in-my-PATH_0021-1" href="#Rcmd-is-not-found-in-my-PATH_0021">2.30 Rcmd is not found in my PATH!</a></li>
-</ul></li>
-<li><a name="toc-Languages-and-Internationalization-1" href="#Languages-and-Internationalization">3 Languages and Internationalization</a>
-<ul class="no-bullet">
-  <li><a name="toc-The-installer-does-not-offer-my-language_002e" href="#The-installer-does-not-offer-my-language">3.1 The installer does not offer my language.</a></li>
-  <li><a name="toc-I-want-R-in-English-_0028and-not-in-French_002fChinese_002f_002e_002e_002e_0029_0021" href="#I-want-R-in-English_0021">3.2 I want R in English (and not in French/Chinese/...)!</a></li>
-  <li><a name="toc-I-want-to-run-R-in-Chinese_002fJapanese_002fKorean_002e" href="#I-want-to-run-R-in-Chinese_002fJapanese_002fKorean">3.3 I want to run R in Chinese/Japanese/Korean.</a></li>
-  <li><a name="toc-I-selected-English-for-installation-but-R-runs-in-Chinese_002e" href="#I-selected-English-for-installation-but-R-runs-in-Chinese">3.4 I selected English for installation but R runs in Chinese.</a></li>
-  <li><a name="toc-I-would-like-to-be-able-to-use-Japanese-fonts_002e" href="#I-would-like-to-be-able-to-use-Japanese-fonts">3.5 I would like to be able to use Japanese fonts.</a></li>
-  <li><a name="toc-I-don_0027t-see-characters-with-accents-at-the-R-console_002c-for-example-in-_003ftext_002e" href="#I-don_0027t-see-characters-with-accents-at-the-R-console">3.6 I don&rsquo;t see characters with accents at the R console, for example in ?text.</a></li>
-  <li><a name="toc-The-dialog-buttons-are-not-translated_002e" href="#The-dialog-buttons-are-not-translated">3.7 The dialog buttons are not translated.</a></li>
-</ul></li>
-<li><a name="toc-Packages-1" href="#Packages">4 Packages</a>
-<ul class="no-bullet">
-  <li><a name="toc-Can-I-install-packages-into-libraries-in-this-version_003f-1" href="#Can-I-install-packages-into-libraries-in-this-version_003f">4.1 Can I install packages into libraries in this version?</a></li>
-  <li><a name="toc-I-don_0027t-have-permission-to-write-to-the-R_002d4_002e0_002e3_005clibrary-directory_002e" href="#I-don_0027t-have-permission-to-write-to-the-R_002d4_002e0_002e3_005clibrary-directory">4.2 I don&rsquo;t have permission to write to the <samp>R-4.0.3\library</samp> directory.</a></li>
-  <li><a name="toc-The-packages-I-installed-do-not-appear-in-the-HTML-help-system_002e" href="#The-packages-I-installed-do-not-appear-in-the-HTML-help-system">4.3 The packages I installed do not appear in the HTML help system.</a></li>
-  <li><a name="toc-My-functions-are-not-found-by-the-HTML-help-search-system_002e-1" href="#My-functions-are-not-found-by-the-HTML-help-search-system_002e">4.4 My functions are not found by the HTML help search system.</a></li>
-  <li><a name="toc-Loading-a-package-fails_002e-1" href="#Loading-a-package-fails_002e">4.5 Loading a package fails.</a></li>
-  <li><a name="toc-Package-TclTk-does-not-work_002e-1" href="#Package-TclTk-does-not-work_002e">4.6 Package TclTk does not work.</a></li>
-  <li><a name="toc-Hyperlinks-in-HTML-sometimes-do-not-work_002e" href="#Hyperlinks-in-HTML-do-not-work_002e">4.7 Hyperlinks in HTML sometimes do not work.</a></li>
-  <li><a name="toc-update_002epackages_0028_0029-fails_002e" href="#update_002epackages_0028_0029-fails">4.8 <code>update.packages()</code> fails.</a></li>
-  <li><a name="toc-How-do-I-add-to-the-list-of-repositories_003f-1" href="#How-do-I-add-to-the-list-of-repositories_003f">4.9 How do I add to the list of repositories?</a></li>
-  <li><a name="toc-Help-is-not-shown-for-some-of-the-packages-1" href="#Help-is-not-shown-for-some-of-the-packages">4.10 Help is not shown for some of the packages</a></li>
-  <li><a name="toc-How-do-I-get-static-HTML-pages_003f-1" href="#How-do-I-get-static-HTML-pages_003f">4.11 How do I get static HTML pages?</a></li>
-  <li><a name="toc-How-can-I-get-a-binary-version-of-a-package_003f-1" href="#How-can-I-get-a-binary-version-of-a-package_003f">4.12 How can I get a binary version of a package?</a></li>
-  <li><a name="toc-Package-xxx-is-out-of-date-for-Windows-1" href="#Package-xxx-is-out-of-date-for-Windows">4.13 Package xxx is out of date for Windows</a></li>
-  <li><a name="toc-No-binary-packages-appear-to-be-available-for-my-version-of-R-1" href="#No-binary-packages-appear-to-be-available-for-my-version-of-R">4.14 No binary packages appear to be available for my version of R</a></li>
-  <li><a name="toc-How-do-I-build-my-package-for-both-32_002d-and-64_002dbit-R_003f-1" href="#How-do-I-build-my-package-for-both-32_002d-and-64_002dbit-R_003f">4.15 How do I build my package for both 32- and 64-bit R?</a></li>
-</ul></li>
-<li><a name="toc-Windows-Features-1" href="#Windows-Features">5 Windows Features</a>
-<ul class="no-bullet">
-  <li><a name="toc-What-should-I-expect-to-behave-differently-from-the-Unix-version-of-R_003f" href="#What-should-I-expect-to-behave-differently-from-the-Unix-version">5.1 What should I expect to behave differently from the Unix version of R?</a></li>
-  <li><a name="toc-I-hear-about-some-nifty-features_003a-please-tell-me-about-them_0021" href="#I-hear-about-some-nifty-features_002e">5.2 I hear about some nifty features: please tell me about them!</a></li>
-  <li><a name="toc-Circles-appear-as-ovals-on-screen_002e" href="#Circles-appear-as-ovals-on-screen">5.3 Circles appear as ovals on screen.</a></li>
-  <li><a name="toc-How-do-I-move-focus-to-a-graphics-window-or-the-console_003f-1" href="#How-do-I-move-focus-to-a-graphics-window-or-the-console_003f">5.4 How do I move focus to a graphics window or the console?</a></li>
-  <li><a name="toc-What-does-TAB-completion-do_003f-1" href="#What-does-TAB-completion-do_003f">5.5 What does TAB completion do?</a></li>
-</ul></li>
-<li><a name="toc-Workspaces-1" href="#Workspaces">6 Workspaces</a>
-<ul class="no-bullet">
-  <li><a name="toc-My-workspace-gets-saved-in-a-strange-place_003a-how-do-I-stop-this_003f" href="#My-workspace-gets-saved-in-a-strange-place_002e-How-do-I-stop-this_003f">6.1 My workspace gets saved in a strange place: how do I stop this?</a></li>
-  <li><a name="toc-How-do-I-store-my-workspace-in-a-different-place_003f-1" href="#How-do-I-store-my-workspace-in-a-different-place_003f">6.2 How do I store my workspace in a different place?</a></li>
-  <li><a name="toc-Can-I-load-workspaces-saved-under-Unix_002fGNU_002dLinux-or-Mac-macOS_003f" href="#Can-I-load-workspaces-saved-under-Unix_002fGNU_002dLinux-or-macOS_003f">6.3 Can I load workspaces saved under Unix/GNU-Linux or Mac macOS?</a></li>
-</ul></li>
-<li><a name="toc-The-R-Console-1" href="#The-R-Console">7 The R Console</a>
-<ul class="no-bullet">
-  <li><a name="toc-When-using-Rgui-the-output-to-the-console-seems-to-be-delayed_002e" href="#The-output-to-the-console-seems-to-be-delayed">7.1 When using Rgui the output to the console seems to be delayed.</a></li>
-  <li><a name="toc-Long-lines-in-the-console-or-pager-are-truncated_002e" href="#Long-lines-seem-to-be-truncated_002e">7.2 Long lines in the console or pager are truncated.</a></li>
-</ul></li>
-<li><a name="toc-Building-from-Source-1" href="#Building-from-Source">8 Building from Source</a>
-<ul class="no-bullet">
-  <li><a name="toc-How-can-I-compile-R-from-source_003f-1" href="#How-can-I-compile-R-from-source_003f">8.1 How can I compile R from source?</a></li>
-  <li><a name="toc-Can-I-use-a-fast-BLAS_003f-1" href="#Can-I-use-a-fast-BLAS_003f">8.2 Can I use a fast BLAS?</a></li>
-  <li><a name="toc-How-do-I-include-compiled-C-code_003f-1" href="#How-do-I-include-compiled-C-code_003f">8.3 How do I include compiled C code?</a></li>
-  <li><a name="toc-How-do-I-debug-code-that-I-have-compiled-and-dyn_002eload_002ded_003f-1" href="#How-do-I-debug-code-that-I-have-compiled-and-dyn_002eload_002ded_003f">8.4 How do I debug code that I have compiled and dyn.load-ed?</a></li>
-  <li><a name="toc-How-do-I-include-C_002b_002b-code_003f-1" href="#How-do-I-include-C_002b_002b-code_003f">8.5 How do I include C++ code?</a></li>
-  <li><a name="toc-The-output-from-my-C-code-disappears_002e-Why_003f" href="#The-output-from-my-C-code-disappears_002e">8.6 The output from my C code disappears.  Why?</a></li>
-  <li><a name="toc-The-output-from-my-Fortran-code-disappears_002e-Why_003f" href="#The-output-from-my-Fortran-code-disappears_002e">8.7 The output from my Fortran code disappears.  Why?</a></li>
-  <li><a name="toc-The-console-freezes-when-my-compiled-code-is-running_002e" href="#The-console-freezes-when-my-compiled-code-is-running">8.8 The console freezes when my compiled code is running.</a></li>
-</ul></li>
 
+<ul class="toc-numbered-mark">
+  <li><a id="toc-Introduction-1" href="#Introduction">1 Introduction</a></li>
+  <li><a id="toc-Installation-and-Usage-1" href="#Installation-and-Usage">2 Installation and Usage</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Where-can-I-find-the-latest-version_003f-1" href="#Where-can-I-find-the-latest-version_003f">2.1 Where can I find the latest version?</a></li>
+    <li><a id="toc-How-do-I-install-R-for-Windows_003f-1" href="#How-do-I-install-R-for-Windows_003f">2.2 How do I install R for Windows?</a></li>
+    <li><a id="toc-How-do-I-check-an-installation-is-not-corrupt_003f" href="#How-do-I-check-an-installation_003f">2.3 How do I check an installation is not corrupt?</a></li>
+    <li><a id="toc-Can-I-customize-the-installation_003f-1" href="#Can-I-customize-the-installation_003f">2.4 Can I customize the installation?</a></li>
+    <li><a id="toc-How-do-I-run-it_003f-1" href="#How-do-I-run-it_003f">2.5 How do I run it?</a></li>
+    <li><a id="toc-Can-I-run-R-from-a-CD-or-USB-drive_003f-1" href="#Can-I-run-R-from-a-CD-or-USB-drive_003f">2.6 Can I run R from a CD or USB drive?</a></li>
+    <li><a id="toc-How-do-I-UNinstall-R_003f-1" href="#How-do-I-UNinstall-R_003f">2.7 How do I UNinstall R?</a></li>
+    <li><a id="toc-What_0027s-the-best-way-to-upgrade_003f-1" href="#What_0027s-the-best-way-to-upgrade_003f">2.8 What&rsquo;s the best way to upgrade?</a></li>
+    <li><a id="toc-How-can-I-keep-workspaces-for-different-projects-in-different-directories_003f-1" href="#How-can-I-keep-workspaces-for-different-projects-in-different-directories_003f">2.9 How can I keep workspaces for different projects in different directories?</a></li>
+    <li><a id="toc-How-do-I-print-from-R_003f-1" href="#How-do-I-print-from-R_003f">2.10 How do I print from R?</a></li>
+    <li><a id="toc-Can-I-use-R-CMD-BATCH_003f-1" href="#Can-I-use-R-CMD-BATCH_003f">2.11 Can I use <code class="code">R CMD BATCH</code>?</a></li>
+    <li><a id="toc-Can-I-use-R_002d4_002e3_002e0-with-ESS-and-Emacs_003f-1" href="#Can-I-use-R_002d4_002e3_002e0-with-ESS-and-Emacs_003f">2.12 Can I use R-4.3.0 with ESS and Emacs?</a></li>
+    <li><a id="toc-What-are-HOME-and-working-directories_003f-1" href="#What-are-HOME-and-working-directories_003f">2.13 What are HOME and working directories?</a></li>
+    <li><a id="toc-How-do-I-set-environment-variables_003f-1" href="#How-do-I-set-environment-variables_003f">2.14 How do I set environment variables?</a></li>
+    <li><a id="toc-R-can_0027t-find-my-file_002c-but-I-know-it-is-there_0021" href="#R-can_0027t-find-my-file">2.15 R can&rsquo;t find my file, but I know it is there!</a></li>
+    <li><a id="toc-Does-R-use-the-Registry_003f-1" href="#Does-R-use-the-Registry_003f">2.16 Does R use the Registry?</a></li>
+    <li><a id="toc-Does-R-support-automation-_0028OLE_002c-COM_0029_003f" href="#Does-R-support-automation_003f">2.17 Does R support automation (OLE, COM)?</a></li>
+    <li><a id="toc-The-Internet-download-functions-fail_002e-1" href="#The-Internet-download-functions-fail_002e">2.18 The Internet download functions fail.</a></li>
+    <li><a id="toc-Entering-certain-characters-crashes-Rgui_002e-1" href="#Entering-certain-characters-crashes-Rgui_002e">2.19 Entering certain characters crashes Rgui.</a></li>
+    <li><a id="toc-What-does-_0027DLL-attempted-to-change-FPU-control-word_0027-mean_003f-1" href="#What-does-_0027DLL-attempted-to-change-FPU-control-word_0027-mean_003f">2.20 What does &rsquo;DLL attempted to change FPU control word&rsquo; mean?</a></li>
+    <li><a id="toc-Other-strange-crashes_002e-1" href="#Other-strange-crashes_002e">2.21 Other strange crashes.</a></li>
+    <li><a id="toc-Why-does-R-never-use-more-than-50_0025-of-my-CPU_003f-1" href="#Why-does-R-never-use-more-than-50_0025-of-my-CPU_003f">2.22 Why does R never use more than 50% of my CPU?</a></li>
+    <li><a id="toc-Does-R-run-under-Windows-7_002f8_002f10_002f11_002fServer-2012_002f2016_002f2022_003f" href="#Does-R-run-under-Windows-7_003f">2.23 Does R run under Windows 7/8/10/11/Server 2012/2016/2022?</a></li>
+    <li><a id="toc-Quotes-don_0027t-come-out-right-on-the-console_002fterminal_002fpager_002e" href="#Quotes-don_0027t-come-out-right-on-the-console_002fterminal_002fpager">2.24 Quotes don&rsquo;t come out right on the console/terminal/pager.</a></li>
+    <li><a id="toc-There-is-no-tilde-on-my-keyboard_0021" href="#There-is-no-tilde-on-my-keyboard">2.25 There is no tilde on my keyboard!</a></li>
+    <li><a id="toc-Can-I-use-R-on-64_002dbit-Windows_003f-1" href="#Can-I-use-R-on-64_002dbit-Windows_003f">2.26 Can I use R on 64-bit Windows?</a></li>
+    <li><a id="toc-Should-I-run-32_002dbit-or-64_002dbit-R_003f-1" href="#Should-I-run-32_002dbit-or-64_002dbit-R_003f">2.27 Should I run 32-bit or 64-bit R?</a></li>
+    <li><a id="toc-Can-both-32_002d-and-64_002dbit-R-be-installed-on-the-same-machine_003f-1" href="#Can-both-32_002d-and-64_002dbit-R-be-installed-on-the-same-machine_003f">2.28 Can both 32- and 64-bit R be installed on the same machine?</a></li>
+    <li><a id="toc-Rcmd-is-not-found-in-my-PATH_0021-1" href="#Rcmd-is-not-found-in-my-PATH_0021">2.29 Rcmd is not found in my PATH!</a></li>
+  </ul></li>
+  <li><a id="toc-Languages-and-Internationalization-1" href="#Languages-and-Internationalization">3 Languages and Internationalization</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-The-installer-does-not-offer-my-language_002e" href="#The-installer-does-not-offer-my-language">3.1 The installer does not offer my language.</a></li>
+    <li><a id="toc-I-want-R-in-English-_0028and-not-in-French_002fChinese_002f_002e_002e_002e_0029_0021" href="#I-want-R-in-English_0021">3.2 I want R in English (and not in French/Chinese/...)!</a></li>
+    <li><a id="toc-I-want-to-run-R-in-Chinese_002fJapanese_002fKorean_002e" href="#I-want-to-run-R-in-Chinese_002fJapanese_002fKorean">3.3 I want to run R in Chinese/Japanese/Korean.</a></li>
+    <li><a id="toc-I-selected-English-for-installation-but-R-runs-in-Chinese_002e" href="#I-selected-English-for-installation-but-R-runs-in-Chinese">3.4 I selected English for installation but R runs in Chinese.</a></li>
+    <li><a id="toc-I-would-like-to-be-able-to-use-Japanese-fonts_002e" href="#I-would-like-to-be-able-to-use-Japanese-fonts">3.5 I would like to be able to use Japanese fonts.</a></li>
+    <li><a id="toc-I-don_0027t-see-characters-with-accents-at-the-R-console_002c-for-example-in-_003ftext_002e" href="#I-don_0027t-see-characters-with-accents-at-the-R-console">3.6 I don&rsquo;t see characters with accents at the R console, for example in ?text.</a></li>
+    <li><a id="toc-The-dialog-buttons-are-not-translated_002e" href="#The-dialog-buttons-are-not-translated">3.7 The dialog buttons are not translated.</a></li>
+  </ul></li>
+  <li><a id="toc-Packages-1" href="#Packages">4 Packages</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-Can-I-install-packages-into-libraries-in-this-version_003f-1" href="#Can-I-install-packages-into-libraries-in-this-version_003f">4.1 Can I install packages into libraries in this version?</a></li>
+    <li><a id="toc-I-don_0027t-have-permission-to-write-to-the-R_002d4_002e3_002e0_005clibrary-directory_002e" href="#I-don_0027t-have-permission-to-write-to-the-R_002d4_002e3_002e0_005clibrary-directory">4.2 I don&rsquo;t have permission to write to the <samp class="file">R-4.3.0\library</samp> directory.</a></li>
+    <li><a id="toc-The-packages-I-installed-do-not-appear-in-the-HTML-help-system_002e" href="#The-packages-I-installed-do-not-appear-in-the-HTML-help-system">4.3 The packages I installed do not appear in the HTML help system.</a></li>
+    <li><a id="toc-My-functions-are-not-found-by-the-HTML-help-search-system_002e-1" href="#My-functions-are-not-found-by-the-HTML-help-search-system_002e">4.4 My functions are not found by the HTML help search system.</a></li>
+    <li><a id="toc-Loading-a-package-fails_002e-1" href="#Loading-a-package-fails_002e">4.5 Loading a package fails.</a></li>
+    <li><a id="toc-Package-TclTk-does-not-work_002e-1" href="#Package-TclTk-does-not-work_002e">4.6 Package TclTk does not work.</a></li>
+    <li><a id="toc-Hyperlinks-in-HTML-sometimes-do-not-work_002e" href="#Hyperlinks-in-HTML-do-not-work_002e">4.7 Hyperlinks in HTML sometimes do not work.</a></li>
+    <li><a id="toc-update_002epackages_0028_0029-fails_002e" href="#update_002epackages_0028_0029-fails">4.8 <code class="code">update.packages()</code> fails.</a></li>
+    <li><a id="toc-How-do-I-add-to-the-list-of-repositories_003f-1" href="#How-do-I-add-to-the-list-of-repositories_003f">4.9 How do I add to the list of repositories?</a></li>
+    <li><a id="toc-Help-is-not-shown-for-some-of-the-packages-1" href="#Help-is-not-shown-for-some-of-the-packages">4.10 Help is not shown for some of the packages</a></li>
+    <li><a id="toc-How-do-I-get-static-HTML-pages_003f-1" href="#How-do-I-get-static-HTML-pages_003f">4.11 How do I get static HTML pages?</a></li>
+    <li><a id="toc-How-can-I-get-a-binary-version-of-a-package_003f-1" href="#How-can-I-get-a-binary-version-of-a-package_003f">4.12 How can I get a binary version of a package?</a></li>
+    <li><a id="toc-Package-xxx-is-out-of-date-for-Windows-1" href="#Package-xxx-is-out-of-date-for-Windows">4.13 Package xxx is out of date for Windows</a></li>
+    <li><a id="toc-No-binary-packages-appear-to-be-available-for-my-version-of-R-1" href="#No-binary-packages-appear-to-be-available-for-my-version-of-R">4.14 No binary packages appear to be available for my version of R</a></li>
+    <li><a id="toc-How-do-I-build-my-package-for-both-32_002d-and-64_002dbit-R_003f-1" href="#How-do-I-build-my-package-for-both-32_002d-and-64_002dbit-R_003f">4.15 How do I build my package for both 32- and 64-bit R?</a></li>
+  </ul></li>
+  <li><a id="toc-Windows-Features-1" href="#Windows-Features">5 Windows Features</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-What-should-I-expect-to-behave-differently-from-the-Unix-version-of-R_003f" href="#What-should-I-expect-to-behave-differently-from-the-Unix-version">5.1 What should I expect to behave differently from the Unix version of R?</a></li>
+    <li><a id="toc-I-hear-about-some-nifty-features_003a-please-tell-me-about-them_0021" href="#I-hear-about-some-nifty-features_002e">5.2 I hear about some nifty features: please tell me about them!</a></li>
+    <li><a id="toc-Circles-appear-as-ovals-on-screen_002e" href="#Circles-appear-as-ovals-on-screen">5.3 Circles appear as ovals on screen.</a></li>
+    <li><a id="toc-How-do-I-move-focus-to-a-graphics-window-or-the-console_003f-1" href="#How-do-I-move-focus-to-a-graphics-window-or-the-console_003f">5.4 How do I move focus to a graphics window or the console?</a></li>
+    <li><a id="toc-What-does-TAB-completion-do_003f-1" href="#What-does-TAB-completion-do_003f">5.5 What does TAB completion do?</a></li>
+  </ul></li>
+  <li><a id="toc-Workspaces-1" href="#Workspaces">6 Workspaces</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-My-workspace-gets-saved-in-a-strange-place_003a-how-do-I-stop-this_003f" href="#My-workspace-gets-saved-in-a-strange-place_002e-How-do-I-stop-this_003f">6.1 My workspace gets saved in a strange place: how do I stop this?</a></li>
+    <li><a id="toc-How-do-I-store-my-workspace-in-a-different-place_003f-1" href="#How-do-I-store-my-workspace-in-a-different-place_003f">6.2 How do I store my workspace in a different place?</a></li>
+    <li><a id="toc-Can-I-load-workspaces-saved-under-Unix_002fGNU_002dLinux-or-Mac-macOS_003f" href="#Can-I-load-workspaces-saved-under-Unix_002fGNU_002dLinux-or-macOS_003f">6.3 Can I load workspaces saved under Unix/GNU-Linux or Mac macOS?</a></li>
+  </ul></li>
+  <li><a id="toc-The-R-Console-1" href="#The-R-Console">7 The R Console</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-When-using-Rgui-the-output-to-the-console-seems-to-be-delayed_002e" href="#The-output-to-the-console-seems-to-be-delayed">7.1 When using Rgui the output to the console seems to be delayed.</a></li>
+    <li><a id="toc-Long-lines-in-the-console-or-pager-are-truncated_002e" href="#Long-lines-seem-to-be-truncated_002e">7.2 Long lines in the console or pager are truncated.</a></li>
+  </ul></li>
+  <li><a id="toc-Building-from-Source-1" href="#Building-from-Source">8 Building from Source</a>
+  <ul class="toc-numbered-mark">
+    <li><a id="toc-How-can-I-compile-R-from-source_003f-1" href="#How-can-I-compile-R-from-source_003f">8.1 How can I compile R from source?</a></li>
+    <li><a id="toc-Can-I-use-a-fast-BLAS_003f-1" href="#Can-I-use-a-fast-BLAS_003f">8.2 Can I use a fast BLAS?</a></li>
+    <li><a id="toc-How-do-I-include-compiled-C-code_003f-1" href="#How-do-I-include-compiled-C-code_003f">8.3 How do I include compiled C code?</a></li>
+    <li><a id="toc-How-do-I-debug-code-that-I-have-compiled-and-dyn_002eload_002ded_003f-1" href="#How-do-I-debug-code-that-I-have-compiled-and-dyn_002eload_002ded_003f">8.4 How do I debug code that I have compiled and dyn.load-ed?</a></li>
+    <li><a id="toc-How-do-I-include-C_002b_002b-code_003f-1" href="#How-do-I-include-C_002b_002b-code_003f">8.5 How do I include C++ code?</a></li>
+    <li><a id="toc-The-output-from-my-C-code-disappears_002e-Why_003f" href="#The-output-from-my-C-code-disappears_002e">8.6 The output from my C code disappears.  Why?</a></li>
+    <li><a id="toc-The-output-from-my-Fortran-code-disappears_002e-Why_003f" href="#The-output-from-my-Fortran-code-disappears_002e">8.7 The output from my Fortran code disappears.  Why?</a></li>
+    <li><a id="toc-The-console-freezes-when-my-compiled-code-is-running_002e" href="#The-console-freezes-when-my-compiled-code-is-running">8.8 The console freezes when my compiled code is running.</a></li>
+  </ul></li>
 </ul>
 </div>
-
-
-
-
-<a name="Top"></a>
-<h1 class="node-heading">Top</h1>
-
-
-
-<hr><hr>
-<a name="Introduction"></a>
-<a name="Introduction-1"></a>
-<h2 class="chapter">1 Introduction</h2>
+</div>
+<hr>
+<div class="chapter-level-extent" id="Introduction">
+<h2 class="chapter" id="Introduction-1">1 Introduction</h2>
 
 <p>This FAQ is for the Windows port of R: it describes features specific to
 that version.  The main R FAQ can be found at
 </p>
 <div class="display">
-<pre class="display"><a href="https://CRAN.R-project.org/doc/FAQ/R-FAQ.html">https://CRAN.R-project.org/doc/FAQ/R-FAQ.html</a>.
+<pre class="display-preformatted"><a class="uref" href="https://CRAN.R-project.org/doc/FAQ/R-FAQ.html">https://CRAN.R-project.org/doc/FAQ/R-FAQ.html</a>.
 </pre></div>
 
 <p>The information here applies only to recent versions of R for Windows.
-It is biased towards users of 64-bit Windows.
+It is biased towards users of 64-bit Windows and since R 4.2.0, only 64-bit
+builds of R are provided.
 </p>
 
-<hr><hr>
-<a name="Installation-and-Usage"></a>
-<a name="Installation-and-Usage-1"></a>
-<h2 class="chapter">2 Installation and Usage</h2>
+<hr>
+<hr>
+</div>
+<div class="chapter-level-extent" id="Installation-and-Usage">
+<h2 class="chapter" id="Installation-and-Usage-1">2 Installation and Usage</h2>
 
 
 
 <hr>
-<a name="Where-can-I-find-the-latest-version_003f"></a>
-<a name="Where-can-I-find-the-latest-version_003f-1"></a>
-<h3 class="section">2.1 Where can I find the latest version?</h3>
+<div class="section-level-extent" id="Where-can-I-find-the-latest-version_003f">
+<h3 class="section" id="Where-can-I-find-the-latest-version_003f-1">2.1 Where can I find the latest version?</h3>
 
-<p>Go to any CRAN site (see <a href="https://cran.r-project.org/mirrors.html">https://cran.r-project.org/mirrors.html</a>
-for a list), navigate to the <samp>bin/windows/base</samp> directory and
+<p>Go to any CRAN site (see <a class="uref" href="https://CRAN.R-project.org/mirrors.html">https://CRAN.R-project.org/mirrors.html</a>
+for a list), navigate to the <samp class="file">bin/windows/base</samp> directory and
 collect the file(s) you need.  The current release is distributed as an
-installer &lsquo;<samp>R-4.0.3-win.exe</samp>&rsquo; of about 65MB.
+installer &lsquo;<samp class="samp">R-4.3.0-win.exe</samp>&rsquo; of about 80MB.
 </p>
-<p>There are also links on that page to the &lsquo;<samp>r-patched</samp>&rsquo; and
-&lsquo;<samp>r-devel</samp>&rsquo; snapshots.  These are frequently updated builds of
-development versions of R.  The &lsquo;<samp>r-patched</samp>&rsquo; build includes bug
-fixes to the current release, and &lsquo;<samp>r-devel</samp>&rsquo; contains these as well
+<p>There are also links on that page to the &lsquo;<samp class="samp">r-patched</samp>&rsquo; and
+&lsquo;<samp class="samp">r-devel</samp>&rsquo; snapshots.  These are frequently updated builds of
+development versions of R.  The &lsquo;<samp class="samp">r-patched</samp>&rsquo; build includes bug
+fixes to the current release, and &lsquo;<samp class="samp">r-devel</samp>&rsquo; contains these as well
 as changes that are planned to eventually make it into the next
-&lsquo;<samp>x.y.0</samp>&rsquo; release.
+&lsquo;<samp class="samp">x.y.0</samp>&rsquo; release. &lsquo;<samp class="samp">r-devel</samp>&rsquo; is less stable and likely to contain
+bugs, be careful if you use it.
 </p>
 <hr>
-<a name="How-do-I-install-R-for-Windows_003f"></a>
-<a name="How-do-I-install-R-for-Windows_003f-1"></a>
-<h3 class="section">2.2 How do I install R for Windows?</h3>
+</div>
+<div class="section-level-extent" id="How-do-I-install-R-for-Windows_003f">
+<h3 class="section" id="How-do-I-install-R-for-Windows_003f-1">2.2 How do I install R for Windows?</h3>
 
-<p>Current binary versions of R are known to run on Windows 7 or later,
-including on 64-bit versions: See <a href="#Can-I-use-R-on-64_002dbit-Windows_003f">Can I use R on 64-bit Windows?</a>.
-Windows XP is no longer supported.
+<p>Current binary versions of R are known to run on Windows 7 or later. R 4.1
+is the last version that supported 32-bit versions: See <a class="xref" href="#Can-I-use-R-on-64_002dbit-Windows_003f">Can I use R on 64-bit Windows?</a>.
+Windows Vista is no longer supported.
+</p>
+<p>R 4.2.0 and later require the Universal C Runtime (UCRT), which is included in
+Windows 10 and Windows Server 2016 or newer. On earlier versions of Windows,
+UCRT has to be installed before installing R. UCRT is available for Windows since
+Windows Vista SP2 and Windows Server 2008 SP2. 
 </p>
 
-<p>We only test on versions of Windows currently supported by Microsoft,
-mainly 64-bit Windows 7, Windows Server 2008 and Windows 10.
+<p>We primarily test on versions of Windows currently supported by Microsoft,
+recently mainly Windows 10, Windows Server 2022 and sometimes on Windows 11. 
+The most thorough testing is done via CRAN packages checks: for R 4.3 this
+has been on Windows Server 2022.  R 4.3.0 has been tested to install, start
+and pass its own checks also on Windows 7 and Windows 8.1, but it has not
+been tested with contributed packages.
+</p>
+<p>For UTF-8 to be the native encoding, you need R at least 4.2 and at least
+Windows 10 (version 1903) on desktop systems, Windows Server 2022 on
+long-term support server systems or Windows Server 1903 from the semi-annual
+channel.
 </p>
 <p>Your file system must allow case-honouring long file names (as is likely
 except perhaps for some network-mounted systems).  An installation takes
-up to 150MB of disk space.
+up to 175MB of disk space.
 </p>
-<p>If you want to be able to build packages from sources, we recommend that
-you choose an installation path not containing spaces.  (Using a path
-with spaces in will probably work, but is little-tested.)  Users
-installing for a single user using an account with administrator
-rights<a name="DOCF1" href="#FOOT1"><sup>1</sup></a> should consider
-installing into a non-system area (such as <samp>C:\R</samp>).  Installing to
-a network share (a filepath starting with <code>\\machine\...</code>) is not
-supported: such paths will need to mapped to a network drive.
+<p>We tried to make R to work with space in file names, but building of some
+packages from source may not work as this is little tested.  By default,
+most versions of Windows have short names (aka 8dot3names) enabled by
+default on the system drive, and hence <samp class="file">Program Files</samp> folder has a
+short-name variant &lsquo;<samp class="samp">PROGRA~1</samp>&rsquo;, which is then used by R.  When R is
+installed on a different drive, we recommend that you ensure that the short
+name is available or choose an installation directory name without space,
+such as <samp class="file">D:\R</samp>.  You can check whether the short name is available from
+R by <code class="code">shortPathName(R.home())</code> or by <code class="command">dir /X</code> from the
+&lsquo;<samp class="samp">Command Prompt</samp>&rsquo;.  If it is not, you may create it using
+<code class="command">fsutil</code>, e.g.
+<code class="command">fsutil file setshortname &quot;Program Files&quot; PROGRA~1</code> and
+<code class="command">fsutil file setshortname &quot;Program Files (x86)&quot; PROGRA~2</code>. This may
+also be needed by some other applications used from R packages.
+We have come across Windows Server 2022 docker container images with short
+names disabled even on the system drive.
 </p>
-<p>To install use &lsquo;<samp>R-4.0.3-win.exe</samp>&rsquo;.  Just double-click on the icon
+<p>Installing to
+a network share (a filepath starting with <code class="code">\\machine\...</code>) is not
+supported: such paths will need to be mapped to a network drive.
+</p>
+<p>To install use &lsquo;<samp class="samp">R-4.3.0-win.exe</samp>&rsquo;.  Just double-click on the icon
 and follow the instructions.  If you have an account with Administrator
-privileges you will be able to install R in the <samp>Program Files</samp>
+privileges you will be able to install R in the <samp class="file">Program Files</samp>
 area and to set all the optional registry entries; otherwise you will
-only be able to install R in your own file area.  You may need to
+only be able to install R in your own file area.  Since R 4.2.0, the default
+location in that case is the User Program Files folder (typically
+<samp class="file">${LOCALAPPDATA}\Programs</samp>, so e.g.
+<samp class="file">C:\Users\username\AppData\Local\Programs</samp>). Prior to R 4.2.0, the
+default location was the Windows &quot;personal&quot; directory  (typically
+<samp class="file">C:\Users\username\Documents</samp>). Once R is installed, one may open the
+installation directory in explorer using <code class="code">shell.exec(R.home())</code>.
+</p>
+<p>You may need to
 confirm that you want to proceed with installing a program from an
 &lsquo;unknown&rsquo; or &lsquo;unidentified&rsquo; publisher.
 </p>
-<p>After installation you should choose a working directory for R.  You
-will have a shortcut to <samp>Rgui.exe</samp> on your desktop and/or somewhere
+<p>After installation you may choose a working directory for R. By default,
+it is the Windows &quot;personal&quot; directory  (typically 
+<samp class="file">C:\Users\username\Documents</samp>). You
+will have a shortcut to <samp class="file">Rgui.exe</samp> on your desktop and/or somewhere
 on the Start menu file tree, and perhaps also in the Quick Launch part
 of the taskbar (Vista and earlier).  Right-click each shortcut, select
 Properties... and change the &lsquo;Start in&rsquo; field to your working directory.
+Also, you need to remove the argument <code class="code">--cd-to-userdocs</code> in the Target
+field, which implements the default behavior.
 (If your account was not the one used for installation, you may need to
-copy the shortcut before editing it.)
+copy the shortcut before editing it.) 
 </p>
-<p>On some systems you will have two shortcuts, one for 32-bit with a label
-starting <code>R i386</code> and one for 64-bit starting <code>R x64</code>
-(see <a href="#Should-I-run-32_002dbit-or-64_002dbit-R_003f">Should I run 32-bit or 64-bit R?</a>)
+<p>On some systems with R prior to 4.2 you will have two shortcuts, one for
+32-bit with a label starting <code class="code">R i386</code> and one for 64-bit starting
+<code class="code">R x64</code> (see <a class="pxref" href="#Should-I-run-32_002dbit-or-64_002dbit-R_003f">Should I run 32-bit or 64-bit R?</a>)
 </p>
 <p>You may also want to add command-line arguments at the end of the
-Target field (<em>after</em> any final double quote, and separated by a
-space), for example <code>--sdi --max-mem-size=1G</code>.  You can also set
+Target field (<em class="emph">after</em> any final double quote, and separated by a
+space), for example <code class="code">--sdi --no-environ</code>.  You can also set
 environment variables at the end of the Target field, for example
-<code>R_LIBS=p:/myRlib</code>, and if you want to ensure that menus and
-messages are in (American) English, <code>LANGUAGE=en</code>.
+<code class="code">R_LIBS=p:/myRlib</code>, and if you want to ensure that menus and
+messages are in (American) English, <code class="code">LANGUAGE=en</code>.
 </p>
 
 
 <hr>
-<a name="How-do-I-check-an-installation_003f"></a>
-<a name="How-do-I-check-an-installation-is-not-corrupt_003f"></a>
-<h3 class="section">2.3 How do I check an installation is not corrupt?</h3>
+</div>
+<div class="section-level-extent" id="How-do-I-check-an-installation_003f">
+<h3 class="section" id="How-do-I-check-an-installation-is-not-corrupt_003f">2.3 How do I check an installation is not corrupt?</h3>
 
 <p>Relates to earlier installers, removed in R 2.11.0.
 </p>
 <hr>
-<a name="Can-I-customize-the-installation_003f"></a>
-<a name="Can-I-customize-the-installation_003f-1"></a>
-<h3 class="section">2.4 Can I customize the installation?</h3>
+</div>
+<div class="section-level-extent" id="Can-I-customize-the-installation_003f">
+<h3 class="section" id="Can-I-customize-the-installation_003f-1">2.4 Can I customize the installation?</h3>
 
 <p>The normal way to customize the installation is by selecting components
 from the wizards shown by the installer.  However, sysadmins might like
 to install R from scripts, and the following command-line flags are
 available for use with the installer.
 </p>
-<dl compact="compact">
-<dt>&lsquo;<samp>/SILENT</samp>&rsquo;</dt>
+<dl class="table">
+<dt>&lsquo;<samp class="samp">/SILENT</samp>&rsquo;</dt>
 <dd><p>only show the installation progress window and error messages.
 </p></dd>
-<dt>&lsquo;<samp>/VERYSILENT</samp>&rsquo;</dt>
+<dt>&lsquo;<samp class="samp">/VERYSILENT</samp>&rsquo;</dt>
 <dd><p>only show error messages.
 </p></dd>
-<dt>&lsquo;<samp>/DIR=&quot;x:\dirname&quot;</samp>&rsquo;</dt>
+<dt>&lsquo;<samp class="samp">/DIR=&quot;x:\dirname&quot;</samp>&rsquo;</dt>
 <dd><p>set the default installation directory
 </p></dd>
-<dt>&lsquo;<samp>/GROUP=&quot;folder name&quot;</samp>&rsquo;</dt>
+<dt>&lsquo;<samp class="samp">/GROUP=&quot;folder name&quot;</samp>&rsquo;</dt>
 <dd><p>set the default Start-menu group name
 </p></dd>
-<dt>&lsquo;<samp>/COMPONENTS=&quot;comma separated list of component names&quot;</samp>&rsquo;</dt>
-<dd><p>set the initial list of components: Components are named &lsquo;<samp>main</samp>&rsquo;,
-&lsquo;<samp>i386</samp>&rsquo;, &lsquo;<samp>x64</samp>&rsquo; and &lsquo;<samp>translations</samp>&rsquo;.
+<dt>&lsquo;<samp class="samp">/COMPONENTS=&quot;comma separated list of component names&quot;</samp>&rsquo;</dt>
+<dd><p>set the initial list of components: Components are named &lsquo;<samp class="samp">main</samp>&rsquo;,
+&lsquo;<samp class="samp">i386</samp>&rsquo; (up to R 4.1), &lsquo;<samp class="samp">x64</samp>&rsquo; and &lsquo;<samp class="samp">translations</samp>&rsquo;.
+</p></dd>
+<dt>&lsquo;<samp class="samp">/CURRENTUSER</samp>&rsquo;</dt>
+<dd><p>install for the current user only even if the current user has Administrator
+privileges
 </p></dd>
 </dl>
 
 <p>It is also possible to save the settings used to a file and later
 reload those settings using
 </p>
-<dl compact="compact">
-<dt>&lsquo;<samp>/SAVEINF=&quot;filename&quot;</samp>&rsquo;</dt>
+<dl class="table">
+<dt>&lsquo;<samp class="samp">/SAVEINF=&quot;filename&quot;</samp>&rsquo;</dt>
 <dd><p>save the settings to the specified file.  Don&rsquo;t forget to use the quotes if
 the filename contains spaces.
 </p></dd>
-<dt>&lsquo;<samp>/LOADINF=&quot;filename&quot;</samp>&rsquo;</dt>
+<dt>&lsquo;<samp class="samp">/LOADINF=&quot;filename&quot;</samp>&rsquo;</dt>
 <dd><p>instructs the installer to load the settings from the specified file
 after having checked the command line.
 </p></dd>
@@ -381,16 +415,13 @@ after having checked the command line.
 
 <p>A successful installation has exit code 0: unsuccessful ones may give 1,
 2, 3, 4 or 5.  See the help for Inno Setup
-(<a href="http://jrsoftware.org/">http://jrsoftware.org/</a>) for details.
+(<a class="uref" href="https://jrsoftware.org/">https://jrsoftware.org/</a>) for details.
 </p>
-<p>We have some facilities for building a customized installer, in
-particular to add packages to the installer.  See the &lsquo;R Installation
-and Administration&rsquo; manual in the subsection &lsquo;Building the installers&rsquo;.
-</p>
+
 <hr>
-<a name="How-do-I-run-it_003f"></a>
-<a name="How-do-I-run-it_003f-1"></a>
-<h3 class="section">2.5 How do I run it?</h3>
+</div>
+<div class="section-level-extent" id="How-do-I-run-it_003f">
+<h3 class="section" id="How-do-I-run-it_003f-1">2.5 How do I run it?</h3>
 
 <p>Just double-click on the shortcut you prepared at installation.
 </p>
@@ -399,17 +430,17 @@ existing one and change the &lsquo;Start in&rsquo; field of the Properties.
 </p>
 <p>You may if you prefer run R from the command line of any shell you use,
 for example a &lsquo;Command Prompt&rsquo; or a port of a Unix shell such as
-<code>tcsh</code> or <code>bash</code>. (The command line can be anything you
+<code class="command">tcsh</code> or <code class="command">bash</code>. (The command line can be anything you
 would put in the Target field of a shortcut, and the starting directory
 will be the current working directory of the shell.  Note that the R
-executables are not by default added to the <code>PATH</code>.)  People running
-from a terminal usually prefer to run <code>Rterm.exe</code> and not
-<code>Rgui.exe</code>.
+executables are not by default added to the <code class="env">PATH</code>.)  People running
+from a terminal usually prefer to run <code class="command">Rterm.exe</code> and not
+<code class="command">Rgui.exe</code>.
 </p>
 <hr>
-<a name="Can-I-run-R-from-a-CD-or-USB-drive_003f"></a>
-<a name="Can-I-run-R-from-a-CD-or-USB-drive_003f-1"></a>
-<h3 class="section">2.6 Can I run R from a CD or USB drive?</h3>
+</div>
+<div class="section-level-extent" id="Can-I-run-R-from-a-CD-or-USB-drive_003f">
+<h3 class="section" id="Can-I-run-R-from-a-CD-or-USB-drive_003f-1">2.6 Can I run R from a CD or USB drive?</h3>
 
 <p>Yes, with care.  A basic R installation is relocatable, so you can burn
 an image of the R installation on your hard disc or install directly
@@ -423,320 +454,327 @@ without creating a shortcut starting in a writable folder.
 </p>
 
 <hr>
-<a name="How-do-I-UNinstall-R_003f"></a>
-<a name="How-do-I-UNinstall-R_003f-1"></a>
-<h3 class="section">2.7 How do I UNinstall R?</h3>
+</div>
+<div class="section-level-extent" id="How-do-I-UNinstall-R_003f">
+<h3 class="section" id="How-do-I-UNinstall-R_003f-1">2.7 How do I UNinstall R?</h3>
 
-<p>Normally you can do this from the &lsquo;<samp>Programs and Features</samp>&rsquo; group in
-the Control Panel.  If it does not appear there, run <samp>unins000.exe</samp>
+<p>Normally you can do this from the &lsquo;<samp class="samp">Programs and Features</samp>&rsquo; group in
+the Control Panel.  If it does not appear there, run <samp class="file">unins000.exe</samp>
 in the top-level installation directory.  On recent versions of Windows
 you may be asked to confirm that you wish to run a program from an
 &lsquo;unknown&rsquo; or &lsquo;unidentified&rsquo; publisher.
 </p>
 <p>Uninstalling R only removes files from the initial installation, not
-(for example) packages you have installed or updated.
+(for example) packages you have installed or updated in your personal
+library.
 </p>
 <p>If all else fails, you can just delete the whole directory in which R
 was installed.
 </p>
 
 <hr>
-<a name="What_0027s-the-best-way-to-upgrade_003f"></a>
-<a name="What_0027s-the-best-way-to-upgrade_003f-1"></a>
-<h3 class="section">2.8 What&rsquo;s the best way to upgrade?</h3>
+</div>
+<div class="section-level-extent" id="What_0027s-the-best-way-to-upgrade_003f">
+<h3 class="section" id="What_0027s-the-best-way-to-upgrade_003f-1">2.8 What&rsquo;s the best way to upgrade?</h3>
 
-<p>That&rsquo;s a matter of taste.  For most people the best thing to do is to
-uninstall R (see the previous Q), install the new version, copy any
-installed packages to the library folder in the new installation, run
-<code>update.packages(checkBuilt=TRUE, ask=FALSE)</code> in the new R and then
-delete anything left of the old installation.  Different versions of R
-are quite deliberately installed in parallel folders so you can keep old
-versions around if you wish.
+<p>That&rsquo;s a matter of taste. For most people the best thing to do is to
+uninstall R (see the previous Q), install the new version, and then handle
+the library.
 </p>
-<p>For those with a personal library (folder <samp>R\win-library\<var>x.y</var></samp>
-of your home directory, <samp>R\win64-library\<var>x.y</var></samp> on 64-bit
-builds), you will need to update that too when the minor version of R
-changes (e.g. from 4.0.2 to 4.1.0).  A simple way to do so is to
-copy (say) <samp>R\win-library\4.0</samp> to <samp>R\win-library\4.1</samp> before
-running <code>update.packages(checkBuilt=TRUE, ask=FALSE)</code>.
+<p>For those with a personal library (folder <samp class="file">R\win-library\<var class="var">x.y</var></samp> of
+your <samp class="file">${LOCALAPPDATA}</samp> directory in R since 4.2.0, or of your home
+directory with earlier versions of R), nothing has to be done when the
+major and minor version of R (<var class="var">x.y</var>) stays the same, but it may still be
+an opportunity to run <code class="code">update.packages(checkBuilt=TRUE, ask=FALSE)</code>.
 </p>
-
+<p>When the minor or even major version of R changes, one has to install all
+required packages again.  The new version of R will use a different location
+for the personal library and the old personal library will be left intact
+(it may be deleted manually when no longer needed).  Installed packages
+should not be copied from the old library to the new one, because they may
+be incompatible with the new version of R.
+</p>
 <hr>
-<a name="There-seems-to-be-a-limit-on-the-memory-it-uses_0021"></a>
-<a name="There-seems-to-be-a-limit-on-the-memory-it-uses_0021-1"></a>
-<h3 class="section">2.9 There seems to be a limit on the memory it uses!</h3>
-
-<p>Indeed there is.  It is set by the command-line flag
-<samp>--max-mem-size</samp> (see <a href="#How-do-I-install-R-for-Windows_003f">How do I install R for Windows?</a>) or by
-environment variable <code>R_MAX_MEM_SIZE</code>. 
-</p>
-<p>For a 64-bit build of R it defaults to the amount of RAM.
-</p>
-<p>For a 32-bit build of R it defaults to the smaller of the amount of
-physical RAM in the machine and 0.5GB less than the limit on user
-virtual memory for a process (most often 2GB when using a 32-bit edition
-of Windows).
-</p>
-<p>Use <code>?Memory</code> and <code>?memory.size</code> for information about memory
-usage.  The limit can be raised (if possible) by calling
-<code>memory.limit</code> within a running R session.
-</p>
-<p>The 32-bit executables support up to 3GB of user address space per
-process under suitably enabled versions of 32-bit Windows (see
-<a href="https://docs.microsoft.com/en-gb/windows/desktop/Memory/physical-address-extension">https://docs.microsoft.com/en-gb/windows/desktop/Memory/physical-address-extension</a>,
-<a href="https://docs.microsoft.com/en-gb/windows/desktop/Memory/4-gigabyte-tuning">https://docs.microsoft.com/en-gb/windows/desktop/Memory/4-gigabyte-tuning</a>;
-this is not enabled by default).  On such systems, the default for
-<code>--max-mem-size</code> is the smaller of the amount of RAM and 2.5GB.  On
-all but the earliest 64-bit versions of Windows the user address space
-for a 32-bit process is 4GB, and there the default for
-<code>--max-mem-size</code> is the smaller of the amount of RAM and 3.5GB.
-</p>
-
-
-<hr>
-<a name="How-can-I-keep-workspaces-for-different-projects-in-different-directories_003f"></a>
-<a name="How-can-I-keep-workspaces-for-different-projects-in-different-directories_003f-1"></a>
-<h3 class="section">2.10 How can I keep workspaces for different projects in different directories?</h3>
+</div>
+<div class="section-level-extent" id="How-can-I-keep-workspaces-for-different-projects-in-different-directories_003f">
+<h3 class="section" id="How-can-I-keep-workspaces-for-different-projects-in-different-directories_003f-1">2.9 How can I keep workspaces for different projects in different directories?</h3>
 
 <p>Create a separate shortcut for each project: see Q2.5.  All the paths to
 files used by R are relative to the starting directory, so setting the
-&lsquo;Start in&rsquo; field automatically helps separate projects.
+&lsquo;Start in&rsquo; field (and removing the
+<code class="code">--cd-to-userdocs</code> argument) automatically helps separate projects.
 </p>
-<p>Alternatively, start R by double-clicking on a saved <samp>.RData</samp> file
+<p>Alternatively, start R by double-clicking on a saved <samp class="file">.RData</samp> file
 in the directory for the project you want to use, or drag-and-drop a
-file with extension <samp>.RData</samp> onto an R shortcut.  In either case,
+file with extension <samp class="file">.RData</samp> onto an R shortcut.  In either case,
 the working directory will be set to that containing the file.
 </p>
 
 <hr>
-<a name="How-do-I-print-from-R_003f"></a>
-<a name="How-do-I-print-from-R_003f-1"></a>
-<h3 class="section">2.11 How do I print from R?</h3>
+</div>
+<div class="section-level-extent" id="How-do-I-print-from-R_003f">
+<h3 class="section" id="How-do-I-print-from-R_003f-1">2.10 How do I print from R?</h3>
 
 <p>It depends what you want to print.
 </p>
-<ul>
-<li> You can print the graphics window from its menu or by using
-<code>dev.print</code> with suitable arguments (see its help page: most likely
-<code>dev.print(win.graph)</code> will work).
+<ul class="itemize mark-bullet">
+<li>You can print the graphics window from its menu or by using
+<code class="code">dev.print</code> with suitable arguments (see its help page: most likely
+<code class="code">dev.print(win.graph)</code> will work).
 
-</li><li> You can print from the R console or pager by &lsquo;<samp>File | Print</samp>&rsquo;.
+</li><li>You can print from the R console or pager by &lsquo;<samp class="samp">File | Print</samp>&rsquo;.
 (This will print the selection if there is one, otherwise the whole
 console or pager contents.)
 
-</li><li> You can print help files from the pager or HTML browser.
+</li><li>You can print help files from the pager or HTML browser.
 
-</li><li> If you have LaTeX installed and a PDF printing system you
-can print help files by <code>help(fn_name, help_type=&quot;PDF&quot;)</code>.
+</li><li>If you have LaTeX installed and a PDF printing system you
+can print help files by <code class="code">help(fn_name, help_type=&quot;PDF&quot;)</code>.
 </li></ul>
 
 
 <hr>
-<a name="Can-I-use-R-CMD-BATCH_003f"></a>
-<a name="Can-I-use-R-CMD-BATCH_003f-1"></a>
-<h3 class="section">2.12 Can I use <code>R CMD BATCH</code>?</h3>
+</div>
+<div class="section-level-extent" id="Can-I-use-R-CMD-BATCH_003f">
+<h3 class="section" id="Can-I-use-R-CMD-BATCH_003f-1">2.11 Can I use <code class="code">R CMD BATCH</code>?</h3>
 
-<p>Yes: use <code>R CMD BATCH --help</code> or <code>?BATCH</code> for full details.
+<p>Yes: use <code class="code">R CMD BATCH --help</code> or <code class="code">?BATCH</code> for full details.
 </p>
-<p>You can also set up a batch file using <code>Rterm.exe</code>.  A sample
+<p>You can also set up a batch file using <code class="command">Rterm.exe</code>.  A sample
 batch file might contain (as one line)
 </p>
 <div class="example">
-<pre class="example">path_to_R\bin\x64\Rterm.exe --no-restore --no-save &lt; %1 &gt; %1.out 2&gt;&amp;1
+<pre class="example-preformatted">path_to_R\bin\x64\Rterm.exe --no-restore --no-save &lt; %1 &gt; %1.out 2&gt;&amp;1
 </pre></div>
 
-<p>The purpose of <code>2&gt;&amp;1</code> is to redirect warnings and errors to the
+<p>The purpose of <code class="code">2&gt;&amp;1</code> is to redirect warnings and errors to the
 same file as normal output.
 </p>
 
 <hr>
-<a name="Can-I-use-R_002d4_002e0_002e3-with-ESS-and-Emacs_003f"></a>
-<a name="Can-I-use-R_002d4_002e0_002e3-with-ESS-and-Emacs_003f-1"></a>
-<h3 class="section">2.13 Can I use R-4.0.3 with ESS and Emacs?</h3>
+</div>
+<div class="section-level-extent" id="Can-I-use-R_002d4_002e3_002e0-with-ESS-and-Emacs_003f">
+<h3 class="section" id="Can-I-use-R_002d4_002e3_002e0-with-ESS-and-Emacs_003f-1">2.12 Can I use R-4.3.0 with ESS and Emacs?</h3>
 
 <p>Yes.  ESS has for a long time supported R under Windows: it does so by
-running <code>Rterm.exe</code> without a visible console.
+running <code class="code">Rterm.exe</code> without a visible console.
 </p>
-<p>For help with ESS, please send email to <a href="mailto:ESS-help@stat.ethz.ch">ESS-help@stat.ethz.ch</a>,
+<p>For help with ESS, please send email to <a class="email" href="mailto:ESS-help@stat.ethz.ch">ESS-help@stat.ethz.ch</a>,
 not the R mailing lists.
 </p>
 
 <hr>
-<a name="What-are-HOME-and-working-directories_003f"></a>
-<a name="What-are-HOME-and-working-directories_003f-1"></a>
-<h3 class="section">2.14 What are HOME and working directories?</h3>
+</div>
+<div class="section-level-extent" id="What-are-HOME-and-working-directories_003f">
+<h3 class="section" id="What-are-HOME-and-working-directories_003f-1">2.13 What are HOME and working directories?</h3>
 
 <p>Several places in the documentation use these terms.
 </p>
-<p>The working directory is the directory from which <code>Rgui</code> or
-<code>Rterm</code> was launched, unless a shortcut was used when it is given
-by the &lsquo;Start in&rsquo; field of the shortcut&rsquo;s properties.  You can find this
-from R code by the call <code>getwd()</code>.
+<p>The working directory is the directory from which <code class="code">Rgui</code> or
+<code class="command">Rterm</code> was launched, unless a shortcut was used when it is given
+by the &lsquo;Start in&rsquo; field of the shortcut&rsquo;s properties (or <code class="code">--cd-to-userdocs</code>
+was passed as argument). You can find this
+from R code by the call <code class="code">getwd()</code>.
 </p>
-<p>The home directory is set as follows: If environment variable
-<code>R_USER</code> is set, its value is used.  Otherwise if environment
-variable <code>HOME</code> is set, its value is used.  After those two
+<p>The home directory (sometimes referred to as user&rsquo;s home directory, but not
+R home directory) is set as follows: If environment variable
+<code class="env">R_USER</code> is set, its value is used.  Otherwise if environment
+variable <code class="env">HOME</code> is set, its value is used.  After those two
 user-controllable settings, R tries to find system-defined home
 directories.  It first tries to use the Windows &quot;personal&quot; directory
-(typically <samp>C:\Users\username\Documents</samp>).  If that fails, if both
-environment variables <code>HOMEDRIVE</code> and <code>HOMEPATH</code> are set (and
-they normally are), the value is <samp>${HOMEDRIVE}${HOMEPATH}</samp>.  If
+(typically <samp class="file">C:\Users\username\Documents</samp>).  If that fails (but that 
+is not expected on current Windows), if both
+environment variables <code class="env">HOMEDRIVE</code> and <code class="env">HOMEPATH</code> are set (and
+they normally are), the value is <samp class="file">${HOMEDRIVE}${HOMEPATH}</samp>.  If
 all of these fail, the current working directory is used.
 </p>
-<p>You can find this from R code by <code>Sys.getenv(&quot;R_USER&quot;)</code> or
-<code>normalizePath(&quot;~&quot;)</code>, &lsquo;<samp>~</samp>&rsquo; being Unix notation for the home directory.
+<p>You can find the home directory from R code by <code class="code">Sys.getenv(&quot;R_USER&quot;)</code>
+or <code class="code">normalizePath(&quot;~&quot;)</code>, &lsquo;<samp class="samp">~</samp>&rsquo; being Unix notation for the home
+directory. Note that some distributions of Unix utilities for Windows, such
+as Msys2 (and hence Rtools) or cygwin set the environment variable
+<code class="env">HOME</code> to a user directory of their choice. When R is invoked from a
+shell of such an distribution, the home directory in R would hence
+typically not be the Windows &quot;personal&quot; directory. With Rtools40,
+Rtools42 and Rtools43, it is the user profile (e.g. <samp class="file">C:\Users\username</samp>).
+</p>
+<p>The R home directory is the directory where R was installed. You can find
+this from R code by <code class="code">R.home()</code> or <code class="code">Sys.getenv(&quot;R_HOME&quot;)</code>. From
+outside R, you can find it by invoking <code class="code">R RHOME</code>.
 </p>
 <hr>
-<a name="How-do-I-set-environment-variables_003f"></a>
-<a name="How-do-I-set-environment-variables_003f-1"></a>
-<h3 class="section">2.15 How do I set environment variables?</h3>
+</div>
+<div class="section-level-extent" id="How-do-I-set-environment-variables_003f">
+<h3 class="section" id="How-do-I-set-environment-variables_003f-1">2.14 How do I set environment variables?</h3>
 
-<p>Environment variables can be set for <code>Rgui.exe</code> and
-<code>Rterm.exe</code> in three different ways.
-</p><ol>
+<p>Environment variables can be set for <code class="command">Rgui.exe</code> and
+<code class="command">Rterm.exe</code> in three different ways.
+</p><ol class="enumerate">
 <li> On the command line as name=value pairs.  For example in the shortcut to
-<code>Rgui</code> you could have
+<code class="command">Rgui</code> you could have
 
 <div class="example">
-<pre class="example">&quot;path_to_R\bin\x64\Rgui.exe&quot; HOME=p:/ R_LIBS=p:/myRlib
+<pre class="example-preformatted">&quot;path_to_R\bin\x64\Rgui.exe&quot; HOME=p:/ R_LIBS=p:/myRlib
 </pre></div>
 
-</li><li> In an environment file <samp>.Renviron</samp> in the working directory
+</li><li> In an environment file <samp class="file">.Renviron</samp> in the working directory
 or in your home directory, for example containing the line
 
 <div class="example">
-<pre class="example">R_LIBS=p:/myRlib
+<pre class="example-preformatted">R_LIBS=p:/myRlib
 </pre></div>
 
 <p>If you have permission to do so, you can also create an environment file
-<samp>etc\Renviron.site</samp> and set environmental variables in that file in
+<samp class="file">etc\Renviron.site</samp> and set environmental variables in that file in
 the same way.  This is useful for variables which should be set for all
 users and all usages of this R installation.  (Their values can be
-overridden in a <samp>.Renviron</samp> file or on the command line.)
+overridden in a <samp class="file">.Renviron</samp> file or on the command line.)
 </p>
-<p>See <code>?Startup</code> for more details of environment files.
+<p>See <code class="code">?Startup</code> for more details of environment files and specifically
+pay attention to caveats when using backslashes.
 </p>
 </li><li> For all applications via Windows.  How you set an environment variable
 is system-specific: under recent versions of Windows, go to &lsquo;User
 Accounts&rsquo; in the Control Panel, and select your account and then &lsquo;Change
-my environment variables&rsquo;.
+my environment variables&rsquo;. Or, type &lsquo;Edit environment variables for your
+account&rsquo;.
 </li></ol>
 
 <p>The order of precedence for environmental variables is the order in
 which these options are listed, that is the command line then
-<samp>.Renviron</samp> then the inherited environment.
+<samp class="file">.Renviron</samp> then the inherited environment.
 </p>
 
 <hr>
-<a name="R-can_0027t-find-my-file"></a>
-<a name="R-can_0027t-find-my-file_002c-but-I-know-it-is-there_0021"></a>
-<h3 class="section">2.16 R can&rsquo;t find my file, but I know it is there!</h3>
+</div>
+<div class="section-level-extent" id="R-can_0027t-find-my-file">
+<h3 class="section" id="R-can_0027t-find-my-file_002c-but-I-know-it-is-there_0021">2.15 R can&rsquo;t find my file, but I know it is there!</h3>
 
 <p>How did you specify it?  Backslashes have to be doubled in R character
 strings, so for example one needs
-&lsquo;<samp>&quot;d:\\R-4.0.3\\library\\xgobi\\scripts\\xgobi.bat&quot;</samp>&rsquo;.  You can make
+&lsquo;<samp class="samp">&quot;d:\\R-4.3.0\\library\\xgobi\\scripts\\xgobi.bat&quot;</samp>&rsquo;.  You can make
 life easier for yourself by using forward slashes as path separators:
 they do work under Windows.  You should include the file extension
-(e.g. &lsquo;<samp>&quot;xgobi.bat&quot;</samp>&rsquo; rather than just &lsquo;<samp>&quot;xgobi&quot;</samp>&rsquo;); sometimes
+(e.g. &lsquo;<samp class="samp">&quot;xgobi.bat&quot;</samp>&rsquo; rather than just &lsquo;<samp class="samp">&quot;xgobi&quot;</samp>&rsquo;); sometimes
 this isn&rsquo;t shown in Windows Explorer, but it is necessary in R.
 </p>
 <p>A simple way to avoid these problems is to use the function
-<code>file.choose()</code> to invoke the standard Windows file selection
+<code class="code">file.choose()</code> to invoke the standard Windows file selection
 dialog.  If you select a file there, the name will be passed to R in
 the correct format.
 </p>
 <p>Another possible source of grief is spaces in folder names.  We have
 tried to make R work on paths with spaces in, but many people writing
 packages for Unix do not bother.  So it is worth trying the alternative
-short name (something like &lsquo;<samp>PROGRA~1</samp>&rsquo;; you can get it as the
+short name (something like &lsquo;<samp class="samp">PROGRA~1</samp>&rsquo;; you can get it as the
 &lsquo;MS-DOS name&rsquo; from the Properties of the file on some versions of
-Windows, and from <code>dir /X</code> in a &lsquo;<samp>Command Prompt</samp>&rsquo; window),
-and using the function <code>shortPathName</code> from R code.
+Windows, and from <code class="command">dir /X</code> in a &lsquo;<samp class="samp">Command Prompt</samp>&rsquo; window),
+and using the function <code class="code">shortPathName</code> from R code. See also Q2.2.
 </p>
-
+<p>Yet another complication is a 260 character limit on the length of the
+entire path name imposed by Windows.  The limit applies only to some system
+functions, and hence it is possible to create a long path using one
+application yet inaccessible to another.  It is sometimes possible to
+reduce the path length by creating a drive mapping using <code class="command">subst</code> and
+accessing files via that drive.  As of Windows 10 version 1607 and R 4.3,
+one can remove this limit via Windows registry by setting
+<code class="code">Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem\LongPathsEnabled</code>
+to <code class="code">1</code>.  Long paths still may not always work reliably: some
+applications or packages may not be able to work with them and Windows
+cannot execute an application with long path as the current directory.
+</p>
 <hr>
-<a name="Does-R-use-the-Registry_003f"></a>
-<a name="Does-R-use-the-Registry_003f-1"></a>
-<h3 class="section">2.17 Does R use the Registry?</h3>
+</div>
+<div class="section-level-extent" id="Does-R-use-the-Registry_003f">
+<h3 class="section" id="Does-R-use-the-Registry_003f-1">2.16 Does R use the Registry?</h3>
 
 <p>Not when R itself is running.
 </p>
-<p>When you run the R installer, there are options (under &lsquo;<samp>Select
-Additional Tasks</samp>&rsquo;) to &lsquo;<samp>Save version number in registry</samp>&rsquo; and (for
-Administrator installs) &lsquo;<samp>Associate R with .RData files</samp>&rsquo;.
+<p>When you run the R installer, there are options (under &lsquo;<samp class="samp">Select
+Additional Tasks</samp>&rsquo;) to &lsquo;<samp class="samp">Save version number in registry</samp>&rsquo; and (for
+Administrator installs) &lsquo;<samp class="samp">Associate R with .RData files</samp>&rsquo;.
 </p>
 <p>If you tick the first option, the following string entries are added to the
 Windows registry:
-</p><ul>
-<li> <code>HKEY_LOCAL_MACHINE\Software\R-core\R\Current Version</code>  
-    contains the version number, currently 4.0.3.
-</li><li> <code>HKEY_LOCAL_MACHINE\Software\R-core\R\[version]\InstallPath</code>
-    (where <code>[version]</code> is currently 4.0.3) contains the path to the R 
+</p><ul class="itemize mark-bullet">
+<li><code class="code">HKEY_LOCAL_MACHINE\Software\R-core\R\Current Version</code>  
+    contains the version number, currently 4.3.0.
+</li><li><code class="code">HKEY_LOCAL_MACHINE\Software\R-core\R\[version]\InstallPath</code>
+    (where <code class="code">[version]</code> is currently 4.3.0) contains the path to the R 
     home directory.
 </li></ul>
 <p>If you do not have administrative privileges on the machine while
 running the installer, then the entries are created under
-<code>HKEY_CURRENT_USER</code>.  The same entries are also created under
-<code>Software\R-core\R32</code> or <code>Software\R-core\R64</code>, for 32- and
-64-bit R respectively.
+<code class="code">HKEY_CURRENT_USER</code>.  The same entries are also created under
+<code class="code">Software\R-core\R32</code> or <code class="code">Software\R-core\R64</code>, for 32- and
+64-bit R respectively (only 64-bit since R 4.2).
 </p>
 <p>If you tick the second option (shown with administrative privileges
-only) (&lsquo;<samp>Associate R with .RData files</samp>&rsquo;) then entries are created
-under <code>HKEY_CLASSES_ROOT\.RData</code> and
-<code>HKEY_CLASSES_ROOT\RWorkspace</code>.
+only) (&lsquo;<samp class="samp">Associate R with .RData files</samp>&rsquo;) then entries are created
+under <code class="code">HKEY_CLASSES_ROOT\.RData</code> and
+<code class="code">HKEY_CLASSES_ROOT\RWorkspace</code>.
 </p>
 <p>After installation you can add the Registry entries by running
-<code>RSetReg.exe</code> in a sub-folder of the <code>bin</code> folder, and remove
-them by running this with argument <code>/U</code>.  Note that this requires
-administrative privileges unless run with argument <code>/Personal</code> and
+<code class="code">RSetReg.exe</code> in a sub-folder of the <code class="code">bin</code> folder, and remove
+them by running this with argument <code class="code">/U</code>.  Note that this requires
+administrative privileges unless run with argument <code class="code">/Personal</code> and
 neither sets up nor removes the file associations.
 </p>
 
 <hr>
-<a name="Does-R-support-automation_003f"></a>
-<a name="Does-R-support-automation-_0028OLE_002c-COM_0029_003f"></a>
-<h3 class="section">2.18 Does R support automation (OLE, COM)?</h3>
+</div>
+<div class="section-level-extent" id="Does-R-support-automation_003f">
+<h3 class="section" id="Does-R-support-automation-_0028OLE_002c-COM_0029_003f">2.17 Does R support automation (OLE, COM)?</h3>
 
-<p>Directly, no.  See packages such as <code>RDCOMClient</code> from Omegahat
-(source and binary packages available from
-<a href="https://www.stats.ox.ac.uk/pub/RWin/">https://www.stats.ox.ac.uk/pub/RWin/</a>)
-and the non-Free project at <a href="http://www.statconn.com/">http://www.statconn.com/</a>.
+<p>Directly, no.  See packages such as <code class="code">RDCOMClient</code> from Omegahat
+(<a class="uref" href="https://github.com/omegahat/RDCOMClient">https://github.com/omegahat/RDCOMClient</a>,
+source and binary packages for earlier versions of R available from
+<a class="uref" href="https://www.stats.ox.ac.uk/pub/RWin/">https://www.stats.ox.ac.uk/pub/RWin/</a>)
+and the non-Free project at <a class="uref" href="https://www.autstat.com/">https://www.autstat.com/</a>.
 </p>
 <hr>
-<a name="The-Internet-download-functions-fail_002e"></a>
-<a name="The-Internet-download-functions-fail_002e-1"></a>
-<h3 class="section">2.19 The Internet download functions fail.</h3>
+</div>
+<div class="section-level-extent" id="The-Internet-download-functions-fail_002e">
+<h3 class="section" id="The-Internet-download-functions-fail_002e-1">2.18 The Internet download functions fail.</h3>
 
-<p>for example <code>update.packages()</code> and the menu items on the Packages menu.
+<p>for example <code class="code">update.packages()</code> and the menu items on the Packages menu.
 </p>
 <p>We have had several reports of this, although they do work for us on
-<em>all</em> of our machines.  There are two known possible causes.
+<em class="emph">all</em> of our machines.  There are two known possible causes.
 </p>
-<p>(a) A proxy needs to be set up: see <code>?download.file</code>.
+<p>(a) A proxy needs to be set up: see <code class="code">?download.file</code>. Note that this is
+specific to the download method and the default method changed in R 4.2.0.
 </p>
 <p>(b) Firewall settings are blocking the R executables from contacting the
 Internet (but this should result in informative error messages from the
 firewall program).
 </p>
+<p>(c) A MITM proxy (typically in enterprise environments) makes it impossible
+to validate that certificates haven&rsquo;t been revoked.  One can switch to only
+best effort revocation checks via an environment variable: see
+<code class="code">?download.file</code>.
+</p>
 
 <hr>
-<a name="Entering-certain-characters-crashes-Rgui_002e"></a>
-<a name="Entering-certain-characters-crashes-Rgui_002e-1"></a>
-<h3 class="section">2.20 Entering certain characters crashes Rgui.</h3>
+</div>
+<div class="section-level-extent" id="Entering-certain-characters-crashes-Rgui_002e">
+<h3 class="section" id="Entering-certain-characters-crashes-Rgui_002e-1">2.19 Entering certain characters crashes Rgui.</h3>
 
-<p>This has not been reported for a few years, but used to happen
+<p>This has not been reported for many years, but used to happen
 regularly.  All the occurrences we have solved have been traced to
-faulty versions of &lsquo;<samp>msvcrt.dll</samp>&rsquo;: we have installed a workaround
+faulty versions of &lsquo;<samp class="samp">msvcrt.dll</samp>&rsquo;: we have installed a workaround
 that seems to avoid this.  A few other people have discovered this was
 caused by desktop switcher and keyboard macro programs, for example
 &lsquo;Macro Magic&rsquo; and &lsquo;JS Pager&rsquo;.
 </p>
+<p>R 4.2 and later use UCRT as the C runtime instead of MSVCRT. No such problems have
+been reported so far.
+</p>
 <hr>
-<a name="What-does-_0027DLL-attempted-to-change-FPU-control-word_0027-mean_003f"></a>
-<a name="What-does-_0027DLL-attempted-to-change-FPU-control-word_0027-mean_003f-1"></a>
-<h3 class="section">2.21 What does &rsquo;DLL attempted to change FPU control word&rsquo; mean?</h3>
+</div>
+<div class="section-level-extent" id="What-does-_0027DLL-attempted-to-change-FPU-control-word_0027-mean_003f">
+<h3 class="section" id="What-does-_0027DLL-attempted-to-change-FPU-control-word_0027-mean_003f-1">2.20 What does &rsquo;DLL attempted to change FPU control word&rsquo; mean?</h3>
 
-<p>This is a <em>warning</em> which indicates that R has taken action to
+<p>This is a <em class="emph">warning</em> which indicates that R has taken action to
 correct the action of some (non-R) DLL which has just been loaded and
 has changed the floating point control word (in its initialization code)
 to a setting incompatible with that needed for R.  This is not good
@@ -746,34 +784,36 @@ updated.
 <p>Unfortunately, because DLLs may themselves load other DLLs it is not
 possible for R to track which DLL caused the problem.
 </p>
-<p>See also <code>?dyn.load</code>.
+<p>This is less of a problem with 64-bit builds of R, which use SSE
+instructions for computations instead of the FPU. We may be able to remove
+this handling of the FPU control word in future versions of R.
+</p>
+<p>See also <code class="code">?dyn.load</code>.
 </p>
 <hr>
-<a name="Other-strange-crashes_002e"></a>
-<a name="Other-strange-crashes_002e-1"></a>
-<h3 class="section">2.22 Other strange crashes.</h3>
+</div>
+<div class="section-level-extent" id="Other-strange-crashes_002e">
+<h3 class="section" id="Other-strange-crashes_002e-1">2.21 Other strange crashes.</h3>
 
-<p>Some users have found that <code>Rgui.exe</code> fails to start, exiting with
+<p>Some users have found that <code class="code">Rgui.exe</code> fails to start, exiting with
 a &ldquo;Floating-point invalid operation&rdquo; or other low level error.  This
-error may also happen in the middle of a session.  In some cases where
+error may also happen in the middle of a session. This hasn&rsquo;t been 
+reported for several years. In some cases where
 we have tracked this down, it was due to bugs in the video driver on the
 system in question: it makes changes to the floating point control word
 which are incompatible with R.  (Good practice would restore the control
 word to the state it was in when the driver code was called, and R
 tries hard to correct this before running its own code.)  For example,
 one user reported that the virtual screen manager JSP2 caused this
-crash.
-</p>
-<p>These errors are essentially impossible for us to fix or work around
+crash. These errors are essentially impossible for us to fix or work around
 beyond the measures already taken.  The only solution we know of is for
 the user to replace the buggy system component that is causing the
 error.
 </p>
-
 <hr>
-<a name="Why-does-R-never-use-more-than-50_0025-of-my-CPU_003f"></a>
-<a name="Why-does-R-never-use-more-than-50_0025-of-my-CPU_003f-1"></a>
-<h3 class="section">2.23 Why does R never use more than 50% of my CPU?</h3>
+</div>
+<div class="section-level-extent" id="Why-does-R-never-use-more-than-50_0025-of-my-CPU_003f">
+<h3 class="section" id="Why-does-R-never-use-more-than-50_0025-of-my-CPU_003f-1">2.22 Why does R never use more than 50% of my CPU?</h3>
 
 <p>This is a misreading of Windows&rsquo; confusing Task Manager.  R&rsquo;s
 computation is single-threaded, and so it cannot use more than one CPU.
@@ -786,20 +826,29 @@ most modern CPUs have at least two cores.
 graphs of &lsquo;CPU Usage History&rsquo; on the &lsquo;Performance&rsquo; tab of the Windows
 Task manager.
 </p>
+<p>R itself would only use multiple CPUs during parallel installation of
+packages, which needs to be selected by user. Some contributed R packages
+use multiple CPUs or multiple threads.
+</p>
 
 <hr>
-<a name="Does-R-run-under-Windows-Vista_003f"></a>
-<a name="Does-R-run-under-Windows-Vista_002f7_002f8_002fServer-2008_003f"></a>
-<h3 class="section">2.24 Does R run under Windows Vista/7/8/Server 2008?</h3>
+</div>
+<div class="section-level-extent" id="Does-R-run-under-Windows-7_003f">
+<h3 class="section" id="Does-R-run-under-Windows-7_002f8_002f10_002f11_002fServer-2012_002f2016_002f2022_003f">2.23 Does R run under Windows 7/8/10/11/Server 2012/2016/2022?</h3>
 
-<p>It does.  A few issues have been reported that are related to the way
-accounts and file permissions work.  (These are not specifically R
-issues, but changes in user experiences.)
+<p>R 4.3 code base still conservatively uses features of Windows 7 and
+later only when available, and otherwise falls back to older features, so it
+might still run on 7, but this is minimally tested (see Q2.2), and the code
+is tuned for newer systems.  Some performance work-arounds for old Windows
+systems past their end of support may be removed, such as a custom memory
+allocator removed in R 4.2.
+</p>
+<p>Since 4.2, R uses UTF-8 as the native encoding on recent Windows (see Q2.2).
 </p>
 <p>Earlier versions of Windows had user and Administrator accounts, and
-user accounts could be give administrative privileges (by being added to
+user accounts could be given administrative privileges (by being added to
 the local Administrators group) and so write permission over system
-areas such as <samp>c:\Program Files</samp>.  R would be installed either by
+areas such as <samp class="file">c:\Program Files</samp>.  R would be installed either by
 users in their own file space or by an account with administrator
 privileges into a system area.  Sysadmins could set policies for user
 accounts, and you might for example have needed to be a &lsquo;Power User&rsquo; to
@@ -823,9 +872,9 @@ administrators can disable installing applications from non-trusted
 sources, in which case you will have to persuade them that R is
 trustworthy, or digitally sign the R installer yourself, or (unless this
 is also disabled) run the installer from a standard account and install
-into your own file area.  (The same issues apply to the <samp>.msi</samp>
-version of the installer.)
+into your own file area.
 </p>
+
 <p>If you install R as a standard user into your own file space and use it
 under the same account, there are no known permission issues.
 </p>
@@ -839,29 +888,29 @@ installation will make use of &lsquo;over-the-shoulder&rsquo; credentials.  You 
 run into problems if you try installing (including updating) packages in
 the main R library.  (It would be nice if at that point R could use
 over-the-shoulder credentials, but they apply to processes as a whole.
-Vista and later disallow creating <code>.dll</code> files in the system area
-without credentials.)  There are several ways around this.
+Vista and later disallow creating <code class="code">.dll</code> files in the system area
+without credentials.)  There are several ways around.
 </p>
-<ul>
-<li> Run R with Administrator privileges in sessions where you want to
+<ul class="itemize mark-bullet">
+<li>Run R with Administrator privileges in sessions where you want to
 install packages.  (Do so by right-clicking on the R shortcut and
 selecting &rsquo;Run as Administrator&rsquo;.)
 
-</li><li> Transfer ownership of the R installation to the user which installed R.
-To do so, use the security tab on the &lsquo;<samp>Properties</samp>&rsquo; of the top-level
+</li><li>Transfer ownership of the R installation to the user which installed R.
+To do so, use the security tab on the &lsquo;<samp class="samp">Properties</samp>&rsquo; of the top-level
 R folder and give &lsquo;Full Control&rsquo; over this directory to the user (not
 just the Administrator group).
 
-</li><li> Install packages into a different library tree owned by the account used to
+</li><li>Install packages into a different library tree owned by the account used to
 install R.
 
 <p>For an installation to be used by a single user, the simplest way is to
-make use of a &lsquo;personal library&rsquo;: See <a href="#I-don_0027t-have-permission-to-write-to-the-R_002d4_002e0_002e3_005clibrary-directory">I don't have permission to write to the R-4.0.3\library directory</a>.
+make use of a &lsquo;personal library&rsquo;: See <a class="xref" href="#I-don_0027t-have-permission-to-write-to-the-R_002d4_002e3_002e0_005clibrary-directory">I don&rsquo;t have permission to write to the <samp class="file">R-4.3.0\library</samp> directory.</a>.
 </p>
 <p>For a site installation, you can create a site-wide library directory
 anywhere convenient, and add it to the default package search path for
-all users via <code>R_LIBS_SITE</code> in <samp>etc\Renviron.site</samp>.  See <a href="#What-are-HOME-and-working-directories_003f">What are HOME and working directories?</a>.  There is a standard location for a
-site library, the <samp>site-library</samp> directory in the top-level R
+all users via <code class="env">R_LIBS_SITE</code> in <samp class="file">etc\Renviron.site</samp>.  See <a class="xref" href="#What-are-HOME-and-working-directories_003f">What are HOME and working directories?</a>.  There is a standard location for a
+site library, the <samp class="file">site-library</samp> directory in the top-level R
 folder (which you would need to create with full control for the R
 installation account).  This will be used for installation in preference
 to the main library folder if it exists.
@@ -871,35 +920,48 @@ unless you &lsquo;Run as administrator&rsquo;: we suggest you use an R session
 running under Administrator privileges when updating those.
 </p></li></ul>
 
-
+<p>If you use an account in the local Administrators group in &lsquo;admin approval
+mode&rsquo;, you can still install R for the current user only in your own file
+space without using nor being asked for the &lsquo;over-the-shoulder&rsquo; credentials.
+See Q2.4.
+</p>
 <p>Another issue with Vista was that the standard POSIX ways that R uses
-(e.g. in <code>file.info</code> and <code>file.access</code>) to look at file
-permissions no longer work reliably.  <code>file.access</code> was re-written
+(e.g. in <code class="code">file.info</code> and <code class="code">file.access</code>) to look at file
+permissions no longer worked reliably.  <code class="code">file.access</code> was re-written
 to work with Windows NT-based security and the new version seems much
 more reliable with these OSes (but still not 100% correct).
 </p>
 
 
 <hr>
-<a name="Quotes-don_0027t-come-out-right-on-the-console_002fterminal_002fpager"></a>
-<a name="Quotes-don_0027t-come-out-right-on-the-console_002fterminal_002fpager_002e"></a>
-<h3 class="section">2.25 Quotes don&rsquo;t come out right on the console/terminal/pager.</h3>
+</div>
+<div class="section-level-extent" id="Quotes-don_0027t-come-out-right-on-the-console_002fterminal_002fpager">
+<h3 class="section" id="Quotes-don_0027t-come-out-right-on-the-console_002fterminal_002fpager_002e">2.24 Quotes don&rsquo;t come out right on the console/terminal/pager.</h3>
 
-<p>R may make use of directional quotes that are not always rendered
-correctly by Windows: these are used by default only by <code>Rgui</code> in
+<p>R 4.2 and later use UTF-8 as the native encoding on recent Windows (see Q2.2) and
+this should make also this previously reported problem disappear.  With
+this feature, R automatically uses the 65001 code page (UTF-8).  When using
+<code class="code">RTerm</code> from the <code class="code">Windows Command Prompt</code> (<samp class="file">cmd.exe</samp>) or
+<code class="code">Power Shell</code>, one may have to select a suitable font that has glyphs for the
+characters intended, such as &lsquo;<samp class="samp">NSimFun</samp>&rsquo; for Asian language).
+</p>
+<p>R may make use of directional quotes that were not always rendered
+correctly by Windows: these are used by default only by <code class="code">Rgui</code> in
 suitable locales (not Chinese/Japanese/Korean).
 </p>
-<p>Whether these are used in R output (from functions <code>sQuote</code> and
-<code>dQuote</code>) is controlled by <code>getOption(&quot;useFancyQuotes&quot;)</code> whose
-default is <code>FALSE</code> except for the <code>Rgui</code> console.  There are
+<p>Whether these are used in R output (from functions <code class="code">sQuote</code> and
+<code class="code">dQuote</code>) is controlled by <code class="code">getOption(&quot;useFancyQuotes&quot;)</code> whose
+default is <code class="code">FALSE</code> except for the <code class="code">Rgui</code> console.  There are
 two potential problems with rendering directional quotes.  The first is
-with running <code>Rterm</code>: in European locales the &lsquo;Windows Command
+with running <code class="code">Rterm</code>: in European locales the &lsquo;Windows Command
 Prompt&rsquo; is by default set up to use MS-DOS and not Windows default
-encodings: this can be changed via <code>chcp</code>, with <code>chcp
+encodings: this can be changed via <code class="command">chcp</code>, with <code class="command">chcp
 1252</code> being appropriate for Western European (including English)
 locales.  The other is that the default raster fonts only include
 directional single quotes and not directional double quotes (which will
-probably be rendered as a filled rectangle).
+probably be rendered as a filled rectangle). In R 4.2 and later
+on recent versions of Windows where UTF-8 is the native encoding,
+<code class="command">Rterm</code> will automatically switch the console codepage to UTF-8.
 </p>
 <p>Directional quotes will also be used in text help which is normally
 displayed in R&rsquo;s internal pager: these may not be rendered correctly in
@@ -907,35 +969,35 @@ an external pager.  They are also used in HTML help, where most browsers
 use fonts which render them correctly.
 </p>
 <p>The font used can affect whether quotes are rendered correctly.  The
-default font in the <code>Rgui</code> console and internal pager is
-<code>Courier New</code>, which has directional quotes on all the systems we
-tried.  <code>Lucida Console</code> which has elegant glyphs for directional
+default font in the <code class="code">Rgui</code> console and internal pager is
+<code class="code">Courier New</code>, which has directional quotes on all the systems we
+tried.  <code class="code">Lucida Console</code> which has elegant glyphs for directional
 quotes (but seems rather light unless ClearType is in use):
-<code>Consolas</code> is another font which we often select when ClearType is
-in use.  Non-TrueType fonts such as <code>Courier</code> and <code>FixedSys</code>
+<code class="code">Consolas</code> is another font which we often select when ClearType is
+in use.  Non-TrueType fonts such as <code class="code">Courier</code> and <code class="code">FixedSys</code>
 lack directional double quotes on the systems we tried.
 </p>
-<p>There is a related problem with using <code>Sweave</code> output in
-<code>Rgui</code>, for LaTeX needs to be told about the encoding of
+<p>There is a related problem with using <code class="code">Sweave</code> output in
+<code class="code">Rgui</code>, for LaTeX needs to be told about the encoding of
 directional quotes by including in the LaTeX preamble e.g. (for a
 Western European locale)
 </p>
 <div class="example">
-<pre class="example">\usepackage[cp1252]{inputenc}
+<pre class="example-preformatted">\usepackage[cp1252]{inputenc}
 </pre></div>
 
-<p>or their use suppressed by <code>options(useFancyQuotes=FALSE)</code>.
+<p>or their use suppressed by <code class="code">options(useFancyQuotes=FALSE)</code>.
 </p>
 <hr>
-<a name="There-is-no-tilde-on-my-keyboard"></a>
-<a name="There-is-no-tilde-on-my-keyboard_0021"></a>
-<h3 class="section">2.26 There is no tilde on my keyboard!</h3>
+</div>
+<div class="section-level-extent" id="There-is-no-tilde-on-my-keyboard">
+<h3 class="section" id="There-is-no-tilde-on-my-keyboard_0021">2.25 There is no tilde on my keyboard!</h3>
 
 <p>Where tilde does not appear on the main keyboard, it can normally be
 accessed by pressing AltGr (the right Alt key) plus some other key.
-This is <code>]</code> in Canadian (multilingual), German and Scandinavian
-layouts, <code>1</code> in Eastern Europe, <code>[</code> in Portuguese, <code>4</code> or
-<code>5</code> in Spanish, <code>/</code> in Francophone Belgian, and so on.  You
+This is <code class="code">]</code> in Canadian (multilingual), German and Scandinavian
+layouts, <code class="code">1</code> in Eastern Europe, <code class="code">[</code> in Portuguese, <code class="code">4</code> or
+<code class="code">5</code> in Spanish, <code class="code">/</code> in Francophone Belgian, and so on.  You
 can explore those for your keyboard via the &lsquo;On-Screen Keyboard&rsquo; (under
 Ease of access on Windows 7).
 </p>
@@ -944,28 +1006,32 @@ down the left Alt key and typing 0126 on the numeric keypad (if you have
 one), then releasing the Alt key.
 </p>
 <hr>
-<a name="Can-I-use-R-on-64_002dbit-Windows_003f"></a>
-<a name="Can-I-use-R-on-64_002dbit-Windows_003f-1"></a>
-<h3 class="section">2.27 Can I use R on 64-bit Windows?</h3>
+</div>
+<div class="section-level-extent" id="Can-I-use-R-on-64_002dbit-Windows_003f">
+<h3 class="section" id="Can-I-use-R-on-64_002dbit-Windows_003f-1">2.26 Can I use R on 64-bit Windows?</h3>
 
-<p>The 32-bit build of R for Windows will run on both 32-bit and
-64-bit<a name="DOCF2" href="#FOOT2"><sup>2</sup></a> versions of Windows.  64-bit
+<p>Yes, and this is the primarily used and the only tested option now.  Since R
+4.2.0, 32-bit builds are no longer provided.
+</p>
+<p>The 32-bit build of R for Windows (R 4.1 and earlier) will run on both 32-bit and
+64-bit<a class="footnote" id="DOCF1" href="#FOOT1"><sup>1</sup></a> versions of Windows.  64-bit
 versions of Windows run 32-bit executables under the WOW (Windows on
 Windows) subsystem: they run in almost exactly the same way as on a
 32-bit version of Windows, except that the address limit for the R
 process is 4GB (rather than 2GB or perhaps 3GB).
 </p>
-<p>When R is installed on 64-bit Windows there is the option of installing
+<p>When R 4.1 and earlier is installed on 64-bit Windows there is the option of installing
 32- and/or 64-bit builds: the default is to install both. If you are
-using the 32-bit build, replace &lsquo;<samp>x64</samp>&rsquo; by &lsquo;<samp>i386</samp>&rsquo; in the
+using the 32-bit build, replace &lsquo;<samp class="samp">x64</samp>&rsquo; by &lsquo;<samp class="samp">i386</samp>&rsquo; in the
 examples in this FAQ.
 </p>
 <hr>
-<a name="Should-I-run-32_002dbit-or-64_002dbit-R_003f"></a>
-<a name="Should-I-run-32_002dbit-or-64_002dbit-R_003f-1"></a>
-<h3 class="section">2.28 Should I run 32-bit or 64-bit R?</h3>
+</div>
+<div class="section-level-extent" id="Should-I-run-32_002dbit-or-64_002dbit-R_003f">
+<h3 class="section" id="Should-I-run-32_002dbit-or-64_002dbit-R_003f-1">2.27 Should I run 32-bit or 64-bit R?</h3>
 
 <p>Obviously, only relevant if you are using 64-bit Windows.
+Since R 4.2.0, 32-bit builds are no longer provided.
 </p>
 <p>For most users we would recommend using the &lsquo;native&rsquo; build, that is the
 32-bit version on 32-bit Windows and the 64-bit version of 64-bit Windows.
@@ -977,7 +1043,7 @@ process to take advantage of more than 4GB of RAM (if available) and for
 R&rsquo;s memory manager to more easily handle large objects (in particular
 those of 1GB or more).  The disadvantages are that all the pointers are
 8 rather than 4 bytes and so small objects are larger and more data has
-to be moved around, and that less external software is available for
+to be moved around, and that less external software is (was) available for
 64-bit versions of the OS. The 64-bit compilers are able to take
 advantage of extra features of all x86-64 chips (more registers, SSE2/3
 instructions, &hellip;) and so the code may run faster despite using
@@ -988,53 +1054,54 @@ equivalent).
 <p>For advanced users the choice may be dictated by whether the contributed
 packages needed are available in 64-bit builds (although CRAN only
 offers 32/64-bit builds).  The considerations can be more complex: for
-example 32/64-bit <code>RODBC</code> need 32/64-bit ODBC drivers respectively,
+example 32/64-bit <code class="code">RODBC</code> need 32/64-bit ODBC drivers respectively,
 and where both exist they may not be able to be installed together.  An
 extreme example is the Microsoft Access/Excel ODBC drivers: if you have
 installed 64-bit Microsoft Office you can only install the 64-bit
-drivers and so need to use 64-bit <code>RODBC</code> and hence R.  (And
+drivers and so need to use 64-bit <code class="code">RODBC</code> and hence R.  (And
 similarly for 32-bit Microsoft Office.)
 </p>
 <hr>
-<a name="Can-both-32_002d-and-64_002dbit-R-be-installed-on-the-same-machine_003f"></a>
-<a name="Can-both-32_002d-and-64_002dbit-R-be-installed-on-the-same-machine_003f-1"></a>
-<h3 class="section">2.29 Can both 32- and 64-bit R be installed on the same machine?</h3>
+</div>
+<div class="section-level-extent" id="Can-both-32_002d-and-64_002dbit-R-be-installed-on-the-same-machine_003f">
+<h3 class="section" id="Can-both-32_002d-and-64_002dbit-R-be-installed-on-the-same-machine_003f-1">2.28 Can both 32- and 64-bit R be installed on the same machine?</h3>
 
 <p>Obviously, only relevant if the machine is running a 64-bit version of
 Windows &ndash; simply select both when using the installer.  You can also go
-back and add 64-bit components to a 32-bit install, or <em>vice versa</em>.
+back and add 64-bit components to a 32-bit install, or <em class="emph">vice versa</em>.
+Since R 4.2.0, 32-bit builds are no longer provided.
 </p>
 <p>For many Registry items, 32- and 64-bit programs have different views of
 the Registry, but clashes can occur.  The most obvious problem is the
-file association for <samp>.RData</samp> files, which will use the last
+file association for <samp class="file">.RData</samp> files, which will use the last
 installation for which this option is selected, and if that was for an
 installation of both, will use 64-bit R.  To change the association the
 safest way is to edit the Registry entry
-&lsquo;<samp>HKEY_CLASSES_ROOT\RWorkspace\shell\open\command</samp>&rsquo;
-and replace &lsquo;<samp>x64</samp>&rsquo; by &lsquo;<samp>i386</samp>&rsquo; or <em>vice versa</em>.
+&lsquo;<samp class="samp">HKEY_CLASSES_ROOT\RWorkspace\shell\open\command</samp>&rsquo;
+and replace &lsquo;<samp class="samp">x64</samp>&rsquo; by &lsquo;<samp class="samp">i386</samp>&rsquo; or <em class="emph">vice versa</em>.
 </p>
 
 <hr>
-<a name="Rcmd-is-not-found-in-my-PATH_0021"></a>
-<a name="Rcmd-is-not-found-in-my-PATH_0021-1"></a>
-<h3 class="section">2.30 Rcmd is not found in my PATH!</h3>
+</div>
+<div class="section-level-extent" id="Rcmd-is-not-found-in-my-PATH_0021">
+<h3 class="section" id="Rcmd-is-not-found-in-my-PATH_0021-1">2.29 Rcmd is not found in my PATH!</h3>
 
 <p>This has often been reported after an upgrade.
 </p>
-<p>The R installer does not put <code>Rcmd.exe</code> (nor any other R
-executable) on your <code>PATH</code>.  What seems to have happened is that
+<p>The R installer does not put <code class="command">Rcmd.exe</code> (nor any other R
+executable) on your <code class="env">PATH</code>.  What seems to have happened is that
 people did this for themselves in the past, upgraded R (which by default
 will install to a different location) and un-installed the old version
 of R.  If you do that (or install R for the first time), you need to
-edit the <code>PATH</code>.
+edit the <code class="env">PATH</code>.
 </p>
 <p>The element you want to add to the path is something like
 </p>
 <div class="example">
-<pre class="example">c:\Program Files\R\R-4.0.0\bin\x64
+<pre class="example-preformatted">c:\Program Files\R\R-4.3.0\bin\x64
 </pre></div>
 
-<p>for 64-bit <code>Rcmd.exe</code>, replacing <code>x64</code> by <code>i386</code> for
+<p>for 64-bit <code class="command">Rcmd.exe</code>, replacing <code class="code">x64</code> by <code class="code">i386</code> for
 32-bit.
 </p>
 <p>How you set the path depends on your OS version.  Under recent versions,
@@ -1042,34 +1109,35 @@ go to &lsquo;User Accounts&rsquo; in the Control Panel, and select your account 
 then &lsquo;Change my environment variables&rsquo;.  (System policies can prevent
 end users making changes.)
 </p>
-<p>An alternative is to set the <code>PATH</code> in the shell you are running
-(<code>Rcmd.exe</code> is  a command-line program).  For those using the
+<p>An alternative is to set the <code class="env">PATH</code> in the shell you are running
+(<code class="command">Rcmd.exe</code> is  a command-line program).  For those using the
 standard Windows &lsquo;Command Prompt&rsquo; Duncan Murdoch suggested:
 </p>
 <p>The simple way to do it just for the command prompt is to write a little 
-batch file <code>setpath.bat</code> containing
+batch file <code class="command">setpath.bat</code> containing
 </p>
 <div class="example">
-<pre class="example">set PATH=newstuff;%PATH%
+<pre class="example-preformatted">set PATH=newstuff;%PATH%
 </pre></div>
 
-<p>and then run <code>cmd</code> with
+<p>and then run <code class="command">cmd</code> with
 </p>
 <div class="example">
-<pre class="example">CMD /K setpath.bat
+<pre class="example-preformatted">CMD /K setpath.bat
 </pre></div>
-
-
-<hr><hr>
-<a name="Languages-and-Internationalization"></a>
-<a name="Languages-and-Internationalization-1"></a>
-<h2 class="chapter">3 Languages and Internationalization</h2>
 
 
 <hr>
-<a name="The-installer-does-not-offer-my-language"></a>
-<a name="The-installer-does-not-offer-my-language_002e"></a>
-<h3 class="section">3.1 The installer does not offer my language.</h3>
+<hr>
+</div>
+</div>
+<div class="chapter-level-extent" id="Languages-and-Internationalization">
+<h2 class="chapter" id="Languages-and-Internationalization-1">3 Languages and Internationalization</h2>
+
+
+<hr>
+<div class="section-level-extent" id="The-installer-does-not-offer-my-language">
+<h3 class="section" id="The-installer-does-not-offer-my-language_002e">3.1 The installer does not offer my language.</h3>
 
 <p>Only a limited range of languages is supported, currently
 Catalan,
@@ -1096,78 +1164,92 @@ Spanish (Spain)
 and Ukranian.
 </p>
 <hr>
-<a name="I-want-R-in-English_0021"></a>
-<a name="I-want-R-in-English-_0028and-not-in-French_002fChinese_002f_002e_002e_002e_0029_0021"></a>
-<h3 class="section">3.2 I want R in English (and not in French/Chinese/...)!</h3>
+</div>
+<div class="section-level-extent" id="I-want-R-in-English_0021">
+<h3 class="section" id="I-want-R-in-English-_0028and-not-in-French_002fChinese_002f_002e_002e_002e_0029_0021">3.2 I want R in English (and not in French/Chinese/...)!</h3>
 
 <p>The default behaviour of R is to try to run in the language you run
 Windows in.
 </p>
-<p>Apparently some users want<a name="DOCF3" href="#FOOT3"><sup>3</sup></a>
+<p>Apparently some users want<a class="footnote" id="DOCF2" href="#FOOT2"><sup>2</sup></a>
 Windows in their native language, but not R.  To do so, set
-<code>LANGUAGE=en</code> as discussed in Q2.2 and Q2.15, or in the
-<samp>Rconsole</samp> file.
+<code class="code">LANGUAGE=en</code> as discussed in Q2.2 and Q2.15, or in the
+<samp class="file">Rconsole</samp> file.
 </p>
 <hr>
-<a name="I-want-to-run-R-in-Chinese_002fJapanese_002fKorean"></a>
-<a name="I-want-to-run-R-in-Chinese_002fJapanese_002fKorean_002e"></a>
-<h3 class="section">3.3 I want to run R in Chinese/Japanese/Korean.</h3>
+</div>
+<div class="section-level-extent" id="I-want-to-run-R-in-Chinese_002fJapanese_002fKorean">
+<h3 class="section" id="I-want-to-run-R-in-Chinese_002fJapanese_002fKorean_002e">3.3 I want to run R in Chinese/Japanese/Korean.</h3>
 
 <p>Suitable versions of Windows support what it calls &lsquo;East Asian&rsquo;
 languages, but e.g. Western installations of Windows often do not have
 such support.  So we need to assume that your copy of Windows does.
 </p>
-<p>Both <code>Rterm.exe</code> and <code>Rgui.exe</code> support single- and
+<p>R 4.2 and later on recent versions of Windows (see Q2.2) use UTF-8 as the native
+encoding.  It is thus possible to use characters outside of the system
+locale code page in R, including the command-line front-end
+<code class="command">Rterm.exe</code> (and <code class="command">Rgui.exe</code>, where limited support has
+existed before). For use in <code class="command">RTerm</code>, one needs to choose suitable fonts
+which have the required glyphs, such as <code class="code">NSimFun</code> for Asian languages.
+Use <code class="code">l10n_info()</code> from R to check whether R is really running in UTF-8
+as native encoding.
+</p>
+<p>With R 4.2 and later on earlier versions of Windows and with earlier versions of R,
+the following content still applies.
+</p>
+<p>Both <code class="command">Rterm.exe</code> and <code class="command">Rgui.exe</code> support single- and
 double-width characters.  It will be necessary to select suitable fonts
-in files <samp>Rconsole</samp> and <samp>Rdevga</samp> (see <code>?Rconsole</code> or the
-comments in the files: the system versions are in the <samp>etc</samp>
-folder); in the latter you can replace <code>Arial</code> by <code>Arial
-Unicode MS</code>, and we tried <code>FixedSys</code> and <code>MS Mincho</code> in
-<samp>Rconsole</samp>.  (Note that <samp>Rdevga</samp> only applies to Windows
-graphics devices and not, say, to <code>pdf</code>.)  
+in files <samp class="file">Rconsole</samp> and <samp class="file">Rdevga</samp> (see <code class="code">?Rconsole</code> or the
+comments in the files: the system versions are in the <samp class="file">etc</samp>
+folder); in the latter you can replace <code class="code">Arial</code> by <code class="code">Arial
+Unicode MS</code>, and we tried <code class="code">FixedSys</code> and <code class="code">MS Mincho</code> in
+<samp class="file">Rconsole</samp>.  (Note that <samp class="file">Rdevga</samp> only applies to Windows
+graphics devices and not, say, to <code class="code">pdf</code>.)  
 </p>
 <p>Note that it is important that the console font uses double-width
 characters for all CJK characters (as that is what the width table used
 assumes): this is true for the fonts intended for CJK locales but not
-for example for <code>Lucida Console</code> or <code>Consolas</code>.
+for example for <code class="code">Lucida Console</code> or <code class="code">Consolas</code>.
 </p>
 <p>You do need to ensure that R is running in a suitable locale: use
-<code>Sys.getlocale()</code> to find out.  (CJK users may be used to their
+<code class="code">Sys.getlocale()</code> to find out.  (CJK users may be used to their
 language characters always being available, which is the case for
 so-called &lsquo;Unicode&rsquo; Windows applications.  However, R is primarily
 written for Unix-alikes and is not therefore &lsquo;Unicode&rsquo; in the Windows
 sense.)  You can find suitable locale names from
-<a href="https://msdn.microsoft.com/en-us/library/39cwe7zf%28v=vs.80%29.aspx">https://msdn.microsoft.com/en-us/library/39cwe7zf%28v=vs.80%29.aspx</a>
-and <a href="https://msdn.microsoft.com/en-us/library/cdax410z%28v=vs.80%29.aspx">https://msdn.microsoft.com/en-us/library/cdax410z%28v=vs.80%29.aspx</a>
-beware that <code>&quot;Chinese&quot;</code> is Traditional Chinese (code page 950,
-Big5) and <code>&quot;chs&quot;</code> is needed for Simplified Chinese (code page 936,
+<a class="uref" href="https://msdn.microsoft.com/en-us/library/39cwe7zf%28v=vs.80%29.aspx">https://msdn.microsoft.com/en-us/library/39cwe7zf%28v=vs.80%29.aspx</a>
+and <a class="uref" href="https://msdn.microsoft.com/en-us/library/cdax410z%28v=vs.80%29.aspx">https://msdn.microsoft.com/en-us/library/cdax410z%28v=vs.80%29.aspx</a>
+beware that <code class="code">&quot;Chinese&quot;</code> is Traditional Chinese (code page 950,
+Big5) and <code class="code">&quot;chs&quot;</code> is needed for Simplified Chinese (code page 936,
 GB2312).
 </p>
-<p>When using <code>Rterm</code> the window in which it is run has to be set
-up to use a suitable font (e.g. <code>Lucida Console</code> or
-<code>Consolas</code>, not the OEM raster fonts) and a suitable codepage
-(which for the Windows Cmd shell can be done using <code>chcp</code>).
+<p>When using <code class="command">Rterm</code> the window in which it is run has to be set
+up to use a suitable font (e.g. <code class="code">Lucida Console</code> or
+<code class="code">Consolas</code>, not the OEM raster fonts) and a suitable codepage
+(which for the Windows Cmd shell can be done using <code class="command">chcp</code>). In R 4.2
+and later on recent versions of Windows where UTF-8 is the native encoding,
+<code class="command">Rterm</code> will automatically switch the console codepage to UTF-8.
 </p>
 <hr>
-<a name="I-selected-English-for-installation-but-R-runs-in-Chinese"></a>
-<a name="I-selected-English-for-installation-but-R-runs-in-Chinese_002e"></a>
-<h3 class="section">3.4 I selected English for installation but R runs in Chinese.</h3>
+</div>
+<div class="section-level-extent" id="I-selected-English-for-installation-but-R-runs-in-Chinese">
+<h3 class="section" id="I-selected-English-for-installation-but-R-runs-in-Chinese_002e">3.4 I selected English for installation but R runs in Chinese.</h3>
 
-<p>Precisely, you selected English <strong>for installation</strong>!  The language
+<p>Precisely, you selected English <strong class="strong">for installation</strong>!  The language
 of the installer has nothing to do with the language used to run R: this
 is completely standard Windows practice (and necessary as different
 users of the computer may use different languages).
 </p>
 <p>The language R uses for menus and messages is determined by the
-<em>locale</em>: please read the appropriate manual (&lsquo;R Installation and
+<em class="emph">locale</em>: please read the appropriate manual (&lsquo;R Installation and
 Administration&rsquo;) for the details.  You can ensure that R uses English
-messages by appending <code>LANGUAGE=en</code> to the shortcut you use to
-start R, or setting it in the <samp>Rconsole</samp> file.
+messages by appending <code class="code">LANGUAGE=en</code> to the shortcut you use to
+start R, or setting it in the <samp class="file">Rconsole</samp> file.
 </p>
 <hr>
-<a name="I-would-like-to-be-able-to-use-Japanese-fonts"></a>
-<a name="I-would-like-to-be-able-to-use-Japanese-fonts_002e"></a>
-<h3 class="section">3.5 I would like to be able to use Japanese fonts.</h3>
+</div>
+<div class="section-level-extent" id="I-would-like-to-be-able-to-use-Japanese-fonts">
+<h3 class="section" id="I-would-like-to-be-able-to-use-Japanese-fonts_002e">3.5 I would like to be able to use Japanese fonts.</h3>
 
 <p>for example, in the console and to annotate graphs.  Similar comments
 apply to any non-Western-European language.
@@ -1175,42 +1257,42 @@ apply to any non-Western-European language.
 <p>With suitable fonts, this should just work.  You will need to set MS
 Mincho or MS Gothic as the console font to ensure that single- and
 double-width characters are handled correctly.  The default graphics
-fonts for the <code>windows()</code> graphics device can handle most common
+fonts for the <code class="code">windows()</code> graphics device can handle most common
 Japanese characters, but more specialized fonts may need to be set.
 (See Q5.2 for how to set fonts: the console font can also be set from
-the &lsquo;GUI preferences&rsquo; menu item.)  The help for <code>windowsFonts</code> has
-examples of selecting Japanese fonts for the <code>windows()</code> family of
+the &lsquo;GUI preferences&rsquo; menu item.)  The help for <code class="code">windowsFonts</code> has
+examples of selecting Japanese fonts for the <code class="code">windows()</code> family of
 devices.
 </p>
-<p>In addition, the Hershey vector fonts (see <code>?Hershey</code>,
-<code>?Japanese</code> and <code>demo(Japanese)</code>) can be used on any graphics
+<p>In addition, the Hershey vector fonts (see <code class="code">?Hershey</code>,
+<code class="code">?Japanese</code> and <code class="code">demo(Japanese)</code>) can be used on any graphics
 device to display Japanese characters.
 </p>
-<p>To use non-Latin-1 characters in the <code>postscript</code> graphics device,
-see its help page (which also applies to <code>pdf</code>).
+<p>To use non-Latin-1 characters in the <code class="code">postscript</code> graphics device,
+see its help page (which also applies to <code class="code">pdf</code>).
 </p>
 <hr>
-<a name="I-don_0027t-see-characters-with-accents-at-the-R-console"></a>
-<a name="I-don_0027t-see-characters-with-accents-at-the-R-console_002c-for-example-in-_003ftext_002e"></a>
-<h3 class="section">3.6 I don&rsquo;t see characters with accents at the R console, for example in ?text.</h3>
+</div>
+<div class="section-level-extent" id="I-don_0027t-see-characters-with-accents-at-the-R-console">
+<h3 class="section" id="I-don_0027t-see-characters-with-accents-at-the-R-console_002c-for-example-in-_003ftext_002e">3.6 I don&rsquo;t see characters with accents at the R console, for example in ?text.</h3>
 
-<p>You need to specify a font in <samp>Rconsole</samp> (see Q5.2) that supports
+<p>You need to specify a font in <samp class="file">Rconsole</samp> (see Q5.2) that supports
 the encoding in use.  This used to be a problem in earlier versions of
 Windows, but now it is hard to find a font which does not.
 </p>
-<p>Support for these characters within <code>Rterm</code> depends on the
+<p>Support for these characters within <code class="command">Rterm</code> depends on the
 environment (the terminal window and shell, including locale and
 codepage settings) within which it is run as well as the font used by
 the terminal window.  Those are usually on legacy DOS settings and need
-to altered.
+to altered (see Q3.3).
 </p>
 <hr>
-<a name="The-dialog-buttons-are-not-translated"></a>
-<a name="The-dialog-buttons-are-not-translated_002e"></a>
-<h3 class="section">3.7 The dialog buttons are not translated.</h3>
+</div>
+<div class="section-level-extent" id="The-dialog-buttons-are-not-translated">
+<h3 class="section" id="The-dialog-buttons-are-not-translated_002e">3.7 The dialog buttons are not translated.</h3>
 
 <p>In most cases they actually are, but by Windows.  Setting the locale or
-the <code>LANGUAGE</code> environment variable does not change the Windows
+the <code class="code">LANGUAGE</code> environment variable does not change the Windows
 setting of its &lsquo;UI language&rsquo;.  Vista and later talk about the &rsquo;UI
 language&rsquo; and the &rsquo;system locale&rsquo; for setting the language used for
 &lsquo;non-Unicode&rsquo; programs (on the &rsquo;Administrative&rsquo; tab in Windows 7).
@@ -1220,179 +1302,183 @@ settings are likely to be consistent.  However, if you try to run
 Windows in one language and R in another, you may find the way Windows
 handles internationalization slightly odd.
 </p>
-<hr><hr>
-<a name="Packages"></a>
-<a name="Packages-1"></a>
-<h2 class="chapter">4 Packages</h2>
+<hr>
+<hr>
+</div>
+</div>
+<div class="chapter-level-extent" id="Packages">
+<h2 class="chapter" id="Packages-1">4 Packages</h2>
 
 
 
 
 <hr>
-<a name="Can-I-install-packages-into-libraries-in-this-version_003f"></a>
-<a name="Can-I-install-packages-into-libraries-in-this-version_003f-1"></a>
-<h3 class="section">4.1 Can I install packages into libraries in this version?</h3>
+<div class="section-level-extent" id="Can-I-install-packages-into-libraries-in-this-version_003f">
+<h3 class="section" id="Can-I-install-packages-into-libraries-in-this-version_003f-1">4.1 Can I install packages into libraries in this version?</h3>
 
 <p>Yes, but you will need a lot of tools to do so, unless the author or the
-maintainers of the <samp>bin/windows/contrib</samp> section on CRAN have been
+maintainers of the <samp class="file">bin/windows/contrib</samp> section on CRAN have been
 kind enough to provide a binary version for Windows as a
-<code>.zip</code> file, or the package is a simple one involving no compiled
+<code class="code">.zip</code> file, or the package is a simple one involving no compiled
 code (and binary versions are usually available for simple
 packages).
 </p>
 <p>You can install binary packages either from a repository such as
-CRAN or from a local <code>.zip</code> file by using <code>install.packages</code>:
-see its help page.  There are menu items on the <code>Packages</code> menu to
+CRAN or from a local <code class="code">.zip</code> file by using <code class="code">install.packages</code>:
+see its help page.  There are menu items on the <code class="code">Packages</code> menu to
 provide a point-and-click interface to package installation.  The
 packages for each minor (4.x.?) version will be stored in a separate area,
-so for R 4.0.? the files are in <samp>bin/windows/contrib/4.0</samp>.
+so for R 4.3.? the files are in <samp class="file">bin/windows/contrib/4.3</samp>.
 </p>
 
 <p>If there is no binary package or that is not up-to-date or you prefer
 compiling from source, read the &lsquo;R Installation and Administration&rsquo;
 manual section on &lsquo;Add-on Packages&rsquo;.  Source packages which contain no
 C/C++/Fortran code which needs compilation can simply be installed by
-<code>install.packages(type = &quot;source&quot;)</code> or <code>R CMD INSTALL
+<code class="code">install.packages(type = &quot;source&quot;)</code> or <code class="command">R CMD INSTALL
 pkgname</code> at a Windows command prompt.  For packages with code that needs
 compilation you will need to collect and install several tools: you can
 download them via the portal at
-<a href="https://cran.r-project.org/bin/windows/Rtools/">https://cran.r-project.org/bin/windows/Rtools/</a>.  Once you have done
-so, just run <code>R CMD INSTALL pkgname</code> at a Windows command
+<a class="uref" href="https://CRAN.R-project.org/bin/windows/Rtools/">https://CRAN.R-project.org/bin/windows/Rtools/</a> and check for more
+detailed instructions there. Once you have done
+so, just run <code class="command">R CMD INSTALL pkgname</code> at a Windows command
 prompt.  To check the package (including running all the examples on its
-help pages and in its test suite, if any) use <code>R CMD check
-pkgname</code>: see the <em>&lsquo;Writing R Extensions&rsquo;</em> manual.
+help pages and in its test suite, if any) use <code class="command">R CMD check
+pkgname</code>: see the <em class="emph">&lsquo;Writing R Extensions&rsquo;</em> manual.
 </p>
 <p>Note that setting up Windows to install a source package that needs
 compilation is rather tricky; please do ensure that you have followed
-the instructions <strong>exactly</strong>.  At least 90% of the questions asked
+the instructions <strong class="strong">exactly</strong>.  At least 90% of the questions asked
 are because people have not done so.
 </p>
 <p>If you have a source package that is known to work on a Unix-alike
 system, you can try the automated Windows binary package builder
-documented at <a href="https://win-builder.r-project.org">https://win-builder.r-project.org</a>.
+documented at <a class="url" href="https://win-builder.R-project.org">https://win-builder.R-project.org</a>.
 </p>
 <hr>
-<a name="I-don_0027t-have-permission-to-write-to-the-R_002d4_002e0_002e3_005clibrary-directory"></a>
-<a name="I-don_0027t-have-permission-to-write-to-the-R_002d4_002e0_002e3_005clibrary-directory_002e"></a>
-<h3 class="section">4.2 I don&rsquo;t have permission to write to the <samp>R-4.0.3\library</samp> directory.</h3>
+</div>
+<div class="section-level-extent" id="I-don_0027t-have-permission-to-write-to-the-R_002d4_002e3_002e0_005clibrary-directory">
+<h3 class="section" id="I-don_0027t-have-permission-to-write-to-the-R_002d4_002e3_002e0_005clibrary-directory_002e">4.2 I don&rsquo;t have permission to write to the <samp class="file">R-4.3.0\library</samp> directory.</h3>
 
 <p>You can install packages anywhere and use the environment variable
-<code>R_LIBS</code> (see <a href="#How-do-I-set-environment-variables_003f">How do I set environment variables?</a>) to point to
+<code class="env">R_LIBS</code> (see <a class="pxref" href="#How-do-I-set-environment-variables_003f">How do I set environment variables?</a>) to point to
 the library location(s).
 </p>
-<p>Suppose your packages are installed in <samp>p:\myRlib</samp>.  Then you can
+<p>Suppose your packages are installed in <samp class="file">p:\myRlib</samp>.  Then you can
 EITHER
 </p>
 <div class="example">
-<pre class="example">set the environment variable R_LIBS to p:/myRlib before starting R
+<pre class="example-preformatted">set the environment variable R_LIBS to p:/myRlib before starting R
 </pre></div>
 
 <p>OR use a package by, e.g.
 </p>
 <div class="example">
-<pre class="example">library(mypkg, lib.loc=&quot;p:/myRlib&quot;)
+<pre class="example-preformatted">library(mypkg, lib.loc=&quot;p:/myRlib&quot;)
 </pre></div>
 
 <p>You can also have a personal library, which defaults to the directory
-<samp>R\win-library\<var>x.y</var></samp> of your home directory for versions
-<var>x.y.z</var> of R.  This location can be changed by setting the
-environment variable <code>R_LIBS_USER</code>, and can be found from inside R
-by running <code>Sys.getenv(&quot;R_LIBS_USER&quot;)</code>.  This will only be used if
+<samp class="file">R\win-library\<var class="var">x.y</var></samp> of your <samp class="file">${LOCALAPPDATA}</samp> directory
+(e.g. <samp class="file">C:\Users\username\AppData\Local</samp>) for versions
+<var class="var">x.y.z</var> since R 4.2.0. With older versions of R, it was a subdirectory
+of your home directory by default. This location can be changed by setting the
+environment variable <code class="env">R_LIBS_USER</code>, and can be found from inside R
+by running <code class="code">Sys.getenv(&quot;R_LIBS_USER&quot;)</code>.  This will only be used if
 it exists so you may need to create it: you can use
 </p>
 <div class="example">
-<pre class="example">dir.create(Sys.getenv(&quot;R_LIBS_USER&quot;), recursive = TRUE)
+<pre class="example-preformatted">dir.create(Sys.getenv(&quot;R_LIBS_USER&quot;), recursive = TRUE)
 </pre></div>
 
-<p>to do so.  If you use <code>install.packages</code> and do not have permission
+<p>to do so.  If you use <code class="code">install.packages</code> and do not have permission
 to write to the main or site library, it should offer to create a personal
 library for you and install the packages there.  This will also happen
-if <code>update.packages</code> offers to update packages for you in a library
+if <code class="code">update.packages</code> offers to update packages for you in a library
 where you do not have write permission.
 </p>
 <p>There can be additional security issues under Windows Vista and later:
-See <a href="#Does-R-run-under-Windows-Vista_003f">Does R run under Windows Vista?</a>.  In particular, the detection
-that a standard user has suitable permissions appears to be unreliable
-under Vista, so we recommend that you do create a personal directory
-yourself.
+See <a class="xref" href="#Does-R-run-under-Windows-7_003f">Does R run under Windows 7/8/10/11/Server 2012/2016/2022?</a>.
 </p>
 
 <hr>
-<a name="The-packages-I-installed-do-not-appear-in-the-HTML-help-system"></a>
-<a name="The-packages-I-installed-do-not-appear-in-the-HTML-help-system_002e"></a>
-<h3 class="section">4.3 The packages I installed do not appear in the HTML help system.</h3>
+</div>
+<div class="section-level-extent" id="The-packages-I-installed-do-not-appear-in-the-HTML-help-system">
+<h3 class="section" id="The-packages-I-installed-do-not-appear-in-the-HTML-help-system_002e">4.3 The packages I installed do not appear in the HTML help system.</h3>
 
 <p>This question applied to the pre-2.10.0 HTML help system, which has been
 replaced.
 </p>
 
 <hr>
-<a name="My-functions-are-not-found-by-the-HTML-help-search-system_002e"></a>
-<a name="My-functions-are-not-found-by-the-HTML-help-search-system_002e-1"></a>
-<h3 class="section">4.4 My functions are not found by the HTML help search system.</h3>
+</div>
+<div class="section-level-extent" id="My-functions-are-not-found-by-the-HTML-help-search-system_002e">
+<h3 class="section" id="My-functions-are-not-found-by-the-HTML-help-search-system_002e-1">4.4 My functions are not found by the HTML help search system.</h3>
 
 <p>This question applied to the pre-2.10.0 search system, which has been
 replaced.
 </p>
 
 <hr>
-<a name="Loading-a-package-fails_002e"></a>
-<a name="Loading-a-package-fails_002e-1"></a>
-<h3 class="section">4.5 Loading a package fails.</h3>
+</div>
+<div class="section-level-extent" id="Loading-a-package-fails_002e">
+<h3 class="section" id="Loading-a-package-fails_002e-1">4.5 Loading a package fails.</h3>
 
 <p>Is the package installed for this version of R?   Packages need to have
-prepared for R 4.0.0 or later.
+prepared for R 4.2.0 or later.
 </p>
 <p>You can tell the version the package was compiled for by looking at the
-&lsquo;<samp>Built:</samp>&rsquo; line in its <samp>DESCRIPTION</samp> file.
+&lsquo;<samp class="samp">Built:</samp>&rsquo; line in its <samp class="file">DESCRIPTION</samp> file.
 </p>
 <p>For a small number of binary packages you need to install additional
-software and have its DLLs in your <code>PATH</code>.  Windows will normally
-give an informative message about a certain DLL not being found.  See
-<a href="https://cran.r-project.org/bin/windows/contrib/4.0/ReadMe">https://cran.r-project.org/bin/windows/contrib/4.0/ReadMe</a> for a
-listing of some of these packages (notably <code>RGtk2</code>,
-<code>cairoDevice</code>, <code>rggobi</code>, <code>rJava</code>, <code>rjags</code> and some
-of the packages connecting to databases).
+software and have its DLLs in your <code class="code">PATH</code>.  Windows will normally
+give an informative message about a certain DLL not being found. See
+<a class="uref" href="https://CRAN.R-project.org/bin/windows/contrib/4.3/ReadMe">https://CRAN.R-project.org/bin/windows/contrib/4.3/ReadMe</a> for a
+listing of some of these packages (notably <code class="code">RGtk2</code>, <code class="code">cairoDevice</code>,
+<code class="code">rggobi</code>, <code class="code">rJava</code>, <code class="code">rjags</code> and some of the packages connecting to databases).
 </p>
 
 <hr>
-<a name="Package-TclTk-does-not-work_002e"></a>
-<a name="Package-TclTk-does-not-work_002e-1"></a>
-<h3 class="section">4.6 Package TclTk does not work.</h3>
+</div>
+<div class="section-level-extent" id="Package-TclTk-does-not-work_002e">
+<h3 class="section" id="Package-TclTk-does-not-work_002e-1">4.6 Package TclTk does not work.</h3>
 
-<p>For package <code>tcltk</code> to work (try <code>demo(tkdensity)</code> or
-<code>demo(tkttest)</code> after <code>library(tcltk)</code>) you need to have Tcl/Tk
+<p>For package <code class="code">tcltk</code> to work (try <code class="code">demo(tkdensity)</code> or
+<code class="code">demo(tkttest)</code> after <code class="code">library(tcltk)</code>) you need to have Tcl/Tk
 installed.  This is part of the R installation, so it should be there.
 </p>
-<p>However, if you have the environment variable <code>MY_TCLTK</code> set to a
+<p>However, if you have the environment variable <code class="env">MY_TCLTK</code> set to a
 non-empty value, it is assumed that you want to use a different Tcl/Tk
-8.6.x installation with the path to its <samp>bin</samp> directory given by
-value of <code>MY_TCLTK</code>, and that this is set up correctly (with
-<code>TCL_LIBRARY</code> set if needed).  Note that you do need 8.6.x and not
+8.6.x installation with the path to its <samp class="file">bin</samp> directory given by
+value of <code class="env">MY_TCLTK</code>, and that this is set up correctly (with
+<code class="env">TCL_LIBRARY</code> set if needed).  Note that you do need 8.6.x and not
 8.5.x nor 8.4.x, and you do need the architecture to match, that is a
 32-bit or 64-bit build of Tcl/Tk to match the R build in use.  (There is
 no guarantee that a 64-bit build will work: it depends on the layout it
-uses.)
+uses and R 4.2 and later use a different layout from previous versions.)
 </p>
 <p>In the past several package authors have suggested using ActiveTcl
-(<a href="https://www.activestate.com/Products/activetcl/">https://www.activestate.com/Products/activetcl/</a>) as a way to
+(<a class="uref" href="https://www.activestate.com/Products/activetcl/">https://www.activestate.com/Products/activetcl/</a>) as a way to
 get Tcl/Tk extensions (but the support files do contain the most
-commonly used <code>TkTable</code> and <code>BWidget</code> extensions).  This could
+commonly used <code class="code">TkTable</code> and <code class="code">BWidget</code> extensions).  This could
 be used by setting (for a default install)
 </p>
 <div class="example">
-<pre class="example">MY_TCLTK=c:/Tcl/bin
+<pre class="example-preformatted">MY_TCLTK=c:/Tcl/bin
 </pre></div>
 
-<p><strong>but</strong> current versions do not by default contain any extra
-extensions (although they may be downloaded via the <code>Teacup</code>
-facility) and this only works for 32-bit R.
+<p><strong class="strong">but</strong> current versions do not by default contain any extra
+extensions (although they may be downloaded via the <code class="code">Teacup</code>
+facility) and this only worked for 32-bit R.
 </p>
-
+<p>As only 64-bit builds are provided as of R 4.2, the Tcl/Tk bundle used is
+now also 64-bit only.  The older combined 32-bit/64-bit bundle for R 4.1
+cannot be used with R 4.2 and later, because it has a different directory layout even
+for the 64-bit part.
+</p>
 <hr>
-<a name="Hyperlinks-in-HTML-do-not-work_002e"></a>
-<a name="Hyperlinks-in-HTML-sometimes-do-not-work_002e"></a>
-<h3 class="section">4.7 Hyperlinks in HTML sometimes do not work.</h3>
+</div>
+<div class="section-level-extent" id="Hyperlinks-in-HTML-do-not-work_002e">
+<h3 class="section" id="Hyperlinks-in-HTML-sometimes-do-not-work_002e">4.7 Hyperlinks in HTML sometimes do not work.</h3>
 
 <p>This question was much more relevant prior to version 2.10.0.
 </p>
@@ -1400,48 +1486,48 @@ facility) and this only works for 32-bit R.
 if the HTTP server has been disabled: the remedy is not to do that!
 </p>
 <hr>
-<a name="update_002epackages_0028_0029-fails"></a>
-<a name="update_002epackages_0028_0029-fails_002e"></a>
-<h3 class="section">4.8 <code>update.packages()</code> fails.</h3>
+</div>
+<div class="section-level-extent" id="update_002epackages_0028_0029-fails">
+<h3 class="section" id="update_002epackages_0028_0029-fails_002e">4.8 <code class="code">update.packages()</code> fails.</h3>
 
 <p>You may not be able to update a package which is in use: Windows &lsquo;locks&rsquo;
-the package&rsquo;s DLL when it is loaded.  So use <code>update.packages()</code>
+the package&rsquo;s DLL when it is loaded.  So use <code class="code">update.packages()</code>
 (or the menu equivalent) in a new session.
 </p>
-<p>If you put <code>library(foo)</code> in your <samp>.Rprofile</samp> you will need to
-start R with <samp>--vanilla</samp> to be able to update package <code>foo</code>.
-If you set <code>R_DEFAULT_PACKAGES</code> to include <code>foo</code>, you will
+<p>If you put <code class="code">library(foo)</code> in your <samp class="file">.Rprofile</samp> you will need to
+start R with <samp class="option">--vanilla</samp> to be able to update package <code class="code">foo</code>.
+If you set <code class="env">R_DEFAULT_PACKAGES</code> to include <code class="code">foo</code>, you will
 need to unset it temporarily.
 </p>
 <p>It has been reported that some other software has interfered with the
 installation process by preventing the renaming of temporary files,
-<em>Google Desktop</em> being a known example.
+<em class="emph">Google Desktop</em> being a known example.
 </p>
 
 <hr>
-<a name="How-do-I-add-to-the-list-of-repositories_003f"></a>
-<a name="How-do-I-add-to-the-list-of-repositories_003f-1"></a>
-<h3 class="section">4.9 How do I add to the list of repositories?</h3>
+</div>
+<div class="section-level-extent" id="How-do-I-add-to-the-list-of-repositories_003f">
+<h3 class="section" id="How-do-I-add-to-the-list-of-repositories_003f-1">4.9 How do I add to the list of repositories?</h3>
 
-<p>as shown in the <code>Select repositories...</code> item on the
-<code>Packages</code> menu?
+<p>as shown in the <code class="code">Select repositories...</code> item on the
+<code class="code">Packages</code> menu?
 </p>
-<p>This reads from the tab-delimited file <samp>R_HOME\etc\repositories</samp>,
-which you can edit, or put a modified copy at <samp>.R\repositories</samp>
-in your HOME directory (see <a href="#What-are-HOME-and-working-directories_003f">What are HOME and working directories?</a>).
+<p>This reads from the tab-delimited file <samp class="file">R_HOME\etc\repositories</samp>,
+which you can edit, or put a modified copy at <samp class="file">.R\repositories</samp>
+in your HOME directory (see <a class="pxref" href="#What-are-HOME-and-working-directories_003f">What are HOME and working directories?</a>).
 </p>
 <hr>
-<a name="Help-is-not-shown-for-some-of-the-packages"></a>
-<a name="Help-is-not-shown-for-some-of-the-packages-1"></a>
-<h3 class="section">4.10 Help is not shown for some of the packages</h3>
+</div>
+<div class="section-level-extent" id="Help-is-not-shown-for-some-of-the-packages">
+<h3 class="section" id="Help-is-not-shown-for-some-of-the-packages-1">4.10 Help is not shown for some of the packages</h3>
 
 <p>This was about Compiled HTML help, which has not been supported since R
 2.10.0.
 </p>
 <hr>
-<a name="How-do-I-get-static-HTML-pages_003f"></a>
-<a name="How-do-I-get-static-HTML-pages_003f-1"></a>
-<h3 class="section">4.11 How do I get static HTML pages?</h3>
+</div>
+<div class="section-level-extent" id="How-do-I-get-static-HTML-pages_003f">
+<h3 class="section" id="How-do-I-get-static-HTML-pages_003f-1">4.11 How do I get static HTML pages?</h3>
 
 <p>We presume you want to do this for some special purpose: R&rsquo;s help system
 will not make use of them, links across library directories will not
@@ -1455,16 +1541,16 @@ need to install R and/or packages from their sources.  To install just a
 few packages with static HTML pages use
 </p>
 <div class="example">
-<pre class="example">R CMD INSTALL --html <var>pkg1</var> <var>pkg2</var> &hellip;
+<pre class="example-preformatted">R CMD INSTALL --html <var class="var">pkg1</var> <var class="var">pkg2</var> &hellip;
 </pre></div>
 
 <p>To install R itself with static HTML pages you need to build it from the
 sources for yourself.  Change the following line in file
-<samp>MkRules.local</samp> (after copying <samp>MkRules.dist</samp> to
-<samp>MkRules.local</samp> if that has not already been done).
+<samp class="file">MkRules.local</samp> (after copying <samp class="file">MkRules.dist</samp> to
+<samp class="file">MkRules.local</samp> if that has not already been done).
 </p>
 <div class="example">
-<pre class="example"># set this to YES to build static HTML help
+<pre class="example-preformatted"># set this to YES to build static HTML help
 BUILD_HTML = NO
 </pre></div>
 
@@ -1472,34 +1558,34 @@ BUILD_HTML = NO
 installed with static HTML pages.
 </p>
 <hr>
-<a name="How-can-I-get-a-binary-version-of-a-package_003f"></a>
-<a name="How-can-I-get-a-binary-version-of-a-package_003f-1"></a>
-<h3 class="section">4.12 How can I get a binary version of a package?</h3>
+</div>
+<div class="section-level-extent" id="How-can-I-get-a-binary-version-of-a-package_003f">
+<h3 class="section" id="How-can-I-get-a-binary-version-of-a-package_003f-1">4.12 How can I get a binary version of a package?</h3>
 
 <p>Presumably one not available on CRAN, BioC or a similar repository.
 </p>
 <p>If you have a source package that is known to work on a Unix-alike
 system, you can try the automated Windows binary package builder
-documented at <a href="https://win-builder.r-project.org">https://win-builder.r-project.org</a>.  If the package is
+documented at <a class="url" href="https://win-builder.R-project.org">https://win-builder.R-project.org</a>.  If the package is
 not yours, please remember to change the maintainer address so the
 results go to you and not the author(s)!
 </p>
 <p>However, if a CRAN package is not available in binary form, this usually
 means that there is a problem with some dependent package or external
-software (often mentioned in the <samp>@ReadMe</samp> file in the binary
-repository directory).  You can email <a href="mailto:R-windows@r-project.org">R-windows@r-project.org</a>
+software (often mentioned in the <samp class="file">@ReadMe</samp> file in the binary
+repository directory).  You can email <a class="email" href="mailto:R-windows@R-project.org">R-windows@R-project.org</a>
 expressing a wish for such a package to be ported&mdash;the maintainers will
 take such wishes into account when prioritizing work on binary packages.
 </p>
 <p>In many cases installing packages from the sources is not at all
 difficult (it is simple if the package contains no compiled code), so
 please attempt that for yourself before requesting help from the busy
-volunteers.
+volunteers. See also Q4.1.
 </p>
 <hr>
-<a name="Package-xxx-is-out-of-date-for-Windows"></a>
-<a name="Package-xxx-is-out-of-date-for-Windows-1"></a>
-<h3 class="section">4.13 Package xxx is out of date for Windows</h3>
+</div>
+<div class="section-level-extent" id="Package-xxx-is-out-of-date-for-Windows">
+<h3 class="section" id="Package-xxx-is-out-of-date-for-Windows-1">4.13 Package xxx is out of date for Windows</h3>
 
 <p>Here are three possible reasons:
 </p>
@@ -1512,17 +1598,17 @@ get behind, so you could try another mirror.
 than the one you are using.  You can check on the package&rsquo;s HTML page on
 CRAN, and update your R if needed.
 </p>
-<p>Your R might be too old.  Binary packages for the 3.6 series will be
-built until about Mar 2021, and were discontinued for earlier versions by
+<p>Your R might be too old.  Binary packages for the 3.6 series were
+built until Apr 2021, and were discontinued for earlier versions by
 early 2020.  Packages for R 4.x are built (if possible) whilst 4.(x+1)
 is current, but building stops once 4.(x+2) reaches alpha (pre-release,
 about a month before release).  You can always try installing from the
 sources.
 </p>
 <hr>
-<a name="No-binary-packages-appear-to-be-available-for-my-version-of-R"></a>
-<a name="No-binary-packages-appear-to-be-available-for-my-version-of-R-1"></a>
-<h3 class="section">4.14 No binary packages appear to be available for my version of R</h3>
+</div>
+<div class="section-level-extent" id="No-binary-packages-appear-to-be-available-for-my-version-of-R">
+<h3 class="section" id="No-binary-packages-appear-to-be-available-for-my-version-of-R-1">4.14 No binary packages appear to be available for my version of R</h3>
 
 <p>How old is it?  The CRAN policy is to archive binary packages two years
 after the 3.x or 4.x series is closed.  Other repositories may do so
@@ -1534,111 +1620,115 @@ source.
 </p>
 
 <hr>
-<a name="How-do-I-build-my-package-for-both-32_002d-and-64_002dbit-R_003f"></a>
-<a name="How-do-I-build-my-package-for-both-32_002d-and-64_002dbit-R_003f-1"></a>
-<h3 class="section">4.15 How do I build my package for both 32- and 64-bit R?</h3>
+</div>
+<div class="section-level-extent" id="How-do-I-build-my-package-for-both-32_002d-and-64_002dbit-R_003f">
+<h3 class="section" id="How-do-I-build-my-package-for-both-32_002d-and-64_002dbit-R_003f-1">4.15 How do I build my package for both 32- and 64-bit R?</h3>
 
-<p>Packages without compiled code nor a <samp>configure.win</samp> script will
+<p>Since R 4.2.0, 32-bit builds are no longer provided. The following
+information refers to previous versions of R.
+</p>
+<p>Packages without compiled code nor a <samp class="file">configure.win</samp> script will
 run on both 32- and 64-bit R.
 </p>
-<p>Packages with compiled code but no <samp>configure.win</samp> nor
-<code>src/Makefile.win</code> file will be built for both when running on a
+<p>Packages with compiled code but no <samp class="file">configure.win</samp> nor
+<code class="code">src/Makefile.win</code> file will be built for both when running on a
 64-bit version of Windows if both versions of R are installed.
 </p>
-<p>An empty <samp>configure.win</samp> is treated in the same way as if none
+<p>An empty <samp class="file">configure.win</samp> is treated in the same way as if none
 existed.  Also, there is a list of packages known to have an
-architecture-independent <samp>configure.win</samp> hardcoded into <code>R
+architecture-independent <samp class="file">configure.win</samp> hardcoded into <code class="command">R
 CMD INSTALL</code>, and for these packages, both architectures will be built
 under the above conditions.  Other packages can be installed with
-<samp>configure.win</samp> run for just the first architecture by using option
-<samp>--force-biarch</samp>. 
+<samp class="file">configure.win</samp> run for just the first architecture by using option
+<samp class="option">--force-biarch</samp>. 
 </p>
 <p>Any package can be installed for first one architecture and then the
-other with option <samp>--merge-multiarch</samp>, but the package source
+other with option <samp class="option">--merge-multiarch</samp>, but the package source
 must be a tarball (and as before, running on a 64-bit version of Windows
 with both versions of R installed).
 </p>
-<p>Finally, a package without a <code>src/Makefile.win</code> file and no or
-empty or architecture-independent <code>configure.win</code> file can be
+<p>Finally, a package without a <code class="code">src/Makefile.win</code> file and no or
+empty or architecture-independent <code class="code">configure.win</code> file can be
 installed for both architectures from 32-bit Windows if the 64-bit
 components were selected when R was installed and option
-<samp>--compile-both</samp> is given.  Obviously, only the 32-bit
+<samp class="option">--compile-both</samp> is given.  Obviously, only the 32-bit
 installation can be tested.
 </p>
-<hr><hr>
-<a name="Windows-Features"></a>
-<a name="Windows-Features-1"></a>
-<h2 class="chapter">5 Windows Features</h2>
+<hr>
+<hr>
+</div>
+</div>
+<div class="chapter-level-extent" id="Windows-Features">
+<h2 class="chapter" id="Windows-Features-1">5 Windows Features</h2>
 
 
 
 <hr>
-<a name="What-should-I-expect-to-behave-differently-from-the-Unix-version"></a>
-<a name="What-should-I-expect-to-behave-differently-from-the-Unix-version-of-R_003f"></a>
-<h3 class="section">5.1 What should I expect to behave differently from the Unix version of R?</h3>
+<div class="section-level-extent" id="What-should-I-expect-to-behave-differently-from-the-Unix-version">
+<h3 class="section" id="What-should-I-expect-to-behave-differently-from-the-Unix-version-of-R_003f">5.1 What should I expect to behave differently from the Unix version of R?</h3>
 
-<ul>
-<li> R commands can be interrupted by <tt class="key">Esc</tt> in <code>Rgui.exe</code>
-and <tt class="key">Ctrl-break</tt> or <tt class="key">Ctrl-C</tt> in <code>Rterm.exe</code>:
-<tt class="key">Ctrl-C</tt> is used for copying in <code>Rgui.exe</code>.
+<ul class="itemize mark-bullet">
+<li>R commands can be interrupted by <kbd class="key">Esc</kbd> in <code class="command">Rgui.exe</code>
+and <kbd class="key">Ctrl-break</kbd> or <kbd class="key">Ctrl-C</kbd> in <code class="command">Rterm.exe</code>:
+<kbd class="key">Ctrl-C</kbd> is used for copying in <code class="command">Rgui.exe</code>.
 
-</li><li> Command-line editing is always available, but is somewhat simpler than the
-readline-based editing on Unix.  For <code>Rgui.exe</code>, the menu item
-&lsquo;Help | Console&rsquo; will give details.  For <code>Rterm.exe</code> see file
-<samp>README.rterm</samp>.
+</li><li>Command-line editing is always available, but is somewhat simpler than the
+readline-based editing on Unix.  For <code class="command">Rgui.exe</code>, the menu item
+&lsquo;Help | Console&rsquo; will give details.  For <code class="command">Rterm.exe</code> see file
+<samp class="file">README.rterm</samp>.
 
-</li><li> Paths to files (e.g. in <code>source()</code>) can be specified with
+</li><li>Paths to files (e.g. in <code class="code">source()</code>) can be specified with
 either &quot;/&quot; or &quot;\\&quot;.
 
-</li><li> <code>system()</code> is slightly different: see its help page and that
-of <code>shell()</code>.
+</li><li><code class="code">system()</code> is slightly different: see its help page and that
+of <code class="code">shell()</code>.
 </li></ul>
 
 
 <hr>
-<a name="I-hear-about-some-nifty-features_002e"></a>
-<a name="I-hear-about-some-nifty-features_003a-please-tell-me-about-them_0021"></a>
-<h3 class="section">5.2 I hear about some nifty features: please tell me about them!</h3>
+</div>
+<div class="section-level-extent" id="I-hear-about-some-nifty-features_002e">
+<h3 class="section" id="I-hear-about-some-nifty-features_003a-please-tell-me-about-them_0021">5.2 I hear about some nifty features: please tell me about them!</h3>
 
-<p>You have read the file <samp>README.R-4.0.3</samp>? There are file menus on
+<p>You have read the file <samp class="file">README.R-4.3.0</samp>? There are file menus on
 the R console, pager and graphics windows.  You can source and save from
-those menus, and copy the graphics to <code>png</code>, <code>jpeg</code>,
-<code>bmp</code>, <code>postscript</code>, <code>PDF</code> or <code>metafile</code>.  There are
+those menus, and copy the graphics to <code class="code">png</code>, <code class="code">jpeg</code>,
+<code class="code">bmp</code>, <code class="code">postscript</code>, <code class="code">PDF</code> or <code class="code">metafile</code>.  There are
 right-click menus giving shortcuts to menu items, and optionally
 toolbars with buttons giving shortcuts to frequent operations.
 </p>
-<p>If you resize the R console the <code>options(width=)</code> is automatically
+<p>If you resize the R console the <code class="code">options(width=)</code> is automatically
 set to the console width (unless disabled in the configuration file).
 </p>
-<p>The graphics has a history mechanism.  As <samp>README.R-4.0.3</samp> says:
+<p>The graphics has a history mechanism.  As <samp class="file">README.R-4.3.0</samp> says:
 </p>
-<blockquote>
+<blockquote class="quotation">
 <p>&lsquo;The History menu allows the recording of plots.  When plots have been
-recorded they can be reviewed by <tt class="key">PgUp</tt> and <tt class="key">PgDn</tt>, saved and
+recorded they can be reviewed by <kbd class="key">PgUp</kbd> and <kbd class="key">PgDn</kbd>, saved and
 replaced.  Recording can be turned on automatically (the Recording item
-on the list) or individual plots can be added (Add or the <tt class="key">INS</tt>
+on the list) or individual plots can be added (Add or the <kbd class="key">INS</kbd>
 key).  The whole plot history can be saved to or retrieved from an R
 variable in the global environment.
   The format of recorded plots may change between R versions.
-  Recorded plots should <strong>not</strong> be used as a permanent
+  Recorded plots should <strong class="strong">not</strong> be used as a permanent
   storage format for R plots.
 </p>
 <p>There is only one graphics history shared by all the windows devices.&rsquo;
 </p></blockquote>
 
 <p>The R console and graphics windows have configuration files stored in
-the <samp>RHOME\etc</samp> directory called <samp>Rconsole</samp> and <samp>Rdevga</samp>;
-you can keep personal copies in your <samp>HOME</samp> directory.  They contain
+the <samp class="file">RHOME\etc</samp> directory called <samp class="file">Rconsole</samp> and <samp class="file">Rdevga</samp>;
+you can keep personal copies in your <samp class="file">HOME</samp> directory.  They contain
 comments which should suffice for you to edit them to your
-preferences.  For more details see <code>?Rconsole</code>.
-There is a GUI preferences editor invoked from the <code>Edit</code> menu which
-can be used to edit the file <samp>Rconsole</samp>.
+preferences.  For more details see <code class="code">?Rconsole</code>.
+There is a GUI preferences editor invoked from the <code class="code">Edit</code> menu which
+can be used to edit the file <samp class="file">Rconsole</samp>.
 </p>
 
 <hr>
-<a name="Circles-appear-as-ovals-on-screen"></a>
-<a name="Circles-appear-as-ovals-on-screen_002e"></a>
-<h3 class="section">5.3 Circles appear as ovals on screen.</h3>
+</div>
+<div class="section-level-extent" id="Circles-appear-as-ovals-on-screen">
+<h3 class="section" id="Circles-appear-as-ovals-on-screen_002e">5.3 Circles appear as ovals on screen.</h3>
 
 <p>The graphics system asks Windows for the number of pixels per inch in
 the X and Y directions, and uses that to size graphics (which in R are
@@ -1646,7 +1736,7 @@ in units of inches).  Sometimes the answer is a complete invention, and
 in any case Windows will not know exactly how the horizontal and
 vertical size have been set on a monitor which allows them to be
 adjusted.  You can specify correct values either in the call to
-<code>windows</code> or as options: see <code>?windows</code>.  (Typically these are
+<code class="code">windows</code> or as options: see <code class="code">?windows</code>.  (Typically these are
 of the order of 100.)
 </p>
 <p>On one of our systems, the screen height was reported as 240mm, and the
@@ -1657,78 +1747,79 @@ modes.  In fact it was a 21&quot; monitor and 400mm x 300mm!
 they are not running at their native resolution.
 </p>
 <hr>
-<a name="How-do-I-move-focus-to-a-graphics-window-or-the-console_003f"></a>
-<a name="How-do-I-move-focus-to-a-graphics-window-or-the-console_003f-1"></a>
-<h3 class="section">5.4 How do I move focus to a graphics window or the console?</h3>
+</div>
+<div class="section-level-extent" id="How-do-I-move-focus-to-a-graphics-window-or-the-console_003f">
+<h3 class="section" id="How-do-I-move-focus-to-a-graphics-window-or-the-console_003f-1">5.4 How do I move focus to a graphics window or the console?</h3>
 
 <p>You may want to do this from within a function, for example when calling
-&lsquo;<samp>identify</samp>&rsquo; or &lsquo;<samp>readline</samp>&rsquo;.  Use the function
-&lsquo;<samp>bringToTop()</samp>&rsquo;.  With its default argument it brings the active
-graphics window to the top and gives it focus.  With argument &lsquo;<samp>-1</samp>&rsquo;
+&lsquo;<samp class="samp">identify</samp>&rsquo; or &lsquo;<samp class="samp">readline</samp>&rsquo;.  Use the function
+&lsquo;<samp class="samp">bringToTop()</samp>&rsquo;.  With its default argument it brings the active
+graphics window to the top and gives it focus.  With argument &lsquo;<samp class="samp">-1</samp>&rsquo;
 it brings the console to the top and gives it focus.
 </p>
-<p>This works for <code>Rgui.exe</code> in MDI and SDI modes, and can be used for
-graphics windows from <code>Rterm.exe</code> (although Windows may not always
+<p>This works for <code class="command">Rgui.exe</code> in MDI and SDI modes, and can be used for
+graphics windows from <code class="command">Rterm.exe</code> (although Windows may not always
 act on it).
 </p>
 
 <hr>
-<a name="What-does-TAB-completion-do_003f"></a>
-<a name="What-does-TAB-completion-do_003f-1"></a>
-<h3 class="section">5.5 What does TAB completion do?</h3>
+</div>
+<div class="section-level-extent" id="What-does-TAB-completion-do_003f">
+<h3 class="section" id="What-does-TAB-completion-do_003f-1">5.5 What does TAB completion do?</h3>
 
-<p>Both <code>Rgui</code> and <code>Rterm</code> support <kbd>TAB</kbd> completion.
-Hitting <kbd>TAB</kbd> whilst entering a command line completes the current
-&lsquo;word&rsquo; as far as is unambiguously possible.  Hitting <kbd>TAB</kbd> a second
+<p>Both <code class="command">Rgui</code> and <code class="command">Rterm</code> support <kbd class="kbd">TAB</kbd> completion.
+Hitting <kbd class="kbd">TAB</kbd> whilst entering a command line completes the current
+&lsquo;word&rsquo; as far as is unambiguously possible.  Hitting <kbd class="kbd">TAB</kbd> a second
 time then shows a list of possible completions (or the first few if
 there are many): the user can then enter one or more characters and hit
-<kbd>TAB</kbd> again.
+<kbd class="kbd">TAB</kbd> again.
 </p>
 <p>What is it &lsquo;completing&rsquo;?  There are two modes: within an unterminated
 (single- or double-) quoted expression it completes file
-paths.<a name="DOCF4" href="#FOOT4"><sup>4</sup></a>  Otherwise, it is completing R expressions: most obviously
-it will match visible R object names and keywords, so <kbd>apr</kbd> followed
-by <kbd>TAB</kbd> will (in a vanilla session) complete to <code>apropos</code>.
-After a function name and parenthesis (e.g. <kbd>apropos(</kbd>) it will
-complete argument names (and <kbd>=</kbd>), and after <kbd>$</kbd> or <kbd>@</kbd> it
+paths.<a class="footnote" id="DOCF3" href="#FOOT3"><sup>3</sup></a>  Otherwise, it is completing R expressions: most obviously
+it will match visible R object names and keywords, so <kbd class="kbd">apr</kbd> followed
+by <kbd class="kbd">TAB</kbd> will (in a vanilla session) complete to <code class="code">apropos</code>.
+After a function name and parenthesis (e.g. <kbd class="kbd">apropos(</kbd>) it will
+complete argument names (and <kbd class="kbd">=</kbd>), and after <kbd class="kbd">$</kbd> or <kbd class="kbd">@</kbd> it
 will complete list components or slot names respectively.
 </p>
-<p>This feature can be turned off: <code>Rgui</code> has two menu items to do
-so, and setting the environment variable <code>R_COMPLETION</code> to
-<code>FALSE</code> turns it off completely for both <code>Rgui</code> and
-<code>Rterm</code>.  Further, the behaviour can be fine-tuned: to see the
+<p>This feature can be turned off: <code class="command">Rgui</code> has two menu items to do
+so, and setting the environment variable <code class="env">R_COMPLETION</code> to
+<code class="code">FALSE</code> turns it off completely for both <code class="command">Rgui</code> and
+<code class="command">Rterm</code>.  Further, the behaviour can be fine-tuned: to see the
 settings available use
 </p>
 <div class="example">
-<pre class="example">?rc.settings
+<pre class="example-preformatted">?rc.settings
 </pre></div>
 
 <p>which also explains how the various types of completion work.
 </p>
 <p>This feature is very similar to the completion available in the
-<code>readline</code>-based command line interface on Unix-alikes: the macOS
-GUI <code>R.app</code> has a different completion scheme.
+<code class="code">readline</code>-based command line interface on Unix-alikes: the macOS
+GUI <code class="code">R.app</code> has a different completion scheme.
 </p>
-<hr><hr>
-<a name="Workspaces"></a>
-<a name="Workspaces-1"></a>
-<h2 class="chapter">6 Workspaces</h2>
+<hr>
+<hr>
+</div>
+</div>
+<div class="chapter-level-extent" id="Workspaces">
+<h2 class="chapter" id="Workspaces-1">6 Workspaces</h2>
 
 
 
 
 <hr>
-<a name="My-workspace-gets-saved-in-a-strange-place_002e-How-do-I-stop-this_003f"></a>
-<a name="My-workspace-gets-saved-in-a-strange-place_003a-how-do-I-stop-this_003f"></a>
-<h3 class="section">6.1 My workspace gets saved in a strange place: how do I stop this?</h3>
+<div class="section-level-extent" id="My-workspace-gets-saved-in-a-strange-place_002e-How-do-I-stop-this_003f">
+<h3 class="section" id="My-workspace-gets-saved-in-a-strange-place_003a-how-do-I-stop-this_003f">6.1 My workspace gets saved in a strange place: how do I stop this?</h3>
 
 <p>Have you changed the working directory?: see Q6.2.
 </p>
 
 <hr>
-<a name="How-do-I-store-my-workspace-in-a-different-place_003f"></a>
-<a name="How-do-I-store-my-workspace-in-a-different-place_003f-1"></a>
-<h3 class="section">6.2 How do I store my workspace in a different place?</h3>
+</div>
+<div class="section-level-extent" id="How-do-I-store-my-workspace-in-a-different-place_003f">
+<h3 class="section" id="How-do-I-store-my-workspace-in-a-different-place_003f-1">6.2 How do I store my workspace in a different place?</h3>
 
 <p>Use the &lsquo;File | Change Dir...&rsquo; menu item to select a new working
 directory: this defaults to the last directory you loaded a file
@@ -1736,34 +1827,49 @@ from.  The workspace is saved in the working directory.  You can also
 save a snapshot of the workspace from the &lsquo;Save Workspace...&rsquo; menu item.
 </p>
 <p>From the command line you can change the working directory by the
-function <code>setwd</code>: see its help page.
+function <code class="code">setwd</code>: see its help page.
 </p>
 
 <hr>
-<a name="Can-I-load-workspaces-saved-under-Unix_002fGNU_002dLinux-or-macOS_003f"></a>
-<a name="Can-I-load-workspaces-saved-under-Unix_002fGNU_002dLinux-or-Mac-macOS_003f"></a>
-<h3 class="section">6.3 Can I load workspaces saved under Unix/GNU-Linux or Mac macOS?</h3>
+</div>
+<div class="section-level-extent" id="Can-I-load-workspaces-saved-under-Unix_002fGNU_002dLinux-or-macOS_003f">
+<h3 class="section" id="Can-I-load-workspaces-saved-under-Unix_002fGNU_002dLinux-or-Mac-macOS_003f">6.3 Can I load workspaces saved under Unix/GNU-Linux or Mac macOS?</h3>
 
 <p>Yes.  All ports of R use the same format for saved workspaces, so they
 are interchangeable (for the same 4.x.? version of R, at least).
 </p>
+<p>It is possible to save references to package namespaces when saving the
+workspace: if that happens the package will need to be installed on the
+machine loading the workspace.
+</p>
+<p>As of R 3.6, which uses serialization format 3 for saving the workspace by
+default, information about the current encoding is recorded in the
+workspace.
+</p>
 <p>Note though that character data in a workspace will be in a particular
-encoding that may not be recorded in the workspace, so workspaces
-containing non-<acronym>ASCII</acronym> character data may not be interchangeable
+encoding that may not be recorded in the workspace for older versions of R, so workspaces
+containing non-<abbr class="acronym">ASCII</abbr> character data may not be interchangeable
 even on the same OS.  Since R marks character data when it knows it to
 be in UTF-8 or Latin-1 (including its Windows superset, CP1252), strings
 in those encodings are likely to be transferred correctly: fortunately
 this covers most of the common cases (macOS normally uses UTF-8, and
 Linux users are likely to use UTF-8 or perhaps Latin-1).
 </p>
-<p>It is possible to save references to package namespaces when saving the
-workspace: if that happens the package will need to be installed on the
-machine loading the workspace.
+<p>As of R 3.6, when the workspace is loaded, the characters in other encodings
+are converted to the current encoding, if possible. When this is not
+possible, such as the characters are not representable in such encodings,
+they are converted to UTF-8 with a warning, which may cause some disruption
+or confuse some software.
 </p>
-<hr><hr>
-<a name="The-R-Console"></a>
-<a name="The-R-Console-1"></a>
-<h2 class="chapter">7 The R Console</h2>
+<p>As of R 4.2, when running on recent Windows, the native encoding is UTF-8
+and so these problems should disappear.
+</p>
+<hr>
+<hr>
+</div>
+</div>
+<div class="chapter-level-extent" id="The-R-Console">
+<h2 class="chapter" id="The-R-Console-1">7 The R Console</h2>
 
 
 
@@ -1771,68 +1877,68 @@ machine loading the workspace.
 
 
 <hr>
-<a name="The-output-to-the-console-seems-to-be-delayed"></a>
-<a name="When-using-Rgui-the-output-to-the-console-seems-to-be-delayed_002e"></a>
-<h3 class="section">7.1 When using Rgui the output to the console seems to be delayed.</h3>
+<div class="section-level-extent" id="The-output-to-the-console-seems-to-be-delayed">
+<h3 class="section" id="When-using-Rgui-the-output-to-the-console-seems-to-be-delayed_002e">7.1 When using Rgui the output to the console seems to be delayed.</h3>
 
 <p>This is deliberate: the console output is buffered and re-written in
 chunks to be faster and less distracting.  You can turn buffering off or
-on from the &lsquo;Misc&rsquo; menu or the right-click menu: <tt class="key">Ctrl-W</tt> toggles
+on from the &lsquo;Misc&rsquo; menu or the right-click menu: <kbd class="key">Ctrl-W</kbd> toggles
 the setting.
 </p>
 <p>If you are sourcing R code or writing from a function, there is another
-option.  A call to the R function <code>flush.console()</code> will write out
+option.  A call to the R function <code class="code">flush.console()</code> will write out
 the buffer and so update the console.
 </p>
 
 <hr>
-<a name="Long-lines-seem-to-be-truncated_002e"></a>
-<a name="Long-lines-in-the-console-or-pager-are-truncated_002e"></a>
-<h3 class="section">7.2 Long lines in the console or pager are truncated.</h3>
+</div>
+<div class="section-level-extent" id="Long-lines-seem-to-be-truncated_002e">
+<h3 class="section" id="Long-lines-in-the-console-or-pager-are-truncated_002e">7.2 Long lines in the console or pager are truncated.</h3>
 
-<p>They only <strong>seem</strong> to be truncated: that $ at the end indicates you
+<p>They only <strong class="strong">seem</strong> to be truncated: that $ at the end indicates you
 can scroll the window to see the rest of the line.  Use the horizontal
-scrollbar or the <tt class="key">CTRL + left/right arrow</tt> keys to scroll
-horizontally. (The <tt class="key">left/right arrow</tt> keys work in the pager too.)
+scrollbar or the <kbd class="key">CTRL + left/right arrow</kbd> keys to scroll
+horizontally. (The <kbd class="key">left/right arrow</kbd> keys work in the pager too.)
 </p>
 
 
-<hr><hr>
-<a name="Building-from-Source"></a>
-<a name="Building-from-Source-1"></a>
-<h2 class="chapter">8 Building from Source</h2>
+<hr>
+<hr>
+</div>
+</div>
+<div class="chapter-level-extent" id="Building-from-Source">
+<h2 class="chapter" id="Building-from-Source-1">8 Building from Source</h2>
 
 
 
 <hr>
-<a name="How-can-I-compile-R-from-source_003f"></a>
-<a name="How-can-I-compile-R-from-source_003f-1"></a>
-<h3 class="section">8.1 How can I compile R from source?</h3>
+<div class="section-level-extent" id="How-can-I-compile-R-from-source_003f">
+<h3 class="section" id="How-can-I-compile-R-from-source_003f-1">8.1 How can I compile R from source?</h3>
 
 <p>See the &lsquo;R Installation and Administration&rsquo; manual (for the version of R
 you want to install).
 </p>
 <hr>
-<a name="Can-I-use-a-fast-BLAS_003f"></a>
-<a name="Can-I-use-a-fast-BLAS_003f-1"></a>
-<h3 class="section">8.2 Can I use a fast BLAS?</h3>
+</div>
+<div class="section-level-extent" id="Can-I-use-a-fast-BLAS_003f">
+<h3 class="section" id="Can-I-use-a-fast-BLAS_003f-1">8.2 Can I use a fast BLAS?</h3>
 
 <p>Fast BLAS (Basic Linear Algebra Subprograms,
-<a href="http://www.netlib.org/blas/faq.html">http://www.netlib.org/blas/faq.html</a>) routines are used to
+<a class="uref" href="https://www.netlib.org/blas/faq.html">https://www.netlib.org/blas/faq.html</a>) routines are used to
 speed up numerical linear algebra.  There is support in the R sources
 for the &lsquo;tuned&rsquo; BLAS called ATLAS
-(<a href="http://math-atlas.sourceforge.net">http://math-atlas.sourceforge.net</a>).  The savings can be
+(<a class="uref" href="https://math-atlas.sourceforge.net">https://math-atlas.sourceforge.net</a>).  The savings can be
 appreciable but because ATLAS is tuned to a particular chip we can&rsquo;t use
 it generally.  However, linear algebra on large matrices is not often an
 important part of R computations, and more typical calculations on small
 matrices may run slower.
 </p>
 <p>BLAS support is supplied by the single DLL
-<samp>R_HOME\bin\x64\Rblas.dll</samp>, and you can add a fast BLAS just by
+<samp class="file">R_HOME\bin\x64\Rblas.dll</samp>, and you can add a fast BLAS just by
 replacing that.  Replacements for 32-bit R and some of the older common
 chips are available on CRAN in directory
-<samp>bin/windows/contrib/ATLAS</samp>.  See the R Installation and
-Administration&rsquo; manual for how to build an ATLAS <samp>Rblas.dll</samp> tuned
+<samp class="file">bin/windows/contrib/ATLAS</samp>.  See the R Installation and
+Administration&rsquo; manual for how to build an ATLAS <samp class="file">Rblas.dll</samp> tuned
 to your system using the R sources.  Unfortunately the process has been
 less successful when tried for the common current CPUs.
 </p>
@@ -1841,75 +1947,72 @@ less successful when tried for the common current CPUs.
 slightly less accurate) results than the reference BLAS included in R.
 </p>
 <hr>
-<a name="How-do-I-include-compiled-C-code_003f"></a>
-<a name="How-do-I-include-compiled-C-code_003f-1"></a>
-<h3 class="section">8.3 How do I include compiled C code?</h3>
+</div>
+<div class="section-level-extent" id="How-do-I-include-compiled-C-code_003f">
+<h3 class="section" id="How-do-I-include-compiled-C-code_003f-1">8.3 How do I include compiled C code?</h3>
 
-<p>We strongly encourage you to do this <em>via</em> building an R package:
-see the <em>&lsquo;Writing R Extensions&rsquo;</em> manual.  In any event you should
+<p>We strongly encourage you to do this <em class="emph">via</em> building an R package:
+see the <em class="emph">&lsquo;Writing R Extensions&rsquo;</em> manual.  In any event you should
 get and install the tools and toolchain mentioned in the &lsquo;R Installation
 and Administration&rsquo; manual.  Then you can use
 </p><div class="example">
-<pre class="example">...\bin\x64\R CMD SHLIB foo.c bar.f
+<pre class="example-preformatted">...\bin\x64\R CMD SHLIB foo.c bar.f
 </pre></div>
-<p>to make <samp>foo.dll</samp>.  Use <code>...\bin\x64\R CMD SHLIB --help</code> for
-further options, or see <code>?SHLIB</code>.  (Replace <code>x64</code> by
-<code>i386</code> for 64-bit R.)
+<p>to make <samp class="file">foo.dll</samp>.  Use <code class="command">...\bin\x64\R CMD SHLIB --help</code> for
+further options, or see <code class="code">?SHLIB</code>.
 </p>
-<p>If you want to use Visual C++, Borland C++ or other compilers, see the
-appropriate section in <samp>README.packages</samp>.
-</p>
+
 
 
 <hr>
-<a name="How-do-I-debug-code-that-I-have-compiled-and-dyn_002eload_002ded_003f"></a>
-<a name="How-do-I-debug-code-that-I-have-compiled-and-dyn_002eload_002ded_003f-1"></a>
-<h3 class="section">8.4 How do I debug code that I have compiled and dyn.load-ed?</h3>
+</div>
+<div class="section-level-extent" id="How-do-I-debug-code-that-I-have-compiled-and-dyn_002eload_002ded_003f">
+<h3 class="section" id="How-do-I-debug-code-that-I-have-compiled-and-dyn_002eload_002ded_003f-1">8.4 How do I debug code that I have compiled and dyn.load-ed?</h3>
 
-<p>Debugging under Windows is often a fraught process, and sometimes does
-not work at all.  If all you need is a <em>just-in-time</em> debugger to
-catch crashes, consider (32-bit) <code>Dr. Mingw</code> from the
-<code>mingw-utils</code> bundle on <a href="http://www.mingw.org">http://www.mingw.org</a>.  That will be
-able to pinpoint the error, most effectively if you build a version of R
-with debugging information as described below.
-</p>
+
 <p>First, build a version of the R system with debugging information by
 </p>
 <div class="example">
-<pre class="example">make clean
+<pre class="example-preformatted">make clean
 make DEBUG=T
 </pre></div>
 
 <p>and make a debug version of your package by
 </p>
 <div class="example">
-<pre class="example">Rcmd INSTALL --debug mypkg
+<pre class="example-preformatted">Rcmd INSTALL --debug mypkg
 </pre></div>
 
-<p>You will need a suitable version of <code>gdb</code> which matches your
+<p>See the &lsquo;R Installation and Administration&rsquo; manual (for the version of R you
+want to install) and <a class="uref" href="https://CRAN.R-project.org/bin/windows/Rtools/">https://CRAN.R-project.org/bin/windows/Rtools/</a>
+for links to detailed information on how to build R and R packages from
+source using corresponding versions of Rtools and for additional hints for
+debugging on Windows.
+</p>
+<p>You will need a suitable version of <code class="command">gdb</code> which matches your
 compiler.  Then you can debug by
 </p>
 <div class="example">
-<pre class="example">gdb /path/to/R-4.0.3/bin/x64/Rgui.exe
+<pre class="example-preformatted">gdb /path/to/R-4.3.0/bin/x64/Rgui.exe
 </pre></div>
 
-<p>(or use <code>Rterm.exe</code>.)  However, note
+<p>(or use <code class="command">Rterm.exe</code>.)  However, note
 </p>
-<ul>
-<li> <code>gdb</code> may only be able to find the source code if we run in the
-location where the source was compiled (<samp>R-4.0.3/src/gnuwin32</samp> for
-the main system, <samp>R-4.0.3/src/library/mypkg/src</samp> for a package),
-unless told otherwise by the <code>directory</code> command.  It is most
-convenient to set a list of code locations via <code>directory</code> commands
-in the file <samp>.gdbinit</samp> in the directory from which <code>gdb</code> is
+<ul class="itemize mark-bullet">
+<li><code class="command">gdb</code> may only be able to find the source code if we run in the
+location where the source was compiled (<samp class="file">R-4.3.0/src/gnuwin32</samp> for
+the main system, <samp class="file">R-4.3.0/src/library/mypkg/src</samp> for a package),
+unless told otherwise by the <code class="command">directory</code> command.  It is most
+convenient to set a list of code locations via <code class="command">directory</code> commands
+in the file <samp class="file">.gdbinit</samp> in the directory from which <code class="command">gdb</code> is
 run.
 
-</li><li> It is only possible to set breakpoints in a DLL after the DLL has
-been loaded.  So a way to examine the function <code>tukeyline</code> in
-package <code>stats</code> might be
+</li><li>It is only possible to set breakpoints in a DLL after the DLL has
+been loaded.  So a way to examine the function <code class="code">tukeyline</code> in
+package <code class="code">stats</code> might be
 
 <div class="example">
-<pre class="example">     gdb ../../../../bin/i386/Rgui.exe
+<pre class="example-preformatted">     gdb ../../../../bin/x64/Rgui.exe
      (gdb) break WinMain
      (gdb) run
      [ stops with R.dll loaded ]
@@ -1925,47 +2028,47 @@ package <code>stats</code> might be
      ...
 </pre></div>
 
-<p>Alternatively, in <code>Rgui</code> you can use the &lsquo;Misc|Break to
+<p>Alternatively, in <code class="command">Rgui</code> you can use the &lsquo;Misc|Break to
 debugger&rsquo; menu item after your DLL is loaded.  The C function call
-<code>breaktodebugger()</code> will do the same thing.
+<code class="code">breaktodebugger()</code> will do the same thing.
 </p>
-</li><li> Fortran symbols need an underline appended.
+</li><li>Fortran symbols need an underline appended.
 
-</li><li> Windows has little support for signals, so the Unix idea of running a
+</li><li>Windows has little support for signals, so the Unix idea of running a
 program under a debugger and sending it a signal to interrupt it and
 drop control back to the debugger does not work with a MinGW version of
-<code>gdb</code>.  It does often work with the <code>cygwin</code> version.
+<code class="command">gdb</code>.  It does often work with the <code class="code">cygwin</code> version.
 
 </li></ul>
 
 
 <hr>
-<a name="How-do-I-include-C_002b_002b-code_003f"></a>
-<a name="How-do-I-include-C_002b_002b-code_003f-1"></a>
-<h3 class="section">8.5 How do I include C++ code?</h3>
+</div>
+<div class="section-level-extent" id="How-do-I-include-C_002b_002b-code_003f">
+<h3 class="section" id="How-do-I-include-C_002b_002b-code_003f-1">8.5 How do I include C++ code?</h3>
 
 <p>You need to do two things:
 </p>
 <p>(a) Write a wrapper to export the symbols you want to call from R as
- <code>extern &quot;C&quot;</code>.
+ <code class="code">extern &quot;C&quot;</code>.
 </p>
 <p>(b) Include the C++ libraries in the link to make the DLL.  Suppose
-<samp>X.cc</samp> contains your C++ code, and <samp>X_main.cc</samp> is the wrapper,
-as in the example in <em>&lsquo;Writing R Extensions&rsquo;</em>.  Then build the DLL by
-(<code>gcc</code>)
+<samp class="file">X.cc</samp> contains your C++ code, and <samp class="file">X_main.cc</samp> is the wrapper,
+as in the example in <em class="emph">&lsquo;Writing R Extensions&rsquo;</em>.  Then build the DLL by
+(<code class="command">gcc</code>)
 </p>
 <div class="example">
-<pre class="example">...\bin\x64\R CMD SHLIB X.cc X_main.cc
+<pre class="example-preformatted">...\bin\x64\R CMD SHLIB X.cc X_main.cc
 </pre></div>
 
-<p>or (VC++, which requires extension <code>.cpp</code>)
+<p>or (VC++, which requires extension <code class="code">.cpp</code>)
 </p>
 <div class="example">
-<pre class="example">cl /MT /c X.cpp X_main.cpp
+<pre class="example-preformatted">cl /MT /c X.cpp X_main.cpp
 link /dll /out:X.dll /export:X_main X.obj X_main.obj
 </pre></div>
 
-<p>and call the entry point(s) in <code>X_R</code>, such as <code>X_main</code>.
+<p>and call the entry point(s) in <code class="code">X_R</code>, such as <code class="code">X_main</code>.
 Construction of static variables will occur when the DLL is loaded, and
 destruction when the DLL is unloaded, usually when R terminates.
 </p>
@@ -1974,70 +2077,70 @@ console: see the next section.
 </p>
 
 <hr>
-<a name="The-output-from-my-C-code-disappears_002e"></a>
-<a name="The-output-from-my-C-code-disappears_002e-Why_003f"></a>
-<h3 class="section">8.6 The output from my C code disappears.  Why?</h3>
+</div>
+<div class="section-level-extent" id="The-output-from-my-C-code-disappears_002e">
+<h3 class="section" id="The-output-from-my-C-code-disappears_002e-Why_003f">8.6 The output from my C code disappears.  Why?</h3>
 
-<p>The <code>Rgui.exe</code> console is a Windows application: writing to
-<code>stdout</code> or <code>stderr</code> will not produce output in the
-console.  (This will work with <code>Rterm.exe</code>.)  Use <code>Rprintf</code> or
-<code>REprintf</code> instead.  These are declared in header file
-<samp>R_ext/PrtUtil.h</samp>.
+<p>The <code class="command">Rgui.exe</code> console is a Windows application: writing to
+<code class="code">stdout</code> or <code class="code">stderr</code> will not produce output in the
+console.  (This will work with <code class="command">Rterm.exe</code>.)  Use <code class="code">Rprintf</code> or
+<code class="code">REprintf</code> instead.  These are declared in header file
+<samp class="file">R_ext/PrtUtil.h</samp>.
 </p>
-<p>Note that output from the console is delayed (see <a href="#The-output-to-the-console-seems-to-be-delayed">The output to the console seems to be delayed</a>), so that you will not normally see any
+<p>Note that output from the console is delayed (see <a class="pxref" href="#The-output-to-the-console-seems-to-be-delayed">When using Rgui the output to the console seems to be delayed.</a>), so that you will not normally see any
 output before returning to the R prompt.
 </p>
 
 <hr>
-<a name="The-output-from-my-Fortran-code-disappears_002e"></a>
-<a name="The-output-from-my-Fortran-code-disappears_002e-Why_003f"></a>
-<h3 class="section">8.7 The output from my Fortran code disappears.  Why?</h3>
+</div>
+<div class="section-level-extent" id="The-output-from-my-Fortran-code-disappears_002e">
+<h3 class="section" id="The-output-from-my-Fortran-code-disappears_002e-Why_003f">8.7 The output from my Fortran code disappears.  Why?</h3>
 
-<p>Writing to Fortran output writes to a file, not the <code>Rgui</code> console.
-Use one of the subroutines <code>dblepr</code>, <code>intpr</code> or <code>realpr</code>
-documented in the <em>&lsquo;Writing R Extensions&rsquo;</em> manual.
+<p>Writing to Fortran output writes to a file, not the <code class="command">Rgui</code> console.
+Use one of the subroutines <code class="code">dblepr</code>, <code class="code">intpr</code> or <code class="code">realpr</code>
+documented in the <em class="emph">&lsquo;Writing R Extensions&rsquo;</em> manual.
 </p>
-<p>Note that output from the console is delayed (see <a href="#The-output-to-the-console-seems-to-be-delayed">The output to the console seems to be delayed</a>), so that you will not normally see any
-output before returning to the R prompt even when using the <code>xxxpr</code>
+<p>Note that output from the console is delayed (see <a class="pxref" href="#The-output-to-the-console-seems-to-be-delayed">When using Rgui the output to the console seems to be delayed.</a>), so that you will not normally see any
+output before returning to the R prompt even when using the <code class="code">xxxpr</code>
 subroutines.
 </p>
 
 <hr>
-<a name="The-console-freezes-when-my-compiled-code-is-running"></a>
-<a name="The-console-freezes-when-my-compiled-code-is-running_002e"></a>
-<h3 class="section">8.8 The console freezes when my compiled code is running.</h3>
+</div>
+<div class="section-level-extent" id="The-console-freezes-when-my-compiled-code-is-running">
+<h3 class="section" id="The-console-freezes-when-my-compiled-code-is-running_002e">8.8 The console freezes when my compiled code is running.</h3>
 
 <p>The console, pagers and graphics window all run in the same thread
 as the R engine.  To allow the console etc to respond to Windows events,
-call <code>R_ProcessEvents()</code> periodically from your compiled code.
+call <code class="code">R_ProcessEvents()</code> periodically from your compiled code.
 If you want output to be updated on the console, call
-<code>R_FlushConsole()</code> and then <code>R_ProcessEvents()</code>.
+<code class="code">R_FlushConsole()</code> and then <code class="code">R_ProcessEvents()</code>.
 </p>
 <hr WIDTH="100%">
 <address>
-Last edited 2015-08-13: comments to
-<code><a href="mailto:R-windows@R-project.org">R-windows@r-project.org</a></code>
+Last edited 2022-04-12: comments to
+<code><a href="mailto:R-windows@R-project.org">R-windows@R-project.org</a></code>
 </address>
-<div class="footnote">
+
+</div>
+</div>
+</div>
+<div class="footnotes-segment">
 <hr>
 <h4 class="footnotes-heading">Footnotes</h4>
 
-<h3><a name="FOOT1" href="#DOCF1">(1)</a></h3>
-<p>Non-administrator accounts will automatically be offered
-a default installation directory in the user area.</p>
-<h3><a name="FOOT2" href="#DOCF2">(2)</a></h3>
+<h5 class="footnote-body-heading"><a id="FOOT1" href="#DOCF1">(1)</a></h5>
 <p>what Windows calls x64 for x86-64 CPUs, not the very
 rare ia64 Windows for Itanium CPUs.</p>
-<h3><a name="FOOT3" href="#DOCF3">(3)</a></h3>
+<h5 class="footnote-body-heading"><a id="FOOT2" href="#DOCF2">(2)</a></h5>
 <p>or they may have no choice:
 apparently some Windows editions are tied to a specific language.</p>
-<h3><a name="FOOT4" href="#DOCF4">(4)</a></h3>
+<h5 class="footnote-body-heading"><a id="FOOT3" href="#DOCF3">(3)</a></h5>
 <p>It does not have a complete understanding of Windows
 file paths, but can complete most relative or absolute file paths,
 including drives and spaces. Relative paths on drives are not handled,
 for example.</p>
 </div>
-<hr>
 
 
 

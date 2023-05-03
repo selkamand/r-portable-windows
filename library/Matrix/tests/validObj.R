@@ -3,6 +3,9 @@ library(Matrix)
 
 source(system.file("test-tools.R", package = "Matrix"))
 
+## from ../R/Auxiliaries.R :
+no_facts <- Matrix:::.drop.factors
+
 ## the empty ones:
 checkMatrix(new("dgeMatrix"))
 checkMatrix(Matrix(,0,0))
@@ -28,20 +31,20 @@ stopifnot(colnames(m1) == c.nam,
 	  identical(m1, t(tm1)))
 
 ## an example of *named* dimnames
-(t34N <- as(unclass(table(x = gl(3,4), y=gl(4,3))), "dgeMatrix"))
+(t34N <- as(unclass(table(x = gl(3,4), y=gl(4,3))), "unpackedMatrix"))
 stopifnot(identical(dimnames(t34N),
 		    dimnames(as(t34N, "matrix"))),
           identical(t34N, t(t(t34N))))
 
 ## "dpo"
 checkMatrix(cm <- crossprod(m1))
-checkMatrix(cp <- as(cm, "dppMatrix"))# 'dpp' + factors
+checkMatrix(cp <- as(cm, "packedMatrix"))# 'dpp' + factors
 checkMatrix(cs <- as(cm, "dsyMatrix"))# 'dsy' + factors
-checkMatrix(dcm <- as(cm, "dgeMatrix"))#'dge'
+checkMatrix(dcm <- as(cm, "generalMatrix"))#'dge'
 checkMatrix(mcm <- as(cm, "dMatrix")) # 'dsy' + factors -- buglet? rather == cm?
 checkMatrix(mc. <- as(cm, "Matrix"))  # dpo --> dsy -- (as above)  FIXME? ??
 stopifnot(identical(mc., mcm),
-	  identical(cm, (2*cm)/2),# remains dpo
+	  identical(no_facts(cm), (2*cm)/2),# remains dpo
 	  identical(cm + cp, cp + cs),# dge
 	  identical(mc., mcm),
 	  all(2*cm == mcm * 2))
@@ -55,7 +58,7 @@ stopifnot(all(eq@x),
 ## Coercion to 'dpo' should give an error if result would be invalid
 M <- Matrix(diag(4) - 1)
 assertError(as(M, "dpoMatrix"))
-M. <- as(M, "dgeMatrix")
+M. <- as(M, "generalMatrix")
 M.[1,2] <- 10 # -> not even symmetric anymore
 assertError(as(M., "dpoMatrix"))
 
@@ -63,7 +66,7 @@ assertError(as(M., "dpoMatrix"))
 ## Cholesky
 checkMatrix(ch <- chol(cm))
 checkMatrix(ch2 <- chol(as(cm, "dsyMatrix")))
-checkMatrix(ch3 <- chol(as(cm, "dgeMatrix")))
+checkMatrix(ch3 <- chol(as(cm, "generalMatrix")))
 stopifnot(is.all.equal3(as(ch, "matrix"), as(ch2, "matrix"), as(ch3, "matrix")))
 ### Very basic	triangular matrix stuff
 
@@ -92,18 +95,17 @@ validObject(M <- new("dtCMatrix", Dim = c(n,n), diag = "U",
 stopifnot(identical(as.mat(T), diag(n)))
 
 suppressWarnings(RNGversion("3.5.0")); set.seed(3)
-(p9 <- as(sample(9), "pMatrix"))
-## Check that the correct error message is triggered:
-ind.try <- try(p9[1,1] <- 1, silent = TRUE)
-np9 <- as(p9, "ngTMatrix")
-stopifnot(grepl("replacing.*sensible", ind.try[1]),
-	  is.logical(p9[1,]),
+(p9 <- p9. <- as(sample(9), "pMatrix"))
+(np9 <- np9. <- as(p9, "TsparseMatrix"))
+p9.[1,1] <- np9.[1,1] <- TRUE
+stopifnot(is.logical(p9[1,]),
 	  is(p9[2,, drop=FALSE], "indMatrix"),
 	  is(p9[9:1,], "indMatrix"),
 	  isTRUE(p9[-c(1:6, 8:9), 1]),
 	  identical(t(p9), solve(p9)),
 	  identical(p9[TRUE, ], p9),
           all.equal(p9[, TRUE], np9), # currently...
+          identical(p9., np9.),
 	  identical(as(diag(9), "pMatrix"), as(1:9, "pMatrix"))
 	  )
 assert.EQ.mat(p9[TRUE,], as.matrix(np9))
@@ -119,22 +121,25 @@ m. <- mm
 ip <- c(1:2, 4:3, 6:5) # permute the 'i' and 'x' slot just "inside column":
 m.@i <- m.i <- mm@i[ip]
 m.@x <- m.x <- mm@x[ip]
-stopifnot(grep("row indices are not", validObject(m., test=TRUE)) == 1)
+stopifnot(identical(1L, grep("not increasing within columns",
+                             validObject(m., test = TRUE))))
 Matrix:::.sortCsparse(m.) # don't use this at home, boys!
 m. # now is fixed
 
 ## Make sure that validObject() objects...
 ## 1) to wrong 'p'
 m. <- mm; m.@p[1] <- 1L
-stopifnot(grep("first element of slot p", validObject(m., test=TRUE)) == 1)
+stopifnot(identical(1L, grep("first element of 'p' slot",
+                             validObject(m., test = TRUE))))
 m.@p <- mm@p[c(1,3:2,4:6)]
-stopifnot(grep("^slot p.* non-decreasing", validObject(m., test=TRUE)) == 1)
+stopifnot(identical(1L, grep("not nondecreasing",
+                             validObject(m., test = TRUE))))
 ## 2) to non-strictly increasing i's:
 m. <- mm ; ix <- c(1:3,3,5:6)
 m.@i <- mm@i[ix]
 m.@x <- mm@x[ix]
-stopifnot(identical(grep("slot i is not.* increasing .*column$",
-                         validObject(m., test=TRUE)), 1L))
+stopifnot(identical(1L, grep("not increasing within columns",
+                             validObject(m., test = TRUE))))
 ## ix <- c(1:3, 3:6) # now the the (i,x) slots are too large (and decreasing at end)
 ## m.@i <- mm@i[ix]
 ## m.@x <- mm@x[ix]

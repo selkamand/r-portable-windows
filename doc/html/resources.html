@@ -1,7 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<!-- Created by GNU Texinfo 5.2, http://www.gnu.org/software/texinfo/ -->
+<!-- Created by GNU Texinfo 6.7, http://www.gnu.org/software/texinfo/ -->
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>R Resources</title>
 
 <meta name="description" content="R Resources">
@@ -9,36 +10,48 @@
 <meta name="resource-type" content="document">
 <meta name="distribution" content="global">
 <meta name="Generator" content="texi2any">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link href="#Top" rel="start" title="Top">
 <link href="dir.html#Top" rel="up" title="(dir)">
 <style type="text/css">
 <!--
 a.summary-letter {text-decoration: none}
-blockquote.smallquotation {font-size: smaller}
+blockquote.indentedblock {margin-right: 0em}
 div.display {margin-left: 3.2em}
 div.example {margin-left: 3.2em}
-div.indentedblock {margin-left: 3.2em}
 div.lisp {margin-left: 3.2em}
-div.smalldisplay {margin-left: 3.2em}
-div.smallexample {margin-left: 3.2em}
-div.smallindentedblock {margin-left: 3.2em; font-size: smaller}
-div.smalllisp {margin-left: 3.2em}
-kbd {font-style:oblique}
+kbd {font-style: oblique}
 pre.display {font-family: inherit}
 pre.format {font-family: inherit}
 pre.menu-comment {font-family: serif}
 pre.menu-preformatted {font-family: serif}
-pre.smalldisplay {font-family: inherit; font-size: smaller}
-pre.smallexample {font-size: smaller}
-pre.smallformat {font-family: inherit; font-size: smaller}
-pre.smalllisp {font-size: smaller}
-span.nocodebreak {white-space:nowrap}
-span.nolinebreak {white-space:nowrap}
-span.roman {font-family:serif; font-weight:normal}
-span.sansserif {font-family:sans-serif; font-weight:normal}
+span.nolinebreak {white-space: nowrap}
+span.roman {font-family: initial; font-weight: normal}
+span.sansserif {font-family: sans-serif; font-weight: normal}
 ul.no-bullet {list-style: none}
+@media screen {
+    .container {
+	padding-right: 10px;
+	padding-left: 10px;
+	margin-right: auto;
+	margin-left: auto;
+	max-width: 900px;
+    }
+}
+
+.rimage img { /* from knitr - for examples and demos */
+    width: 96%;
+    margin-left: 2%;
+} 	
+
+.katex { font-size: 1.1em; }
+
+code {
+    color: inherit;
+    background: inherit;
+}
+
 body {
+    line-height: 1.4;
     background: white;
     color: black;
 }
@@ -57,7 +70,7 @@ h1 {
     background: white;
     color: rgb(55%, 55%, 55%);
     font-family: monospace;
-    font-size: x-large;
+    font-size: 1.4em; /* x-large; */
     text-align: center;
 }
 
@@ -65,7 +78,7 @@ h2 {
     background: white;
     color: rgb(40%, 40%, 40%);
     font-family: monospace;
-    font-size: large;
+    font-size: 1.2em; /* large; */
     text-align: center;
 }
 
@@ -73,7 +86,7 @@ h3 {
     background: white;
     color: rgb(40%, 40%, 40%);
     font-family: monospace;
-    font-size: large;
+    font-size: 1.2em; /* large; */
 }
 
 h4 {
@@ -81,7 +94,7 @@ h4 {
     color: rgb(40%, 40%, 40%);
     font-family: monospace;
     font-style: italic;
-    font-size: large;
+    font-size: 1.2em; /* large; */
 }
 
 h5 {
@@ -96,7 +109,7 @@ h6 {
     font-family: monospace;
     font-style: italic;
 }
-		
+
 img.toplogo {
     width: 4em;
     vertical-align: middle;
@@ -136,13 +149,23 @@ div.vignettes a:hover {
     background: rgb(85%, 85%, 85%);
 }
 
+tr {
+    vertical-align: top;
+}
+
+span.rlang {
+    font-family: Courier New, Courier;
+    color: #666666;
+}
+
+
 -->
 </style>
 
 
 </head>
 
-<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+<body lang="en">
 <h1 class="settitle" align="center">R Resources</h1>
 
 
@@ -152,14 +175,12 @@ div.vignettes a:hover {
 <img class="toplogo" src="Rlogo.svg" alt="[R logo]">
 </h1>
 <hr width="100%">
-<a name="Top"></a>
-<h1 class="node-heading">Top</h1>
+
+<span id="Top"></span><h1 class="node-heading">Top</h1>
 
 
 <hr>
-<a name="FAQ"></a>
-<a name="FAQ-1"></a>
-<h3 class="section">1 FAQ</h3>
+<span id="FAQ"></span><span id="FAQ-1"></span><h3 class="section">1 FAQ</h3>
 
 <p>A collection of <a href="faq.html">Frequently Asked Questions</a> and their
 answers is maintained by <a href="mailto:Kurt.Hornik@R-project.org">Kurt Hornik</a>
@@ -171,9 +192,7 @@ and can be found at the <acronym>URL</acronym>
 
 
 <hr>
-<a name="Mailing-lists"></a>
-<a name="Mailing-lists-1"></a>
-<h3 class="section">2 Mailing lists</h3>
+<span id="Mailing-lists"></span><span id="Mailing-lists-1"></span><h3 class="section">2 Mailing lists</h3>
 
 <p>Thanks to <a href="mailto:Martin.Maechler@R-project.org">Martin Maechler</a> there
 are a number of mailing lists which are used by R users and developers.
@@ -186,9 +205,7 @@ See
 <p>for details.
 </p>
 <hr>
-<a name="Archives"></a>
-<a name="Archives-1"></a>
-<h3 class="section">3 Archives</h3>
+<span id="Archives"></span><span id="Archives-1"></span><h3 class="section">3 Archives</h3>
 
 <p>The Comprehensive R Archive Network (<acronym>CRAN</acronym>) is a collection of
 sites which carry identical material, consisting of the R
@@ -201,9 +218,7 @@ information on daily mirrors available from
 </p></blockquote>
 
 <hr>
-<a name="Bug_002dtracking-system"></a>
-<a name="Bug_002dtracking-system-1"></a>
-<h3 class="section">4 Bug-tracking system</h3>
+<span id="Bug_002dtracking-system"></span><span id="Bug_002dtracking-system-1"></span><h3 class="section">4 Bug-tracking system</h3>
 
 <p>R has a bug-tracking system (or perhaps a bug-filing system is a more
 precise description) available on the net at

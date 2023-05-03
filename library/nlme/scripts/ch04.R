@@ -4,7 +4,9 @@
 
 library(nlme)
 library(lattice)
-options(width = 65, digits = 5)
+options(width = 65,
+        ## reduce platform dependence in printed output when testing
+        digits = if(nzchar(Sys.getenv("R_TESTS"))) 3 else 5)
 options(contrasts = c(unordered = "contr.helmert", ordered = "contr.poly"))
 pdf(file = 'ch04.pdf')
 
@@ -116,7 +118,9 @@ ranef(fm1Oxide, level = 1:2)
 fm1Wafer <- lme(current ~ voltage + I(voltage^2), data = Wafer,
                 random = list(Wafer = pdDiag(~voltage + I(voltage^2)),
                 Site = pdDiag(~voltage + I(voltage^2))))
+## IGNORE_RDIFF_BEGIN
 summary(fm1Wafer)
+## IGNORE_RDIFF_END
 fitted(fm1Wafer, level = 0)
 resid(fm1Wafer, level = 1:2)
 newWafer <-
@@ -160,7 +164,9 @@ fm2Wafer <- update(fm1Wafer,
       random = list(Wafer=pdDiag(~voltage+I(voltage^2)),
              Site=pdDiag(~voltage+I(voltage^2))))
 summary(fm2Wafer)
+## IGNORE_RDIFF_BEGIN
 intervals(fm2Wafer)
+## IGNORE_RDIFF_END
 qqnorm(fm2Wafer)
 qqnorm(fm2Orth.lme, ~ranef(.), id = 0.10, cex = 0.7)
 pairs(fm2Orth.lme, ~ranef(.) | Sex,
@@ -199,5 +205,4 @@ fm1Machine <-
 # cleanup
 
 summary(warnings())
-proc.time()
 

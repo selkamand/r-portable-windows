@@ -8,15 +8,17 @@ data(Ovary)
 ## tolerance increased for flang (was 6e-6)
 fm1 <- gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
            correlation = corAR1(form = ~ 1 | Mare))
-(int1 <- intervals(fm1))
-stopifnot(
+int1 <- intervals(fm1)
+## no longer print attr(,"label"), PR#18196 :
+writeLines(intOut <- capture.output(int1))
+stopifnot({
+    length(grep(',"label"', intOut, fixed=TRUE)) == 0
     all.equal(int1$corStruct["Phi",],
 	      c(lower=0.66842829, est.=0.753207889, upper=0.81866619),
 	      tol = 1e-5)# 7e-6 needed for flan
-   ,
     all.equal(as.vector(int1$sigma),
 	      c(3.9747061, 4.61617157, 5.361161), tol = 1e-5)
-)
+})
 
 # variance changes with a power of the absolute fitted values?
 fm2 <- update(fm1, weights = varPower())

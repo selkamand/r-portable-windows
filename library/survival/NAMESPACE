@@ -1,13 +1,13 @@
 useDynLib(survival, .registration = TRUE)
 importFrom(splines, spline.des, ns)
 importFrom(Matrix, expm)
-importFrom(stats, anova, approx, as.formula, coef, coefficients,
+importFrom(stats, aggregate, anova, approx, as.formula, coef, coefficients,
            contr.treatment, cor, density, delete.response, extractAIC, formula, 
            family, fitted, lm, logLik, makepredictcall, median, model.extract,
-           model.frame, model.matrix, model.offset, model.response,
-           model.weights, na.fail, na.pass, napredict, naprint, naresid, nobs,
-           pchisq, pnorm, printCoefmat, predict, qnorm, quantile, qgamma,
-           reformulate, setNames, terms.formula,
+           model.frame, model.matrix, model.offset, model.response, make.link,
+           model.weights, na.fail, na.pass, na.omit, napredict, naprint, naresid,
+           nobs, pchisq, pnorm, printCoefmat, predict, qnorm, quantile, qgamma,
+           qweibull, reformulate, setNames, terms.formula, 
            resid, residuals, rnorm, runif, stat.anova, terms, weights, var, vcov,
            .checkMFClasses, .getXlevels, update, update.formula)
 importFrom(graphics, arrows, axis, barplot, box, clip, matlines, matplot,
@@ -18,17 +18,18 @@ importFrom(methods, as)
 importFrom(utils, getS3method, type.convert, methods, head, tail)
 export(Surv, Surv2, Surv2data, aeqSurv, aareg, agreg.fit,
        agexact.fit, attrassign, 
+       blogit, bprobit, bcloglog, blog,
        basehaz, cch, clogit, cipoisson, cluster, concordance, concordancefit, 
        coxph, cox.zph, coxph.control, coxph.detail, coxph.fit,
        coxph.wtest, finegray, format.Surv, 
        frailty,  frailty.gamma, 
        frailty.gaussian, frailty.t, is.Surv, 
-       is.na.Surv, is.ratetable,
-       labels.survreg, match.ratetable, neardate,
-       psurvreg, qsurvreg, dsurvreg,
+       is.na.Surv, is.ratetable, nsk,
+       match.ratetable, neardate,
+       psurvreg, qsurvreg, dsurvreg, pseudo,
        pspline, pyears, ratetableDate, ratetable,
        ridge, royston, rsurvreg, rttright,statefig, strata, 
-       survSplit, survcheck, survdiff, survexp,  survfit,
+       survSplit, survcheck, survcondense, survdiff, survexp,  survfit,
        survfit0, survfit.formula,
        coxsurv.fit, survfitKM, survfitCI,
        survobrien,  
@@ -43,9 +44,11 @@ S3method('[', Surv2)
 S3method('[', cox.zph)
 S3method('[', coxph.penalty)
 S3method('[', ratetable)
+S3method('[', ratetable2)
 S3method('[', survfit)
 S3method('[', survfitms)
 S3method('[', tcut)
+S3method('[', tmerge)
 S3method(Math, Surv)
 S3method(Math, Surv2)
 S3method(Math, ratetable)
@@ -60,6 +63,7 @@ S3method(anova, coxph)
 S3method(anova, coxphlist)
 S3method(anova, survreg)
 S3method(anova, survreglist)
+S3method(aggregate, survfit)
 S3method(as.character, Surv)
 S3method(as.character, Surv2)
 S3method(as.data.frame, Surv)
@@ -104,6 +108,7 @@ S3method(is.na, Surv)
 S3method(is.na, Surv2)
 S3method(is.na, coxph.penalty)
 S3method(is.na, ratetable)
+S3method(is.na, ratetable2)
 S3method(labels, survreg)
 S3method(levels, Surv)
 S3method(levels, tcut)
@@ -116,8 +121,11 @@ S3method(logLik, coxph)
 S3method(logLik, coxph.null)
 S3method(logLik, survreg)
 S3method(makepredictcall, pspline)
+S3method(makepredictcall, nsk)
 S3method(median, Surv)
+S3method(median, survfit)
 S3method(model.frame, coxph)
+S3method(model.frame, survfit)
 S3method(model.frame, survreg)
 S3method(model.matrix, coxph)
 S3method(model.matrix, survreg)
@@ -133,6 +141,7 @@ S3method(points, Surv)
 S3method(points, Surv2)
 S3method(points, survfit)
 S3method(predict, coxph)
+S3method(predict, coxphms)
 S3method(predict, coxph.penal)
 S3method(predict, pspline)
 S3method(predict, survreg)
@@ -149,6 +158,7 @@ S3method(print, coxph.null)
 S3method(print, coxph.penal)
 S3method(print, pyears)
 S3method(print, ratetable)
+S3method(print, summary.aareg)
 S3method(print, summary.cch)
 S3method(print, summary.coxph)
 S3method(print, summary.coxph.penal)
@@ -164,11 +174,14 @@ S3method(print, survfitms)
 S3method(print, survreg)
 S3method(print, survreg.penal)
 S3method(print, yates)
+S3method(quantile, Surv)
 S3method(quantile, survfit)
 S3method(quantile, survfitms)
 S3method(ratetableDate, POSIXt)
 S3method(ratetableDate, Date)
 S3method(ratetableDate, date)
+S3method(ratetableDate, dates)
+S3method(ratetableDate, integer)
 S3method(ratetableDate, chron)
 S3method(ratetableDate, default)
 S3method(rep, Surv)
@@ -178,8 +191,10 @@ S3method(rep.int, Surv2)
 S3method(rep_len, Surv)
 S3method(rep_len, Surv2)
 S3method(residuals, coxph)
+S3method(residuals, coxphms)
 S3method(residuals, coxph.null)
 S3method(residuals, coxph.penal)
+S3method(residuals, survfit)
 S3method(residuals, survreg)
 S3method(residuals, survreg.penal)
 S3method(rev, Surv)
@@ -194,6 +209,8 @@ S3method(summary, survexp)
 S3method(summary, survfit)
 S3method(summary, survfitms)
 S3method(summary, survreg)
+S3method(summary, tmerge)
+S3method(survfit, clogit)
 S3method(survfit, coxph)
 S3method(survfit, coxphms)
 S3method(survfit, formula)
@@ -215,8 +232,6 @@ S3method(weights, survreg)
 S3method(yates_setup, default)
 S3method(yates_setup, glm)
 S3method(yates_setup, coxph)
-S3method('[', ratetable2)
-S3method(is.na,ratetable2)
 
 # xtfrm.Surv was moved out of base into survival at one point
 if(getRversion() >= "3.6.0")

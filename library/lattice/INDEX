@@ -60,6 +60,7 @@ simpleKey               Function to generate a simple key
 simpleTheme             Function to generate a simple theme
 singer                  Heights of New York Choral Society singers
 splom                   Scatter Plot Matrices
+standard.theme          Built-in Graphical Themes
 strip.default           Default Trellis Strip Function
 tmd                     Tukey Mean-Difference Plot
 trellis.device          Initializing Trellis Displays

@@ -13,5 +13,10 @@ if(require(nlme)) {
     beav.gls <- gls(temp ~ activ + dummy, data = beav,
                     corr = corAR1(0.8), method = "ML")
     stepAIC(beav.gls)
-}
 
+## for future terms-based nlme
+    FIT <- glmmPQL(y ~ trt + I(week > 2), random = ~ 1 | ID,
+                   family = binomial, data = bacteria)
+    form <- formula(FIT)
+    stopifnot(form[[2]] == "y")
+}

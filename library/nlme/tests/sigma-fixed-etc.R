@@ -4,13 +4,7 @@
 ## library(nlme,lib.loc=lib.loc)
 library(nlme)
 
-## possibly move to ../R/ or ../inst/ if used in more places
-doExtras <- function ()
-{
-    interactive() || nzchar(Sys.getenv("R_nlme_check_extra")) ||
-        identical("true", unname(Sys.getenv("R_PKG_CHECKING_doExtras")))
-}
-doExtras()  ## used below {when activated by the tester, e.g., MM..r}
+nlme:::doExtras()  ## used below {when activated by the tester, e.g., MM..r}
 ## isSun <- Sys.info()[["sysname"]] == "SunOS"
 
 ##===   example 1 general linear model page 251  gls ML  and LME ================
@@ -143,7 +137,7 @@ stopifnot(
 
 ##
 ##   REML method
-if(doExtras()) { ## -- takes 2--3 minutes
+if(nlme:::doExtras()) { ## -- takes 2--3 minutes
 method <- "REML"
 sigma <- 0.7
 cat("\nFixed sigma= ", sigma,"  estimation method ", method,"\n")
@@ -159,7 +153,7 @@ cat(" -> numIter: ", t1.fix.REML.nlme$numIter, "\n") # 380 or so
 print(summary(t1.fix.REML.nlme))
 print( anova(t1.fix.REML.nlme))
 it1.fRn <- try( intervals(t1.fix.REML.nlme) ) ## cannot get .. Non-positive ...
-}# only if(doExtras())
+}# only if(nlme:::doExtras())
 
 cat("Time elapsed: ", (proc.time() - .pt)[1:3], "\n")
 

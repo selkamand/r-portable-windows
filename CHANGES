@@ -497,8 +497,8 @@ CHANGES IN R VERSION 2.12.0:
       the same for both 32- and 64-bit R.
 
     * The recommended 64-bit toolchain has been changed to one that
-      does not add leading underscores.  See <URL:
-      http://cran.r-project.org/bin/windows/Rtools/>.  Any static or
+      does not add leading underscores.  See
+      <http://cran.r-project.org/bin/windows/Rtools/>.  Any static or
       import libraries for external software used in installing
       packages will need to be re-compiled for this toolchain, but the
       use of DLLs is unaffected.

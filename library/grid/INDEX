@@ -1,6 +1,7 @@
 Grid                    Grid Graphics
 absolute.size           Absolute Size of a Grob
 arrow                   Describe arrows to add to a line.
+as.mask                 Define a Soft Mask
 calcStringMetric        Calculate Metric Information for Text
 convertUnit             Convert Between Different grid Coordinate
                         Systems
@@ -10,6 +11,7 @@ depth                   Determine the number of levels in an object.
 deviceLoc               Convert Viewport Location to Device Location
 drawDetails             Customising grid Drawing
 editDetails             Customising grid Editing
+editViewport            Modify a Viewport
 explode                 Explode a path into its components.
 gEdit                   Create and Apply Edit Objects
 gPath                   Concatenate Grob Names
@@ -32,9 +34,11 @@ grid.force              Force a grob into its components
 grid.frame              Create a Frame for Packing Objects
 grid.function           Draw a curve representing a function
 grid.get                Get a Grid Graphical Object
+grid.glyph              Draw Typeset Glyphs
 grid.grab               Grab the current grid output
-grid.grep               Search for grobs
+grid.grep               Search for Grobs and/or Viewports
 grid.grill              Draw a Grill
+grid.group              Draw a Group
 grid.layout             Create a Grid Layout
 grid.lines              Draw Lines in a Grid Viewport
 grid.locator            Capture a Mouse Click
@@ -48,7 +52,8 @@ grid.place              Place an Object within a Frame
 grid.plot.and.legend    A Simple Plot and Legend Demo
 grid.points             Draw Data Symbols
 grid.polygon            Draw a Polygon
-grid.pretty             Generate a Sensible Set of Breakpoints
+grid.pretty             Generate a Sensible ("Pretty") Set of
+                        Breakpoints
 grid.raster             Render a raster object
 grid.record             Encapsulate calculations and drawing
 grid.rect               Draw rectangles
@@ -59,10 +64,12 @@ grid.segments           Draw Line Segments
 grid.set                Set a Grid Graphical Object
 grid.show.layout        Draw a Diagram of a Grid Layout
 grid.show.viewport      Draw a Diagram of a Grid Viewport
+grid.stroke             Stroke or Fill a Path
 grid.text               Draw Text
 grid.xaxis              Draw an X-Axis
 grid.xspline            Draw an Xspline
 grid.yaxis              Draw a Y-Axis
+gridCoords              Create Sets of Coordinates for Grid Grobs
 grob                    Create Grid Graphical Objects, aka "Grob"s
 grobCoords              Calculate Points on the Perimeter of a Grob
 grobName                Generate a Name for a Grob
@@ -71,6 +78,7 @@ grobX                   Create a Unit Describing a Grob Boundary
                         Location
 legendGrob              Constructing a Legend Grob
 makeContent             Customised grid Grobs
+patterns                Define Gradient and Pattern Fills
 plotViewport            Create a Viewport with a Standard Plot Layout
 pushViewport            Maintaining and Navigating the Grid Viewport
                         Tree
@@ -90,6 +98,7 @@ unitType                Return the Units of a Unit Object
 valid.just              Validate a Justification
 validDetails            Customising grid grob Validation
 viewport                Create a Grid Viewport
+viewportTransform       Define a Group Transformation
 vpPath                  Concatenate Viewport Names
 widthDetails            Width and Height of a grid grob
 xDetails                Boundary of a grid grob

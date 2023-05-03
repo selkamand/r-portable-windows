@@ -8,6 +8,7 @@ export(agnes, clara, daisy, diana, fanny, mona, pam)
 ## and the rest
 export(bannerplot, ellipsoidhull, ellipsoidPoints,
        clusGap, maxSE,
+       medoids,
        lower.to.upper.tri.inds, upper.to.lower.tri.inds,
        meanabsdev, sizeDiss, sortSilhouette)
 
@@ -44,6 +45,9 @@ S3method(volume, ellipsoid)
 
 ## register all the method for generics elsewhere in case namespace is
 ## loaded but not currently attached.
+# via matrix method (R "bug": needs a copy *in* cluster, -> R/silhouette.R):
+S3method(as.data.frame, silhouette, as.data.frame.matrix)
+##
 S3method(as.dendrogram, twins)
 S3method(coef, hclust)
 S3method(coef, twins)

@@ -360,8 +360,9 @@ struct _DevDesc {
      * A new page might mean just clearing the
      * device (e.g., X11) or moving to a new page
      * (e.g., postscript)
+     * The background of the new page should be filled with gc->fill
+     * (if that is opaque).
      * An example is ...
-     *
      *
      * static void X11_NewPage(const pGEcontext gc,
      *                         pDevDesc dd);
@@ -675,6 +676,125 @@ struct _DevDesc {
     int haveRaster; /* 1 = no, 2 = yes, 3 = except for missing values */
     int haveCapture, haveLocator;  /* 1 = no, 2 = yes */
 
+#if R_USE_PROTOTYPES
+    SEXP (*setPattern)(SEXP pattern, pDevDesc dd);
+#else
+    SEXP (*setPattern)();
+#endif
+
+#if R_USE_PROTOTYPES
+    void (*releasePattern)(SEXP ref, pDevDesc dd);
+#else
+    void (*releasePattern)();
+#endif
+
+#if R_USE_PROTOTYPES
+    SEXP (*setClipPath)(SEXP path, SEXP ref, pDevDesc dd);
+#else
+    SEXP (*setClipPath)();
+#endif
+
+#if R_USE_PROTOTYPES
+    void (*releaseClipPath)(SEXP ref, pDevDesc dd);
+#else
+    void (*releaseClipPath)();
+#endif
+
+#if R_USE_PROTOTYPES
+    SEXP (*setMask)(SEXP path, SEXP ref, pDevDesc dd);
+#else
+    SEXP (*setMask)();
+#endif
+
+#if R_USE_PROTOTYPES
+    void (*releaseMask)(SEXP ref, pDevDesc dd);
+#else
+    void (*releaseMask)();
+#endif
+
+    /* This should match R_GE_version,
+     * BUT it does not have to.
+     * It give the graphics engine a chance to work with 
+     * graphics device packages BEFORE they update to 
+     * changes in R_GE_version.
+     */
+    int deviceVersion;
+
+    /* This can be used to OVERRIDE canClip so that graphics engine
+     * leaves ALL clipping to the graphics device 
+     */
+    Rboolean deviceClip;
+
+    /* Define a group of shapes that will be drawn together.
+     * 
+     * 'source' is an R function that draws something.
+     * 'op' is the composition operator applied when drawing 'group'.
+     *     (this must be R_GE_compositeOver or one of its ilk;
+     *      see GraphicsEngine.h).
+     * 'destination' is either NULL or an R function that draws something.
+     * 'name' is a string that can be used to identify the group on the device.
+     * 
+     * 'destination' is drawn first (using the "over" compositing operator), 
+     * then 'source' is drawn using the 'op' compositing operator.
+     * 
+     * The return value is a "reference" to the group that only has to 
+     * make sense to the device; it is sent back in via useGroup().
+     */
+#if R_USE_PROTOTYPES
+    SEXP (*defineGroup)(SEXP source, int op, SEXP destination, pDevDesc dd);
+#else
+    SEXP (*defineGroup)();
+#endif
+    /* Render a group of shapes that has previously been defined.
+     * If the group identified by 'ref' does not exist on the device, 
+     * do nothing.
+     *
+     * 'trans' is a transformation matrix or NULL (which means do not transform)
+     */
+#if R_USE_PROTOTYPES
+    void (*useGroup)(SEXP ref, SEXP trans, pDevDesc dd);
+#else
+    void (*useGroup)();
+#endif
+    /* An opportunity for the device to "release" (e.g., the memory 
+     * associated with) a group definition.
+     */
+#if R_USE_PROTOTYPES
+    void (*releaseGroup)(SEXP ref, pDevDesc dd);
+#else
+    void (*releaseGroup)();
+#endif
+
+    /* Draw (stroke or fill) a path,
+     * where the path is defined by an R function that draws something
+     */
+#if R_USE_PROTOTYPES
+    void (*stroke)(SEXP path, const pGEcontext gc, pDevDesc dd);
+#else
+    void (*stroke)();
+#endif
+#if R_USE_PROTOTYPES
+    void (*fill)(SEXP path, int rule, const pGEcontext gc, pDevDesc dd);
+#else
+    void (*fill)();
+#endif
+#if R_USE_PROTOTYPES
+    void (*fillStroke)(SEXP path, int rule, const pGEcontext gc, pDevDesc dd);
+#else
+    void (*fillStroke)();
+#endif
+#if R_USE_PROTOTYPES
+    SEXP (*capabilities)(SEXP cap);
+#else
+    SEXP (*capabilities)();
+#endif
+#if R_USE_PROTOTYPES
+    void (*glyph)(int n, int *glyphs, double *x, double *y, 
+                  SEXP font, double size,
+                  int colour, double rot, pDevDesc dd);
+#else
+    void (*glyph)();
+#endif
 
     /* Area for future expansion.
        By zeroing this, devices are more likely to work if loaded
