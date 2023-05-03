@@ -1,6 +1,6 @@
 
-R version 4.0.3 RC (2020-10-06 r79305) -- "Bunny-Wunnies Freak Out"
-Copyright (C) 2020 The R Foundation for Statistical Computing
+R Under development (unstable) (2022-03-19 r81942) -- "Unsuffered Consequences"
+Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -20,7 +20,7 @@ Type 'q()' to quit R.
 > ###
 > ### '##P': These lines don't give TRUE but relevant ``Print output''
 > 
-> ### --> d-p-q-r-tests.R  for distribution things
+> ### --> d-p-q-r-tests.R & d-p-q-r-tst-2.R  for distribution things
 > 
 > .proctime00 <- proc.time()
 > opt.conformance <- 0
@@ -323,5 +323,5 @@ Warning messages:
 > 
 > ## Last Line:
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  0.321 0.015 0.338 0 0 
+Time elapsed:  0.677 0.028 0.714 0 0 
 > 

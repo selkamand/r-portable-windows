@@ -4,7 +4,7 @@
 ## As from R 3.4.0 method = "libcurl" is the default on a Unix-alike
 ## so this is in small part duplication -- but not on Windows.
 
-if(!capabilities()["libcurl"]) {
+if(!capabilities("libcurl")) {
     warning("no libcurl support")
     q()
 }
@@ -16,12 +16,6 @@ if(.Platform$OS.type == "unix" &&
 tf <- tempfile()
 download.file("http://cran.r-project.org/", tf,  method = "libcurl")
 file.size(tf)
-unlink(tf)
-
-tf <- tempfile()
-download.file("ftp://ftp.stats.ox.ac.uk/pub/datasets/csb/ch11b.dat",
-              tf,  method = "libcurl")
-file.size(tf) # 2102
 unlink(tf)
 
 
@@ -50,8 +44,6 @@ stopifnot(test404.1)
 ##  via read.table (which closes the connection)
 tail(read.table(url("http://www.stats.ox.ac.uk/pub/datasets/csb/ch11b.dat",
                     method = "libcurl")))
-tail(read.table(url("ftp://ftp.stats.ox.ac.uk/pub/datasets/csb/ch11b.dat",
-                    method = "libcurl")))
 
 ## check option works
 options(url.method = "libcurl")
@@ -75,7 +67,7 @@ showConnections(all = TRUE)
 junk <- tryCatch(curlGetHeaders("http://bugs.r-project.org"),
                  error = function(e) {
 			 message("Check for working https failed:\n\t",
-				 conditionMessage(e), 
+				 conditionMessage(e),
 				 "skipping https tests\n")
 			 q()
 		 })

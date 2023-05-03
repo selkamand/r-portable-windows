@@ -1,6 +1,6 @@
 
-R version 3.5.0 alpha (2018-03-28 r74481)
-Copyright (C) 2018 The R Foundation for Statistical Computing
+R version 4.2.0 Patched (2022-05-13 r82353) -- "Vigorous Calisthenics"
+Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -16,14 +16,11 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > ## For different cluster versions
-> 
+>
 > require(cluster)
 Loading required package: cluster
 > 
-> if(interactive()) {
-+     (pkgPath <- .find.package("cluster", verbose = TRUE))
-+     (verC <- readLines(Dfile <- file.path(pkgPath, "DESCRIPTION"), n = 2)[2])
-+ }
+> if(interactive()) print(packageDescription("cluster"))
 > 
 > ## trivial cases should 'work':
 > daisy(cbind(1))
@@ -926,4 +923,4 @@ Number of objects : 20
 > 
 > proc.time()
    user  system elapsed 
-  0.265   0.043   0.361 
+  0.518   0.113   0.905 

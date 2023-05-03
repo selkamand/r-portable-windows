@@ -1,6 +1,6 @@
 Package: cluster
-Version: 2.1.0
-Date: 2019-06-07
+Version: 2.1.4
+Date: 2022-08-19
 Priority: recommended
 Title: "Finding Groups in Data": Cluster Analysis Extended Rousseeuw et
         al.
@@ -26,7 +26,7 @@ Authors@R: c(person("Martin","Maechler", role = c("aut","cre"),
                                                        ORCID = "0000-0001-9143-4880"))
  ,person("Keefe",  "Murphy", role="ctb", comment = "volume.ellipsoid({d >= 3})")
  )
-Depends: R (>= 3.3.0)
+Depends: R (>= 3.5.0)
 Imports: graphics, grDevices, stats, utils
 Suggests: MASS, Matrix
 SuggestsNote: MASS: two examples using cov.rob() and mvrnorm(); Matrix
@@ -36,9 +36,9 @@ LazyData: yes
 ByteCompile: yes
 BuildResaveData: no
 License: GPL (>= 2)
-URL: https://svn.r-project.org/R-packages/trunk/cluster
+URL: https://svn.r-project.org/R-packages/trunk/cluster/
 NeedsCompilation: yes
-Packaged: 2019-06-19 08:21:30 UTC; maechler
+Packaged: 2022-08-19 13:31:31 UTC; maechler
 Author: Martin Maechler [aut, cre] (<https://orcid.org/0000-0002-8685-9910>),
   Peter Rousseeuw [aut] (Fortran original,
     <https://orcid.org/0000-0002-3807-5353>),
@@ -54,6 +54,6 @@ Author: Martin Maechler [aut, cre] (<https://orcid.org/0000-0002-8685-9910>),
     <https://orcid.org/0000-0001-9143-4880>),
   Keefe Murphy [ctb] (volume.ellipsoid({d >= 3}))
 Repository: CRAN
-Date/Publication: 2019-06-19 11:10:03 UTC
-Built: R 4.0.3; x86_64-w64-mingw32; 2020-10-10 12:54:32 UTC; windows
-Archs: i386, x64
+Date/Publication: 2022-08-22 10:10:02 UTC
+Built: R 4.3.0; x86_64-w64-mingw32; 2023-04-21 09:28:06 UTC; windows
+Archs: x64

@@ -34,7 +34,6 @@ src/include/Rdefines.h
 src/include/Rgraphics.h
 src/include/Rinternals.h
 src/include/Rmath.h
-src/include/S.h
 src/include/R_ext/*.h
 
 Note that it does not apply to the header files such as Rembedded.h
@@ -260,33 +259,10 @@ src/main/xspline.c
  * notice remain intact.
 
 
-src/modules/nano{ftp,http}.c
-
- Copyright (C) 1998-2001 Daniel Veillard.  All Rights Reserved.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is fur-
-nished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FIT-
-NESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-
-
-src/modules/lapack/dlapack.f, cmplx.f, dlamc.f
+src/modules/lapack/dlapack.f, cmplx.f, dlamc.f, *.f90
 
   Extracted from
-  *  -- LAPACK computational routine (version 3.9.0) --
+  *  -- LAPACK computational routine (version 3.11.0) --
   *  -- LAPACK is a software package provided by Univ. of Tennessee,    --
   *  -- Univ. of California Berkeley, Univ. of Colorado Denver and NAG Ltd..--
   *     November 2017
@@ -295,17 +271,17 @@ src/modules/lapack/dlapack.f, cmplx.f, dlamc.f
   For version 3.7.0, many of the copyright dates were updated
   even for routines which have not been changed for years.
 
-  LAPACK 3.9.0 contains a LICENSE file, copied to src/modules/lapack
+  LAPACK 3.11.0 contains a LICENSE file, copied to src/modules/lapack
   (but many of these routines were originally copied from earlier
   versions of LAPACK).  For binary distributions it is reproduced here:
 
   --- src/modules/lapack/LICENSE ---
-  Copyright (c) 1992-2017 The University of Tennessee and The University
+  Copyright (c) 1992-2022 The University of Tennessee and The University
                           of Tennessee Research Foundation.  All rights
                           reserved.
-  Copyright (c) 2000-2017 The University of California Berkeley. All
+  Copyright (c) 2000-2022 The University of California Berkeley. All
                           rights reserved.
-  Copyright (c) 2006-2017 The University of Colorado Denver.  All rights
+  Copyright (c) 2006-2022 The University of Colorado Denver.  All rights
                           reserved.
 
   $COPYRIGHT$
@@ -349,6 +325,12 @@ src/modules/lapack/dlapack.f, cmplx.f, dlamc.f
   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   --- end of src/modules/lapack/LICENSE ---
+
+
+src/extra/blas/*.{f,f90}
+
+These are now derived from the LAPACK 3.11.0 sources, so the previous
+item applies.
 
 src/extra/xdr/*
 
@@ -528,7 +510,7 @@ m4/openmp.m4
 
   Under GPL-3 with the Autoconf Configure Script Exception, version 3.0.
 
-tools/config.quess
+tools/config.guess
 tools/config.sub
 
    Copyright 1992-2019 Free Software Foundation.  
@@ -538,10 +520,28 @@ tools/install-sh
 
    Copyright (C) 1994 X Consortium
 
-m4/cxx_11.m4
+tools/uniset
+
+is by Marcus Kuhn (https://www.cl.cam.ac.uk/~mgk25/) but contains
+neither licence nor copyright claim.
+
+m4/cxx.m4
+Based on ax_cxx_compile_stdcxx.m4
 #   Copyright (c) 2008 Benjamin Kosnik <bkoz@redhat.com>
 #   Copyright (c) 2012 Zack Weinberg <zackw@panix.com>
 #   Copyright (c) 2013 Roy Stogner <roystgnr@ices.utexas.edu>
+#   Copyright (c) 2014, 2015 Google Inc.; contributed by Alexey Sokolov <sokolov@google.com>
+#   Copyright (c) 2015 Paul Norman <penorman@mac.com>
+#   Copyright (c) 2015 Moritz Klammler <moritz@klammler.eu>
+#   Copyright (c) 2016 Krzesimir Nowak <qdlacz@gmail.com>
+#   Copyright (c) 2016, 2018 Krzesimir Nowak <qdlacz@gmail.com>
+#   Copyright (c) 2019 Enji Cooper <yaneurabeya@gmail.com>
+#
+#   Copying and distribution of this file, with or without modification, are
+#   permitted in any medium without royalty provided the copyright notice
+#   and this notice are preserved.  This file is offered as-is, without any
+#   warranty.
+
 
 m4/stat-time.m4
 
@@ -597,6 +597,26 @@ src/gnuwin32/installer/R.bmp
 
    The design of the current logo is based on the previous logo that
    was included in the R source from 1998 to 2016.
+
+
+doc/html/prism.js
+doc/html/prism.css
+
+   Downloaded from https://prismjs.com/download.html
+
+   Prism (https://github.com/PrismJS/prism) is Copyright (c) 2012 Lea
+   Verou and is distributed under the MIT license (see the above
+   files for a copy).
+
+doc/html/katex/*
+doc/html/katex/fonts/*
+
+   Downloaded from https://github.com/KaTeX/KaTeX/releases
+
+   KaTeX (https://github.com/KaTeX/KaTeX) is Copyright (c) 2013-2020
+   Khan Academy and other contributors, and is distributed under the
+   MIT license. See doc/html/katex/LICENSE for a copy.
+
 
 	---------------------------------------------------
 

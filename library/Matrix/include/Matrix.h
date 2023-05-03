@@ -1,12 +1,16 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
+#include <Rinternals.h>
+#include <Rconfig.h>
+
 #ifdef	__cplusplus
 extern "C" {
 // and  bool is defined
 #else
 # define bool Rboolean
 #endif
+
 
 // From ../../src/Mutils.h :
 #ifdef __GNUC__
@@ -19,9 +23,6 @@ extern "C" {
 /* For R >= 3.2.2, the 'elif' above shall be replaced by
 #elif defined(HAVE_ALLOCA_H)
 */
-
-#include <Rdefines.h>
-#include <Rconfig.h>
 #include "cholmod.h" //--->  M_cholmod_*() declarations
 // "Implementation" of these in ---> ./Matrix_stubs.c
 
@@ -82,6 +83,9 @@ extern "C" {
 
 #define MATRIX_VALID_tri_Csparse		\
    "dtCMatrix", "ltCMatrix", "ntCMatrix", "ztCMatrix"
+
+#define MATRIX_VALID_sym_Csparse		\
+   "dsCMatrix", "lsCMatrix", "nsCMatrix", "zsCMatrix"
 
 #define MATRIX_VALID_CHMfactor "dCHMsuper", "dCHMsimpl", "nCHMsuper", "nCHMsimpl"
 

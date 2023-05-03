@@ -5,17 +5,17 @@ if(interactive()) options(error = recover)
 options(warn=1)# show as they happen
 cat("doExtras:",doExtras,"\n")
 
-no.Mcl <- function(cl) ## TRUE if MatrixClass() returns empty, i
-    identical(Matrix:::MatrixClass(cl), character(0))
+no.Mcl <- function(cl) ## TRUE if MatrixClass() returns empty, i.e., have "no Matrix-pkg class"
+    identical(MatrixClass(cl), character(0))
 
 setClass("myDGC", contains = "dgCMatrix")
 M <- new("myDGC", as(Matrix(c(-2:4, rep(0,9)), 4), "CsparseMatrix"))
 M
 stopifnot(M[-4,2] == 2:4,
-	  Matrix:::MatrixClass("myDGC"    ) == "dgCMatrix",
-	  Matrix:::MatrixClass("Cholesky" ) == "dtrMatrix",
-	  Matrix:::MatrixClass("pCholesky") == "dtpMatrix",
-	  Matrix:::MatrixClass("corMatrix") == "dpoMatrix",
+	  MatrixClass("myDGC"    ) == "dgCMatrix",
+	  MatrixClass("Cholesky" ) == "dtrMatrix",
+	  MatrixClass("pCholesky") == "dtpMatrix",
+	  MatrixClass("corMatrix") == "dpoMatrix",
 	  no.Mcl("pMatrix"),
 	  no.Mcl("indMatrix"))
 
@@ -24,16 +24,26 @@ stopifnot(M[-4,2] == 2:4,
 ## [matrix-Bugs][6182] Coercion method doesn't work on child class
 ## Bugs item #6182, at 2015-09-01 17:49 by Vitalie Spinu
 setClass("A", contains = "ngCMatrix")
-ngc <- as(diag(3), "ngCMatrix")
-validObject(dd <- as(ngc, "dgCMatrix")) # fine
+ngc <- as(as(as(diag(3), "CsparseMatrix"), "generalMatrix"), "nMatrix")
+validObject(dd <- as(ngc, "dMatrix")) # fine
 A. <- as(ngc, "A")
-stopifnot(identical(as(A., "dgCMatrix"), dd))
+stopifnot(identical(as(A., "dMatrix"), dd))
 ## as(.) coercion failed in Matrix <= 1.2.3
 stopifnot(all( abs(A.)# failed too
               == diag(3)))
 
+d <- Diagonal(3)
+(dC <- as(d, "CsparseMatrix")) # "dtCMatrix" (unitriangular)
+(dgC <- as(dC, "generalMatrix"))
+stopifnot(exprs = {
+    is(dgC, "dgCMatrix") # was wrong in Matrix 1.3.2
+    ## identical(dgC, as(dC, "dgCMatrix")) # deprecated
+    identical(dC , new("dtCMatrix", p = rep(0L, 4), Dim = c(3L, 3L), diag = "U"))
+    identical(dC , diagN2U(as(dgC, "triangularMatrix")))
+})
+
 setClass("posDef", contains = "dspMatrix")
-N <- as(as(crossprod(M) + Diagonal(4), "denseMatrix"),"dspMatrix")
+N <- as(crossprod(M) + Diagonal(4), "packedMatrix")
 (N <- new("posDef", N))
 stopifnot(is(N[1:2, 1:2], "symmetricMatrix"))
 
@@ -135,7 +145,7 @@ mT <- as(mC <- as(m, "CsparseMatrix"), "TsparseMatrix")
 stopifnot(identical(as(mT,"CsparseMatrix"), mC))
 (mC. <- as(mT[1:2, 2:3], "CsparseMatrix"))
 (mlC <- as(mC. , "lMatrix"))
-as(mlC,"ltCMatrix")
+as(mlC, "triangularMatrix")
 
 if(!doExtras && !interactive()) q("no") ## (saving testing time)
 
@@ -175,7 +185,7 @@ tstMatrixClass <-
     bl.string <- function(no) sprintf("%*s", no, "")
 
     ## Compute a few things only once :
-    mM <- as(mM, "dgeMatrix")
+    mM <- as(as(as(mM, "unpackedMatrix"), "generalMatrix"), "dMatrix") # dge
     trm <- mm; trm[lower.tri(mm)] <- 0
     ## not yet used:
     ## summList <- lapply(getGroupMembers("Summary"), get,
@@ -200,7 +210,8 @@ tstMatrixClass <-
         cat. <- function(...) cat(bl.string(offset), ...)
 
         clNam <- cl@subClass
-        cat("\n")
+        deprecated <- grepl("^[dln](ge|tr|sy|tp|sp|[gts][CRT])Matrix$", clNam)
+	cat("\n==>")
         cat.(clNam)
         ##---------
         clD <- getClassDef(clNam)
@@ -230,17 +241,26 @@ tstMatrixClass <-
             denseC  <- extends(clD, "denseMatrix")
             if(!(sparseC || denseC))
                 stop("does not extend either 'sparse' or 'dense'")
-	    cat("; new(..): ")
-	    m <- new(clNam) ; cat("ok; ")
+	    cat("; new(*): ")
+            m <- new(clNam) ; cat("ok; ")
 	    m0 <- matrix(,0,0)
 	    if(canCoerce(m0, clNam)) {
-		cat("; as(matrix(,0,0), <.>): ")
-		stopifnot(Qidentical(m, as(m0, clNam))); cat("ok; ")
+		cat("; canCoerce(matrix(,0,0), *) => as(m0, <.>): ")
+                m0. <-
+                    if(deprecated)
+                        eval(Matrix:::.as.via.virtual(
+                                          "matrix", clNam, quote(m0)))
+                    else as(m0, clNam)
+                if(.hasSlot(m, "diag") && .hasSlot(m0., "diag") &&
+                   identical(m@diag, "N") && identical(m0.@diag, "U"))
+                    ## tolerate as(0-by-0, .) formally having unit diagonal
+                    m0.@diag <- "N"
+		stopifnot(Qidentical(m, m0.)); cat("ok; ")
 	    }
             is_p <- extends(clD, "indMatrix")
             is_cor <- extends(clD, "corMatrix") # has diagonal divided out
 	    if(canCoerce(mm, clNam)) { ## replace 'm' by `non-empty' version
-		cat("canCoerce() ")
+		cat("canCoerce(mm, *) ")
 		m0 <- {
 		    if(triC) trm
 		    else if(is_p)
@@ -253,11 +273,15 @@ tstMatrixClass <-
 		else if(extends(clD, "zMatrix"))
 		    storage.mode(m0) <- "complex"
 		validObject(m) ## validity of trivial 'm' before replacing
-		m <- as(m0, clNam)
+		m <-
+                    if(deprecated)
+                        eval(Matrix:::.as.via.virtual(
+                                          "matrix", clNam, quote(m0)))
+                    else as(m0, clNam)
 		if(is_cor)
                     m0 <- cov2cor(m0)
 	    } else {
-                m0 <- vector(Matrix:::.type.kind[Matrix:::.M.kindC(clNam)])
+                m0 <- vector(Matrix:::.type.kind[Matrix:::.M.kind(m)])
                 dim(m0) <- c(0L,0L)
             }
 	    ## m0 is the 'matrix' version of our 'Matrix' m
@@ -303,7 +327,11 @@ tstMatrixClass <-
                 if(any(clNam == not.coerce1))
                     cat.("not coercable_1\n")
                 else if(canCoerce(mM, clNam)) {
-                    m2 <- as(mM, clNam)
+                    m2 <-
+                        if(deprecated)
+                            eval(Matrix:::.as.via.virtual(
+                                              class(mM), clNam, quote(mM)))
+                        else as(mM, clNam)
                     cat("valid:", validObject(m2), "\n")
                     if(!is_cor) ## as.vector()
                         stopifnot(as.vector(m2) == as.vector(mM))
@@ -320,7 +348,11 @@ tstMatrixClass <-
 ##                 if(all(clNam != not.coerce2)) {
                     if(canCoerce("matrix", clNam)) {
                         cat.("as(matrix, <class>): ")
-                        m3 <- as(mm, clNam)
+                        m3 <-
+                            if(deprecated)
+                                eval(Matrix:::.as.via.virtual(
+                                                  "matrix", clNam, quote(mm)))
+                            else as(mm, clNam)
                         cat("valid:", validObject(m3), "\n")
                     } else cat.(" not coerceable from \"matrix\"\n")
 ##                 }
@@ -342,14 +374,11 @@ tstMatrixClass <-
                     cat.("not coercable_1\n")
                 else {
                     ## make sure we can coerce to dgT* -- needed, e.g. for "image"
-                    ## change: use Tsparse instead of dgT, unless it *is* Tsparse:
-                    isT <- is(m, "TsparseMatrix")
-                    prefix <- if(isT) "dgT" else "Tsparse"
-                    Tcl <- paste(prefix, "Matrix", sep='')
-                    cat.(sprintf("as %s* ", prefix))
-                    mgT <- as(m, Tcl)
-                    cat(sprintf("; valid %s* coercion: %s\n",
-                                prefix, validObject(mgT)))
+                    cat.("as dgT* ")
+                    mgT <- eval(Matrix:::.as.via.virtual(
+                                             class(m), "dgTMatrix", quote(m)))
+                    cat(sprintf("; valid dgT* coercion: %s\n",
+                                validObject(mgT)))
                 }
             }
         }

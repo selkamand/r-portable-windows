@@ -1,6 +1,6 @@
 Package: lattice
-Version: 0.20-41
-Date: 2020-04-01
+Version: 0.21-8
+Date: 2023-04-05
 Priority: recommended
 Title: Trellis Graphics for R
 Authors@R: c(person("Deepayan", "Sarkar", role = c("aut", "cre"),
@@ -9,30 +9,39 @@ Authors@R: c(person("Deepayan", "Sarkar", role = c("aut", "cre"),
               person("Felix", "Andrews", role = "ctb"),
 	      person("Kevin", "Wright", role = "ctb", comment = "documentation"),
 	      person("Neil", "Klepeis", role = "ctb"),
-              person("Paul", "Murrell", role = "ctb", email = "paul@stat.auckland.ac.nz"))
+	      person("Johan", "Larsson", role = "ctb", comment = "miscellaneous improvements"),
+              person("Zhijian (Jason)", "Wen", role = "cph", comment = "filled contour code"),
+              person("Paul", "Murrell", role = "ctb", email = "paul@stat.auckland.ac.nz"),
+	      person("Stefan", "Eng", role = "ctb", comment = "violin plot improvements"),
+	      person("Achim", "Zeileis", role = "ctb", comment = "modern colors")
+	      )
 Description: A powerful and elegant high-level data visualization
   system inspired by Trellis graphics, with an emphasis on
   multivariate data. Lattice is sufficient for typical graphics needs,
   and is also flexible enough to handle most nonstandard requirements.
   See ?Lattice for an introduction.
-Depends: R (>= 3.0.0)
-Suggests: KernSmooth, MASS, latticeExtra
+Depends: R (>= 4.0.0)
+Suggests: KernSmooth, MASS, latticeExtra, colorspace
 Imports: grid, grDevices, graphics, stats, utils
 Enhances: chron
 LazyLoad: yes
 LazyData: yes
 License: GPL (>= 2)
-URL: http://lattice.r-forge.r-project.org/
+URL: https://lattice.r-forge.r-project.org/
 BugReports: https://github.com/deepayan/lattice/issues
 NeedsCompilation: yes
-Packaged: 2020-04-02 10:52:37 UTC; deepayan
+Packaged: 2023-04-05 15:31:40 UTC; deepayan
 Author: Deepayan Sarkar [aut, cre] (<https://orcid.org/0000-0003-4107-1553>),
   Felix Andrews [ctb],
   Kevin Wright [ctb] (documentation),
   Neil Klepeis [ctb],
-  Paul Murrell [ctb]
+  Johan Larsson [ctb] (miscellaneous improvements),
+  Zhijian (Jason) Wen [cph] (filled contour code),
+  Paul Murrell [ctb],
+  Stefan Eng [ctb] (violin plot improvements),
+  Achim Zeileis [ctb] (modern colors)
 Maintainer: Deepayan Sarkar <deepayan.sarkar@r-project.org>
 Repository: CRAN
-Date/Publication: 2020-04-02 12:00:06 UTC
-Built: R 4.0.3; x86_64-w64-mingw32; 2020-10-10 12:51:20 UTC; windows
-Archs: i386, x64
+Date/Publication: 2023-04-05 17:43:19 UTC
+Built: R 4.3.0; x86_64-w64-mingw32; 2023-04-21 09:23:54 UTC; windows
+Archs: x64

@@ -27,7 +27,6 @@ coef.corARMAd	coef.corStruct
 coef.corCAR1	coef.corStruct
 coef.corCompSymm	coef.corStruct
 coef.corHF	coef.corStruct
-coef.corIdent	coef.corStruct
 coef.corLin	coef.corStruct
 coef.corNatural	coef.corStruct
 coef.corSpatial	coef.corStruct
@@ -49,6 +48,7 @@ coef.reStruct	coef.reStruct
 coef.summary.nlsList	coef.corStruct
 coef.varComb	coef.varFunc
 coef.varConstPower	coef.varFunc
+coef.varConstProp	coef.varFunc
 coef.varExp	coef.varFunc
 coef.varFixed	coef.varFunc
 coef.varFunc	coef.varFunc
@@ -60,7 +60,6 @@ coef<-.corARMA	coef.corStruct
 coef<-.corCAR1	coef.corStruct
 coef<-.corCompSymm	coef.corStruct
 coef<-.corHF	coef.corStruct
-coef<-.corIdent	coef.corStruct
 coef<-.corLin	coef.corStruct
 coef<-.corNatural	coef.corStruct
 coef<-.corSpatial	coef.corStruct
@@ -73,6 +72,7 @@ coef<-.pdMat	coef.pdMat
 coef<-.reStruct	coef.reStruct
 coef<-.varComb	coef.varFunc
 coef<-.varConstPower	coef.varFunc
+coef<-.varConstProp	coef.varFunc
 coef<-.varExp	coef.varFunc
 coef<-.varFixed	coef.varFunc
 coef<-.varIdent	coef.varFunc
@@ -101,14 +101,13 @@ corFactor.corSpatial	corFactor.corStruct
 corFactor.corStruct	corFactor.corStruct
 corFactor.corSymm	corFactor.corStruct
 corGaus	corGaus
-corIdent	corClasses
+corIdent	nlme-deprecated
 corLin	corLin
 corMatrix	corMatrix
 corMatrix.corAR1	corMatrix.corStruct
 corMatrix.corARMA	corMatrix.corStruct
 corMatrix.corCAR1	corMatrix.corStruct
 corMatrix.corCompSymm	corMatrix.corStruct
-corMatrix.corIdent	corMatrix.corStruct
 corMatrix.corNatural	corMatrix.corStruct
 corMatrix.corSpatial	corMatrix.corStruct
 corMatrix.corStruct	corMatrix.corStruct
@@ -212,7 +211,6 @@ Initialize.corARMA	Initialize.corStruct
 Initialize.corCAR1	Initialize.corStruct
 Initialize.corCompSymm	Initialize.corStruct
 Initialize.corHF	Initialize.corStruct
-Initialize.corIdent	Initialize.corStruct
 Initialize.corLin	Initialize.corStruct
 Initialize.corNatural	Initialize.corStruct
 Initialize.corSpatial	Initialize.corStruct
@@ -225,6 +223,7 @@ Initialize.lmeStruct	Initialize.lmeStruct
 Initialize.reStruct	Initialize.reStruct
 Initialize.varComb	Initialize.varFunc
 Initialize.varConstPower	Initialize.varFunc
+Initialize.varConstProp	Initialize.varFunc
 Initialize.varExp	Initialize.varFunc
 Initialize.varFixed	Initialize.varFunc
 Initialize.varFunc	Initialize.varFunc
@@ -251,7 +250,6 @@ lmList	lmList
 lmList.formula	lmList
 lmList.groupedData	lmList.groupedData
 logDet	logDet
-logDet.corIdent	logDet.corStruct
 logDet.corStruct	logDet.corStruct
 logDet.pdBlocked	logDet.pdMat
 logDet.pdCompSymm	logDet.pdMat
@@ -301,9 +299,10 @@ needUpdate.modelStruct	needUpdate.modelStruct
 needUpdate.reStruct	needUpdate.modelStruct
 needUpdate.varComb	needUpdate
 needUpdate.varIdent	needUpdate
-nfGroupedData	groupedData
+nfGroupedData	nlme-deprecated
 Nitrendipene	Nitrendipene
 nlme	nlme
+nlme-deprecated	nlme-deprecated
 nlme.formula	nlme
 nlme.nlsList	nlme.nlsList
 nlmeControl	nlmeControl
@@ -312,7 +311,7 @@ nlmeStruct	nlmeStruct
 nlsList	nlsList
 nlsList.formula	nlsList
 nlsList.selfStart	nlsList.selfStart
-nmGroupedData	groupedData
+nmGroupedData	nlme-deprecated
 Oats	Oats
 Orthodont	Orthodont
 Ovary	Ovary
@@ -422,7 +421,6 @@ recalc.corARMA	recalc.corStruct
 recalc.corCAR1	recalc.corStruct
 recalc.corCompSymm	recalc.corStruct
 recalc.corHF	recalc.corStruct
-recalc.corIdent	recalc.corStruct
 recalc.corNatural	recalc.corStruct
 recalc.corSpatial	recalc.corStruct
 recalc.corStruct	recalc.corStruct
@@ -442,8 +440,6 @@ residuals.lmeStruct	residuals.lmeStruct
 residuals.lmList	residuals.lmList
 residuals.nlmeStruct	residuals.nlmeStruct
 reStruct	reStruct
-sigma	lmeObject
-sigma.lme	lmeObject
 simulate.lme	simulate.lme
 solve.pdBlocked	solve.pdMat
 solve.pdDiag	solve.pdMat
@@ -462,7 +458,6 @@ summary.corCAR1	summary.corStruct
 summary.corCompSymm	summary.corStruct
 summary.corExp	summary.corStruct
 summary.corGaus	summary.corStruct
-summary.corIdent	summary.corStruct
 summary.corLin	summary.corStruct
 summary.corNatural	summary.corStruct
 summary.corRatio	summary.corStruct
@@ -485,6 +480,7 @@ summary.pdSymm	summary.pdMat
 summary.reStruct	summary.modelStruct
 summary.varComb	summary.varFunc
 summary.varConstPower	summary.varFunc
+summary.varConstProp	summary.varFunc
 summary.varExp	summary.varFunc
 summary.varFixed	summary.varFunc
 summary.varFunc	summary.varFunc
@@ -502,6 +498,7 @@ update.nlsList	nlsList
 update.reStruct	update.modelStruct
 update.varComb	update.varFunc
 update.varConstPower	update.varFunc
+update.varConstProp	update.varFunc
 update.varExp	update.varFunc
 update.varExpon	update.varFunc
 update.varFunc	update.varFunc
@@ -509,6 +506,7 @@ update.varPower	update.varFunc
 varClasses	varClasses
 varComb	varComb
 varConstPower	varConstPower
+varConstProp	varConstProp
 VarCorr	VarCorr
 VarCorr.lme	VarCorr
 VarCorr.pdBlocked	VarCorr

@@ -9,25 +9,45 @@ options(warn=1, # show as they happen
 
 ##' Check matrix multiplications with (unit) Diagonal matrices
 chkDiagProd <- function(M) {
-    stopifnot(is.matrix(M) || is(M,"Matrix"))
+    if(is.matrix(M)) {
+        noRN <- function(x) {
+            if(!is.null(dn <- dimnames(x)))
+                dimnames(x) <- c(list(NULL), dn[2L])
+            x
+        }
+        noCN <- function(x) {
+            if(!is.null(dn <- dimnames(x)))
+                dimnames(x) <- c(dn[1L], list(NULL))
+            x
+        }
+    } else if(is(M, "Matrix")) {
+        noRN <- function(x) {
+            x@Dimnames <- c(list(NULL), x@Dimnames[2L])
+            x
+        }
+        noCN <- function(x) {
+            x@Dimnames <- c(x@Dimnames[1L], list(NULL))
+            x
+        }
+    } else stop("'M' must be a [mM]atrix")
     I.l  <- Diagonal(nrow(M)) # I_n -- "unit" Diagonal
     I.r  <- Diagonal(ncol(M)) # I_d
     D2.l <- Diagonal(nrow(M), x = 2) # D_n
     D2.r <- Diagonal(ncol(M), x = 2) # I_d
-    stopifnot(is.EQ.mat(M, M %*% I.r),
-	      is.EQ.mat(M, I.l %*% M),
-	      is.EQ.mat(2*M, M %*% D2.r),
-	      is.EQ.mat(M*2, D2.l %*% M),
+    stopifnot(is.EQ.mat(noCN(M), M %*% I.r),
+	      is.EQ.mat(noRN(M), I.l %*% M),
+	      is.EQ.mat(noCN(2*M), M %*% D2.r),
+	      is.EQ.mat(noRN(M*2), D2.l %*% M),
 	      ## crossprod
-	      is.EQ.mat(t(M), crossprod(M, I.l)),
-	      is.EQ.mat(  M , crossprod(I.l, M)),
-	      is.EQ.mat(t(2*M), crossprod(M, D2.l)),
-	      is.EQ.mat(  M*2 , crossprod(D2.l, M)),
+	      is.EQ.mat(noCN(t(M)), crossprod(M, I.l)),
+	      is.EQ.mat(noRN(M), crossprod(I.l, M)),
+	      is.EQ.mat(noCN(t(2*M)), crossprod(M, D2.l)),
+	      is.EQ.mat(noRN(M*2) , crossprod(D2.l, M)),
 	      ## tcrossprod
-	      is.EQ.mat(  M , tcrossprod(M, I.r)),
-	      is.EQ.mat(t(M), tcrossprod(I.r, M)),
-	      is.EQ.mat(  2*M , tcrossprod(M, D2.r)),
-	      is.EQ.mat(t(M*2), tcrossprod(D2.r, M)))
+	      is.EQ.mat(noCN(M), tcrossprod(M, I.r)),
+	      is.EQ.mat(noRN(t(M)), tcrossprod(I.r, M)),
+	      is.EQ.mat(noCN(2*M), tcrossprod(M, D2.r)),
+	      is.EQ.mat(noRN(t(M*2)), tcrossprod(D2.r, M)))
 }
 
 ### dimnames -- notably for matrix products ----------------
@@ -117,7 +137,7 @@ chkDnProd <- function(m = as(M, "matrix"), M = Matrix(m), browse=FALSE, warn.ok=
     }
     cat("\n")
     invisible(TRUE)
-}
+} # chkDnProd()
 
 ## All these are ok  {now, (2012-06-11) also for dense
 (m <- matrix(c(0, 0, 2:0), 3, 5))
@@ -128,10 +148,30 @@ m0. <- m.0 <- m..
 dimnames(m0.)[1] <- list(NULL); m0.
 dimnames(m.0)[2] <- list(NULL); m.0
 d <- diag(3); dimnames(d) <- list(c("u","v","w"), c("X","Y","Z")); d
-dU <- diagN2U(Matrix(d)) # unitriangular sparse
+dU <- diagN2U(Matrix(d, doDiag = FALSE)) # unitriangular sparse
+tU <- dU; tU[1,2:3] <- 3:4; tU[2,3] <- 7; tU # ditto  "unitri" sparse
 (T <- new("dtrMatrix", diag = "U", x= c(0,0,5,0), Dim= c(2L,2L),
           Dimnames= list(paste0("r",1:2),paste0("C",1:2)))) # unitriangular dense
-##                                                                   ^^^^^^^^^^^^
+pT <- pack(T)#                                                ^^^^^^^^^^^^
+mt <- m[,2:3] %*% pT # deprecation warning in pre-1.5-4
+stopifnot(is(pT, "dtpMatrix"), validObject(pT),
+          validObject(mt), is(mt, "dgeMatrix"),
+          identical(as.matrix(mt),
+                    array(c(1,0,0, 5,2,1), dim = 3:2, dimnames = list(c("A","B","C"), c("b","c"))))
+          )
+
+A <- matrix(c(0.4, 0.1, 0, 0), 2)
+B <- matrix(c(1.1,  0,  0, 0), 2);  ABt <- tcrossprod(A, B)
+##  Matrix version      # both Matrix version:
+class(AM <- as(A, "triangularMatrix")) # dtr
+class(BM <- as(B, "Matrix"))           # ddi
+class(Bs <- as(as(B, "CsparseMatrix"), "symmetricMatrix")) # "dsC"
+(ABst <- tcrossprod(A, Bs)) # was wrong since at least Matrix 1.3-3 (R-4.0.5)
+assert.EQ.mat(ABst, ABt)
+assert.EQ.mat(tcrossprod(AM, BM), ABt)
+assert.EQ.mat(tcrossprod(AM, Bs), ABt)
+assert.EQ.mat(tcrossprod(A , Bs), ABt)
+
 ## currently many warnings about sub-optimal matrix products :
 chkDnProd(m..)
 chkDnProd(m0.)
@@ -139,16 +179,27 @@ chkDnProd(m.0)
 chkDnProd(m00)
 chkDnProd(M =   T)
 chkDnProd(M = t(T))
+if(FALSE) {
+## FIXME:
+## Matrix() bug fix has revealed that diagonalMatrix product methods are not
+## handling (have never handled?) 'Dimnames' correctly, causing these to fail
 chkDnProd(M =   dU)
 chkDnProd(M = t(dU))
+}
 ## all the above failed in 1.2-0 and 1.1-5, 1.1-4 some even earlier
+chkDnProd(M = tU)
+chkDnProd(M = t(tU))
+## the two above failed in Matrix <= 1.4-1
 chkDnProd(M = Diagonal(4))
 chkDnProd(diag(x=3:1))
+if(FALSE) {
+## FIXME: as for dU, t(dU) above
 chkDnProd(d)
 chkDnProd(M = as(d, "denseMatrix"))# M: dtrMatrix (diag = "N")
+}
 
 
-m5 <- 1 + as(diag(-1:4)[-5,], "dgeMatrix")
+m5 <- 1 + as(diag(-1:4)[-5,], "generalMatrix")
 ## named dimnames:
 dimnames(m5) <- list(Rows= LETTERS[1:5], paste("C", 1:6, sep=""))
 tr5 <- tril(m5[,-6])
@@ -231,9 +282,13 @@ assertError(5 %*% as.matrix(d))	 # -> error
 (pd. <- m5 %*% Diagonal(x = 1:6))
 (pd2 <- diag (10:6)	   %*% m5)
 (pd..<- Diagonal(x = 10:6) %*% m5)
-stopifnot(dim(crossprod(t(m5))) == c(5,5),
-	  c(class(p1),class(p2),class(pd1),class(pd2),
-	    class(pd.),class(pd..)) == "dgeMatrix")
+stopifnot(exprs = {
+    dim(crossprod(t(m5))) == c(5,5)
+    c(class(p1),class(p2),class(pd1),class(pd2), class(pd.),class(pd..)) == "dgeMatrix"
+    identical(dimnames(pd.),  c(dimnames(m5)[1L], list(NULL)))
+    identical(dimnames(pd..), c(list(NULL), dimnames(m5)[2L]))
+})
+
 assert.EQ.mat(p1, cbind(c(20,30,33,38,54)))
 assert.EQ.mat(pd1, m. %*% diag(1:6))
 assert.EQ.mat(pd2, diag(10:6) %*% m.)
@@ -242,7 +297,7 @@ assert.EQ.mat(pd..,as(pd2,"matrix"))
 
 ## check that 'solve' and '%*%' are inverses
 suppressWarnings(RNGversion("3.5.0")); set.seed(1)
-A <- Matrix(rnorm(25), nc = 5)
+A <- Matrix(rnorm(25), ncol = 5)
 y <- rnorm(5)
 all.equal((A %*% solve(A, y))@x, y)
 Atr <- new("dtrMatrix", Dim = A@Dim, x = A@x, uplo = "U")
@@ -263,12 +318,19 @@ stopifnot(exprs = {
 Qidentical3 <- function(a,b,c) Q.eq(a,b) && Q.eq(b,c)
 Qidentical4 <- function(a,b,c,d) Q.eq(a,b) && Q.eq(b,c) && Q.eq(c,d)
 chkP <- function(mLeft, mRight, MLeft, MRight, cl = class(MLeft)) {
-    ident4 <- if(extends(cl, "generalMatrix"))
-		  function(a,b,c,d) identical4(as(a, cl), b, c, d)
-	      else function(a,b,c,d) {
-		  assert.EQ.mat(M=b, m=a, tol=0)
-		  Qidentical3(b,c,d)
-	      }
+    ident4 <-
+        if(extends(cl, "generalMatrix")) {
+            function(a,b,c,d) {
+                r <- eval(Matrix:::.as.via.virtual(
+                                       class(a)[1L], cl[1], quote(a)))
+                identical4(r,b,c,d)
+            }
+        } else {
+            function(a,b,c,d) {
+                assert.EQ.mat(M=b, m=a, tol=0)
+                Qidentical3(b,c,d)
+            }
+        }
     mm <- mLeft %*% mRight # ok
     m.m <- crossprod(mRight)
     mm. <- tcrossprod(mLeft, mLeft)
@@ -278,7 +340,7 @@ chkP <- function(mLeft, mRight, MLeft, MRight, cl = class(MLeft)) {
                      MLeft %*% mRight,
                      MLeft %*% MRight),# now ok
 	      m.m == 0, identical(m.m, crossprod(mRight, mRight)),
-	      mm. == 0, identical(mm., tcrossprod(mLeft, mLeft)))
+	      mm. == 0, identical(mm., tcrossprod(mLeft, mLeft)),  allow.logical0 = TRUE)
     stopifnot(ident4(m.m,
 		     crossprod(MRight, MRight),
 		     crossprod(MRight, mRight),
@@ -308,11 +370,9 @@ for(spV in c(FALSE,TRUE)) {
     assertError(crossprod(v, 1:2)); assertError(v %*% 1:2)
     assertError(crossprod(v, 2))  ; assertError(v %*% 2)
     assertError(crossprod(1:2, v)); assertError(1:2 %*% v)
-    if(spV || getRversion() >= "3.2.0") {
 	cat("doing  vec x vec  ..\n")
 	stopifnot(identical(crossprod(2, v), t(2) %*% v),
 		  identical(5 %*% v, 5 %*% t(v)))
-    }
     for(sp in c(FALSE, TRUE)) {
         m <- Matrix(1:2, 1,2, sparse=sp)
         cat(sprintf("class(m): '%s'\n", class(m)))
@@ -376,8 +436,9 @@ assert.EQ.mat(ss., tcrossprod(v,v))
 dm <- Matrix(v, sparse=FALSE)
 sm <- Matrix(v, sparse=TRUE)
 
-validObject(d.vvt <- as(as(vvt <- tcrossprod(v, v), "denseMatrix"), "dgeMatrix"))
-validObject(s.vvt <- as(as(vvt, "sparseMatrix"), "dgCMatrix"))
+vvt <- tcrossprod(v, v)
+validObject(d.vvt <- as(as(vvt, "unpackedMatrix"), "generalMatrix"))
+validObject(s.vvt <- as(as(vvt, "CsparseMatrix"), "generalMatrix"))
 
 stopifnot(
     identical4(tcrossprod(v, v), tcrossprod(mv, v),
@@ -415,7 +476,7 @@ stopifnot(identical(tcrossprod(v, M), v %*% t(M)),
 t1 <- new("dtTMatrix", x= c(3,7), i= 0:1, j=3:2, Dim= as.integer(c(4,4)))
 ## from	 0-diagonal to unit-diagonal {low-level step}:
 tu <- t1 ; tu@diag <- "U"
-cu <- as(tu, "dtCMatrix")
+cu <- as(tu, "CsparseMatrix")
 cl <- t(cu) # unit lower-triangular
 cl10 <- cl %*% Diagonal(4, x=10)
 assert.EQ.mat(cl10, as(cl, "matrix") %*% diag(4, x=10))
@@ -435,38 +496,33 @@ D4 <- Diagonal(4, x=10:7); d4 <- as(D4, "matrix")
 D.D4 <- crossprod(D4); assert.EQ.mat(D.D4, crossprod(d4))
 stopifnotValid(D.D4, "ddiMatrix")
 stopifnotValid(su <- crossprod(cu), "dsCMatrix")
-stopifnot(
+asGe <- function(x) as(as(x, "unpackedMatrix"), "generalMatrix")
+stopifnot(exprs = {
     all(cu2 == cu2.)
-   ,# was wrong for ver. <= 0.999375-4
-          identical(D.D4, tcrossprod(D4))
-,
-          identical4(crossprod(d4, D4), crossprod(D4, d4), tcrossprod(d4, D4), D.D4)
-,
-	  is(cu2, "dtCMatrix"), is(cl2, "dtCMatrix"), # triangularity preserved
-	  cu2@diag == "U", cl2@diag == "U",# UNIT-triangularity preserved
-	  all.equal(D4 %*% cu, D4 %*% mcu)
-,
-	  all.equal(cu %*% D4, mcu %*% D4)
-,
-	  all(D4 %*% su == D4 %*% as.mat(su))
-,
-	  all(su %*% D4 == as.mat(su) %*% D4)
-,
-	  identical(t(cl2), cu2)
-  , # !!
-          identical ( crossprod(cu, D4),  crossprod(mcu, D4))
-,
-          identical4(tcrossprod(cu, D4), tcrossprod(mcu, D4), cu %*% D4, mcu %*% D4)
-,
-          identical4(tcrossprod(D4,cu), tcrossprod(D4,mcu), D4 %*% t(cu), D4 %*% t(mcu))
-,
-	  identical( crossprod(cu), Matrix( crossprod(mcu),sparse=TRUE))
-,
-	  identical(tcrossprod(cu), Matrix(tcrossprod(mcu),sparse=TRUE))
-    )
+    ## was wrong for ver. <= 0.999375-4
+    identical(D.D4, tcrossprod(D4))
+    identical4(crossprod(d4, D4), crossprod(D4, d4), tcrossprod(d4, D4), asGe(D.D4))
+    is(cu2, "dtCMatrix") # triangularity preserved
+    is(cl2, "dtCMatrix")
+    cu2@diag == "U" # unit triangularity preserved
+    cl2@diag == "U"
+    all.equal(D4 %*% mcu, asGe(D4 %*% cu))
+    all.equal(mcu %*% D4, asGe(cu %*% D4))
+    all(D4 %*% su == D4 %*% as.mat(su))
+    all(su %*% D4 == as.mat(su) %*% D4)
+    identical(t(cl2), cu2)
+    ## !!
+    identical(crossprod(mcu, D4), asGe(crossprod(cu, D4)))
+    identical4(asGe(tcrossprod(cu, D4)), tcrossprod(mcu, D4),
+               asGe(cu %*% D4), mcu %*% D4)
+    identical4(asGe(tcrossprod(D4, cu)), tcrossprod(D4,mcu),
+               asGe(D4 %*% t(cu)), D4 %*% t(mcu))
+    identical( crossprod(cu), Matrix( crossprod(mcu),sparse=TRUE))
+    identical(tcrossprod(cu), Matrix(tcrossprod(mcu),sparse=TRUE))
+})
 assert.EQ.mat( crossprod(cu, D4),  crossprod(mcu, d4))
 assert.EQ.mat(tcrossprod(cu, D4), tcrossprod(mcu, d4))
-tr8 <- kronecker(rbind(c(2,0),c(1,4)), cl2)
+tr8 <- kronecker(Matrix(rbind(c(2,0),c(1,4))), cl2)
 T8 <- tr8 %*% (tr8/2) # triangularity preserved?
 T8.2 <- (T8 %*% T8) / 4
 stopifnot(is(T8, "triangularMatrix"), T8@uplo == "L", is(T8.2, "dtCMatrix"))
@@ -481,7 +537,7 @@ cpr   <- t(mm) %*% mm
 cpr.  <- crossprod(mm)
 cpr.. <- crossprod(mm, mm)
 stopifnot(is(cpr., "symmetricMatrix"),
-	  identical3(cpr, as(cpr., class(cpr)), cpr..))
+	  identical3(cpr, as(cpr., "generalMatrix"), cpr..))
 ## with dimnames:
 m <- Matrix(c(0, 0, 2:0), 3, 5)
 dimnames(m) <- list(LETTERS[1:3], letters[1:5])
@@ -492,14 +548,14 @@ t1 <- m %*% t(m)
 (t1. <- tcrossprod(m))
 stopifnot(isSymmetric(p1.),
 	  isSymmetric(t1.),
-	  identical(p1, as(p1., class(p1))),
-	  identical(t1, as(t1., class(t1))),
+	  identical(p1, as(p1., "generalMatrix")),
+	  identical(t1, as(t1., "generalMatrix")),
 	  identical(dimnames(p1), dimnames(p1.)),
 	  identical(dimnames(p1), list(colnames(m), colnames(m))),
 	  identical(dimnames(t1), dimnames(t1.))
 	  )
 
-showMethods("%*%", class=class(M))
+showMethods("%*%", classes=class(M))
 
 v1 <- rep(1, ncol(M))
 str(r <-  M %*% Matrix(v1))
@@ -525,15 +581,16 @@ I <- .sparseDiagonal(n, shape="g")
 S <- as(symW, "matrix")
 sis <- solve(S,    S)
 ## solve(<dsCMatrix>, <sparseMatrix>) when Cholmod fails was buggy for *long*:
+o. <- options(Matrix.verbose = 2) # <-- showing Cholmod error & warning now
 SIS <- solve(symW, symW)
-iw <- solve(symW)
+iw <- solve(symW)  ## << TODO:  LU *not* saved in @factors
 iss <- iw %*% symW
 ##                                     nb-mm3   openBLAS (Avi A.)
 assert.EQ.(I, drop0(sis), tol = 1e-8)# 2.6e-10;  7.96e-9
 assert.EQ.(I, SIS,        tol = 1e-7)# 8.2e-9
 assert.EQ.(I, iss,        tol = 4e-4)# 3.3e-5
 ## solve(<dsCMatrix>, <dense..>) :
-I <- diag(nr=n)
+I <- diag(nrow=n)
 SIS <- solve(symW, as(symW,"denseMatrix"))
 iw  <- solve(symW, I)
 iss <- iw %*% symW
@@ -553,18 +610,19 @@ assert.EQ.(as(I2,"matrix"), I, tol = 7e-7)
 set.seed(131); ii <- sample(length(WW), size= 100)
 WW[ii] <- WW[ii] * (1 + 1e-7*runif(100))
 SW. <- symmpart(WW)
-SW2 <- Matrix:::forceSymmetric(WW)
+SW2 <- forceSymmetric(WW)
 stopifnot(all.equal(as(SW.,"matrix"),
-                    as(SW2,"matrix"), tol = 1e-7))
-(ch <- all.equal(WW, as(SW.,"dgCMatrix"), tolerance =0))
+                    as(SW2,"matrix"), tolerance = 1e-7))
+(ch <- all.equal(WW, as(SW., "generalMatrix"), tolerance = 0))
 stopifnot(is.character(ch), length(ch) == 1)## had length(.)  2  previously
-IW <- solve(WW)
+IW <- solve(WW) # ( => stores in WW@factors !)
 class(I1 <- IW %*% WW)# "dge" or "dgC" (!)
 class(I2 <- WW %*% IW)
-I <- diag(nr=nrow(WW))
+I <- diag(nrow=nrow(WW))
 stopifnot(all.equal(as(I1,"matrix"), I, check.attributes=FALSE, tolerance = 1e-4),
           ## "Mean relative difference: 3.296549e-05"  (or "1.999949" for Matrix_1.0-13 !!!)
           all.equal(as(I2,"matrix"), I, check.attributes=FALSE)) #default tol gives "1" for M.._1.0-13
+options(o.) # revert to less Matrix.verbose
 
 if(doExtras) {
     print(kappa(WW)) ## [1] 5.129463e+12
@@ -592,7 +650,7 @@ assert.EQ.(dIW, IW2, tol= 8e-4)
 a <- matrix(0,5,5)
 a[1,2] <- a[2,3] <- a[3,4] <- a[4,5] <- 1
 a <- a + t(a) + 2*diag(5)
-b <- as(a, "dsCMatrix") ## ok, but we recommend to use Matrix() ``almost always'' :
+b <- as(a, "CsparseMatrix") ## ok, but we recommend to use Matrix() ``almost always'' :
 (b. <- Matrix(a, sparse = TRUE))
 stopifnot(identical(b, b.))
 
@@ -605,14 +663,14 @@ stopifnot(is(B2, "dsCMatrix"), # symmetric indexing keeps symmetry
 	  is(z.s <- solve(B2, bb), "sparseMatrix"))
 assert.EQ.mat(B2 %*% z.s, as(bb, "matrix"))
 ## -> dense RHS and dense result
-z. <- solve(as(B2, "dgCMatrix"), bb)# now *sparse*
-z  <- solve( B2, as(bb,"dgeMatrix"))
+z. <- solve(as(B2, "generalMatrix"), bb)# now *sparse*
+z  <- solve( B2, as(bb, "denseMatrix"))
 stopifnot(is(z., "sparseMatrix"),
           all.equal(z, as(z.,"denseMatrix")))
 ## finish calculating conditional variance matrix
 v <- b[3:5,3:5] - crossprod(bb,z)
 stopifnot(all.equal(as.mat(v),
-		    matrix(c(4/3, 1:0, 1,2,1, 0:2), 3), tol = 1e-14))
+		    matrix(c(4/3, 1:0, 1,2,1, 0:2), 3), tolerance = 1e-14))
 
 
 ###--- "logical" Matrices : ---------------------
@@ -649,22 +707,25 @@ chk.ngMatrix <- function(M, verbose = TRUE) {
     if(verbose) {cat( "crossprod(M):\n"); show(cM) }
     if(verbose) {cat("tcrossprod(M):\n"); show(tM) }
     stopifnot(is(cM,"symmetricMatrix"), is(tM,"symmetricMatrix"),
-	      identical(as( cM, "ngCMatrix"), t(M) %*%   M),
-	      identical(as( tM, "ngCMatrix"),  M   %*% t(M)))
-    assert.EQ.mat( cM,  crossprod(m) > 0)
-    assert.EQ.mat( tM, as(tcrossprod(m),"matrix") > 0)
+	      identical(as(as(cM, "CsparseMatrix"), "generalMatrix"),
+                        t(M) %*% M),
+	      identical(as(as(tM, "CsparseMatrix"), "generalMatrix"),
+                        M %*% t(M)))
+    assert.EQ.mat(cM, crossprod(m) > 0)
+    assert.EQ.mat(tM, as(tcrossprod(m), "matrix") > 0)
 
     ## Part II : matrix products pattern Matrices with numeric:
     ##
     ## "n" x "d" (and "d" x "n") --> "d", i.e. numeric in any case
     dM <- as(M, "dMatrix")
-    stopifnot( ## dense ones:
-        identical( M %*% m, m %*% M -> Mm)
-       , ## sparse ones :
-        identical3(
-            M %*% dM, dM %*% M -> sMM,
-            as(as(m %*% m, "sparseMatrix"), class(sMM)))
-        )
+    stopifnot(exprs = {
+        ## dense ones:
+        identical(M %*% m, m %*% M -> Mm)
+        ## sparse ones :
+        identical3(M %*% dM, dM %*% M -> sMM,
+                   eval(Matrix:::.as.via.virtual(
+                                     "matrix", class(sMM), quote(m %*% m))))
+    })
     if(verbose) {cat( "M %*% m:\n"); show(Mm) }
     stopifnotValid(Mm,  "dMatrix") # not "n.."
     stopifnotValid(sMM, "dMatrix") # not "n.."
@@ -756,17 +817,16 @@ assertError(mm %*% P) # dimension mismatch
 assertError(m  %*% P) # ditto
 assertError(crossprod(t(mm), P)) # ditto
 stopifnotValid(tm1, "dsCMatrix")
-stopifnot(
-	  all.equal(tm1, tm2, tolerance =1e-15),
-	  identical(drop0(Im2 %*% tm2[1:3,]), Matrix(cbind(diag(3),0))),
-	  identical(p, as.matrix(P)),
-	  identical(P %*% m, as.matrix(P) %*% m),
-	  all(P %*% mm	==  P %*% m),
-	  all(P %*% mm	-   P %*% m == 0),
-	  all(t(mm) %*% P ==  t(m) %*% P),
-	  identical(crossprod(m, P),
-		    crossprod(mm, P)),
-	  TRUE)
+stopifnot(exprs = {
+    all.equal(tm1, tm2, tolerance = 1e-15)
+    identical(drop0(Im2 %*% tm2[1:3,]), Matrix(cbind(diag(3), 0)))
+    identical(p, as.matrix(P))
+    all(P %*% m == as.matrix(P) %*% m)
+    all(P %*% mm == P %*% m)
+    all(P %*% mm - P %*% m == 0)
+    all(t(mm) %*% P ==  t(m) %*% P)
+    all(crossprod(m, P) == crossprod(mm, P))
+})
 
 d <- function(m) as(m,"dsparseMatrix")
 IM1 <- as(c(3,1,2), "indMatrix")
@@ -774,8 +834,8 @@ IM2 <- as(c(1,2,1), "indMatrix")
 assert.EQ.Mat(crossprod(  IM1,   IM2),
               crossprod(d(IM1),d(IM2)), tol=0)# failed at first
 iM <- as(cbind2(IM2, 0), "indMatrix")
-stopifnot(identical3(crossprod(iM), # <- wrong for Matrix <= 1.1-5
-                     crossprod(iM, iM), Diagonal(x = 2:0)))
+assert.EQ.Mat(crossprod(iM),     Diagonal(x = 2:0))
+assert.EQ.Mat(crossprod(iM, iM), Diagonal(x = 2:0))
 
 N3 <- Diagonal(x=1:3)
 U3 <- Diagonal(3) # unit diagonal (@diag = "U")
@@ -813,7 +873,7 @@ stopifnot(Q.C.identical(NM, ## <- failed
                      U3 %*% lM -> U3l, # ditto
                      U3 %*% nM)  # wrongly gave ngTMatrix
           ,
-          isValid(U3l, "dgTMatrix")
+          isValid(U3l, "dgCMatrix")
           )
 
 selectMethod("%*%", c("dtCMatrix", "ngTMatrix")) # x %*% .T.2.C(y) -->
@@ -858,8 +918,8 @@ stopifnot(identical(X %x% Y,
                     as(as.matrix(X) %x% as.matrix(Y), "indMatrix")))
 ## crossprod:
 (XtY <- crossprod(X, Y))# gave warning in Matrix 1.1-3
-XtY_ok <- as(crossprod(as.matrix(X), as.matrix(Y)), "dgCMatrix")
-stopifnot(identical(XtY, XtY_ok)) # not true, previously
+XtY_ok <- as(crossprod(as.matrix(X), as.matrix(Y)), "TsparseMatrix")
+assert.EQ.Mat(XtY, XtY_ok) # not true, previously
 
 ###------- %&% -------- Boolean Arithmetic Matrix products
 
@@ -914,5 +974,79 @@ stopifnot(identical(dim(Diagonal(x=c(1,2)) %*% m20), c(2L, 0L)),
 stopifnot(identical(dim(m02 %*% Diagonal(x=c(1,2))), c(0L, 2L)),
           identical(dim(M02 %*% Diagonal(2)       ), c(0L, 2L)),
           identical(dim(M02 %*% Diagonal(x=2:1)   ), c(0L, 2L)))
+
+## RsparseMatrix --- Arko Bose (Jan.2022): "Method for <dgRMatrix> %*% <dgCMatrix>"
+(m <- Matrix(c(0,0,2:0), 3,5))
+stopifnotValid(R <- as(m, "RsparseMatrix"), "RsparseMatrix")
+stopifnotValid(T <- as(m, "TsparseMatrix"), "TsparseMatrix")
+stopifnot(exprs = { ## may change, once (t)crossprod(R) returns dsC*
+    all.equal(t(R) %*% R,  crossprod(R) -> cR)
+    all.equal(R %*% t(R), tcrossprod(R) -> tR) # both dgC {latter could improve to dsC*}
+    all.equal(as(R %*% t(m),"symmetricMatrix"), tcrossprod(m))
+    all.equal(as(m %*% t(R),"symmetricMatrix"), tcrossprod(m))
+    ## failed in Matrix <= 1.4.1  (since 1.2.0, when 'boolArith' was introduced):
+    all.equal(cR,  crossprod(R,T))
+    all.equal(cR,  crossprod(T,R))
+    all.equal(tR, tcrossprod(R,T))
+    all.equal(tR, tcrossprod(T,R))
+})
+
+## More for kronecker() ------------------------------------------------
+
+checkKronecker <- function(X, Y, ...) {
+    k1 <- as(k0 <- kronecker(X, Y, ...), "matrix")
+    k2 <- kronecker(as(X, "matrix"), as(Y, "matrix"), ...)
+    cldX <- getClassDef(class(X))
+    cldY <- getClassDef(class(Y))
+    if(extends(cldX, "indMatrix") &&
+       extends(cldY, "indMatrix")) {
+        stopifnot(is(k0, "indMatrix"))
+        storage.mode(k2) <- "logical"
+    }
+    if(extends(cldX, "triangularMatrix") &&
+       extends(cldY, "triangularMatrix") && X@uplo == Y@uplo)
+        stopifnot(is(k0, "triangularMatrix"),
+                  k0@uplo == X@uplo,
+                  k0@diag == (if(X@diag == "N" || Y@diag == "N") "N" else "U"))
+    else if(extends(cldX, "symmetricMatrix") &&
+            extends(cldY, "symmetricMatrix"))
+        stopifnot(is(k0, "symmetricMatrix"), k0@uplo == X@uplo)
+    ## could test for more special cases
+    if(!isTRUE(ae <- all.equal(k1, k2)))
+        stop(sprintf("checkKronecker(<%s>, <%s>):\n  %s",
+                     class(X), class(Y), paste0(ae, collapse = "\n  ")))
+}
+
+set.seed(145133)
+lXY <- lapply(rpois(2L, 10),
+              function(n) {
+                  x <- rsparsematrix(n, n, 0.6)
+                  dn <- replicate(2L, if(sample(c(FALSE, TRUE), 1L))
+                                          sample(letters, n, TRUE),
+                                  simplify = FALSE)
+                  x@Dimnames <- dn
+                  x4 <- list(as(as(x, "dMatrix"),   "denseMatrix"),
+                             as(as(x, "dMatrix"), "CsparseMatrix"),
+                             as(as(x, "lMatrix"), "RsparseMatrix"),
+                             as(as(x, "nMatrix"), "TsparseMatrix"))
+
+                  mkList <- function(y)
+                      list(x,
+                           triu(x),
+                           tril(x),
+                           { z <- triu(x,  1L); z@diag <- "U"; z },
+                           { z <- tril(x, -1L); z@diag <- "U"; z },
+                           forceSymmetric(x, "U"),
+                           forceSymmetric(x, "L"),
+                           { z <- Diagonal(x = diag(x)); z@Dimnames <- dn; z },
+                           as(sample.int(n, replace = TRUE), "indMatrix"),
+                           as(x, "matrix"))
+                  unlist(lapply(x4, mkList), FALSE, FALSE)
+              })
+lX <- lXY[[1L]]
+lY <- lXY[[2L]]
+for(i in seq_along(lX))
+    for(j in seq_along(lY))
+        checkKronecker(lX[[i]], lY[[j]], make.dimnames = TRUE)
 
 cat('Time elapsed: ', proc.time(),'\n') # for ``statistical reasons''

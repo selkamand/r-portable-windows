@@ -292,6 +292,8 @@ kruskal.test	kruskal.test
 kruskal.test.default	kruskal.test
 kruskal.test.formula	kruskal.test
 ks.test	ks.test
+ks.test.default	ks.test
+ks.test.formula	ks.test
 ksmooth	ksmooth
 labels.dendrogram	order.dendrogram
 labels.dist	dist
@@ -437,7 +439,7 @@ pf	Fdist
 pgamma	GammaDist
 pgeom	Geometric
 phyper	Hypergeometric
-plclust	stats-deprecated
+plclust	stats-defunct
 plnorm	Lognormal
 plogis	Logistic
 plot.acf	plot.acf
@@ -516,6 +518,7 @@ print.HoltWinters	HoltWinters
 print.htest	print.power.htest
 print.integrate	integrate
 print.kmeans	kmeans
+print.lm	lm
 print.loadings	loadings
 print.power.htest	print.power.htest
 print.prcomp	prcomp
@@ -544,6 +547,7 @@ promax	varimax
 prop.test	prop.test
 prop.trend.test	prop.trend.test
 psignrank	SignRank
+psmirnov	Smirnov
 pt	TDist
 ptukey	Tukey
 punif	Uniform
@@ -570,6 +574,7 @@ qqnorm	qqnorm
 qqnorm.default	qqnorm
 qqplot	qqnorm
 qsignrank	SignRank
+qsmirnov	Smirnov
 qt	TDist
 qtukey	Tukey
 quade.test	quade.test
@@ -623,6 +628,7 @@ rnchisq	stats-defunct
 rnorm	Normal
 rpois	Poisson
 rsignrank	SignRank
+rsmirnov	Smirnov
 rstandard	influence.measures
 rstandard.glm	influence.measures
 rstandard.lm	influence.measures
@@ -650,9 +656,11 @@ setNames	setNames
 shapiro.test	shapiro.test
 sigma	sigma
 sigma.default	sigma
+sigma.glm	sigma
 sigma.mlm	sigma
 SignRank	SignRank
 simulate	simulate
+Smirnov	Smirnov
 smooth	smooth
 smooth.spline	smooth.spline
 smoothEnds	smoothEnds
@@ -712,6 +720,7 @@ terms.object	terms.object
 time	time
 time.default	time
 toeplitz	toeplitz
+toeplitz2	toeplitz
 ts	ts
 ts.intersect	ts.union
 ts.plot	ts.plot

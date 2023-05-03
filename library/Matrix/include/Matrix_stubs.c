@@ -610,7 +610,8 @@ M_R_cholmod_start(CHM_CM Common)
     val = fun(Common);
 /*-- NB: keep in sync with  R_cholmod_start() --> ../../src/chm_common.c */
     /* do not allow CHOLMOD printing - currently */
-    Common->print_function = NULL;/* was  R_cholmod_printf; /.* Rprintf gives warning */
+/*- *NOMORE* with SuiteSparse 5.7.1:
+ *-  Common->print_function = NULL; *- was  R_cholmod_printf  (Rprintf gives warning) */
 /* Consider using your own error handler: */
     Common->error_handler = M_R_cholmod_error;
     return val;

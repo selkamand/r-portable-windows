@@ -76,15 +76,15 @@ contour(topo.mar$x,topo.mar$y,topo.lo$se.fit, levels = seq(5, 25, 5),
 title("Loess degree = 1")
 points(topo)
 
-library(akima)
+library(interp) # was akima, interp.old()
 par(mfrow = c(1, 2), pty=  "s")
-topo.int <- interp.old(topo$x, topo$y, topo$z)
+topo.int <- interp(topo$x, topo$y, topo$z)
 eqscplot(topo.int, xlab = "interp default", ylab = "", type = "n")
 contour(topo.int, levels = seq(600, 1000, 25), add = TRUE)
 points(topo)
 topo.mar <- list(x = seq(0, 6.5, 0.1), y = seq(0, 6.5, 0.1))
-topo.int2 <- interp.old(topo$x, topo$y, topo$z, topo.mar$x, topo.mar$y,
-                        ncp = 4, extrap = TRUE)
+topo.int2 <- interp(topo$x, topo$y, topo$z, topo.mar$x, topo.mar$y,
+                    extrap = TRUE) # was ncp = 4.
 eqscplot(topo.int2, xlab = "interp", ylab = "", type = "n")
 contour(topo.int2, levels = seq(600, 1000, 25), add = TRUE)
 points(topo)

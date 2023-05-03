@@ -149,7 +149,7 @@ The most sparse matrix is reached by \emph{not} using an intercept,
 contrast, i.e., here, the \emph{transposed} model matrix, \code{tmm}, is
 <<modMat-warpbreaks, fig=TRUE, height=2>>=
 tmm <- with(warpbreaks,
-            rBind(as(tension, "sparseMatrix"),
+            rbind(as(tension, "sparseMatrix"),
                   as(wool,    "sparseMatrix")[-1,,drop=FALSE]))
 print(  image(tmm)  ) # print(.) the lattice object
 @
@@ -162,7 +162,7 @@ morley$Expt <- factor(morley$Expt)
 morley$Run <- factor(morley$Run)
 str(morley)
 t.mm <- with(morley,
-             rBind(as(Expt, "sparseMatrix"),
+             rbind(as(Expt, "sparseMatrix"),
                    as(Run,  "sparseMatrix")[-1,]))
 print(  image(t.mm)  ) # print(.) the lattice object
 @

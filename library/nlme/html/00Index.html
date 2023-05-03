@@ -1,9 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head><title>R: Linear and Nonlinear Mixed Effects Models</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> Linear and Nonlinear Mixed Effects Models
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
@@ -11,7 +12,7 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;nlme&rsquo; version 3.1-149</h2>
+</div><h2>Documentation for package &lsquo;nlme&rsquo; version 3.1-162</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
 </ul>
@@ -44,9 +45,9 @@
 </p>
 
 
-<h2><a name="A">-- A --</a></h2>
+<h2><a id="A">-- A --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="ACF.html">ACF</a></td>
 <td>Autocorrelation Function</td></tr>
 <tr><td style="width: 25%;"><a href="ACF.gls.html">ACF.gls</a></td>
@@ -87,9 +88,9 @@
 <td>Augmented Predictions</td></tr>
 </table>
 
-<h2><a name="B">-- B --</a></h2>
+<h2><a id="B">-- B --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="balancedGrouped.html">balancedGrouped</a></td>
 <td>Create a groupedData object from a matrix</td></tr>
 <tr><td style="width: 25%;"><a href="bdf.html">bdf</a></td>
@@ -98,9 +99,9 @@
 <td>Rat weight over time for different diets</td></tr>
 </table>
 
-<h2><a name="C">-- C --</a></h2>
+<h2><a id="C">-- C --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="Cefamandole.html">Cefamandole</a></td>
 <td>Pharmacokinetics of Cefamandole</td></tr>
 <tr><td style="width: 25%;"><a href="coef.corStruct.html">coef.corAR1</a></td>
@@ -114,8 +115,6 @@
 <tr><td style="width: 25%;"><a href="coef.corStruct.html">coef.corCompSymm</a></td>
 <td>Coefficients of a corStruct Object</td></tr>
 <tr><td style="width: 25%;"><a href="coef.corStruct.html">coef.corHF</a></td>
-<td>Coefficients of a corStruct Object</td></tr>
-<tr><td style="width: 25%;"><a href="coef.corStruct.html">coef.corIdent</a></td>
 <td>Coefficients of a corStruct Object</td></tr>
 <tr><td style="width: 25%;"><a href="coef.corStruct.html">coef.corLin</a></td>
 <td>Coefficients of a corStruct Object</td></tr>
@@ -159,6 +158,8 @@
 <td>varFunc Object Coefficients</td></tr>
 <tr><td style="width: 25%;"><a href="coef.varFunc.html">coef.varConstPower</a></td>
 <td>varFunc Object Coefficients</td></tr>
+<tr><td style="width: 25%;"><a href="coef.varFunc.html">coef.varConstProp</a></td>
+<td>varFunc Object Coefficients</td></tr>
 <tr><td style="width: 25%;"><a href="coef.varFunc.html">coef.varExp</a></td>
 <td>varFunc Object Coefficients</td></tr>
 <tr><td style="width: 25%;"><a href="coef.varFunc.html">coef.varFixed</a></td>
@@ -180,8 +181,6 @@
 <tr><td style="width: 25%;"><a href="coef.corStruct.html">coef&lt;-.corCompSymm</a></td>
 <td>Coefficients of a corStruct Object</td></tr>
 <tr><td style="width: 25%;"><a href="coef.corStruct.html">coef&lt;-.corHF</a></td>
-<td>Coefficients of a corStruct Object</td></tr>
-<tr><td style="width: 25%;"><a href="coef.corStruct.html">coef&lt;-.corIdent</a></td>
 <td>Coefficients of a corStruct Object</td></tr>
 <tr><td style="width: 25%;"><a href="coef.corStruct.html">coef&lt;-.corLin</a></td>
 <td>Coefficients of a corStruct Object</td></tr>
@@ -206,6 +205,8 @@
 <tr><td style="width: 25%;"><a href="coef.varFunc.html">coef&lt;-.varComb</a></td>
 <td>varFunc Object Coefficients</td></tr>
 <tr><td style="width: 25%;"><a href="coef.varFunc.html">coef&lt;-.varConstPower</a></td>
+<td>varFunc Object Coefficients</td></tr>
+<tr><td style="width: 25%;"><a href="coef.varFunc.html">coef&lt;-.varConstProp</a></td>
 <td>varFunc Object Coefficients</td></tr>
 <tr><td style="width: 25%;"><a href="coef.varFunc.html">coef&lt;-.varExp</a></td>
 <td>varFunc Object Coefficients</td></tr>
@@ -263,8 +264,6 @@
 <td>Factor of a corStruct Object Matrix</td></tr>
 <tr><td style="width: 25%;"><a href="corGaus.html">corGaus</a></td>
 <td>Gaussian Correlation Structure</td></tr>
-<tr><td style="width: 25%;"><a href="corClasses.html">corIdent</a></td>
-<td>Correlation Structure Classes</td></tr>
 <tr><td style="width: 25%;"><a href="corLin.html">corLin</a></td>
 <td>Linear Correlation Structure</td></tr>
 <tr><td style="width: 25%;"><a href="corMatrix.html">corMatrix</a></td>
@@ -276,8 +275,6 @@
 <tr><td style="width: 25%;"><a href="corMatrix.corStruct.html">corMatrix.corCAR1</a></td>
 <td>Matrix of a corStruct Object</td></tr>
 <tr><td style="width: 25%;"><a href="corMatrix.corStruct.html">corMatrix.corCompSymm</a></td>
-<td>Matrix of a corStruct Object</td></tr>
-<tr><td style="width: 25%;"><a href="corMatrix.corStruct.html">corMatrix.corIdent</a></td>
 <td>Matrix of a corStruct Object</td></tr>
 <tr><td style="width: 25%;"><a href="corMatrix.corStruct.html">corMatrix.corNatural</a></td>
 <td>Matrix of a corStruct Object</td></tr>
@@ -319,9 +316,9 @@
 <td>Assign varFunc Covariate</td></tr>
 </table>
 
-<h2><a name="D">-- D --</a></h2>
+<h2><a id="D">-- D --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="Dialyzer.html">Dialyzer</a></td>
 <td>High-Flux Hemodialyzer</td></tr>
 <tr><td style="width: 25%;"><a href="Dim.html">Dim</a></td>
@@ -346,18 +343,18 @@
 <td>Dimensions of a pdMat Object</td></tr>
 </table>
 
-<h2><a name="E">-- E --</a></h2>
+<h2><a id="E">-- E --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="Earthquake.html">Earthquake</a></td>
 <td>Earthquake Intensity</td></tr>
 <tr><td style="width: 25%;"><a href="ergoStool.html">ergoStool</a></td>
 <td>Ergometrics experiment with stool types</td></tr>
 </table>
 
-<h2><a name="F">-- F --</a></h2>
+<h2><a id="F">-- F --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="Fatigue.html">Fatigue</a></td>
 <td>Cracks caused by metal fatigue</td></tr>
 <tr><td style="width: 25%;"><a href="fdHess.html">fdHess</a></td>
@@ -390,9 +387,9 @@
 <td>Extract reStruct Object Formula</td></tr>
 </table>
 
-<h2><a name="G">-- G --</a></h2>
+<h2><a id="G">-- G --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="gapply.html">gapply</a></td>
 <td>Apply a Function by Groups</td></tr>
 <tr><td style="width: 25%;"><a href="Gasoline.html">Gasoline</a></td>
@@ -489,9 +486,9 @@
 <td>Methods for firing naval guns</td></tr>
 </table>
 
-<h2><a name="I">-- I --</a></h2>
+<h2><a id="I">-- I --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="IGF.html">IGF</a></td>
 <td>Radioimmunoassay of IGF-I Protein</td></tr>
 <tr><td style="width: 25%;"><a href="Initialize.html">Initialize</a></td>
@@ -505,8 +502,6 @@
 <tr><td style="width: 25%;"><a href="Initialize.corStruct.html">Initialize.corCompSymm</a></td>
 <td>Initialize corStruct Object</td></tr>
 <tr><td style="width: 25%;"><a href="Initialize.corStruct.html">Initialize.corHF</a></td>
-<td>Initialize corStruct Object</td></tr>
-<tr><td style="width: 25%;"><a href="Initialize.corStruct.html">Initialize.corIdent</a></td>
 <td>Initialize corStruct Object</td></tr>
 <tr><td style="width: 25%;"><a href="Initialize.corStruct.html">Initialize.corLin</a></td>
 <td>Initialize corStruct Object</td></tr>
@@ -531,6 +526,8 @@
 <tr><td style="width: 25%;"><a href="Initialize.varFunc.html">Initialize.varComb</a></td>
 <td>Initialize varFunc Object</td></tr>
 <tr><td style="width: 25%;"><a href="Initialize.varFunc.html">Initialize.varConstPower</a></td>
+<td>Initialize varFunc Object</td></tr>
+<tr><td style="width: 25%;"><a href="Initialize.varFunc.html">Initialize.varConstProp</a></td>
 <td>Initialize varFunc Object</td></tr>
 <tr><td style="width: 25%;"><a href="Initialize.varFunc.html">Initialize.varExp</a></td>
 <td>Initialize varFunc Object</td></tr>
@@ -562,9 +559,9 @@
 <td>Check if Object is Initialized</td></tr>
 </table>
 
-<h2><a name="L">-- L --</a></h2>
+<h2><a id="L">-- L --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="LDEsysMat.html">LDEsysMat</a></td>
 <td>Generate system matrix for LDEs</td></tr>
 <tr><td style="width: 25%;"><a href="lme.html">lme</a></td>
@@ -589,8 +586,6 @@
 <td>lmList Fit from a groupedData Object</td></tr>
 <tr><td style="width: 25%;"><a href="logDet.html">logDet</a></td>
 <td>Extract the Logarithm of the Determinant</td></tr>
-<tr><td style="width: 25%;"><a href="logDet.corStruct.html">logDet.corIdent</a></td>
-<td>Extract corStruct Log-Determinant</td></tr>
 <tr><td style="width: 25%;"><a href="logDet.corStruct.html">logDet.corStruct</a></td>
 <td>Extract corStruct Log-Determinant</td></tr>
 <tr><td style="width: 25%;"><a href="logDet.pdMat.html">logDet.pdBlocked</a></td>
@@ -635,9 +630,9 @@
 <td>Extract varFunc logLik</td></tr>
 </table>
 
-<h2><a name="M">-- M --</a></h2>
+<h2><a id="M">-- M --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="Machines.html">Machines</a></td>
 <td>Productivity Scores for Machines and Workers</td></tr>
 <tr><td style="width: 25%;"><a href="MathAchieve.html">MathAchieve</a></td>
@@ -662,9 +657,9 @@
 <td>Contraction of heart muscle sections</td></tr>
 </table>
 
-<h2><a name="N">-- N --</a></h2>
+<h2><a id="N">-- N --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="Names.html">Names</a></td>
 <td>Names Associated with an Object</td></tr>
 <tr><td style="width: 25%;"><a href="Names.formula.html">Names.formula</a></td>
@@ -699,8 +694,6 @@
 <td>Check if Update is Needed</td></tr>
 <tr><td style="width: 25%;"><a href="needUpdate.html">needUpdate.varIdent</a></td>
 <td>Check if Update is Needed</td></tr>
-<tr><td style="width: 25%;"><a href="groupedData.html">nfGroupedData</a></td>
-<td>Construct a groupedData Object</td></tr>
 <tr><td style="width: 25%;"><a href="Nitrendipene.html">Nitrendipene</a></td>
 <td>Assay of nitrendipene</td></tr>
 <tr><td style="width: 25%;"><a href="nlme.html">nlme</a></td>
@@ -721,13 +714,11 @@
 <td>List of nls Objects with a Common Model</td></tr>
 <tr><td style="width: 25%;"><a href="nlsList.selfStart.html">nlsList.selfStart</a></td>
 <td>nlsList Fit from a selfStart Function</td></tr>
-<tr><td style="width: 25%;"><a href="groupedData.html">nmGroupedData</a></td>
-<td>Construct a groupedData Object</td></tr>
 </table>
 
-<h2><a name="O">-- O --</a></h2>
+<h2><a id="O">-- O --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="Oats.html">Oats</a></td>
 <td>Split-plot Experiment on Varieties of Oats</td></tr>
 <tr><td style="width: 25%;"><a href="Orthodont.html">Orthodont</a></td>
@@ -740,9 +731,9 @@
 <td>Variability in Semiconductor Manufacturing</td></tr>
 </table>
 
-<h2><a name="P">-- P --</a></h2>
+<h2><a id="P">-- P --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="pairs.compareFits.html">pairs.compareFits</a></td>
 <td>Pairs Plot of compareFits Object</td></tr>
 <tr><td style="width: 25%;"><a href="pairs.lme.html">pairs.lme</a></td>
@@ -911,9 +902,9 @@
 <td>Print a varFunc Object</td></tr>
 </table>
 
-<h2><a name="Q">-- Q --</a></h2>
+<h2><a id="Q">-- Q --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="qqnorm.gls.html">qqnorm.gls</a></td>
 <td>Normal Plot of Residuals from a gls Object</td></tr>
 <tr><td style="width: 25%;"><a href="qqnorm.lme.html">qqnorm.lm</a></td>
@@ -930,9 +921,9 @@
 <td>Model function for the Quinidine data</td></tr>
 </table>
 
-<h2><a name="R">-- R --</a></h2>
+<h2><a id="R">-- R --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="Rail.html">Rail</a></td>
 <td>Evaluation of Stress in Railway Rails</td></tr>
 <tr><td style="width: 25%;"><a href="random.effects.html">random.effects</a></td>
@@ -960,8 +951,6 @@
 <tr><td style="width: 25%;"><a href="recalc.corStruct.html">recalc.corCompSymm</a></td>
 <td>Recalculate for corStruct Object</td></tr>
 <tr><td style="width: 25%;"><a href="recalc.corStruct.html">recalc.corHF</a></td>
-<td>Recalculate for corStruct Object</td></tr>
-<tr><td style="width: 25%;"><a href="recalc.corStruct.html">recalc.corIdent</a></td>
 <td>Recalculate for corStruct Object</td></tr>
 <tr><td style="width: 25%;"><a href="recalc.corStruct.html">recalc.corNatural</a></td>
 <td>Recalculate for corStruct Object</td></tr>
@@ -1003,13 +992,9 @@
 <td>Random Effects Structure</td></tr>
 </table>
 
-<h2><a name="S">-- S --</a></h2>
+<h2><a id="S">-- S --</a></h2>
 
-<table width="100%">
-<tr><td style="width: 25%;"><a href="lmeObject.html">sigma</a></td>
-<td>Fitted lme Object</td></tr>
-<tr><td style="width: 25%;"><a href="lmeObject.html">sigma.lme</a></td>
-<td>Fitted lme Object</td></tr>
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="simulate.lme.html">simulate.lme</a></td>
 <td>Simulate Results from 'lme' Models</td></tr>
 <tr><td style="width: 25%;"><a href="solve.pdMat.html">solve.pdBlocked</a></td>
@@ -1045,8 +1030,6 @@
 <tr><td style="width: 25%;"><a href="summary.corStruct.html">summary.corExp</a></td>
 <td>Summarize a corStruct Object</td></tr>
 <tr><td style="width: 25%;"><a href="summary.corStruct.html">summary.corGaus</a></td>
-<td>Summarize a corStruct Object</td></tr>
-<tr><td style="width: 25%;"><a href="summary.corStruct.html">summary.corIdent</a></td>
 <td>Summarize a corStruct Object</td></tr>
 <tr><td style="width: 25%;"><a href="summary.corStruct.html">summary.corLin</a></td>
 <td>Summarize a corStruct Object</td></tr>
@@ -1089,33 +1072,35 @@
 <tr><td style="width: 25%;"><a href="summary.modelStruct.html">summary.reStruct</a></td>
 <td>Summarize a modelStruct Object</td></tr>
 <tr><td style="width: 25%;"><a href="summary.varFunc.html">summary.varComb</a></td>
-<td>Summarize varFunc Object</td></tr>
+<td>Summarize "varFunc" Object</td></tr>
 <tr><td style="width: 25%;"><a href="summary.varFunc.html">summary.varConstPower</a></td>
-<td>Summarize varFunc Object</td></tr>
+<td>Summarize "varFunc" Object</td></tr>
+<tr><td style="width: 25%;"><a href="summary.varFunc.html">summary.varConstProp</a></td>
+<td>Summarize "varFunc" Object</td></tr>
 <tr><td style="width: 25%;"><a href="summary.varFunc.html">summary.varExp</a></td>
-<td>Summarize varFunc Object</td></tr>
+<td>Summarize "varFunc" Object</td></tr>
 <tr><td style="width: 25%;"><a href="summary.varFunc.html">summary.varFixed</a></td>
-<td>Summarize varFunc Object</td></tr>
+<td>Summarize "varFunc" Object</td></tr>
 <tr><td style="width: 25%;"><a href="summary.varFunc.html">summary.varFunc</a></td>
-<td>Summarize varFunc Object</td></tr>
+<td>Summarize "varFunc" Object</td></tr>
 <tr><td style="width: 25%;"><a href="summary.varFunc.html">summary.varIdent</a></td>
-<td>Summarize varFunc Object</td></tr>
+<td>Summarize "varFunc" Object</td></tr>
 <tr><td style="width: 25%;"><a href="summary.varFunc.html">summary.varPower</a></td>
-<td>Summarize varFunc Object</td></tr>
+<td>Summarize "varFunc" Object</td></tr>
 </table>
 
-<h2><a name="T">-- T --</a></h2>
+<h2><a id="T">-- T --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="Tetracycline1.html">Tetracycline1</a></td>
 <td>Pharmacokinetics of tetracycline</td></tr>
 <tr><td style="width: 25%;"><a href="Tetracycline2.html">Tetracycline2</a></td>
 <td>Pharmacokinetics of tetracycline</td></tr>
 </table>
 
-<h2><a name="U">-- U --</a></h2>
+<h2><a id="U">-- U --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="update.modelStruct.html">update.corStruct</a></td>
 <td>Update a modelStruct Object</td></tr>
 <tr><td style="width: 25%;"><a href="gls.html">update.gls</a></td>
@@ -1136,6 +1121,8 @@
 <td>Update varFunc Object</td></tr>
 <tr><td style="width: 25%;"><a href="update.varFunc.html">update.varConstPower</a></td>
 <td>Update varFunc Object</td></tr>
+<tr><td style="width: 25%;"><a href="update.varFunc.html">update.varConstProp</a></td>
+<td>Update varFunc Object</td></tr>
 <tr><td style="width: 25%;"><a href="update.varFunc.html">update.varExp</a></td>
 <td>Update varFunc Object</td></tr>
 <tr><td style="width: 25%;"><a href="update.varFunc.html">update.varExpon</a></td>
@@ -1146,15 +1133,17 @@
 <td>Update varFunc Object</td></tr>
 </table>
 
-<h2><a name="V">-- V --</a></h2>
+<h2><a id="V">-- V --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="varClasses.html">varClasses</a></td>
 <td>Variance Function Classes</td></tr>
 <tr><td style="width: 25%;"><a href="varComb.html">varComb</a></td>
 <td>Combination of Variance Functions</td></tr>
 <tr><td style="width: 25%;"><a href="varConstPower.html">varConstPower</a></td>
 <td>Constant Plus Power Variance Function</td></tr>
+<tr><td style="width: 25%;"><a href="varConstProp.html">varConstProp</a></td>
+<td>Constant Plus Proportion Variance Function</td></tr>
 <tr><td style="width: 25%;"><a href="VarCorr.html">VarCorr</a></td>
 <td>Extract variance and correlation components</td></tr>
 <tr><td style="width: 25%;"><a href="VarCorr.html">VarCorr.lme</a></td>
@@ -1205,9 +1194,9 @@
 <td>Extract Variance Function Weights</td></tr>
 </table>
 
-<h2><a name="W">-- W --</a></h2>
+<h2><a id="W">-- W --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="Wafer.html">Wafer</a></td>
 <td>Modeling of Analog MOS Circuits</td></tr>
 <tr><td style="width: 25%;"><a href="Wheat.html">Wheat</a></td>
@@ -1216,9 +1205,9 @@
 <td>Wheat Yield Trials</td></tr>
 </table>
 
-<h2><a name="misc">-- misc --</a></h2>
+<h2><a id="misc">-- misc --</a></h2>
 
-<table width="100%">
+<table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="groupedData.html">[.groupedData</a></td>
 <td>Construct a groupedData Object</td></tr>
 <tr><td style="width: 25%;"><a href="Extract.pdMat.html">[.pdBlocked</a></td>
@@ -1230,4 +1219,4 @@
 <tr><td style="width: 25%;"><a href="Extract.pdMat.html">[&lt;-.pdMat</a></td>
 <td>Subscript a pdMat Object</td></tr>
 </table>
-</body></html>
+</div></body></html>

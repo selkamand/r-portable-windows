@@ -2,7 +2,9 @@ library(cluster)
 options(digits = 6)
 data(votes.repub)
 
+## IGNORE_RDIFF_BEGIN
 source(system.file("test-tools.R", package = "cluster"), keep.source = FALSE)
+## IGNORE_RDIFF_END
 ## -> showProc.time() ...  & doExtras
 
 agn1 <- agnes(votes.repub, metric = "manhattan", stand = TRUE)

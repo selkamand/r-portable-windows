@@ -39,7 +39,7 @@ reference for me.
 Here is a simple example using the MGUS data.
 I prefer a simpler color palette than the default found in termplot.
 <<mplot, fig=TRUE>>=
-require(survival)
+library(survival)
 mfit <- coxph(Surv(futime, death) ~ sex + pspline(age, df=4), data=mgus)
 mfit
 termplot(mfit, term=2, se=TRUE, col.term=1, col.se=1)
@@ -200,7 +200,7 @@ options(show.signif.stars=FALSE) # display intelligence
 fit1 <- coxph(Surv(futime, death) ~ sex + pspline(age, 3), data=flchain)
 fit1
 termplot(fit1, term=2, se=TRUE, col.term=1, col.se=1,
-         ylab="log hazard")
+         ylab="log hazard ratio")
 @ 
 
 We used a \code{pspline} term rather than \code{ns}, say, 
@@ -264,7 +264,7 @@ The issues as compared to using \code{termplot} are
     \code{pdata}.  The data set is in order of females, then males.
     We fold it into an appropriate matrix for use with matplot.
   \item The vertical centering of the curves corresponds to an average
-    population predictor of$\eta = X\beta =0$; i.e., the average over the
+    population predictor of $\eta = X\beta =0$; i.e., the average over the
     subjects in the data set.  This is a consequence of the
     variable centering that \code{coxph} does for numerical stability.
     To center at some particular (age, sex) pair obtain the predicted

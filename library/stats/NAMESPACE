@@ -5,7 +5,8 @@ import(graphics)
 importFrom(grDevices, as.graphicsAnnot, dev.cur, dev.flush, dev.hold,
            dev.interactive, dev.new, dev.set, devAskNewPage,
            extendrange, n2mfrow, palette, xy.coords)
-importFrom(utils, count.fields, flush.console, str, tail)
+importFrom('utils',
+           count.fields, flush.console, modifyList, str, tail)
 
 export(.checkMFClasses, .getXlevels, .MFclass, .nknots.smspl,
        acf, acf2AR, add.scope,
@@ -71,11 +72,11 @@ export(.checkMFClasses, .getXlevels, .MFclass, .nknots.smspl,
        SSasympOff, SSasympOrig, SSbiexp, SSfol, SSfpl, SSgompertz,
        SSlogis, SSmicmen, SSweibull, start, stat.anova, step, stepfun,
        stl, StructTS, summary.manova, supsmu, symnum, termplot, terms,
-       time, toeplitz, ts, ts.intersect, ts.plot, ts.union, tsdiag,
+       time, toeplitz, toeplitz2, ts, ts.intersect, ts.plot, ts.union, tsdiag,
        tsp, "tsp<-", tsSmooth, TukeyHSD, uniroot, update, var,
        variable.names, varimax, .vcov.aliased, vcov, weighted.mean,
        weighted.residuals, weights, window, "window<-", write.ftable,
-       xtabs, pbirthday, qbirthday)
+       xtabs, pbirthday, qbirthday, psmirnov, qsmirnov, rsmirnov)
 
 ## from ctest
 export(ansari.test, bartlett.test, binom.test, chisq.test, cor.test,
@@ -153,6 +154,7 @@ S3method(anova, lm)
 S3method(anova, lmlist)
 S3method(anova, loess)
 S3method(anova, mlm)
+S3method(anova, mlmlist)
 S3method(anova, nls)
 S3method(bartlett.test, default)
 S3method(bartlett.test, formula)
@@ -259,6 +261,8 @@ S3method(kernapply, vector)
 S3method(knots, stepfun)
 S3method(kruskal.test, default)
 S3method(kruskal.test, formula)
+S3method(ks.test, default)
+S3method(ks.test, formula)
 S3method(labels, dendrogram)
 S3method(labels, dist)
 S3method(labels, lm)
@@ -460,6 +464,7 @@ S3method(selfStart, default)
 S3method(selfStart, formula)
 S3method(sigma, default)
 S3method(sigma, mlm)
+S3method(sigma, glm)
 S3method(simulate, lm)
 S3method(sortedXyData, default)
 S3method(str, dendrogram)
@@ -485,6 +490,7 @@ S3method(str, logLik)
 S3method(t, ts)
 S3method(t.test, default)
 S3method(t.test, formula)
+S3method(terms, aovlist)
 S3method(terms, default)
 S3method(terms, formula)
 S3method(terms, terms)

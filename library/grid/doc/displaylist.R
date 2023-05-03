@@ -1,7 +1,7 @@
 ### R code from vignette source 'displaylist.Rnw'
 
 ###################################################
-### code chunk number 1: displaylist.Rnw:30-36
+### code chunk number 1: displaylist.Rnw:29-35
 ###################################################
 library(grDevices)
 library(graphics) # for plot()
@@ -39,19 +39,19 @@ grid.rect(width = 0.99, height = 0.99, gp = gpar(lty = "dashed"))
 
 
 ###################################################
-### code chunk number 5: displaylist.Rnw:106-107 (eval = FALSE)
+### code chunk number 5: displaylist.Rnw:105-106 (eval = FALSE)
 ###################################################
 ## grid.edit("gr", gp = gpar(col = "red", lwd = 3))
 
 
 ###################################################
-### code chunk number 6: displaylist.Rnw:137-138
+### code chunk number 6: displaylist.Rnw:136-137
 ###################################################
 grid.rect(width = convertWidth(unit(1, "inches"), "npc"))
 
 
 ###################################################
-### code chunk number 7: displaylist.Rnw:146-151
+### code chunk number 7: displaylist.Rnw:145-150
 ###################################################
 drawDetails.myrect <- function(x, recording) {
     gr <- rectGrob(width = convertWidth(unit(1, "inches"), "npc"))
@@ -61,7 +61,7 @@ grid.draw(grob(cl = "myrect"))
 
 
 ###################################################
-### code chunk number 8: displaylist.Rnw:165-181
+### code chunk number 8: displaylist.Rnw:164-180
 ###################################################
 x <- c(0.88, 1.00, 0.67, 0.34)
 y <- c(0.87, 0.43, 0.04, 0.94)
@@ -82,7 +82,7 @@ gr <- rectGrob(gp = gpar(col = "grey", fill = "white", lty = "dashed"))
 
 
 ###################################################
-### code chunk number 9: displaylist.Rnw:188-206
+### code chunk number 9: displaylist.Rnw:187-205
 ###################################################
 drawDetails.pieplot <- function(x, recording) {
     plot(x$x, x$y, xlim = c(-0.2, 1.2), ylim = c(-0.2, 1.2), type = "n")
@@ -105,7 +105,7 @@ drawDetails.pieplot <- function(x, recording) {
 
 
 ###################################################
-### code chunk number 10: displaylist.Rnw:215-220
+### code chunk number 10: displaylist.Rnw:214-219
 ###################################################
 if (suppressWarnings(require("gridBase", quietly = TRUE))) {
 grid.draw(grob(x = x, y = y, z = z,
@@ -115,7 +115,7 @@ grid.draw(grob(x = x, y = y, z = z,
 
 
 ###################################################
-### code chunk number 11: displaylist.Rnw:236-245
+### code chunk number 11: displaylist.Rnw:235-244
 ###################################################
 drawDetails.mylegend <- function(x, recording) {
     x <- 0:64/64

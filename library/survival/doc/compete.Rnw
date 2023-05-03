@@ -305,10 +305,10 @@ The code below creates the necessary \code{etime} and \code{event}
 variables, then computes and plots the competing risks estimate.
 
 <<mgus2, echo=TRUE, fig=TRUE>>=
-etime <- with(mgus2, ifelse(pstat==0, futime, ptime))
+mgus2$etime <- with(mgus2, ifelse(pstat==0, futime, ptime))
 event <- with(mgus2, ifelse(pstat==0, 2*death, 1))
-event <- factor(event, 0:2, labels=c("censor", "pcm", "death"))
-table(event)
+mgus2$event <- factor(event, 0:2, labels=c("censor", "pcm", "death"))
+table(mgus2$event)
 
 mfit2 <- survfit(Surv(etime, event) ~ sex, data=mgus2)
 print(mfit2, rmean=240, scale=12)
@@ -674,7 +674,7 @@ strata), four hypothetical subjects, and 3 states.
 that index to be omitted, for backwards compatability).
 
 <<PCMcurve2, fig=TRUE>>=
-plot(csurv[,,'pcm'], xmax=25*12, xscale=12, 
+plot(csurv[,'pcm'], xmax=25*12, xscale=12, 
      xlab="Years after MGUS diagnosis", ylab="PCM",
      col=1:2, lty=c(1,1,2,2), lwd=2)
 legend(10, .14, outer(c("female", "male   "), 
@@ -721,7 +721,7 @@ values $P$ can be complex, even if the models for the hazards are relatively
 simple. 
 The primary idea of the Fine-Gray approach is to turn the multi-state 
 problem into a collection of two-state ones. 
-In the upper right diagram of figure 1, draw a circle around all of the
+In the upper right diagram of figure \ref{mfig2}, draw a circle around all of the
 states except the chosen endpoint and collapse them into a single meta-state.
 For the MGUS data these are 
 \begin{itemize}

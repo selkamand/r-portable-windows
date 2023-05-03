@@ -44,9 +44,9 @@ h6 <- h9[1:6,1:6]
 stopifnot(all(h6 == Hilbert(6)), length(h6@factors) == 0)
 stopifnotValid(th9p <- t(h9p), "dppMatrix")
 stopifnotValid(h9p@factors$Cholesky,"Cholesky")
-H6  <- as(h6, "dspMatrix")
+H6  <- as(h6, "packedMatrix")
 pp6 <- as(H6, "dppMatrix")
-po6 <- as(pp6,"dpoMatrix")
+po6 <- as(pp6, "dpoMatrix")
 hs <- as(h9p, "dspMatrix")
 stopifnot(names(H6@factors)  == "pCholesky",
 	  names(pp6@factors) == "pCholesky",
@@ -58,13 +58,13 @@ stopifnot(names(hs@factors) %in% c("Cholesky","pCholesky"),
 
 hs@x <- 1/h9p@x # is not pos.def. anymore
 validObject(hs) # "but" this does not check
-stopifnot(diag(hs) == seq(1, by = 2, length = 9))
+stopifnot(diag(hs) == seq(1, by = 2, length.out = 9))
 
 s9 <- solve(h9p, seq(nrow(h9p)))
 signif(t(s9)/10000, 4)# only rounded numbers are platform-independent
 (I9 <- h9p %*% s9)
-m9 <- matrix(1:9, dimnames = list(NULL,NULL))
-stopifnot(all.equal(m9, .asmatrix(I9), tolerance = 2e-9))
+m9 <- as.matrix(1:9)
+stopifnot(all.equal(m9, as(I9, "matrix"), tolerance = 2e-9))
 
 ### Testing nearPD() --- this is partly in  ../man/nearPD.Rd :
 pr <- Matrix(c(1,     0.477, 0.644, 0.478, 0.651, 0.826,
@@ -78,8 +78,8 @@ pr <- Matrix(c(1,     0.477, 0.644, 0.478, 0.651, 0.826,
 nL <-
     list(r   = nearPD(pr, conv.tol = 1e-7), # default
 	 r.1 = nearPD(pr, conv.tol = 1e-7,		corr = TRUE),
-	 rs  = nearPD(pr, conv.tol = 1e-7, doDyk=FALSE),
-	 rs1 = nearPD(pr, conv.tol = 1e-7, doDyk=FALSE, corr = TRUE),
+	 rs  = nearPD(pr, conv.tol = 1e-7, doDykstra=FALSE),
+	 rs1 = nearPD(pr, conv.tol = 1e-7, doDykstra=FALSE, corr = TRUE),
 	 rH  = nearPD(pr, conv.tol = 1e-15),
          rH.1= nearPD(pr, conv.tol = 1e-15, corr = TRUE))
 
@@ -126,8 +126,8 @@ for(M in c(5, 12))
 	m <- m + t(m)
 	diag(m) <- pmax(0, diag(m)) + 1
 	m <- cov2cor(m)
-	CPU <- CPU + system.time(n.m <- nearPD(m))[1]
-	X <- as(n.m$mat, "matrix")
+	CPU <- CPU + system.time(n.m <- nearPD(m, base.matrix=TRUE))[1]
+	X <- n.m$mat
 	stopifnot(all.equal(X, (X + t(X))/2, tolerance = 8*.Machine$double.eps),
 		  all.equal(eigen(n.m$mat, only.values=TRUE)$values,
 			    n.m$eigenvalues, tolerance = 4e-8))
@@ -145,7 +145,7 @@ m[ltm[sample(ne, 3/4*ne)]] <- 0
 m <- (m + t(m))/2 # now is a covariance matrix with many 0 entries
 (spr <- Matrix(m))
 cspr <- cov2cor(spr)
-ev <- eigen(cspr, only.v = TRUE)$values
+ev <- eigen(cspr, only.values = TRUE)$values
 stopifnot(is(spr, "dsCMatrix"),
           is(cspr,"dsCMatrix"),
           all.equal(ev, c(1.5901626099,  1.1902658504, 1, 1,
@@ -157,7 +157,7 @@ mM
 stopifnot(length(mM@factors)== 0)
 (po <- as(mM, "dpoMatrix")) # still has dimnames
 mm <- as(mM, "matrix")
-msy <- as(mm, "dsyMatrix")
+msy <- as(mm, "symmetricMatrix")
 stopifnot(Qidentical(mM, msy),
 	  length(mM @factors)== 1,
 	  length(msy@factors)== 0)

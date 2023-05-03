@@ -1,11 +1,22 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Windows-specific changes to R</title>
+<!DOCTYPE html><html><head><title>R: Windows-specific changes to R</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script type="text/javascript">
+const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+function processMathHTML() {
+    var l = document.getElementsByClassName('reqn');
+    for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
+    return;
+}</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
+    onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 
-<table width="100%" summary="page for CHANGES"><tr><td>CHANGES</td><td style="text-align: right;">R Documentation</td></tr></table>
+<table style="width: 100%;"><tr><td>CHANGES</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2>Windows-specific changes to R</h2>
+<h2 id='CHANGES'>Windows-specific changes to R</h2>
 
 <h3>CHANGES IN R VERSIONS &gt; 2.15.0</h3>
 
@@ -54,8 +65,8 @@ junction points on NTFS file systems.
 </p>
 </li>
 <li><p> C-level error formats now use the trio library, and so for
-example output <span class="samp">1.53e-11</span> (as required by C99) rather than
-<span class="samp">1.53e-011</span>.
+example output &lsquo;<span class="samp">&#8288;1.53e-11&#8288;</span>&rsquo; (as required by C99) rather than
+&lsquo;<span class="samp">&#8288;1.53e-011&#8288;</span>&rsquo;.
 </p>
 </li></ul>
 
@@ -85,7 +96,7 @@ from the standard installer even on a 32-bit version of Windows.
 <ul>
 <li><p> As the current toolchain uses only 32-bit executables, it is
 possible to compile a package for both architectures on 32-bit
-Windows provided both architectures of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> have been installed: use
+Windows provided both architectures of <span class="rlang"><b>R</b></span> have been installed: use
 <code>Rcmd INSTALL --compile-both</code>.
 </p>
 </li>
@@ -132,8 +143,8 @@ preference to <code>gswin32c.exe</code>.
 
 <ul>
 <li><p> The sources (and packages) can now be compiled using the
-multilib toolchain developed for <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 2.15.x: see the
-<span class="samp">MULTI</span> macro in &lsquo;<span class="file">MkRules.dist</span>&rsquo;.  This toolchain is used
+multilib toolchain developed for <span class="rlang"><b>R</b></span> 2.15.x: see the
+&lsquo;<span class="samp">&#8288;MULTI&#8288;</span>&rsquo; macro in &lsquo;<span class="file">MkRules.dist</span>&rsquo;.  This toolchain is used
 for the CRAN binary distribution.
 </p>
 </li></ul>
@@ -146,7 +157,7 @@ for the CRAN binary distribution.
 
 <ul>
 <li><p> The preferred toolchain has changed since the one used for
-<span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 2.12.0 to 2.14.1: see the&lsquo;R Installation and
+<span class="rlang"><b>R</b></span> 2.12.0 to 2.14.1: see the&lsquo;R Installation and
 Administration manual&rsquo;.  Compiled code (except DLLs) may be
 incompatible with previous toolchains (and compiled C++ code
 almost certainly will be: users of <a href="https://CRAN.R-project.org/package=Rcpp"><span class="pkg">Rcpp</span></a> take care).
@@ -156,10 +167,10 @@ to the toolchain you use.
 </p>
 </li>
 <li><p> There is a new macro (aka make variable)
-<span class="samp">SHLIB_PTHREAD_FLAGS</span>.  This is set to <span class="option">-pthread</span> on
+&lsquo;<span class="samp">&#8288;SHLIB_PTHREAD_FLAGS&#8288;</span>&rsquo;.  This is set to <span class="option">-pthread</span> on
 builds using toolchains which support it, and should be included
-in both <span class="samp">PKG_CPPFLAGS</span> (or the Fortran or F9x equivalents)
-and <span class="samp">PKG_LIBS</span>.
+in both &lsquo;<span class="samp">&#8288;PKG_CPPFLAGS&#8288;</span>&rsquo; (or the Fortran or F9x equivalents)
+and &lsquo;<span class="samp">&#8288;PKG_LIBS&#8288;</span>&rsquo;.
 </p>
 </li></ul>
 
@@ -177,7 +188,7 @@ and <span class="samp">PKG_LIBS</span>.
 </li>
 <li><p> Some of the custom messages in the installer were corrupted:
 add a BOM mark to the file as now required by Unicode Inno Setup.
-(<a href="https://bugs.R-project.org/bugzilla3/show_bug.cgi?id=14816">PR#14816</a>)
+(<a href="https://bugs.R-project.org/show_bug.cgi?id=14816">PR#14816</a>)
 </p>
 </li></ul>
 
@@ -222,13 +233,13 @@ architecture-specific sub-directories &lsquo;<span class="file">lib/i386</span>&
 
 
 <ul>
-<li><p> The fix for <a href="https://bugs.R-project.org/bugzilla3/show_bug.cgi?id=14543">PR#14543</a> caused stack problems with outputting
-large <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> objects (e.g., data frames of 25,000 items).  (<a href="https://bugs.R-project.org/bugzilla3/show_bug.cgi?id=14698">PR#14698</a>)
+<li><p> The fix for <a href="https://bugs.R-project.org/show_bug.cgi?id=14543">PR#14543</a> caused stack problems with outputting
+large <span class="rlang"><b>R</b></span> objects (e.g., data frames of 25,000 items).  (<a href="https://bugs.R-project.org/show_bug.cgi?id=14698">PR#14698</a>)
 </p>
 </li>
 <li><p> In a double-byte locale (Chinese, Japanese, Korean),
 <code>grep()</code> and friends might have used byte-wise matching of
-strings in the native encoding.  (<a href="https://bugs.R-project.org/bugzilla3/show_bug.cgi?id=14622">PR#14622</a>)
+strings in the native encoding.  (<a href="https://bugs.R-project.org/show_bug.cgi?id=14622">PR#14622</a>)
 </p>
 </li></ul>
 
@@ -335,7 +346,7 @@ percent on recent CPUs at the expense of those which are several
 years old.  Its effect is particularly evident on 64-bit builds.
 </p>
 <p>This can be overridden when building from the sources: see the
-<span class="samp">EOPTS</span> macro defined in file &lsquo;<span class="file">MkRules.dist</span>&rsquo;.
+&lsquo;<span class="samp">&#8288;EOPTS&#8288;</span>&rsquo; macro defined in file &lsquo;<span class="file">MkRules.dist</span>&rsquo;.
 </p>
 </li>
 <li><p> Where both 32- and 64-bit versions of R are installed, the
@@ -361,7 +372,7 @@ mature enough.
 
 <ul>
 <li> <p>&lsquo;<span class="file">Rzlib.dll</span>&rsquo; (sometimes used in packages <em>via</em>
-<span class="samp">$(ZLIB_LIBS)</span>) does not include the buggy gzio   
+&lsquo;<span class="samp">&#8288;$(ZLIB_LIBS)&#8288;</span>&rsquo;) does not include the buggy gzio   
 interface from zlib 1.2.5.
 </p>
 </li></ul>
@@ -373,7 +384,7 @@ interface from zlib 1.2.5.
 
 
 <ul>
-<li><p>zip.unpack() (deprecated in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 2.13.0) is defunct:
+<li><p>zip.unpack() (deprecated in <span class="rlang"><b>R</b></span> 2.13.0) is defunct:
 use <code>unzip()</code> instead.
 </p>
 </li></ul>
@@ -402,13 +413,13 @@ now does not crash.  (Reported by Stefan Gelissen.)
 
 
 <ul>
-<li><p> The fix for <a href="https://bugs.R-project.org/bugzilla3/show_bug.cgi?id=14583">PR#14583</a> caused inconsistent behaviour in other
-areas, e.g. <a href="https://bugs.R-project.org/bugzilla3/show_bug.cgi?id=14628">PR#14628</a>, extra lines appearing in image displays,
-and uneven bases on histograms.  (<a href="https://bugs.R-project.org/bugzilla3/show_bug.cgi?id=14632">PR#14632</a>).
+<li><p> The fix for <a href="https://bugs.R-project.org/show_bug.cgi?id=14583">PR#14583</a> caused inconsistent behaviour in other
+areas, e.g. <a href="https://bugs.R-project.org/show_bug.cgi?id=14628">PR#14628</a>, extra lines appearing in image displays,
+and uneven bases on histograms.  (<a href="https://bugs.R-project.org/show_bug.cgi?id=14632">PR#14632</a>).
 </p>
 </li>
 <li><p> Opening large numbers of <code>windows()</code> graphics devices
-could cause some of them to fail to redraw (<a href="https://bugs.R-project.org/bugzilla3/show_bug.cgi?id=14668">PR#14668</a>).
+could cause some of them to fail to redraw (<a href="https://bugs.R-project.org/show_bug.cgi?id=14668">PR#14668</a>).
 </p>
 </li></ul>
 
@@ -430,7 +441,7 @@ directories.
 </p>
 </li>
 <li> <p><code>shell.exec()</code> now interprets files relative to the current
-working directory (rather than <span class="samp">R_HOME</span>).
+working directory (rather than &lsquo;<span class="samp">&#8288;R_HOME&#8288;</span>&rsquo;).
 </p>
 </li>
 <li> <p><code>file.info()</code> now accepts &lsquo;file&rsquo; names with
@@ -455,7 +466,7 @@ on some versions of Windows.
 </p>
 </li>
 <li><p> The windows() screen device would sometimes fail to plot
-(visibly) points with <code>pch="."</code>. <a href="https://bugs.R-project.org/bugzilla3/show_bug.cgi?id=14583">PR#14583</a>
+(visibly) points with <code>pch="."</code>. <a href="https://bugs.R-project.org/show_bug.cgi?id=14583">PR#14583</a>
 </p>
 </li>
 <li> <p><code>system()</code> and related functions sometimes failed
@@ -468,7 +479,7 @@ used defaults for <code>family</code>, <code>fg</code> and <code>bg</code> from
 the factory-fresh defaults were the same).
 </p>
 </li>
-<li><p> Shutting down the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> session cleaned up the temporary
+<li><p> Shutting down the <span class="rlang"><b>R</b></span> session cleaned up the temporary
 directory before closing all graphics devices.  On Windows this
 necessitated changing the working directory, so some devices
 (e.g., <code>tiff()</code>) could write files in the wrong directory if
@@ -506,15 +517,15 @@ consistent with Microsoft applications, but Unix versions of
 <code>iconv</code> usually ignore them.)
 </p>
 </li>
-<li><p> Support for repository type <span class="samp">win64.binary</span> (used for
-64-bit Windows binaries for <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 2.11.x only) has been removed.
+<li><p> Support for repository type &lsquo;<span class="samp">&#8288;win64.binary&#8288;</span>&rsquo; (used for
+64-bit Windows binaries for <span class="rlang"><b>R</b></span> 2.11.x only) has been removed.
 </p>
 </li>
 <li><p> The installers no longer put an &lsquo;Uninstall&rsquo; item on
 the start menu (to conform to current Microsoft UI guidelines).
 </p>
 </li>
-<li><p> Running <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> always sets the environment variable <span class="env">R_ARCH</span>
+<li><p> Running <span class="rlang"><b>R</b></span> always sets the environment variable <span class="env">R_ARCH</span>
 (as it does on a Unix-alike from the shell-script front-end).
 </p>
 </li>
@@ -543,7 +554,7 @@ for files &gt; 2GB.
 <li><p> A few more file operations will now work with &gt;2GB files.
 </p>
 </li>
-<li><p> The environment variable <span class="env">R_HOME</span> in an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> session now
+<li><p> The environment variable <span class="env">R_HOME</span> in an <span class="rlang"><b>R</b></span> session now
 uses slash as the path separator (as it always has when set by
 <code>Rcmd.exe</code>).
 </p>
@@ -571,17 +582,17 @@ uses slash as the path separator (as it always has when set by
 
 
 <ul>
-<li><p> There is support for <span class="samp">libjpeg-turbo</span> <em>via</em>
+<li><p> There is support for &lsquo;<span class="samp">&#8288;libjpeg-turbo&#8288;</span>&rsquo; <em>via</em>
 setting <code>JPEGDIR</code> to that value in &lsquo;<span class="file">MkRules.local</span>&rsquo;.
 </p>
-<p>Support for <span class="samp">jpeg-6b</span> has been removed.
+<p>Support for &lsquo;<span class="samp">&#8288;jpeg-6b&#8288;</span>&rsquo; has been removed.
 </p>
 </li>
-<li><p> The sources now work with <span class="samp">libpng-1.5.1</span>, 
-<span class="samp">jpegsrc.v8c</span> (which are used in the CRAN builds) and
-<span class="samp">tiff-4.0.0beta6</span> (CRAN builds use 3.9.1).  It is possible
+<li><p> The sources now work with &lsquo;<span class="samp">&#8288;libpng-1.5.1&#8288;</span>&rsquo;, 
+&lsquo;<span class="samp">&#8288;jpegsrc.v8c&#8288;</span>&rsquo; (which are used in the CRAN builds) and
+&lsquo;<span class="samp">&#8288;tiff-4.0.0beta6&#8288;</span>&rsquo; (CRAN builds use 3.9.1).  It is possible
 that they no longer work with older versions than 
-<span class="samp">libpng-1.4.5</span>. 
+&lsquo;<span class="samp">&#8288;libpng-1.4.5&#8288;</span>&rsquo;. 
 </p>
 </li></ul>
  
@@ -603,7 +614,7 @@ Thanks to Michael Sumner for report and testing.
 </p>
 </li>
 <li><p> Printing extremely long string values could overflow the
-stack and cause the GUI to crash.  (<a href="https://bugs.R-project.org/bugzilla3/show_bug.cgi?id=14543">PR#14543</a>)
+stack and cause the GUI to crash.  (<a href="https://bugs.R-project.org/show_bug.cgi?id=14543">PR#14543</a>)
 </p>
 </li></ul>
 
@@ -633,14 +644,14 @@ Windows: all devices are now closed.
 
 <ul>
 <li><p> In some circumstances the caret (cursor) could be positioned 
-incorrectly. (<a href="https://bugs.R-project.org/bugzilla3/show_bug.cgi?id=14460">PR#14460</a>)
+incorrectly. (<a href="https://bugs.R-project.org/show_bug.cgi?id=14460">PR#14460</a>)
 </p>
 </li>
 <li><p> When loading &lsquo;<span class="file">Rconsole</span>&rsquo; from disk, a spurious warning
 message was sometimes shown.
 </p>
 </li>
-<li><p> In <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 2.12.1, <code>system()</code> sometimes passed an empty
+<li><p> In <span class="rlang"><b>R</b></span> 2.12.1, <code>system()</code> sometimes passed an empty
 input stream to the new process rather than allowing user input.
 </p>
 </li>
@@ -668,7 +679,7 @@ between the calls.
 <ul>
 <li> <p><code>system()</code> and <code>system2()</code> with output redirected
 to a character vector now give a warning if the command returns a
-non-zero error code.  (This is what a Unix-alike does as from <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>
+non-zero error code.  (This is what a Unix-alike does as from <span class="rlang"><b>R</b></span>
 2.12.0.)
 </p>
 </li>
@@ -692,7 +703,7 @@ to, and more cases of <code>system2()</code> are implemented.
 
 
 <ul>
-<li><p> The MSI installer is now made by an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> script, and there is
+<li><p> The MSI installer is now made by an <span class="rlang"><b>R</b></span> script, and there is
 now support for 64-bit builds.  (Unlike the Inno Setup installer,
 there are separate MSI installers for 32- and 64-bit Windows.)
 </p>
@@ -718,13 +729,13 @@ support overwriting.
 <code>Sweave()</code>.
 </p>
 </li>
-<li><p> In <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 2.12.0, <code>system(intern = TRUE)</code> captured
+<li><p> In <span class="rlang"><b>R</b></span> 2.12.0, <code>system(intern = TRUE)</code> captured
 &lsquo;<span class="file">stderr</span>&rsquo; on <code>Rterm</code> when it was documented to only do
 so on <code>Rgui</code>.
 </p>
 </li>
-<li> <p><code>Rgui</code> in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 2.12.0 (only) did not always handle lines
-containing carriage returns (<span class="samp">\r</span>) correctly: sometimes
+<li> <p><code>Rgui</code> in <span class="rlang"><b>R</b></span> 2.12.0 (only) did not always handle lines
+containing carriage returns (&lsquo;<span class="samp">&#8288;\r&#8288;</span>&rsquo;) correctly: sometimes
 random characters where shown.
 </p>
 <p>Since carriage returns have been supported in <code>Rgui</code>,
@@ -788,7 +799,7 @@ be run, and (like Unix-alikes) no longer gives a warning.
 </li>
 <li> <p><code>Rscript -e</code> and similar use a temporary file, and
 now work harder to ensure that filename is not the same as some
-other simultaneous <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> process.
+other simultaneous <span class="rlang"><b>R</b></span> process.
 </p>
 </li></ul>
 
@@ -804,7 +815,7 @@ packages) is now based on <code>gcc 4.5.0</code>: see the &lsquo;R
 Installation and Administration Manual&rsquo;.
 </p>
 </li>
-<li><p> It is now possible to build <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> and the standard installer
+<li><p> It is now possible to build <span class="rlang"><b>R</b></span> and the standard installer
 without Perl: only maintainer-mode tasks now need Perl.
 </p>
 </li></ul>
@@ -820,21 +831,21 @@ without Perl: only maintainer-mode tasks now need Perl.
 </p>
 <p>There is a combined installer (called
 &lsquo;<span class="file">R-&lt;version&gt;-win.exe</span>&rsquo;).  When used under 32-bit Windows
-this works as before and installs 32-bit <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>.  When used under
+this works as before and installs 32-bit <span class="rlang"><b>R</b></span>.  When used under
 64-bit Windows there are options to install either or both of
-32- and 64-bit <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>: the default is to install both.
+32- and 64-bit <span class="rlang"><b>R</b></span>: the default is to install both.
 </p>
 <p>The default package type is <code>"win.binary"</code> on both 32- and
 64-bit builds: a single repository contains binary packages for
 both architectures.  This is in place for CRAN, CRAN extras and
 BioC: <code>type = "win64.binary"</code> can still be used for any
-repositories which follow the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 2.11.x convention.  With the
+repositories which follow the <span class="rlang"><b>R</b></span> 2.11.x convention.  With the
 default filters (see <code>?available.packages</code>) packages will
 only be offered if they are available for the current
 architecture.
 </p>
 <p>The default personal library, e.g. &lsquo;<span class="file">~/R/win-library/2.12</span>&rsquo;
-is now the same for both 32- and 64-bit <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>.
+is now the same for both 32- and 64-bit <span class="rlang"><b>R</b></span>.
 </p>
 </li>
 <li><p> The recommended 64-bit toolchain has been changed to one
@@ -845,7 +856,7 @@ need to be re-compiled for this toolchain, but the use of DLLs is
 unaffected.
 </p>
 </li>
-<li><p> For those building <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> from the sources, the 64-bit
+<li><p> For those building <span class="rlang"><b>R</b></span> from the sources, the 64-bit
 <code>Tcl</code> binary distribution for 2.12.x is in file
 &lsquo;<span class="file">R64a_Tcl_8-5-8.zip</span>&rsquo; and contains e.g. directory
 &lsquo;<span class="file">Tcl/bin64</span>&rsquo; and not &lsquo;<span class="file">Tcl/bin</span>&rsquo;.
@@ -925,7 +936,7 @@ run from <code>Rterm</code> or from <code>Rgui</code> with
 </p>
 </li>
 <li> <p><code>memory.limit()</code> did not allow sizes greater than
-4095 on 64 bit builds. (<a href="https://bugs.R-project.org/bugzilla3/show_bug.cgi?id=14372">PR#14372</a>)
+4095 on 64 bit builds. (<a href="https://bugs.R-project.org/show_bug.cgi?id=14372">PR#14372</a>)
 </p>
 </li></ul>
 
@@ -945,7 +956,7 @@ build now have a title bar icon.
 </p>
 </li>
 <li><p> The outer frame/console for <code>Rgui/Rterm</code> mentions
-'(64-bit)' to make it easier to distinguish running copies of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>.
+'(64-bit)' to make it easier to distinguish running copies of <span class="rlang"><b>R</b></span>.
 </p>
 </li>
 <li><p> The package entries in listbox shown by the <code>Install
@@ -1024,7 +1035,7 @@ of the Registry on 64-bit Windows.
 <ul>
 <li><p> The <code>Tcl</code> timezone files (3Mb on disc) are now an
 optional part of the installation: they would be very rarely used
-with <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>.
+with <span class="rlang"><b>R</b></span>.
 </p>
 </li>
 <li> <p>&lsquo;<span class="file">RSetReg.exe</span>&rsquo; has been updated to (un)set the
@@ -1034,7 +1045,7 @@ per-user rather than the per-machine keys (which need
 administrative access).
 </p>
 </li>
-<li><p> When building <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>, the recommended way is now to supply a file
+<li><p> When building <span class="rlang"><b>R</b></span>, the recommended way is now to supply a file
 &lsquo;<span class="file">R_HOME/src/gnuwin32/MkRules.local</span>&rsquo; instead of editing
 &lsquo;<span class="file">MkRules</span>&rsquo;: there is now no &lsquo;<span class="file">MkRules</span>&rsquo; file in the
 distribution, but one is generated during the build process.
@@ -1058,7 +1069,7 @@ user-mode install (see &lsquo;<span class="file">MkRules.dist</span>&rsquo;).
 
 <ul>
 <li><p> Using <code>ESC</code> to interrupt a <code>system()</code> call could
-cause <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> to become unstable.
+cause <span class="rlang"><b>R</b></span> to become unstable.
 </p>
 </li>
 <li> <p><code>0^1i</code> (which should be complex <code>NAN</code>) was
@@ -1111,7 +1122,7 @@ report by Greg Snow.
 </li>
 <li> <p><code>Rcmd INSTALL</code> once again uses
 <span class="option">--no-restore</span>, for consistency with the Unix version and
-<span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> 2.9.2.
+<span class="rlang"><b>R</b></span> 2.9.2.
 </p>
 </li>
 <li><p> The HTML package index was not constructed properly when the
@@ -1143,7 +1154,7 @@ session.
 </p>
 </li>
 <li><p> A &lsquo;Windows&rsquo; menu has been added to the SDI version of
-the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> GUI, and the corresponding menu in the MDI version has
+the <span class="rlang"><b>R</b></span> GUI, and the corresponding menu in the MDI version has
 been expanded slightly.
 </p>
 </li>
@@ -1241,4 +1252,5 @@ to the native encoding.
 
 
 
+</div>
 </body></html>

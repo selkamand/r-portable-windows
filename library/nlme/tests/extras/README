@@ -1,0 +1,4 @@
+These extra test scripts (and their saved reference outputs) are included
+during R CMD check via tests/extras.Rin *only if* nlme:::doExtras().
+In that case the extras.Rin script copies these extra contents to the
+parent tests directory where the scripts are found and run by R CMD check.

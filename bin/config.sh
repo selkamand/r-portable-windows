@@ -5,7 +5,7 @@
 ## Usage:
 ##   R CMD config [options] [VAR]
 
-## Copyright (C) 2002-2020 The R Core Team
+## Copyright (C) 2002-2022 The R Core Team
 ##
 ## This document is free software; you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -20,11 +20,11 @@
 ## A copy of the GNU General Public License is available at
 ## https://www.R-project.org/Licenses/
 
-revision='$Revision: 78852 $'
+revision='$Revision: 83600 $'
 version=`set - ${revision}; echo ${2}`
 version="R configuration information retrieval script: ${R_VERSION} (r${version})
 
-Copyright (C) 2002-2020 The R Core Team.
+Copyright (C) 2002-2022 The R Core Team.
 This is free software; see the GNU General Public License version 2
 or later for copying conditions.  There is NO warranty."
 
@@ -32,13 +32,13 @@ usage="Usage: R CMD config [options] [VAR]
 
 Get the value of a basic R configure variable VAR which must be among
 those listed in the 'Variables' section below, or the header and
-library flags necessary for linking against R.
+library flags necessary for linking a front-end against R.
 
 Options:
   -h, --help            print short help message and exit
   -v, --version         print version info and exit
-      --cppflags        print pre-processor flags required to compile
-			a C/C++ file using R as a library
+      --cppflags        print pre-processor flags required to compile a
+			C/C++ file as part of a front-end using R as a library
       --ldflags         print linker flags needed for linking a front-end
                         against the R library
       --no-user-files   ignore customization files under ~/.R
@@ -50,12 +50,15 @@ Variables:
   BLAS_LIBS     flags needed for linking against external BLAS libraries
   CC            C compiler command
   CFLAGS        C compiler flags
+  CC17          Ditto for the C17 or earlier compiler
+  C17FLAGS
+  CC23          Ditto for the C23 or later compiler
+  C23FLAGS
   CPICFLAGS     special flags for compiling C code to be included in a
 		shared library
   CPPFLAGS      C/C++ preprocessor flags, e.g. -I<dir> if you have
 		headers in a nonstandard directory <dir>
   CXX           default compiler command for C++ code
-  CXXCPP        C++ preprocessor (deprecated)
   CXXFLAGS      compiler flags for CXX
   CXXPICFLAGS   special flags for compiling C++ code to be included in a
 		shared library
@@ -80,8 +83,11 @@ Variables:
   CXX20         compiler command for C++20 code
   CXX20STD      flag used with CXX20 to enable C++20 support
   CXX20FLAGS    further compiler flags for CXX20
-  CXX20PICFLAGS
-                special flags for compiling C++20 code to be included in
+  CXX23         compiler command for C++23 code
+  CXX23STD      flag used with CXX23 to enable C++23 support
+  CXX23FLAGS    further compiler flags for CXX23
+  CXX23PICFLAGS
+                special flags for compiling C++23 code to be included in
                 a shared library
   DYLIB_EXT	file extension (including '.') for dynamic libraries
   DYLIB_LD      command for linking dynamic libraries which contain
@@ -116,9 +122,9 @@ Variables:
   SHLIB_CXXFLAGS
                 additional CXXFLAGS used when building shared objects
   SHLIB_CXXLD   command for linking shared objects which contain
-		object files from a C++ compiler (and CXX11 CXX14 CXX17 CXX20)
+		object files from a C++ compiler (and CXX11 CXX14 CXX17 CXX20 CXX23)
   SHLIB_CXXLDFLAGS
-		special flags used by SHLIB_CXXLD (and CXX11 CXX14 CXX17 CXX20)
+		special flags used by SHLIB_CXXLD (and CXX11 CXX14 CXX17 CXX20 CXX23)
   SHLIB_EXT	file extension (including '.') for shared objects
   SHLIB_FFLAGS  additional FFLAGS used when building shared objects
   SHLIB_LD      command for linking shared objects which contain
@@ -135,6 +141,7 @@ if test "${R_OSTYPE}" = "windows"; then
 Windows only:
   COMPILED_BY   name and version of compiler used to build R
   LOCAL_SOFT    absolute path to '/usr/local' software collection
+  R_TOOLS_SOFT  absolute path to 'R tools' software collection
   OBJDUMP       command to dump objects"
 fi
 
@@ -257,6 +264,8 @@ if test "${personal}" = "yes"; then
   if test "${R_OSTYPE}" = "windows"; then
     if test -f "${R_MAKEVARS_USER}"; then
       makefiles="${makefiles} -f \"${R_MAKEVARS_USER}\""
+    elif test ${R_ARCH} = "/x64" && test -f "${HOME}/.R/Makevars.ucrt"; then
+      makefiles="${makefiles} -f \"${HOME}\"/.R/Makevars.ucrt"
     elif test ${R_ARCH} = "/x64" && test -f "${HOME}/.R/Makevars.win64"; then
       makefiles="${makefiles} -f \"${HOME}\"/.R/Makevars.win64"
     elif test -f "${HOME}/.R/Makevars.win"; then
@@ -277,19 +286,19 @@ if test "${personal}" = "yes"; then
 fi
 query="${MAKE} -s ${makefiles} print R_HOME=${R_HOME}"
 
-ok_c_vars="CC CFLAGS CPICFLAGS CPPFLAGS"
-ok_cxx_vars="CXX CXXFLAGS CXXPICFLAGS CXX11 CXX11STD CXX11FLAGS CXX11PICFLAGS CXX14 CXX14STD CXX14FLAGS CXX14PICFLAGS CXX17 CXX17STD CXX17FLAGS CXX17PICFLAGS CXX20 CXX20STD CXX20FLAGS CXX20PICFLAGS"
+ok_c_vars="CC CFLAGS CPICFLAGS CPPFLAGS CC17 C17FLAGS CC23 C23FLAGS CC90 C90FLAGS CC99 C99FLAGS"
+ok_cxx_vars="CXX CXXFLAGS CXXPICFLAGS CXX11 CXX11STD CXX11FLAGS CXX11PICFLAGS CXX14 CXX14STD CXX14FLAGS CXX14PICFLAGS CXX17 CXX17STD CXX17FLAGS CXX17PICFLAGS CXX20 CXX20STD CXX20FLAGS CXX20PICFLAG CXX23 CXX23STD CXX23FLAGS CXX23PICFLAGS"
 ok_dylib_vars="DYLIB_EXT DYLIB_LD DYLIB_LDFLAGS"
 ok_objc_vars="OBJC OBJCFLAGS"
 ok_java_vars="JAVA JAVAC JAVAH JAR JAVA_HOME JAVA_LIBS JAVA_CPPFLAGS"
 ok_ftn_vars="FC FFLAGS FPICFLAGS FLIBS FCFLAGS SAFE_FFLAGS"
 ok_ld_vars="LDFLAGS"
-ok_shlib_vars="SHLIB_CFLAGS SHLIB_CXXFLAGS SHLIB_CXXLD SHLIB_CXXLDFLAGS SHLIB_CXX11LD SHLIB_CXX11LDFLAGS SHLIB_CXX14LD SHLIB_CXX14LDFLAGS SHLIB_CXX17LD SHLIB_CXX17LDFLAGS SHLIB_CXX20LD SHLIB_CXX20LDFLAGS SHLIB_EXT SHLIB_FFLAGS SHLIB_LD SHLIB_LDFLAGS"
+ok_shlib_vars="SHLIB_CFLAGS SHLIB_CXXFLAGS SHLIB_CXXLD SHLIB_CXXLDFLAGS SHLIB_CXX11LD SHLIB_CXX11LDFLAGS SHLIB_CXX14LD SHLIB_CXX14LDFLAGS SHLIB_CXX17LD SHLIB_CXX17LDFLAGS SHLIB_CXX20LD SHLIB_CXX20LDFLAGS SHLIB_CXX23LD SHLIB_CXX23LDFLAGS SHLIB_EXT SHLIB_FFLAGS SHLIB_LD SHLIB_LDFLAGS"
 ok_tcltk_vars="TCLTK_CPPFLAGS TCLTK_LIBS"
 ok_other_vars="BLAS_LIBS LAPACK_LIBS MAKE LIBnn AR NM RANLIB LTO LTO_FC LTO_LD"
-deprecated_vars="CPP CXXCPP"
+defunct_vars="CPP CXXCPP"
 if test "${R_OSTYPE}" = "windows"; then
-  ok_win_vars="LOCAL_SOFT COMPILED_BY OBJDUMP"
+  ok_win_vars="LOCAL_SOFT R_TOOLS_SOFT COMPILED_BY OBJDUMP"
 fi
 
 if test "${all}" = "yes"; then
@@ -300,10 +309,9 @@ if test "${all}" = "yes"; then
 	   ${ok_other_vars} ${ok_win_vars}; do
     eval "${query} VAR=${v}"
   done
-  echo "## The following variables are deprecated"
-  for v in ${deprecated_vars}; do
-    eval "${query} VAR=${v}"
-  done
+  echo
+  echo "## The following variables are defunct"
+  echo ${defunct_vars}
   exit 0
 fi
 
@@ -320,11 +328,11 @@ for v in ${ok_c_vars} ${ok_cxx_vars} ${ok_dylib_vars} ${ok_ftn_vars} \
   fi
 done
 
-for v in ${deprecated_vars}; do
+for v in ${defunct_vars}; do
   if test "${var}" = "${v}"; then
     var_ok=yes
-    1>&2 echo "'config' variable '${v}' is deprecated"
-    break
+    1>&2 echo "'config' variable '${v}' is defunct"
+    exit 2
   fi
 done
 

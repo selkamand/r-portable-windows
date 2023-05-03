@@ -88,3 +88,27 @@ assert(identical(sort(findGlobals(function(x) { z <- 1; x + y + z})),
                  sort(c("<-", "{",  "+",  "y"))))
 
 assert(identical(findGlobals(function() Quote(x)), "Quote"))
+
+
+## bquote test cases (from Dirk Schumacher)
+checkUsage(function() {
+    s <- as.symbol("y")
+    bquote(
+        `for`(.(s), 1, x)
+    )
+}, report = stop)
+
+checkUsage(function() {
+    x <- 1
+    bquote(.(x) * y)
+}, report = stop)
+
+checkUsage(function() {
+    x <- 1
+    bquote(.(x * 1) * y)
+}, report = stop)
+
+
+## more bquote tests
+checkUsage(function(x) bquote(.(x) + y), report = stop)
+tools::assertError(checkUsage(function() bquote(.(x)), report = stop))

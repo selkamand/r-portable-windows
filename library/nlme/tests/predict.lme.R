@@ -43,7 +43,7 @@ stopifnot(sum(abs(Fitted - Fitted.Newdata)) == 0)
 m3 <- lme(fixed = distance ~ age, data = Orthodont,
           random = ~ 1 | Subject)
 m4 <- update(m3, random = ~ age | Subject)
-m5 <- update(m4, fixed = distance ~ age * Sex)
+m5 <- update(m4, fixed. = distance ~ age * Sex)
 
 newD <- expand.grid(age = seq(7,15, by = .25),
                     Sex = c("Male", "Female"),
@@ -67,6 +67,35 @@ stopifnot(all.equal(p5Mf[  1:n.age],
           all.equal(p5MS,
                     c(X.1 %*% (fixef(m5)[1:2] + as.numeric(ranef(m5)["M01",]))), tole = 1e-15)
           )
+
+
+## PR#18312: predict with character vs. factor variables in newdata
+newOrth <- data.frame(Subject = "F03", Sex = "Female", age = 8,
+                      stringsAsFactors = FALSE)  # default in R >= 4.0.0
+stopifnot(all.equal(predict(m5, newdata = newOrth), # this failed
+                    fitted(m5)["F03"], # first obs of F03 is for age 8
+                    check.attributes = FALSE))
+## failed in nlme <= 3.1-155 with
+## Error in `contrasts<-`(`*tmp*`, value = contr.funs[1 + isOF[nn]]) : 
+##   contrasts can be applied only to factors with 2 or more levels
+newOrth2 <- rbind(newOrth, list("M11", "Male", 16))
+stopifnot(all.equal(
+    predict(m5, newdata = type.convert(newOrth2, as.is = FALSE)), # factor
+    predict(m5, newdata = newOrth2)                               # character
+))
+## predictions with character input were *wrong* in nlme <= 3.1-155
+
+## numeric newdata for a factor variable should at least warn
+tools::assertWarning(predict(m5, newdata = transform(newOrth, Sex = 2)), verbose = TRUE)
+## did not warn in nlme <= 3.1-155 and may return unexpected result
+## (not the same as Sex=factor("Female", levels = c("Male", "Female")))
+
+## intercept-free model
+m0b <- lme(distance ~ Sex - 1, random = ~1|Subject, data = Orthodont)
+stopifnot(all.equal(predict(m0b, Orthodont[1,], level=0),
+                    fixef(m0b)[1], check.attributes = FALSE))
+## predict wrongly returned c(0,0) in nlme <= 3.1-155
+
 
 ##--- simulate():---------
 

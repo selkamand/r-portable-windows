@@ -102,7 +102,7 @@ Number of Groups: 26
 + )
 > 
 > ## "typo" in 'random=' -- giving 27-dim. vector random effect:
-> ## PR#17524 B.Tyner: https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17524
+> ## PR#17524 B.Tyner: https://bugs.r-project.org/show_bug.cgi?id=17524
 >                try(lme(distance ~ 1,   data=Orthodont, random = ~ Subject))
 Error in lme.formula(distance ~ 1, data = Orthodont, random = ~Subject) : 
   fewer observations than random effects in all level 1 groups

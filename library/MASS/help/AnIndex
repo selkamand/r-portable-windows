@@ -110,7 +110,6 @@ leuk	leuk
 lm.gls	lm.gls
 lm.ridge	lm.ridge
 lmsreg	lqs
-lmwork	stdres
 logLik.negbin	glm.nb
 loglm	loglm
 loglm1	loglm1

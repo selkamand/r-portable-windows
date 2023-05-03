@@ -175,7 +175,7 @@ dense storage, created by the \code{Matrix} function, has class
 The \code{solve} methods for the \code{"dpoMatrix"} class use the
 Cholesky decomposition.
 <<MatrixKoenNg>>=
-mm <- as(KNex$mm, "dgeMatrix")
+mm <- as(KNex$mm, "denseMatrix")
 class(crossprod(mm))
 system.time(Mat.sol <- solve(crossprod(mm), crossprod(mm, y)))
 stopifnot(all.equal(naive.sol, unname(as(Mat.sol,"matrix"))))

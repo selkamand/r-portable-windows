@@ -77,7 +77,6 @@ set S(mode) $::MSTART
 
 # Colors for everything
 set C(fg) black
-set C(bg) gray75
 set C(bg) cornflowerblue
 
 set C(0) white;		set C(1a) darkgreen;	set C(1b) yellow
@@ -92,6 +91,7 @@ set C(17) \#A65353;	set C(18) $C(fg);	set C(19) gray50
 set C(20) cyan;		set C(21) gray65;	set C(22) $C(20)
 set C(23a) blue;	set C(23b) red;		set C(23c) yellow
 set C(24a) red;		set C(24b) white;
+set C(24c) black;	set C(26) $C(0);
 
 proc DoDisplay {w} {
     global S C
@@ -105,7 +105,7 @@ proc DoDisplay {w} {
     $w.c yview moveto .05
     pack $w.c -in $w.screen -side top -fill both -expand 1
 
-    bind $w.c <3> [list $w.pause invoke]
+    bind $w.c <Button-3> [list $w.pause invoke]
     bind $w.c <Destroy> {
 	after cancel $animationCallbacks(goldberg)
 	unset animationCallbacks(goldberg)
@@ -136,7 +136,7 @@ proc DoCtrlFrame {w} {
     ttk::labelframe $w.message -text "Message"
     ttk::entry $w.message.e -textvariable S(message) -justify center
     ttk::labelframe $w.speed -text "Speed: 0"
-    ttk::scale $w.speed.scale -orient h -from 1 -to 10 -variable S(speed)
+    ttk::scale $w.speed.scale -orient horizontal -from 1 -to 10 -variable S(speed)
     ttk::button $w.about -text About -command [list About $w]
 
     grid $w.start -in $w.ctrl -row 0 -sticky ew
@@ -162,7 +162,7 @@ proc DoCtrlFrame {w} {
     grid $w.speed -in $w.ctrl -row 99 -sticky ew -pady {0 5}
     pack $w.speed.scale -fill both -expand 1
     grid $w.about -in $w.ctrl -row 100 -sticky ew
-    bind $w.reset <3> {set S(mode) -1}		;# Debugging
+    bind $w.reset <Button-3> {set S(mode) -1}		;# Debugging
 
     ## See Code / Dismiss buttons hack!
     set btns [addSeeDismiss $w.ctrl.buttons $w]
@@ -342,7 +342,7 @@ proc Draw0 {w} {
     set xy {719 119 763 119}
     $w.c create line $xy -tag I0 -fill $color -width 5 -arrow last \
 	    -arrowshape {18 18 5}
-    $w.c bind I0 <1> Start
+    $w.c bind I0 <Button-1> Start
 }
 proc Move0 {w {step {}}} {
     set step [GetStep 0 $step]
@@ -372,7 +372,7 @@ proc Draw1 {w} {
 
     set xy [box 812 122 9]
     $w.c create oval $xy -tag I1 -fill $color2 -outline {}
-    $w.c bind I1 <1> Start
+    $w.c bind I1 <Button-1> Start
 }
 proc Move1 {w {step {}}} {
     set step [GetStep 1 $step]
@@ -1586,6 +1586,7 @@ proc Move24 {w {step {}}} {
 		-width 10 -smooth 1
 	set msg [subst $S(message)]
 	$w.c create text [Centroid $w I24] -text $msg -tag {I24 I24t} \
+		-fill $::C(24c) \
 		-justify center -font {{Times Roman} 18 bold}
 	return 1
     }
@@ -1619,8 +1620,9 @@ proc Move26 {w {step {}}} {
     if {$step >= 3} {
 	$w.c delete I24 I26
 	$w.c create text 430 755 -anchor s -tag I26 \
+		-fill $::C(26) \
 		-text "click to continue" -font {{Times Roman} 24 bold}
-	bind $w.c <1> [list Reset $w]
+	bind $w.c <Button-1> [list Reset $w]
 	return 4
     }
 
@@ -1675,7 +1677,7 @@ proc RotateC {x y Ox Oy beta} {
 proc Reset {w} {
     global S
     DrawAll $w
-    bind $w.c <1> {}
+    bind $w.c <Button-1> {}
     set S(mode) $::MSTART
     set S(active) 0
 }

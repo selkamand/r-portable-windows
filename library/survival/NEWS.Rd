@@ -1,5 +1,273 @@
 \name{NEWS}
 \title{NEWS file for the survival package}
+\section{Changes in version 3.5-4}{
+  \itemize{
+    \item Update the help file for the finegray command.  It was
+    incorrect with respect to time-dependent covariates.
+    \item Add model= as an option to survfit, and add a
+    model.frame.survfit method.  These are needed to call the
+    survfit/pseudo pair inside another function.
+    \item Small bug in survfit: if start.time was present, the 'type' element
+    could be missing from the output object.
+    \item Enhance the concordance command: one can now put multiple
+    predictions on the right hand side of the equation; this will give
+    the set of concordances and their variance-covariance matrix. 
+   \item Add a couple of overlooked S3 methods to the NAMESPACE
+}}
+\section{Changes in version 3.5-3}{
+  \itemize{
+    \item Fix final compiler warnings that affect CRAN
+    \item Restore backwards compatability for ratetable() calls in a
+    formula. The feature is used by the relsurv package.
+    \item Add information on trust regions to the fail directory.
+}}
+\section{Changes in version 3.5-2}{
+  \itemize{
+    \item New release for CRAN; chase down some challenging (for me)
+    C-code memory issues
+    \item Clean up test case for drop.special
+}}
+\section{Changes in version 3.5-1}{
+  \itemize{
+    \item Minor edits to survreg (fit$coef to fit$coefficients) and
+    summary.coxph (a model with only an offset)
+    \item Fix error in fastkm.c (new routine, edge case, no one had
+    found it yet.)
+    \item Fix a few niggles in .c code, found by the new compiler chain
+    \item Remove backwards compatability for ratetable() calls in a
+    formula;  this was changed in the main code many years ago.
+}}
+\section{Changes in version 3.5-0}{
+  \itemize{
+    \item Final check and updates for CRAN submission
+}}
+\section{Changes in version 3.4-2}{
+  \itemize{
+    \item For a multi-state coxph model, the default is now
+    ties='breslow'. When there is a tied transition of the same type, A:B
+    and A:B say, the Efron approx is justified and was correctly computed.
+    However, ties of different types such as an A:B and A:C (competing risks)
+    transition at the same time or A:B and C:D are effectively ignored
+    by the code; and this would be very hard to change. Using Breslow
+    rather than a partial Efron was felt to be more defensible.
+    \item Add the survcondense function.
+    \item Improve tmerge handling of a wide data set and add a test case
+    for it.  Add a caution to the vignette wrt using wide data sets.
+    \item Improve the speed of concordance (request of Frank H).  Update
+    the vignette and add more tests.
+    \item Fix bug in cox.zph: if there was any NA coefficient in the
+    coxph fit, the residuals used for the plot would also be NA.
+    \item Run all tests and submit to CRAN (2023-01-06)
+}}
+\section{Changes in version 3.4-1}{
+  \itemize{
+    \item Add newdata argument to basehaz, along with more documentation
+    \item survfit.coxph would fail for the combination of newdata and a
+    model with only an offset term, fixed
+    \item Add a check to pseudo. The algorithm was not designed for a
+    survfit curve from interval censored data, but still produced a
+    result (assuredly an incorrect one).  Interval censored curves now
+    have type='interval' to help support this.
+    \item Predict.coxph with reference='zero' and missing newdata
+    incorrectly assumed it could simply return fit$residuals.  Pointed
+    out by David Collett.
+    \item Change the prototype in a few .c routines, per a request from
+    CRAN. (chinv.c for instance was using the old K&R style declaration,
+    which shows how long ago it was written.)
+    \item Check and submit to CRAN
+}}
+\section{Changes in version 3.4-0}{
+  \itemize{
+    \item Replace .[terms call in predict.coxph with drop.term();
+    due to an error in [.term discovered by Jorge Menezes.  Add
+    dropterm.R to the test suite.
+    \item Fix all errors in R CMD check, and submit to CRAN
+}}
+\section{Changes in version 3.3-2}{
+  \itemize{
+    \item Error in concordance(fit, newdata) if newdata had missing
+    values: the derived x and y could be different lengths.
+    \item Add test cases for the (rather difficult) case of predicted
+    survival for multi-state coxph model that has shared hazards
+    \item nsk(..., Boundary.knots=FALSE) was not being handled properly.
+    \item Fix error in terms.inner; it failed for a function with no
+    arguments. Pointed out by Daniel Sjberg and Duncan Murdoch.
+    \item Remove Sint from C code.
+    \item anova.coxph sometimes used P(>Chi) and somtimes Pr(>Chi) as a
+    printout label, depending on the argument; the base packages all use
+    "Pr".  Changed this to be consistent.
+}}
+\section{Changes in version 3.3-1}{
+  \itemize{
+    \item Update the saved tests/Examples/survival-Ex.Rout.save file so
+    as to remove timings, at the behest of CRAN.  (Footnote 21 in the
+    packages manual talks about this.)
+}}
+\section{Changes in version 3.3-0}{
+  \itemize{
+    \item Change any calls to Calloc or Free in the C code to R_Calloc
+    and R_Free, at the request of R core.
+    \item Fix an oversight in aareg: when coxph and survreg were
+    converted from using +cluster() in a formula to cluster as an
+    argument, that same change needed to be made in aareg.  Pointed out
+    by zdgager.
+    \item The std of the cumulative hazard is now present, for select
+    cases of a coxph model curve.  More work remains to be done to
+    return the std for all cases.
+    \item Add a paragraph to the help page for survfit.Rd, pointing out
+    that robust variance is now the default for interval censored data,
+    and why.
+    \item Add the median.survfit method
+    \item Improve the examples in pseudo.Rd
+    \item Fix error in survreg.distributions$gaussian$deviance. The
+    deviance of an interval censored observation was NA due to a sign
+    that was backwards, leading to log of a negative value.  (Simple
+    typo.)
+    \item Error in predict.coxph: it would fail for a model that had two
+    strata terms. Reported by Hanna Frick.
+    \item Fix github issue 130. If newdata contained the strata
+    information, and there was only one curve requested, survfit.coxph
+    would return too many curves.
+}}
+
+\section{Changes in version 3.2-15}{
+  \itemize{
+    \item Fix an inconsistency with the start.time argument.  One of
+    the survfit paths would include an event at start.time (curve starts
+    with an immediate drop) others did not.  All paths now do so. This
+    makes start.time=0 behave the same as ordinary survfit, without the
+    argument, when there is a death at time 0.
+}}
+
+\section{Changes in version 3.2-14}{
+  \itemize{
+    \item Update the royston function to report the scaled Cox-Snell
+    R-squared as the Nagelkirke estimate, and clarify the documentation.
+    \item Update for coxph with ties=exact, for the case of an infinite
+    coefficient where the information matrix becomes singular.  Code for
+    this case had been developed for coxfit6.c (Breslow/Efron) but not
+    replicated in coxexact.c
+}}
+ 
+\section{Changes in version 3.2-13}{
+  \itemize{
+    \item Clarify some sentences in tmerge help file.
+    \item Fix a memory access error in concordance3.c, found by CRAN.
+    \item Add the drop.special function (internal) to work around offset
+    problems in [.terms.
+}}
+\section{Changes in version 3.2-12}{
+  \itemize{
+    \item Avoid a downstream error from infinte coefficients in
+    coxph.  In special case it would fail by passing an NA to C code.
+    \item The df column from cox.zph could be incorrect for a coxme
+    model.
+    \item cox.zph would crash for a coxme model whose random effect
+    contained a factor (odd issue with model.frame).
+    \item yates error for a coxph model with a strata * covariate
+    interaction
+    \item Clarify documentation for the royston command.
+    \item Add error for survexp applied to a multistate model.
+    \item Make the labeling of restricted mean consistent in print and
+    summary, for single state and multistate survfit.
+    \item With just the right data the coxexact.c routine would do a
+    very inefficient calculation: so slow it appeared to be an infinite
+    loop.
+    \item Bug in pspline.R: I had neglected to include 'degree' in the
+    retained arguments for makepredictcall.
+    \item Fix scale factor error in cholesky3.c, which could cause it to
+    incorrectly mark a column as singular.  Found via a survreg example
+    from Nathan Adams, where y had large values.
+    \item 2021-08-12: update CRAN
+}}
+\section{Changes in version 3.2-11}{
+  \itemize{
+    \item Missing labels for the "pairwise" option in yates(), fixed.
+    \item Bug in plot.survfit -- could not use conf.int=T and xmax in
+    the same call.  Pointed out by Dirk Larson.
+    \item Failure of survfit, when applied to a multi-state coxph model with
+    strata().  Repaired and added this as a test case.
+    \item Change seq(along=  to seq(along.with=, to match the complete
+    argument name.
+    \item In pyears(...,data.frame=TRUE), if the levels of a tcut are
+    numeric return a numeric rather than a factor.  (Version 2.4 feature
+    that had been inadvertently removed.)
+    \item Fix mistake in survfit.coxphms(..., stype=1): had pmin when I
+    meant pmax.  (Resulting curves were not even close.)  Add a test
+    case.
+    \item update anova.survreg to have class("anova", "data.table").
+    Error pointed out by Daniel Sjoberg.
+}}
+
+\section{Changes in version 3.2-10}{
+  \itemize{
+    \item CRAN valgrind checks discovered an uninitialized vector in
+    one of the C routines.  Now fixed.  Updated version is now on CRAN.
+}}
+
+\section{Changes in version 3.2-9}{
+  \itemize{
+    \item More careful tests of the rttright function.
+    \item Fix bug in tmerge that was introduced in 3.2-8. A new
+    consistency check was too aggressive and would flag a legal dataset.
+    \item Fix tmerge bug reported by E Lundt: if two or more additions
+    were before the start of a subject's timeline, tdc would pick the
+    first rather than the last.
+sou    \item Add the last test case for residuals.survfit (auc for tstart,
+    tstop data), and yes, it uncovered an error.
+    \item Error in survit.coxph for a multistate fit with strata, an array
+    dimension was wrong (but contents correct).  It led to downstream
+    problems with print and plot.  Pointed out by Matthew Hall.
+    \item Add ability for a multistate coxph model to have shared
+    (proportional) baselines for transitions.
+    \item The coxph routine no longer recenters 0/1 predictors (fit$mean
+    will be 0), per the default value of the new \code{nocenter}
+    argument. Application of survfit to a coxph model without specifying
+    newdata remains a bad idea, but this change makes it a little
+    less bad since for factors the curve will refer to the reference
+    level.  The results of predict(fit) are now more defensible for a
+    factor variable.
+    \item Add an explicit error message for survreg() with a frailty
+    term.  This usage was never supported -- it is integrating out the
+    appropriate density for a coxph model, which is the wrong one for
+    survreg -- but because the code would run we've found that people
+    assumed it must be right, despite a statement to the contrary in the
+    survival vignette.  Long overdue fix. 
+}}
+\section{Changes in version 3.2-8}{
+  \itemize{
+    \item In tmerge, if data2 contains identifiers not found in data1
+    these rows are now counted in the "missid" column of the tcount
+    attribute, rather than treated as an error.
+    \item In a survfit() call with the start.time option, if one curve
+    had no subjects past the start time the dim of the result was wrong,
+    leading to multiple downstream failures.
+    \item Add a scale argument to quantile.survfit.
+    \item Revert a change to plot.survfit, which was the use of clip() to
+    keep lines away from the right margin.  This had some unforseen downstream
+    consequences, e.g., later addition of a legend.
+    \item Minor fix to survcheck: if the events table had only 1 row the
+    matrix property was lost. Pointed out by Oleguer Plana-Ripoll.
+    \item Error in plot.survfit: the noplot argument had been overlooked
+    for the confidence intervals, and the wrong interval could be matched to
+    each curve.
+    \item The neardate routine implicitly assumed that data set 2 was in
+    sorted order, if it is not an error message ensues from the internal
+    call to findInterval.  Now repaired and a new test added.  Pointed
+    out by Bruce Macwilliams.
+    \item Add an error message to survfit recognizing that it can not
+    yet deal with multistate coxph models that have shared baseline
+    hazards.
+    \item Add the pseudo function for psuedo-values. The vignette is in
+    vignette2 since it uses svyglm (survey) to get proper standard
+    errors (see the 'other' vignette).
+    Add supporting routine residuals.survfit (which does the real work.)
+    \item Add the nsk function.
+    \item Add the aggregate.survfit method
+    \item Formally depricate survConcordance, replaced with the more capable
+    concordance method which has formula, lm, glm, and coxph methods.    
+}}
+
 \section{Changes in version 3.2-7}{
   \itemize{
     \item Fix one URL, revealed by the CRAN submission.

@@ -18,7 +18,7 @@
 
 # Give a fortune cookie, but only to interactive sessions
 # (This would need the fortunes package to be installed.)
-#  if (interactive())
+#  if (interactive()) 
 #    fortunes::fortune()
 
 .libPaths(.Library)

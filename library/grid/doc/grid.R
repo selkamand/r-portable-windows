@@ -1,7 +1,7 @@
 ### R code from vignette source 'grid.Rnw'
 
 ###################################################
-### code chunk number 1: grid.Rnw:32-38
+### code chunk number 1: grid.Rnw:31-37
 ###################################################
 library(grDevices)
 library(graphics) # for par
@@ -12,7 +12,7 @@ options(width = 60)
 
 
 ###################################################
-### code chunk number 2: grid.Rnw:80-81 (eval = FALSE)
+### code chunk number 2: grid.Rnw:79-80 (eval = FALSE)
 ###################################################
 ## viewport(x = 0.5, y = 0.5, width = 0.5, height = 0.25, angle=45)
 
@@ -216,114 +216,5 @@ pushViewport(viewport(layout.pos.col = 2))
 pushViewport(plotViewport(c(5, 0, 4, 0)))
 leg(legLabels)
 popViewport(3)
-
-
-###################################################
-### code chunk number 18: grid.Rnw:654-655
-###################################################
-library(lattice)
-
-
-###################################################
-### code chunk number 19: trellisdata (eval = FALSE)
-###################################################
-## x <- rnorm(100)
-## y <- rnorm(100)
-## g <- sample(1:8, 100, replace = TRUE)
-
-
-###################################################
-### code chunk number 20: trellispanelplot (eval = FALSE)
-###################################################
-## xyplot(y ~ x | g, panel = function(x, y) {
-##     panel.xyplot(x, y);
-##     grid.lines(unit(c(0, 1), "npc"), unit(0, "native"),
-##                gp = gpar(col = "grey"))
-## })
-
-
-###################################################
-### code chunk number 21: trellispanel
-###################################################
-x <- rnorm(100)
-y <- rnorm(100)
-g <- sample(1:8, 100, replace = TRUE)
-xyplot(y ~ x | g, panel = function(x, y) {
-    panel.xyplot(x, y);
-    grid.lines(unit(c(0, 1), "npc"), unit(0, "native"),
-               gp = gpar(col = "grey"))
-})
-
-
-###################################################
-### code chunk number 22: trellisstripplot (eval = FALSE)
-###################################################
-## xyplot(y ~ x | g, strip = function(which.given, which.panel, ...) {
-##     grid.text(paste("Variable ", which.given, ": Level ",
-##                     which.panel[which.given], sep = ""),
-##               unit(1, "mm"), .5, just = "left")
-## })
-
-
-###################################################
-### code chunk number 23: trellisstrip
-###################################################
-x <- rnorm(100)
-y <- rnorm(100)
-g <- sample(1:8, 100, replace = TRUE)
-xyplot(y ~ x | g, strip = function(which.given, which.panel, ...) {
-    grid.text(paste("Variable ", which.given, ": Level ",
-                    which.panel[which.given], sep = ""),
-              unit(1, "mm"), .5, just = "left")
-})
-
-
-###################################################
-### code chunk number 24: trellisgridplot (eval = FALSE)
-###################################################
-## someText <- paste("A panel of text", "produced using", "raw grid code",
-##                   "that could be used", "to describe",
-##                   "the plot", "to the right.", sep = "\n")
-## latticePlot <- xyplot(y ~ x | g, layout = c(2, 4))
-## grid.rect(gp = gpar(lty = "dashed"))
-## pushViewport(viewport(layout = grid.layout(1, 2,
-##                       widths = unit.c(unit(1, "strwidth", someText) +
-##                       unit(2, "cm"),
-##                       unit(1, "null")))))
-## pushViewport(viewport(layout.pos.col = 1))
-## grid.rect(gp = gpar(fill = "light grey"))
-## grid.text(someText,
-##           x = unit(1, "cm"), y = unit(1, "npc") - unit(1, "inches"),
-##           just = c("left", "top"))
-## popViewport()
-## pushViewport(viewport(layout.pos.col = 2))
-## print(latticePlot, newpage = FALSE)
-## popViewport(2)
-
-
-###################################################
-### code chunk number 25: trellisgrid
-###################################################
-x <- rnorm(100)
-y <- rnorm(100)
-g <- sample(1:8, 100, replace = TRUE)
-someText <- paste("A panel of text", "produced using", "raw grid code",
-                  "that could be used", "to describe",
-                  "the plot", "to the right.", sep = "\n")
-latticePlot <- xyplot(y ~ x | g, layout = c(2, 4))
-grid.rect(gp = gpar(lty = "dashed"))
-pushViewport(viewport(layout = grid.layout(1, 2,
-                      widths = unit.c(unit(1, "strwidth", someText) +
-                      unit(2, "cm"),
-                      unit(1, "null")))))
-pushViewport(viewport(layout.pos.col = 1))
-grid.rect(gp = gpar(fill = "light grey"))
-grid.text(someText,
-          x = unit(1, "cm"), y = unit(1, "npc") - unit(1, "inches"),
-          just = c("left", "top"))
-popViewport()
-pushViewport(viewport(layout.pos.col = 2))
-print(latticePlot, newpage = FALSE)
-popViewport(2)
 
 

@@ -1,6 +1,6 @@
 Package: nlme
-Version: 3.1-149
-Date: 2020-08-21
+Version: 3.1-162
+Date: 2023-01-30
 Priority: recommended
 Title: Linear and Nonlinear Mixed Effects Models
 Authors@R: c(person("José", "Pinheiro", role = "aut", comment = "S version"),
@@ -10,22 +10,22 @@ Authors@R: c(person("José", "Pinheiro", role = "aut", comment = "S version"),
              person("EISPACK authors", role = "ctb", comment = "src/rs.f"),
 	     person("Siem", "Heisterkamp", role = "ctb", comment = "Author fixed sigma"),
              person("Bert", "Van Willigen",role = "ctb", comment = "Programmer fixed sigma"),
-	     person("R-core", email = "R-core@R-project.org",
+             person("Johannes", "Ranke", role = "ctb", comment = "varConstProp()"),
+	     person("R Core Team", email = "R-core@R-project.org",
                     role = c("aut", "cre")))
 Contact: see 'MailingList'
 Description: Fit and compare Gaussian linear and nonlinear mixed-effects models.
-Depends: R (>= 3.4.0)
+Depends: R (>= 3.5.0)
 Imports: graphics, stats, utils, lattice
-Suggests: Hmisc, MASS
+Suggests: Hmisc, MASS, SASmixed
 LazyData: yes
-ByteCompile: yes
 Encoding: UTF-8
-License: GPL (>= 2) | file LICENCE
+License: GPL (>= 2)
 BugReports: https://bugs.r-project.org
 MailingList: R-help@r-project.org
 URL: https://svn.r-project.org/R-packages/trunk/nlme/
 NeedsCompilation: yes
-Packaged: 2020-08-21 12:48:52 UTC; ripley
+Packaged: 2023-01-31 08:57:23 UTC; maechler
 Author: José Pinheiro [aut] (S version),
   Douglas Bates [aut] (up to 2007),
   Saikat DebRoy [ctb] (up to 2002),
@@ -33,9 +33,10 @@ Author: José Pinheiro [aut] (S version),
   EISPACK authors [ctb] (src/rs.f),
   Siem Heisterkamp [ctb] (Author fixed sigma),
   Bert Van Willigen [ctb] (Programmer fixed sigma),
-  R-core [aut, cre]
-Maintainer: R-core <R-core@R-project.org>
+  Johannes Ranke [ctb] (varConstProp()),
+  R Core Team [aut, cre]
+Maintainer: R Core Team <R-core@R-project.org>
 Repository: CRAN
-Date/Publication: 2020-08-23 05:23:28 UTC
-Built: R 4.0.3; x86_64-w64-mingw32; 2020-10-10 12:53:20 UTC; windows
-Archs: i386, x64
+Date/Publication: 2023-01-31 16:50:09 UTC
+Built: R 4.3.0; x86_64-w64-mingw32; 2023-04-21 09:26:44 UTC; windows
+Archs: x64

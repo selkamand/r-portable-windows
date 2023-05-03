@@ -27,18 +27,18 @@ temp
 
 
 ###################################################
-### code chunk number 3: validate.Rnw:188-211
+### code chunk number 3: validate.Rnw:190-213
 ###################################################
 iter <- matrix(0, nrow=6, ncol=4,
                dimnames=list(paste("iter", 0:5),
                              c("beta", "loglik", "U", "H")))
 # Exact Newton-Raphson
 beta <- 0
-for (i in 1:6) {
+for (i in 1:5) {
     iter[i,] <- breslow1(beta)
     beta <- beta + iter[i,"U"]/iter[i,"H"]
 }
-print(iter, digits=10)
+print(iter, digits=9)
 
 # coxph fits
 test1 <- data.frame(time=  c(1, 1, 6, 6, 8, 9),

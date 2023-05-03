@@ -1,6 +1,6 @@
 
-R version 4.0.3 RC (2020-10-06 r79305) -- "Bunny-Wunnies Freak Out"
-Copyright (C) 2020 The R Foundation for Statistical Computing
+R Under development (unstable) (2022-03-19 r81942) -- "Unsuffered Consequences"
+Copyright (C) 2022 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -147,7 +147,7 @@ Error in read.table("foo6", header = TRUE, fill = TRUE) :
 > unlink("foo7")
 > 
 > # should be logical
-> type.convert(character(0))
+> type.convert(character(0), as.is=FALSE)
 logical(0)
 > 
 > # test of comments in data files

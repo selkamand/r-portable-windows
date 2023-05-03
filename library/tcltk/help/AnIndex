@@ -12,6 +12,7 @@ $<-.tclvar	tcltk-defunct
 .Tk.newwin	TclInterface
 .Tk.subwin	TclInterface
 .TkRoot	TclInterface
+.TkUp	TclInterface
 addTclPath	TclInterface
 as.character.tclObj	TclInterface
 as.character.tclVar	TclInterface

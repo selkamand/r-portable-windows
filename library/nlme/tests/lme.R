@@ -33,7 +33,7 @@ fm1 <- lme(distance ~ age, data = Orthodont,
 )
 
 ## "typo" in 'random=' -- giving 27-dim. vector random effect:
-## PR#17524 B.Tyner: https://bugs.r-project.org/bugzilla/show_bug.cgi?id=17524
+## PR#17524 B.Tyner: https://bugs.r-project.org/show_bug.cgi?id=17524
                try(lme(distance ~ 1,   data=Orthodont, random = ~ Subject))
 tools::assertError(lme(distance ~ age, data=Orthodont, random = ~ Subject))
 ## seg.faults in nlme <= 3.1-137 (2018) because of integer overflow

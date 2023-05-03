@@ -6,12 +6,14 @@ Surv2data               Convert data from timecourse to (time1,time2)
 aareg                   Aalen's additive regression model for censored
                         data
 aeqSurv                 Adjudicate near ties in a Surv object
+aggregate.survfit       Average survival curves
 agreg.fit               Cox model fitting functions
 aml                     Acute Myelogenous Leukemia survival data
 anova.coxph             Analysis of Deviance for a Cox model.
 attrassign              Create new-style "assign" attribute
 basehaz                 Alias for the survfit function
 bladder                 Bladder Cancer Recurrences
+blogit                  Bounded link functions
 cch                     Fits proportional hazards regression model to
                         case-cohort data
 cgd                     Chronic Granulotamous Disease data
@@ -30,6 +32,8 @@ coxph.control           Ancillary arguments for controlling coxph fits
 coxph.detail            Details of a Cox Model Fit
 coxph.object            Proportional Hazards Regression Object
 coxph.wtest             Compute a quadratic form
+coxphms.object          Multi-state Proportional Hazards Regression
+                        Object
 coxsurv.fit             A direct interface to the 'computational
                         engine' of survfit.coxph
 diabetic                Ddiabetic retinopathy
@@ -53,12 +57,15 @@ mgus2                   Monoclonal gammopathy data
 model.frame.coxph       Model.frame method for coxph objects
 model.matrix.coxph      Model.matrix method for coxph models
 myeloid                 Acute myeloid leukemia
+myeloma                 Survival times of patients with multiple
+                        myeloma
 nafld1                  Non-alcohol fatty liver disease
 neardate                Find the index of the closest value in data set
                         2, for each entry in data set one.
+nsk                     Natural splines with knot heights as the basis.
 nwtco                   Data from the National Wilm's Tumor Study
 ovarian                 Ovarian Cancer Survival Data
-pbc                     Mayo Clinic Primary Biliary Cirrhosis Data
+pbc                     Mayo Clinic Primary Biliary Cholangitis Data
 pbcseq                  Mayo Clinic Primary Biliary Cirrhosis,
                         sequential data
 plot.aareg              Plot an aareg object.
@@ -71,15 +78,17 @@ print.summary.coxph     Print method for summary.coxph objects
 print.summary.survexp   Print Survexp Summary
 print.summary.survfit   Print Survfit Summary
 print.survfit           Print a Short Summary of a Survival Curve
+pseudo                  Pseudo values for survival.
 pspline                 Smoothing splines using a pspline basis
 pyears                  Person Years
 quantile.survfit        Quantiles from a survfit object
-ratetable               Rate table structure
+ratetable               Allow ratetable() terms in a model
 ratetableDate           Convert date objects to ratetable form
 rats                    Rat treatment data from Mantel et al
 rats2                   Rat data from Gail et al.
 reliability             Reliability data sets
 residuals.coxph         Calculate Residuals for a 'coxph' Fit
+residuals.survfit       IJ residuals from a survfit object.
 residuals.survreg       Compute Residuals for 'survreg' Objects
 retinopathy             Diabetic Retinopathy
 rhDNase                 rhDNASE data set
@@ -97,9 +106,9 @@ summary.coxph           Summary method for Cox models
 summary.pyears          Summary function for pyears objecs
 summary.survexp         Summary function for a survexp object
 summary.survfit         Summary of a Survival Curve
-survConcordance         Compute a concordance measure.
 survSplit               Split a survival data set at specified times
 survcheck               Checks of a survival data set
+survcondense            Shorten a (time1, time2) survival dataset
 survdiff                Test Survival Curve Differences
 survexp                 Compute Expected Survival
 survexp.fit             Compute Expected Survival
@@ -115,6 +124,7 @@ survfit.object          Survival Curve Object
 survfit0                Convert the format of a survfit object.
 survfitcoxph.fit        A direct interface to the 'computational
                         engine' of survfit.coxph
+survival-deprecated     Deprecated functions in package 'survival'
 survobrien              O'Brien's Test for Association of a Single
                         Variable with Survival
 survreg                 Regression for a Parametric Survival Model
