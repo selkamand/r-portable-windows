@@ -7,10 +7,6 @@ useDynLib(Matrix, .registration = TRUE)
 ## (including generic functions for which we define methods),
 ## but not more ...
 
-## Some of the imports are necessary for when 'Matrix'
-## is loaded but not attached:
-## $ R --vanilla -e 'require(methods); (M <- Matrix::Matrix(0:1, 3L, 3L)); as(M, "sparseMatrix")'
-
 importFrom("grDevices", colorRampPalette, grey)
 
 importFrom("graphics", image, par)
@@ -23,15 +19,14 @@ importFrom("lattice", levelplot, panel.levelplot.raster)
 importFrom("methods", .hasSlot, .selectSuperClasses, .slotNames,
            Arith, Compare, Complex, Logic, Math, Math2, Ops, Summary,
            as, callGeneric, callNextMethod, canCoerce, cbind2, coerce,
-           extends, getClass, getClassDef, getGroupMembers,
-           implicitGeneric, is, isClassDef, kronecker, new,
-           packageSlot, prototype, rbind2, representation,
+           extends, getClassDef, getGroupMembers,
+           is, isClassDef, kronecker, new, rbind2,
            setAs, setClass, setClassUnion, setGeneric, setMethod,
-           setOldClass, setReplaceMethod, setValidity,
-           signature, show, slot, "slot<-", slotNames, validObject)
+           setOldClass, show, slot, "slot<-", slotNames, validObject)
 
-importFrom("stats", "contrasts<-", cov2cor , diffinv, model.frame,
-           rnorm, runif, symnum, terms, toeplitz, update, setNames)
+importFrom("stats", contr.SAS, contr.helmert, contr.poly, contr.sum,
+           contr.treatment, "contrasts<-", cov2cor , diffinv, model.frame,
+           rnorm, runif, symnum, terms, toeplitz, update)
 
 importFrom("utils", capture.output, head, head.matrix, str, tail, tail.matrix)
 
@@ -40,53 +35,60 @@ importFrom("utils", capture.output, head, head.matrix, str, tail, tail.matrix)
 
 ## ---- Non-generic functions ------------------------------------------
 
-export(.CR2RC,
-       .CR2T,
+export(.M2C,
+       .M2R,
+       .M2T,
+       .M2V,
        .M2diag,
+       .M2gen,
+       .M2kind,
+       .M2m,
+       .M2packed,
        .M2sym,
        .M2tri,
-       .SuiteSparse_version,
-       .T2CR,
+       .M2unpacked,
+       .M2v,
        .bdiag,
-       .dense2g,
-       .dense2kind,
-       .dense2m,
        .dense2sparse,
-       .dense2v,
        .diag.dsC,
        .diag2dense,
        .diag2sparse,
        .diagN2U,
        .diagU2N,
+       .ind2dense,
+       .ind2sparse,
        .formatSparseSimple,
+       .m2V,
        .m2dense,
        .m2sparse,
        .sparse2dense,
-       .sparse2g,
-       .sparse2kind,
-       .sparse2m,
-       .sparse2v,
        .sparseDiagonal,
        .symDiagonal,
        .trDiagonal,
        .solve.dgC.chol,
        .solve.dgC.lu,
        .solve.dgC.qr,
-       .tCR2RC,
+       .tCRT,
        .updateCHMfactor,
        .validateCsparse,
        Diagonal,
        Hilbert,
        KhatriRao,
        Matrix,
+       Matrix.Version,
        MatrixClass,
        T2graph,
        abIseq,
        abIseq1,
+       aggregateT,
        anyDuplicatedT,
+       asPerm,
+       asUniqueT,
        bandSparse,
        bdiag,
-       c.sparseVector, # c() dispatches on first argument only => allow method to be called explicitly if that argument may not be a sparseVector
+       ## 'c' dispatches on first argument only, so allow direct method calls :
+       ## c.Matrix, # not yet (see below)
+       c.sparseVector,
        colScale,
        condest,
        det,
@@ -101,8 +103,11 @@ export(.CR2RC,
        formatSparseM,
        graph2T,
        invPerm,
+       invertPerm,
        is.null.DN,
        isLDL,
+       isPerm,
+       isUniqueT,
        mat2triplet,
        nearPD,
        onenormest,
@@ -116,11 +121,11 @@ export(.CR2RC,
        rep2abI,
        rowScale,
        rsparsematrix,
+       signPerm,
        spMatrix,
        sparse.model.matrix,
        sparseMatrix,
-       sparseVector,
-       uniqTsparse)
+       sparseVector)
 
 ## Deprecated since Matrix 1.5-4 {Apr 2023}
 export(..2dge, .C2nC, .T2Cmat, .asmatrix, .dense2sy,
@@ -129,6 +134,11 @@ export(..2dge, .C2nC, .T2Cmat, .asmatrix, .dense2sy,
 
 ## Defunct since Matrix 1.3-3 {May 2021}
 export(cBind, rBind)
+
+## Redundant now but not yet deprecated ...
+export(.CR2RC, .CR2T, .SuiteSparse_version, .T2CR, .dense2g, .dense2kind,
+       .dense2m, .dense2v, .sparse2g, .sparse2kind, .sparse2m, .sparse2v,
+       .tCR2RC, uniqTsparse)
 
 
 ## ---- S3 generic functions -------------------------------------------
@@ -139,23 +149,25 @@ export(cBind, rBind)
 ## ---- S3 methods -----------------------------------------------------
 
 ## So that dispatch also happens inside of 'base' functions:
-S3method(as.array, Matrix)
-S3method(as.array, sparseVector)
 S3method(as.matrix, Matrix)
 S3method(as.matrix, sparseVector)
-S3method(as.vector, Matrix)
-S3method(as.vector, sparseVector)
+S3method(as.array, Matrix)
+S3method(as.array, sparseVector)
 
 ## Because S4 dispatch is "hard" for c():
-S3method(c, abIndex)
+## S3method(c, Matrix) # breaks 7 rev. dep. {2023-09-08}
 S3method(c, sparseVector)
+S3method(c, abIndex)
 
 ## For printing return values of our summary() methods:
-S3method(print, sparseSummary)
 S3method(print, diagSummary)
+S3method(print, sparseSummary)
 
 
 ## ---- S4 generic functions, methods ----------------------------------
+
+export(crossprod, tcrossprod) # *necessary* (once .Primitive in base)
+## MJ: why these and not also export(dim, ...) which are also primitive ??
 
 ## From 'Matrix' {no need to also export(); see WRE}
 exportMethods("%&%",
@@ -164,6 +176,8 @@ exportMethods("%&%",
               Schur,
               band,
               expand,
+              expand1,
+              expand2,
               expm,
               facmul,
               forceSymmetric,
@@ -180,64 +194,62 @@ exportMethods("%&%",
               updown,
               writeMM)
 
-## From 'base'
+## From 'base'  --- several of these are  implicitGeneric
 exportMethods("!",
               "%*%",
               "+",
-	      all,
-              any,
               all.equal,
               as.array,
-	      as.integer,
-	      as.logical,
-	      as.matrix,
-	      as.numeric,
-	      as.vector,
-	      chol,
-	      chol2inv,
-	      colMeans,
-	      colSums,
-	      crossprod,
+              as.complex,
+              as.integer,
+              as.logical,
+              as.matrix,
+              as.numeric,
+              as.vector,
+              chol,
+              chol2inv,
+              colMeans,
+              colSums,
+              crossprod,
               determinant,
               diag,
               "diag<-",
-	      diff,
-	      dim,
-	      "dim<-",
-	      dimnames,
-	      "dimnames<-",
+              diff,
+              dim,
+              "dim<-",
+              dimnames,
+              "dimnames<-",
               drop,
-              ## eigen, # if(.Matrix.avoiding.as.matrix)
               format,
-	      is.finite,
+              is.finite,
               is.infinite,
-	      is.na,
-	      isSymmetric,
+              is.na,
+              isSymmetric,
               kronecker,
               length,
-	      mean,
-	      norm,
+              mean,
+              norm,
               print,
               qr,
-	      qr.R,
               qr.Q,
-	      qr.coef,
-	      qr.fitted,
-	      qr.resid,
-	      qr.qty,
-	      qr.qy,
+              qr.R,
+              qr.X,
+              qr.coef,
+              qr.fitted,
+              qr.resid,
+              qr.qty,
+              qr.qy,
               rcond,
               rep,
               rowMeans,
-	      rowSums,
+              rowSums,
               solve,
               summary,
-              ## svd, # if(.Matrix.avoiding.as.matrix)
               t,
-	      tcrossprod,
+              tcrossprod,
               unname,
-	      which,
-	      zapsmall)
+              which,
+              zapsmall)
 
 ## From 'graphics'
 exportMethods(image)
@@ -257,10 +269,9 @@ exportMethods(head, tail)
 
 exportClasses(Matrix, # and its subclasses .............................
 
-              compMatrix,
               generalMatrix,
-              triangularMatrix,
               symmetricMatrix,
+              triangularMatrix,
               diagonalMatrix,
 
               denseMatrix,
@@ -276,43 +287,43 @@ exportClasses(Matrix, # and its subclasses .............................
 
               ndenseMatrix,
               ngeMatrix,
-              ntrMatrix,
-              ntpMatrix,
               nsyMatrix,
               nspMatrix,
+              ntrMatrix,
+              ntpMatrix,
 
               nsparseMatrix,
               ngCMatrix,
               ngRMatrix,
               ngTMatrix,
-              ntCMatrix,
-              ntRMatrix,
-              ntTMatrix,
               nsCMatrix,
               nsRMatrix,
               nsTMatrix,
+              ntCMatrix,
+              ntRMatrix,
+              ntTMatrix,
 
-              ## ndiMatrix,
+              ndiMatrix,
 
               lMatrix,
 
               ldenseMatrix,
               lgeMatrix,
-              ltrMatrix,
-              ltpMatrix,
               lsyMatrix,
               lspMatrix,
+              ltrMatrix,
+              ltpMatrix,
 
               lsparseMatrix,
               lgCMatrix,
               lgRMatrix,
               lgTMatrix,
-              ltCMatrix,
-              ltRMatrix,
-              ltTMatrix,
               lsCMatrix,
               lsRMatrix,
               lsTMatrix,
+              ltCMatrix,
+              ltRMatrix,
+              ltTMatrix,
 
               ldiMatrix,
 
@@ -320,46 +331,47 @@ exportClasses(Matrix, # and its subclasses .............................
 
               ## idenseMatrix,
               ## igeMatrix,
-              ## itrMatrix,
-              ## itpMatrix,
               ## isyMatrix,
               ## ispMatrix,
+              ## itrMatrix,
+              ## itpMatrix,
 
               ## isparseMatrix,
               ## igCMatrix,
               ## igRMatrix,
               ## igTMatrix,
-              ## itCMatrix,
-              ## itRMatrix,
-              ## itTMatrix,
               ## isCMatrix,
               ## isRMatrix,
               ## isTMatrix,
+              ## itCMatrix,
+              ## itRMatrix,
+              ## itTMatrix,
+
               ## idiMatrix,
 
               dMatrix,
 
               ddenseMatrix,
               dgeMatrix,
-              dtrMatrix,
-              dtpMatrix,
               dsyMatrix,
               dspMatrix,
               dpoMatrix,
-	      dppMatrix,
+              dppMatrix,
               corMatrix,
-              ## copMatrix,
+              copMatrix,
+              dtrMatrix,
+              dtpMatrix,
 
               dsparseMatrix,
               dgCMatrix,
               dgRMatrix,
               dgTMatrix,
-              dtCMatrix,
-              dtRMatrix,
-              dtTMatrix,
               dsCMatrix,
               dsRMatrix,
               dsTMatrix,
+              dtCMatrix,
+              dtRMatrix,
+              dtTMatrix,
 
               ddiMatrix,
 
@@ -367,67 +379,68 @@ exportClasses(Matrix, # and its subclasses .............................
 
               ## zdenseMatrix,
               ## zgeMatrix,
-              ## ztrMatrix,
-              ## ztpMatrix,
               ## zsyMatrix,
               ## zspMatrix,
+              ## ztrMatrix,
+              ## ztpMatrix,
 
               ## zsparseMatrix,
               ## zgCMatrix,
               ## zgRMatrix,
               ## zgTMatrix,
-              ## ztCMatrix,
-              ## ztRMatrix,
-              ## ztTMatrix,
               ## zsCMatrix,
               ## zsRMatrix,
               ## zsTMatrix,
+              ## ztCMatrix,
+              ## ztRMatrix,
+              ## ztTMatrix,
 
               ## zdiMatrix,
 
-	      indMatrix,
+              indMatrix,
               pMatrix,
 
               MatrixFactorization, # and its subclasses ................
 
               LU,
               denseLU,
-	      sparseLU,
+              sparseLU,
 
-              ## QR,
+              QR,
               ## denseQR,
               sparseQR,
 
+              SchurFactorization,
               Schur,
 
+              BunchKaufmanFactorization,
               BunchKaufman,
-	      pBunchKaufman,
+              pBunchKaufman,
 
               CholeskyFactorization,
               Cholesky,
-	      pCholesky,
-	      CHMfactor,
+              pCholesky,
+              CHMfactor,
               CHMsuper,
               dCHMsuper,
-	      nCHMsuper, # unused
-	      CHMsimpl,
+              nCHMsuper, # unused
+              CHMsimpl,
               dCHMsimpl,
               nCHMsimpl, # unused
 
               sparseVector, # and its subclasses .......................
               nsparseVector,
-	      lsparseVector,
-	      isparseVector,
-	      dsparseVector,
-	      zsparseVector,
+              lsparseVector,
+              isparseVector,
+              dsparseVector,
+              zsparseVector,
 
-              ## "Other" virtual {for now just unions}:
+              ## MJ: aim to deprecate and eventually remove these
+              ##     (except perhaps 'index')
+              abIndex,
               atomicVector,
+              compMatrix,
               index,
               number,
-              replValue, # dispatch fails when not exported
-              xsparseVector,
-
-              ## "Other" non-virtual {for now just experimental index classes}:
-              abIndex,
+              replValue,
               rleDiff)

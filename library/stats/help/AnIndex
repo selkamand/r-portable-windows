@@ -103,7 +103,9 @@ coefficients	coef
 complete.cases	complete.cases
 confint	confint
 confint.default	confint
+confint.glm	confint
 confint.lm	confint
+confint.nls	confint
 constrOptim	constrOptim
 contr.helmert	contrast
 contr.poly	contrast
@@ -257,6 +259,7 @@ hat	influence.measures
 hatvalues	influence.measures
 hatvalues.lm	influence.measures
 hclust	hclust
+head.ts	ts
 heatmap	heatmap
 HoltWinters	HoltWinters
 Hypergeometric	Hypergeometric
@@ -425,6 +428,7 @@ p.adjust.methods	p.adjust
 pacf	acf
 pacf.default	acf
 Pair	Pair
+pairs.profile	plot.profile
 pairwise.prop.test	pairwise.prop.test
 pairwise.t.test	pairwise.t.test
 pairwise.table	pairwise.table
@@ -455,6 +459,7 @@ plot.mts	stats-defunct
 plot.ppr	plot.ppr
 plot.prcomp	prcomp
 plot.princomp	princomp
+plot.profile	plot.profile
 plot.profile.nls	plot.profile.nls
 plot.spec	plot.spec
 plot.spec.coherency	plot.spec
@@ -537,6 +542,7 @@ print.ts	print.ts
 print.xtabs	xtabs
 printCoefmat	printCoefmat
 profile	profile
+profile.glm	profile.glm
 profile.nls	profile.nls
 proj	proj
 proj.aov	proj
@@ -573,6 +579,7 @@ qqline	qqnorm
 qqnorm	qqnorm
 qqnorm.default	qqnorm
 qqplot	qqnorm
+qr.influence	lm.influence
 qsignrank	SignRank
 qsmirnov	Smirnov
 qt	TDist
@@ -610,6 +617,7 @@ reshapeLong	stats-defunct
 reshapeWide	stats-defunct
 resid	residuals
 residuals	residuals
+residuals.default	residuals
 residuals.glm	glm.summaries
 residuals.HoltWinters	HoltWinters
 residuals.lm	lm.summaries
@@ -706,12 +714,14 @@ summary.nls	summary.nls
 summary.prcomp	prcomp
 summary.princomp	summary.princomp
 summary.stepfun	stepfun
+summary.stl	stlmethods
 supsmu	supsmu
 symnum	symnum
 t.test	t.test
 t.test.default	t.test
 t.test.formula	t.test
 t.ts	ts
+tail.ts	ts
 TDist	TDist
 termplot	termplot
 terms	terms

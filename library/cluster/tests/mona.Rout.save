@@ -1,6 +1,6 @@
 
-R Under development (unstable) (2019-04-30 r76446) -- "Unsuffered Consequences"
-Copyright (C) 2019 The R Foundation for Statistical Computing
+R version 4.3.1 Patched (2023-08-12 r84937) -- "Beagle Scouts"
+Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -16,8 +16,6 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(cluster)
-> 
-> if(getRversion() < "3.4.0") source("withAutoprint.R")
 > 
 > data(animals)
 > (mani <- mona(animals, trace=TRUE))
@@ -2806,4 +2804,4 @@ Error in mona(cbind(1:0), trace = 2) :
 > 
 > proc.time()
    user  system elapsed 
-  0.220   0.059   0.274 
+  0.294   0.053   0.348 

@@ -1,12 +1,12 @@
 Package: utils
-Version: 4.3.0
+Version: 4.5.1
 Priority: base
 Title: The R Utils Package
 Author: R Core Team and contributors worldwide
 Maintainer: R Core Team <do-use-Contact-address@r-project.org>
 Contact: R-help mailing list <r-help@r-project.org>
 Description: R utility functions.
-License: Part of R 4.3.0
-Suggests: methods, xml2, commonmark, knitr
+License: Part of R 4.5.1
+Suggests: methods, xml2, commonmark, knitr, jsonlite
 NeedsCompilation: yes
-Built: R 4.3.0; x86_64-w64-mingw32; 2023-04-21 09:18:02 UTC; windows
+Built: R 4.5.1; x86_64-w64-mingw32; 2025-06-13 07:47:04 UTC; windows

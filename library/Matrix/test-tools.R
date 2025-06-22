@@ -9,4 +9,5 @@ source(system.file("test-tools-1.R",      package = "Matrix"),
 source(system.file("test-tools-Matrix.R", package = "Matrix"),
        keep.source = FALSE)
 
+if(!exists("doExtras", mode="logical")) # << only if not set *before*
 doExtras <- interactive() || nzchar(Sys.getenv("R_MATRIX_CHECK_EXTRA"))

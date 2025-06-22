@@ -13,6 +13,7 @@ bug.reports.mgcv	bug.reports.mgcv
 choldrop	chol.down
 cholup	chol.down
 choose.k	choose.k
+clog	clog
 cnorm	cnorm
 coef.pdIdnot	pdIdnot
 coef.pdTens	pdTens
@@ -22,6 +23,7 @@ concurvity	concurvity
 corMatrix.pdIdnot	pdIdnot
 cox.ph	coxph
 cox.pht	coxpht
+cpois	cpois
 cSplineDes	cSplineDes
 cubic.regression.spline	smooth.construct.cr.smooth.spec
 cyclic.cubic.spline	smooth.construct.cr.smooth.spec
@@ -40,6 +42,7 @@ extract.lme.cov2	extract.lme.cov
 factor.smooth	factor.smooth
 factor.smooth.interaction	factor.smooth
 family.mgcv	family.mgcv
+feasible	lp
 FFdes	FFdes
 fix.family.link	fix.family.link
 fix.family.ls	fix.family.link
@@ -80,10 +83,13 @@ gamSim	gamSim
 gaulss	gaulss
 get.var	get.var
 gevlss	gevlss
+gfam	gfam
 ginla	ginla
 gp.smooth	smooth.construct.gp.smooth.spec
+grouped families	gfam
 gumbls	gumbls
 identifiability	identifiability
+ijXVXd	XWXd
 in.out	in.out
 influence.gam	influence.gam
 initial.sp	initial.sp
@@ -96,9 +102,11 @@ ldTweedie	ldTweedie
 linear.functional.terms	linear.functional.terms
 logDet.pdIdnot	pdIdnot
 logLik.gam	logLik.gam
+lp	lp
 ls.size	ls.size
 magic	magic
 magic.post.proc	magic.post.proc
+mchol	mchol
 mgcv	mgcv-package
 mgcv.FAQ	mgcv-FAQ
 mgcv.package	mgcv-package
@@ -112,6 +120,7 @@ mroot	mroot
 multinom	multinom
 mvn	mvn
 nb	negbin
+NCV	NCV
 negbin	negbin
 new.name	new.name
 notExp	notExp

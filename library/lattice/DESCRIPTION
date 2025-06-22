@@ -1,6 +1,6 @@
 Package: lattice
-Version: 0.21-8
-Date: 2023-04-05
+Version: 0.22-7
+Date: 2025-03-31
 Priority: recommended
 Title: Trellis Graphics for R
 Authors@R: c(person("Deepayan", "Sarkar", role = c("aut", "cre"),
@@ -13,7 +13,8 @@ Authors@R: c(person("Deepayan", "Sarkar", role = c("aut", "cre"),
               person("Zhijian (Jason)", "Wen", role = "cph", comment = "filled contour code"),
               person("Paul", "Murrell", role = "ctb", email = "paul@stat.auckland.ac.nz"),
 	      person("Stefan", "Eng", role = "ctb", comment = "violin plot improvements"),
-	      person("Achim", "Zeileis", role = "ctb", comment = "modern colors")
+	      person("Achim", "Zeileis", role = "ctb", comment = "modern colors"),
+              person("Alexandre", "Courtiol", role = "ctb", comment = "generics for larrows, lpolygon, lrect and lsegments")
 	      )
 Description: A powerful and elegant high-level data visualization
   system inspired by Trellis graphics, with an emphasis on
@@ -23,14 +24,14 @@ Description: A powerful and elegant high-level data visualization
 Depends: R (>= 4.0.0)
 Suggests: KernSmooth, MASS, latticeExtra, colorspace
 Imports: grid, grDevices, graphics, stats, utils
-Enhances: chron
+Enhances: chron, zoo
 LazyLoad: yes
 LazyData: yes
 License: GPL (>= 2)
 URL: https://lattice.r-forge.r-project.org/
 BugReports: https://github.com/deepayan/lattice/issues
 NeedsCompilation: yes
-Packaged: 2023-04-05 15:31:40 UTC; deepayan
+Packaged: 2025-04-02 04:55:57 UTC; deepayan
 Author: Deepayan Sarkar [aut, cre] (<https://orcid.org/0000-0003-4107-1553>),
   Felix Andrews [ctb],
   Kevin Wright [ctb] (documentation),
@@ -39,9 +40,11 @@ Author: Deepayan Sarkar [aut, cre] (<https://orcid.org/0000-0003-4107-1553>),
   Zhijian (Jason) Wen [cph] (filled contour code),
   Paul Murrell [ctb],
   Stefan Eng [ctb] (violin plot improvements),
-  Achim Zeileis [ctb] (modern colors)
+  Achim Zeileis [ctb] (modern colors),
+  Alexandre Courtiol [ctb] (generics for larrows, lpolygon, lrect and
+    lsegments)
 Maintainer: Deepayan Sarkar <deepayan.sarkar@r-project.org>
 Repository: CRAN
-Date/Publication: 2023-04-05 17:43:19 UTC
-Built: R 4.3.0; x86_64-w64-mingw32; 2023-04-21 09:23:54 UTC; windows
+Date/Publication: 2025-04-02 15:40:02 UTC
+Built: R 4.5.1; x86_64-w64-mingw32; 2025-06-13 07:52:16 UTC; windows
 Archs: x64

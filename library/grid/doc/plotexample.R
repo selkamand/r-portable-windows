@@ -1,7 +1,7 @@
 ### R code from vignette source 'plotexample.Rnw'
 
 ###################################################
-### code chunk number 1: plotexample.Rnw:33-38
+### code chunk number 1: plotexample.Rnw:34-39
 ###################################################
 library(grDevices)
 library(stats) # for runif()
@@ -11,7 +11,7 @@ options(width=60)
 
 
 ###################################################
-### code chunk number 2: plotexample.Rnw:93-95
+### code chunk number 2: plotexample.Rnw:94-96
 ###################################################
 x <- runif(10)
 y <- runif(10)
@@ -48,7 +48,7 @@ popViewport()
 
 
 ###################################################
-### code chunk number 5: plotexample.Rnw:130-131
+### code chunk number 5: plotexample.Rnw:131-132
 ###################################################
 pushViewport(data.vp)
 grid.points(x, y)
@@ -75,7 +75,7 @@ popViewport()
 
 
 ###################################################
-### code chunk number 7: plotexample.Rnw:147-149
+### code chunk number 7: plotexample.Rnw:148-150
 ###################################################
 pushViewport(data.vp)
 grid.points(x, y)
@@ -97,7 +97,7 @@ popViewport()
 
 
 ###################################################
-### code chunk number 8: plotexample.Rnw:164-185
+### code chunk number 8: plotexample.Rnw:165-186
 ###################################################
 data.vp <- viewport(name = "dataregion",
                     x = unit(5, "lines"),
@@ -123,7 +123,7 @@ upViewport()
 
 
 ###################################################
-### code chunk number 9: plotexample.Rnw:191-195
+### code chunk number 9: plotexample.Rnw:192-196
 ###################################################
 downViewport("dataregion")
 grid.text(date(), x = unit(1, "npc"), y  =  0,
@@ -190,7 +190,7 @@ upViewport()
 
 
 ###################################################
-### code chunk number 13: plotexample.Rnw:271-273
+### code chunk number 13: plotexample.Rnw:272-274
 ###################################################
 grid.rect(gp = gpar(fill = "grey"))
 message <-
@@ -218,7 +218,7 @@ upViewport(0)
 
 
 ###################################################
-### code chunk number 14: plotexample.Rnw:300-336
+### code chunk number 14: plotexample.Rnw:301-337
 ###################################################
 splot.data.vp <- function(x, y) {
   viewport(name = "dataregion",
@@ -265,7 +265,7 @@ splot <- function(x, y, title, name=NULL, draw=TRUE, gp=gpar(), vp=NULL) {
 
 
 ###################################################
-### code chunk number 16: plotexample.Rnw:353-358
+### code chunk number 16: plotexample.Rnw:354-359
 ###################################################
 splot(1:10, 1:10, "Same as Before", name = "splot")
 downViewport("dataregion")
@@ -275,14 +275,14 @@ upViewport(0)
 
 
 ###################################################
-### code chunk number 17: plotexample.Rnw:406-408
+### code chunk number 17: plotexample.Rnw:407-409
 ###################################################
 splot(1:10, 1:10, "Same as Before", name = "splot")
 grid.edit("splot", gp = gpar(cex=0.5))
 
 
 ###################################################
-### code chunk number 18: plotexample.Rnw:409-412
+### code chunk number 18: plotexample.Rnw:410-413
 ###################################################
 sg <- splot(1:10, 1:10, "Same as Before", name = "splot", draw = FALSE)
 sg <- editGrob(sg, gp = gpar(cex = 0.5))
@@ -290,14 +290,14 @@ grid.draw(sg)
 
 
 ###################################################
-### code chunk number 19: plotexample.Rnw:418-420
+### code chunk number 19: plotexample.Rnw:419-421
 ###################################################
 splot(1:10, 1:10, "Same as Before", name = "splot")
 grid.edit(gPath("splot", "points"), gp = gpar(col = 1:10))
 
 
 ###################################################
-### code chunk number 20: plotexample.Rnw:421-425
+### code chunk number 20: plotexample.Rnw:422-426
 ###################################################
 sg <- splot(1:10, 1:10, "Same as Before", name = "splot", draw = FALSE)
 sg <- editGrob(sg, gPath = "points", gp = gpar(col = 1:10))
@@ -306,7 +306,7 @@ grid.draw(sg)
 
 
 ###################################################
-### code chunk number 21: plotexample.Rnw:433-445
+### code chunk number 21: plotexample.Rnw:434-446
 ###################################################
 editDetails.splot <- function(x, specs) {
     if (any(c("x", "y") %in% names(specs))) {
@@ -323,7 +323,7 @@ grid.edit("splot", x = 1:100, y = (1:100)^2)
 
 
 ###################################################
-### code chunk number 22: plotexample.Rnw:446-449
+### code chunk number 22: plotexample.Rnw:447-450
 ###################################################
 sg <- splot(1:10, 1:10, "Same as Before", name = "splot", draw = FALSE)
 sg <- editGrob(sg, x = 1:100, y = (1:100)^2)
@@ -331,7 +331,7 @@ grid.draw(sg)
 
 
 ###################################################
-### code chunk number 23: plotexample.Rnw:460-501
+### code chunk number 23: plotexample.Rnw:461-502
 ###################################################
 cellname <- function(i, j) paste("cell", i, j, sep = "")
 
@@ -377,7 +377,7 @@ splom(df)
 
 
 ###################################################
-### code chunk number 24: plotexample.Rnw:506-511
+### code chunk number 24: plotexample.Rnw:507-512
 ###################################################
 splom(df)
 grid.edit("plot21::xlab", label = "", redraw = FALSE)
@@ -393,7 +393,7 @@ grid.edit("plot32::yaxis", label = FALSE)
 
 
 ###################################################
-### code chunk number 26: plotexample.Rnw:514-520
+### code chunk number 26: plotexample.Rnw:515-521
 ###################################################
 smg <- splom(df, draw = FALSE)
 smg <- editGrob(smg, gPath = "plot21::xaxis", label = FALSE)
@@ -404,7 +404,7 @@ grid.draw(smg)
 
 
 ###################################################
-### code chunk number 27: plotexample.Rnw:530-535
+### code chunk number 27: plotexample.Rnw:531-536
 ###################################################
 splom(df, name = "splom")
 grid.remove("cell12")
@@ -414,7 +414,7 @@ grid.add("splom", textGrob(date(), name = "date",
 
 
 ###################################################
-### code chunk number 28: plotexample.Rnw:536-542
+### code chunk number 28: plotexample.Rnw:537-543
 ###################################################
 smg <- splom(df, draw = FALSE)
 smg <- removeGrob(smg, "cell12")
@@ -425,7 +425,7 @@ grid.draw(smg)
 
 
 ###################################################
-### code chunk number 29: plotexample.Rnw:550-566
+### code chunk number 29: plotexample.Rnw:551-567
 ###################################################
 splom(df, name = "splom")
 grid.remove("cell12")
@@ -446,7 +446,7 @@ grid.draw(date)
 
 
 ###################################################
-### code chunk number 30: plotexample.Rnw:567-580
+### code chunk number 30: plotexample.Rnw:568-581
 ###################################################
 smg <- splom(df, draw = FALSE)
 smg <- removeGrob(smg, "cell12")

@@ -1,7 +1,7 @@
 
-R version 4.3.0 alpha (2023-04-04 r84156)
-Copyright (C) 2023 The R Foundation for Statistical Computing
-Platform: aarch64-apple-darwin22.4.0 (64-bit)
+R Under development (unstable) (2025-02-19 r87751) -- "Unsuffered Consequences"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: aarch64-apple-darwin24.3.0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -203,7 +203,7 @@ F-statistic: 72.09 on 3 and 196 DF,  p-value: < 2.2e-16
 
 > summary(lm(L75 ~ Noise/(Age + OME), data = OMEif,
 +            subset = (Age >= 30 & Age <= 60),
-+            na.action = na.omit), cor = FALSE)
++            na.action = na.omit), correlation = FALSE)
 
 Call:
 lm(formula = L75 ~ Noise/(Age + OME), data = OMEif, subset = (Age >= 
@@ -620,6 +620,7 @@ n= 220, number of events= 177
 > 
 > # PQL glmm analysis
 > library(nlme)
+> ## IGNORE_RDIFF_BEGIN
 > summary(glmmPQL(y ~ trt + I(week > 2), random = ~ 1 | ID,
 +                 family = binomial, data = bacteria))
 iteration 1
@@ -659,6 +660,7 @@ Standardized Within-Group Residuals:
 
 Number of Observations: 220
 Number of Groups: 50 
+> ## IGNORE_RDIFF_END
 > 
 > 
 > 
@@ -755,7 +757,7 @@ Order selected 1  sigma^2 estimated as  0.01011
 > stemp <- as.vector(temp - alpha*lag(temp, -1))
 > sX <- X[-1, ] - alpha * X[-115,]
 > beav1.ls <- lm(stemp ~ -1 + sX, na.action = na.omit)
-> summary(beav1.ls, cor = FALSE)
+> summary(beav1.ls, correlation = FALSE)
 
 Call:
 lm(formula = stemp ~ -1 + sX, na.action = na.omit)
@@ -853,7 +855,7 @@ sigma^2 estimated as 0.01434:  log likelihood = 69.83,  aic = -127.67
 > 
 > ## IGNORE_RDIFF_BEGIN
 > library(nlme) # for gls and corAR1
-> beav2.gls <- gls(temp ~ activ, data = beav2, corr = corAR1(0.8),
+> beav2.gls <- gls(temp ~ activ, data = beav2, correlation = corAR1(0.8),
 +                  method = "ML")
 > summary(beav2.gls)
 Generalized least squares fit by maximum likelihood
@@ -974,10 +976,10 @@ Residual Deviance: 195.5 	AIC: 217.5
 > ### ** Examples
 > 
 > boxcox(Volume ~ log(Height) + log(Girth), data = trees,
-+        lambda = seq(-0.25, 0.25, length = 10))
++        lambda = seq(-0.25, 0.25, length.out = 10))
 > 
 > boxcox(Days+1 ~ Eth*Sex*Age*Lrn, data = quine,
-+        lambda = seq(-0.05, 0.45, len = 20))
++        lambda = seq(-0.05, 0.45, length.out = 20))
 > 
 > 
 > 
@@ -1039,70 +1041,6 @@ Coefficients:
 (Intercept)           x1           x2           x3           x4  
     62.4054       1.5511       0.5102       0.1019      -0.1441  
 
-> 
-> 
-> 
-> cleanEx()
-> nameEx("confint")
-> ### * confint
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: confint-MASS
-> ### Title: Confidence Intervals for Model Parameters
-> ### Aliases: confint.glm confint.nls confint.profile.glm
-> ###   confint.profile.nls
-> ### Keywords: models
-> 
-> ### ** Examples
-> 
-> expn1 <- deriv(y ~ b0 + b1 * 2^(-x/th), c("b0", "b1", "th"),
-+                function(b0, b1, th, x) {})
-> 
-> wtloss.gr <- nls(Weight ~ expn1(b0, b1, th, Days),
-+    data = wtloss, start = c(b0=90, b1=95, th=120))
-> 
-> expn2 <- deriv(~b0 + b1*((w0 - b0)/b1)^(x/d0),
-+          c("b0","b1","d0"), function(b0, b1, d0, x, w0) {})
-> 
-> wtloss.init <- function(obj, w0) {
-+   p <- coef(obj)
-+   d0 <-  - log((w0 - p["b0"])/p["b1"])/log(2) * p["th"]
-+   c(p[c("b0", "b1")], d0 = as.vector(d0))
-+ }
-> 
-> out <- NULL
-> w0s <- c(110, 100, 90)
-> for(w0 in w0s) {
-+     fm <- nls(Weight ~ expn2(b0, b1, d0, Days, w0),
-+               wtloss, start = wtloss.init(wtloss.gr, w0))
-+     out <- rbind(out, c(coef(fm)["d0"], confint(fm, "d0")))
-+   }
-Waiting for profiling to be done...
-Waiting for profiling to be done...
-Waiting for profiling to be done...
-> dimnames(out) <- list(paste(w0s, "kg:"),  c("d0", "low", "high"))
-> out
-              d0      low     high
-110 kg: 261.5132 256.2303 267.5009
-100 kg: 349.4979 334.7293 368.0151
-90 kg:  507.0941 457.2637 594.8745
-> 
-> ldose <- rep(0:5, 2)
-> numdead <- c(1, 4, 9, 13, 18, 20, 0, 2, 6, 10, 12, 16)
-> sex <- factor(rep(c("M", "F"), c(6, 6)))
-> SF <- cbind(numdead, numalive = 20 - numdead)
-> budworm.lg0 <- glm(SF ~ sex + ldose - 1, family = binomial)
-> confint(budworm.lg0)
-Waiting for profiling to be done...
-           2.5 %    97.5 %
-sexF  -4.4581438 -2.613610
-sexM  -3.1728745 -1.655117
-ldose  0.8228708  1.339058
-> confint(budworm.lg0, "ldose")
-Waiting for profiling to be done...
-    2.5 %    97.5 % 
-0.8228708 1.3390581 
 > 
 > 
 > 
@@ -1486,7 +1424,7 @@ P:A     1    6.956 27.696
 > ### ** Examples
 > 
 > summary(glm(y ~ lbase*trt + lage + V4, family = poisson,
-+             data = epil), cor = FALSE)
++             data = epil), correlation = FALSE)
 
 Call:
 glm(formula = y ~ lbase * trt + lage + V4, family = poisson, 
@@ -1494,20 +1432,20 @@ glm(formula = y ~ lbase * trt + lage + V4, family = poisson,
 
 Coefficients:
                    Estimate Std. Error z value Pr(>|z|)    
-(Intercept)         1.89791    0.04260  44.552  < 2e-16 ***
-lbase               0.94862    0.04360  21.759  < 2e-16 ***
-trtprogabide       -0.34588    0.06100  -5.670 1.42e-08 ***
-lage                0.88760    0.11650   7.619 2.56e-14 ***
-V4                 -0.15977    0.05458  -2.927  0.00342 ** 
-lbase:trtprogabide  0.56154    0.06352   8.841  < 2e-16 ***
+(Intercept)         1.89915    0.04258  44.602  < 2e-16 ***
+lbase               0.94952    0.04356  21.797  < 2e-16 ***
+trtprogabide       -0.34713    0.06098  -5.693 1.25e-08 ***
+lage                0.89705    0.11644   7.704 1.32e-14 ***
+V4                 -0.16109    0.05458  -2.952  0.00316 ** 
+lbase:trtprogabide  0.56223    0.06350   8.855  < 2e-16 ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 (Dispersion parameter for poisson family taken to be 1)
 
-    Null deviance: 2517.83  on 235  degrees of freedom
-Residual deviance:  869.07  on 230  degrees of freedom
-AIC: 1647
+    Null deviance: 2521.75  on 235  degrees of freedom
+Residual deviance:  869.32  on 230  degrees of freedom
+AIC: 1647.3
 
 Number of Fisher Scoring iterations: 5
 
@@ -1526,7 +1464,7 @@ Number of Fisher Scoring iterations: 5
 +     dimnames = list(NULL, c("placebo-base", "drug-placebo")))
 > ## IGNORE_RDIFF_BEGIN
 > summary(glm(y ~ pred + factor(subject) + offset(log(time)),
-+             family = poisson, data = epil3), cor = FALSE)
++             family = poisson, data = epil3), correlation = FALSE)
 
 Call:
 glm(formula = y ~ pred + factor(subject) + offset(log(time)), 
@@ -1534,16 +1472,16 @@ glm(formula = y ~ pred + factor(subject) + offset(log(time)),
 
 Coefficients:
                     Estimate Std. Error z value Pr(>|z|)    
-(Intercept)        1.122e+00  2.008e-01   5.590 2.28e-08 ***
-predplacebo-base   1.087e-01  4.691e-02   2.318 0.020474 *  
-preddrug-placebo  -1.016e-01  6.507e-02  -1.561 0.118431    
-factor(subject)2  -9.105e-16  2.828e-01   0.000 1.000000    
+(Intercept)        1.122e+00  2.008e-01   5.587 2.30e-08 ***
+predplacebo-base   1.108e-01  4.689e-02   2.363 0.018127 *  
+preddrug-placebo  -1.037e-01  6.505e-02  -1.594 0.110992    
+factor(subject)2   7.983e-15  2.828e-01   0.000 1.000000    
 factor(subject)3  -3.857e-01  3.144e-01  -1.227 0.219894    
 factor(subject)4  -1.744e-01  2.960e-01  -0.589 0.555847    
 factor(subject)5   1.577e+00  2.197e-01   7.178 7.08e-13 ***
 factor(subject)6   6.729e-01  2.458e-01   2.738 0.006182 ** 
 factor(subject)7  -4.082e-02  2.858e-01  -0.143 0.886411    
-factor(subject)8   1.758e+00  2.166e-01   8.117 4.77e-16 ***
+factor(subject)8   1.772e+00  2.163e-01   8.189 2.64e-16 ***
 factor(subject)9   5.878e-01  2.494e-01   2.356 0.018454 *  
 factor(subject)10  5.423e-01  2.515e-01   2.156 0.031060 *  
 factor(subject)11  1.552e+00  2.202e-01   7.048 1.81e-12 ***
@@ -1564,45 +1502,45 @@ factor(subject)25  2.069e+00  2.123e-01   9.750  < 2e-16 ***
 factor(subject)26 -5.108e-01  3.266e-01  -1.564 0.117799    
 factor(subject)27 -2.231e-01  3.000e-01  -0.744 0.456990    
 factor(subject)28  1.386e+00  2.236e-01   6.200 5.66e-10 ***
-factor(subject)29  1.604e+00  2.227e-01   7.203 5.90e-13 ***
-factor(subject)30  1.023e+00  2.372e-01   4.313 1.61e-05 ***
-factor(subject)31  9.149e-02  2.821e-01   0.324 0.745700    
-factor(subject)32 -3.111e-02  2.909e-01  -0.107 0.914822    
-factor(subject)33  4.710e-01  2.597e-01   1.814 0.069736 .  
-factor(subject)34  3.887e-01  2.640e-01   1.473 0.140879    
-factor(subject)35  1.487e+00  2.250e-01   6.609 3.87e-11 ***
-factor(subject)36  3.598e-01  2.656e-01   1.355 0.175551    
-factor(subject)37 -1.221e-01  2.979e-01  -0.410 0.681943    
-factor(subject)38  1.344e+00  2.283e-01   5.889 3.90e-09 ***
-factor(subject)39  1.082e+00  2.354e-01   4.596 4.30e-06 ***
-factor(subject)40 -7.687e-01  3.634e-01  -2.116 0.034384 *  
-factor(subject)41  1.656e-01  2.772e-01   0.597 0.550234    
-factor(subject)42  5.227e-02  2.848e-01   0.184 0.854388    
-factor(subject)43  1.543e+00  2.239e-01   6.891 5.54e-12 ***
-factor(subject)44  9.605e-01  2.393e-01   4.014 5.96e-05 ***
-factor(subject)45  1.177e+00  2.326e-01   5.061 4.18e-07 ***
-factor(subject)46 -5.275e-01  3.355e-01  -1.572 0.115840    
-factor(subject)47  1.053e+00  2.363e-01   4.456 8.35e-06 ***
-factor(subject)48 -5.275e-01  3.355e-01  -1.572 0.115840    
-factor(subject)49  2.949e+00  2.082e-01  14.168  < 2e-16 ***
-factor(subject)50  3.887e-01  2.640e-01   1.473 0.140879    
-factor(subject)51  1.038e+00  2.367e-01   4.385 1.16e-05 ***
-factor(subject)52  5.711e-01  2.548e-01   2.241 0.025023 *  
-factor(subject)53  1.670e+00  2.215e-01   7.538 4.76e-14 ***
-factor(subject)54  4.443e-01  2.611e-01   1.702 0.088759 .  
-factor(subject)55  2.674e-01  2.709e-01   0.987 0.323618    
-factor(subject)56  1.124e+00  2.341e-01   4.800 1.59e-06 ***
-factor(subject)57  2.674e-01  2.709e-01   0.987 0.323618    
-factor(subject)58 -6.017e-01  3.436e-01  -1.751 0.079911 .  
-factor(subject)59 -7.556e-02  2.942e-01  -0.257 0.797331    
+factor(subject)29  1.605e+00  2.227e-01   7.208 5.70e-13 ***
+factor(subject)30  1.024e+00  2.372e-01   4.317 1.58e-05 ***
+factor(subject)31  9.259e-02  2.821e-01   0.328 0.742760    
+factor(subject)32 -3.001e-02  2.909e-01  -0.103 0.917814    
+factor(subject)33  4.721e-01  2.597e-01   1.818 0.069089 .  
+factor(subject)34  3.898e-01  2.640e-01   1.477 0.139764    
+factor(subject)35  1.488e+00  2.251e-01   6.614 3.74e-11 ***
+factor(subject)36  3.609e-01  2.656e-01   1.359 0.174241    
+factor(subject)37 -1.210e-01  2.979e-01  -0.406 0.684646    
+factor(subject)38  1.345e+00  2.283e-01   5.893 3.78e-09 ***
+factor(subject)39  1.083e+00  2.354e-01   4.601 4.21e-06 ***
+factor(subject)40 -7.676e-01  3.634e-01  -2.113 0.034642 *  
+factor(subject)41  1.667e-01  2.772e-01   0.601 0.547598    
+factor(subject)42  5.337e-02  2.848e-01   0.187 0.851369    
+factor(subject)43  1.544e+00  2.239e-01   6.896 5.35e-12 ***
+factor(subject)44  9.616e-01  2.393e-01   4.019 5.85e-05 ***
+factor(subject)45  1.178e+00  2.326e-01   5.065 4.08e-07 ***
+factor(subject)46 -5.265e-01  3.355e-01  -1.569 0.116600    
+factor(subject)47  1.054e+00  2.363e-01   4.461 8.17e-06 ***
+factor(subject)48 -5.265e-01  3.355e-01  -1.569 0.116600    
+factor(subject)49  2.950e+00  2.082e-01  14.173  < 2e-16 ***
+factor(subject)50  3.898e-01  2.640e-01   1.477 0.139764    
+factor(subject)51  1.039e+00  2.367e-01   4.389 1.14e-05 ***
+factor(subject)52  5.722e-01  2.548e-01   2.245 0.024746 *  
+factor(subject)53  1.671e+00  2.215e-01   7.543 4.59e-14 ***
+factor(subject)54  4.454e-01  2.611e-01   1.706 0.087976 .  
+factor(subject)55  2.685e-01  2.709e-01   0.991 0.321639    
+factor(subject)56  1.125e+00  2.341e-01   4.805 1.55e-06 ***
+factor(subject)57  2.685e-01  2.709e-01   0.991 0.321639    
+factor(subject)58 -6.006e-01  3.436e-01  -1.748 0.080463 .  
+factor(subject)59 -7.447e-02  2.942e-01  -0.253 0.800210    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 (Dispersion parameter for poisson family taken to be 1)
 
-    Null deviance: 3180.82  on 117  degrees of freedom
-Residual deviance:  303.16  on  57  degrees of freedom
-AIC: 1003.5
+    Null deviance: 3185.11  on 117  degrees of freedom
+Residual deviance:  303.96  on  57  degrees of freedom
+AIC: 1004.3
 
 Number of Fisher Scoring iterations: 5
 
@@ -1624,30 +1562,30 @@ Linear mixed-effects model fit by maximum likelihood
 Random effects:
  Formula: ~1 | subject
         (Intercept) Residual
-StdDev:   0.4442704 1.400807
+StdDev:   0.4449054 1.399283
 
 Variance function:
  Structure: fixed weights
  Formula: ~invwt 
 Fixed effects:  y ~ lbase * trt + lage + V4 
                         Value Std.Error  DF   t-value p-value
-(Intercept)         1.8696677 0.1055620 176 17.711554  0.0000
-lbase               0.8818228 0.1292834  54  6.820849  0.0000
-trtprogabide       -0.3095253 0.1490438  54 -2.076740  0.0426
-lage                0.5335460 0.3463119  54  1.540652  0.1292
-V4                 -0.1597696 0.0774521 176 -2.062819  0.0406
-lbase:trtprogabide  0.3415425 0.2033325  54  1.679725  0.0988
+(Intercept)         1.8706422 0.1056178 176 17.711434  0.0000
+lbase               0.8828134 0.1293711  54  6.823884  0.0000
+trtprogabide       -0.3103624 0.1491240  54 -2.081236  0.0422
+lage                0.5375809 0.3465146  54  1.551395  0.1266
+V4                 -0.1610871 0.0773565 176 -2.082398  0.0388
+lbase:trtprogabide  0.3410064 0.2034656  54  1.675990  0.0995
  Correlation: 
                    (Intr) lbase  trtprg lage   V4    
-lbase              -0.126                            
-trtprogabide       -0.691  0.089                     
+lbase              -0.125                            
+trtprogabide       -0.691  0.088                     
 lage               -0.103 -0.038  0.088              
 V4                 -0.162  0.000  0.000  0.000       
 lbase:trtprogabide  0.055 -0.645 -0.184  0.267  0.000
 
 Standardized Within-Group Residuals:
         Min          Q1         Med          Q3         Max 
--2.13240534 -0.63871136 -0.08486339  0.41960195  4.97872138 
+-2.13615625 -0.63779485 -0.08342573  0.42100427  4.97927910 
 
 Number of Observations: 236
 Number of Groups: 59 
@@ -1669,16 +1607,16 @@ Linear mixed-effects model fit by maximum likelihood
 Random effects:
  Formula: ~1 | subject
         (Intercept) Residual
-StdDev:   0.7257895  2.16629
+StdDev:   0.7260474 2.169273
 
 Variance function:
  Structure: fixed weights
  Formula: ~invwt 
 Fixed effects:  y ~ pred 
                      Value  Std.Error DF   t-value p-value
-(Intercept)       3.213631 0.10569117 58 30.405865  0.0000
-predplacebo-base  0.110855 0.09989089 57  1.109763  0.2718
-preddrug-placebo -0.105613 0.13480483 57 -0.783450  0.4366
+(Intercept)       3.214199 0.10574213 58 30.396582  0.0000
+predplacebo-base  0.112880 0.09997031 57  1.129132  0.2636
+preddrug-placebo -0.107590 0.13493917 57 -0.797319  0.4286
  Correlation: 
                  (Intr) prdpl-
 predplacebo-base  0.081       
@@ -1686,7 +1624,7 @@ preddrug-placebo -0.010 -0.700
 
 Standardized Within-Group Residuals:
        Min         Q1        Med         Q3        Max 
--2.0446864 -0.4765135 -0.1975651  0.3145761  2.6532834 
+-2.0412058 -0.4766737 -0.1992579  0.3179334  2.6501959 
 
 Number of Observations: 118
 Number of Groups: 59 
@@ -2333,7 +2271,7 @@ Number of Groups: 50
 > house.glm0 <- glm(Freq ~ Infl*Type*Cont + Sat, family = poisson,
 +                   data = housing)
 > ## IGNORE_RDIFF_BEGIN
-> summary(house.glm0, cor = FALSE)
+> summary(house.glm0, correlation = FALSE)
 
 Call:
 glm(formula = Freq ~ Infl * Type * Cont + Sat, family = poisson, 
@@ -2394,7 +2332,7 @@ Cont:Sat  2   212.33 609.30   5.126   0.07708 .
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 > 
 > house.glm1 <- update(house.glm0, . ~ . + Sat*(Infl+Type+Cont))
-> summary(house.glm1, cor = FALSE)
+> summary(house.glm1, correlation = FALSE)
 
 Call:
 glm(formula = Freq ~ Infl + Type + Cont + Sat + Infl:Type + Infl:Cont + 
@@ -3144,7 +3082,7 @@ Pearson          14.07985  5 0.01511005
 > ### ** Examples
 > 
 > logtrans(Days ~ Age*Sex*Eth*Lrn, data = quine,
-+          alpha = seq(0.75, 6.5, len=20))
++          alpha = seq(0.75, 6.5, length.out = 20))
 > 
 > 
 > 
@@ -3248,6 +3186,7 @@ Correlations 0.806 0.745  cumulative % explained 26.87 51.71
 > plot(survfit(Surv(time, cens) ~ factor(temp), motors), conf.int = FALSE)
 > # fit Weibull model
 > motor.wei <- survreg(Surv(time, cens) ~ temp, motors)
+> ## IGNORE_RDIFF_BEGIN
 > summary(motor.wei)
 
 Call:
@@ -3262,9 +3201,10 @@ Scale= 0.334
 Weibull distribution
 Loglik(model)= -147.4   Loglik(intercept only)= -169.5
 	Chisq= 44.32 on 1 degrees of freedom, p= 2.8e-11 
-Number of Newton-Raphson Iterations: 7 
+Number of Newton-Raphson Iterations: 8 
 n= 40 
 
+> ## IGNORE_RDIFF_END
 > # and predict at 130C
 > unlist(predict(motor.wei, data.frame(temp=130), se.fit = TRUE))
    fit.1 se.fit.1 
@@ -3778,7 +3718,7 @@ Golden.rain  Marvellous     Victory
 > pet3.lme <- lme(Y ~ SG + VP + V10 + EP,
 +                 random = ~ 1 | No, data = Petrol)
 > pet3.lme <- update(pet3.lme, method = "ML")
-> pet4.lme <- update(pet3.lme, fixed = Y ~ V10 + EP)
+> pet4.lme <- update(pet3.lme, fixed. = Y ~ V10 + EP)
 > anova(pet4.lme, pet3.lme)
          Model df      AIC      BIC    logLik   Test L.Ratio p-value
 pet4.lme     1  5 149.6119 156.9406 -69.80594                       
@@ -3803,35 +3743,6 @@ detaching ‘package:nlme’
 > ### ** Examples
 > 
 > plot(mca(farms, abbrev = TRUE))
-> 
-> 
-> 
-> cleanEx()
-> nameEx("plot.profile")
-> ### * plot.profile
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: plot.profile
-> ### Title: Plotting Functions for 'profile' Objects
-> ### Aliases: plot.profile pairs.profile
-> ### Keywords: models hplot
-> 
-> ### ** Examples
-> 
-> ## see ?profile.glm for an example using glm fits.
-> 
-> ## a version of example(profile.nls) from R >= 2.8.0
-> fm1 <- nls(demand ~ SSasympOrig(Time, A, lrc), data = BOD)
-> pr1 <- profile(fm1, alpha = 0.1)
-> MASS:::plot.profile(pr1)
-> pairs(pr1) # a little odd since the parameters are highly correlated
-> 
-> ## an example from ?nls
-> x <- -(1:100)/10
-> y <- 100 + 10 * exp(x / 2) + rnorm(x)/10
-> nlmod <- nls(y ~  Const + A * exp(B * x), start=list(Const=100, A=10, B=1))
-> pairs(profile(nlmod))
 > 
 > 
 > 
@@ -4307,32 +4218,6 @@ Levels: c s v
 > 
 > 
 > 
-> cleanEx()
-> nameEx("profile.glm")
-> ### * profile.glm
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: profile.glm
-> ### Title: Method for Profiling glm Objects
-> ### Aliases: profile.glm
-> ### Keywords: regression models
-> 
-> ### ** Examples
-> 
-> options(contrasts = c("contr.treatment", "contr.poly"))
-> ldose <- rep(0:5, 2)
-> numdead <- c(1, 4, 9, 13, 18, 20, 0, 2, 6, 10, 12, 16)
-> sex <- factor(rep(c("M", "F"), c(6, 6)))
-> SF <- cbind(numdead, numalive = 20 - numdead)
-> budworm.lg <- glm(SF ~ sex*ldose, family = binomial)
-> pr1 <- profile(budworm.lg)
-> plot(pr1)
-> pairs(pr1)
-> 
-> 
-> 
-> base::options(contrasts = c(unordered = "contr.treatment",ordered = "contr.poly"))
 > cleanEx()
 > nameEx("qda")
 > ### * qda
@@ -5110,7 +4995,7 @@ Achieved convergence tolerance: 4.389e-06
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  2.167 0.113 2.441 0 0 
+Time elapsed:  2.033 0.107 2.175 0 0 
 > grDevices::dev.off()
 null device 
           1 

@@ -1,5 +1,5 @@
 
-                            AVAILABLE R RESOURCES
+                           AVAILABLE R RESOURCES
 
 1 FAQ
 *****
@@ -10,8 +10,8 @@ by Kurt Hornik <Kurt.Hornik@R-project.org> and can be found at the URL
      <https://CRAN.R-project.org/doc/FAQ/R-FAQ.html>
 
 A text version is in file 'FAQ' in this directory, and an HTML version is
-available as file 'doc/html/faq.html' and via the on-line help (on the index
-page given by 'help.start()').
+available as file 'doc/manual/R-FAQ.html' and via the on-line help (on the
+index page given by 'help.start()').
 
 2 Mailing lists
 ***************

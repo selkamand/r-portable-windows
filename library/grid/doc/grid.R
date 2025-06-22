@@ -1,7 +1,7 @@
 ### R code from vignette source 'grid.Rnw'
 
 ###################################################
-### code chunk number 1: grid.Rnw:31-37
+### code chunk number 1: grid.Rnw:33-39
 ###################################################
 library(grDevices)
 library(graphics) # for par
@@ -12,7 +12,7 @@ options(width = 60)
 
 
 ###################################################
-### code chunk number 2: grid.Rnw:79-80 (eval = FALSE)
+### code chunk number 2: grid.Rnw:81-82 (eval = FALSE)
 ###################################################
 ## viewport(x = 0.5, y = 0.5, width = 0.5, height = 0.25, angle=45)
 

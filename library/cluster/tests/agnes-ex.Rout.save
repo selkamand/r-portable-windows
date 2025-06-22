@@ -594,7 +594,7 @@ Available components:
 [1] "order"     "height"    "ac"        "merge"     "diss"      "call"     
 [7] "method"    "order.lab" "data"     
 > print  (ar3 <- agnes(ruspini, metric="manhattan", method = "flexible",
-+                      par.meth = 0.5))
++                      par.method = 0.5))
 Call:	 agnes(x = ruspini, metric = "manhattan", method = "flexible",      par.method = 0.5) 
 Agglomerative coefficient:  0.942387 
 Order of objects:

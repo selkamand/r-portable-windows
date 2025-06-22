@@ -128,8 +128,8 @@ stopifnot(
     all.equal(fixef(t1.fix.ML.nlme),
               c(lKe = -2.432512, lKa = 0.450163, lCl = -3.2144713), tol= 8e-6)
     ,
-    all.equal(sM4$tTable[,"Std.Error"],
-              c(lKe = 0.0640155, lKa = 0.196058, lCl = 0.0808379), tol = 5e-5)
+    all.equal(sM4$tTable[,"Std.Error"], # aarch64/linux gave 5.915e-5
+              c(lKe = 0.0640155, lKa = 0.196058, lCl = 0.0808379), tol = 1e-4)
     ,
     all.equal(aM4[,"F-value"],
               c(65.439, 9.09557, 1581.21), tol = 1e-4) # ATLAS had 7.86e-05

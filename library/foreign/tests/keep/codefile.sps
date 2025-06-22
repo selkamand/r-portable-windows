@@ -1,7 +1,7 @@
 SET DECIMAL=DOT.
 
 DATA LIST FILE= "datafile.dat"  free (",")
-ENCODING="Locale"
+ENCODING="UTF8"
 / X1 X2 * X3 (A8) 
   .
 

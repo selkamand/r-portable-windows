@@ -1,12 +1,12 @@
 Package: tcltk
-Version: 4.3.0
+Version: 4.5.1
 Priority: base
 Title: Tcl/Tk Interface
 Author: R Core Team
 Maintainer: R Core Team <do-use-Contact-address@r-project.org>
 Contact: R-help mailing list <r-help@r-project.org>
 Description: Interface and language bindings to Tcl/Tk GUI elements.
-License: Part of R 4.3.0
+License: Part of R 4.5.1
 Imports: utils
 NeedsCompilation: yes
-Built: R 4.3.0; x86_64-w64-mingw32; 2023-04-21 09:21:47 UTC; windows
+Built: R 4.5.1; x86_64-w64-mingw32; 2025-06-13 07:50:29 UTC; windows

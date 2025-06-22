@@ -70,7 +70,7 @@
 
 
 ###################################################
-### code chunk number 3: parallel.Rnw:530-535 (eval = FALSE)
+### code chunk number 3: parallel.Rnw:531-536 (eval = FALSE)
 ###################################################
 ## ## Restricts all elements of X to run on CPU 1 and 2.
 ## X <- list(1, 2, 3)
@@ -80,13 +80,13 @@
 
 
 ###################################################
-### code chunk number 4: parallel.Rnw:567-568 (eval = FALSE)
+### code chunk number 4: parallel.Rnw:568-569 (eval = FALSE)
 ###################################################
 ## library(parallel)
 
 
 ###################################################
-### code chunk number 5: parallel.Rnw:593-600 (eval = FALSE)
+### code chunk number 5: parallel.Rnw:594-601 (eval = FALSE)
 ###################################################
 ## library(boot)
 ## cd4.rg <- function(data, mle) MASS::mvrnorm(nrow(data), mle$m, mle$v)
@@ -98,7 +98,7 @@
 
 
 ###################################################
-### code chunk number 6: parallel.Rnw:605-615 (eval = FALSE)
+### code chunk number 6: parallel.Rnw:606-616 (eval = FALSE)
 ###################################################
 ## cd4.rg <- function(data, mle) MASS::mvrnorm(nrow(data), mle$m, mle$v)
 ## cd4.mle <- list(m = colMeans(cd4), v = var(cd4))
@@ -113,13 +113,13 @@
 
 
 ###################################################
-### code chunk number 7: parallel.Rnw:620-621 (eval = FALSE)
+### code chunk number 7: parallel.Rnw:621-622 (eval = FALSE)
 ###################################################
 ## do.call(c, lapply(seq_len(mc), run1))
 
 
 ###################################################
-### code chunk number 8: parallel.Rnw:625-640 (eval = FALSE)
+### code chunk number 8: parallel.Rnw:626-641 (eval = FALSE)
 ###################################################
 ## run1 <- function(...) {
 ##    library(boot)
@@ -139,7 +139,7 @@
 
 
 ###################################################
-### code chunk number 9: parallel.Rnw:650-663 (eval = FALSE)
+### code chunk number 9: parallel.Rnw:651-664 (eval = FALSE)
 ###################################################
 ## cl <- makeCluster(mc)
 ## cd4.rg <- function(data, mle) MASS::mvrnorm(nrow(data), mle$m, mle$v)
@@ -157,7 +157,7 @@
 
 
 ###################################################
-### code chunk number 10: parallel.Rnw:668-682 (eval = FALSE)
+### code chunk number 10: parallel.Rnw:669-683 (eval = FALSE)
 ###################################################
 ## R <- 999; M <- 999 ## we would like at least 999 each
 ## cd4.nest <- boot(cd4, nested.corr, R=R, stype="w", t0=corr(cd4), M=M)
@@ -176,7 +176,7 @@
 
 
 ###################################################
-### code chunk number 11: parallel.Rnw:687-695 (eval = FALSE)
+### code chunk number 11: parallel.Rnw:688-696 (eval = FALSE)
 ###################################################
 ## mc <- 9
 ## R <- 999; M <- 999; RR <- floor(R/mc)
@@ -189,7 +189,7 @@
 
 
 ###################################################
-### code chunk number 12: parallel.Rnw:709-720 (eval = FALSE)
+### code chunk number 12: parallel.Rnw:710-721 (eval = FALSE)
 ###################################################
 ## library(spatial)
 ## towns <- ppinit("towns.dat")
@@ -205,7 +205,7 @@
 
 
 ###################################################
-### code chunk number 13: parallel.Rnw:724-733 (eval = FALSE)
+### code chunk number 13: parallel.Rnw:725-734 (eval = FALSE)
 ###################################################
 ## run3 <- function(c) {
 ##     library(spatial)
@@ -219,7 +219,7 @@
 
 
 ###################################################
-### code chunk number 14: parallel.Rnw:737-741 (eval = FALSE)
+### code chunk number 14: parallel.Rnw:738-742 (eval = FALSE)
 ###################################################
 ## cl <- makeForkCluster(10)  # fork after the variables have been set up
 ## run4 <- function(c)  mean(replicate(R, tget(Strauss(69, c=c, r=3.5))))
@@ -228,14 +228,14 @@
 
 
 ###################################################
-### code chunk number 15: parallel.Rnw:744-746 (eval = FALSE)
+### code chunk number 15: parallel.Rnw:745-747 (eval = FALSE)
 ###################################################
 ## run4 <- function(c)  mean(replicate(R, tget(Strauss(69, c=c, r=3.5))))
 ## res <- c(0, unlist(mclapply(c[-1], run4, mc.cores = 10)))
 
 
 ###################################################
-### code chunk number 16: parallel.Rnw:777-811 (eval = FALSE)
+### code chunk number 16: parallel.Rnw:778-812 (eval = FALSE)
 ###################################################
 ## pkgs <- "<names of packages to be installed>"
 ## M <- 20 # number of parallel installs
@@ -274,7 +274,7 @@
 
 
 ###################################################
-### code chunk number 17: parallel.Rnw:824-841 (eval = FALSE)
+### code chunk number 17: parallel.Rnw:825-842 (eval = FALSE)
 ###################################################
 ##     fn <- function(r) statistic(data, i[r, ], ...)
 ##     RR <- sum(R)
@@ -296,7 +296,7 @@
 
 
 ###################################################
-### code chunk number 18: parallel.Rnw:844-845 (eval = FALSE)
+### code chunk number 18: parallel.Rnw:845-846 (eval = FALSE)
 ###################################################
 ##             list(...) # evaluate any promises
 

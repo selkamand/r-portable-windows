@@ -1,6 +1,8 @@
 #### Testing  cbind() & rbind() -- based on cbind2() & rbind2()
 ##   (where using 'cBind()' and 'rBind()' in  Matrix)
 
+## for R_DEFAULT_PACKAGES=NULL :
+library(utils)
 
 library(Matrix)
 
@@ -120,8 +122,8 @@ assert.EQ.mat(d4, rbind(diag(4),    0:3))
 assert.EQ.mat(m4, cbind(diag(-1:2), 0:3))
 stopifnot(identical(Matrix(cbind(diag(3),0)), cbind2(Diagonal(3),0)),
 	  is(d4, "sparseMatrix"), is(m4, "sparseMatrix"),
-	  identical(t(d4), cbind(Diagonal(4),     0:3)),
-	  identical(t(m4), rbind(Diagonal(x=-1:2), 0:3)))
+	  identical(.tCRT(d4), cbind(Diagonal(4),     0:3)),
+	  identical(.tCRT(m4), rbind(Diagonal(x=-1:2), 0:3)))
 showProc.time()
 
 ### --- Sparse Matrices ---
@@ -158,8 +160,9 @@ cbind(diag(nr), mT)
 stopifnot(identical(t(cbind(diag(nr),   mT)),
                       rbind(diag(nr), t(mT))))
 (cc <- cbind(mC, 0,7,0, diag(nr), 0))
-stopifnot(identical3(cc, cbind(mT, 0,7,0, diag(nr), 0),
-                     as( cbind( M, 0,7,0, diag(nr), 0), "CsparseMatrix")))
+stopifnot(identical3(cc,
+                     as(cbind(mT, 0, 7, 0, diag(nr), 0), "CsparseMatrix"),
+                     as(cbind( M, 0, 7, 0, diag(nr), 0), "CsparseMatrix")))
 
 cbind(mC, 1, 100*mC, 0, 0:2)
 cbind(mT, 1, 0, mT+10*mT, 0, 0:2)
@@ -200,8 +203,8 @@ s42 <- Matrix(z42 <- cbind2(rep(0:1,4), rep(1:0,4)),
               sparse=TRUE)
 (C86 <- rbind(1, 0, D5.1, 0))
 stopifnotValid(D5.1, "dgCMatrix")
-stopifnotValid(print(rbind2(Matrix(1:10, 2,5), D5)),   "dgCMatrix")
-stopifnotValid(print(cbind2(Matrix(10:1, 5,2), D5.1)), "dgeMatrix")
+stopifnotValid(print(rbind2(Matrix(1:10, 2,5), D5)),   "dgRMatrix")
+stopifnotValid(print(cbind2(Matrix(10:1, 5,2), D5.1)), "dgCMatrix")
 stopifnotValid(zz <- cbind2(z42, C86), "dgCMatrix")
 stopifnot(identical(zz, cbind2(s42, C86)))
 

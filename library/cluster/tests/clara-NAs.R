@@ -38,10 +38,29 @@ try(clara(rbind(NA,x), 2))
 
 x <- x[-33,]
 ## still had the ** dysta2() .. OUT" problem {no longer!}
-clara(x, 2, samples = 12, trace = 3)
+c2  <- clara(x, 2, samples = 12, trace = 3)
+c2. <- clara(x, 2, samples = 12, trace = 1, correct.d=TRUE)
+p2g <- pam(daisy(x,"gower"), k=2, trace = 3)
+if(FALSE) { ## disabled clara(*, "gower") for now (2023-11-30):
+c2g <- clara(x, 2, samples = 12, sampsize=nrow(x), trace = 2, metric = "gower", pamLike=TRUE, correct.d=TRUE)
+(icall <- which(names(c2) == "call"))
+## c2g and p2g  are *quite* different !
+table(c2g$clustering,
+      p2g$clustering)
+##    1  2
+## 1 40 32
+## 2 15  0  <<  not *one* pair of  {2,2}   !?!
+
+stopifnot(exprs = {
+    all.equal(c2[-icall], c2.[-icall])
+})
+}# no "gower" for now
 
 data(xclara)
 suppressWarnings(RNGversion("3.5.0")) # back compatibility of results
 set.seed(123)
 xclara[sample(nrow(xclara), 50),] <- NA
-try( clara(xclara, k = 3) ) #-> "nice" error message depicting first 12 missing obs
+try( clara(xclara, k = 3) ) #-> "nice" error message  {.. first 12 missing obs} :
+## Error in clara(xclara, k = 3) :
+##   50 observations (74,126,137,308,411,423,438,451,642,686,689,735 ...) have *only* NAs
+##     --> omit them for clustering!

@@ -1,13 +1,14 @@
 ### triangular packed
+
+## for R_DEFAULT_PACKAGES=NULL :
+library(stats)
+library(utils)
+
 library(Matrix)
 source(system.file("test-tools.R", package = "Matrix"))# identical3() etc
 
-cp6 <- chol(H6 <- Hilbert(6))
+cp6 <- as(Cholesky(H6 <- Hilbert(6), perm = FALSE), "dtrMatrix")
 (tp6 <- as(cp6, "packedMatrix"))
-stopifnot(exprs = {
-    grepl("^6 x 6 Matrix .*Cholesky\"", capture.output(cp6)[[1]])
-    grepl("^6 x 6 Matrix .*Cholesky\"", capture.output(tp6)[[1]])
-})
 round(tp6, 3)## round() is "Math2" group method
 1/tp6        ## "Arith" group : gives 'dgeMatrix'
 str(tp6)
@@ -22,8 +23,7 @@ stopifnot(as.matrix(tp - tp6 == tp6 - tp),
 stopifnot(validObject(tp6),
           all.equal(tp6 %*% diag(6), as(tp6, "generalMatrix")),
           validObject(tp6. <- diag(6) %*% tp6),
-          class((tt6 <- t(tp6))) == "pCholesky",
-          identical(t(tt6), tp6),
+          identical(t(tt6 <- t(tp6)), tp6),
           tp6@uplo == "U" && tt6@uplo == "L")
 
 all.equal(as(tp6.,"matrix"),

@@ -71,6 +71,7 @@ Sys.setenv              Set or Unset Environment Variables
 Sys.sleep               Suspend Execution for a Time Interval
 Sys.time                Get Current Date and Time
 Sys.which               Find Full Paths to Executables
+Tailcall                'Tailcall' and 'Exec'
 Trig                    Trigonometric Functions
 UseMethod               Class Methods
 Vectorize               Vectorize a Scalar Function
@@ -131,7 +132,7 @@ char.expand             Expand a String with Respect to a Target Table
 charToRaw               Convert to or from (Bit/Packed) Raw Vectors
 character               Character Vectors
 charmatch               Partial String Matching
-chartr                  Character Translation and Casefolding
+chartr                  Character Translation and Case Folding
 chkDots                 Warn About Extraneous Arguments in the "..." of
                         Its Caller
 chol                    The Cholesky Decomposition
@@ -150,7 +151,7 @@ connections             Functions to Manipulate Connections (Files,
 contributors            R Project Contributors
 copyright               Copyrights of Files Used to Build R
 cosh                    Hyperbolic Functions
-crossprod               Matrix Crossproduct
+crossprod               Matrix Cross-Product
 cumsum                  Cumulative Sums, Products, and Extremes
 curlGetHeaders          Retrieve Headers from URLs
 cut                     Convert Numeric to Factor
@@ -160,6 +161,7 @@ data.frame              Data Frames
 data.matrix             Convert a Data Frame to a Numeric Matrix
 date                    System Date and Time
 debug                   Debug a Function
+declare                 Declarations
 delayedAssign           Delay Evaluation and Promises
 deparse                 Expression Deparsing
 det                     Calculate the Determinant of a Matrix
@@ -244,7 +246,6 @@ integer                 Integer Vectors
 interaction             Compute Factor Interactions
 interactive             Is R Running Interactively?
 invisible               Change the Print Mode to Invisible
-is.R                    Are we using R, rather than S?
 is.finite               Finite, Infinite and NaN Numbers
 is.function             Is an Object of Type (Primitive) Function?
 is.language             Is an Object a Language Object?
@@ -284,7 +285,7 @@ make.names              Make Syntactically Valid Names
 make.unique             Make Character Strings Unique
 mapply                  Apply a Function to Multiple List or Vector
                         Arguments
-marginSums              Compute table margins
+marginSums              Compute Table Margins
 mat.or.vec              Create a Matrix or a Vector
 match                   Value Matching
 match.arg               Argument Verification Using Partial Matching
@@ -396,6 +397,7 @@ slice.index             Slice Indexes in an Array
 socketSelect            Wait on Socket Connections
 solve                   Solve a System of Equations
 sort                    Sorting or Ordering Vectors
+sort_by                 Sorting Vectors or Data Frames by Other Vectors
 source                  Read R Code from a File, a Connection or
                         Expressions
 split                   Divide into Groups and Reassemble
@@ -453,6 +455,7 @@ units                   Units
 unlink                  Delete Files and Directories
 unlist                  Flatten Lists
 unname                  Remove 'names' or 'dimnames'
+use                     Use Packages
 utf8ToInt               Convert Integer Vectors to or from
                         UTF-8-encoded Character Vectors
 validUTF8               Check if a Character Vector is Validly Encoded

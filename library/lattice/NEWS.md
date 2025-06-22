@@ -1,10 +1,28 @@
 
+
+# Changes in lattice 0.22
+
+* All high-level functions such as `xyplot()` now have `"data.frame"`
+  methods, where the formula can be provided either as the unnamed
+  second argument or as the named `formula` argument.
+
+* `larrows()`, `lpolygon()`, `lrect()` and `lsegments()` are now
+  generic functions.
+
+* Support for paths (via `grid.path()`, which supports holes) in
+  `lpolypath()`, as well as in `lpolygon()` using new `rule` argument.
+
+* The long-deprecated `parallel()` function is now defunct.
+
+
 # Changes in lattice 0.21
 
 * The color scheme used in the default graphical settings has been
   updated to use modern palettes, thanks to Achim Zeileis. It is also
   easier to customize the color palette in `standard.theme()`, via a
-  new function `custom_theme()`.
+  new function `custom_theme()`. The earlier behaviour can be
+  reinstated by setting `classic.theme("pdf")` as the theme; see
+  `help(classic.theme)` for details.
 
 * `panel.levelplot()` has a new `region.type = "countour"` argument
   allowing smooth region boundaries similar to `filled.contour()`.

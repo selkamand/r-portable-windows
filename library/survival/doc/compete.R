@@ -252,10 +252,10 @@ dim(mgus2)
 ###################################################
 # The PCM curves of the multi-state model
 pfit2 <- survfit(Surv(fgstart, fgstop, fgstatus) ~ sex,
-                data=pcmdat, weight=fgwt)
+                data=pcmdat, weights=fgwt)
 # The death curves of the multi-state model
 dfit2 <- survfit(Surv(fgstart, fgstop, fgstatus) ~ sex, 
-                  data=deathdat, weight=fgwt)
+                  data=deathdat, weights=fgwt)
 
 
 ###################################################
@@ -263,10 +263,10 @@ dfit2 <- survfit(Surv(fgstart, fgstop, fgstatus) ~ sex,
 ###################################################
 getOption("SweaveHooks")[["fig"]]()
 fgfit1 <- coxph(Surv(fgstart, fgstop, fgstatus) ~ sex, data=pcmdat,
-               weight= fgwt)
+               weights= fgwt)
 summary(fgfit1)
 fgfit2 <- coxph(Surv(fgstart, fgstop, fgstatus) ~ sex, data=deathdat,
-               weight= fgwt)
+               weights= fgwt)
 fgfit2
 
 mfit2 <- survfit(Surv(etime, event) ~ sex, data=mgus2) #reprise the AJ
@@ -291,10 +291,10 @@ rcurve <- survfit(cfitr, newdata=ndata)
 ### code chunk number 18: fg3
 ###################################################
 fgfit2a <- coxph(Surv(fgstart, fgstop, fgstatus) ~ age + sex + mspike,
-                 data=pcmdat, weight=fgwt)
+                 data=pcmdat, weights=fgwt)
 
 fgfit2b <-  coxph(Surv(fgstart, fgstop, fgstatus) ~ age + sex + mspike,
-                 data=deathdat, weight=fgwt)
+                 data=deathdat, weights=fgwt)
 round(rbind(PCM= coef(fgfit2a), death=coef(fgfit2b)), 3)
 
 

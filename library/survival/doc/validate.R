@@ -27,7 +27,7 @@ temp
 
 
 ###################################################
-### code chunk number 3: validate.Rnw:190-213
+### code chunk number 3: validate.Rnw:186-209
 ###################################################
 iter <- matrix(0, nrow=6, ncol=4,
                dimnames=list(paste("iter", 0:5),

@@ -2,6 +2,7 @@ utils-package	utils-package
 $.person	person
 .AtNames	rcompgen
 .AtNames.default	rcompgen
+.checkHT	head
 .DollarNames	rcompgen
 .DollarNames.default	rcompgen
 .DollarNames.environment	rcompgen

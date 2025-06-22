@@ -1,14 +1,16 @@
 ## -*- R -*-
-## FIXME: Change to using 'bibentry' see e.g., .../copula/inst/CITATION !
-
-citHeader("To cite the R package 'cluster' in publications use:")
 
 PKG <- "cluster"
+citHeader(paste("To cite the R package ",PKG," in publications use:"))
+
+if(!exists("meta") || is.null(meta)) meta <- packageDescription(PKG)
+stopifnot(meta$Package == PKG)
+
 year <- sub(".*(2[[:digit:]]{3})-.*", "\\1", meta$Date)
 vers <- paste("R package version", meta$Version)
 url <- paste0("https://CRAN.R-project.org/package=", PKG)
 
-citEntry(entry	= "Manual",
+bibentry(bibtype = "Manual",
 	 title	= "cluster: Cluster Analysis Basics and Extensions",
 	 author = c(
          person("Martin", "Maechler", email="maechler@stat.math.ethz.ch",
@@ -22,7 +24,7 @@ citEntry(entry	= "Manual",
 	 year = year,
          url = url,
 	 note = paste(vers,"---",
-	 "For new features, see the 'Changelog' file (in the package source)"),
+	 "For new features, see the 'NEWS' and the 'Changelog' file in the package source)"),
 ## FIXME:  rather give the URL to the manual on CRAN ???
 ##	   url = "http://stat.ethz.ch/CRAN/src/contrib/........",
 	 textVersion = paste0(

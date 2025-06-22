@@ -91,13 +91,13 @@ cfit4 <- coxph(Surv(time, status) ~ tt(ph.ecog), lung,
 aeq(1/cfit4$var, cfun(fit4))
 
 # Case weights
-fit5 <- concordance(Surv(time, status) ~ x, tdata, weight=wt, reverse=TRUE)
+fit5 <- concordance(Surv(time, status) ~ x, tdata, weights=wt, reverse=TRUE)
 fit6 <- concordance(Surv(time, status) ~x, tdata[rep(1:11,tdata$wt),])
 aeq(addxy(fit5$count), with(tdata, allpair(x, time, status, wt)))
 aeq(fit5$count[1:4], c(70, 91, 7, 0))  # checked by hand
 aeq(fit5$count[1:3], fit6$count[c(2,1,3)])  #spurious "tied on time" values, ignore
 aeq(fit5$std, fit6$std)
-cfit5 <- coxph(Surv(time, status) ~ tt(x), tdata, weight=wt, 
+cfit5 <- coxph(Surv(time, status) ~ tt(x), tdata, weights=wt, 
                iter=0, method='breslow', tt=grank2)
 cfit6 <- coxph(Surv(time, status) ~ tt(x), tdata[rep(1:11,tdata$wt),], 
                iter=0, method='breslow', tt=grank)
@@ -108,7 +108,7 @@ aeq(cfit5$var, cfit6$var)
 fit7 <- concordance(Surv(rep(0,11), time, status) ~ x, tdata)
 aeq(fit7$count, fit$count)
 aeq(fit7$std.err, fit$std.err)
-fit7 <- concordance(Surv(rep(0,11), time, status) ~ x, tdata, weight=wt)
+fit7 <- concordance(Surv(rep(0,11), time, status) ~ x, tdata, weights=wt)
 aeq(fit5$count, fit7$count[c(2,1,3:5)])  #one reversed, one not
 
 # Multiple intervals for some, but same risk sets as tdata
@@ -119,11 +119,11 @@ tdata2 <- data.frame(time1=c(0,3, 5,  6,7,   0,  4,17,  7,  0,16,  2,  0,
                      status=c(0,1, 1, 0,0,  1,  0,1, 0, 0,1, 1, 0, 0,1, 0),
                      x = c(1,1, 6, 2,2, 7, 3,3, 7, 3,3, 8, 4, 4,4, 5),
                      wt= c(1,1, 2, 3,3, 2, 1,1, 2, 3,3, 4, 3, 2,2, 1))
-fit8 <- concordance(Surv(time1, time2, status) ~x, tdata2, weight=wt,
+fit8 <- concordance(Surv(time1, time2, status) ~x, tdata2, weights=wt,
                     reverse=TRUE)
 aeq(fit5$count, fit8$count)
 aeq(fit5$std.err, fit8$std.err)
-cfit8 <- coxph(Surv(time1, time2, status) ~ tt(x), tdata2, weight=wt, 
+cfit8 <- coxph(Surv(time1, time2, status) ~ tt(x), tdata2, weights=wt, 
                iter=0, method='breslow', tt=grank2)
 aeq(1/cfit8$var, cfun(fit8))
 
@@ -135,6 +135,6 @@ tdata3 <- data.frame(time1=c(tdata2$time1, rep(0, nrow(lung))),
                      wt= c(tdata2$wt, rep(1, nrow(lung))),
                      grp=rep(1:2, c(nrow(tdata2), nrow(lung))))
 fit9 <- concordance(Surv(time1, time2, status) ~x + strata(grp),
-                        data=tdata3, weight=wt, reverse=TRUE)
+                        data=tdata3, weights=wt, reverse=TRUE)
 aeq(fit9$count[1,], fit5$count)
 aeq(fit9$count[2,], fit4$count)

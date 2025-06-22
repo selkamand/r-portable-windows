@@ -1,27 +1,37 @@
 library(survival)
 aeq <- function(x,y) all.equal(as.vector(x), as.vector(y))
 # One more test on coxph survival curves, to test out the individual
-#  option.  First fit a model with a time dependent covariate
+#  option.  First fit a model with a time dependent covariate.
+# This is test data 2 of section 4 of the validation vignette (appendix E2 of
+#  Therneau and Grambsch), i.e. all the results are known in closed form.
 #
 test2 <- data.frame(start=c(1, 2, 5, 2, 1, 7, 3, 4, 8, 8),
                     stop =c(2, 3, 6, 7, 8, 9, 9, 9,14,17),
                     event=c(1, 1, 1, 1, 1, 1, 1, 0, 0, 0),
                     x    =c(1, 0, 0, 1, 0, 1, 1, 1, 0, 0) )
 
-# True hazard function, from the validation document
-lambda <- function(beta, x=0, method='efron') {
+# True hazard function, and components of the variance
+lambda <- function(beta, x=0, method="efron") {
+    time <- c(2,3,6,7,8,9)
     r <- exp(beta)
     lambda <- c(1/(r+1), 1/(r+2), 1/(3*r +2), 1/(3*r+1),
                 1/(3*r+1), 1/(3*r+2) + 1/(2*r +2))
-    if (method == 'breslow') lambda[9] <- 2/(3*r +2)
-    list(time=c(2,3,6,7,8,9), lambda=lambda)
+    xbar <- c(r/(r+1), r/(r+2), 3*r/(3*r +2), 3*r/(3*r+1),
+               3*r/(3*r+1), (1.5*r)/(3*r +2) + r/(2*r+2))
+
+    if (method == "breslow") {
+        lambda[6] <- 2/(3*r +2)
+        xbar[6] <- 3*r/(3*r+2)
+    }
+    
+    list(time=time, lambda=lambda, xbar=xbar)
     }
 
 fit <- coxph(Surv(start, stop, event) ~x, test2)
 # A curve for someone who never changes
 surv1 <-survfit(fit, newdata=list(x=0), censor=FALSE)
 
-true <- lambda(fit$coef, 0)
+true <- lambda(fit$coefficients, 0)
 
 aeq(true$time, surv1$time)
 aeq(-log(surv1$surv), cumsum(true$lambda))
@@ -31,7 +41,7 @@ data2 <- data.frame(start=c(0, 4, 9, 11), stop=c(4, 9, 11, 17),
                       event=c(0,0,0,0), x=c(0,0,0,0), patn=c(1,1,1,1))
 surv2 <- survfit(fit, newdata=data2, id=patn, censor=FALSE)
 aeq(surv2$surv, surv1$surv)
-
+aeq(surv2$std.err, surv1$std.err)
 
 #
 # Now a more complex data set with multiple strata
@@ -48,13 +58,13 @@ test3 <- data.frame(start=c(1, 2, 5, 2, 1, 7, 3, 4, 8, 8,
 
 fit2 <- coxph(Surv(start, stop, event) ~ x + strata(grp), test3)
 
-# The above tests show the program works for a simple case, use it to
+# The fit1 tests show the program works for a simple case, use it to
 #  get a true baseline for strata 2
 fit2b <- coxph(Surv(start, stop, event) ~x, test3,
-               subset=(grp=='b'), init=fit2$coef, iter=0)
+               subset=(grp=='b'), init=fit2$coefficients, iter=0)
 temp <- survfit(fit2b,  newdata=list(x=0), censor=F)
-true2 <- list(time=temp$time, lambda=diff(c(0, -log(temp$surv))))
-true1 <- lambda(fit2$coef, x=0)
+true2 <- list(time=temp$time, lambda=diff(c(0, temp$cumhaz)))
+true1 <- lambda(fit2$coefficients, x=0)
 
 # Separate strata, one value
 surv3 <- survfit(fit2, list(x=0), censor=FALSE)
@@ -88,11 +98,11 @@ data5 <- data.frame(start=c(0,5,9,11,
 surv5 <- survfit(fit2, newdata=data5, censor=FALSE, id=subject)
 
 aeq(surv5[1]$time, c(2,3,5,6,7,8))  #surv1 has 2, 3, 6, 7, 8, 9
-aeq(surv5[1]$surv, surv3[1]$surv ^ exp(fit2$coef))
+aeq(surv5[1]$surv, surv3[1]$surv ^ exp(fit2$coefficients))
 
-tlam <- c(true1$lambda[1:2]* exp(fit2$coef * data5$x[5]),
-          true1$lambda[3:5]* exp(fit2$coef * data5$x[6]),      
-          true2$lambda[3:4]* exp(fit2$coef * data5$x[7]))
+tlam <- c(true1$lambda[1:2]* exp(fit2$coefficients * data5$x[5]),
+          true1$lambda[3:5]* exp(fit2$coefficients * data5$x[6]),      
+          true2$lambda[3:4]* exp(fit2$coefficients * data5$x[7]))
 aeq(-log(surv5[2]$surv), cumsum(tlam))
 
                           

@@ -22,7 +22,7 @@ This repo contains a portable version of R (normal R installed with no registry 
   * `{path_to_repo}/r-portable-windows/library`
 
 ### Current R Version
-R 4.3.0
+R 4.5.1
 
 ### How do I install packages?
 

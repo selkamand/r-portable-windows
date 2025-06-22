@@ -137,3 +137,23 @@ stopifnot(is.array(logL), length(d <- dim(logL)) == 3, d == c(3,2,2),
               c(14.563 , 2.86712, 1.00026, 12.6749, 1.1615,-0.602989,
                 16.2301, 2.95877, 2.12854, 14.3586, 1.2534, 0.582263), tol=8e-6)
 )
+
+## PR#17955 and PR#18433
+makeLimitWarningsHandler <- function (limit = 10) {
+    nWarn <- 0L
+    function (w)
+        if ((nWarn <<- nWarn + 1L) > limit)
+            stop("caught too many warnings")
+}
+orthSim <- withCallingHandlers(
+    simulate.lme(
+        list(fixed = distance ~ age, data = Orthodont, random = ~ 1 | Subject),
+        nsim = 150, seed = 38, m2 = list(random = ~ age | Subject),
+        method = "ML", useGen = FALSE
+    )
+    ## infinite looping under OpenBLAS (even serial), where optif9() called
+    ## internal_loglik() with very large pars (849.665, 64.3347, 54954.7),
+    ## producing an NaN result followed by endless warnings:
+    ##   Singular precision matrix in level -1, block 1
+  , warning = makeLimitWarningsHandler())
+stopifnot(inherits(orthSim, "simulate.lme"))

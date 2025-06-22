@@ -1,18 +1,22 @@
+## for R_DEFAULT_PACKAGES=NULL :
+library(stats)
+library(utils)
+
 library(Matrix)
 
 ## This is example(sp....) -- much extended
 
-mEQ <- function(x,y, ...) {
+mEQ <- function(x, y, check.attributes = NA, ...) {
     ## first drop columns from y  which are all 0 :
     if(any(i0 <- colSums(abs(x)) == 0)) {
         message(gettextf("x had  %d  zero-columns", sum(i0)))
-        x <- x[, !i0, drop=FALSE]
+        x <- x[, !i0, drop = FALSE]
     }
     if(any(i0 <- colSums(abs(y)) == 0)) {
         message(gettextf("y had  %d  zero-columns", sum(i0)))
-        y <- y[, !i0, drop=FALSE]
+        y <- y[, !i0, drop = FALSE]
     }
-    isTRUE(all.equal(x,y, tolerance =0, ...))
+    isTRUE(all.equal(x, y, tolerance = 0, check.attributes = check.attributes, ...))
 }
 
 ##' Is  sparse.model.matrix() giving the "same" as dense model.matrix() ?
@@ -109,7 +113,8 @@ stopifnot(mEQ(sm , mm), ## (both have a zero column)
 	  mEQ(sm., mm)) ## << that's ok, since mm has all-0 column !
 ## look at this :
 all(mm[,"d5"] == 0)  ## !!!! --- correct: a column of all 0  <--> dropped level!
-stopifnot(all.equal(sm., mm[, - which("d5" == colnames(mm))])) ## indeed !
+stopifnot(all.equal(sm., mm[, - which("d5" == colnames(mm))], ## indeed !
+                    check.attributes = NA))
 ## i.e., sm has just dropped an all zero column --- which it should!
 
 stopifnot(isEQsparseDense(~ 1 + sin(x) + b*c + a:x, dd4, showFactors=TRUE))
@@ -206,7 +211,7 @@ CidS <- lapply(df, contrasts, contrasts=FALSE, sparse=TRUE)
 X2  <- sparse.model.matrix(~ . -1, data = df, contrasts.arg = Cid)
 X2S <- sparse.model.matrix(~ . -1, data = df, contrasts.arg = CidS)
 X2
-stopifnot(all.equal(X2, X2S, tolerance=0))
+stopifnot(all.equal(X2, X2S, tolerance = 0, check.attributes = NA))
 ## X2S was missing the last column ('b6') in Matrix <= 1.x-y
 
 

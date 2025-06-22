@@ -1,7 +1,7 @@
 
-R Under development (unstable) (2020-03-24 r78051) -- "Unsuffered Consequences"
-Copyright (C) 2020 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin19.3.0 (64-bit)
+R Under development (unstable) (2025-03-14 r87973) -- "Unsuffered Consequences"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -308,8 +308,9 @@ List of 20
 > 
 > 
 > ## after "long label patch":
+> ## (from <https://stat.ethz.ch/pipermail/r-devel/2008-July/050165.html>)
 > 
-> invisible(Sys.setlocale (locale="C")) ## to resolve locale problem
+> ##invisible(Sys.setlocale (locale="C")) ## to resolve locale problem  # ??
 > ldat <- read.spss("spss_long.sav", to.data.frame=TRUE)
 > ldat
   variable1 variable2
@@ -344,7 +345,7 @@ Warning messages:
 5: In read.spss(file = sav, to.data.frame = FALSE, reencode = "UTF-8") :
   Undeclared level(s) 0, 3 added in variable: factor_n_undeclared2
 6: In read.spss(file = sav, to.data.frame = FALSE, reencode = "UTF-8") :
-  Undeclared level(s) .. added in variable: factor_s_duplicated
+  Undeclared level(s) ä, ö added in variable: factor_s_duplicated
 7: In read.spss(file = sav, to.data.frame = FALSE, reencode = "UTF-8") :
   Duplicated levels in factor factor_s_duplicated: A
 8: In read.spss(file = sav, to.data.frame = FALSE, reencode = "UTF-8") :
@@ -364,7 +365,7 @@ List of 17
  $ STRIN0                   : chr [1:5] ", my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents. I s"| __truncated__ "                                                                                                               "| __truncated__ "r place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of"| __truncated__ "                                                                                                               "| __truncated__ ...
  $ string_miss              : chr [1:5] "a       " "c       " "b       " "g       " ...
  $ factor_s_coded_miss      : Factor w/ 3 levels "female","male",..: 2 1 NA 2 3
- $ factor_s_duplicated      : Factor w/ 4 levels "..","A","A_duplicated_b",..: 2 1 1 NA NA
+ $ factor_s_duplicated      : Factor w/ 5 levels "A","A_duplicated_b",..: 1 5 4 NA NA
  $ factor_s_undeclared      : Factor w/ 3 levels "no","perhaps",..: 3 1 2 NA 3
  $ factor_s_undeclared2     : Factor w/ 2 levels "no","yes": NA NA NA NA NA
  $ date                     : num [1:5] 1.27e+10 1.37e+10 1.37e+10 NA NA
@@ -374,7 +375,7 @@ List of 17
   ..$ factor_numeric           : Named chr [1:5] "5" "4" "3" "2" ...
   .. ..- attr(*, "names")= chr [1:5] "strongly agree" "agree" "neither agree nor disagree" "disagree" ...
   ..$ factor_n_long_value_label: Named chr [1:2] "2" "1"
-  .. ..- attr(*, "names")= chr [1:2] "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ! \" # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _ ` { | } ~ ..." "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnop"
+  .. ..- attr(*, "names")= chr [1:2] "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ! \" # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _ ` { | } ~ €" "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnop"
   ..$ factor_n_coded_miss      : Named chr [1:6] "99" "5" "4" "3" ...
   .. ..- attr(*, "names")= chr [1:6] "no answer" "strongly agree" "agree" "neither agree nor disagree" ...
   ..$ factor_n_duplicated      : Named chr [1:3] "3" "2" "1"
@@ -453,7 +454,7 @@ Warning messages:
 4: In read.spss(file = sav, to.data.frame = TRUE, reencode = "UTF-8",  :
   Undeclared level(s) 0, 3 added in variable: factor_n_undeclared2
 5: In read.spss(file = sav, to.data.frame = TRUE, reencode = "UTF-8",  :
-  Undeclared level(s) .. added in variable: factor_s_duplicated
+  Undeclared level(s) ä, ö added in variable: factor_s_duplicated
 6: In read.spss(file = sav, to.data.frame = TRUE, reencode = "UTF-8",  :
   Duplicated levels in factor factor_s_duplicated: A
 7: In read.spss(file = sav, to.data.frame = TRUE, reencode = "UTF-8",  :
@@ -473,7 +474,7 @@ Warning messages:
  $ STRIN0                   : Factor w/ 4 levels "                                                                                                               "| __truncated__,..: 2 1 4 1 3
  $ string_miss              : Factor w/ 4 levels "        ","a       ",..: 2 3 NA 4 1
  $ factor_s_coded_miss      : Factor w/ 3 levels "female","male",..: 2 1 NA 2 3
- $ factor_s_duplicated      : Factor w/ 4 levels "..","A","A_duplicated_b",..: 2 1 1 NA NA
+ $ factor_s_duplicated      : Factor w/ 5 levels "A","A_duplicated_b",..: 1 5 4 NA NA
  $ factor_s_undeclared      : Factor w/ 3 levels "no","perhaps",..: 3 1 2 NA 3
  $ factor_s_undeclared2     : Factor w/ 2 levels "no","yes": NA NA NA NA NA
  $ date                     : num  1.27e+10 1.37e+10 1.37e+10 NA NA
@@ -493,7 +494,7 @@ Warning messages:
 4: In read.spss(file = sav, to.data.frame = TRUE, add.undeclared.levels = "append",  :
   Undeclared level(s) 0, 3 added in variable: factor_n_undeclared2
 5: In read.spss(file = sav, to.data.frame = TRUE, add.undeclared.levels = "append",  :
-  Undeclared level(s) .. added in variable: factor_s_duplicated
+  Undeclared level(s) ä, ö added in variable: factor_s_duplicated
 6: In read.spss(file = sav, to.data.frame = TRUE, add.undeclared.levels = "append",  :
   Duplicated levels in factor factor_s_duplicated: A
 7: In read.spss(file = sav, to.data.frame = TRUE, add.undeclared.levels = "append",  :
@@ -533,7 +534,7 @@ Warning messages:
 4: In read.spss(file = sav, to.data.frame = TRUE, reencode = "UTF-8") :
   Undeclared level(s) 0, 3 added in variable: factor_n_undeclared2
 5: In read.spss(file = sav, to.data.frame = TRUE, reencode = "UTF-8") :
-  Undeclared level(s) .. added in variable: factor_s_duplicated
+  Undeclared level(s) ä, ö added in variable: factor_s_duplicated
 6: In read.spss(file = sav, to.data.frame = TRUE, reencode = "UTF-8") :
   Duplicated levels in factor factor_s_duplicated: A
 7: In read.spss(file = sav, to.data.frame = TRUE, reencode = "UTF-8") :
@@ -552,7 +553,7 @@ Warning messages:
 4: In read.spss(file = sav, to.data.frame = TRUE, duplicated.value.labels = "condense",  :
   Undeclared level(s) 0, 3 added in variable: factor_n_undeclared2
 5: In read.spss(file = sav, to.data.frame = TRUE, duplicated.value.labels = "condense",  :
-  Undeclared level(s) .. added in variable: factor_s_duplicated
+  Undeclared level(s) ä, ö added in variable: factor_s_duplicated
 6: In read.spss(file = sav, to.data.frame = TRUE, duplicated.value.labels = "condense",  :
   Duplicated levels in factor factor_s_duplicated: A
 7: In read.spss(file = sav, to.data.frame = TRUE, duplicated.value.labels = "condense",  :
@@ -584,7 +585,7 @@ Warning messages:
 4: In read.spss(file = sav, to.data.frame = TRUE, stringsAsFactors = FALSE,  :
   Undeclared level(s) 0, 3 added in variable: factor_n_undeclared2
 5: In read.spss(file = sav, to.data.frame = TRUE, stringsAsFactors = FALSE,  :
-  Undeclared level(s) .. added in variable: factor_s_duplicated
+  Undeclared level(s) ä, ö added in variable: factor_s_duplicated
 6: In read.spss(file = sav, to.data.frame = TRUE, stringsAsFactors = FALSE,  :
   Duplicated levels in factor factor_s_duplicated: A
 7: In read.spss(file = sav, to.data.frame = TRUE, stringsAsFactors = FALSE,  :
@@ -605,9 +606,9 @@ A wonderful serenity has taken possession of my entire soul, like
  language ocean. A small river named Duden flows by thei 
   
  abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ 
- !".. $%& /() =?* '<> #|; ....~ @`.. ...... ...... {} abc def ghi jkl 
- mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ !".. $%& /() =?* 
- '<> #|; ....~ @`.. ...... ...... {} abc def ghi j 
+ !"§ $%& /() =?* '<> #|; ²³~ @`´ ©«» ¤¼× {} abc def ghi jkl mno pqrs 
+ tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ !"§ $%& /() =?* '<> #|; 
+ ²³~ @`´ ©«» ¤¼× {} abc def ghi j 
 > ## second part: x$STRIN0:
 > cat.long.string(x$STRIN0)
 , my dear friend, so absorbed in the exquisite sense of mere tranquil 
@@ -619,10 +620,10 @@ A wonderful serenity has taken possession of my entire soul, like
  paradisematic country, in which roasted parts of sentences fly into 
  your mouth. 
   
- kl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ !".. $%& /() 
- =?* '<> #|; ....~ @`.. ...... ...... {} abc def ghi jkl mno pqrs tuv 
- wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ !".. $%& /() =?* '<> #|; ....~ 
- @`.. ...... ...... {} abc def ghi jkl 
+ kl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ !"§ $%& /() 
+ =?* '<> #|; ²³~ @`´ ©«» ¤¼× {} abc def ghi jkl mno pqrs tuv wxyz ABC 
+ DEF GHI JKL MNO PQRS TUV WXYZ !"§ $%& /() =?* '<> #|; ²³~ @`´ ©«» ¤¼× 
+ {} abc def ghi jkl 
 > ## complete long string:
 > long.string <- apply(x[,c("string_500", "STRIN0")], 1, paste, collapse="")
 > cat.long.string(long.string)
@@ -643,14 +644,13 @@ A wonderful serenity has taken possession of my entire soul, like
  country, in which roasted parts of sentences fly into your mouth. 
   
  abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ 
- !".. $%& /() =?* '<> #|; ....~ @`.. ...... ...... {} abc def ghi jkl 
- mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ !".. $%& /() =?* 
- '<> #|; ....~ @`.. ...... ...... {} abc def ghi jkl mno pqrs tuv wxyz 
- ABC DEF GHI JKL MNO PQRS TUV WXYZ !".. $%& /() =?* '<> #|; ....~ @`.. 
- ...... ...... {} abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL 
- MNO PQRS TUV WXYZ !".. $%& /() =?* '<> #|; ....~ @`.. ...... ...... 
- {} abc def ghi jkl 
+ !"§ $%& /() =?* '<> #|; ²³~ @`´ ©«» ¤¼× {} abc def ghi jkl mno pqrs 
+ tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ !"§ $%& /() =?* '<> #|; 
+ ²³~ @`´ ©«» ¤¼× {} abc def ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL 
+ MNO PQRS TUV WXYZ !"§ $%& /() =?* '<> #|; ²³~ @`´ ©«» ¤¼× {} abc def 
+ ghi jkl mno pqrs tuv wxyz ABC DEF GHI JKL MNO PQRS TUV WXYZ !"§ $%& 
+ /() =?* '<> #|; ²³~ @`´ ©«» ¤¼× {} abc def ghi jkl 
 > 
 > proc.time()
    user  system elapsed 
-  0.345   0.055   0.391 
+  0.275   0.025   0.291 

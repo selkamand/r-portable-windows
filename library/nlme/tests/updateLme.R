@@ -1,5 +1,7 @@
 library(nlme)
 
+if (requireNamespace("MASS")) {
+
 ## Example 1  --- was  ./update.R  ---
 data(petrol, package = 'MASS')
 Petrol <- petrol
@@ -20,6 +22,9 @@ stopifnot(
     all.equal(as.numeric(vc3[,"StdDev"]),
 	      c(0.00029397, 9.69657845), tol=1e-6)
 )
+
+}
+
 
 ## Example 2  ---
 data(Assay)

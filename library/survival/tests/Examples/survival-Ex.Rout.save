@@ -1,7 +1,7 @@
 
-R Under development (unstable) (2023-01-30 r83727) -- "Unsuffered Consequences"
-Copyright (C) 2023 The R Foundation for Statistical Computing
-Platform: x86_64-pc-linux-gnu (64-bit)
+R Under development (unstable) (2024-08-21 r87038) -- "Unsuffered Consequences"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -276,6 +276,37 @@ $`factor(ph.ecog)`
 > pfit <- glm(py ~ ph.ecog, data=lung, family=gaussian(link=blogit()))
 > # For each +1 change in performance score, the odds of 2 year survival
 > #  are multiplied by 1/2  = exp of the coefficient.
+> 
+> 
+> 
+> cleanEx()
+> nameEx("brier")
+> ### * brier
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: brier
+> ### Title: Compute the Brier score for a Cox model
+> ### Aliases: brier
+> ### Keywords: survival
+> 
+> ### ** Examples
+> 
+> cfit <- coxph(Surv(rtime, recur) ~ age + meno + size + pmin(nodes,11), 
++               data= rotterdam)
+> round(cfit$concordance["concordance"], 3)  # some predictive power
+concordance 
+      0.675 
+> brier(cfit, times=c(4,6)*365.25)   # values at 4 and 6 years
+$rsquared
+[1] 0.1501931 0.1514488
+
+$brier
+[1] 0.1952731 0.2097106
+
+$times
+[1] 1461.0 2191.5
+
 > 
 > 
 > 
@@ -903,6 +934,30 @@ n= 227, number of events= 164
 > 
 > 
 > cleanEx()
+> nameEx("hoel")
+> ### * hoel
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: hoel
+> ### Title: Mouse cancer data
+> ### Aliases: hoel
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> hsurv <- survfit(Surv(days, outcome) ~ trt, data = hoel, id= id)
+> plot(hsurv, lty=1:2, col=rep(1:3, each=2), lwd=2, xscale=30.5,
++       xlab="Months", ylab= "Death")
+> legend("topleft", c("Lymphoma control", "Lymphoma germ free",
++                     "Sarcoma control", "Sarcoma germ free",
++                     "Other control", "Other germ free"),
++        col=rep(1:3, each=2), lty=1:2, lwd=2, bty='n')
+> hfit <- coxph(Surv(days, outcome) ~ trt, data= hoel, id = id)
+> 
+> 
+> 
+> cleanEx()
 > nameEx("is.ratetable")
 > ### * is.ratetable
 > 
@@ -1019,13 +1074,13 @@ NULL
 Call: survfit(formula = Surv(start, stop, event) ~ sex, data = mgus1, 
     subset = (enum == 1), id = id)
 
-                    n nevent   rmean*
-sex=female, (s0)  104      0 5762.379
-sex=male, (s0)    137      0 4543.293
-sex=female, pcm   104     33 2881.500
-sex=male, pcm     137     31 2478.026
-sex=female, death 104     63 5681.121
-sex=male, death   137    100 7303.682
+                    n nevent    rmean se(rmean)*
+sex=female, (s0)  104      0 5762.379   372.6367
+sex=male, (s0)    137      0 4543.293   315.1668
+sex=female, pcm   104     33 2881.500   400.8899
+sex=male, pcm     137     31 2478.026   397.9675
+sex=female, death 104     63 5681.121   462.1850
+sex=male, death   137    100 7303.682   452.9533
    *restricted mean time in state (max time = 14325 )
 > 
 > plot(sfit, xscale=365.25, lty=c(2,2,1,1), col=c(1,2,1,2),
@@ -1075,14 +1130,16 @@ sex=male, death   137    100 7303.682
 > 
 > ### ** Examples
 > 
-> coxph(Surv(futime, death) ~ trt, data=myeloid)
+> coxph(Surv(futime, death) ~ trt + flt3, data=myeloid)
 Call:
-coxph(formula = Surv(futime, death) ~ trt, data = myeloid)
+coxph(formula = Surv(futime, death) ~ trt + flt3, data = myeloid)
 
-        coef exp(coef) se(coef)      z       p
-trtB -0.3457    0.7077   0.1122 -3.081 0.00206
+         coef exp(coef) se(coef)      z        p
+trtB  -0.3534    0.7023   0.1122 -3.149  0.00164
+flt3B  0.4114    1.5089   0.1587  2.593  0.00952
+flt3C  0.7878    2.1985   0.1656  4.758 1.96e-06
 
-Likelihood ratio test=9.52  on 1 df, p=0.002029
+Likelihood ratio test=34.04  on 3 df, p=1.94e-07
 n= 646, number of events= 320 
 > # See the mstate vignette for a more complete analysis
 > 
@@ -2355,8 +2412,8 @@ ph.ecog=3  NA  NA  NA
 > 
 > ### Name: reliability
 > ### Title: Reliability data sets
-> ### Aliases: reliability capacitor cracks genfan ifluid imotor turbine
-> ###   valveSeat
+> ### Aliases: reliability braking capacitor cracks genfan ifluid imotor
+> ###   turbine valveSeat
 > ### Keywords: datasets
 > 
 > ### ** Examples
@@ -2375,6 +2432,29 @@ Scale= 0.3638092
 Loglik(model)= -244.2   Loglik(intercept only)= -254.5
 	Chisq= 20.57 on 2 degrees of freedom, p= 3.41e-05 
 n= 64 
+> 
+> # Figure 16.7 of Meeker, cumulative replacement of locomotive braking
+> #  grids
+> gfit <- survfit(Surv(day1, day2, status) ~ batch, braking, id= locomotive)
+> plot(gfit, cumhaz=TRUE, col=1:2, xscale=30.5, conf.time= c(6,12,18)*30.5, 
++      xlab="Locomotive Age in Months", ylab="Mean cumulative number replacements")
+> 
+> # Replacement of valve seats.  In this case the cumulative hazard is the 
+> #  natural target, an estimate of the number of replacements by a given time
+> #  (known as the cumulative mean function = CMF in relability).
+> # When two valve seats failed at the same inspection, we need to jitter one
+> #  of the times, to avoid a (time1, time2) interval of length 0
+> ties <- which(with(valveSeat, diff(id)==0 & diff(time)==0))  #first of a tie
+> temp <- valveSeat$time
+> temp[ties] <- temp[ties] - .1 # jittered time
+> vdata <- valveSeat
+> vdata$time1 <- ifelse(!duplicated(vdata$id), 0, c(0, temp[-length(temp)]))
+> vdata$time2 <- temp
+> fit2 <- survfit(Surv(time1, time2, status) ~1, vdata, id=id)
+> ## Not run: 
+> ##D plot(fit2, cumhaz= TRUE, xscale= 365.25, 
+> ##D       xlab="Years in service", ylab = "Expected number of repairs")
+> ## End(Not run)
 > 
 > 
 > 
@@ -2413,30 +2493,31 @@ n= 64
 > 
 > fit <- survfit(Surv(time, status) ~ x, aml)
 > resid(fit, times=c(24, 48), type="RMTS")
-            [,1]         [,2]
- [1,] -1.0836777 -2.076652893
- [2,] -0.7200413 -1.713016529
- [3,]  0.2004132  0.421074380
- [4,] -0.3237345 -1.468414256
- [5,]  0.1876291 -0.957050620
- [6,]  0.2899019  0.965676653
- [7,]  0.2899019 -0.359777893
- [8,]  0.2899019  0.008403926
- [9,]  0.2899019  1.726585744
-[10,]  0.2899019  1.726585744
-[11,]  0.2899019  1.726585744
-[12,] -1.0057870 -1.475694444
-[13,] -1.0057870 -1.475694444
-[14,] -0.7557870 -1.225694444
-[15,] -0.7557870 -1.225694444
-[16,] -0.4224537 -0.892361111
-[17,]  0.5636574  0.899305556
-[18,]  0.4826389 -0.121527778
-[19,]  0.5798611  0.267361111
-[20,]  0.5798611  0.559027778
-[21,]  0.5798611  0.850694444
-[22,]  0.5798611  1.822916667
-[23,]  0.5798611  2.017361111
+    times
+             24           48
+  1  -1.0836777 -2.076652893
+  2  -0.7200413 -1.713016529
+  3   0.2004132  0.421074380
+  4  -0.3237345 -1.468414256
+  5   0.1876291 -0.957050620
+  6   0.2899019  0.965676653
+  7   0.2899019 -0.359777893
+  8   0.2899019  0.008403926
+  9   0.2899019  1.726585744
+  10  0.2899019  1.726585744
+  11  0.2899019  1.726585744
+  12 -1.0057870 -1.475694444
+  13 -1.0057870 -1.475694444
+  14 -0.7557870 -1.225694444
+  15 -0.7557870 -1.225694444
+  16 -0.4224537 -0.892361111
+  17  0.5636574  0.899305556
+  18  0.4826389 -0.121527778
+  19  0.5798611  0.267361111
+  20  0.5798611  0.559027778
+  21  0.5798611  0.850694444
+  22  0.5798611  1.822916667
+  23  0.5798611  2.017361111
 > 
 > 
 > 
@@ -2591,11 +2672,24 @@ n= 26, number of events= 12
 > 
 > ### ** Examples
 > 
-> status  <- pmax(rotterdam$recur, rotterdam$death)
+> # liberal definition of rfs (count later deaths)
+> rfs  <- pmax(rotterdam$recur, rotterdam$death)
 > rfstime <- with(rotterdam, ifelse(recur==1, rtime, dtime))
-> fit1 <- coxph(Surv(rfstime, status) ~ pspline(age) + meno + size + 
-+         pspline(nodes) + er,
-+      data=rotterdam, subset = (nodes > 0))
+> fit1 <- coxph(Surv(rfstime, rfs) ~ pspline(age) + meno + size + 
++         pspline(nodes) + er,  data = rotterdam)
+> 
+> # conservative (no deaths after last fu for recurrence)
+> ignore <- with(rotterdam, recur ==0 & death==1 & rtime < dtime)
+> table(ignore)
+ignore
+FALSE  TRUE 
+ 2939    43 
+> rfs2 <- with(rotterdam, ifelse(recur==1 | ignore, recur, death))
+> rfstime2 <- with(rotterdam, ifelse(recur==1 | ignore, rtime, dtime))
+> fit2 <- coxph(Surv(rfstime2, rfs2) ~ pspline(age) + meno + size + 
++         pspline(nodes) + er,  data = rotterdam)
+> 
+> # Note: Both age and nodes show non-linear effects.
 > # Royston and Altman used fractional polynomials for the nonlinear terms
 > 
 > 
@@ -2645,24 +2739,24 @@ n= 26, number of events= 12
 > cdf <- cdf[!duplicated(aml$time[index], fromLast=TRUE)]  # remove duplicate times
 > cbind(time=afit$time, KM= afit$surv, RTTR= 1-cdf)
       time         KM       RTTR
- [1,]    5 0.91304348  -1.000000
- [2,]    8 0.82608696  -3.000000
- [3,]    9 0.78260870  -4.000000
- [4,]   12 0.73913043  -5.000000
- [5,]   13 0.69565217  -6.000000
- [6,]   16 0.69565217  -6.000000
- [7,]   18 0.64596273  -7.142857
- [8,]   23 0.54658385  -9.428571
- [9,]   27 0.49689441 -10.571429
-[10,]   28 0.49689441 -10.571429
-[11,]   30 0.44168392 -11.841270
-[12,]   31 0.38647343 -13.111111
-[13,]   33 0.33126294 -14.380952
-[14,]   34 0.27605245 -15.650794
-[15,]   43 0.22084196 -16.920635
-[16,]   45 0.16563147 -18.190476
-[17,]   48 0.08281573 -20.095238
-[18,]  161 0.08281573 -20.095238
+ [1,]    5 0.91304348 0.91304348
+ [2,]    8 0.82608696 0.82608696
+ [3,]    9 0.78260870 0.78260870
+ [4,]   12 0.73913043 0.73913043
+ [5,]   13 0.69565217 0.69565217
+ [6,]   16 0.69565217 0.69565217
+ [7,]   18 0.64596273 0.64596273
+ [8,]   23 0.54658385 0.54658385
+ [9,]   27 0.49689441 0.49689441
+[10,]   28 0.49689441 0.49689441
+[11,]   30 0.44168392 0.44168392
+[12,]   31 0.38647343 0.38647343
+[13,]   33 0.33126294 0.33126294
+[14,]   34 0.27605245 0.27605245
+[15,]   43 0.22084196 0.22084196
+[16,]   45 0.16563147 0.16563147
+[17,]   48 0.08281573 0.08281573
+[18,]  161 0.08281573 0.08281573
 > 
 > # Hormonal patients have a diffent censoring pattern
 > wt2 <- rttright(Surv(dtime, death) ~ hormon, rotterdam, times= 365*c(3, 5))
@@ -2683,6 +2777,35 @@ n= 26, number of events= 12
 > ### Keywords: datasets
 > 
 > ### ** Examples
+> 
+> fit1 <- glm(skips ~ Opening * Solder, poisson, solder,
++             subset= (Mask != "A6"))
+> anova(fit1)  # The interaction is important
+Analysis of Deviance Table
+
+Model: poisson, link: log
+
+Response: skips
+
+Terms added sequentially (first to last)
+
+
+               Df Deviance Resid. Df Resid. Dev  Pr(>Chi)    
+NULL                             809     7336.9              
+Opening         2  2638.44       807     4698.5 < 2.2e-16 ***
+Solder          1  1120.85       806     3577.7 < 2.2e-16 ***
+Opening:Solder  2    41.14       804     3536.5 1.166e-09 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+> dummy <- expand.grid(Opening= c("S", "M", "L"), Solder=c("Thin", "Thick"))
+> yhat <- matrix(predict(fit1, newdata=dummy), ncol=2,
++             dimnames=list(Opening= c("S", "M", "L"), Solder=c("Thin", "Thick")))
+> yhat <- cbind(yhat, difference= yhat[,1]- yhat[,2])
+> round(yhat, 1) # thin and thick have  different patterns
+  Thin Thick difference
+S  2.8   1.7        1.1
+M  1.1   0.2        1.0
+L  1.0  -0.9        1.9
 > 
 > # The balanced subset used by Chambers and Hastie
 > #   contains the first 180 of each mask and deletes mask A6. 
@@ -2843,7 +2966,7 @@ Score (logrank) test = 13.72  on 2 df,   p=0.001
 > 
 > ### Name: summary.survfit
 > ### Title: Summary of a Survival Curve
-> ### Aliases: summary.survfit
+> ### Aliases: summary.survfit summary.survfitms
 > ### Keywords: survival
 > 
 > ### ** Examples
@@ -2918,6 +3041,22 @@ Call: survfit(formula = Surv(futime, fustat) ~ rx, data = ovarian)
 overall.karno   t0_60.karno       t60_120          t120 
  -0.034443897  -0.049176157  -0.011031558  -0.007629841 
 > 
+> # Sometimes we want to split on one scale and analyse on another
+> #  Add a "current age" variable to the mgus2 data set.
+> temp1 <- mgus2
+> temp1$endage <- mgus2$age + mgus2$futime/12    # futime is in months
+> temp1$startage <- temp1$age
+> temp2 <- survSplit(Surv(age, endage, death) ~ ., temp1, cut=25:100,
++                    start= "age1", end= "age2")
+> 
+> # restore the time since enrollment scale
+> temp2$time1 <- (temp2$age1 - temp2$startage)*12
+> temp2$time2 <- (temp2$age2 - temp2$startage)*12
+> 
+> # In this data set, initial age and current age have similar utility
+> mfit1 <- coxph(Surv(futime, death) ~ age + sex, data=mgus2)
+> mfit2 <- coxph(Surv(time1, time2, death) ~ age1 + sex, data=temp2)
+> 
 > 
 > 
 > cleanEx()
@@ -2970,9 +3109,12 @@ rx=1 13        7     5.23     0.596      1.06
 rx=2 13        5     6.77     0.461      1.06
 
  Chisq= 1.1  on 1 degrees of freedom, p= 0.3 
+> check <- coxph(Surv(futime, fustat) ~ rx, data=ovarian, ties="breslow")
+> round(summary(check)$sctest, 3)
+  test     df pvalue 
+ 1.063  1.000  0.303 
 > 
-> ## Stratified 7-sample test
-> 
+> ## Stratified 8-sample test (7 df)
 > survdiff(Surv(time, status) ~ pat.karno + strata(inst), data=lung)
 Call:
 survdiff(formula = Surv(time, status) ~ pat.karno + strata(inst), 
@@ -2991,6 +3133,10 @@ pat.karno=90  60       38   47.242   1.80800   3.23078
 pat.karno=100 35       21   26.207   1.03451   1.44067
 
  Chisq= 21.4  on 7 degrees of freedom, p= 0.003 
+> check <- coxph(Surv(time, status) ~ factor(pat.karno) + strata(inst), lung)
+> round(summary(check)$sctest, 3)
+  test     df pvalue 
+21.368  7.000  0.003 
 > 
 > ## Expected survival for heart transplant patients based on
 > ## US mortality tables
@@ -3015,7 +3161,7 @@ Call:
 survdiff(formula = Surv(futime, death) ~ offset(e2), data = flchain)
 
  Observed  Expected         Z         p 
-2169.0000 2073.9133   -2.0880    0.0368 
+2169.0000 2076.8776   -2.0214    0.0432 
 > 
 > 
 > 
@@ -3062,9 +3208,9 @@ survexp(formula = ~surgery, data = jasa, rmap = list(sex = "male",
     year = accept.dt, age = (accept.dt - birth.dt)), times = 1:10 * 
     182.5, method = "ederer")
 
-  age ranges from 8.8 to 64.4 years
-  male: 103  female: 0 
-  date of entry from 1967-09-13 to 1974-03-22 
+ age ranges from 8.8 to 64.4 years
+    male: 103  female: 0 
+    date of entry from 1967-09-13 to 1974-03-22 
 
  time nrisk1 nrisk2 surgery=0 surgery=1
   182     87     16     0.996     0.996
@@ -3570,11 +3716,11 @@ fgrp     <=60 60-70 70-80  >80
 > pfit[,2]  #time to liver transplant, by blood type
 Call: survfit(formula = Surv(futime, event) ~ abo, data = transplant)
 
-                n nevent   rmean*
-abo=A, death  325     21 164.9734
-abo=B, death  103     10 202.4902
-abo=AB, death  41      3 137.8293
-abo=O, death  346     32 182.1075
+                n nevent    rmean se(rmean)*
+abo=A, death  325     21 164.9734   17.49968
+abo=B, death  103     10 202.4902   59.61134
+abo=AB, death  41      3 137.8293   19.65319
+abo=O, death  346     32 182.1075   28.17050
    *restricted mean time in state (max time = 2055 )
 > plot(pfit[,2], mark.time=FALSE, col=1:4, lwd=2, xmax=735,
 +        xscale=30.5, xlab="Months", ylab="Fraction transplanted",
@@ -3735,7 +3881,7 @@ $terms
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  3.085 0.112 3.199 0 0 
+Time elapsed:  6.683 0.484 7.167 0 0 
 > grDevices::dev.off()
 null device 
           1 

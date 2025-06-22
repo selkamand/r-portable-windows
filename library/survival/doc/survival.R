@@ -110,7 +110,7 @@ text(400, .95, "Males", cex=2)
 
 
 ###################################################
-### code chunk number 6: survival.Rnw:574-576
+### code chunk number 6: survival.Rnw:576-578
 ###################################################
 data.frame(id=rep(392,3), time1=c(0, 258, 328), time2=c(258, 328, 377),
            status=c(1,1,0))
@@ -160,14 +160,14 @@ summary(tfit)
 
 
 ###################################################
-### code chunk number 11: survival.Rnw:694-695
+### code chunk number 11: survival.Rnw:696-697
 ###################################################
 getOption("SweaveHooks")[["fig"]]()
 plot(tfit, col=1:4, lty=1:4, lwd=2, ylab="Probability in state")
 
 
 ###################################################
-### code chunk number 12: survival.Rnw:708-710
+### code chunk number 12: survival.Rnw:710-712
 ###################################################
 dim(tfit)
 tfit$states
@@ -209,7 +209,7 @@ legend(0, .25, c("Males, PCM, incorrect curve", "Males, PCM, competing risk"),
 
 
 ###################################################
-### code chunk number 16: survival.Rnw:842-845
+### code chunk number 16: survival.Rnw:844-847
 ###################################################
 dim(crfit)
 crfit$strata
@@ -262,7 +262,7 @@ mdata[1:7, c("id", "trt", "tstart", "tstop", "event", "priorcr", "priortx")]
 
 
 ###################################################
-### code chunk number 21: survival.Rnw:980-981
+### code chunk number 21: survival.Rnw:982-983
 ###################################################
 survcheck(Surv(tstart, tstop, event) ~1, mdata, id=id)
 
@@ -577,7 +577,7 @@ getOption("SweaveHooks")[["fig"]]()
 zp1 <- cox.zph(cfit1)
 zp1
 plot(zp1[2], resid=FALSE)
-abline(coef(fit1)[2] ,0, lty=3)
+abline(coef(cfit1)[2] ,0, lty=3)
 
 
 ###################################################
@@ -731,7 +731,7 @@ summary(ndata)
 
 
 ###################################################
-### code chunk number 54: survival.Rnw:2032-2035
+### code chunk number 54: survival.Rnw:2034-2037
 ###################################################
 tc <- attr(ndata, 'tcount')   # shorter name for use in Sexpr below
 icount <- table(table(nafld3$id)) #number with 1, 2, ... intervals
@@ -793,7 +793,7 @@ print(nfit1)
 
 
 ###################################################
-### code chunk number 59: survival.Rnw:2230-2232
+### code chunk number 59: survival.Rnw:2232-2234
 ###################################################
 options(show.signif.stars = FALSE) # display statistical maturity
 summary(nfit1, digits=3)
@@ -846,22 +846,17 @@ tldata <- merge(tldata, with(nafld1, data.frame(id=id, days=futime, death=status
 
 # Add in the comorbidities of interest.  None of these 4 happen to have
 #  duplicates (MI does, for instance).  
-# Start by removing the the 13 rows with a "confirmed NAFLD" (actual NAFLD + 1 year)
-#  that is after the actual last follow-up date.
 # Treat diabetes before day 0 as diabetes on day 0.
-badrow <- which(nafld3$days > nafld1$futime[match(nafld3$id, nafld1$id)])
-fixnf3 <- nafld3[-badrow,]
-
-tldata <- merge(tldata, with(subset(fixnf3, event=="diabetes"),
+tldata <- merge(tldata, with(subset(nafld3, event=="diabetes"),
                            data.frame(id=id, days=pmax(0,days), diabetes=1)),
                    all=TRUE, by=c("id", "days"))
-tldata <- merge(tldata, with(subset(fixnf3, event=="htn"),
+tldata <- merge(tldata, with(subset(nafld3, event=="htn"),
                            data.frame(id=id, days=pmax(0,days), htn=1)),
                      all=TRUE, by=c("id", "days"))
-tldata <- merge(tldata, with(subset(fixnf3, event=="dyslipidemia"),
+tldata <- merge(tldata, with(subset(nafld3, event=="dyslipidemia"),
                            data.frame(id=id, days= pmax(0, days), dyslipid=1)),
                        all=TRUE, by=c("id", "days"))
-tldata <- merge(tldata, with(subset(fixnf3, event=="nafld"),
+tldata <- merge(tldata, with(subset(nafld3, event=="nafld"),
                            data.frame(id=id, days= pmax(0,days), nafld=1)),
                     by=c("id", "days"), all=TRUE)
 
@@ -912,7 +907,7 @@ round(coef(nfit2), 3)
 
 
 ###################################################
-### code chunk number 65: survival.Rnw:2438-2440 (eval = FALSE)
+### code chunk number 65: survival.Rnw:2435-2437 (eval = FALSE)
 ###################################################
 ## fit2 <- coxph(Surv(time, status) ~ trt + trt*time + celltype + karno,
 ##                 data = veteran)
@@ -960,13 +955,54 @@ par(oldpar)
 
 
 ###################################################
-### code chunk number 69: survival.Rnw:3426-3427
+### code chunk number 69: profile1
+###################################################
+getOption("SweaveHooks")[["fig"]]()
+fit1 <- coxph(Surv(futime, fustat) ~ rx + age + resid.ds, ovarian)
+fit1
+
+# create the profile plot
+imat <- solve(vcov(fit1))  #information matrix
+
+acoef <- seq(0, .25, length=100)
+profile <- matrix(0, 100, 2)
+for (i in 1:100) {
+    icoef <- c(fit1$coef[1], acoef[i], fit1$coef[3])
+    tfit <- coxph(Surv(futime, fustat) ~ rx + offset(acoef[i]*age) + resid.ds, 
+                  ovarian)
+    profile[i,1] <- tfit$loglik[2]
+    delta <- c(0, acoef[i]- fit1$coef[2], 0)
+    profile[i,2] <- fit1$loglik[2] - delta%*% imat %*% delta/2
+}
+matplot(acoef, profile*2, type='l', lwd=2, lty=1, xlab="Coefficient for age",
+        ylab="2*loglik")
+abline(h = 2*fit1$loglik[2] - qchisq(.95, 1), lty=3)
+legend(.11, -58, c("Cox likelihood", "Wald approximation"), lty=1, lwd=2, 
+       col=1:2, bty='n')
+
+
+###################################################
+### code chunk number 70: profile2
+###################################################
+myfun <- function(beta) {
+    icoef <- coef(fit1)
+    icoef[2] <- beta
+    tfit <- coxph(Surv(futime, fustat) ~ rx + offset(age*beta) + resid.ds, 
+                  ovarian)
+    (fit1$loglik - tfit$loglik)[2] - qchisq(.95, 1)/2 
+}
+uniroot(myfun, c (0, .2))$root  # lower
+uniroot(myfun, c(.2, .5))$root  # upper
+
+
+###################################################
+### code chunk number 71: survival.Rnw:3485-3486
 ###################################################
 with(subset(aml, x=="Nonmaintained"), Surv(time, status))
 
 
 ###################################################
-### code chunk number 70: coarsen
+### code chunk number 72: coarsen
 ###################################################
 getOption("SweaveHooks")[["fig"]]()
 tdata <- subset(colon, etype==1)   # progression or death

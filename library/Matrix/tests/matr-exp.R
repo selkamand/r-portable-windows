@@ -1,7 +1,9 @@
+## for R_DEFAULT_PACKAGES=NULL :
+library(stats)
+
 library(Matrix)
 
 ## Matrix Exponential
-
 source(system.file("test-tools.R", package = "Matrix"))
 
 ## e ^ 0 = 1  - for matrices:
@@ -23,7 +25,11 @@ summary(rE)
 m1 <- Matrix(c(1,0,1,1), ncol = 2)
 e1 <- expm(m1)
 assert.EQ.mat(e1, cbind(c(exp(1),0), exp(1)))
-
+(p1 <- pack(m1))
+stopifnot(exprs = { 
+    is(p1, "dtpMatrix")
+    all.equal(pack(e1), expm(p1), tolerance = 2e-15)# failed in Matrix 1.6.1
+})
 m2 <- Matrix(c(-49, -64, 24, 31), ncol = 2)
 e2 <- expm(m2)
 ## The true matrix exponential is 'te2':
@@ -33,7 +39,10 @@ te2 <- rbind(c(3*e_17 - 2*e_1, -3/2*e_17 + 3/2*e_1),
              c(4*e_17 - 4*e_1, -2  *e_17 + 3  *e_1))
 assert.EQ.mat(e2, te2, tol = 1e-13)
 ## See the (average relative) difference:
-all.equal(as(e2,"matrix"), te2, tolerance = 0) # 1.48e-14 on "lynne"
+all.equal(as(e2,"matrix"), te2, tolerance = 0) # 2.22e-14 {was 1.48e-14} on "lynne"
+
+(dsp <- pack(crossprod(matrix(-2:3, 2,3))))
+stopifnot(all(abs(expm(dsp) - expm(as.matrix(dsp))) <= 0.5)) # failed badly in Matrix 1.6.1
 
 ## The ``surprising identity''      det(exp(A)) == exp( tr(A) )
 ## or                           log det(exp(A)) == tr(A) :

@@ -28,22 +28,24 @@ NLSstRtAsymptote        Horizontal Asymptote on the Right Side
 NegBinomial             The Negative Binomial Distribution
 Normal                  The Normal Distribution
 PP.test                 Phillips-Perron Test for Unit Roots
-Pair                    Construct paired-data object
+Pair                    Construct a Paired-Data Object
 Poisson                 The Poisson Distribution
 SSD                     SSD Matrix and Estimated Variance Matrix in
                         Multivariate Models
-SSasymp                 Self-Starting Nls Asymptotic Regression Model
-SSasympOff              Self-Starting Nls Asymptotic Regression Model
-                        with an Offset
-SSasympOrig             Self-Starting Nls Asymptotic Regression Model
-                        through the Origin
-SSbiexp                 Self-Starting Nls Biexponential model
-SSfol                   Self-Starting Nls First-order Compartment Model
-SSfpl                   Self-Starting Nls Four-Parameter Logistic Model
-SSgompertz              Self-Starting Nls Gompertz Growth Model
-SSlogis                 Self-Starting Nls Logistic Model
-SSmicmen                Self-Starting Nls Michaelis-Menten Model
-SSweibull               Self-Starting Nls Weibull Growth Curve Model
+SSasymp                 Self-Starting 'nls' Asymptotic Model
+SSasympOff              Self-Starting 'nls' Asymptotic Model with an
+                        Offset
+SSasympOrig             Self-Starting 'nls' Asymptotic Model through
+                        the Origin
+SSbiexp                 Self-Starting 'nls' Biexponential Model
+SSfol                   Self-Starting 'nls' First-order Compartment
+                        Model
+SSfpl                   Self-Starting 'nls' Four-Parameter Logistic
+                        Model
+SSgompertz              Self-Starting 'nls' Gompertz Growth Model
+SSlogis                 Self-Starting 'nls' Logistic Model
+SSmicmen                Self-Starting 'nls' Michaelis-Menten Model
+SSweibull               Self-Starting 'nls' Weibull Growth Curve Model
 SignRank                Distribution of the Wilcoxon Signed Rank
                         Statistic
 Smirnov                 Distribution of the Smirnov Statistic
@@ -63,7 +65,7 @@ addmargins              Puts Arbitrary Margins on Multidimensional
                         Tables or Arrays
 aggregate               Compute Summary Statistics of Data Subsets
 alias                   Find Aliases (Dependencies) in a Model
-anova                   Anova Tables
+anova                   ANOVA Tables
 anova.glm               Analysis of Deviance for Generalized Linear
                         Model Fits
 anova.lm                ANOVA for Linear Model Fits
@@ -77,7 +79,7 @@ arima                   ARIMA Modelling of Time Series
 arima.sim               Simulate from an ARIMA Model
 arima0                  ARIMA Modelling of Time Series - Preliminary
                         Version
-as.hclust               Convert Objects to Class hclust
+as.hclust               Convert Objects to Class '"hclust"'
 asOneSidedFormula       Convert to One-Sided Formula
 ave                     Group Averages Over Level Combinations of
                         Factors
@@ -141,7 +143,7 @@ fivenum                 Tukey Five-Number Summaries
 fligner.test            Fligner-Killeen Test of Homogeneity of
                         Variances
 formula                 Model Formulae
-formula.nls             Extract Model Formula from nls Object
+formula.nls             Extract Model Formula from 'nls' Object
 friedman.test           Friedman Rank Sum Test
 ftable                  Flat Contingency Tables
 ftable.formula          Formula Notation for Flat Contingency Tables
@@ -169,9 +171,10 @@ listof                  A Class for Lists of (Parts of) Model Fits
 lm                      Fitting Linear Models
 lm.fit                  Fitter Functions for Linear Models
 lm.influence            Regression Diagnostics
-loadings                Print Loadings in Factor Analysis
+loadings                Print Factor Analysis 'factanal()', Notably
+                        Loadings
 loess                   Local Polynomial Regression Fitting
-loess.control           Set Parameters for Loess
+loess.control           Set Parameters for 'loess'
 logLik                  Extract Log-Likelihood
 loglin                  Fitting Log-Linear Models
 lowess                  Scatter Plot Smoothing
@@ -189,13 +192,14 @@ mantelhaen.test         Cochran-Mantel-Haenszel Chi-Squared Test for
 mauchly.test            Mauchly's Test of Sphericity
 mcnemar.test            McNemar's Chi-squared Test for Count Data
 median                  Median Value
-medpolish               Median Polish (Robust Twoway Decomposition) of
+medpolish               Median Polish (Robust Two-way Decomposition) of
                         a Matrix
 model.extract           Extract Components from a Model Frame
 model.frame             Extracting the Model Frame from a Formula or
                         Fit
 model.matrix            Construct Design Matrices
-model.tables            Compute Tables of Results from an Aov Model Fit
+model.tables            Compute Tables of Results from an 'aov' Model
+                        Fit
 monthplot               Plot a Seasonal or other Subseries from a Time
                         Series
 mood.test               Mood Two-Sample Test of Scale
@@ -208,8 +212,8 @@ nextn                   Find Highly Composite Numbers
 nlm                     Non-Linear Minimization
 nlminb                  Optimization using PORT routines
 nls                     Nonlinear Least Squares
-nls.control             Control the Iterations in nls
-nobs                    Extract the Number of Observations from a Fit.
+nls.control             Control the Iterations in 'nls'
+nobs                    Extract the Number of Observations from a Fit
 numericDeriv            Evaluate Derivatives Numerically
 offset                  Include an Offset in a Model Formula
 oneway.test             Test for Equal Means in a One-Way Layout
@@ -222,15 +226,16 @@ pairwise.prop.test      Pairwise comparisons for proportions
 pairwise.t.test         Pairwise t tests
 pairwise.table          Tabulate p values for pairwise comparisons
 pairwise.wilcox.test    Pairwise Wilcoxon Rank Sum Tests
-plot.HoltWinters        Plot function for HoltWinters objects
+plot.HoltWinters        Plot function for '"HoltWinters"' objects
 plot.acf                Plot Autocovariance and Autocorrelation
                         Functions
 plot.density            Plot Method for Kernel Density Estimation
-plot.isoreg             Plot Method for isoreg Objects
+plot.isoreg             Plot Method for 'isoreg' Objects
 plot.lm                 Plot Diagnostics for an 'lm' Object
 plot.ppr                Plot Ridge Functions for Projection Pursuit
                         Regression Fit
-plot.profile.nls        Plot a profile.nls Object
+plot.profile            Plotting Functions for 'profile' Objects
+plot.profile.nls        Plot a 'profile.nls' Object
 plot.spec               Plotting Spectral Densities
 plot.stepfun            Plot Step Functions
 plot.stl                Methods for STL Objects
@@ -253,7 +258,7 @@ predict.HoltWinters     Prediction Function for Fitted Holt-Winters
                         Models
 predict.glm             Predict Method for GLM Fits
 predict.lm              Predict method for Linear Model Fits
-predict.loess           Predict Loess Curve or Surface
+predict.loess           Predict LOESS Curve or Surface
 predict.nls             Predicting from Nonlinear Least Squares Fits
 predict.smooth.spline   Predict from Smoothing Spline Fit
 preplot                 Pre-computations for a Plotting Object
@@ -263,7 +268,8 @@ print.power.htest       Print Methods for Hypothesis Tests and Power
 print.ts                Printing and Formatting of Time-Series Objects
 printCoefmat            Print Coefficient Matrices
 profile                 Generic Function for Profiling Models
-profile.nls             Method for Profiling nls Objects
+profile.glm             Method for Profiling 'glm' Objects
+profile.nls             Method for Profiling 'nls' Objects
 proj                    Projections of Models
 prop.test               Test of Equal or Given Proportions
 prop.trend.test         Test for trend in proportions
@@ -282,8 +288,9 @@ replications            Number of Replications of Terms
 reshape                 Reshape Grouped Data
 residuals               Extract Model Residuals
 runmed                  Running Medians - Robust Scatter Plot Smoothing
-scatter.smooth          Scatter Plot with Smooth Curve Fitted by Loess
-screeplot               Screeplots
+scatter.smooth          Scatter Plot with Smooth Curve Fitted by
+                        'loess'
+screeplot               Scree Plots
 sd                      Standard Deviation
 se.contrast             Standard Errors for Contrasts in Model Terms
 selfStart               Construct Self-starting Nonlinear Models
@@ -303,7 +310,7 @@ spec.taper              Taper a Time Series by a Cosine Bell
 spectrum                Spectral Density Estimation
 splinefun               Interpolating Splines
 start                   Encode the Terminal Times of Time Series
-stat.anova              GLM Anova Statistics
+stat.anova              GLM ANOVA Statistics
 stats-deprecated        Deprecated Functions in Package 'stats'
 stats-package           The R Stats Package
 step                    Choose a model by AIC in a Stepwise Algorithm
@@ -322,7 +329,7 @@ symnum                  Symbolic Number Coding
 t.test                  Student's t-Test
 termplot                Plot Regression Terms
 terms                   Model Terms
-terms.formula           Construct a terms Object from a Formula
+terms.formula           Construct a 'terms' Object from a Formula
 terms.object            Description of Terms Objects
 time                    Sampling Times of Time Series
 toeplitz                Create Symmetric and Asymmetric Toeplitz Matrix

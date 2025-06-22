@@ -6,14 +6,12 @@ Documentation           Using and Creating On-line Documentation for
 GenericFunctions        Tools for Managing Generic Functions
 Introduction            Basic use of S4 Methods and Classes
 LinearMethodsList-class
-                        Class "LinearMethodsList"
+                        Class '"LinearMethodsList"'
 LocalReferenceClasses   Localized Objects based on Reference Classes
 MethodDefinition-class
                         Classes to Represent Method Definitions
-MethodWithNext-class    Class MethodWithNext
+MethodWithNext-class    Class '"MethodWithNext"'
 Methods                 S4 Class Documentation
-MethodsList-class       Class MethodsList, Defunct Representation of
-                        Methods
 Methods_Details         General Information on Methods
 Methods_for_Nongenerics
                         Methods for Non-Generic Functions in Other

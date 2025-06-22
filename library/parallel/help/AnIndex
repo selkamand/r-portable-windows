@@ -1,4 +1,5 @@
 parallel-package	parallel-package
+closeNode	sendData
 clusterApply	clusterApply
 clusterApplyLB	clusterApply
 clusterCall	clusterApply
@@ -27,7 +28,11 @@ parRapply	clusterApply
 parSapply	clusterApply
 parSapplyLB	clusterApply
 pvec	mcdummies
+recvData	sendData
+recvOneData	sendData
+registerClusterType	makeCluster
 R_PARALLEL_PORT	makeCluster
+sendData	sendData
 setDefaultCluster	makeCluster
 splitIndices	splitIndices
 stopCluster	makeCluster

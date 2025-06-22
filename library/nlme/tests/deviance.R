@@ -1,6 +1,6 @@
 library(nlme)
 ## ==> ~/R/Pkgs/MASS_CRAN/tests/lme.R : tests  stepAIC() for *both* lme and gls
-library(MASS)
+if (!require(MASS)) q("no")
 
 ## deviance.lme() and extractAIC.lme() :
 set.seed(321) # to be sure

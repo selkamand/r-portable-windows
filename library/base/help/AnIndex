@@ -16,6 +16,7 @@ $<-.POSIXlt	DateTimeClasses
 %in%	match
 %o%	outer
 %x%	kronecker
+%||%	Control
 &	Logic
 &&	Logic
 &.hexmode	hexmode
@@ -90,7 +91,6 @@ $<-.POSIXlt	DateTimeClasses
 .First	Startup
 .First.lib	base-defunct
 .First.sys	Startup
-.Firstlib_as_onLoad	base-internal
 .fixupGFortranStderr	base-internal
 .fixupGFortranStdout	base-internal
 .format.zeros	formatc
@@ -118,6 +118,7 @@ $<-.POSIXlt	DateTimeClasses
 .Import	base-defunct
 .ImportFrom	base-defunct
 .Internal	Internal
+.internalGenerics	InternalMethods
 .isMethodsDispatchOn	base-internal
 .isOpen	srcfile
 .kappa_tri	kappa
@@ -141,7 +142,6 @@ $<-.POSIXlt	DateTimeClasses
 .mergeExportMethods	ns-internal
 .mergeImportMethods	ns-internal
 .Method	UseMethod
-.methodsNamespace	base-internal
 .noGenerics	library
 .NotYetImplemented	notyet
 .NotYetUsed	notyet
@@ -164,6 +164,7 @@ $<-.POSIXlt	DateTimeClasses
 .primUntrace	base-internal
 .Provided	base-defunct
 .Random.seed	Random
+.rangeNum	range
 .readRDS	base-defunct
 .Renviron	Startup
 .rmpkg	base-internal
@@ -178,6 +179,7 @@ $<-.POSIXlt	DateTimeClasses
 .S3_methods_table	ns-internal
 .saveRDS	base-defunct
 .Script	zScript
+.set_ops_need_as_vector	base-internal
 .set_row_names	base-internal
 .signalSimpleWarning	conditions
 .standard_regexps	zutils
@@ -282,24 +284,24 @@ as.data.frame	as.data.frame
 as.data.frame.array	as.data.frame
 as.data.frame.AsIs	as.data.frame
 as.data.frame.character	as.data.frame
-as.data.frame.complex	as.data.frame
+as.data.frame.complex	base-deprecated
 as.data.frame.data.frame	as.data.frame
-as.data.frame.Date	Dates
+as.data.frame.Date	base-deprecated
 as.data.frame.default	as.data.frame
-as.data.frame.difftime	as.data.frame
-as.data.frame.factor	as.data.frame
-as.data.frame.integer	as.data.frame
+as.data.frame.difftime	base-deprecated
+as.data.frame.factor	base-deprecated
+as.data.frame.integer	base-deprecated
 as.data.frame.list	as.data.frame
-as.data.frame.logical	as.data.frame
+as.data.frame.logical	base-deprecated
 as.data.frame.matrix	as.data.frame
 as.data.frame.model.matrix	as.data.frame
-as.data.frame.noquote	as.data.frame
-as.data.frame.numeric	as.data.frame
-as.data.frame.numeric_version	numeric_version
-as.data.frame.ordered	as.data.frame
-as.data.frame.POSIXct	DateTimeClasses
+as.data.frame.noquote	base-deprecated
+as.data.frame.numeric	base-deprecated
+as.data.frame.numeric_version	base-deprecated
+as.data.frame.ordered	base-deprecated
+as.data.frame.POSIXct	base-deprecated
 as.data.frame.POSIXlt	DateTimeClasses
-as.data.frame.raw	as.data.frame
+as.data.frame.raw	base-deprecated
 as.data.frame.table	table
 as.data.frame.ts	as.data.frame
 as.data.frame.vector	as.data.frame
@@ -543,6 +545,7 @@ DateTimeClasses	DateTimeClasses
 debug	debug
 debuggingState	debug
 debugonce	debug
+declare	declare
 default.stringsAsFactors	base-defunct
 Defunct	Defunct
 defunct	Defunct
@@ -626,6 +629,7 @@ errorCondition	conditions
 eval	eval
 eval.parent	eval
 evalq	eval
+Exec	Tailcall
 exists	exists
 exp	Log
 expand.grid	expand.grid
@@ -743,6 +747,7 @@ gregexpr	grep
 grep	grep
 grepl	grep
 grepRaw	grepRaw
+grepv	grep
 group generic	groupGeneric
 groupGeneric	groupGeneric
 grouping	grouping
@@ -828,7 +833,7 @@ is.package_version	numeric_version
 is.pairlist	list
 is.primitive	is.function
 is.qr	qr
-is.R	isR
+is.R	base-defunct
 is.raw	raw
 is.real	base-defunct
 is.recursive	is.recursive
@@ -1003,6 +1008,8 @@ months.POSIXt	weekday.POSIXt
 mostattributes<-	attributes
 mtfrm	mtfrm
 mtfrm.default	mtfrm
+mtfrm.POSIXct	mtfrm
+mtfrm.POSIXlt	mtfrm
 NA	NA
 name	name
 nameOfClass	class
@@ -1199,7 +1206,9 @@ R.version.string	Version
 Random	Random
 Random.user	Random-user
 range	range
+range.Date	range
 range.default	range
+range.POSIXct	range
 rank	rank
 rapply	rapply
 raw	raw
@@ -1398,6 +1407,9 @@ sort.default	sort
 sort.int	sort
 sort.list	order
 sort.POSIXlt	sort
+sort_by	sort_by
+sort_by.data.frame	sort_by
+sort_by.default	sort_by
 source	source
 source.url	base-defunct
 Special	Special
@@ -1464,6 +1476,7 @@ Summary.Date	Dates
 summary.Date	Dates
 summary.default	summary
 Summary.difftime	difftime
+summary.difftime	difftime
 Summary.factor	factor
 summary.factor	summary
 summary.matrix	summary
@@ -1534,6 +1547,7 @@ t.data.frame	t
 t.default	t
 table	table
 tabulate	tabulate
+Tailcall	Tailcall
 tan	Trig
 tanh	Hyperbolic
 tanpi	Trig
@@ -1613,6 +1627,7 @@ untracemem	tracemem
 unz	connections
 upper.tri	lower.tri
 url	connections
+use	use
 UseMethod	UseMethod
 UTF-8 file path	UTF8filepaths
 utf8ToInt	utf8Conversion
@@ -1662,6 +1677,7 @@ xtfrm.POSIXct	xtfrm
 xtfrm.POSIXlt	xtfrm
 xzfile	connections
 zapsmall	zapsmall
+zstdfile	connections
 [	Extract
 [.AsIs	AsIs
 [.data.frame	Extract.data.frame

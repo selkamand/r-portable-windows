@@ -4,6 +4,7 @@
 ### code chunk number 1: preliminaries
 ###################################################
 options(width=75)
+library(utils) # for R_DEFAULT_PACKAGES=NULL
 
 
 ###################################################
@@ -72,7 +73,7 @@ str(Mg2@x) # length 13, was 16
 ###################################################
 ### code chunk number 10: image
 ###################################################
-data(CAex)
+data(CAex, package = "Matrix")
 print(image(CAex, main = "image(CAex)")) # print(.) needed for Sweave
 
 
