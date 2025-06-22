@@ -19,7 +19,7 @@ dat <- data.frame(
           -0.49, -2.39, -2.67,-0.71, -0.4, 2.55, 0.97, 1.96, 8.13, -5.93, 4.01, 0.79,
           -5.61, 0.29, 4.92, -2.89, -3.24, -3.06, -0.23, 0.71, 0.75, 4.6, 1.35, -3.35),
     f.block = rep(1:4, 24),
-    id = paste0("a", rep(c(2,1,3), each = 4)))
+    id = factor(paste0("a", rep(c(2,1,3), each = 4))))
 
 dd <- dat
 set.seed(33)
@@ -42,9 +42,6 @@ try(nlme(y ~ fpl.B.range(x,A,B,C,D), data = dd,
 #     control= nlmeControl(## NB: msMaxIter=200, ## gives singularity error at iter.55
 #         msVerbose=TRUE), #==> passed as 'trace' to nlminb()
          verbose = TRUE)) -> res
-## now (2021-09-23) ends in
-## Error in contr.treatment(n = 0L) : not enough degrees of freedom to define contrasts
-
 
 ## it stalls, I need to kill the R process
 ## --  [on lynne Fedora 26 (4.14.11-200.fc26.x86_64), Jan.2018]

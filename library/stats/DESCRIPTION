@@ -1,13 +1,15 @@
 Package: stats
-Version: 4.3.0
+Version: 4.5.1
 Priority: base
 Title: The R Stats Package
 Author: R Core Team and contributors worldwide
 Maintainer: R Core Team <do-use-Contact-address@r-project.org>
 Contact: R-help mailing list <r-help@r-project.org>
 Description: R statistical functions.
-License: Part of R 4.3.0
+License: Part of R 4.5.1
 Imports: utils, grDevices, graphics
 Suggests: MASS, Matrix, SuppDists, methods, stats4
 NeedsCompilation: yes
-Built: R 4.3.0; x86_64-w64-mingw32; 2023-04-21 09:19:18 UTC; windows
+Encoding: UTF-8
+Enhances: Kendall, coin, multcomp, pcaPP, pspearman, robustbase
+Built: R 4.5.1; x86_64-w64-mingw32; 2025-06-13 07:48:24 UTC; windows

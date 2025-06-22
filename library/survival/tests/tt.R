@@ -84,3 +84,12 @@ fit5b <-  coxph(Surv(tstart, futime, status) ~ x + ns2(c.age)+ offset(grp/10)
                 , data=data2)
 aeq(coef(fit5a), coef(fit5b))
 aeq(vcov(fit5a), vcov(fit5b))
+
+# Check that strata is correct
+fit6a <- coxph(Surv(futime, status) ~ x + tt(age) + strata(grp), tdata,
+               tt = function(x, t, ...) (x+t)^2)
+fit6b <- coxph(Surv(tstart, futime, status) ~ x + I(c.age^2) +strata(grp), data2)
+aeq(coef(fit6a), coef(fit6b))
+aeq(vcov(fit6a), vcov(fit6b))
+
+                                             

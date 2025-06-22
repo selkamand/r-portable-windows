@@ -1,7 +1,8 @@
 library(nlme)
+
+## from example(nlme.nlsList)
 fm1 <- nlsList(SSasymp, Loblolly)
 fm1
-system.time(cnL1 <- confint(fm1)) # 0.48 sec
 
 stopifnot(
     all.equal(as.matrix(coef(fm1)),
@@ -19,15 +20,24 @@ stopifnot(
     ,
     all.equal(pooledSD(fm1), structure(0.70039649, df = 42), tol = 1e-5)
     ,
-    84 == sum(vapply(lapply(fm1, fitted), length, 1L)) # total deg.freedom
-   , ## confint() :
-    is.list(cnL1), identical(names(cnL1), names(fm1)),
-    vapply(cnL1, is.matrix, NA),
-    vapply(cnL1, dim, c(NA,0L)) == 3:2,
-    identical(unname(sapply(cnL1, dim)), matrix(3:2, 2, length(fm1))),
-    sapply(cnL1, is.finite)
-    )
+    84 == sum(lengths(lapply(fm1, fitted))) # total deg.freedom
+)
 
+## confint():
+if (getRversion() >= "4.4.0" || # confint.nls() taken from MASS
+    (requireNamespace("MASS") && packageVersion("MASS") < "7.3-60.1")) {
+    system.time(cnL1 <- confint(fm1)) # 0.4 sec
+    stopifnot(exprs = {
+        is.list(cnL1)
+        identical(names(cnL1), names(fm1))
+        vapply(cnL1, is.matrix, NA)
+        vapply(cnL1, dim, c(NA,0L)) == 3:2
+        identical(unname(sapply(cnL1, dim)), matrix(3:2, 2, length(fm1)))
+        sapply(cnL1, is.finite)
+    })
+}
+
+## build a random-effects model from the stratified nls fits
 fm2 <- nlme(fm1, random = Asym ~ 1)
 fm2
 stopifnot(
@@ -56,3 +66,31 @@ fm3 <- nlme(height ~ SSasymp(age, Asym, R0, lrc),
 ##   unused argument (groups = ~Seed)
 fm2$origCall <- NULL
 stopifnot(all.equal(fm2, fm3))
+
+
+## reproduce a simple random-intercept lme() using nlme()
+BW1 <- subset(BodyWeight, Diet == 1, -Diet)
+fm1BW.lme <- lme(weight ~ 1, data = BW1, random = ~ 1 | Rat, method = "ML")
+fm1BW.nlme <- nlme(weight ~ b0, fixed = b0 ~ 1, random = b0 ~ 1 | Rat,
+                   data = BW1, start = fixef(fm1BW.lme), method = "ML")
+stopifnot(exprs = {
+    all.equal(logLik(fm1BW.lme), logLik(fm1BW.nlme))
+    all.equal(fixef(fm1BW.lme), fixef(fm1BW.nlme), check.names = FALSE)
+    all.equal(ranef(fm1BW.lme), ranef(fm1BW.nlme), check.attributes = FALSE)
+    all.equal(as.numeric(VarCorr(fm1BW.lme)), as.numeric(VarCorr(fm1BW.nlme)))
+})
+
+## now the same with an additional spatial correlation structure (PR#18192)
+fm2BW.lme <- update(fm1BW.lme, correlation = corExp(form = ~ Time))
+fm2BW.nlme <- try(update(fm1BW.nlme, correlation = corExp(form = ~ Time)))
+## nlme() <= 3.1-166 would sometimes crash with varying memory errors, e.g.:
+## segfault, possibly also reporting many "*** recursive gc invocation",
+## or crash with "corrupted size vs. prev_size" or "double free or corruption (!prev)"
+if (!inherits(fm2BW.nlme, "try-error")) # may not have converged (seen on Apple M1)
+stopifnot(exprs = {
+    all.equal(logLik(fm2BW.lme), logLik(fm2BW.nlme))
+    all.equal(fixef(fm2BW.lme), fixef(fm2BW.nlme), check.names = FALSE)
+    all.equal(ranef(fm2BW.lme), ranef(fm2BW.nlme), check.attributes = FALSE,
+              tolerance = 1e-5) # seen 4e-05
+    all.equal(as.numeric(VarCorr(fm1BW.lme)), as.numeric(VarCorr(fm1BW.nlme)))
+})

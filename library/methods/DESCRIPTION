@@ -1,5 +1,5 @@
 Package: methods
-Version: 4.3.0
+Version: 4.5.1
 Priority: base
 Imports: utils, stats
 Title: Formal Methods and Classes
@@ -10,7 +10,7 @@ Description: Formally defined methods and classes for R objects,
   plus other programming tools, as described in the reference.
 References: John M. Chambers (2008) ``Software for Data Analysis:
         Programming with R''; Springer NY.
-License: Part of R 4.3.0
+License: Part of R 4.5.1
 Suggests: codetools
 NeedsCompilation: yes
-Built: R 4.3.0; x86_64-w64-mingw32; 2023-04-21 09:20:51 UTC; windows
+Built: R 4.5.1; x86_64-w64-mingw32; 2025-06-13 07:49:41 UTC; windows

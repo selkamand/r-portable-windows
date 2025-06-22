@@ -1,7 +1,7 @@
 
-R Under development (unstable) (2022-02-28 r81832) -- "Unsuffered Consequences"
-Copyright (C) 2022 The R Foundation for Statistical Computing
-Platform: x86_64-pc-linux-gnu (64-bit)
+R Under development (unstable) (2024-08-14 r87014) -- "Unsuffered Consequences"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -251,7 +251,7 @@ Number of Groups: 131
 > VarCorr(fm6)
 schoolNR = pdLogChol(IQ.ver.cen) 
             Variance StdDev  Corr  
-(Intercept)  7.66638 2.76882 (Intr)
+(Intercept)  7.66639 2.76882 (Intr)
 IQ.ver.cen   0.17751 0.42132 -0.658
 Residual    41.36242 6.43136       
 
@@ -260,4 +260,4 @@ Residual    41.36242 6.43136
 > 
 > proc.time()
    user  system elapsed 
-  0.514   0.024   0.531 
+  0.846   1.606   0.491 

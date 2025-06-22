@@ -1,4 +1,9 @@
 ### Testing positive definite matrices
+
+## for R_DEFAULT_PACKAGES=NULL :
+library(stats)
+library(utils)
+
 library(Matrix)
 source(system.file("test-tools.R", package = "Matrix"))# identical3() etc
 cat("doExtras:",doExtras,"\n")
@@ -13,20 +18,18 @@ assert.EQ.(c(determinant(h9)$modulus),	-96.7369487, tol = 8e-8)
 
 ## determinant() now working via chol(): ==> h9 now has factorization
 stopifnot(names(h9@factors) == "Cholesky",
-          identical(ch9 <- chol(h9), h9@factors$Cholesky))
-round(ch9, 3) ## round() preserves 'triangular' !
+          identical(ch9 <- Cholesky(h9, perm = FALSE), h9@factors$Cholesky))
 str(f9 <- as(ch9, "dtrMatrix"))
+round(f9, 3) ## round() preserves 'triangular' !
 stopifnot(all.equal(rcond(h9), 9.0938e-13),
           all.equal(rcond(f9), 9.1272e-7, tolerance = 1e-6))# more precision fails
 options(digits=4)
 (cf9 <- crossprod(f9))# looks the same as  h9 :
 assert.EQ.mat(h9, as(cf9,"matrix"), tol=1e-15)
 
-h9. <- round(h9, 2)# actually loses pos.def. "slightly"
-                   # ==> the above may be invalid in the future
-h9p  <- as(h9,  "dppMatrix")
-h9.p <- as(h9., "dppMatrix")
-ch9p <- chol(h9p)
+h9. <- round(h9, 2) # dpo->dsy
+h9p <- pack(h9)
+ch9p <- Cholesky(h9p, perm = FALSE)
 stopifnot(identical(ch9p, h9p@factors$pCholesky),
 	  identical(names(h9p@factors), c("Cholesky", "pCholesky")))
 h4  <- h9.[1:4, 1:4] # this and the next
@@ -49,12 +52,14 @@ pp6 <- as(H6, "dppMatrix")
 po6 <- as(pp6, "dpoMatrix")
 hs <- as(h9p, "dspMatrix")
 stopifnot(names(H6@factors)  == "pCholesky",
-	  names(pp6@factors) == "pCholesky",
-	  names(hs@factors)  == "Cholesky") # for now
+          names(pp6@factors) == "pCholesky",
+          names(hs@factors)  == "Cholesky") # for now
 chol(hs) # and that is cached in 'hs' too :
 stopifnot(names(hs@factors) %in% c("Cholesky","pCholesky"),
-	  all.equal(h9, crossprod(hs@factors$pCholesky), tolerance =1e-13),
-	  all.equal(h9, crossprod(hs@factors$ Cholesky), tolerance =1e-13))
+	  all.equal(h9, crossprod(as(hs@factors$pCholesky, "dtpMatrix")),
+                    tolerance = 1e-13),
+	  all.equal(h9, crossprod(as(hs@factors$ Cholesky, "dtrMatrix")),
+                    tolerance = 1e-13))
 
 hs@x <- 1/h9p@x # is not pos.def. anymore
 validObject(hs) # "but" this does not check

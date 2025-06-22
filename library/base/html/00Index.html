@@ -12,9 +12,9 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;base&rsquo; version 4.3.0</h2>
+</div><h2>Documentation for package &lsquo;base&rsquo; version 4.5.1</h2>
 
-<ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
+<ul><li><a href="../DESCRIPTION" type="text/plain">DESCRIPTION file</a>.</li>
 <li><a href="../demo">Code demos</a>.  Use <a href="../../utils/help/demo">demo()</a> to run them.</li>
 </ul>
 
@@ -151,11 +151,7 @@
 <td>Coerce to a Data Frame</td></tr>
 <tr><td style="width: 25%;"><a href="as.data.frame.html">as.data.frame.AsIs</a></td>
 <td>Coerce to a Data Frame</td></tr>
-<tr><td style="width: 25%;"><a href="Dates.html">as.data.frame.Date</a></td>
-<td>Date Class</td></tr>
-<tr><td style="width: 25%;"><a href="numeric_version.html">as.data.frame.numeric_version</a></td>
-<td>Numeric Versions</td></tr>
-<tr><td style="width: 25%;"><a href="DateTimeClasses.html">as.data.frame.POSIXct</a></td>
+<tr><td style="width: 25%;"><a href="DateTimeClasses.html">as.data.frame.POSIXlt</a></td>
 <td>Date-Time Classes</td></tr>
 <tr><td style="width: 25%;"><a href="table.html">as.data.frame.table</a></td>
 <td>Cross Tabulation and Table Creation</td></tr>
@@ -372,7 +368,7 @@
 <tr><td style="width: 25%;"><a href="capabilities.html">capabilities</a></td>
 <td>Report Capabilities of this Build of R</td></tr>
 <tr><td style="width: 25%;"><a href="chartr.html">casefold</a></td>
-<td>Character Translation and Casefolding</td></tr>
+<td>Character Translation and Case Folding</td></tr>
 <tr><td style="width: 25%;"><a href="cat.html">cat</a></td>
 <td>Concatenate and Print</td></tr>
 <tr><td style="width: 25%;"><a href="cbind.html">cbind</a></td>
@@ -390,7 +386,7 @@
 <tr><td style="width: 25%;"><a href="rawConversion.html">charToRaw</a></td>
 <td>Convert to or from (Bit/Packed) Raw Vectors</td></tr>
 <tr><td style="width: 25%;"><a href="chartr.html">chartr</a></td>
-<td>Character Translation and Casefolding</td></tr>
+<td>Character Translation and Case Folding</td></tr>
 <tr><td style="width: 25%;"><a href="chkDots.html">chkDots</a></td>
 <td>Warn About Extraneous Arguments in the "..." of Its Caller</td></tr>
 <tr><td style="width: 25%;"><a href="chol.html">chol</a></td>
@@ -482,7 +478,7 @@
 <tr><td style="width: 25%;"><a href="Trig.html">cospi</a></td>
 <td>Trigonometric Functions</td></tr>
 <tr><td style="width: 25%;"><a href="crossprod.html">crossprod</a></td>
-<td>Matrix Crossproduct</td></tr>
+<td>Matrix Cross-Product</td></tr>
 <tr><td style="width: 25%;"><a href="StackOverflows.html">CStackOverflowError</a></td>
 <td>Stack Overflow Errors</td></tr>
 <tr><td style="width: 25%;"><a href="Cstack_info.html">Cstack_info</a></td>
@@ -528,6 +524,8 @@
 <td>Debug a Function</td></tr>
 <tr><td style="width: 25%;"><a href="debug.html">debugonce</a></td>
 <td>Debug a Function</td></tr>
+<tr><td style="width: 25%;"><a href="declare.html">declare</a></td>
+<td>Declarations</td></tr>
 <tr><td style="width: 25%;"><a href="Defunct.html">Defunct</a></td>
 <td>Marking Objects as Defunct</td></tr>
 <tr><td style="width: 25%;"><a href="Defunct.html">defunct</a></td>
@@ -657,6 +655,8 @@
 <td>Evaluate an (Unevaluated) Expression</td></tr>
 <tr><td style="width: 25%;"><a href="eval.html">evalq</a></td>
 <td>Evaluate an (Unevaluated) Expression</td></tr>
+<tr><td style="width: 25%;"><a href="Tailcall.html">Exec</a></td>
+<td>'Tailcall' and 'Exec'</td></tr>
 <tr><td style="width: 25%;"><a href="exists.html">exists</a></td>
 <td>Is an Object Defined?</td></tr>
 <tr><td style="width: 25%;"><a href="Log.html">exp</a></td>
@@ -855,6 +855,8 @@
 <td>Pattern Matching and Replacement</td></tr>
 <tr><td style="width: 25%;"><a href="grepRaw.html">grepRaw</a></td>
 <td>Pattern Matching for Raw Vectors</td></tr>
+<tr><td style="width: 25%;"><a href="grep.html">grepv</a></td>
+<td>Pattern Matching and Replacement</td></tr>
 <tr><td style="width: 25%;"><a href="groupGeneric.html">group generic</a></td>
 <td>S3 Group Generic Functions</td></tr>
 <tr><td style="width: 25%;"><a href="groupGeneric.html">groupGeneric</a></td>
@@ -1017,8 +1019,6 @@
 <td>Is an Object of Type (Primitive) Function?</td></tr>
 <tr><td style="width: 25%;"><a href="qr.html">is.qr</a></td>
 <td>The QR Decomposition of a Matrix</td></tr>
-<tr><td style="width: 25%;"><a href="isR.html">is.R</a></td>
-<td>Are we using R, rather than S?</td></tr>
 <tr><td style="width: 25%;"><a href="raw.html">is.raw</a></td>
 <td>Raw Vectors</td></tr>
 <tr><td style="width: 25%;"><a href="is.recursive.html">is.recursive</a></td>
@@ -1224,9 +1224,9 @@
 <tr><td style="width: 25%;"><a href="mapply.html">mapply</a></td>
 <td>Apply a Function to Multiple List or Vector Arguments</td></tr>
 <tr><td style="width: 25%;"><a href="marginSums.html">margin.table</a></td>
-<td>Compute table margins</td></tr>
+<td>Compute Table Margins</td></tr>
 <tr><td style="width: 25%;"><a href="marginSums.html">marginSums</a></td>
-<td>Compute table margins</td></tr>
+<td>Compute Table Margins</td></tr>
 <tr><td style="width: 25%;"><a href="mat.or.vec.html">mat.or.vec</a></td>
 <td>Create a Matrix or a Vector</td></tr>
 <tr><td style="width: 25%;"><a href="match.html">match</a></td>
@@ -1967,6 +1967,8 @@
 <td>Sorting or Ordering Vectors</td></tr>
 <tr><td style="width: 25%;"><a href="order.html">sort.list</a></td>
 <td>Ordering Permutation</td></tr>
+<tr><td style="width: 25%;"><a href="sort_by.html">sort_by</a></td>
+<td>Sorting Vectors or Data Frames by Other Vectors</td></tr>
 <tr><td style="width: 25%;"><a href="source.html">source</a></td>
 <td>Read R Code from a File, a Connection or Expressions</td></tr>
 <tr><td style="width: 25%;"><a href="Special.html">Special</a></td>
@@ -2068,6 +2070,8 @@
 <tr><td style="width: 25%;"><a href="Dates.html">summary.Date</a></td>
 <td>Date Class</td></tr>
 <tr><td style="width: 25%;"><a href="difftime.html">Summary.difftime</a></td>
+<td>Time Intervals / Differences</td></tr>
+<tr><td style="width: 25%;"><a href="difftime.html">summary.difftime</a></td>
 <td>Time Intervals / Differences</td></tr>
 <tr><td style="width: 25%;"><a href="factor.html">Summary.factor</a></td>
 <td>Factors</td></tr>
@@ -2178,6 +2182,8 @@
 <td>Cross Tabulation and Table Creation</td></tr>
 <tr><td style="width: 25%;"><a href="tabulate.html">tabulate</a></td>
 <td>Tabulation for Vectors</td></tr>
+<tr><td style="width: 25%;"><a href="Tailcall.html">Tailcall</a></td>
+<td>'Tailcall' and 'Exec'</td></tr>
 <tr><td style="width: 25%;"><a href="Trig.html">tan</a></td>
 <td>Trigonometric Functions</td></tr>
 <tr><td style="width: 25%;"><a href="Hyperbolic.html">tanh</a></td>
@@ -2189,7 +2195,7 @@
 <tr><td style="width: 25%;"><a href="taskCallbackManager.html">taskCallbackManager</a></td>
 <td>Create an R-level Task Callback Manager</td></tr>
 <tr><td style="width: 25%;"><a href="crossprod.html">tcrossprod</a></td>
-<td>Matrix Crossproduct</td></tr>
+<td>Matrix Cross-Product</td></tr>
 <tr><td style="width: 25%;"><a href="tempfile.html">tempdir</a></td>
 <td>Create Names for Temporary Files</td></tr>
 <tr><td style="width: 25%;"><a href="tempfile.html">tempfile</a></td>
@@ -2215,13 +2221,13 @@
 <tr><td style="width: 25%;"><a href="EnvVar.html">TMPDIR</a></td>
 <td>Environment Variables</td></tr>
 <tr><td style="width: 25%;"><a href="chartr.html">tolower</a></td>
-<td>Character Translation and Casefolding</td></tr>
+<td>Character Translation and Case Folding</td></tr>
 <tr><td style="width: 25%;"><a href="ns-topenv.html">topenv</a></td>
 <td>Top Level Environment</td></tr>
 <tr><td style="width: 25%;"><a href="toString.html">toString</a></td>
 <td>Convert an R Object to a Character String</td></tr>
 <tr><td style="width: 25%;"><a href="chartr.html">toupper</a></td>
-<td>Character Translation and Casefolding</td></tr>
+<td>Character Translation and Case Folding</td></tr>
 <tr><td style="width: 25%;"><a href="trace.html">trace</a></td>
 <td>Interactive Tracing and Debugging of Calls to a Function or Method</td></tr>
 <tr><td style="width: 25%;"><a href="traceback.html">traceback</a></td>
@@ -2315,6 +2321,8 @@
 <td>Lower and Upper Triangular Part of a Matrix</td></tr>
 <tr><td style="width: 25%;"><a href="connections.html">url</a></td>
 <td>Functions to Manipulate Connections (Files, URLs, ...)</td></tr>
+<tr><td style="width: 25%;"><a href="use.html">use</a></td>
+<td>Use Packages</td></tr>
 <tr><td style="width: 25%;"><a href="UseMethod.html">UseMethod</a></td>
 <td>Class Methods</td></tr>
 <tr><td style="width: 25%;"><a href="UTF8filepaths.html">UTF-8 file path</a></td>
@@ -2401,6 +2409,8 @@
 <table style="width: 100%;">
 <tr><td style="width: 25%;"><a href="zapsmall.html">zapsmall</a></td>
 <td>Rounding of Numbers: Zapping Small Ones to Zero</td></tr>
+<tr><td style="width: 25%;"><a href="connections.html">zstdfile</a></td>
+<td>Functions to Manipulate Connections (Files, URLs, ...)</td></tr>
 </table>
 
 <h2><a id="misc">-- misc --</a></h2>
@@ -2440,6 +2450,8 @@
 <td>Outer Product of Arrays</td></tr>
 <tr><td style="width: 25%;"><a href="kronecker.html">%x%</a></td>
 <td>Kronecker Products on Arrays</td></tr>
+<tr><td style="width: 25%;"><a href="Control.html">%||%</a></td>
+<td>Control Flow</td></tr>
 <tr><td style="width: 25%;"><a href="Logic.html">&amp;</a></td>
 <td>Logical Operators</td></tr>
 <tr><td style="width: 25%;"><a href="Logic.html">&amp;&amp;</a></td>
@@ -2546,6 +2558,8 @@
 <td>Condition Handling and Recovery</td></tr>
 <tr><td style="width: 25%;"><a href="Internal.html">.Internal</a></td>
 <td>Call an Internal Function</td></tr>
+<tr><td style="width: 25%;"><a href="InternalMethods.html">.internalGenerics</a></td>
+<td>Internal Generic Functions</td></tr>
 <tr><td style="width: 25%;"><a href="srcfile.html">.isOpen</a></td>
 <td>References to Source Files and Code</td></tr>
 <tr><td style="width: 25%;"><a href="kappa.html">.kappa_tri</a></td>
@@ -2604,6 +2618,8 @@
 <td>Look Up a Primitive Function</td></tr>
 <tr><td style="width: 25%;"><a href="Random.html">.Random.seed</a></td>
 <td>Random Number Generation</td></tr>
+<tr><td style="width: 25%;"><a href="range.html">.rangeNum</a></td>
+<td>Range of Values</td></tr>
 <tr><td style="width: 25%;"><a href="Startup.html">.Renviron</a></td>
 <td>Initialization at Start of an R Session</td></tr>
 <tr><td style="width: 25%;"><a href="row.html">.row</a></td>

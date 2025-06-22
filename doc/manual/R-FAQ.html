@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
-<!-- Created by GNU Texinfo 7.0.2, https://www.gnu.org/software/texinfo/ -->
+<!-- Created by GNU Texinfo 7.2, https://www.gnu.org/software/texinfo/ -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>R FAQ</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="R FAQ">
 <meta name="keywords" content="R FAQ">
 <meta name="resource-type" content="document">
@@ -15,6 +14,7 @@
 
 <link href="#Top" rel="start" title="Top">
 <link href="#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="../html/index.html" rel="up" title="(dir)">
 <link href="#Introduction" rel="next" title="Introduction">
 <style type="text/css">
 <!--
@@ -26,6 +26,7 @@ kbd.key {font-style: normal}
 pre.display-preformatted {font-family: inherit}
 span.r {font-family: initial; font-weight: normal; font-style: normal}
 span:hover a.copiable-link {visibility: visible}
+table.cartouche {border-style: solid; border-radius: 0.5em}
 ul.mark-bullet {list-style-type: disc}
 ul.toc-numbered-mark {list-style: none}
 body {
@@ -33,7 +34,7 @@ body {
     margin-right: 5%;
 }
 
-h1 {
+h1 {             
     background: white;
     color: rgb(25%, 25%, 25%);
     font-family: monospace;
@@ -82,7 +83,23 @@ span.env {
     font-family: monospace;
 }
 
-#Top > .header, #Top > h1 {     /* for Texinfo 6.8 */
+ul {
+    margin-top: 0.25ex;
+    margin-bottom: 0.25ex;
+}
+
+li {
+    margin-top: 0.25ex;
+    margin-bottom: 0.25ex;
+}
+
+p {
+    margin-top: 0.6ex;
+    margin-bottom: 1.2ex;
+}
+
+/* hide top navigation bar in Texinfo >= 6.8 output */
+#Top > .header, #Top > .nav-panel {
     display: none
 }
 
@@ -108,152 +125,161 @@ span.env {
 
 
 
-<h2>Frequently Asked Questions on R</h2>
-<h3 style="text-align: center;">Version 2022-09-08</h3>
-<h3 style="text-align: center;">Kurt Hornik and the R Core Team</h3>
-<hr>
+
+
+
+
+
+
+
+
+
 
 
 <div class="top-level-extent" id="Top">
 <div class="nav-panel">
 <p>
-Next: <a href="#Introduction" accesskey="n" rel="next">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+Next: <a href="#Introduction" accesskey="n" rel="next">Introduction</a>, Up: <a href="../html/index.html" accesskey="u" rel="up">(dir)</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h1 class="top" id="R-FAQ">R FAQ</h1>
+<h1 class="top" id="R-FAQ"><span>R FAQ<a class="copiable-link" href="#R-FAQ"> &para;</a></span></h1>
+
+<p>This document contains answers to some of the most frequently asked
+questions about R.
+</p>
 
 
-<div class="element-contents" id="SEC_Contents">
+<div class="region-contents" id="SEC_Contents">
 <h2 class="contents-heading">Table of Contents</h2>
 
 <div class="contents">
 
 <ul class="toc-numbered-mark">
-  <li><a id="toc-Introduction-1" href="#Introduction">1 Introduction</a>
+  <li><a id="toc-Introduction" href="#Introduction">1 Introduction</a>
   <ul class="toc-numbered-mark">
-    <li><a id="toc-Legalese-1" href="#Legalese">1.1 Legalese</a></li>
-    <li><a id="toc-Obtaining-this-document-1" href="#Obtaining-this-document">1.2 Obtaining this document</a></li>
-    <li><a id="toc-Citing-this-document-1" href="#Citing-this-document">1.3 Citing this document</a></li>
-    <li><a id="toc-Notation-1" href="#Notation">1.4 Notation</a></li>
-    <li><a id="toc-Feedback-1" href="#Feedback">1.5 Feedback</a></li>
+    <li><a id="toc-Legalese" href="#Legalese">1.1 Legalese</a></li>
+    <li><a id="toc-Obtaining-this-document" href="#Obtaining-this-document">1.2 Obtaining this document</a></li>
+    <li><a id="toc-Citing-this-document" href="#Citing-this-document">1.3 Citing this document</a></li>
+    <li><a id="toc-Notation" href="#Notation">1.4 Notation</a></li>
+    <li><a id="toc-Feedback" href="#Feedback">1.5 Feedback</a></li>
   </ul></li>
-  <li><a id="toc-R-Basics-1" href="#R-Basics">2 R Basics</a>
+  <li><a id="toc-R-Basics" href="#R-Basics">2 R Basics</a>
   <ul class="toc-numbered-mark">
-    <li><a id="toc-What-is-R_003f-1" href="#What-is-R_003f">2.1 What is R?</a></li>
-    <li><a id="toc-What-machines-does-R-run-on_003f-1" href="#What-machines-does-R-run-on_003f">2.2 What machines does R run on?</a></li>
-    <li><a id="toc-What-is-the-current-version-of-R_003f-1" href="#What-is-the-current-version-of-R_003f">2.3 What is the current version of R?</a></li>
-    <li><a id="toc-How-can-R-be-obtained_003f-1" href="#How-can-R-be-obtained_003f">2.4 How can R be obtained?</a></li>
-    <li><a id="toc-How-can-R-be-installed_003f-1" href="#How-can-R-be-installed_003f">2.5 How can R be installed?</a>
+    <li><a id="toc-What-is-R_003f" href="#What-is-R_003f">2.1 What is R?</a></li>
+    <li><a id="toc-What-machines-does-R-run-on_003f" href="#What-machines-does-R-run-on_003f">2.2 What machines does R run on?</a></li>
+    <li><a id="toc-What-is-the-current-version-of-R_003f" href="#What-is-the-current-version-of-R_003f">2.3 What is the current version of R?</a></li>
+    <li><a id="toc-How-can-R-be-obtained_003f" href="#How-can-R-be-obtained_003f">2.4 How can R be obtained?</a></li>
+    <li><a id="toc-How-can-R-be-installed_003f" href="#How-can-R-be-installed_003f">2.5 How can R be installed?</a>
     <ul class="toc-numbered-mark">
-      <li><a id="toc-How-can-R-be-installed-_0028Unix_002dlike_0029-1" href="#How-can-R-be-installed-_0028Unix_002dlike_0029">2.5.1 How can R be installed (Unix-like)</a></li>
-      <li><a id="toc-How-can-R-be-installed-_0028Windows_0029-1" href="#How-can-R-be-installed-_0028Windows_0029">2.5.2 How can R be installed (Windows)</a></li>
-      <li><a id="toc-How-can-R-be-installed-_0028Mac_0029-1" href="#How-can-R-be-installed-_0028Mac_0029">2.5.3 How can R be installed (Mac)</a></li>
+      <li><a id="toc-How-can-R-be-installed-_0028Unix_002dlike_0029" href="#How-can-R-be-installed-_0028Unix_002dlike_0029">2.5.1 How can R be installed (Unix-like)</a></li>
+      <li><a id="toc-How-can-R-be-installed-_0028Windows_0029" href="#How-can-R-be-installed-_0028Windows_0029">2.5.2 How can R be installed (Windows)</a></li>
+      <li><a id="toc-How-can-R-be-installed-_0028Mac_0029" href="#How-can-R-be-installed-_0028Mac_0029">2.5.3 How can R be installed (Mac)</a></li>
     </ul></li>
-    <li><a id="toc-Are-there-Unix_002dlike-binaries-for-R_003f-1" href="#Are-there-Unix_002dlike-binaries-for-R_003f">2.6 Are there Unix-like binaries for R?</a></li>
-    <li><a id="toc-What-documentation-exists-for-R_003f-1" href="#What-documentation-exists-for-R_003f">2.7 What documentation exists for R?</a></li>
-    <li><a id="toc-Citing-R-1" href="#Citing-R">2.8 Citing R</a></li>
-    <li><a id="toc-What-mailing-lists-exist-for-R_003f-1" href="#What-mailing-lists-exist-for-R_003f">2.9 What mailing lists exist for R?</a></li>
-    <li><a id="toc-What-is-CRAN_003f-1" href="#What-is-CRAN_003f">2.10 What is <abbr class="acronym">CRAN</abbr>?</a></li>
-    <li><a id="toc-Can-I-use-R-for-commercial-purposes_003f-1" href="#Can-I-use-R-for-commercial-purposes_003f">2.11 Can I use R for commercial purposes?</a></li>
-    <li><a id="toc-Why-is-R-named-R_003f-1" href="#Why-is-R-named-R_003f">2.12 Why is R named R?</a></li>
-    <li><a id="toc-What-is-the-R-Foundation_003f-1" href="#What-is-the-R-Foundation_003f">2.13 What is the R Foundation?</a></li>
-    <li><a id="toc-What-is-R_002dForge_003f-1" href="#What-is-R_002dForge_003f">2.14 What is R-Forge?</a></li>
+    <li><a id="toc-Are-there-Unix_002dlike-binaries-for-R_003f" href="#Are-there-Unix_002dlike-binaries-for-R_003f">2.6 Are there Unix-like binaries for R?</a></li>
+    <li><a id="toc-What-documentation-exists-for-R_003f" href="#What-documentation-exists-for-R_003f">2.7 What documentation exists for R?</a></li>
+    <li><a id="toc-Citing-R" href="#Citing-R">2.8 Citing R</a></li>
+    <li><a id="toc-What-mailing-lists-exist-for-R_003f" href="#What-mailing-lists-exist-for-R_003f">2.9 What mailing lists exist for R?</a></li>
+    <li><a id="toc-What-is-CRAN_003f" href="#What-is-CRAN_003f">2.10 What is <abbr class="acronym">CRAN</abbr>?</a></li>
+    <li><a id="toc-Can-I-use-R-for-commercial-purposes_003f" href="#Can-I-use-R-for-commercial-purposes_003f">2.11 Can I use R for commercial purposes?</a></li>
+    <li><a id="toc-Why-is-R-named-R_003f" href="#Why-is-R-named-R_003f">2.12 Why is R named R?</a></li>
+    <li><a id="toc-What-is-the-R-Foundation_003f" href="#What-is-the-R-Foundation_003f">2.13 What is the R Foundation?</a></li>
+    <li><a id="toc-What-is-R_002dForge_003f" href="#What-is-R_002dForge_003f">2.14 What is R-Forge?</a></li>
   </ul></li>
-  <li><a id="toc-R-and-S-1" href="#R-and-S">3 R and S</a>
+  <li><a id="toc-R-and-S" href="#R-and-S">3 R and S</a>
   <ul class="toc-numbered-mark">
-    <li><a id="toc-What-is-S_003f-1" href="#What-is-S_003f">3.1 What is S?</a></li>
-    <li><a id="toc-What-is-S_002dPLUS_003f-1" href="#What-is-S_002dPLUS_003f">3.2 What is <small class="sc">S-PLUS</small>?</a></li>
-    <li><a id="toc-What-are-the-differences-between-R-and-S_003f-1" href="#What-are-the-differences-between-R-and-S_003f">3.3 What are the differences between R and S?</a>
+    <li><a id="toc-What-is-S_003f" href="#What-is-S_003f">3.1 What is S?</a></li>
+    <li><a id="toc-What-is-S_002dPlus_003f" href="#What-is-S_002dPLUS_003f">3.2 What is <small class="sc">S-PLUS</small>?</a></li>
+    <li><a id="toc-What-are-the-differences-between-R-and-S_003f" href="#What-are-the-differences-between-R-and-S_003f">3.3 What are the differences between R and S?</a>
     <ul class="toc-numbered-mark">
-      <li><a id="toc-Lexical-scoping-1" href="#Lexical-scoping">3.3.1 Lexical scoping</a></li>
-      <li><a id="toc-Models-1" href="#Models">3.3.2 Models</a></li>
-      <li><a id="toc-Others-1" href="#Others">3.3.3 Others</a></li>
+      <li><a id="toc-Lexical-scoping" href="#Lexical-scoping">3.3.1 Lexical scoping</a></li>
+      <li><a id="toc-Models" href="#Models">3.3.2 Models</a></li>
+      <li><a id="toc-Others" href="#Others">3.3.3 Others</a></li>
     </ul></li>
-    <li><a id="toc-Is-there-anything-R-can-do-that-S_002dPLUS-cannot_003f-1" href="#Is-there-anything-R-can-do-that-S_002dPLUS-cannot_003f">3.4 Is there anything R can do that <small class="sc">S-PLUS</small> cannot?</a></li>
-    <li><a id="toc-What-is-R_002dplus_003f-1" href="#What-is-R_002dplus_003f">3.5 What is R-plus?</a></li>
+    <li><a id="toc-Is-there-anything-R-can-do-that-S_002dPlus-cannot_003f" href="#Is-there-anything-R-can-do-that-S_002dPLUS-cannot_003f">3.4 Is there anything R can do that <small class="sc">S-PLUS</small> cannot?</a></li>
+    <li><a id="toc-What-is-R_002dplus_003f" href="#What-is-R_002dplus_003f">3.5 What is R-plus?</a></li>
   </ul></li>
-  <li><a id="toc-R-Web-Interfaces-1" href="#R-Web-Interfaces">4 R Web Interfaces</a></li>
-  <li><a id="toc-R-Add_002dOn-Packages-1" href="#R-Add_002dOn-Packages">5 R Add-On Packages</a>
+  <li><a id="toc-R-Web-Interfaces" href="#R-Web-Interfaces">4 R Web Interfaces</a></li>
+  <li><a id="toc-R-Add_002dOn-Packages" href="#R-Add_002dOn-Packages">5 R Add-On Packages</a>
   <ul class="toc-numbered-mark">
-    <li><a id="toc-Which-add_002don-packages-exist-for-R_003f-1" href="#Which-add_002don-packages-exist-for-R_003f">5.1 Which add-on packages exist for R?</a>
+    <li><a id="toc-Which-add_002don-packages-exist-for-R_003f" href="#Which-add_002don-packages-exist-for-R_003f">5.1 Which add-on packages exist for R?</a>
     <ul class="toc-numbered-mark">
-      <li><a id="toc-Add_002don-packages-in-R-1" href="#Add_002don-packages-in-R">5.1.1 Add-on packages in R</a></li>
-      <li><a id="toc-Add_002don-packages-from-CRAN-1" href="#Add_002don-packages-from-CRAN">5.1.2 Add-on packages from <abbr class="acronym">CRAN</abbr></a></li>
-      <li><a id="toc-Add_002don-packages-from-Bioconductor-1" href="#Add_002don-packages-from-Bioconductor">5.1.3 Add-on packages from Bioconductor</a></li>
-      <li><a id="toc-Other-add_002don-packages-1" href="#Other-add_002don-packages">5.1.4 Other add-on packages</a></li>
+      <li><a id="toc-Add_002don-packages-in-R" href="#Add_002don-packages-in-R">5.1.1 Add-on packages in R</a></li>
+      <li><a id="toc-Add_002don-packages-from-CRAN" href="#Add_002don-packages-from-CRAN">5.1.2 Add-on packages from <abbr class="acronym">CRAN</abbr></a></li>
+      <li><a id="toc-Add_002don-packages-from-Bioconductor" href="#Add_002don-packages-from-Bioconductor">5.1.3 Add-on packages from Bioconductor</a></li>
+      <li><a id="toc-Other-add_002don-packages" href="#Other-add_002don-packages">5.1.4 Other add-on packages</a></li>
     </ul></li>
-    <li><a id="toc-How-can-add_002don-packages-be-installed_003f-1" href="#How-can-add_002don-packages-be-installed_003f">5.2 How can add-on packages be installed?</a></li>
-    <li><a id="toc-How-can-add_002don-packages-be-used_003f-1" href="#How-can-add_002don-packages-be-used_003f">5.3 How can add-on packages be used?</a></li>
-    <li><a id="toc-How-can-add_002don-packages-be-removed_003f-1" href="#How-can-add_002don-packages-be-removed_003f">5.4 How can add-on packages be removed?</a></li>
-    <li><a id="toc-How-can-I-create-an-R-package_003f-1" href="#How-can-I-create-an-R-package_003f">5.5 How can I create an R package?</a></li>
-    <li><a id="toc-How-can-I-contribute-to-R_003f-1" href="#How-can-I-contribute-to-R_003f">5.6 How can I contribute to R?</a></li>
+    <li><a id="toc-How-can-add_002don-packages-be-installed_003f" href="#How-can-add_002don-packages-be-installed_003f">5.2 How can add-on packages be installed?</a></li>
+    <li><a id="toc-How-can-add_002don-packages-be-used_003f" href="#How-can-add_002don-packages-be-used_003f">5.3 How can add-on packages be used?</a></li>
+    <li><a id="toc-How-can-add_002don-packages-be-removed_003f" href="#How-can-add_002don-packages-be-removed_003f">5.4 How can add-on packages be removed?</a></li>
+    <li><a id="toc-How-can-I-create-an-R-package_003f" href="#How-can-I-create-an-R-package_003f">5.5 How can I create an R package?</a></li>
+    <li><a id="toc-How-can-I-contribute-to-R_003f" href="#How-can-I-contribute-to-R_003f">5.6 How can I contribute to R?</a></li>
   </ul></li>
-  <li><a id="toc-R-and-Emacs-1" href="#R-and-Emacs">6 R and Emacs</a>
+  <li><a id="toc-R-and-Emacs" href="#R-and-Emacs">6 R and Emacs</a>
   <ul class="toc-numbered-mark">
-    <li><a id="toc-Is-there-Emacs-support-for-R_003f-1" href="#Is-there-Emacs-support-for-R_003f">6.1 Is there Emacs support for R?</a></li>
-    <li><a id="toc-Should-I-run-R-from-within-Emacs_003f-1" href="#Should-I-run-R-from-within-Emacs_003f">6.2 Should I run R from within Emacs?</a></li>
-    <li><a id="toc-Debugging-R-from-within-Emacs-1" href="#Debugging-R-from-within-Emacs">6.3 Debugging R from within Emacs</a></li>
+    <li><a id="toc-Is-there-Emacs-support-for-R_003f" href="#Is-there-Emacs-support-for-R_003f">6.1 Is there Emacs support for R?</a></li>
+    <li><a id="toc-Should-I-run-R-from-within-Emacs_003f" href="#Should-I-run-R-from-within-Emacs_003f">6.2 Should I run R from within Emacs?</a></li>
+    <li><a id="toc-Debugging-R-from-within-Emacs" href="#Debugging-R-from-within-Emacs">6.3 Debugging R from within Emacs</a></li>
   </ul></li>
-  <li><a id="toc-R-Miscellanea-1" href="#R-Miscellanea">7 R Miscellanea</a>
+  <li><a id="toc-R-Miscellanea" href="#R-Miscellanea">7 R Miscellanea</a>
   <ul class="toc-numbered-mark">
-    <li><a id="toc-How-can-I-set-components-of-a-list-to-NULL_003f-1" href="#How-can-I-set-components-of-a-list-to-NULL_003f">7.1 How can I set components of a list to NULL?</a></li>
-    <li><a id="toc-How-can-I-save-my-workspace_003f-1" href="#How-can-I-save-my-workspace_003f">7.2 How can I save my workspace?</a></li>
-    <li><a id="toc-How-can-I-clean-up-my-workspace_003f-1" href="#How-can-I-clean-up-my-workspace_003f">7.3 How can I clean up my workspace?</a></li>
-    <li><a id="toc-How-can-I-get-eval_0028_0029-and-D_0028_0029-to-work_003f-1" href="#How-can-I-get-eval_0028_0029-and-D_0028_0029-to-work_003f">7.4 How can I get eval() and D() to work?</a></li>
-    <li><a id="toc-Why-do-my-matrices-lose-dimensions_003f-1" href="#Why-do-my-matrices-lose-dimensions_003f">7.5 Why do my matrices lose dimensions?</a></li>
-    <li><a id="toc-How-does-autoloading-work_003f-1" href="#How-does-autoloading-work_003f">7.6 How does autoloading work?</a></li>
-    <li><a id="toc-How-should-I-set-options_003f-1" href="#How-should-I-set-options_003f">7.7 How should I set options?</a></li>
-    <li><a id="toc-How-do-file-names-work-in-Windows_003f-1" href="#How-do-file-names-work-in-Windows_003f">7.8 How do file names work in Windows?</a></li>
-    <li><a id="toc-Why-does-plotting-give-a-color-allocation-error_003f-1" href="#Why-does-plotting-give-a-color-allocation-error_003f">7.9 Why does plotting give a color allocation error?</a></li>
-    <li><a id="toc-How-do-I-convert-factors-to-numeric_003f-1" href="#How-do-I-convert-factors-to-numeric_003f">7.10 How do I convert factors to numeric?</a></li>
-    <li><a id="toc-Are-Trellis-displays-implemented-in-R_003f-1" href="#Are-Trellis-displays-implemented-in-R_003f">7.11 Are Trellis displays implemented in R?</a></li>
-    <li><a id="toc-What-are-the-enclosing-and-parent-environments_003f-1" href="#What-are-the-enclosing-and-parent-environments_003f">7.12 What are the enclosing and parent environments?</a></li>
-    <li><a id="toc-How-can-I-substitute-into-a-plot-label_003f-1" href="#How-can-I-substitute-into-a-plot-label_003f">7.13 How can I substitute into a plot label?</a></li>
-    <li><a id="toc-What-are-valid-names_003f-1" href="#What-are-valid-names_003f">7.14 What are valid names?</a></li>
-    <li><a id="toc-Are-GAMs-implemented-in-R_003f-1" href="#Are-GAMs-implemented-in-R_003f">7.15 Are GAMs implemented in R?</a></li>
-    <li><a id="toc-Why-is-the-output-not-printed-when-I-source_0028_0029-a-file_003f-1" href="#Why-is-the-output-not-printed-when-I-source_0028_0029-a-file_003f">7.16 Why is the output not printed when I source() a file?</a></li>
-    <li><a id="toc-Why-does-outer_0028_0029-behave-strangely-with-my-function_003f-1" href="#Why-does-outer_0028_0029-behave-strangely-with-my-function_003f">7.17 Why does outer() behave strangely with my function?</a></li>
-    <li><a id="toc-Why-does-the-output-from-anova_0028_0029-depend-on-the-order-of-factors-in-the-model_003f-1" href="#Why-does-the-output-from-anova_0028_0029-depend-on-the-order-of-factors-in-the-model_003f">7.18 Why does the output from anova() depend on the order of factors in the model?</a></li>
-    <li><a id="toc-How-do-I-produce-PNG-graphics-in-batch-mode_003f-1" href="#How-do-I-produce-PNG-graphics-in-batch-mode_003f">7.19 How do I produce PNG graphics in batch mode?</a></li>
-    <li><a id="toc-How-can-I-get-command-line-editing-to-work_003f-1" href="#How-can-I-get-command-line-editing-to-work_003f">7.20 How can I get command line editing to work?</a></li>
-    <li><a id="toc-How-can-I-turn-a-string-into-a-variable_003f-1" href="#How-can-I-turn-a-string-into-a-variable_003f">7.21 How can I turn a string into a variable?</a></li>
-    <li><a id="toc-Why-do-lattice_002ftrellis-graphics-not-work_003f-1" href="#Why-do-lattice_002ftrellis-graphics-not-work_003f">7.22 Why do lattice/trellis graphics not work?</a></li>
-    <li><a id="toc-How-can-I-sort-the-rows-of-a-data-frame_003f-1" href="#How-can-I-sort-the-rows-of-a-data-frame_003f">7.23 How can I sort the rows of a data frame?</a></li>
-    <li><a id="toc-Why-does-the-help_002estart_0028_0029-search-engine-not-work_003f-1" href="#Why-does-the-help_002estart_0028_0029-search-engine-not-work_003f">7.24 Why does the help.start() search engine not work?</a></li>
-    <li><a id="toc-Why-did-my-_002eRprofile-stop-working-when-I-updated-R_003f-1" href="#Why-did-my-_002eRprofile-stop-working-when-I-updated-R_003f">7.25 Why did my .Rprofile stop working when I updated R?</a></li>
-    <li><a id="toc-Where-have-all-the-methods-gone_003f-1" href="#Where-have-all-the-methods-gone_003f">7.26 Where have all the methods gone?</a></li>
-    <li><a id="toc-How-can-I-create-rotated-axis-labels_003f-1" href="#How-can-I-create-rotated-axis-labels_003f">7.27 How can I create rotated axis labels?</a></li>
-    <li><a id="toc-Why-is-read_002etable_0028_0029-so-inefficient_003f-1" href="#Why-is-read_002etable_0028_0029-so-inefficient_003f">7.28 Why is read.table() so inefficient?</a></li>
-    <li><a id="toc-What-is-the-difference-between-package-and-library_003f-1" href="#What-is-the-difference-between-package-and-library_003f">7.29 What is the difference between package and library?</a></li>
-    <li><a id="toc-I-installed-a-package-but-the-functions-are-not-there-1" href="#I-installed-a-package-but-the-functions-are-not-there">7.30 I installed a package but the functions are not there</a></li>
-    <li><a id="toc-Why-doesn_0027t-R-think-these-numbers-are-equal_003f-1" href="#Why-doesn_0027t-R-think-these-numbers-are-equal_003f">7.31 Why doesn&rsquo;t R think these numbers are equal?</a></li>
-    <li><a id="toc-How-can-I-capture-or-ignore-errors-in-a-long-simulation_003f-1" href="#How-can-I-capture-or-ignore-errors-in-a-long-simulation_003f">7.32 How can I capture or ignore errors in a long simulation?</a></li>
-    <li><a id="toc-Why-are-powers-of-negative-numbers-wrong_003f-1" href="#Why-are-powers-of-negative-numbers-wrong_003f">7.33 Why are powers of negative numbers wrong?</a></li>
-    <li><a id="toc-How-can-I-save-the-result-of-each-iteration-in-a-loop-into-a-separate-file_003f-1" href="#How-can-I-save-the-result-of-each-iteration-in-a-loop-into-a-separate-file_003f">7.34 How can I save the result of each iteration in a loop into a separate file?</a></li>
-    <li><a id="toc-Why-are-p_002dvalues-not-displayed-when-using-lmer_0028_0029_003f-1" href="#Why-are-p_002dvalues-not-displayed-when-using-lmer_0028_0029_003f">7.35 Why are <em class="math">p</em>-values not displayed when using lmer()?</a></li>
+    <li><a id="toc-How-can-I-set-components-of-a-list-to-NULL_003f" href="#How-can-I-set-components-of-a-list-to-NULL_003f">7.1 How can I set components of a list to NULL?</a></li>
+    <li><a id="toc-How-can-I-save-my-workspace_003f" href="#How-can-I-save-my-workspace_003f">7.2 How can I save my workspace?</a></li>
+    <li><a id="toc-How-can-I-clean-up-my-workspace_003f" href="#How-can-I-clean-up-my-workspace_003f">7.3 How can I clean up my workspace?</a></li>
+    <li><a id="toc-How-can-I-get-eval_0028_0029-and-D_0028_0029-to-work_003f" href="#How-can-I-get-eval_0028_0029-and-D_0028_0029-to-work_003f">7.4 How can I get <code class="code">eval()</code> and <code class="code">D()</code> to work?</a></li>
+    <li><a id="toc-Why-do-my-matrices-lose-dimensions_003f" href="#Why-do-my-matrices-lose-dimensions_003f">7.5 Why do my matrices lose dimensions?</a></li>
+    <li><a id="toc-How-does-autoloading-work_003f" href="#How-does-autoloading-work_003f">7.6 How does autoloading work?</a></li>
+    <li><a id="toc-How-should-I-set-options_003f" href="#How-should-I-set-options_003f">7.7 How should I set options?</a></li>
+    <li><a id="toc-How-do-file-names-work-in-Windows_003f" href="#How-do-file-names-work-in-Windows_003f">7.8 How do file names work in Windows?</a></li>
+    <li><a id="toc-Why-does-plotting-give-a-color-allocation-error_003f" href="#Why-does-plotting-give-a-color-allocation-error_003f">7.9 Why does plotting give a color allocation error?</a></li>
+    <li><a id="toc-How-do-I-convert-factors-to-numeric_003f" href="#How-do-I-convert-factors-to-numeric_003f">7.10 How do I convert factors to numeric?</a></li>
+    <li><a id="toc-Are-Trellis-displays-implemented-in-R_003f" href="#Are-Trellis-displays-implemented-in-R_003f">7.11 Are Trellis displays implemented in R?</a></li>
+    <li><a id="toc-What-are-the-enclosing-and-parent-environments_003f" href="#What-are-the-enclosing-and-parent-environments_003f">7.12 What are the enclosing and parent environments?</a></li>
+    <li><a id="toc-How-can-I-substitute-into-a-plot-label_003f" href="#How-can-I-substitute-into-a-plot-label_003f">7.13 How can I substitute into a plot label?</a></li>
+    <li><a id="toc-What-are-valid-names_003f" href="#What-are-valid-names_003f">7.14 What are valid names?</a></li>
+    <li><a id="toc-Are-GAMs-implemented-in-R_003f" href="#Are-GAMs-implemented-in-R_003f">7.15 Are GAMs<!-- /@w --> implemented in R?</a></li>
+    <li><a id="toc-Why-is-the-output-not-printed-when-I-source_0028_0029-a-file_003f" href="#Why-is-the-output-not-printed-when-I-source_0028_0029-a-file_003f">7.16 Why is the output not printed when I source() a file?</a></li>
+    <li><a id="toc-Why-does-outer_0028_0029-behave-strangely-with-my-function_003f" href="#Why-does-outer_0028_0029-behave-strangely-with-my-function_003f">7.17 Why does outer() behave strangely with my function?</a></li>
+    <li><a id="toc-Why-does-the-output-from-anova_0028_0029-depend-on-the-order-of-factors-in-the-model_003f" href="#Why-does-the-output-from-anova_0028_0029-depend-on-the-order-of-factors-in-the-model_003f">7.18 Why does the output from <code class="code">anova()</code> depend on the order of factors in the model?</a></li>
+    <li><a id="toc-How-do-I-produce-PNG-graphics-in-batch-mode_003f" href="#How-do-I-produce-PNG-graphics-in-batch-mode_003f">7.19 How do I produce PNG graphics in batch mode?</a></li>
+    <li><a id="toc-How-can-I-get-command-line-editing-to-work_003f" href="#How-can-I-get-command-line-editing-to-work_003f">7.20 How can I get command line editing to work?</a></li>
+    <li><a id="toc-How-can-I-turn-a-string-into-a-variable_003f" href="#How-can-I-turn-a-string-into-a-variable_003f">7.21 How can I turn a string into a variable?</a></li>
+    <li><a id="toc-Why-do-lattice_002ftrellis-graphics-not-work_003f" href="#Why-do-lattice_002ftrellis-graphics-not-work_003f">7.22 Why do lattice/trellis graphics not work?</a></li>
+    <li><a id="toc-How-can-I-sort-the-rows-of-a-data-frame_003f" href="#How-can-I-sort-the-rows-of-a-data-frame_003f">7.23 How can I sort the rows of a data frame?</a></li>
+    <li><a id="toc-Why-does-the-help_002estart_0028_0029-search-engine-not-work_003f" href="#Why-does-the-help_002estart_0028_0029-search-engine-not-work_003f">7.24 Why does the help.start() search engine not work?</a></li>
+    <li><a id="toc-Why-did-my-_002eRprofile-stop-working-when-I-updated-R_003f" href="#Why-did-my-_002eRprofile-stop-working-when-I-updated-R_003f">7.25 Why did my .Rprofile stop working when I updated R?</a></li>
+    <li><a id="toc-Where-have-all-the-methods-gone_003f" href="#Where-have-all-the-methods-gone_003f">7.26 Where have all the methods gone?</a></li>
+    <li><a id="toc-How-can-I-create-rotated-axis-labels_003f" href="#How-can-I-create-rotated-axis-labels_003f">7.27 How can I create rotated axis labels?</a></li>
+    <li><a id="toc-Why-is-read_002etable_0028_0029-so-inefficient_003f" href="#Why-is-read_002etable_0028_0029-so-inefficient_003f">7.28 Why is read.table() so inefficient?</a></li>
+    <li><a id="toc-What-is-the-difference-between-package-and-library_003f" href="#What-is-the-difference-between-package-and-library_003f">7.29 What is the difference between package and library?</a></li>
+    <li><a id="toc-I-installed-a-package-but-the-functions-are-not-there" href="#I-installed-a-package-but-the-functions-are-not-there">7.30 I installed a package but the functions are not there</a></li>
+    <li><a id="toc-Why-doesn_0027t-R-think-these-numbers-are-equal_003f" href="#Why-doesn_0027t-R-think-these-numbers-are-equal_003f">7.31 Why doesn&rsquo;t R think these numbers are equal?</a></li>
+    <li><a id="toc-How-can-I-capture-or-ignore-errors-in-a-long-simulation_003f" href="#How-can-I-capture-or-ignore-errors-in-a-long-simulation_003f">7.32 How can I capture or ignore errors in a long simulation?</a></li>
+    <li><a id="toc-Why-are-powers-of-negative-numbers-wrong_003f" href="#Why-are-powers-of-negative-numbers-wrong_003f">7.33 Why are powers of negative numbers wrong?</a></li>
+    <li><a id="toc-How-can-I-save-the-result-of-each-iteration-in-a-loop-into-a-separate-file_003f" href="#How-can-I-save-the-result-of-each-iteration-in-a-loop-into-a-separate-file_003f">7.34 How can I save the result of each iteration in a loop into a separate file?</a></li>
+    <li><a id="toc-Why-are-p_002dvalues-not-displayed-when-using-lmer_0028_0029_003f" href="#Why-are-p_002dvalues-not-displayed-when-using-lmer_0028_0029_003f">7.35 Why are <em class="math">p</em>-values not displayed when using <code class="code">lmer()</code>?</a></li>
     <li><a id="toc-Why-are-there-unwanted-borders_002c-lines-or-grid_002dlike-artifacts-when-viewing-a-plot-saved-to-a-PS-or-PDF-file_003f" href="#Why-are-there-unwanted-borders">7.36 Why are there unwanted borders, lines or grid-like artifacts when viewing a plot saved to a PS or PDF file?</a></li>
-    <li><a id="toc-Why-does-backslash-behave-strangely-inside-strings_003f-1" href="#Why-does-backslash-behave-strangely-inside-strings_003f">7.37 Why does backslash behave strangely inside strings?</a></li>
-    <li><a id="toc-How-can-I-put-error-bars-or-confidence-bands-on-my-plot_003f-1" href="#How-can-I-put-error-bars-or-confidence-bands-on-my-plot_003f">7.38 How can I put error bars or confidence bands on my plot?</a></li>
-    <li><a id="toc-How-do-I-create-a-plot-with-two-y_002daxes_003f-1" href="#How-do-I-create-a-plot-with-two-y_002daxes_003f">7.39 How do I create a plot with two y-axes?</a></li>
-    <li><a id="toc-How-do-I-access-the-source-code-for-a-function_003f-1" href="#How-do-I-access-the-source-code-for-a-function_003f">7.40 How do I access the source code for a function?</a></li>
-    <li><a id="toc-Why-does-summary_0028_0029-report-strange-results-for-the-R_005e2-estimate-when-I-fit-a-linear-model-with-no-intercept_003f-1" href="#Why-does-summary_0028_0029-report-strange-results-for-the-R_005e2-estimate-when-I-fit-a-linear-model-with-no-intercept_003f">7.41 Why does summary() report strange results for the R^2 estimate when I fit a linear model with no intercept?</a></li>
-    <li><a id="toc-Why-is-R-apparently-not-releasing-memory_003f-1" href="#Why-is-R-apparently-not-releasing-memory_003f">7.42 Why is R apparently not releasing memory?</a></li>
-    <li><a id="toc-How-can-I-enable-secure-https-downloads-in-R_003f-1" href="#How-can-I-enable-secure-https-downloads-in-R_003f">7.43 How can I enable secure https downloads in R?</a></li>
-    <li><a id="toc-How-can-I-get-CRAN-package-binaries-for-outdated-versions-of-R_003f-1" href="#How-can-I-get-CRAN-package-binaries-for-outdated-versions-of-R_003f">7.44 How can I get CRAN package binaries for outdated versions of R?</a></li>
+    <li><a id="toc-Why-does-backslash-behave-strangely-inside-strings_003f" href="#Why-does-backslash-behave-strangely-inside-strings_003f">7.37 Why does backslash behave strangely inside strings?</a></li>
+    <li><a id="toc-How-can-I-put-error-bars-or-confidence-bands-on-my-plot_003f" href="#How-can-I-put-error-bars-or-confidence-bands-on-my-plot_003f">7.38 How can I put error bars or confidence bands on my plot?</a></li>
+    <li><a id="toc-How-do-I-create-a-plot-with-two-y_002daxes_003f" href="#How-do-I-create-a-plot-with-two-y_002daxes_003f">7.39 How do I create a plot with two y-axes?</a></li>
+    <li><a id="toc-How-do-I-access-the-source-code-for-a-function_003f" href="#How-do-I-access-the-source-code-for-a-function_003f">7.40 How do I access the source code for a function?</a></li>
+    <li><a id="toc-Why-does-summary_0028_0029-report-strange-results-for-the-R_005e2-estimate-when-I-fit-a-linear-model-with-no-intercept_003f" href="#Why-does-summary_0028_0029-report-strange-results-for-the-R_005e2-estimate-when-I-fit-a-linear-model-with-no-intercept_003f">7.41 Why does summary() report strange results for the R^2 estimate when I fit a linear model with no intercept?</a></li>
+    <li><a id="toc-Why-is-R-apparently-not-releasing-memory_003f" href="#Why-is-R-apparently-not-releasing-memory_003f">7.42 Why is R apparently not releasing memory?</a></li>
+    <li><a id="toc-How-can-I-enable-secure-https-downloads-in-R_003f" href="#How-can-I-enable-secure-https-downloads-in-R_003f">7.43 How can I enable secure https downloads in R?</a></li>
+    <li><a id="toc-How-can-I-get-CRAN-package-binaries-for-outdated-versions-of-R_003f" href="#How-can-I-get-CRAN-package-binaries-for-outdated-versions-of-R_003f">7.44 How can I get CRAN package binaries for outdated versions of R?</a></li>
   </ul></li>
-  <li><a id="toc-R-Programming-1" href="#R-Programming">8 R Programming</a>
+  <li><a id="toc-R-Programming" href="#R-Programming">8 R Programming</a>
   <ul class="toc-numbered-mark">
-    <li><a id="toc-How-should-I-write-summary-methods_003f-1" href="#How-should-I-write-summary-methods_003f">8.1 How should I write summary methods?</a></li>
-    <li><a id="toc-How-can-I-debug-dynamically-loaded-code_003f-1" href="#How-can-I-debug-dynamically-loaded-code_003f">8.2 How can I debug dynamically loaded code?</a></li>
-    <li><a id="toc-How-can-I-inspect-R-objects-when-debugging_003f-1" href="#How-can-I-inspect-R-objects-when-debugging_003f">8.3 How can I inspect R objects when debugging?</a></li>
-    <li><a id="toc-How-can-I-change-compilation-flags_003f-1" href="#How-can-I-change-compilation-flags_003f">8.4 How can I change compilation flags?</a></li>
-    <li><a id="toc-How-can-I-debug-S4-methods_003f-1" href="#How-can-I-debug-S4-methods_003f">8.5 How can I debug S4 methods?</a></li>
+    <li><a id="toc-How-should-I-write-summary-methods_003f" href="#How-should-I-write-summary-methods_003f">8.1 How should I write summary methods?</a></li>
+    <li><a id="toc-How-can-I-debug-dynamically-loaded-code_003f" href="#How-can-I-debug-dynamically-loaded-code_003f">8.2 How can I debug dynamically loaded code?</a></li>
+    <li><a id="toc-How-can-I-inspect-R-objects-when-debugging_003f" href="#How-can-I-inspect-R-objects-when-debugging_003f">8.3 How can I inspect R objects when debugging?</a></li>
+    <li><a id="toc-How-can-I-change-compilation-flags_003f" href="#How-can-I-change-compilation-flags_003f">8.4 How can I change compilation flags?</a></li>
+    <li><a id="toc-How-can-I-debug-S4-methods_003f" href="#How-can-I-debug-S4-methods_003f">8.5 How can I debug S4 methods?</a></li>
   </ul></li>
-  <li><a id="toc-R-Bugs-1" href="#R-Bugs">9 R Bugs</a>
+  <li><a id="toc-R-Bugs" href="#R-Bugs">9 R Bugs</a>
   <ul class="toc-numbered-mark">
-    <li><a id="toc-What-is-a-bug_003f-1" href="#What-is-a-bug_003f">9.1 What is a bug?</a></li>
-    <li><a id="toc-How-to-report-a-bug-1" href="#How-to-report-a-bug">9.2 How to report a bug</a></li>
+    <li><a id="toc-What-is-a-bug_003f" href="#What-is-a-bug_003f">9.1 What is a bug?</a></li>
+    <li><a id="toc-How-to-report-a-bug" href="#How-to-report-a-bug">9.2 How to report a bug</a></li>
   </ul></li>
-  <li><a id="toc-Acknowledgments-1" href="#Acknowledgments">10 Acknowledgments</a></li>
+  <li><a id="toc-Acknowledgments" href="#Acknowledgments">Acknowledgments</a></li>
 </ul>
 </div>
 </div>
@@ -263,11 +289,8 @@ Next: <a href="#Introduction" accesskey="n" rel="next">Introduction</a> &nbsp; [
 <p>
 Next: <a href="#R-Basics" accesskey="n" rel="next">R Basics</a>, Previous: <a href="#Top" accesskey="p" rel="prev">R FAQ</a>, Up: <a href="#Top" accesskey="u" rel="up">R FAQ</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h2 class="chapter" id="Introduction-1">1 Introduction</h2>
+<h2 class="chapter" id="Introduction-1"><span>1 Introduction<a class="copiable-link" href="#Introduction-1"> &para;</a></span></h2>
 
-<p>This document contains answers to some of the most frequently asked
-questions about R.
-</p>
 
 <ul class="mini-toc">
 <li><a href="#Legalese" accesskey="1">Legalese</a></li>
@@ -280,12 +303,12 @@ questions about R.
 <div class="section-level-extent" id="Legalese">
 <div class="nav-panel">
 <p>
-Next: <a href="#Obtaining-this-document" accesskey="n" rel="next">Obtaining this document</a>, Previous: <a href="#Introduction" accesskey="p" rel="prev">Introduction</a>, Up: <a href="#Introduction" accesskey="u" rel="up">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+Next: <a href="#Obtaining-this-document" accesskey="n" rel="next">Obtaining this document</a>, Up: <a href="#Introduction" accesskey="u" rel="up">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Legalese-1">1.1 Legalese</h3>
+<h3 class="section" id="Legalese-1"><span>1.1 Legalese<a class="copiable-link" href="#Legalese-1"> &para;</a></span></h3>
 
 <p>Copyright &copy; 1998&ndash;2020 Kurt Hornik <br>
-Copyright &copy; 2021&ndash;2022 R Core Team
+Copyright &copy; 2021&ndash;2025 R Core Team
 </p>
 <p>This document is free software; you can redistribute it and/or modify it
 under the terms of the <abbr class="acronym">GNU</abbr> General Public License as published
@@ -304,7 +327,6 @@ available at
 <pre class="display-preformatted"><a class="url" href="https://www.R-project.org/Licenses/">https://www.R-project.org/Licenses/</a>
 </pre></div>
 
-
 <hr>
 </div>
 <div class="section-level-extent" id="Obtaining-this-document">
@@ -312,25 +334,17 @@ available at
 <p>
 Next: <a href="#Citing-this-document" accesskey="n" rel="next">Citing this document</a>, Previous: <a href="#Legalese" accesskey="p" rel="prev">Legalese</a>, Up: <a href="#Introduction" accesskey="u" rel="up">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Obtaining-this-document-1">1.2 Obtaining this document</h3>
+<h3 class="section" id="Obtaining-this-document-1"><span>1.2 Obtaining this document<a class="copiable-link" href="#Obtaining-this-document-1"> &para;</a></span></h3>
 
 <p>The latest version of this document is always available from
 </p>
 <div class="display">
-<pre class="display-preformatted"><a class="url" href="https://CRAN.R-project.org/doc/FAQ/">https://CRAN.R-project.org/doc/FAQ/</a>
+<pre class="display-preformatted"><a class="url" href="https://CRAN.R-project.org/doc/manuals/">https://CRAN.R-project.org/doc/manuals/</a>
 </pre></div>
 
 <p>From there, you can obtain versions converted to
-<a class="url" href="https://CRAN.R-project.org/doc/FAQ/R-FAQ.txt">plain
-<abbr class="acronym">ASCII</abbr> text</a>,
-<a class="url" href="https://CRAN.R-project.org/doc/FAQ/R-FAQ.info.gz"><abbr class="acronym">GNU</abbr>
-info</a>, <a class="url" href="https://CRAN.R-project.org/doc/FAQ/R-FAQ.html"><abbr class="acronym">HTML</abbr></a>,
-<a class="url" href="https://CRAN.R-project.org/doc/FAQ/R-FAQ.pdf">PDF</a>,
-as well as the <a class="url" href="https://CRAN.R-project.org/doc/FAQ/R-FAQ.texi">Texinfo source</a> used for creating all these formats using the
-<abbr class="acronym">GNU</abbr> Texinfo system.
-</p>
-<p>You can also obtain the R <abbr class="acronym">FAQ</abbr> from the <samp class="file">doc/FAQ</samp>
-subdirectory of a <abbr class="acronym">CRAN</abbr> site (see <a class="pxref" href="#What-is-CRAN_003f">What is <abbr class="acronym">CRAN</abbr>?</a>).
+<a class="url" href="https://CRAN.R-project.org/doc/manuals/R-FAQ.html"><abbr class="acronym">HTML</abbr></a> and
+<a class="url" href="https://CRAN.R-project.org/doc/manuals/R-FAQ.pdf">PDF</a>.
 </p>
 <hr>
 </div>
@@ -339,21 +353,20 @@ subdirectory of a <abbr class="acronym">CRAN</abbr> site (see <a class="pxref" h
 <p>
 Next: <a href="#Notation" accesskey="n" rel="next">Notation</a>, Previous: <a href="#Obtaining-this-document" accesskey="p" rel="prev">Obtaining this document</a>, Up: <a href="#Introduction" accesskey="u" rel="up">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Citing-this-document-1">1.3 Citing this document</h3>
+<h3 class="section" id="Citing-this-document-1"><span>1.3 Citing this document<a class="copiable-link" href="#Citing-this-document-1"> &para;</a></span></h3>
 
 <p>In publications, please refer to this <abbr class="acronym">FAQ</abbr> as Hornik and R Core Team
-(2022), &ldquo;The R <abbr class="acronym">FAQ</abbr>&rdquo;, and give the above,
+(2024), &ldquo;The R <abbr class="acronym">FAQ</abbr>&rdquo;, and give the above,
 <em class="emph">official</em> <abbr class="acronym">URL</abbr>:
 </p>
 <div class="example">
 <div class="group"><pre class="example-preformatted">@Misc{,
   author        = {Kurt Hornik and the R Core Team},
   title         = {{R} {FAQ}},
-  year          = {2022},
-  url           = {https://CRAN.R-project.org/doc/FAQ/R-FAQ.html}
+  year          = {2024},
+  url           = {https://CRAN.R-project.org/doc/manuals/R-FAQ.html}
 }
 </pre></div></div>
-
 
 <hr>
 </div>
@@ -362,7 +375,7 @@ Next: <a href="#Notation" accesskey="n" rel="next">Notation</a>, Previous: <a hr
 <p>
 Next: <a href="#Feedback" accesskey="n" rel="next">Feedback</a>, Previous: <a href="#Citing-this-document" accesskey="p" rel="prev">Citing this document</a>, Up: <a href="#Introduction" accesskey="u" rel="up">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Notation-1">1.4 Notation</h3>
+<h3 class="section" id="Notation-1"><span>1.4 Notation<a class="copiable-link" href="#Notation-1"> &para;</a></span></h3>
 
 <p>Everything should be pretty standard.  &lsquo;<samp class="samp">R&gt;</samp>&rsquo; is used for the R
 prompt, and a &lsquo;<samp class="samp">$</samp>&rsquo; for the shell prompt (where applicable).
@@ -374,7 +387,7 @@ prompt, and a &lsquo;<samp class="samp">$</samp>&rsquo; for the shell prompt (wh
 <p>
 Previous: <a href="#Notation" accesskey="p" rel="prev">Notation</a>, Up: <a href="#Introduction" accesskey="u" rel="up">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Feedback-1">1.5 Feedback</h3>
+<h3 class="section" id="Feedback-1"><span>1.5 Feedback<a class="copiable-link" href="#Feedback-1"> &para;</a></span></h3>
 
 <p>Feedback via email to <a class="email" href="mailto:R-devel@R-project.org">R-devel@R-project.org</a> is most welcome.
 </p>
@@ -388,6 +401,8 @@ systems that you think should be added to this document, please let us
 know.
 </p>
 
+
+
 <hr>
 </div>
 </div>
@@ -396,7 +411,7 @@ know.
 <p>
 Next: <a href="#R-and-S" accesskey="n" rel="next">R and S</a>, Previous: <a href="#Introduction" accesskey="p" rel="prev">Introduction</a>, Up: <a href="#Top" accesskey="u" rel="up">R FAQ</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h2 class="chapter" id="R-Basics-1">2 R Basics</h2>
+<h2 class="chapter" id="R-Basics-1"><span>2 R Basics<a class="copiable-link" href="#R-Basics-1"> &para;</a></span></h2>
 
 
 <ul class="mini-toc">
@@ -419,9 +434,9 @@ Next: <a href="#R-and-S" accesskey="n" rel="next">R and S</a>, Previous: <a href
 <div class="section-level-extent" id="What-is-R_003f">
 <div class="nav-panel">
 <p>
-Next: <a href="#What-machines-does-R-run-on_003f" accesskey="n" rel="next">What machines does R run on?</a>, Previous: <a href="#R-Basics" accesskey="p" rel="prev">R Basics</a>, Up: <a href="#R-Basics" accesskey="u" rel="up">R Basics</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+Next: <a href="#What-machines-does-R-run-on_003f" accesskey="n" rel="next">What machines does R run on?</a>, Up: <a href="#R-Basics" accesskey="u" rel="up">R Basics</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="What-is-R_003f-1">2.1 What is R?</h3>
+<h3 class="section" id="What-is-R_003f-1"><span>2.1 What is R?<a class="copiable-link" href="#What-is-R_003f-1"> &para;</a></span></h3>
 
 <p>R is a system for statistical computation and graphics.  It consists of
 a language plus a run-time environment with graphics, a debugger, access
@@ -455,12 +470,36 @@ Zealand.  In addition, a large group of individuals has contributed to R
 by sending code and bug reports.
 </p>
 <p>Since mid-1997 there has been a core group (the &ldquo;R Core Team&rdquo;) who can
-modify the R source code archive.  The group currently consists of Doug
-Bates, John Chambers, Peter Dalgaard, Robert Gentleman,
-Kurt Hornik, Ross Ihaka, Tomas Kalibera, Michael Lawrence, Friedrich Leisch, Uwe Ligges,
-Thomas Lumley, Martin Maechler, Sebastian Meyer, Paul Murrell, Martyn
-Plummer, Brian Ripley, Deepayan Sarkar, Duncan Temple Lang, Luke
-Tierney, and Simon Urbanek.
+modify the R source code archive, currently consisting of
+</p><div class="display">
+<pre class="display-preformatted">John Chambers,
+Peter Dalgaard,
+Robert Gentleman,
+Kurt Hornik,
+Ross Ihaka,
+Tomas Kalibera,
+Michael Lawrence,
+Uwe Ligges,
+Thomas Lumley,
+Martin Maechler,
+Sebastian Meyer,
+Paul Murrell,
+Martyn Plummer,
+Brian Ripley,
+Deepayan Sarkar,
+Duncan Temple Lang,
+Luke Tierney, and 
+Simon Urbanek,
+</pre></div>
+<p>plus 
+Heiner Schwarte up to October 1999, 
+Guido Masarotto up to June 2003, 
+Stefano Iacus up to July 2014, 
+Seth Falcon up to August 2015, 
+Duncan Murdoch up to September 2017, 
+Martin Morgan up to June 2021,
+Douglas Bates up to March 2024, and 
+Friedrich Leisch up to April 2024.
 </p>
 <p>R has a home page at <a class="url" href="https://www.R-project.org/">https://www.R-project.org/</a>.  It is
 <a class="url" href="https://www.gnu.org/philosophy/free-sw.html">free software</a>
@@ -476,20 +515,27 @@ official part of the <a class="url" href="https://www.gnu.org/"><abbr class="acr
 <p>
 Next: <a href="#What-is-the-current-version-of-R_003f" accesskey="n" rel="next">What is the current version of R?</a>, Previous: <a href="#What-is-R_003f" accesskey="p" rel="prev">What is R?</a>, Up: <a href="#R-Basics" accesskey="u" rel="up">R Basics</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="What-machines-does-R-run-on_003f-1">2.2 What machines does R run on?</h3>
+<h3 class="section" id="What-machines-does-R-run-on_003f-1"><span>2.2 What machines does R run on?<a class="copiable-link" href="#What-machines-does-R-run-on_003f-1"> &para;</a></span></h3>
 
 <p>R is being developed for the Unix-like, Windows and Mac families of
 operating systems.  Support for Mac OS Classic ended with R 1.7.1.
 </p>
 <p>The current version of R will configure and build under a number of
 common Unix-like (e.g., <a class="uref" href="https://en.wikipedia.org/wiki/Unix-like">https://en.wikipedia.org/wiki/Unix-like</a>)
-platforms including <var class="var">cpu</var>-linux-gnu for the i386, amd64/x86_64,
-alpha, arm, arm64, hppa, mips/mipsel, powerpc, s390x and sparc
+platforms including <var class="var">cpu</var>-linux-gnu for the i386,
+amd64/x86_64, alpha, arm, arm64, hppa,
+mips/mipsel, powerpc, s390x and sparc
 <abbr class="acronym">CPU</abbr>s (e.g.,
-<a class="url" href="https://buildd.debian.org/build.php?&amp;pkg=r-base">https://buildd.debian.org/build.php?&amp;pkg=r-base</a>), i386-hurd-gnu,
+<a class="url" href="https://buildd.debian.org/build.php?&amp;pkg=r-base">https://buildd.debian.org/build.php?&amp;pkg=r-base</a>), 
+386-hurd-gnu,
 <var class="var">cpu</var>-kfreebsd-gnu for i386 and amd64,
-i386-pc-solaris, rs6000-ibm-aix, sparc-sun-solaris, x86_64-apple-darwin,
-aarch64-apple-darwin, x86_64-unknown-freebsd and x86_64-unknown-openbsd.
+i386-pc-solaris,
+rs6000-ibm-aix,
+sparc-sun-solaris, 
+x86_64-apple-darwin,
+aarch64-apple-darwin, 
+x86_64-unknown-freebsd and 
+x86_64-unknown-openbsd.
 </p>
 
 <p>If you know about other platforms, please drop us a note.
@@ -501,7 +547,7 @@ aarch64-apple-darwin, x86_64-unknown-freebsd and x86_64-unknown-openbsd.
 <p>
 Next: <a href="#How-can-R-be-obtained_003f" accesskey="n" rel="next">How can R be obtained?</a>, Previous: <a href="#What-machines-does-R-run-on_003f" accesskey="p" rel="prev">What machines does R run on?</a>, Up: <a href="#R-Basics" accesskey="u" rel="up">R Basics</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="What-is-the-current-version-of-R_003f-1">2.3 What is the current version of R?</h3>
+<h3 class="section" id="What-is-the-current-version-of-R_003f-1"><span>2.3 What is the current version of R?<a class="copiable-link" href="#What-is-the-current-version-of-R_003f-1"> &para;</a></span></h3>
  
 <p>R uses a &lsquo;major.minor.patchlevel&rsquo; numbering scheme.  Based on this,
 there are the current release version of R (&lsquo;r-release&rsquo;) as well as two
@@ -520,7 +566,7 @@ versions of r-release, r-patched and r-devel.
 <p>
 Next: <a href="#How-can-R-be-installed_003f" accesskey="n" rel="next">How can R be installed?</a>, Previous: <a href="#What-is-the-current-version-of-R_003f" accesskey="p" rel="prev">What is the current version of R?</a>, Up: <a href="#R-Basics" accesskey="u" rel="up">R Basics</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-can-R-be-obtained_003f-1">2.4 How can R be obtained?</h3>
+<h3 class="section" id="How-can-R-be-obtained_003f-1"><span>2.4 How can R be obtained?<a class="copiable-link" href="#How-can-R-be-obtained_003f-1"> &para;</a></span></h3>
 
 <p>Sources, binaries and documentation for R can be obtained via <abbr class="acronym">CRAN</abbr>,
 the &ldquo;Comprehensive R Archive Network&rdquo; (see <a class="ref" href="#What-is-CRAN_003f">What is <abbr class="acronym">CRAN</abbr>?</a>).
@@ -531,6 +577,8 @@ CVS).
 </p>
 <p>Tarballs with daily snapshots of the r-devel and r-patched development
 versions of R can be found at
+<a class="url" href="https://cran.r-project.org/src/base-prerelease/">https://cran.r-project.org/src/base-prerelease/</a>. An alternative
+source is
 <a class="url" href="https://stat.ethz.ch/R/daily/">https://stat.ethz.ch/R/daily/</a>.
 </p>
 
@@ -545,8 +593,7 @@ versions of R can be found at
 <p>
 Next: <a href="#Are-there-Unix_002dlike-binaries-for-R_003f" accesskey="n" rel="next">Are there Unix-like binaries for R?</a>, Previous: <a href="#How-can-R-be-obtained_003f" accesskey="p" rel="prev">How can R be obtained?</a>, Up: <a href="#R-Basics" accesskey="u" rel="up">R Basics</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-can-R-be-installed_003f-1">2.5 How can R be installed?</h3>
-
+<h3 class="section" id="How-can-R-be-installed_003f-1"><span>2.5 How can R be installed?<a class="copiable-link" href="#How-can-R-be-installed_003f-1"> &para;</a></span></h3>
 
 <ul class="mini-toc">
 <li><a href="#How-can-R-be-installed-_0028Unix_002dlike_0029" accesskey="1">How can R be installed (Unix-like)</a></li>
@@ -557,9 +604,9 @@ Next: <a href="#Are-there-Unix_002dlike-binaries-for-R_003f" accesskey="n" rel="
 <div class="subsection-level-extent" id="How-can-R-be-installed-_0028Unix_002dlike_0029">
 <div class="nav-panel">
 <p>
-Next: <a href="#How-can-R-be-installed-_0028Windows_0029" accesskey="n" rel="next">How can R be installed (Windows)</a>, Previous: <a href="#How-can-R-be-installed_003f" accesskey="p" rel="prev">How can R be installed?</a>, Up: <a href="#How-can-R-be-installed_003f" accesskey="u" rel="up">How can R be installed?</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+Next: <a href="#How-can-R-be-installed-_0028Windows_0029" accesskey="n" rel="next">How can R be installed (Windows)</a>, Up: <a href="#How-can-R-be-installed_003f" accesskey="u" rel="up">How can R be installed?</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h4 class="subsection" id="How-can-R-be-installed-_0028Unix_002dlike_0029-1">2.5.1 How can R be installed (Unix-like)</h4>
+<h4 class="subsection" id="How-can-R-be-installed-_0028Unix_002dlike_0029-1"><span>2.5.1 How can R be installed (Unix-like)<a class="copiable-link" href="#How-can-R-be-installed-_0028Unix_002dlike_0029-1"> &para;</a></span></h4>
 
 <p>If R is already installed, it can be started by typing <kbd class="kbd">R</kbd> at the
 shell prompt (of course, provided that the executable is in your path).
@@ -590,15 +637,14 @@ directory.  You can copy the script to a place where users can invoke
 it, for example to <samp class="file">/usr/local/bin</samp>.  In addition,
 <abbr class="acronym">HTML</abbr> versions of the R manuals (e.g., <samp class="file">R-exts.html</samp>, the
 &ldquo;Writing R Extensions&rdquo; manual) are built in the <samp class="file">doc/manual</samp>
-subdirectory.
+subdirectory (if a suitable <code class="command">texi2any</code> program was found).
 </p>
 <p>Use <kbd class="kbd">make pdf</kbd> to build PDF (Portable Document Format)
 versions of the R manuals, including
 <samp class="file">fullrefman.pdf</samp> (an R object reference index).  Manuals written in the
-<abbr class="acronym">GNU</abbr> Texinfo system can also be converted to info files
+<abbr class="acronym">GNU</abbr> Texinfo system can also be converted to <samp class="file">.info</samp> files
 suitable for reading online with Emacs or stand-alone <abbr class="acronym">GNU</abbr>
-Info; use <kbd class="kbd">make info</kbd> to create these versions (note that this
-requires Makeinfo version 4.5).
+Info; use <kbd class="kbd">make info</kbd> to create these files.
 </p>
 <p>Finally, use <kbd class="kbd">make check</kbd> to find out whether your R system works
 correctly.
@@ -641,15 +687,15 @@ respectively.
 <p>
 Next: <a href="#How-can-R-be-installed-_0028Mac_0029" accesskey="n" rel="next">How can R be installed (Mac)</a>, Previous: <a href="#How-can-R-be-installed-_0028Unix_002dlike_0029" accesskey="p" rel="prev">How can R be installed (Unix-like)</a>, Up: <a href="#How-can-R-be-installed_003f" accesskey="u" rel="up">How can R be installed?</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h4 class="subsection" id="How-can-R-be-installed-_0028Windows_0029-1">2.5.2 How can R be installed (Windows)</h4>
+<h4 class="subsection" id="How-can-R-be-installed-_0028Windows_0029-1"><span>2.5.2 How can R be installed (Windows)<a class="copiable-link" href="#How-can-R-be-installed-_0028Windows_0029-1"> &para;</a></span></h4>
 
 <p>The <samp class="file">bin/windows</samp> directory of a <abbr class="acronym">CRAN</abbr> site contains binaries for
 a base distribution and add-on packages from <abbr class="acronym">CRAN</abbr> to run on 64-bit
-versions of Windows 7 and later on x86_64 chips (R 4.1.3 was the last
+versions of Windows 10 and later on x86_64 chips (R 4.1.3 was the last
 version of R to support 32-bit Windows).  The Windows version of R was
-created by Robert Gentleman and Guido Masarotto; Brian Ripley and Duncan
-Murdoch made substantial contributions and it is now being maintained by
-other members of the R Core team.
+created by Robert Gentleman and Guido Masarotto; Brian
+Ripley and Duncan Murdoch made substantial contributions and it is
+now being maintained by other members of the R Core team.
 </p>
 <p>The same directory has links to snapshots of the r-patched and r-devel
 versions of R.
@@ -663,12 +709,12 @@ versions of R.
 <p>
 Previous: <a href="#How-can-R-be-installed-_0028Windows_0029" accesskey="p" rel="prev">How can R be installed (Windows)</a>, Up: <a href="#How-can-R-be-installed_003f" accesskey="u" rel="up">How can R be installed?</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h4 class="subsection" id="How-can-R-be-installed-_0028Mac_0029-1">2.5.3 How can R be installed (Mac)</h4>
+<h4 class="subsection" id="How-can-R-be-installed-_0028Mac_0029-1"><span>2.5.3 How can R be installed (Mac)<a class="copiable-link" href="#How-can-R-be-installed-_0028Mac_0029-1"> &para;</a></span></h4>
 
 <p>The <samp class="file">bin/macosx</samp> directory of a <abbr class="acronym">CRAN</abbr> site contains a standard
 Apple installer package to run on macOS 10.13 (&lsquo;High Sierra&rsquo;) or later,
-and another which runs only on &lsquo;Apple Silicon&rsquo; Macs under macOS 11 (&lsquo;Big
-Sur&rsquo;) or later.  Once downloaded and executed, the installer will
+and another which runs only on &lsquo;Apple Silicon&rsquo; Macs under macOS 11
+(&lsquo;Big Sur&rsquo;) or later.  Once downloaded and executed, the installer will
 install the current release of R and R.app, the macOS <abbr class="acronym">GUI</abbr>.
 This port of R for macOS is maintained by
 <a class="email" href="mailto:Simon.Urbanek@R-project.org">Simon Urbanek</a> (and previously by
@@ -679,6 +725,7 @@ macOS <abbr class="acronym">FAQ</abbr>&rdquo;</a> has more details.
 <p>Snapshots of the r-patched and r-devel versions of R are available as
 Apple installer packages at <a class="uref" href="https://mac.R-project.org">https://mac.R-project.org</a>.
 </p>
+
 <hr>
 </div>
 </div>
@@ -687,26 +734,15 @@ Apple installer packages at <a class="uref" href="https://mac.R-project.org">htt
 <p>
 Next: <a href="#What-documentation-exists-for-R_003f" accesskey="n" rel="next">What documentation exists for R?</a>, Previous: <a href="#How-can-R-be-installed_003f" accesskey="p" rel="prev">How can R be installed?</a>, Up: <a href="#R-Basics" accesskey="u" rel="up">R Basics</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Are-there-Unix_002dlike-binaries-for-R_003f-1">2.6 Are there Unix-like binaries for R?</h3>
-
+<h3 class="section" id="Are-there-Unix_002dlike-binaries-for-R_003f-1"><span>2.6 Are there Unix-like binaries for R?<a class="copiable-link" href="#Are-there-Unix_002dlike-binaries-for-R_003f-1"> &para;</a></span></h3>
 
 <p>Binary distributions of R are available on many Unix-like OSes: only
 some can be mentioned here so check your OS&rsquo;s search facilities to see
 if one is available for yours.
 </p>
-<p>The <samp class="file">bin/linux</samp> directory of a <abbr class="acronym">CRAN</abbr> site contains the following
-packages.
+<p>The <samp class="file">bin/linux</samp> directory of a <abbr class="acronym">CRAN</abbr> site contains R packages for
+Debian and Ubuntu.
 </p>
-<blockquote class="quotation">
-<table summary="" class="multitable">
-<thead><tr><th></th><th>CPU</th><th>Versions</th><th>Provider</th></tr></thead>
-<tbody><tr><td>Debian</td><td>i386/amd64</td><td>squeeze/wheezy</td><td>Johannes Ranke</td></tr>
-<tr><td></td><td>armel</td><td>wheezy</td><td>Johannes Ranke</td></tr>
-<tr><td>Ubuntu</td><td>i386/amd64</td><td>lucid/precise/trusty</td><td>Michael Rutter</td></tr>
-</tbody>
-</table>
-</blockquote>
-
 <p>Debian packages, maintained by Dirk Eddelbuettel, have long been part of
 the Debian distribution, and can be accessed through APT, the Debian
 package maintenance tool.  Use e.g. <code class="code">apt-get install r-base
@@ -719,30 +755,31 @@ available from <abbr class="acronym">CRAN</abbr>.  See
 <a class="url" href="https://CRAN.R-project.org/bin/linux/debian/index.html">https://CRAN.R-project.org/bin/linux/debian/index.html</a> for details on R
 Debian packages and installing the backports, which should also be
 suitable for other Debian derivatives.  Native backports for Ubuntu are
-provided by Michael Rutter.
+provided by Michael Rutter, see
+<a class="url" href="https://CRAN.R-project.org/bin/linux/ubuntu/index.html">https://CRAN.R-project.org/bin/linux/ubuntu/index.html</a> for
+instructions.
 </p>
-<p>R binaries for Fedora, maintained by Tom &ldquo;Spot&rdquo; Callaway, are provided
-as part of the Fedora distribution and can be accessed through
-<code class="command">yum</code>, the RPM installer/updater.  Note that the &ldquo;Software&rdquo;
-application (gnome-software), which is the default <abbr class="acronym">GUI</abbr> for
-software installation in Fedora 20, cannot be used to install R.  It is
-therefore recommended to use the yum command line tool.
-The Fedora R RPM is a &ldquo;meta-package&rdquo; which installs all the user and
-developer components of R (available separately as <code class="code">R-core</code> and
-<code class="code">R-devel</code>), as well as <code class="code">R-java</code>, which ensures that R is
-configured for use with Java.  The R RPM also installs the standalone R
-math library (<code class="code">libRmath</code> and <code class="code">libRmath-devel</code>), although this
-is not necessary to use R.  When a new version of R is released, there
-may be a delay of up to 2 weeks until the Fedora RPM becomes publicly
-available, as it must pass through the Fedora review process.
-RPMs for a selection of R packages are also provided by Fedora.  The
-Extra Packages for Enterprise Linux (EPEL) project
-(<a class="url" href="https://docs.fedoraproject.org/en-US/epel/">https://docs.fedoraproject.org/en-US/epel/</a>) provides ports of the Fedora
-RPMs for RedHat Enterprise Linux and compatible distributions (e.g.,
-Centos, Scientific Linux, Oracle Linux).
-</p>
-<p>See <a class="url" href="https://CRAN.R-project.org/bin/linux/suse/README.html">https://CRAN.R-project.org/bin/linux/suse/README.html</a> for
-information about RPMs for openSUSE.
+<p>R binaries for Fedora, maintained by Tom &ldquo;Spot&rdquo; Callaway and
+Iñaki Ucar, are provided as part of the Fedora distribution and can
+be accessed through <code class="command">dnf</code>, the <abbr class="abbr">RPM</abbr> installer/updater.
+The Fedora R <abbr class="abbr">RPM</abbr> is a &ldquo;meta-package&rdquo; which installs all the
+user and developer components of R (available separately as
+<code class="code">R-core</code> and <code class="code">R-core-devel</code>), as well as <code class="code">R-java</code> and
+<code class="code">R-java-devel</code>, which ensures that R is configured for use with
+Java.  The R <abbr class="abbr">RPM</abbr> also installs the standalone R math library
+(<code class="code">libRmath</code> and <code class="code">libRmath-devel</code>), although this is not
+necessary to use R.  When a new version of R is released, there may be a
+delay of up to 2 weeks until the Fedora <abbr class="abbr">RPM</abbr> becomes publicly
+available, as it must pass through the Fedora update process.
+The Extra Packages for Enterprise Linux (<abbr class="abbr">EPEL</abbr>) project
+(<a class="url" href="https://docs.fedoraproject.org/en-US/epel/">https://docs.fedoraproject.org/en-US/epel/</a>) provides ports of the
+Fedora <abbr class="abbr">RPM</abbr>s for RedHat Enterprise Linux and compatible
+distributions (e.g., CentOS Stream, Scientific Linux, Oracle
+Linux, AlmaLinux, or Rocky Linux among others).
+<abbr class="abbr">RPM</abbr>s for selection of R packages are also provided by Fedora.
+Additional <abbr class="abbr">RPM</abbr>s for R packages are maintained by Iñaki Ucar
+on Fedora Copr.  See <a class="url" href="https://CRAN.R-project.org/bin/linux/fedora/">https://CRAN.R-project.org/bin/linux/fedora/</a>
+for further details and installation instructions.
 </p>
 <p>No other binary distributions are currently publicly available via
 <abbr class="acronym">CRAN</abbr>.
@@ -754,7 +791,7 @@ information about RPMs for openSUSE.
 <p>
 Next: <a href="#Citing-R" accesskey="n" rel="next">Citing R</a>, Previous: <a href="#Are-there-Unix_002dlike-binaries-for-R_003f" accesskey="p" rel="prev">Are there Unix-like binaries for R?</a>, Up: <a href="#R-Basics" accesskey="u" rel="up">R Basics</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="What-documentation-exists-for-R_003f-1">2.7 What documentation exists for R?</h3>
+<h3 class="section" id="What-documentation-exists-for-R_003f-1"><span>2.7 What documentation exists for R?<a class="copiable-link" href="#What-documentation-exists-for-R_003f-1"> &para;</a></span></h3>
 
 <p>Online documentation for most of the functions and variables in R
 exists, and can be printed on-screen by typing <kbd class="kbd">help(<var class="var">name</var>)</kbd>
@@ -803,45 +840,53 @@ can be found at
 <p>Books on R by R Core Team members include
 </p>
 <blockquote class="quotation">
-<p>John M. Chambers (2008), &ldquo;Software for Data Analysis: Programming with
-R&rdquo;.  Springer, New York, ISBN 978-0-387-75935-7,
-<a class="url" href="https://statweb.stanford.edu/~jmc4/Rbook/">https://statweb.stanford.edu/~jmc4/Rbook/</a>.
+<p>John M. Chambers (2008),
+&ldquo;Software for Data Analysis: Programming with R&rdquo;.  
+Springer, New York, ISBN 978-0-387-75935-7,
+<a class="url" href="https://johnmchambers.su.domains/Rbook/">https://johnmchambers.su.domains/Rbook/</a>.
 </p>
-<p>Peter Dalgaard (2008), &ldquo;Introductory Statistics with R&rdquo;, 2nd edition.
+<p>Peter Dalgaard (2008),
+&ldquo;Introductory Statistics with R&rdquo;,
+2nd edition.
 Springer, ISBN 978-0-387-79053-4,
 <a class="url" href="http://publicifsv.sund.ku.dk/~pd/ISwR.html">http://publicifsv.sund.ku.dk/~pd/ISwR.html</a>.
 </p>
-<p>Robert Gentleman (2008), &ldquo;R Programming for Bioinformatics&rdquo;.  Chapman
-&amp; Hall/CRC, Boca Raton, FL, ISBN 978-1-420-06367-7,
-<a class="url" href="https://master.bioconductor.org/help/publications/books/r-programming-for-bioinformatics/">https://master.bioconductor.org/help/publications/books/r-programming-for-bioinformatics/</a>.
+<p>Robert Gentleman (2008),
+&ldquo;R Programming for Bioinformatics&rdquo;.
+Chapman &amp; Hall/CRC, Boca Raton, FL, ISBN 978-1-420-06367-7,
+<a class="url" href="https://bioconductor.org/help/publications/books/r-programming-for-bioinformatics/">https://bioconductor.org/help/publications/books/r-programming-for-bioinformatics/</a>.
 </p>
-<p>Stefano M. Iacus (2008), &ldquo;Simulation and Inference for Stochastic
-Differential Equations: With R Examples&rdquo;. Springer, New York, ISBN
-978-0-387-75838-1.
+<p>Stefano M. Iacus (2008),
+&ldquo;Simulation and Inference for Stochastic Differential Equations: With R
+Examples&rdquo;.
+Springer, New York, ISBN 978-0-387-75838-1.
 </p>
-<p>Deepayan Sarkar (2007), &ldquo;Lattice: Multivariate Data Visualization with
-R&rdquo;. Springer, New York, ISBN 978-0-387-75968-5.
+<p>Deepayan Sarkar (2007),
+&ldquo;Lattice: Multivariate Data Visualization with R&rdquo;.
+Springer, New York, ISBN 978-0-387-75968-5.
 </p>
-<p>W. John Braun and Duncan J. Murdoch (2007), &ldquo;A First Course in
-Statistical Programming with R&rdquo;.  Cambridge University Press,
-Cambridge, ISBN 978-0521872652.
+<p>W. John Braun and Duncan J. Murdoch (2007),
+&ldquo;A First Course in Statistical Programming with R&rdquo;.
+ Cambridge University Press, Cambridge, ISBN 978-0521872652.
 </p>
-<p>P. Murrell (2005), &ldquo;R Graphics&rdquo;, Chapman &amp; Hall/CRC, ISBN:
-1-584-88486-X,
+<p>P. Murrell (2005), &ldquo;R Graphics&rdquo;,
+Chapman &amp; Hall/CRC, ISBN 1-584-88486-X,
 <a class="url" href="https://www.stat.auckland.ac.nz/~paul/RGraphics/rgraphics.html">https://www.stat.auckland.ac.nz/~paul/RGraphics/rgraphics.html</a>.
 </p>
-<p>William N. Venables and Brian D. Ripley (2002), &ldquo;Modern Applied
-Statistics with S&rdquo; (4th edition).  Springer, ISBN 0-387-95457-0,
+<p>William N. Venables and Brian D. Ripley (2002),
+&ldquo;Modern Applied Statistics with S&rdquo; (4th edition).
+Springer, ISBN 0-387-95457-0,
 <a class="url" href="https://www.stats.ox.ac.uk/pub/MASS4/">https://www.stats.ox.ac.uk/pub/MASS4/</a>.
 </p>
-<p>Jose C. Pinheiro and Douglas M. Bates (2000), &ldquo;Mixed-Effects Models in
-S and S-Plus&rdquo;. Springer, ISBN 0-387-98957-0.
+<p>Jose C. Pinheiro and Douglas M. Bates (2000),
+&ldquo;Mixed-Effects Models in S and S-Plus&rdquo;.
+Springer, ISBN 0-387-98957-0.
 </p></blockquote>
 
 <p>Last, but not least, Ross&rsquo; and Robert&rsquo;s experience in designing and
-implementing R is described in Ihaka &amp; Gentleman (1996), &ldquo;R: A Language
-for Data Analysis and Graphics&rdquo;, <em class="emph">Journal of Computational and
-Graphical Statistics</em>, <strong class="strong">5</strong>, 299&ndash;314
+implementing R is described in Ihaka &amp; Gentleman (1996), 
+&ldquo;R: A Language for Data Analysis and Graphics&rdquo;, 
+<em class="emph">Journal of Computational and Graphical Statistics</em>, <strong class="strong">5</strong>, 299&ndash;314
 (doi:&nbsp;<a class="url" href="https://doi.org/10.1080/10618600.1996.10474713">10.1080/10618600.1996.10474713</a>).
 </p>
 <hr>
@@ -851,7 +896,7 @@ Graphical Statistics</em>, <strong class="strong">5</strong>, 299&ndash;314
 <p>
 Next: <a href="#What-mailing-lists-exist-for-R_003f" accesskey="n" rel="next">What mailing lists exist for R?</a>, Previous: <a href="#What-documentation-exists-for-R_003f" accesskey="p" rel="prev">What documentation exists for R?</a>, Up: <a href="#R-Basics" accesskey="u" rel="up">R Basics</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Citing-R-1">2.8 Citing R</h3>
+<h3 class="section" id="Citing-R-1"><span>2.8 Citing R<a class="copiable-link" href="#Citing-R-1"> &para;</a></span></h3>
 
 <p>To cite R in publications, use
 </p>
@@ -879,7 +924,7 @@ obtained by <code class="code">citation()</code>.
 <p>
 Next: <a href="#What-is-CRAN_003f" accesskey="n" rel="next">What is <abbr class="acronym">CRAN</abbr>?</a>, Previous: <a href="#Citing-R" accesskey="p" rel="prev">Citing R</a>, Up: <a href="#R-Basics" accesskey="u" rel="up">R Basics</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="What-mailing-lists-exist-for-R_003f-1">2.9 What mailing lists exist for R?</h3>
+<h3 class="section" id="What-mailing-lists-exist-for-R_003f-1"><span>2.9 What mailing lists exist for R?<a class="copiable-link" href="#What-mailing-lists-exist-for-R_003f-1"> &para;</a></span></h3>
 
 <p>Thanks to <a class="email" href="mailto:Martin.Maechler@R-project.org">Martin Maechler</a>, there
 are several mailing lists devoted to R, including the following:
@@ -953,7 +998,7 @@ the R mailing lists.
 <p>
 Next: <a href="#Can-I-use-R-for-commercial-purposes_003f" accesskey="n" rel="next">Can I use R for commercial purposes?</a>, Previous: <a href="#What-mailing-lists-exist-for-R_003f" accesskey="p" rel="prev">What mailing lists exist for R?</a>, Up: <a href="#R-Basics" accesskey="u" rel="up">R Basics</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="What-is-CRAN_003f-1">2.10 What is <abbr class="acronym">CRAN</abbr>?</h3>
+<h3 class="section" id="What-is-CRAN_003f-1"><span>2.10 What is <abbr class="acronym">CRAN</abbr>?<a class="copiable-link" href="#What-is-CRAN_003f-1"> &para;</a></span></h3>
 
 <p>The &ldquo;Comprehensive R Archive Network&rdquo; (<abbr class="acronym">CRAN</abbr>) is a collection of
 sites which carry identical material, consisting of the R
@@ -993,7 +1038,7 @@ system.
 <p>
 Next: <a href="#Why-is-R-named-R_003f" accesskey="n" rel="next">Why is R named R?</a>, Previous: <a href="#What-is-CRAN_003f" accesskey="p" rel="prev">What is <abbr class="acronym">CRAN</abbr>?</a>, Up: <a href="#R-Basics" accesskey="u" rel="up">R Basics</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Can-I-use-R-for-commercial-purposes_003f-1">2.11 Can I use R for commercial purposes?</h3>
+<h3 class="section" id="Can-I-use-R-for-commercial-purposes_003f-1"><span>2.11 Can I use R for commercial purposes?<a class="copiable-link" href="#Can-I-use-R-for-commercial-purposes_003f-1"> &para;</a></span></h3>
 
 <p>R is released under the
 <a class="url" href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html"><abbr class="acronym">GNU</abbr> General Public License (<abbr class="acronym">GPL</abbr>), version 2 or
@@ -1007,8 +1052,7 @@ all Open Source licenses, permits all and any use of the package.  It
 only restricts distribution of R or of other programs containing code
 from R.  This is made clear in clause 6 (&ldquo;No Discrimination Against
 Fields of Endeavor&rdquo;) of the
-<a class="url" href="https://opensource.org/docs/definition.html">Open Source
-Definition</a>:
+<a class="url" href="https://opensource.org/osd">Open Source Definition</a>:
 </p>
 <blockquote class="quotation">
 <p>The license must not restrict anyone from making use of the program in a
@@ -1041,7 +1085,7 @@ Core Team does not provide legal advice under any circumstances.
 <p>
 Next: <a href="#What-is-the-R-Foundation_003f" accesskey="n" rel="next">What is the R Foundation?</a>, Previous: <a href="#Can-I-use-R-for-commercial-purposes_003f" accesskey="p" rel="prev">Can I use R for commercial purposes?</a>, Up: <a href="#R-Basics" accesskey="u" rel="up">R Basics</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Why-is-R-named-R_003f-1">2.12 Why is R named R?</h3>
+<h3 class="section" id="Why-is-R-named-R_003f-1"><span>2.12 Why is R named R?<a class="copiable-link" href="#Why-is-R-named-R_003f-1"> &para;</a></span></h3>
 
 <p>The name is partly based on the (first) names of the first two R authors
 (Robert Gentleman and Ross Ihaka), and partly a play on the name of the
@@ -1055,7 +1099,7 @@ Bell Labs language &lsquo;S&rsquo; (see <a class="pxref" href="#What-is-S_003f">
 <p>
 Next: <a href="#What-is-R_002dForge_003f" accesskey="n" rel="next">What is R-Forge?</a>, Previous: <a href="#Why-is-R-named-R_003f" accesskey="p" rel="prev">Why is R named R?</a>, Up: <a href="#R-Basics" accesskey="u" rel="up">R Basics</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="What-is-the-R-Foundation_003f-1">2.13 What is the R Foundation?</h3>
+<h3 class="section" id="What-is-the-R-Foundation_003f-1"><span>2.13 What is the R Foundation?<a class="copiable-link" href="#What-is-the-R-Foundation_003f-1"> &para;</a></span></h3>
 
 <p>The R Foundation is a not for profit organization working in the public
 interest.  It was founded by the members of the R Core Team in order to
@@ -1073,7 +1117,7 @@ software and documentation.  See
 <p>
 Previous: <a href="#What-is-the-R-Foundation_003f" accesskey="p" rel="prev">What is the R Foundation?</a>, Up: <a href="#R-Basics" accesskey="u" rel="up">R Basics</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="What-is-R_002dForge_003f-1">2.14 What is R-Forge?</h3>
+<h3 class="section" id="What-is-R_002dForge_003f-1"><span>2.14 What is R-Forge?<a class="copiable-link" href="#What-is-R_002dForge_003f-1"> &para;</a></span></h3>
 
 <p>R-Forge (<a class="url" href="https://R-Forge.R-project.org/">https://R-Forge.R-project.org/</a>) offers a central platform
 for the development of R packages, R-related software and further
@@ -1086,6 +1130,7 @@ Stefan Theu&szlig;l and Achim Zeileis (2009), &ldquo;Collaborative software
 development using R-Forge&rdquo;, <a class="url" href="https://journal.R-project.org/"><em class="emph">The R Journal</em></a>, <strong class="strong">1</strong>(1):9&ndash;14.
 </p>
 
+
 <hr>
 </div>
 </div>
@@ -1094,7 +1139,7 @@ development using R-Forge&rdquo;, <a class="url" href="https://journal.R-project
 <p>
 Next: <a href="#R-Web-Interfaces" accesskey="n" rel="next">R Web Interfaces</a>, Previous: <a href="#R-Basics" accesskey="p" rel="prev">R Basics</a>, Up: <a href="#Top" accesskey="u" rel="up">R FAQ</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h2 class="chapter" id="R-and-S-1">3 R and S</h2>
+<h2 class="chapter" id="R-and-S-1"><span>3 R and S<a class="copiable-link" href="#R-and-S-1"> &para;</a></span></h2>
 
 
 <ul class="mini-toc">
@@ -1108,13 +1153,13 @@ Next: <a href="#R-Web-Interfaces" accesskey="n" rel="next">R Web Interfaces</a>,
 <div class="section-level-extent" id="What-is-S_003f">
 <div class="nav-panel">
 <p>
-Next: <a href="#What-is-S_002dPLUS_003f" accesskey="n" rel="next">What is <small class="sc">S-PLUS</small>?</a>, Previous: <a href="#R-and-S" accesskey="p" rel="prev">R and S</a>, Up: <a href="#R-and-S" accesskey="u" rel="up">R and S</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+Next: <a href="#What-is-S_002dPLUS_003f" accesskey="n" rel="next">What is <small class="sc">S-PLUS</small>?</a>, Up: <a href="#R-and-S" accesskey="u" rel="up">R and S</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="What-is-S_003f-1">3.1 What is S?</h3>
+<h3 class="section" id="What-is-S_003f-1"><span>3.1 What is S?<a class="copiable-link" href="#What-is-S_003f-1"> &para;</a></span></h3>
 
 <p>S is a very high level language and an environment for data analysis and
 graphics.  In 1998, the Association for Computing Machinery
-(<abbr class="acronym">ACM</abbr>) presented its Software System Award to John M. Chambers,
+(<abbr class="abbr">ACM</abbr>) presented its Software System Award to John M. Chambers,
 the principal designer of S, for
 </p>
 <blockquote class="quotation">
@@ -1130,35 +1175,39 @@ Chambers.
 Chambers and coauthors, which are also the primary references for S.
 </p>
 <ul class="itemize mark-bullet">
-<li>Richard A. Becker and John M. Chambers (1984), &ldquo;S.  An Interactive
-Environment for Data Analysis and Graphics,&rdquo; Monterey: Wadsworth and
-Brooks/Cole.
+<li>Richard A. Becker and John M. Chambers (1984),
+&ldquo;S.  An Interactive Environment for Data Analysis and Graphics,&rdquo;
+Monterey: Wadsworth and Brooks/Cole.
 
 <p>This is also referred to as the &ldquo;<em class="emph">Brown Book</em>&rdquo;, and of historical
 interest only.
 </p>
-</li><li>Richard A. Becker, John M. Chambers and Allan R. Wilks (1988), &ldquo;The New
-S Language,&rdquo; London: Chapman &amp; Hall.
+</li><li>Richard A. Becker, John M. Chambers and Allan R. Wilks (1988),
+&ldquo;The New S Language,&rdquo;
+London: Chapman &amp; Hall.
 
 <p>This book is often called the &ldquo;<em class="emph">Blue Book</em>&rdquo;, and introduced what
 is now known as S version 2.
 </p>
-</li><li>John M. Chambers and Trevor J. Hastie (1992), &ldquo;Statistical Models in
-S,&rdquo;  London: Chapman &amp; Hall.
+</li><li>John M. Chambers and Trevor J. Hastie (1992),
+&ldquo;Statistical Models in S,&rdquo;
+ London: Chapman &amp; Hall.
 
 <p>This is also called the &ldquo;<em class="emph">White Book</em>&rdquo;, and introduced S version
 3, which added structures to facilitate statistical modeling in S.
 </p>
-</li><li>John M. Chambers (1998), &ldquo;Programming with Data,&rdquo; New York: Springer,
+</li><li>John M. Chambers (1998), 
+&ldquo;Programming with Data,&rdquo;
+New York: Springer,
 ISBN 0-387-98503-4
-(<a class="url" href="https://statweb.stanford.edu/~jmc4/Sbook/">https://statweb.stanford.edu/~jmc4/Sbook/</a>).
+(<a class="url" href="https://johnmchambers.su.domains/Sbook/">https://johnmchambers.su.domains/Sbook/</a>).
 
 <p>This &ldquo;<em class="emph">Green Book</em>&rdquo; describes version 4 of S, a major revision of
-S designed by John Chambers to improve its usefulness at every stage of
-the programming process.
+S designed by John Chambers to improve its usefulness at every stage
+of the programming process.
 </p></li></ul>
 
-<p>See <a class="url" href="https://statweb.stanford.edu/~jmc4/papers/96.7.ps">https://statweb.stanford.edu/~jmc4/papers/96.7.ps</a>
+<p>See <a class="url" href="https://johnmchambers.su.domains/papers/96.7.ps">https://johnmchambers.su.domains/papers/96.7.ps</a>
 for further information on the &ldquo;Evolution of the S Language&rdquo;.
 </p>
 
@@ -1170,7 +1219,7 @@ for further information on the &ldquo;Evolution of the S Language&rdquo;.
 <p>
 Next: <a href="#What-are-the-differences-between-R-and-S_003f" accesskey="n" rel="next">What are the differences between R and S?</a>, Previous: <a href="#What-is-S_003f" accesskey="p" rel="prev">What is S?</a>, Up: <a href="#R-and-S" accesskey="u" rel="up">R and S</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="What-is-S_002dPLUS_003f-1">3.2 What is <small class="sc">S-PLUS</small>?</h3>
+<h3 class="section" id="What-is-S_002dPlus_003f"><span>3.2 What is <small class="sc">S-PLUS</small>?<a class="copiable-link" href="#What-is-S_002dPlus_003f"> &para;</a></span></h3>
 
 <p><small class="sc">S-PLUS</small> is a value-added version of S sold by
 <a class="url" href="https://www.tibco.com/">TIBCO Software Inc</a> as &lsquo;TIBCO Spotfire S+&rsquo;.
@@ -1183,7 +1232,7 @@ See <a class="url" href="https://en.wikipedia.org/wiki/S-PLUS">https://en.wikipe
 <p>
 Next: <a href="#Is-there-anything-R-can-do-that-S_002dPLUS-cannot_003f" accesskey="n" rel="next">Is there anything R can do that <small class="sc">S-PLUS</small> cannot?</a>, Previous: <a href="#What-is-S_002dPLUS_003f" accesskey="p" rel="prev">What is <small class="sc">S-PLUS</small>?</a>, Up: <a href="#R-and-S" accesskey="u" rel="up">R and S</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="What-are-the-differences-between-R-and-S_003f-1">3.3 What are the differences between R and S?</h3>
+<h3 class="section" id="What-are-the-differences-between-R-and-S_003f-1"><span>3.3 What are the differences between R and S?<a class="copiable-link" href="#What-are-the-differences-between-R-and-S_003f-1"> &para;</a></span></h3>
 
 <p>We can regard S as a language with three current implementations or
 &ldquo;engines&rdquo;, the &ldquo;old S engine&rdquo; (S version 3; <small class="sc">S-PLUS</small> 3.x and 4.x),
@@ -1205,9 +1254,9 @@ the S language.
 <div class="subsection-level-extent" id="Lexical-scoping">
 <div class="nav-panel">
 <p>
-Next: <a href="#Models" accesskey="n" rel="next">Models</a>, Previous: <a href="#What-are-the-differences-between-R-and-S_003f" accesskey="p" rel="prev">What are the differences between R and S?</a>, Up: <a href="#What-are-the-differences-between-R-and-S_003f" accesskey="u" rel="up">What are the differences between R and S?</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+Next: <a href="#Models" accesskey="n" rel="next">Models</a>, Up: <a href="#What-are-the-differences-between-R-and-S_003f" accesskey="u" rel="up">What are the differences between R and S?</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h4 class="subsection" id="Lexical-scoping-1">3.3.1 Lexical scoping</h4>
+<h4 class="subsection" id="Lexical-scoping-1"><span>3.3.1 Lexical scoping<a class="copiable-link" href="#Lexical-scoping-1"> &para;</a></span></h4>
 
 <p>Contrary to other implementations of the S language, R has adopted an
 evaluation model in which nested function definitions are lexically
@@ -1259,9 +1308,9 @@ also looked in:
 <p>As a more &ldquo;interesting&rdquo; real-world problem, suppose you want to write
 a function which returns the density function of the <em class="math">r</em>-th order
 statistic from a sample of size <em class="math">n</em> from a (continuous)
-distribution.  For simplicity, we shall use both the cdf and pdf of the
-distribution as explicit arguments.  (Example compiled from various
-postings by Luke Tierney.)
+distribution.  For simplicity, we shall use both the distribution and
+density functions distribution as explicit arguments.  (Example compiled
+from various postings by Luke Tierney.)
 </p>
 <p>The <small class="sc">S-PLUS</small> documentation for <code class="code">call()</code> basically suggests the
 following:
@@ -1421,7 +1470,7 @@ all functions and data used.
 <p>
 Next: <a href="#Others" accesskey="n" rel="next">Others</a>, Previous: <a href="#Lexical-scoping" accesskey="p" rel="prev">Lexical scoping</a>, Up: <a href="#What-are-the-differences-between-R-and-S_003f" accesskey="u" rel="up">What are the differences between R and S?</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h4 class="subsection" id="Models-1">3.3.2 Models</h4>
+<h4 class="subsection" id="Models-1"><span>3.3.2 Models<a class="copiable-link" href="#Models-1"> &para;</a></span></h4>
 
 <p>There are some differences in the modeling code, such as
 </p>
@@ -1429,7 +1478,7 @@ Next: <a href="#Others" accesskey="n" rel="next">Others</a>, Previous: <a href="
 <li>Whereas in S, you would use <code class="code">lm(y ~ x^3)</code> to regress <code class="code">y</code> on
 <code class="code">x^3</code>, in R, you have to insulate powers of numeric vectors (using
 <code class="code">I()</code>), i.e., you have to use <code class="code">lm(y ~ I(x^3))</code>.
-</li><li>The glm family objects are implemented differently in R and S.  The same
+</li><li>The <abbr class="abbr">GLM</abbr> family objects are implemented differently in R and S.  The same
 functionality is available but the components have different names.
 </li><li>Option <code class="code">na.action</code> is set to <code class="code">&quot;na.omit&quot;</code> by default in R,
 but not set in S.
@@ -1448,7 +1497,7 @@ can be specified by <code class="code">y ~ 0</code>.
 <p>
 Previous: <a href="#Models" accesskey="p" rel="prev">Models</a>, Up: <a href="#What-are-the-differences-between-R-and-S_003f" accesskey="u" rel="up">What are the differences between R and S?</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h4 class="subsection" id="Others-1">3.3.3 Others</h4>
+<h4 class="subsection" id="Others-1"><span>3.3.3 Others<a class="copiable-link" href="#Others-1"> &para;</a></span></h4>
 
 <p>Apart from lexical scoping and its implications, R follows the S
 language definition in the Blue and White Books as much as possible, and
@@ -1630,7 +1679,7 @@ works.
 <p>
 Next: <a href="#What-is-R_002dplus_003f" accesskey="n" rel="next">What is R-plus?</a>, Previous: <a href="#What-are-the-differences-between-R-and-S_003f" accesskey="p" rel="prev">What are the differences between R and S?</a>, Up: <a href="#R-and-S" accesskey="u" rel="up">R and S</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Is-there-anything-R-can-do-that-S_002dPLUS-cannot_003f-1">3.4 Is there anything R can do that <small class="sc">S-PLUS</small> cannot?</h3>
+<h3 class="section" id="Is-there-anything-R-can-do-that-S_002dPlus-cannot_003f"><span>3.4 Is there anything R can do that <small class="sc">S-PLUS</small> cannot?<a class="copiable-link" href="#Is-there-anything-R-can-do-that-S_002dPlus-cannot_003f"> &para;</a></span></h3>
 
 <p>Since almost anything you can do in R has source code that you could
 port to <small class="sc">S-PLUS</small> with little effort there will never be much you can do
@@ -1642,10 +1691,10 @@ handling of line types, more convenient color handling (via palettes),
 gamma correction for color, and, most importantly, mathematical
 annotation in plot texts, via input expressions reminiscent of TeX
 constructs.  See the help page for <code class="code">plotmath</code>, which features an
-impressive on-line example.  More details can be found in Paul Murrell
-and Ross Ihaka (2000), &ldquo;An Approach to Providing Mathematical
-Annotation in Plots&rdquo;, <em class="emph">Journal of Computational and Graphical
-Statistics</em>, <strong class="strong">9</strong>, 582&ndash;599
+impressive on-line example.  More details can be found in 
+Paul Murrell and Ross Ihaka (2000),
+&ldquo;An Approach to Providing Mathematical Annotation in Plots&rdquo;, 
+<em class="emph">Journal of Computational and Graphical Statistics</em>, <strong class="strong">9</strong>, 582&ndash;599
 (doi:&nbsp;<a class="url" href="https://doi.org/10.1080/10618600.2000.10474900">10.1080/10618600.2000.10474900</a>).
 </p>
 <hr>
@@ -1655,7 +1704,7 @@ Statistics</em>, <strong class="strong">9</strong>, 582&ndash;599
 <p>
 Previous: <a href="#Is-there-anything-R-can-do-that-S_002dPLUS-cannot_003f" accesskey="p" rel="prev">Is there anything R can do that <small class="sc">S-PLUS</small> cannot?</a>, Up: <a href="#R-and-S" accesskey="u" rel="up">R and S</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="What-is-R_002dplus_003f-1">3.5 What is R-plus?</h3>
+<h3 class="section" id="What-is-R_002dplus_003f-1"><span>3.5 What is R-plus?<a class="copiable-link" href="#What-is-R_002dplus_003f-1"> &para;</a></span></h3>
 
 <p>For a very long time, there was no such thing.
 </p>
@@ -1670,6 +1719,8 @@ for more information).
 <a class="url" href="https://en.wikipedia.org/wiki/R_programming_language#Commercialized_versions_of_R">https://en.wikipedia.org/wiki/R_programming_language#Commercialized_versions_of_R</a>
 for pointers to commercialized versions of R.
 </p>
+
+
 <hr>
 </div>
 </div>
@@ -1678,7 +1729,7 @@ for pointers to commercialized versions of R.
 <p>
 Next: <a href="#R-Add_002dOn-Packages" accesskey="n" rel="next">R Add-On Packages</a>, Previous: <a href="#R-and-S" accesskey="p" rel="prev">R and S</a>, Up: <a href="#Top" accesskey="u" rel="up">R FAQ</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h2 class="chapter" id="R-Web-Interfaces-1">4 R Web Interfaces</h2>
+<h2 class="chapter" id="R-Web-Interfaces-1"><span>4 R Web Interfaces<a class="copiable-link" href="#R-Web-Interfaces-1"> &para;</a></span></h2>
 
 <p>Please refer to the <abbr class="acronym">CRAN</abbr> task view on &ldquo;Web Technologies and
 Services&rdquo; (<a class="url" href="https://CRAN.R-project.org/view=WebTechnologies">https://CRAN.R-project.org/view=WebTechnologies</a>),
@@ -1697,6 +1748,8 @@ Angelo Mineo and Alfredo Pontillo (2006),
 &ldquo;Using R via PHP for Teaching Purposes: R-php&rdquo;
 (doi:&nbsp;<a class="url" href="https://doi.org/10.18637/jss.v017.i04">10.18637/jss.v017.i04</a>).
 </p>
+
+
 <hr>
 </div>
 <div class="chapter-level-extent" id="R-Add_002dOn-Packages">
@@ -1704,7 +1757,7 @@ Angelo Mineo and Alfredo Pontillo (2006),
 <p>
 Next: <a href="#R-and-Emacs" accesskey="n" rel="next">R and Emacs</a>, Previous: <a href="#R-Web-Interfaces" accesskey="p" rel="prev">R Web Interfaces</a>, Up: <a href="#Top" accesskey="u" rel="up">R FAQ</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h2 class="chapter" id="R-Add_002dOn-Packages-1">5 R Add-On Packages</h2>
+<h2 class="chapter" id="R-Add_002dOn-Packages-1"><span>5 R Add-On Packages<a class="copiable-link" href="#R-Add_002dOn-Packages-1"> &para;</a></span></h2>
 
 
 <ul class="mini-toc">
@@ -1719,9 +1772,9 @@ Next: <a href="#R-and-Emacs" accesskey="n" rel="next">R and Emacs</a>, Previous:
 <div class="section-level-extent" id="Which-add_002don-packages-exist-for-R_003f">
 <div class="nav-panel">
 <p>
-Next: <a href="#How-can-add_002don-packages-be-installed_003f" accesskey="n" rel="next">How can add-on packages be installed?</a>, Previous: <a href="#R-Add_002dOn-Packages" accesskey="p" rel="prev">R Add-On Packages</a>, Up: <a href="#R-Add_002dOn-Packages" accesskey="u" rel="up">R Add-On Packages</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+Next: <a href="#How-can-add_002don-packages-be-installed_003f" accesskey="n" rel="next">How can add-on packages be installed?</a>, Up: <a href="#R-Add_002dOn-Packages" accesskey="u" rel="up">R Add-On Packages</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Which-add_002don-packages-exist-for-R_003f-1">5.1 Which add-on packages exist for R?</h3>
+<h3 class="section" id="Which-add_002don-packages-exist-for-R_003f-1"><span>5.1 Which add-on packages exist for R?<a class="copiable-link" href="#Which-add_002don-packages-exist-for-R_003f-1"> &para;</a></span></h3>
 
 
 <ul class="mini-toc">
@@ -1734,9 +1787,9 @@ Next: <a href="#How-can-add_002don-packages-be-installed_003f" accesskey="n" rel
 <div class="subsection-level-extent" id="Add_002don-packages-in-R">
 <div class="nav-panel">
 <p>
-Next: <a href="#Add_002don-packages-from-CRAN" accesskey="n" rel="next">Add-on packages from <abbr class="acronym">CRAN</abbr></a>, Previous: <a href="#Which-add_002don-packages-exist-for-R_003f" accesskey="p" rel="prev">Which add-on packages exist for R?</a>, Up: <a href="#Which-add_002don-packages-exist-for-R_003f" accesskey="u" rel="up">Which add-on packages exist for R?</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+Next: <a href="#Add_002don-packages-from-CRAN" accesskey="n" rel="next">Add-on packages from <abbr class="acronym">CRAN</abbr></a>, Up: <a href="#Which-add_002don-packages-exist-for-R_003f" accesskey="u" rel="up">Which add-on packages exist for R?</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h4 class="subsection" id="Add_002don-packages-in-R-1">5.1.1 Add-on packages in R</h4>
+<h4 class="subsection" id="Add_002don-packages-in-R-1"><span>5.1.1 Add-on packages in R<a class="copiable-link" href="#Add_002don-packages-in-R-1"> &para;</a></span></h4>
 
 <p>The R distribution comes with the following packages:
 </p>
@@ -1795,7 +1848,7 @@ and random-number generation (added in R 2.14.0).
 <p>
 Next: <a href="#Add_002don-packages-from-Bioconductor" accesskey="n" rel="next">Add-on packages from Bioconductor</a>, Previous: <a href="#Add_002don-packages-in-R" accesskey="p" rel="prev">Add-on packages in R</a>, Up: <a href="#Which-add_002don-packages-exist-for-R_003f" accesskey="u" rel="up">Which add-on packages exist for R?</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h4 class="subsection" id="Add_002don-packages-from-CRAN-1">5.1.2 Add-on packages from <abbr class="acronym">CRAN</abbr></h4>
+<h4 class="subsection" id="Add_002don-packages-from-CRAN-1"><span>5.1.2 Add-on packages from <abbr class="acronym">CRAN</abbr><a class="copiable-link" href="#Add_002don-packages-from-CRAN-1"> &para;</a></span></h4>
 
 <p>The <abbr class="acronym">CRAN</abbr> <samp class="file">src/contrib</samp> area contains a wealth of add-on
 packages, including the following <em class="emph">recommended</em> packages which are
@@ -1819,7 +1872,7 @@ Methods and Their Applications&rdquo; by A. C. Davison and D. V. Hinkley,
 1997, Cambridge University Press.
 </p></dd>
 <dt><strong class="strong">class</strong></dt>
-<dd><p>Functions for classification (<em class="math">k</em>-nearest neighbor and LVQ).
+<dd><p>Functions for classification (<em class="math">k</em>-nearest neighbor and <abbr class="abbr">LVQ</abbr>).
 </p></dd>
 <dt><strong class="strong">cluster</strong></dt>
 <dd><p>Functions for cluster analysis.
@@ -1835,8 +1888,8 @@ like Minitab, S, SAS, SPSS, Stata, Systat, etc.
 <dd><p>Lattice graphics, an implementation of Trellis Graphics functions.
 </p></dd>
 <dt><strong class="strong">mgcv</strong></dt>
-<dd><p>Routines for GAMs and other generalized ridge regression problems with
-multiple smoothing parameter selection by GCV or UBRE.
+<dd><p>Routines for GAMs<!-- /@w --> and other generalized ridge regression problems with
+multiple smoothing parameter selection by GCV or <abbr class="abbr">UBRE</abbr>.
 </p></dd>
 <dt><strong class="strong">nlme</strong></dt>
 <dd><p>Fit and compare Gaussian linear and nonlinear mixed-effects models.
@@ -1874,7 +1927,7 @@ all packages for special areas of interest.
 <p>
 Next: <a href="#Other-add_002don-packages" accesskey="n" rel="next">Other add-on packages</a>, Previous: <a href="#Add_002don-packages-from-CRAN" accesskey="p" rel="prev">Add-on packages from <abbr class="acronym">CRAN</abbr></a>, Up: <a href="#Which-add_002don-packages-exist-for-R_003f" accesskey="u" rel="up">Which add-on packages exist for R?</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h4 class="subsection" id="Add_002don-packages-from-Bioconductor-1">5.1.3 Add-on packages from Bioconductor</h4>
+<h4 class="subsection" id="Add_002don-packages-from-Bioconductor-1"><span>5.1.3 Add-on packages from Bioconductor<a class="copiable-link" href="#Add_002don-packages-from-Bioconductor-1"> &para;</a></span></h4>
 
 <p><a class="url" href="https://www.bioconductor.org/">Bioconductor</a> is an open source and
 open development software project for the analysis and comprehension of
@@ -1886,7 +1939,7 @@ project has matured, the functional scope of the software packages
 broadened to include the analysis of all types of genomic data, such as
 SAGE, sequence, or SNP data.  In addition, there are metadata
 (annotation, CDF and probe) and experiment data packages.  See
-<a class="url" href="https://master.bioconductor.org/install/">https://master.bioconductor.org/install/</a> for available packages and a
+<a class="url" href="https://bioconductor.org/install/">https://bioconductor.org/install/</a> for available packages and a
 complete taxonomy via BioC Views.
 </p>
 <hr>
@@ -1896,7 +1949,7 @@ complete taxonomy via BioC Views.
 <p>
 Previous: <a href="#Add_002don-packages-from-Bioconductor" accesskey="p" rel="prev">Add-on packages from Bioconductor</a>, Up: <a href="#Which-add_002don-packages-exist-for-R_003f" accesskey="u" rel="up">Which add-on packages exist for R?</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h4 class="subsection" id="Other-add_002don-packages-1">5.1.4 Other add-on packages</h4>
+<h4 class="subsection" id="Other-add_002don-packages-1"><span>5.1.4 Other add-on packages<a class="copiable-link" href="#Other-add_002don-packages-1"> &para;</a></span></h4>
 
 <p>Many more packages are available from places other than the default
 repositories discussed above (<abbr class="acronym">CRAN</abbr> and Bioconductor).  In particular,
@@ -1914,7 +1967,7 @@ obtained from the mailing list archive.
 <p>
 Next: <a href="#How-can-add_002don-packages-be-used_003f" accesskey="n" rel="next">How can add-on packages be used?</a>, Previous: <a href="#Which-add_002don-packages-exist-for-R_003f" accesskey="p" rel="prev">Which add-on packages exist for R?</a>, Up: <a href="#R-Add_002dOn-Packages" accesskey="u" rel="up">R Add-On Packages</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-can-add_002don-packages-be-installed_003f-1">5.2 How can add-on packages be installed?</h3>
+<h3 class="section" id="How-can-add_002don-packages-be-installed_003f-1"><span>5.2 How can add-on packages be installed?<a class="copiable-link" href="#How-can-add_002don-packages-be-installed_003f-1"> &para;</a></span></h3>
 
 <p>(Unix-like only.)  The add-on packages on <abbr class="acronym">CRAN</abbr> come as gzipped tar
 files named <code class="code"><var class="var">pkg</var>_<var class="var">version</var>.tar.gz</code>.  Let <var class="var">path</var> be
@@ -1954,7 +2007,7 @@ information.
 <p>
 Next: <a href="#How-can-add_002don-packages-be-removed_003f" accesskey="n" rel="next">How can add-on packages be removed?</a>, Previous: <a href="#How-can-add_002don-packages-be-installed_003f" accesskey="p" rel="prev">How can add-on packages be installed?</a>, Up: <a href="#R-Add_002dOn-Packages" accesskey="u" rel="up">R Add-On Packages</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-can-add_002don-packages-be-used_003f-1">5.3 How can add-on packages be used?</h3>
+<h3 class="section" id="How-can-add_002don-packages-be-used_003f-1"><span>5.3 How can add-on packages be used?<a class="copiable-link" href="#How-can-add_002don-packages-be-used_003f-1"> &para;</a></span></h3>
 
 <p>To find out which additional packages are available on your system, type
 </p>
@@ -1967,43 +2020,44 @@ Next: <a href="#How-can-add_002don-packages-be-removed_003f" accesskey="n" rel="
 <p>This produces something like
 </p>
 <blockquote class="quotation">
-<table summary="" class="cartouche" border="1"><tr><td>
+<table summary="" class="cartouche"><tr><td>
 <div class="example smallexample">
-<pre class="example-preformatted">Packages in ‘/home/me/lib/R’:
+<pre class="example-preformatted">Packages in library '/home/me/lib/R':
 
 mystuff       My own R functions, nicely packaged but not documented
 
-Packages in ‘/usr/local/lib/R/library’:
+Packages in library '/usr/local/lib/R/library':
 
-KernSmooth    Functions for kernel smoothing for Wand &amp; Jones (1995)
+KernSmooth    Functions for Kernel Smoothing Supporting Wand &amp; Jones (1995)
 MASS          Support Functions and Datasets for Venables and Ripley's MASS
 Matrix        Sparse and Dense Matrix Classes and Methods
-base          The R Base package
-boot          Bootstrap R (S-Plus) Functions (Canty)
+base          The R Base Package
 boot          Bootstrap Functions (Originally by Angelo Canty for S)
 class         Functions for Classification
 cluster       &quot;Finding Groups in Data&quot;: Cluster Analysis Extended
               Rousseeuw et al.
 codetools     Code Analysis Tools for R
+compiler      The R Compiler Package
 datasets      The R Datasets Package
-foreign       Read Data Stored by Minitab, S, SAS, SPSS, Stata, Systat,
-              dBase, ...
+foreign       Read Data Stored by 'Minitab', 'S', 'SAS', 'SPSS', 'Stata',
+              'Systat', 'Weka', 'dBase', ...
 grDevices     The R Graphics Devices and Support for Colours and Fonts
 graphics      The R Graphics Package
 grid          The Grid Graphics Package
-lattice       Lattice Graphics
+lattice       Trellis Graphics for R
 methods       Formal Methods and Classes
-mgcv          GAMs with GCV/AIC/REML smoothness estimation and GAMMs
-              by PQL
+mgcv          Mixed GAM Computation Vehicle with Automatic Smoothness
+              Estimation
 nlme          Linear and Nonlinear Mixed Effects Models
-nnet          Feed-forward Neural Networks and Multinomial Log-Linear
+nnet          Feed-Forward Neural Networks and Multinomial Log-Linear
               Models
-rpart         Recursive Partitioning
+parallel      Support for Parallel Computation in R
+rpart         Recursive Partitioning and Regression Trees
 spatial       Functions for Kriging and Point Pattern Analysis
 splines       Regression Spline Functions and Classes
 stats         The R Stats Package
-stats4        Statistical functions using S4 Classes
-survival      Survival analysis, including penalised likelihood
+stats4        Statistical Functions using S4 Classes
+survival      Survival Analysis
 tcltk         Tcl/Tk Interface
 tools         Tools for Package Development
 utils         The R Utils Package
@@ -2024,14 +2078,13 @@ utils         The R Utils Package
 help(package = <var class="var">pkg</var>)
 </pre></div>
 
-<p>You can unload the loaded package <var class="var">pkg</var> by
+<p>You can remove the loaded package <var class="var">pkg</var> from the <code class="code">search()</code> path by
 </p>
 <div class="example">
-<pre class="example-preformatted">detach(&quot;package:<var class="var">pkg</var>&quot;, unload = TRUE)
+<pre class="example-preformatted">detach(&quot;package:<var class="var">pkg</var>&quot;)
 </pre></div>
 
-<p>(where <code class="code">unload = TRUE</code> is needed only for packages with a
-namespace, see <code class="code">?unload</code>).
+<p>(which does not by default unload the namespace, see <code class="code">?detach</code>).
 </p>
 <hr>
 </div>
@@ -2040,12 +2093,12 @@ namespace, see <code class="code">?unload</code>).
 <p>
 Next: <a href="#How-can-I-create-an-R-package_003f" accesskey="n" rel="next">How can I create an R package?</a>, Previous: <a href="#How-can-add_002don-packages-be-used_003f" accesskey="p" rel="prev">How can add-on packages be used?</a>, Up: <a href="#R-Add_002dOn-Packages" accesskey="u" rel="up">R Add-On Packages</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-can-add_002don-packages-be-removed_003f-1">5.4 How can add-on packages be removed?</h3>
+<h3 class="section" id="How-can-add_002don-packages-be-removed_003f-1"><span>5.4 How can add-on packages be removed?<a class="copiable-link" href="#How-can-add_002don-packages-be-removed_003f-1"> &para;</a></span></h3>
 
 <p>Use
 </p>
 <div class="example">
-<pre class="example-preformatted">$ R CMD REMOVE <var class="var">pkg_1</var> &hellip; <var class="var">pkg_n</var>
+<pre class="example-preformatted">$ R CMD REMOVE <var class="var">pkg_1</var> ... <var class="var">pkg_n</var>
 </pre></div>
 
 <p>to remove the packages <var class="var">pkg_1</var>, &hellip;, <var class="var">pkg_n</var> from the
@@ -2056,7 +2109,7 @@ is set and non-null, and from the default library otherwise.
 <p>To remove from library <var class="var">lib</var>, do
 </p>
 <div class="example">
-<pre class="example-preformatted">$ R CMD REMOVE -l <var class="var">lib</var> <var class="var">pkg_1</var> &hellip; <var class="var">pkg_n</var>
+<pre class="example-preformatted">$ R CMD REMOVE -l <var class="var">lib</var> <var class="var">pkg_1</var> ... <var class="var">pkg_n</var>
 </pre></div>
 
 <hr>
@@ -2066,7 +2119,7 @@ is set and non-null, and from the default library otherwise.
 <p>
 Next: <a href="#How-can-I-contribute-to-R_003f" accesskey="n" rel="next">How can I contribute to R?</a>, Previous: <a href="#How-can-add_002don-packages-be-removed_003f" accesskey="p" rel="prev">How can add-on packages be removed?</a>, Up: <a href="#R-Add_002dOn-Packages" accesskey="u" rel="up">R Add-On Packages</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-can-I-create-an-R-package_003f-1">5.5 How can I create an R package?</h3>
+<h3 class="section" id="How-can-I-create-an-R-package_003f-1"><span>5.5 How can I create an R package?<a class="copiable-link" href="#How-can-I-create-an-R-package_003f-1"> &para;</a></span></h3>
 
 <p>A package consists of a subdirectory containing a file
 <samp class="file">DESCRIPTION</samp> and the subdirectories <samp class="file">R</samp>, <samp class="file">data</samp>,
@@ -2076,8 +2129,10 @@ package subdirectory may also contain files <samp class="file">INDEX</samp>,
 <samp class="file">NAMESPACE</samp>, <samp class="file">configure</samp>, <samp class="file">cleanup</samp>, <samp class="file">LICENSE</samp>,
 <samp class="file">LICENCE</samp>, <samp class="file">COPYING</samp> and <samp class="file">NEWS</samp>.
 </p>
-<p>See <a data-manual="R-exts" href="https://cran.r-project.org/doc/manuals/R-exts.html#Creating-R-packages">Creating R packages</a> in <cite class="cite">Writing R
-Extensions</cite>, for details.
+<p>See <a data-manual="R-exts" href="https://CRAN.R-project.org/doc/manuals/R-exts.html#Creating-R-packages">Creating R packages</a> in <cite class="cite">Writing R Extensions</cite>
+for details.  This manual is included in the R distribution, see <a class="pxref" href="#What-documentation-exists-for-R_003f">What documentation exists for R?</a>, and gives information on package
+structure, the configure and cleanup mechanisms, and on automated
+package checking and building.
 </p>
 <p>R version 1.3.0 has added the function <code class="code">package.skeleton()</code> which
 will set up directories, save data and code, and create skeleton help
@@ -2092,7 +2147,7 @@ files for a set of R functions and datasets.
 <p>
 Previous: <a href="#How-can-I-create-an-R-package_003f" accesskey="p" rel="prev">How can I create an R package?</a>, Up: <a href="#R-Add_002dOn-Packages" accesskey="u" rel="up">R Add-On Packages</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-can-I-contribute-to-R_003f-1">5.6 How can I contribute to R?</h3>
+<h3 class="section" id="How-can-I-contribute-to-R_003f-1"><span>5.6 How can I contribute to R?<a class="copiable-link" href="#How-can-I-contribute-to-R_003f-1"> &para;</a></span></h3>
 
 <p>R is in active development and there is always a risk of bugs creeping
 in.  Also, the developers do not have access to all possible machines
@@ -2104,6 +2159,8 @@ intermediate repository for more or less finalized ideas and plans for
 the R statistical system.  It contains (pointers to) TODO lists, RFCs,
 various other writeups, ideas lists, and SVN miscellanea.
 </p>
+
+
 <hr>
 </div>
 </div>
@@ -2112,7 +2169,7 @@ various other writeups, ideas lists, and SVN miscellanea.
 <p>
 Next: <a href="#R-Miscellanea" accesskey="n" rel="next">R Miscellanea</a>, Previous: <a href="#R-Add_002dOn-Packages" accesskey="p" rel="prev">R Add-On Packages</a>, Up: <a href="#Top" accesskey="u" rel="up">R FAQ</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h2 class="chapter" id="R-and-Emacs-1">6 R and Emacs</h2>
+<h2 class="chapter" id="R-and-Emacs-1"><span>6 R and Emacs<a class="copiable-link" href="#R-and-Emacs-1"> &para;</a></span></h2>
 
 
 <ul class="mini-toc">
@@ -2124,17 +2181,17 @@ Next: <a href="#R-Miscellanea" accesskey="n" rel="next">R Miscellanea</a>, Previ
 <div class="section-level-extent" id="Is-there-Emacs-support-for-R_003f">
 <div class="nav-panel">
 <p>
-Next: <a href="#Should-I-run-R-from-within-Emacs_003f" accesskey="n" rel="next">Should I run R from within Emacs?</a>, Previous: <a href="#R-and-Emacs" accesskey="p" rel="prev">R and Emacs</a>, Up: <a href="#R-and-Emacs" accesskey="u" rel="up">R and Emacs</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+Next: <a href="#Should-I-run-R-from-within-Emacs_003f" accesskey="n" rel="next">Should I run R from within Emacs?</a>, Up: <a href="#R-and-Emacs" accesskey="u" rel="up">R and Emacs</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Is-there-Emacs-support-for-R_003f-1">6.1 Is there Emacs support for R?</h3>
+<h3 class="section" id="Is-there-Emacs-support-for-R_003f-1"><span>6.1 Is there Emacs support for R?<a class="copiable-link" href="#Is-there-Emacs-support-for-R_003f-1"> &para;</a></span></h3>
 
 <p>There is an Emacs package called <abbr class="acronym">ESS</abbr> (&ldquo;Emacs Speaks
 Statistics&rdquo;) which provides a standard interface between statistical
 programs and statistical processes.  It is intended to provide
 assistance for interactive statistical programming and data analysis.
 Languages supported include: S dialects (R, S 3/4, and <small class="sc">S-PLUS</small>
-3.x/4.x/5.x/6.x/7.x), LispStat dialects (XLispStat, ViSta), SAS, Stata,
-and BUGS.
+3.x/4.x/5.x/6.x/7.x), LispStat dialects (XLispStat, ViSta),
+SAS, Stata, and BUGS.
 </p>
 <p><abbr class="acronym">ESS</abbr> grew out of the need for bug fixes and extensions to
 S-mode 4.8 (which was a <abbr class="acronym">GNU</abbr> Emacs interface to S/<small class="sc">S-PLUS</small>
@@ -2179,10 +2236,10 @@ within Emacs by typing <kbd class="kbd">M-x ess-submit-bug-report</kbd> or using
 <p>
 Next: <a href="#Debugging-R-from-within-Emacs" accesskey="n" rel="next">Debugging R from within Emacs</a>, Previous: <a href="#Is-there-Emacs-support-for-R_003f" accesskey="p" rel="prev">Is there Emacs support for R?</a>, Up: <a href="#R-and-Emacs" accesskey="u" rel="up">R and Emacs</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Should-I-run-R-from-within-Emacs_003f-1">6.2 Should I run R from within Emacs?</h3>
+<h3 class="section" id="Should-I-run-R-from-within-Emacs_003f-1"><span>6.2 Should I run R from within Emacs?<a class="copiable-link" href="#Should-I-run-R-from-within-Emacs_003f-1"> &para;</a></span></h3>
 
 <p>Yes, instead of just running it in a console, <em class="emph">definitely</em>.  As an
-alternative to other IDE&rsquo;s such as Rstudio, <em class="emph">possibly</em>, notably if you
+alternative to other <abbr class="abbr">IDE</abbr>s such as RStudio, <em class="emph">possibly</em>, notably if you
 are interested to use Emacs for other computer interaction.
 You&rsquo;d be using <abbr class="acronym">ESS</abbr>, Emacs Speaks Statistics, see previous FAQ.
 </p>
@@ -2213,10 +2270,10 @@ also be used for error recovery through the use of the transcript mode.
 <p>
 Previous: <a href="#Should-I-run-R-from-within-Emacs_003f" accesskey="p" rel="prev">Should I run R from within Emacs?</a>, Up: <a href="#R-and-Emacs" accesskey="u" rel="up">R and Emacs</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Debugging-R-from-within-Emacs-1">6.3 Debugging R from within Emacs</h3>
+<h3 class="section" id="Debugging-R-from-within-Emacs-1"><span>6.3 Debugging R from within Emacs<a class="copiable-link" href="#Debugging-R-from-within-Emacs-1"> &para;</a></span></h3>
 
 <p>To debug R &ldquo;from within Emacs&rdquo;, there are several possibilities.  To
-use the Emacs GUD (Grand Unified Debugger) library with the recommended
+use the Emacs <abbr class="abbr">GUD</abbr> (Grand Unified Debugger) library with the recommended
 debugger GDB, type <kbd class="kbd">M-x gdb</kbd> and give the path to the R
 <em class="emph">binary</em> as argument.  At the <code class="command">gdb</code> prompt, set
 <code class="env">R_HOME</code> and other environment variables as needed (using e.g.
@@ -2228,16 +2285,16 @@ binary with the desired arguments (e.g., <kbd class="kbd">run --quiet</kbd>).
 <samp class="option">-d gdb</samp>.
 </p>
 <p>A third option is to start an inferior R process via <abbr class="acronym">ESS</abbr>
-(<kbd class="kbd">M-x R</kbd>) and then start GUD (<kbd class="kbd">M-x gdb</kbd>) giving the R binary
+(<kbd class="kbd">M-x R</kbd>) and then start <abbr class="abbr">GUD</abbr> (<kbd class="kbd">M-x gdb</kbd>) giving the R binary
 (using its full path name) as the program to debug.  Use the program
 <code class="command">ps</code> to find the process number of the currently running R
-process then use the <code class="code">attach</code> command in gdb to attach it to that
+process then use the <code class="code">attach</code> command in GDB to attach it to that
 process.  One advantage of this method is that you have separate
 <code class="code">*R*</code> and <code class="code">*gud-gdb*</code> windows.  Within the <code class="code">*R*</code> window
 you have all the <abbr class="acronym">ESS</abbr> facilities, such as object-name
 completion, that we know and love.
 </p>
-<p>When using GUD mode for debugging from within Emacs, you may find it
+<p>When using <abbr class="abbr">GUD</abbr> mode for debugging from within Emacs, you may find it
 most convenient to use the directory with your code in it as the current
 working directory and then make a symbolic link from that directory to
 the R binary.  That way <samp class="file">.gdbinit</samp> can stay in the directory with
@@ -2254,6 +2311,8 @@ dir /opt/R/src/nmath
 dir /opt/R/src/unix
 </pre></div>
 
+
+
 <hr>
 </div>
 </div>
@@ -2262,7 +2321,7 @@ dir /opt/R/src/unix
 <p>
 Next: <a href="#R-Programming" accesskey="n" rel="next">R Programming</a>, Previous: <a href="#R-and-Emacs" accesskey="p" rel="prev">R and Emacs</a>, Up: <a href="#Top" accesskey="u" rel="up">R FAQ</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h2 class="chapter" id="R-Miscellanea-1">7 R Miscellanea</h2>
+<h2 class="chapter" id="R-Miscellanea-1"><span>7 R Miscellanea<a class="copiable-link" href="#R-Miscellanea-1"> &para;</a></span></h2>
 
 
 
@@ -2275,7 +2334,7 @@ Next: <a href="#R-Programming" accesskey="n" rel="next">R Programming</a>, Previ
 <li><a href="#How-can-I-set-components-of-a-list-to-NULL_003f" accesskey="1">How can I set components of a list to NULL?</a></li>
 <li><a href="#How-can-I-save-my-workspace_003f" accesskey="2">How can I save my workspace?</a></li>
 <li><a href="#How-can-I-clean-up-my-workspace_003f" accesskey="3">How can I clean up my workspace?</a></li>
-<li><a href="#How-can-I-get-eval_0028_0029-and-D_0028_0029-to-work_003f" accesskey="4">How can I get eval() and D() to work?</a></li>
+<li><a href="#How-can-I-get-eval_0028_0029-and-D_0028_0029-to-work_003f" accesskey="4">How can I get <code class="code">eval()</code> and <code class="code">D()</code> to work?</a></li>
 <li><a href="#Why-do-my-matrices-lose-dimensions_003f" accesskey="5">Why do my matrices lose dimensions?</a></li>
 <li><a href="#How-does-autoloading-work_003f" accesskey="6">How does autoloading work?</a></li>
 <li><a href="#How-should-I-set-options_003f" accesskey="7">How should I set options?</a></li>
@@ -2286,10 +2345,10 @@ Next: <a href="#R-Programming" accesskey="n" rel="next">R Programming</a>, Previ
 <li><a href="#What-are-the-enclosing-and-parent-environments_003f">What are the enclosing and parent environments?</a></li>
 <li><a href="#How-can-I-substitute-into-a-plot-label_003f">How can I substitute into a plot label?</a></li>
 <li><a href="#What-are-valid-names_003f">What are valid names?</a></li>
-<li><a href="#Are-GAMs-implemented-in-R_003f">Are GAMs implemented in R?</a></li>
+<li><a href="#Are-GAMs-implemented-in-R_003f">Are GAMs<!-- /@w --> implemented in R?</a></li>
 <li><a href="#Why-is-the-output-not-printed-when-I-source_0028_0029-a-file_003f">Why is the output not printed when I source() a file?</a></li>
 <li><a href="#Why-does-outer_0028_0029-behave-strangely-with-my-function_003f">Why does outer() behave strangely with my function?</a></li>
-<li><a href="#Why-does-the-output-from-anova_0028_0029-depend-on-the-order-of-factors-in-the-model_003f">Why does the output from anova() depend on the order of factors in the model?</a></li>
+<li><a href="#Why-does-the-output-from-anova_0028_0029-depend-on-the-order-of-factors-in-the-model_003f">Why does the output from <code class="code">anova()</code> depend on the order of factors in the model?</a></li>
 <li><a href="#How-do-I-produce-PNG-graphics-in-batch-mode_003f">How do I produce PNG graphics in batch mode?</a></li>
 <li><a href="#How-can-I-get-command-line-editing-to-work_003f">How can I get command line editing to work?</a></li>
 <li><a href="#How-can-I-turn-a-string-into-a-variable_003f">How can I turn a string into a variable?</a></li>
@@ -2306,7 +2365,7 @@ Next: <a href="#R-Programming" accesskey="n" rel="next">R Programming</a>, Previ
 <li><a href="#How-can-I-capture-or-ignore-errors-in-a-long-simulation_003f">How can I capture or ignore errors in a long simulation?</a></li>
 <li><a href="#Why-are-powers-of-negative-numbers-wrong_003f">Why are powers of negative numbers wrong?</a></li>
 <li><a href="#How-can-I-save-the-result-of-each-iteration-in-a-loop-into-a-separate-file_003f">How can I save the result of each iteration in a loop into a separate file?</a></li>
-<li><a href="#Why-are-p_002dvalues-not-displayed-when-using-lmer_0028_0029_003f">Why are <em class="math">p</em>-values not displayed when using lmer()?</a></li>
+<li><a href="#Why-are-p_002dvalues-not-displayed-when-using-lmer_0028_0029_003f">Why are <em class="math">p</em>-values not displayed when using <code class="code">lmer()</code>?</a></li>
 <li><a href="#Why-are-there-unwanted-borders">Why are there unwanted borders, lines or grid-like artifacts when viewing a plot saved to a PS or PDF file?</a></li>
 <li><a href="#Why-does-backslash-behave-strangely-inside-strings_003f">Why does backslash behave strangely inside strings?</a></li>
 <li><a href="#How-can-I-put-error-bars-or-confidence-bands-on-my-plot_003f">How can I put error bars or confidence bands on my plot?</a></li>
@@ -2321,9 +2380,9 @@ Next: <a href="#R-Programming" accesskey="n" rel="next">R Programming</a>, Previ
 <div class="section-level-extent" id="How-can-I-set-components-of-a-list-to-NULL_003f">
 <div class="nav-panel">
 <p>
-Next: <a href="#How-can-I-save-my-workspace_003f" accesskey="n" rel="next">How can I save my workspace?</a>, Previous: <a href="#R-Miscellanea" accesskey="p" rel="prev">R Miscellanea</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+Next: <a href="#How-can-I-save-my-workspace_003f" accesskey="n" rel="next">How can I save my workspace?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-can-I-set-components-of-a-list-to-NULL_003f-1">7.1 How can I set components of a list to NULL?</h3>
+<h3 class="section" id="How-can-I-set-components-of-a-list-to-NULL_003f-1"><span>7.1 How can I set components of a list to NULL?<a class="copiable-link" href="#How-can-I-set-components-of-a-list-to-NULL_003f-1"> &para;</a></span></h3>
 
 <p>You can use
 </p>
@@ -2346,7 +2405,7 @@ the list.
 <p>
 Next: <a href="#How-can-I-clean-up-my-workspace_003f" accesskey="n" rel="next">How can I clean up my workspace?</a>, Previous: <a href="#How-can-I-set-components-of-a-list-to-NULL_003f" accesskey="p" rel="prev">How can I set components of a list to NULL?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-can-I-save-my-workspace_003f-1">7.2 How can I save my workspace?</h3>
+<h3 class="section" id="How-can-I-save-my-workspace_003f-1"><span>7.2 How can I save my workspace?<a class="copiable-link" href="#How-can-I-save-my-workspace_003f-1"> &para;</a></span></h3>
 
 <p><code class="code">save.image()</code> saves the objects in the user&rsquo;s <code class="code">.GlobalEnv</code> to
 the file <samp class="file">.RData</samp> in the R startup directory.  (This is also what
@@ -2358,9 +2417,9 @@ can save the image under a different name.
 <div class="section-level-extent" id="How-can-I-clean-up-my-workspace_003f">
 <div class="nav-panel">
 <p>
-Next: <a href="#How-can-I-get-eval_0028_0029-and-D_0028_0029-to-work_003f" accesskey="n" rel="next">How can I get eval() and D() to work?</a>, Previous: <a href="#How-can-I-save-my-workspace_003f" accesskey="p" rel="prev">How can I save my workspace?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+Next: <a href="#How-can-I-get-eval_0028_0029-and-D_0028_0029-to-work_003f" accesskey="n" rel="next">How can I get <code class="code">eval()</code> and <code class="code">D()</code> to work?</a>, Previous: <a href="#How-can-I-save-my-workspace_003f" accesskey="p" rel="prev">How can I save my workspace?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-can-I-clean-up-my-workspace_003f-1">7.3 How can I clean up my workspace?</h3>
+<h3 class="section" id="How-can-I-clean-up-my-workspace_003f-1"><span>7.3 How can I clean up my workspace?<a class="copiable-link" href="#How-can-I-clean-up-my-workspace_003f-1"> &para;</a></span></h3>
 
 <p>To remove all objects in the currently active environment (typically
 <code class="code">.GlobalEnv</code>), you can do
@@ -2379,7 +2438,7 @@ with a &lsquo;<samp class="samp">.</samp>&rsquo; are removed.)
 <p>
 Next: <a href="#Why-do-my-matrices-lose-dimensions_003f" accesskey="n" rel="next">Why do my matrices lose dimensions?</a>, Previous: <a href="#How-can-I-clean-up-my-workspace_003f" accesskey="p" rel="prev">How can I clean up my workspace?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-can-I-get-eval_0028_0029-and-D_0028_0029-to-work_003f-1">7.4 How can I get eval() and D() to work?</h3>
+<h3 class="section" id="How-can-I-get-eval_0028_0029-and-D_0028_0029-to-work_003f-1"><span>7.4 How can I get <code class="code">eval()</code> and <code class="code">D()</code> to work?<a class="copiable-link" href="#How-can-I-get-eval_0028_0029-and-D_0028_0029-to-work_003f-1"> &para;</a></span></h3>
 
 <p>Strange things will happen if you use <code class="code">eval(print(x), envir = e)</code>
 or <code class="code">D(x^2, &quot;x&quot;)</code>.  The first one will either tell you that
@@ -2423,9 +2482,9 @@ g(a * b)
 <div class="section-level-extent" id="Why-do-my-matrices-lose-dimensions_003f">
 <div class="nav-panel">
 <p>
-Next: <a href="#How-does-autoloading-work_003f" accesskey="n" rel="next">How does autoloading work?</a>, Previous: <a href="#How-can-I-get-eval_0028_0029-and-D_0028_0029-to-work_003f" accesskey="p" rel="prev">How can I get eval() and D() to work?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+Next: <a href="#How-does-autoloading-work_003f" accesskey="n" rel="next">How does autoloading work?</a>, Previous: <a href="#How-can-I-get-eval_0028_0029-and-D_0028_0029-to-work_003f" accesskey="p" rel="prev">How can I get <code class="code">eval()</code> and <code class="code">D()</code> to work?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Why-do-my-matrices-lose-dimensions_003f-1">7.5 Why do my matrices lose dimensions?</h3>
+<h3 class="section" id="Why-do-my-matrices-lose-dimensions_003f-1"><span>7.5 Why do my matrices lose dimensions?<a class="copiable-link" href="#Why-do-my-matrices-lose-dimensions_003f-1"> &para;</a></span></h3>
 
 <p>When a matrix with a single row or column is created by a subscripting
 operation, e.g., <code class="code">row &lt;- mat[2, ]</code>, it is by default turned into a
@@ -2464,7 +2523,7 @@ rewritten as
 <p>
 Next: <a href="#How-should-I-set-options_003f" accesskey="n" rel="next">How should I set options?</a>, Previous: <a href="#Why-do-my-matrices-lose-dimensions_003f" accesskey="p" rel="prev">Why do my matrices lose dimensions?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-does-autoloading-work_003f-1">7.6 How does autoloading work?</h3>
+<h3 class="section" id="How-does-autoloading-work_003f-1"><span>7.6 How does autoloading work?<a class="copiable-link" href="#How-does-autoloading-work_003f-1"> &para;</a></span></h3>
 
 <p>Autoloading is rarely used since packages became lazy-loaded.
 </p>
@@ -2488,7 +2547,7 @@ does not occupy memory (yet).
 <p>
 Next: <a href="#How-do-file-names-work-in-Windows_003f" accesskey="n" rel="next">How do file names work in Windows?</a>, Previous: <a href="#How-does-autoloading-work_003f" accesskey="p" rel="prev">How does autoloading work?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-should-I-set-options_003f-1">7.7 How should I set options?</h3>
+<h3 class="section" id="How-should-I-set-options_003f-1"><span>7.7 How should I set options?<a class="copiable-link" href="#How-should-I-set-options_003f-1"> &para;</a></span></h3>
 
 <p>The function <code class="code">options()</code> allows setting and examining a variety of
 global &ldquo;options&rdquo; which affect the way in which R computes and displays
@@ -2531,7 +2590,7 @@ environment (frame), are just silently disregarded.
 <p>
 Next: <a href="#Why-does-plotting-give-a-color-allocation-error_003f" accesskey="n" rel="next">Why does plotting give a color allocation error?</a>, Previous: <a href="#How-should-I-set-options_003f" accesskey="p" rel="prev">How should I set options?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-do-file-names-work-in-Windows_003f-1">7.8 How do file names work in Windows?</h3>
+<h3 class="section" id="How-do-file-names-work-in-Windows_003f-1"><span>7.8 How do file names work in Windows?<a class="copiable-link" href="#How-do-file-names-work-in-Windows_003f-1"> &para;</a></span></h3>
 
 <p>As R uses C-style string handling, &lsquo;<samp class="samp">\</samp>&rsquo; is treated as an escape
 character, so that for example one can enter a newline as &lsquo;<samp class="samp">\n</samp>&rsquo;.
@@ -2548,7 +2607,7 @@ can also replace &lsquo;<samp class="samp">\</samp>&rsquo; by &lsquo;<samp class
 <p>
 Next: <a href="#How-do-I-convert-factors-to-numeric_003f" accesskey="n" rel="next">How do I convert factors to numeric?</a>, Previous: <a href="#How-do-file-names-work-in-Windows_003f" accesskey="p" rel="prev">How do file names work in Windows?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Why-does-plotting-give-a-color-allocation-error_003f-1">7.9 Why does plotting give a color allocation error?</h3>
+<h3 class="section" id="Why-does-plotting-give-a-color-allocation-error_003f-1"><span>7.9 Why does plotting give a color allocation error?<a class="copiable-link" href="#Why-does-plotting-give-a-color-allocation-error_003f-1"> &para;</a></span></h3>
 
 <p>This is about a problem rarely seen with modern X11 installations.
 </p>
@@ -2574,7 +2633,7 @@ help page for <code class="code">X11()</code> for more information.
 <p>
 Next: <a href="#Are-Trellis-displays-implemented-in-R_003f" accesskey="n" rel="next">Are Trellis displays implemented in R?</a>, Previous: <a href="#Why-does-plotting-give-a-color-allocation-error_003f" accesskey="p" rel="prev">Why does plotting give a color allocation error?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-do-I-convert-factors-to-numeric_003f-1">7.10 How do I convert factors to numeric?</h3>
+<h3 class="section" id="How-do-I-convert-factors-to-numeric_003f-1"><span>7.10 How do I convert factors to numeric?<a class="copiable-link" href="#How-do-I-convert-factors-to-numeric_003f-1"> &para;</a></span></h3>
 
 <p>It may happen that when reading numeric data into R (usually, when
 reading in a file), they come in as factors.  If <code class="code">f</code> is such a
@@ -2601,7 +2660,7 @@ internal codes).
 <p>
 Next: <a href="#What-are-the-enclosing-and-parent-environments_003f" accesskey="n" rel="next">What are the enclosing and parent environments?</a>, Previous: <a href="#How-do-I-convert-factors-to-numeric_003f" accesskey="p" rel="prev">How do I convert factors to numeric?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Are-Trellis-displays-implemented-in-R_003f-1">7.11 Are Trellis displays implemented in R?</h3>
+<h3 class="section" id="Are-Trellis-displays-implemented-in-R_003f-1"><span>7.11 Are Trellis displays implemented in R?<a class="copiable-link" href="#Are-Trellis-displays-implemented-in-R_003f-1"> &para;</a></span></h3>
 
 <p>The recommended package <a class="url" href="https://CRAN.R-project.org/package=lattice"><strong class="strong">lattice</strong></a> (which is based on base
 package <strong class="strong">grid</strong>) provides graphical functionality that is compatible
@@ -2625,7 +2684,7 @@ equivalent.)
 <p>
 Next: <a href="#How-can-I-substitute-into-a-plot-label_003f" accesskey="n" rel="next">How can I substitute into a plot label?</a>, Previous: <a href="#Are-Trellis-displays-implemented-in-R_003f" accesskey="p" rel="prev">Are Trellis displays implemented in R?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="What-are-the-enclosing-and-parent-environments_003f-1">7.12 What are the enclosing and parent environments?</h3>
+<h3 class="section" id="What-are-the-enclosing-and-parent-environments_003f-1"><span>7.12 What are the enclosing and parent environments?<a class="copiable-link" href="#What-are-the-enclosing-and-parent-environments_003f-1"> &para;</a></span></h3>
 
 <p>Inside a function you may want to access variables in two additional
 environments: the one that the function was defined in (&ldquo;enclosing&rdquo;),
@@ -2680,7 +2739,7 @@ is wherever the function was created.
 <p>
 Next: <a href="#What-are-valid-names_003f" accesskey="n" rel="next">What are valid names?</a>, Previous: <a href="#What-are-the-enclosing-and-parent-environments_003f" accesskey="p" rel="prev">What are the enclosing and parent environments?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-can-I-substitute-into-a-plot-label_003f-1">7.13 How can I substitute into a plot label?</h3>
+<h3 class="section" id="How-can-I-substitute-into-a-plot-label_003f-1"><span>7.13 How can I substitute into a plot label?<a class="copiable-link" href="#How-can-I-substitute-into-a-plot-label_003f-1"> &para;</a></span></h3>
 
 <p>Often, it is desired to use the value of an R object in a plot label,
 e.g., a title.  This is easily accomplished using <code class="code">paste()</code> if the
@@ -2711,9 +2770,9 @@ values.
 <div class="section-level-extent" id="What-are-valid-names_003f">
 <div class="nav-panel">
 <p>
-Next: <a href="#Are-GAMs-implemented-in-R_003f" accesskey="n" rel="next">Are GAMs implemented in R?</a>, Previous: <a href="#How-can-I-substitute-into-a-plot-label_003f" accesskey="p" rel="prev">How can I substitute into a plot label?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+Next: <a href="#Are-GAMs-implemented-in-R_003f" accesskey="n" rel="next">Are GAMs<!-- /@w --> implemented in R?</a>, Previous: <a href="#How-can-I-substitute-into-a-plot-label_003f" accesskey="p" rel="prev">How can I substitute into a plot label?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="What-are-valid-names_003f-1">7.14 What are valid names?</h3>
+<h3 class="section" id="What-are-valid-names_003f-1"><span>7.14 What are valid names?<a class="copiable-link" href="#What-are-valid-names_003f-1"> &para;</a></span></h3>
 
 <p>When creating data frames using <code class="code">data.frame()</code> or
 <code class="code">read.table()</code>, R by default ensures that the variable names are
@@ -2762,26 +2821,26 @@ strings file &ldquo;names&rdquo;.
 <p>
 Next: <a href="#Why-is-the-output-not-printed-when-I-source_0028_0029-a-file_003f" accesskey="n" rel="next">Why is the output not printed when I source() a file?</a>, Previous: <a href="#What-are-valid-names_003f" accesskey="p" rel="prev">What are valid names?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Are-GAMs-implemented-in-R_003f-1">7.15 Are GAMs implemented in R?</h3>
+<h3 class="section" id="Are-GAMs-implemented-in-R_003f-1"><span>7.15 Are GAMs<!-- /@w --> implemented in R?<a class="copiable-link" href="#Are-GAMs-implemented-in-R_003f-1"> &para;</a></span></h3>
 
 <p>Package <a class="url" href="https://CRAN.R-project.org/package=gam"><strong class="strong">gam</strong></a> from <abbr class="acronym">CRAN</abbr> implements all the Generalized
 Additive Models (GAM) functionality as described in the GAM chapter of
 the White Book.  In particular, it implements backfitting with both
 local regression and smoothing splines, and is extendable.  There is a
-<code class="code">gam()</code> function for GAMs in package <a class="url" href="https://CRAN.R-project.org/package=mgcv"><strong class="strong">mgcv</strong></a>, but it is not
+<code class="code">gam()</code> function for GAMs<!-- /@w --> in package <a class="url" href="https://CRAN.R-project.org/package=mgcv"><strong class="strong">mgcv</strong></a>, but it is not
 an exact clone of what is described in the White Book (no <code class="code">lo()</code>
-for example).  Package <a class="url" href="https://CRAN.R-project.org/package=gss"><strong class="strong">gss</strong></a> can fit spline-based GAMs too.  And
+for example).  Package <a class="url" href="https://CRAN.R-project.org/package=gss"><strong class="strong">gss</strong></a> can fit spline-based GAMs<!-- /@w --> too.  And
 if you can accept regression splines you can use <code class="code">glm()</code>.  For
-Gaussian GAMs you can use <code class="code">bruto()</code> from package <a class="url" href="https://CRAN.R-project.org/package=mda"><strong class="strong">mda</strong></a>.
+Gaussian GAMs<!-- /@w --> you can use <code class="code">bruto()</code> from package <a class="url" href="https://CRAN.R-project.org/package=mda"><strong class="strong">mda</strong></a>.
 </p>
 <hr>
 </div>
 <div class="section-level-extent" id="Why-is-the-output-not-printed-when-I-source_0028_0029-a-file_003f">
 <div class="nav-panel">
 <p>
-Next: <a href="#Why-does-outer_0028_0029-behave-strangely-with-my-function_003f" accesskey="n" rel="next">Why does outer() behave strangely with my function?</a>, Previous: <a href="#Are-GAMs-implemented-in-R_003f" accesskey="p" rel="prev">Are GAMs implemented in R?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+Next: <a href="#Why-does-outer_0028_0029-behave-strangely-with-my-function_003f" accesskey="n" rel="next">Why does outer() behave strangely with my function?</a>, Previous: <a href="#Are-GAMs-implemented-in-R_003f" accesskey="p" rel="prev">Are GAMs<!-- /@w --> implemented in R?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Why-is-the-output-not-printed-when-I-source_0028_0029-a-file_003f-1">7.16 Why is the output not printed when I source() a file?</h3>
+<h3 class="section" id="Why-is-the-output-not-printed-when-I-source_0028_0029-a-file_003f-1"><span>7.16 Why is the output not printed when I source() a file?<a class="copiable-link" href="#Why-is-the-output-not-printed-when-I-source_0028_0029-a-file_003f-1"> &para;</a></span></h3>
 
 <p>Most R commands do not generate any output. The command
 </p>
@@ -2823,9 +2882,9 @@ specifically print it.
 <div class="section-level-extent" id="Why-does-outer_0028_0029-behave-strangely-with-my-function_003f">
 <div class="nav-panel">
 <p>
-Next: <a href="#Why-does-the-output-from-anova_0028_0029-depend-on-the-order-of-factors-in-the-model_003f" accesskey="n" rel="next">Why does the output from anova() depend on the order of factors in the model?</a>, Previous: <a href="#Why-is-the-output-not-printed-when-I-source_0028_0029-a-file_003f" accesskey="p" rel="prev">Why is the output not printed when I source() a file?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+Next: <a href="#Why-does-the-output-from-anova_0028_0029-depend-on-the-order-of-factors-in-the-model_003f" accesskey="n" rel="next">Why does the output from <code class="code">anova()</code> depend on the order of factors in the model?</a>, Previous: <a href="#Why-is-the-output-not-printed-when-I-source_0028_0029-a-file_003f" accesskey="p" rel="prev">Why is the output not printed when I source() a file?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Why-does-outer_0028_0029-behave-strangely-with-my-function_003f-1">7.17 Why does outer() behave strangely with my function?</h3>
+<h3 class="section" id="Why-does-outer_0028_0029-behave-strangely-with-my-function_003f-1"><span>7.17 Why does outer() behave strangely with my function?<a class="copiable-link" href="#Why-does-outer_0028_0029-behave-strangely-with-my-function_003f-1"> &para;</a></span></h3>
 
 <p>As the help for <code class="code">outer()</code> indicates, it does not work on arbitrary
 functions the way the <code class="code">apply()</code> family does.  It requires functions
@@ -2870,7 +2929,7 @@ function is
 <p>
 Next: <a href="#How-do-I-produce-PNG-graphics-in-batch-mode_003f" accesskey="n" rel="next">How do I produce PNG graphics in batch mode?</a>, Previous: <a href="#Why-does-outer_0028_0029-behave-strangely-with-my-function_003f" accesskey="p" rel="prev">Why does outer() behave strangely with my function?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Why-does-the-output-from-anova_0028_0029-depend-on-the-order-of-factors-in-the-model_003f-1">7.18 Why does the output from anova() depend on the order of factors in the model?</h3>
+<h3 class="section" id="Why-does-the-output-from-anova_0028_0029-depend-on-the-order-of-factors-in-the-model_003f-1"><span>7.18 Why does the output from <code class="code">anova()</code> depend on the order of factors in the model?<a class="copiable-link" href="#Why-does-the-output-from-anova_0028_0029-depend-on-the-order-of-factors-in-the-model_003f-1"> &para;</a></span></h3>
 
 <p>In a model such as <code class="code">~A+B+A:B</code>, R will report the difference in sums
 of squares between the models <code class="code">~1</code>, <code class="code">~A</code>, <code class="code">~A+B</code> and
@@ -2900,9 +2959,9 @@ squares resulting from dropping single terms.
 <div class="section-level-extent" id="How-do-I-produce-PNG-graphics-in-batch-mode_003f">
 <div class="nav-panel">
 <p>
-Next: <a href="#How-can-I-get-command-line-editing-to-work_003f" accesskey="n" rel="next">How can I get command line editing to work?</a>, Previous: <a href="#Why-does-the-output-from-anova_0028_0029-depend-on-the-order-of-factors-in-the-model_003f" accesskey="p" rel="prev">Why does the output from anova() depend on the order of factors in the model?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+Next: <a href="#How-can-I-get-command-line-editing-to-work_003f" accesskey="n" rel="next">How can I get command line editing to work?</a>, Previous: <a href="#Why-does-the-output-from-anova_0028_0029-depend-on-the-order-of-factors-in-the-model_003f" accesskey="p" rel="prev">Why does the output from <code class="code">anova()</code> depend on the order of factors in the model?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-do-I-produce-PNG-graphics-in-batch-mode_003f-1">7.19 How do I produce PNG graphics in batch mode?</h3>
+<h3 class="section" id="How-do-I-produce-PNG-graphics-in-batch-mode_003f-1"><span>7.19 How do I produce PNG graphics in batch mode?<a class="copiable-link" href="#How-do-I-produce-PNG-graphics-in-batch-mode_003f-1"> &para;</a></span></h3>
 
 <p>Under a Unix-like, if your installation supports the
 <code class="code">type=&quot;cairo&quot;</code> option to the <code class="code">png()</code> device there should be no
@@ -2928,7 +2987,7 @@ install), which is an X11 server that does not require a screen.
 <p>
 Next: <a href="#How-can-I-turn-a-string-into-a-variable_003f" accesskey="n" rel="next">How can I turn a string into a variable?</a>, Previous: <a href="#How-do-I-produce-PNG-graphics-in-batch-mode_003f" accesskey="p" rel="prev">How do I produce PNG graphics in batch mode?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-can-I-get-command-line-editing-to-work_003f-1">7.20 How can I get command line editing to work?</h3>
+<h3 class="section" id="How-can-I-get-command-line-editing-to-work_003f-1"><span>7.20 How can I get command line editing to work?<a class="copiable-link" href="#How-can-I-get-command-line-editing-to-work_003f-1"> &para;</a></span></h3>
 
 <p>The Unix-like command-line interface to R can only provide the inbuilt
 command line editor which allows recall, editing and re-submission of
@@ -2946,7 +3005,7 @@ packages such as <code class="code">libreadline-dev</code> (Debian) or
 <p>
 Next: <a href="#Why-do-lattice_002ftrellis-graphics-not-work_003f" accesskey="n" rel="next">Why do lattice/trellis graphics not work?</a>, Previous: <a href="#How-can-I-get-command-line-editing-to-work_003f" accesskey="p" rel="prev">How can I get command line editing to work?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-can-I-turn-a-string-into-a-variable_003f-1">7.21 How can I turn a string into a variable?</h3>
+<h3 class="section" id="How-can-I-turn-a-string-into-a-variable_003f-1"><span>7.21 How can I turn a string into a variable?<a class="copiable-link" href="#How-can-I-turn-a-string-into-a-variable_003f-1"> &para;</a></span></h3>
 
 <p>If you have
 </p>
@@ -2999,7 +3058,29 @@ and then you can easily index it by name
 vars[[&quot;a&quot;]]
 </pre></div>
 
-<p>without any of this messing about.
+<p>without any of this messing about.  This becomes especially true if you
+are finding yourself creating and trying to programmatically access
+groups of related variables such as <code class="code">result1</code>, <code class="code">result2</code>,
+<code class="code">result3</code>, and so on: instead of fighting against the language to
+use
+</p>
+<div class="example">
+<pre class="example-preformatted">assign(paste0(&quot;result&quot;, i), process(get(paste0(&quot;dataset&quot;, i))))
+</pre></div>
+
+<p>it is much easier to put the related variables in lists and use
+</p>
+<div class="example">
+<pre class="example-preformatted">result[[i]] &lt;- process(dataset[[i]])
+</pre></div>
+
+<p>and, eventually,
+</p>
+<div class="example">
+<pre class="example-preformatted">result &lt;- lapply(dataset, process)
+</pre></div>
+
+<p>which is easy to replace with <code class="code">parLapply</code> for parallel processing.
 </p>
 <hr>
 </div>
@@ -3008,7 +3089,7 @@ vars[[&quot;a&quot;]]
 <p>
 Next: <a href="#How-can-I-sort-the-rows-of-a-data-frame_003f" accesskey="n" rel="next">How can I sort the rows of a data frame?</a>, Previous: <a href="#How-can-I-turn-a-string-into-a-variable_003f" accesskey="p" rel="prev">How can I turn a string into a variable?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Why-do-lattice_002ftrellis-graphics-not-work_003f-1">7.22 Why do lattice/trellis graphics not work?</h3>
+<h3 class="section" id="Why-do-lattice_002ftrellis-graphics-not-work_003f-1"><span>7.22 Why do lattice/trellis graphics not work?<a class="copiable-link" href="#Why-do-lattice_002ftrellis-graphics-not-work_003f-1"> &para;</a></span></h3>
 
 <p>The most likely reason is that you forgot to tell R to display the
 graph.  Lattice functions such as <code class="code">xyplot()</code> create a graph object,
@@ -3026,12 +3107,15 @@ explicit <code class="code">print()</code> statement.
 <p>
 Next: <a href="#Why-does-the-help_002estart_0028_0029-search-engine-not-work_003f" accesskey="n" rel="next">Why does the help.start() search engine not work?</a>, Previous: <a href="#Why-do-lattice_002ftrellis-graphics-not-work_003f" accesskey="p" rel="prev">Why do lattice/trellis graphics not work?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-can-I-sort-the-rows-of-a-data-frame_003f-1">7.23 How can I sort the rows of a data frame?</h3>
+<h3 class="section" id="How-can-I-sort-the-rows-of-a-data-frame_003f-1"><span>7.23 How can I sort the rows of a data frame?<a class="copiable-link" href="#How-can-I-sort-the-rows-of-a-data-frame_003f-1"> &para;</a></span></h3>
 
 <p>To sort the rows within a data frame, with respect to the values in one
 or more of the columns, simply use <code class="code">order()</code> (e.g.,
 <code class="code">DF[order(DF$a, DF[[&quot;b&quot;]]), ]</code> to sort the data frame <code class="code">DF</code> on
 columns named <code class="code">a</code> and <code class="code">b</code>).
+</p>
+<p>From R 4.4.0, <code class="code">sort_by()</code> provides a less verbose alternative
+with a formula interface (e.g., <code class="code">sort_by(DF, ~a + b)</code>).
 </p>
 <hr>
 </div>
@@ -3040,7 +3124,7 @@ columns named <code class="code">a</code> and <code class="code">b</code>).
 <p>
 Next: <a href="#Why-did-my-_002eRprofile-stop-working-when-I-updated-R_003f" accesskey="n" rel="next">Why did my .Rprofile stop working when I updated R?</a>, Previous: <a href="#How-can-I-sort-the-rows-of-a-data-frame_003f" accesskey="p" rel="prev">How can I sort the rows of a data frame?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Why-does-the-help_002estart_0028_0029-search-engine-not-work_003f-1">7.24 Why does the help.start() search engine not work?</h3>
+<h3 class="section" id="Why-does-the-help_002estart_0028_0029-search-engine-not-work_003f-1"><span>7.24 Why does the help.start() search engine not work?<a class="copiable-link" href="#Why-does-the-help_002estart_0028_0029-search-engine-not-work_003f-1"> &para;</a></span></h3>
 
 <p>Since R 2.10.0, the browser-based search engine in <code class="code">help.start()</code>
 is an <abbr class="acronym">HTML</abbr> interface to <code class="code">help.search()</code>, and should always work.
@@ -3056,7 +3140,7 @@ JavaScript enabled in the browser.
 <p>
 Next: <a href="#Where-have-all-the-methods-gone_003f" accesskey="n" rel="next">Where have all the methods gone?</a>, Previous: <a href="#Why-does-the-help_002estart_0028_0029-search-engine-not-work_003f" accesskey="p" rel="prev">Why does the help.start() search engine not work?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Why-did-my-_002eRprofile-stop-working-when-I-updated-R_003f-1">7.25 Why did my .Rprofile stop working when I updated R?</h3>
+<h3 class="section" id="Why-did-my-_002eRprofile-stop-working-when-I-updated-R_003f-1"><span>7.25 Why did my .Rprofile stop working when I updated R?<a class="copiable-link" href="#Why-did-my-_002eRprofile-stop-working-when-I-updated-R_003f-1"> &para;</a></span></h3>
 
 <p>Did you read the <samp class="file">NEWS</samp> file?  For functions that are not in the
 <strong class="strong">base</strong> package you need to specify the correct package namespace,
@@ -3074,8 +3158,6 @@ help.start()
 utils::help.start()
 </pre></div>
 
-<p>(<code class="code">graphics::ps.options(horizontal = FALSE)</code> in R 1.9.x).
-</p>
 <hr>
 </div>
 <div class="section-level-extent" id="Where-have-all-the-methods-gone_003f">
@@ -3083,7 +3165,7 @@ utils::help.start()
 <p>
 Next: <a href="#How-can-I-create-rotated-axis-labels_003f" accesskey="n" rel="next">How can I create rotated axis labels?</a>, Previous: <a href="#Why-did-my-_002eRprofile-stop-working-when-I-updated-R_003f" accesskey="p" rel="prev">Why did my .Rprofile stop working when I updated R?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Where-have-all-the-methods-gone_003f-1">7.26 Where have all the methods gone?</h3>
+<h3 class="section" id="Where-have-all-the-methods-gone_003f-1"><span>7.26 Where have all the methods gone?<a class="copiable-link" href="#Where-have-all-the-methods-gone_003f-1"> &para;</a></span></h3>
 
 <p>Many functions, particularly S3 methods, are now hidden in namespaces.
 This has the advantage that they cannot be called inadvertently with
@@ -3107,7 +3189,7 @@ probably unexported for a reason and may change without warning.
 <p>
 Next: <a href="#Why-is-read_002etable_0028_0029-so-inefficient_003f" accesskey="n" rel="next">Why is read.table() so inefficient?</a>, Previous: <a href="#Where-have-all-the-methods-gone_003f" accesskey="p" rel="prev">Where have all the methods gone?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-can-I-create-rotated-axis-labels_003f-1">7.27 How can I create rotated axis labels?</h3>
+<h3 class="section" id="How-can-I-create-rotated-axis-labels_003f-1"><span>7.27 How can I create rotated axis labels?<a class="copiable-link" href="#How-can-I-create-rotated-axis-labels_003f-1"> &para;</a></span></h3>
 
 <p>To rotate axis labels (using base graphics), you need to use
 <code class="code">text()</code>, rather than <code class="code">mtext()</code>, as the latter does not
@@ -3136,7 +3218,8 @@ region.  You can adjust the value of the <code class="code">0.25</code> offset a
 to move the axis labels up or down relative to the x axis.  See
 <code class="code">?par</code> for more information.
 </p>
-<p>Also see Figure 1 and associated code in Paul Murrell (2003),
+<p>Also see Figure 1 and associated code in 
+Paul Murrell (2003),
 &ldquo;Integrating grid Graphics Output with Base Graphics Output&rdquo;,
 <em class="emph">R News</em>, <strong class="strong">3/2</strong>, 7&ndash;12.
 </p>
@@ -3147,7 +3230,7 @@ to move the axis labels up or down relative to the x axis.  See
 <p>
 Next: <a href="#What-is-the-difference-between-package-and-library_003f" accesskey="n" rel="next">What is the difference between package and library?</a>, Previous: <a href="#How-can-I-create-rotated-axis-labels_003f" accesskey="p" rel="prev">How can I create rotated axis labels?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Why-is-read_002etable_0028_0029-so-inefficient_003f-1">7.28 Why is read.table() so inefficient?</h3>
+<h3 class="section" id="Why-is-read_002etable_0028_0029-so-inefficient_003f-1"><span>7.28 Why is read.table() so inefficient?<a class="copiable-link" href="#Why-is-read_002etable_0028_0029-so-inefficient_003f-1"> &para;</a></span></h3>
 
 <p>By default, <code class="code">read.table()</code> needs to read in everything as character
 data, and then try to figure out which variables to convert to numerics
@@ -3163,7 +3246,7 @@ columns of the table.
 <p>
 Next: <a href="#I-installed-a-package-but-the-functions-are-not-there" accesskey="n" rel="next">I installed a package but the functions are not there</a>, Previous: <a href="#Why-is-read_002etable_0028_0029-so-inefficient_003f" accesskey="p" rel="prev">Why is read.table() so inefficient?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="What-is-the-difference-between-package-and-library_003f-1">7.29 What is the difference between package and library?</h3>
+<h3 class="section" id="What-is-the-difference-between-package-and-library_003f-1"><span>7.29 What is the difference between package and library?<a class="copiable-link" href="#What-is-the-difference-between-package-and-library_003f-1"> &para;</a></span></h3>
 
 <p>A <em class="dfn">package</em> is a standardized collection of material extending R,
 e.g. providing code, data, or documentation.  A <em class="dfn">library</em> is a
@@ -3184,7 +3267,7 @@ containing packages.
 <p>
 Next: <a href="#Why-doesn_0027t-R-think-these-numbers-are-equal_003f" accesskey="n" rel="next">Why doesn&rsquo;t R think these numbers are equal?</a>, Previous: <a href="#What-is-the-difference-between-package-and-library_003f" accesskey="p" rel="prev">What is the difference between package and library?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="I-installed-a-package-but-the-functions-are-not-there-1">7.30 I installed a package but the functions are not there</h3>
+<h3 class="section" id="I-installed-a-package-but-the-functions-are-not-there-1"><span>7.30 I installed a package but the functions are not there<a class="copiable-link" href="#I-installed-a-package-but-the-functions-are-not-there-1"> &para;</a></span></h3>
 
 <p>To actually <em class="emph">use</em> the package, it needs to be <em class="emph">loaded</em> using
 <code class="code">library()</code>.
@@ -3198,7 +3281,7 @@ Next: <a href="#Why-doesn_0027t-R-think-these-numbers-are-equal_003f" accesskey=
 <p>
 Next: <a href="#How-can-I-capture-or-ignore-errors-in-a-long-simulation_003f" accesskey="n" rel="next">How can I capture or ignore errors in a long simulation?</a>, Previous: <a href="#I-installed-a-package-but-the-functions-are-not-there" accesskey="p" rel="prev">I installed a package but the functions are not there</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Why-doesn_0027t-R-think-these-numbers-are-equal_003f-1">7.31 Why doesn&rsquo;t R think these numbers are equal?</h3>
+<h3 class="section" id="Why-doesn_0027t-R-think-these-numbers-are-equal_003f-1"><span>7.31 Why doesn&rsquo;t R think these numbers are equal?<a class="copiable-link" href="#Why-doesn_0027t-R-think-these-numbers-are-equal_003f-1"> &para;</a></span></h3>
 
 <p>The only numbers that can be represented exactly in R&rsquo;s numeric type are
 integers and fractions whose denominator is a power of 2.  All other
@@ -3226,12 +3309,15 @@ carefully.
 &ldquo;Computational Precision and Floating Point Arithmetic&rdquo;, pages
 753&ndash;771 of <em class="emph">Statistical Analysis and Data Display: An Intermediate
 Course with Examples in R</em>, Richard M. Heiberger and Burt Holland
-(Springer 2015, second edition).  This appendix is a free download from
+(Springer 2015, second edition).
+This appendix is a free download from
 <a class="url" href="https://link.springer.com/content/pdf/bbm:978-1-4939-2122-5/1.pdf">https://link.springer.com/content/pdf/bbm:978-1-4939-2122-5/1.pdf</a>.
 </p>
-<p>For more information, see e.g. David Goldberg (1991), &ldquo;What Every
-Computer Scientist Should Know About Floating-Point Arithmetic&rdquo;,
-<em class="emph">ACM Computing Surveys</em>, <strong class="strong">23/1</strong>, 5&ndash;48, also available via
+<p>For more information, see e.g. 
+David Goldberg (1991), 
+&ldquo;What Every Computer Scientist Should Know About Floating-Point Arithmetic&rdquo;,
+<em class="emph">ACM Computing Surveys</em>, <strong class="strong">23/1</strong>, 5&ndash;48, 
+also available via
 <a class="url" href="https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html">https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html</a>.
 </p>
 <p>Here is another example, this time using addition:
@@ -3257,7 +3343,7 @@ R&gt; print(matrix(c(.3,  .6,  .9, .3 + .6)), digits = 18)
 <p>
 Next: <a href="#Why-are-powers-of-negative-numbers-wrong_003f" accesskey="n" rel="next">Why are powers of negative numbers wrong?</a>, Previous: <a href="#Why-doesn_0027t-R-think-these-numbers-are-equal_003f" accesskey="p" rel="prev">Why doesn&rsquo;t R think these numbers are equal?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-can-I-capture-or-ignore-errors-in-a-long-simulation_003f-1">7.32 How can I capture or ignore errors in a long simulation?</h3>
+<h3 class="section" id="How-can-I-capture-or-ignore-errors-in-a-long-simulation_003f-1"><span>7.32 How can I capture or ignore errors in a long simulation?<a class="copiable-link" href="#How-can-I-capture-or-ignore-errors-in-a-long-simulation_003f-1"> &para;</a></span></h3>
 
 <p>Use <code class="code">try()</code>, which returns an object of class <code class="code">&quot;try-error&quot;</code>
 instead of an error, or preferably <code class="code">tryCatch()</code>, where the return
@@ -3279,7 +3365,7 @@ are supposed to be 4 coefficients in this example).
 <p>
 Next: <a href="#How-can-I-save-the-result-of-each-iteration-in-a-loop-into-a-separate-file_003f" accesskey="n" rel="next">How can I save the result of each iteration in a loop into a separate file?</a>, Previous: <a href="#How-can-I-capture-or-ignore-errors-in-a-long-simulation_003f" accesskey="p" rel="prev">How can I capture or ignore errors in a long simulation?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Why-are-powers-of-negative-numbers-wrong_003f-1">7.33 Why are powers of negative numbers wrong?</h3>
+<h3 class="section" id="Why-are-powers-of-negative-numbers-wrong_003f-1"><span>7.33 Why are powers of negative numbers wrong?<a class="copiable-link" href="#Why-are-powers-of-negative-numbers-wrong_003f-1"> &para;</a></span></h3>
 
 <p>You are probably seeing something like
 </p>
@@ -3315,9 +3401,9 @@ interprets  an expression you can look at the parse tree
 <div class="section-level-extent" id="How-can-I-save-the-result-of-each-iteration-in-a-loop-into-a-separate-file_003f">
 <div class="nav-panel">
 <p>
-Next: <a href="#Why-are-p_002dvalues-not-displayed-when-using-lmer_0028_0029_003f" accesskey="n" rel="next">Why are <em class="math">p</em>-values not displayed when using lmer()?</a>, Previous: <a href="#Why-are-powers-of-negative-numbers-wrong_003f" accesskey="p" rel="prev">Why are powers of negative numbers wrong?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+Next: <a href="#Why-are-p_002dvalues-not-displayed-when-using-lmer_0028_0029_003f" accesskey="n" rel="next">Why are <em class="math">p</em>-values not displayed when using <code class="code">lmer()</code>?</a>, Previous: <a href="#Why-are-powers-of-negative-numbers-wrong_003f" accesskey="p" rel="prev">Why are powers of negative numbers wrong?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-can-I-save-the-result-of-each-iteration-in-a-loop-into-a-separate-file_003f-1">7.34 How can I save the result of each iteration in a loop into a separate file?</h3>
+<h3 class="section" id="How-can-I-save-the-result-of-each-iteration-in-a-loop-into-a-separate-file_003f-1"><span>7.34 How can I save the result of each iteration in a loop into a separate file?<a class="copiable-link" href="#How-can-I-save-the-result-of-each-iteration-in-a-loop-into-a-separate-file_003f-1"> &para;</a></span></h3>
 
 <p>One way is to use <code class="code">paste()</code> (or <code class="code">sprintf()</code>) to concatenate a
 stem filename and the iteration number while <code class="code">file.path()</code>
@@ -3328,7 +3414,7 @@ constructs the path.  For example, to save results into files
 <div class="example">
 <pre class="example-preformatted">for(i in 1:100) {
   ## Calculations constructing &quot;some_object&quot; ...
-  fp &lt;- file.path(&quot;Results&quot;, paste(&quot;result&quot;, i, &quot;.rda&quot;, sep = &quot;&quot;))
+  fp &lt;- file.path(&quot;Results&quot;, paste0(&quot;result&quot;, i, &quot;.rda&quot;))
   save(list = &quot;some_object&quot;, file = fp)
 }
 </pre></div>
@@ -3340,7 +3426,7 @@ constructs the path.  For example, to save results into files
 <p>
 Next: <a href="#Why-are-there-unwanted-borders" accesskey="n" rel="next">Why are there unwanted borders, lines or grid-like artifacts when viewing a plot saved to a PS or PDF file?</a>, Previous: <a href="#How-can-I-save-the-result-of-each-iteration-in-a-loop-into-a-separate-file_003f" accesskey="p" rel="prev">How can I save the result of each iteration in a loop into a separate file?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Why-are-p_002dvalues-not-displayed-when-using-lmer_0028_0029_003f-1">7.35 Why are <em class="math">p</em>-values not displayed when using lmer()?</h3>
+<h3 class="section" id="Why-are-p_002dvalues-not-displayed-when-using-lmer_0028_0029_003f-1"><span>7.35 Why are <em class="math">p</em>-values not displayed when using <code class="code">lmer()</code>?<a class="copiable-link" href="#Why-are-p_002dvalues-not-displayed-when-using-lmer_0028_0029_003f-1"> &para;</a></span></h3>
 
 <p>Doug Bates has kindly provided an extensive response in a post to the 
 r-help list, which can be reviewed at
@@ -3351,9 +3437,9 @@ r-help list, which can be reviewed at
 <div class="section-level-extent" id="Why-are-there-unwanted-borders">
 <div class="nav-panel">
 <p>
-Next: <a href="#Why-does-backslash-behave-strangely-inside-strings_003f" accesskey="n" rel="next">Why does backslash behave strangely inside strings?</a>, Previous: <a href="#Why-are-p_002dvalues-not-displayed-when-using-lmer_0028_0029_003f" accesskey="p" rel="prev">Why are <em class="math">p</em>-values not displayed when using lmer()?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+Next: <a href="#Why-does-backslash-behave-strangely-inside-strings_003f" accesskey="n" rel="next">Why does backslash behave strangely inside strings?</a>, Previous: <a href="#Why-are-p_002dvalues-not-displayed-when-using-lmer_0028_0029_003f" accesskey="p" rel="prev">Why are <em class="math">p</em>-values not displayed when using <code class="code">lmer()</code>?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Why-are-there-unwanted-borders_002c-lines-or-grid_002dlike-artifacts-when-viewing-a-plot-saved-to-a-PS-or-PDF-file_003f">7.36 Why are there unwanted borders, lines or grid-like artifacts when viewing a plot saved to a PS or PDF file?</h3>
+<h3 class="section" id="Why-are-there-unwanted-borders_002c-lines-or-grid_002dlike-artifacts-when-viewing-a-plot-saved-to-a-PS-or-PDF-file_003f"><span>7.36 Why are there unwanted borders, lines or grid-like artifacts when viewing a plot saved to a PS or PDF file?<a class="copiable-link" href="#Why-are-there-unwanted-borders_002c-lines-or-grid_002dlike-artifacts-when-viewing-a-plot-saved-to-a-PS-or-PDF-file_003f"> &para;</a></span></h3>
 
 <p>This can occur when using functions such as <code class="code">polygon()</code>,
 <code class="code">filled.contour()</code>, <code class="code">image()</code> or other functions which may
@@ -3367,33 +3453,33 @@ upon the viewer used, the operating system and may change over time.
 For some common viewers, consider the following:
 </p>
 <dl class="ftable">
-<dt id='index-Acrobat-Reader-_0028cross-platform_0029'><span>Acrobat Reader (cross platform)<a class="copiable-link" href='#index-Acrobat-Reader-_0028cross-platform_0029'> &para;</a></span></dt>
+<dt><a id="index-Acrobat-Reader-_0028cross-platform_0029"></a><span>Acrobat Reader (cross platform)<a class="copiable-link" href="#index-Acrobat-Reader-_0028cross-platform_0029"> &para;</a></span></dt>
 <dd><p>There are options in Preferences to enable/disable text smoothing, image
 smoothing and line art smoothing.
 Disable line art smoothing.
 </p></dd>
-<dt id='index-Preview-_0028macOS_0029'><span>Preview (macOS)<a class="copiable-link" href='#index-Preview-_0028macOS_0029'> &para;</a></span></dt>
+<dt><a id="index-Preview-_0028macOS_0029"></a><span>Preview (macOS)<a class="copiable-link" href="#index-Preview-_0028macOS_0029"> &para;</a></span></dt>
 <dd><p>There is an option in Preferences to enable/disable anti-aliasing of
 text and line art.
 Disable this option. 
 </p></dd>
-<dt id='index-GSview-_0028cross-platform_0029'><span>GSview (cross platform)<a class="copiable-link" href='#index-GSview-_0028cross-platform_0029'> &para;</a></span></dt>
+<dt><a id="index-GSview-_0028cross-platform_0029"></a><span>GSview (cross platform)<a class="copiable-link" href="#index-GSview-_0028cross-platform_0029"> &para;</a></span></dt>
 <dd><p>There are settings for Text Alpha and Graphics Alpha.
 Change Graphics Alpha from 4 bits to 1 bit to disable graphic
 anti-aliasing.
 </p></dd>
-<dt id='index-gv-_0028Unix_002dlike-X_0029'><span>gv (Unix-like X)<a class="copiable-link" href='#index-gv-_0028Unix_002dlike-X_0029'> &para;</a></span></dt>
+<dt><a id="index-gv-_0028Unix_002dlike-X_0029"></a><span>gv (Unix-like X)<a class="copiable-link" href="#index-gv-_0028Unix_002dlike-X_0029"> &para;</a></span></dt>
 <dd><p>There is an option to enable/disable anti-aliasing.
 Disable this option.
 </p></dd>
-<dt id='index-Evince-_0028Linux_002fGNOME_0029'><span>Evince (Linux/GNOME)<a class="copiable-link" href='#index-Evince-_0028Linux_002fGNOME_0029'> &para;</a></span></dt>
+<dt><a id="index-Evince-_0028Linux_002fGNOME_0029"></a><span>Evince (Linux/GNOME)<a class="copiable-link" href="#index-Evince-_0028Linux_002fGNOME_0029"> &para;</a></span></dt>
 <dd><p>There is not an option to disable anti-aliasing in this viewer.
 </p></dd>
-<dt id='index-Okular-_0028Linux_002fKDE_0029'><span>Okular (Linux/KDE)<a class="copiable-link" href='#index-Okular-_0028Linux_002fKDE_0029'> &para;</a></span></dt>
+<dt><a id="index-Okular-_0028Linux_002fKDE_0029"></a><span>Okular (Linux/KDE)<a class="copiable-link" href="#index-Okular-_0028Linux_002fKDE_0029"> &para;</a></span></dt>
 <dd><p>There is not an option in the GUI to enable/disable anti-aliasing.
 From a console command line, use:
 </p><div class="example smallexample">
-<pre class="example-preformatted">$ kwriteconfig --file okularpartrc --group ‘Dlg Performance’ \
+<pre class="example-preformatted">$ kwriteconfig --file okularpartrc --group 'Dlg Performance' \
                --key GraphicsAntialias Disabled
 </pre></div>
 <p>Then restart Okular.  Change the final word to &lsquo;<samp class="samp">Enabled</samp>&rsquo; to restore
@@ -3408,7 +3494,7 @@ the original setting.
 <p>
 Next: <a href="#How-can-I-put-error-bars-or-confidence-bands-on-my-plot_003f" accesskey="n" rel="next">How can I put error bars or confidence bands on my plot?</a>, Previous: <a href="#Why-are-there-unwanted-borders" accesskey="p" rel="prev">Why are there unwanted borders, lines or grid-like artifacts when viewing a plot saved to a PS or PDF file?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Why-does-backslash-behave-strangely-inside-strings_003f-1">7.37 Why does backslash behave strangely inside strings?</h3>
+<h3 class="section" id="Why-does-backslash-behave-strangely-inside-strings_003f-1"><span>7.37 Why does backslash behave strangely inside strings?<a class="copiable-link" href="#Why-does-backslash-behave-strangely-inside-strings_003f-1"> &para;</a></span></h3>
 
 <p>This question most often comes up in relation to file names (see
 <a class="ref" href="#How-do-file-names-work-in-Windows_003f">How do file names work in Windows?</a>)  but it also happens that
@@ -3470,7 +3556,7 @@ warning.
 <p>
 Next: <a href="#How-do-I-create-a-plot-with-two-y_002daxes_003f" accesskey="n" rel="next">How do I create a plot with two y-axes?</a>, Previous: <a href="#Why-does-backslash-behave-strangely-inside-strings_003f" accesskey="p" rel="prev">Why does backslash behave strangely inside strings?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-can-I-put-error-bars-or-confidence-bands-on-my-plot_003f-1">7.38 How can I put error bars or confidence bands on my plot?</h3>
+<h3 class="section" id="How-can-I-put-error-bars-or-confidence-bands-on-my-plot_003f-1"><span>7.38 How can I put error bars or confidence bands on my plot?<a class="copiable-link" href="#How-can-I-put-error-bars-or-confidence-bands-on-my-plot_003f-1"> &para;</a></span></h3>
 
 <p>Some functions will display a particular kind of plot with error bars,
 such as the <code class="code">bar.err()</code> function in the <a class="url" href="https://CRAN.R-project.org/package=agricolae"><strong class="strong">agricolae</strong></a>
@@ -3505,7 +3591,7 @@ displayed with <code class="code">Dotplot()</code> or <code class="code">xYplot(
 <p>
 Next: <a href="#How-do-I-access-the-source-code-for-a-function_003f" accesskey="n" rel="next">How do I access the source code for a function?</a>, Previous: <a href="#How-can-I-put-error-bars-or-confidence-bands-on-my-plot_003f" accesskey="p" rel="prev">How can I put error bars or confidence bands on my plot?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-do-I-create-a-plot-with-two-y_002daxes_003f-1">7.39 How do I create a plot with two y-axes?</h3>
+<h3 class="section" id="How-do-I-create-a-plot-with-two-y_002daxes_003f-1"><span>7.39 How do I create a plot with two y-axes?<a class="copiable-link" href="#How-do-I-create-a-plot-with-two-y_002daxes_003f-1"> &para;</a></span></h3>
 
 <p>Creating a graph with two y-axes, i.e., with two sorts of data that are
 scaled to the same vertical size and showing separate vertical axes on
@@ -3523,7 +3609,7 @@ package) automate the process somewhat.
 <p>
 Next: <a href="#Why-does-summary_0028_0029-report-strange-results-for-the-R_005e2-estimate-when-I-fit-a-linear-model-with-no-intercept_003f" accesskey="n" rel="next">Why does summary() report strange results for the R^2 estimate when I fit a linear model with no intercept?</a>, Previous: <a href="#How-do-I-create-a-plot-with-two-y_002daxes_003f" accesskey="p" rel="prev">How do I create a plot with two y-axes?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-do-I-access-the-source-code-for-a-function_003f-1">7.40 How do I access the source code for a function?</h3>
+<h3 class="section" id="How-do-I-access-the-source-code-for-a-function_003f-1"><span>7.40 How do I access the source code for a function?<a class="copiable-link" href="#How-do-I-access-the-source-code-for-a-function_003f-1"> &para;</a></span></h3>
 
 <p>In most cases, typing the name of the function will print its source 
 code. However, code is sometimes hidden in a namespace, or compiled.  For 
@@ -3538,14 +3624,14 @@ a complete overview on how to access source code, see Uwe Ligges (2006),
 <p>
 Next: <a href="#Why-is-R-apparently-not-releasing-memory_003f" accesskey="n" rel="next">Why is R apparently not releasing memory?</a>, Previous: <a href="#How-do-I-access-the-source-code-for-a-function_003f" accesskey="p" rel="prev">How do I access the source code for a function?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Why-does-summary_0028_0029-report-strange-results-for-the-R_005e2-estimate-when-I-fit-a-linear-model-with-no-intercept_003f-1">7.41 Why does summary() report strange results for the R^2 estimate when I fit a linear model with no intercept?</h3>
+<h3 class="section" id="Why-does-summary_0028_0029-report-strange-results-for-the-R_005e2-estimate-when-I-fit-a-linear-model-with-no-intercept_003f-1"><span>7.41 Why does summary() report strange results for the R^2 estimate when I fit a linear model with no intercept?<a class="copiable-link" href="#Why-does-summary_0028_0029-report-strange-results-for-the-R_005e2-estimate-when-I-fit-a-linear-model-with-no-intercept_003f-1"> &para;</a></span></h3>
 
 <p>As described in <code class="code">?summary.lm</code>, when the intercept is zero (e.g.,
 from <code class="code">y ~ x - 1</code> or <code class="code">y ~ x + 0</code>), <code class="code">summary.lm()</code> uses the
 formula
-  R^2 = 1 - Sum(R[i]^2) / Sum((y[i])^2)
+     R^2 = 1 - Sum(R[i]^2) / Sum((y[i])^2),
 which is different from the usual
-  R^2 = 1 - Sum(R[i]^2) / Sum((y[i] - mean(y))^2).
+     R^2 = 1 - Sum(R[i]^2) / Sum((y[i] - mean(y))^2).
 There are several reasons for this:
 </p><ul class="itemize mark-bullet">
 <li>Otherwise the <em class="math">R^2</em> could be negative (because the model with zero
@@ -3571,7 +3657,7 @@ probably shouldn&rsquo;t be fitting a line through the origin.)
 <p>
 Next: <a href="#How-can-I-enable-secure-https-downloads-in-R_003f" accesskey="n" rel="next">How can I enable secure https downloads in R?</a>, Previous: <a href="#Why-does-summary_0028_0029-report-strange-results-for-the-R_005e2-estimate-when-I-fit-a-linear-model-with-no-intercept_003f" accesskey="p" rel="prev">Why does summary() report strange results for the R^2 estimate when I fit a linear model with no intercept?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="Why-is-R-apparently-not-releasing-memory_003f-1">7.42 Why is R apparently not releasing memory?</h3>
+<h3 class="section" id="Why-is-R-apparently-not-releasing-memory_003f-1"><span>7.42 Why is R apparently not releasing memory?<a class="copiable-link" href="#Why-is-R-apparently-not-releasing-memory_003f-1"> &para;</a></span></h3>
 
 <p>This question is often asked in different flavors along the lines of
 &ldquo;I have removed objects in R and run <code class="code">gc()</code> and yet
@@ -3632,12 +3718,12 @@ actually used memory as well as unused memory that cannot be released.
 <p>
 Next: <a href="#How-can-I-get-CRAN-package-binaries-for-outdated-versions-of-R_003f" accesskey="n" rel="next">How can I get CRAN package binaries for outdated versions of R?</a>, Previous: <a href="#Why-is-R-apparently-not-releasing-memory_003f" accesskey="p" rel="prev">Why is R apparently not releasing memory?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-can-I-enable-secure-https-downloads-in-R_003f-1">7.43 How can I enable secure https downloads in R?</h3>
+<h3 class="section" id="How-can-I-enable-secure-https-downloads-in-R_003f-1"><span>7.43 How can I enable secure https downloads in R?<a class="copiable-link" href="#How-can-I-enable-secure-https-downloads-in-R_003f-1"> &para;</a></span></h3>
 
 <p>From R 4.2.0, <code class="code">&quot;libcurl&quot;</code> download method is always available and
-used for <abbr class="acronym">HTTPS</abbr> by default on all platforms.  It has been used
+used for <abbr class="abbr">HTTPS</abbr> by default on all platforms.  It has been used
 since R 3.3.0 everywhere but Windows where the default method
-<code class="code">&quot;wininet&quot;</code> also supported <abbr class="acronym">HTTPS</abbr>.
+<code class="code">&quot;wininet&quot;</code> also supported <abbr class="abbr">HTTPS</abbr>.
 </p>
 <p>So nothing needs to be done to access &lsquo;<samp class="samp">https://</samp>&rsquo; websites in recent
 versions of R.
@@ -3649,7 +3735,7 @@ versions of R.
 <p>
 Previous: <a href="#How-can-I-enable-secure-https-downloads-in-R_003f" accesskey="p" rel="prev">How can I enable secure https downloads in R?</a>, Up: <a href="#R-Miscellanea" accesskey="u" rel="up">R Miscellanea</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-can-I-get-CRAN-package-binaries-for-outdated-versions-of-R_003f-1">7.44 How can I get CRAN package binaries for outdated versions of R?</h3>
+<h3 class="section" id="How-can-I-get-CRAN-package-binaries-for-outdated-versions-of-R_003f-1"><span>7.44 How can I get CRAN package binaries for outdated versions of R?<a class="copiable-link" href="#How-can-I-get-CRAN-package-binaries-for-outdated-versions-of-R_003f-1"> &para;</a></span></h3>
 
 <p>Since March 2016, Windows and macOS binaries of <abbr class="acronym">CRAN</abbr> packages for old
 versions of R (released more than 5 years ago) are made available from a
@@ -3664,6 +3750,8 @@ option accordingly, by something like
 </pre></div>
 <p>(see <code class="code">?options</code> for more information).
 </p>
+
+
 <hr>
 </div>
 </div>
@@ -3672,7 +3760,7 @@ option accordingly, by something like
 <p>
 Next: <a href="#R-Bugs" accesskey="n" rel="next">R Bugs</a>, Previous: <a href="#R-Miscellanea" accesskey="p" rel="prev">R Miscellanea</a>, Up: <a href="#Top" accesskey="u" rel="up">R FAQ</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h2 class="chapter" id="R-Programming-1">8 R Programming</h2>
+<h2 class="chapter" id="R-Programming-1"><span>8 R Programming<a class="copiable-link" href="#R-Programming-1"> &para;</a></span></h2>
 
 
 <ul class="mini-toc">
@@ -3686,9 +3774,9 @@ Next: <a href="#R-Bugs" accesskey="n" rel="next">R Bugs</a>, Previous: <a href="
 <div class="section-level-extent" id="How-should-I-write-summary-methods_003f">
 <div class="nav-panel">
 <p>
-Next: <a href="#How-can-I-debug-dynamically-loaded-code_003f" accesskey="n" rel="next">How can I debug dynamically loaded code?</a>, Previous: <a href="#R-Programming" accesskey="p" rel="prev">R Programming</a>, Up: <a href="#R-Programming" accesskey="u" rel="up">R Programming</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+Next: <a href="#How-can-I-debug-dynamically-loaded-code_003f" accesskey="n" rel="next">How can I debug dynamically loaded code?</a>, Up: <a href="#R-Programming" accesskey="u" rel="up">R Programming</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-should-I-write-summary-methods_003f-1">8.1 How should I write summary methods?</h3>
+<h3 class="section" id="How-should-I-write-summary-methods_003f-1"><span>8.1 How should I write summary methods?<a class="copiable-link" href="#How-should-I-write-summary-methods_003f-1"> &para;</a></span></h3>
 
 <p>Suppose you want to provide a summary method for class <code class="code">&quot;foo&quot;</code>.
 Then <code class="code">summary.foo()</code> should not print anything, but return an
@@ -3707,13 +3795,14 @@ cases you don&rsquo;t want anything printed.
 <p>
 Next: <a href="#How-can-I-inspect-R-objects-when-debugging_003f" accesskey="n" rel="next">How can I inspect R objects when debugging?</a>, Previous: <a href="#How-should-I-write-summary-methods_003f" accesskey="p" rel="prev">How should I write summary methods?</a>, Up: <a href="#R-Programming" accesskey="u" rel="up">R Programming</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-can-I-debug-dynamically-loaded-code_003f-1">8.2 How can I debug dynamically loaded code?</h3>
+<h3 class="section" id="How-can-I-debug-dynamically-loaded-code_003f-1"><span>8.2 How can I debug dynamically loaded code?<a class="copiable-link" href="#How-can-I-debug-dynamically-loaded-code_003f-1"> &para;</a></span></h3>
 
 <p>Roughly speaking, you need to start R inside the debugger, load the
 code, send an interrupt, and then set the required breakpoints.
 </p>
-<p>See <a data-manual="R-exts" href="https://cran.r-project.org/doc/manuals/R-exts.html#Finding-entry-points">Finding entry points in dynamically loaded
-code</a> in <cite class="cite">Writing R Extensions</cite>.
+<p>See <a data-manual="R-exts" href="https://CRAN.R-project.org/doc/manuals/R-exts.html#Finding-entry-points">Finding entry points in dynamically loaded
+code</a> in <cite class="cite">Writing R Extensions</cite>.  This manual is included in the R
+distribution, see <a class="pxref" href="#What-documentation-exists-for-R_003f">What documentation exists for R?</a>.
 </p>
 <hr>
 </div>
@@ -3722,12 +3811,12 @@ code</a> in <cite class="cite">Writing R Extensions</cite>.
 <p>
 Next: <a href="#How-can-I-change-compilation-flags_003f" accesskey="n" rel="next">How can I change compilation flags?</a>, Previous: <a href="#How-can-I-debug-dynamically-loaded-code_003f" accesskey="p" rel="prev">How can I debug dynamically loaded code?</a>, Up: <a href="#R-Programming" accesskey="u" rel="up">R Programming</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-can-I-inspect-R-objects-when-debugging_003f-1">8.3 How can I inspect R objects when debugging?</h3>
+<h3 class="section" id="How-can-I-inspect-R-objects-when-debugging_003f-1"><span>8.3 How can I inspect R objects when debugging?<a class="copiable-link" href="#How-can-I-inspect-R-objects-when-debugging_003f-1"> &para;</a></span></h3>
 
 <p>The most convenient way is to call <code class="code">R_PV</code> from the symbolic
 debugger.
 </p>
-<p>See <a data-manual="R-exts" href="https://cran.r-project.org/doc/manuals/R-exts.html#Inspecting-R-objects">Inspecting R objects when debugging</a> in <cite class="cite">Writing R Extensions</cite>.
+<p>See <a data-manual="R-exts" href="https://CRAN.R-project.org/doc/manuals/R-exts.html#Inspecting-R-objects">Inspecting R objects when debugging</a> in <cite class="cite">Writing R Extensions</cite>.
 </p>
 <hr>
 </div>
@@ -3736,17 +3825,16 @@ debugger.
 <p>
 Next: <a href="#How-can-I-debug-S4-methods_003f" accesskey="n" rel="next">How can I debug S4 methods?</a>, Previous: <a href="#How-can-I-inspect-R-objects-when-debugging_003f" accesskey="p" rel="prev">How can I inspect R objects when debugging?</a>, Up: <a href="#R-Programming" accesskey="u" rel="up">R Programming</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-can-I-change-compilation-flags_003f-1">8.4 How can I change compilation flags?</h3>
+<h3 class="section" id="How-can-I-change-compilation-flags_003f-1"><span>8.4 How can I change compilation flags?<a class="copiable-link" href="#How-can-I-change-compilation-flags_003f-1"> &para;</a></span></h3>
 
 <p>Suppose you have C code file for dynloading into R, but you want to use
 <code class="code">R CMD SHLIB</code> with compilation flags other than the default ones
 (which were determined when R was built).
 </p>
-<p>Starting with R 2.1.0, users can provide personal Makevars configuration
+<p>Starting with R 2.1.0, users can provide personal <samp class="file">Makevars</samp> configuration
 files in <samp class="file">$<code class="env">HOME</code>/.R</samp> to override the default flags.
-See <a data-manual="R-admin" href="https://cran.r-project.org/doc/manuals/R-admin.html#Add_002don-packages">Add-on packages</a> in <cite class="cite">R Installation and Administration</cite>.
+See <a data-manual="R-admin" href="https://CRAN.R-project.org/doc/manuals/R-admin.html#Add_002don-packages">Add-on packages</a> in <cite class="cite">R Installation and Administration</cite>.
 </p>
-
 <hr>
 </div>
 <div class="section-level-extent" id="How-can-I-debug-S4-methods_003f">
@@ -3754,13 +3842,15 @@ See <a data-manual="R-admin" href="https://cran.r-project.org/doc/manuals/R-admi
 <p>
 Previous: <a href="#How-can-I-change-compilation-flags_003f" accesskey="p" rel="prev">How can I change compilation flags?</a>, Up: <a href="#R-Programming" accesskey="u" rel="up">R Programming</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-can-I-debug-S4-methods_003f-1">8.5 How can I debug S4 methods?</h3>
+<h3 class="section" id="How-can-I-debug-S4-methods_003f-1"><span>8.5 How can I debug S4 methods?<a class="copiable-link" href="#How-can-I-debug-S4-methods_003f-1"> &para;</a></span></h3>
 
 <p>Use the <code class="code">trace()</code> function with argument <code class="code">signature=</code> to add
 calls to the browser or any other code to the method that will be
 dispatched for the corresponding signature.  See <code class="code">?trace</code> for
 details.
 </p>
+
+
 <hr>
 </div>
 </div>
@@ -3769,7 +3859,7 @@ details.
 <p>
 Next: <a href="#Acknowledgments" accesskey="n" rel="next">Acknowledgments</a>, Previous: <a href="#R-Programming" accesskey="p" rel="prev">R Programming</a>, Up: <a href="#Top" accesskey="u" rel="up">R FAQ</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h2 class="chapter" id="R-Bugs-1">9 R Bugs</h2>
+<h2 class="chapter" id="R-Bugs-1"><span>9 R Bugs<a class="copiable-link" href="#R-Bugs-1"> &para;</a></span></h2>
 
 
 <ul class="mini-toc">
@@ -3780,9 +3870,9 @@ Next: <a href="#Acknowledgments" accesskey="n" rel="next">Acknowledgments</a>, P
 <div class="section-level-extent" id="What-is-a-bug_003f">
 <div class="nav-panel">
 <p>
-Next: <a href="#How-to-report-a-bug" accesskey="n" rel="next">How to report a bug</a>, Previous: <a href="#R-Bugs" accesskey="p" rel="prev">R Bugs</a>, Up: <a href="#R-Bugs" accesskey="u" rel="up">R Bugs</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
+Next: <a href="#How-to-report-a-bug" accesskey="n" rel="next">How to report a bug</a>, Up: <a href="#R-Bugs" accesskey="u" rel="up">R Bugs</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="What-is-a-bug_003f-1">9.1 What is a bug?</h3>
+<h3 class="section" id="What-is-a-bug_003f-1"><span>9.1 What is a bug?<a class="copiable-link" href="#What-is-a-bug_003f-1"> &para;</a></span></h3>
 
 <p>If R executes an illegal instruction, or dies with an operating system
 error message that indicates a problem in the program (as opposed to
@@ -3839,7 +3929,7 @@ information.
 <p>
 Previous: <a href="#What-is-a-bug_003f" accesskey="p" rel="prev">What is a bug?</a>, Up: <a href="#R-Bugs" accesskey="u" rel="up">R Bugs</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h3 class="section" id="How-to-report-a-bug-1">9.2 How to report a bug</h3>
+<h3 class="section" id="How-to-report-a-bug-1"><span>9.2 How to report a bug<a class="copiable-link" href="#How-to-report-a-bug-1"> &para;</a></span></h3>
 
 <p>When you decide that there is a bug, it is important to report it and to
 report it in a way which is useful.  What is most useful is an exact
@@ -3930,26 +4020,38 @@ last translator (listed at the top of the appropriate &lsquo;<samp class="samp">
 or to the translation team as listed at
 <a class="url" href="https://developer.R-project.org/TranslationTeams.html">https://developer.R-project.org/TranslationTeams.html</a>.
 </p>
+
+
 <hr>
 </div>
 </div>
-<div class="chapter-level-extent" id="Acknowledgments">
+<div class="unnumbered-level-extent" id="Acknowledgments">
 <div class="nav-panel">
 <p>
 Previous: <a href="#R-Bugs" accesskey="p" rel="prev">R Bugs</a>, Up: <a href="#Top" accesskey="u" rel="up">R FAQ</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>]</p>
 </div>
-<h2 class="chapter" id="Acknowledgments-1">10 Acknowledgments</h2>
+<h2 class="unnumbered" id="Acknowledgments-1"><span>Acknowledgments<a class="copiable-link" href="#Acknowledgments-1"> &para;</a></span></h2>
 
 <p>Of course, many many thanks to Robert and Ross for the R system, and to
 the package writers and porters for adding to it.
 </p>
-<p>Special thanks go to Doug Bates, Peter Dalgaard, Paul Gilbert, Stefano
-Iacus, Fritz Leisch, Jim Lindsey, Thomas Lumley, Martin Maechler, Brian
-D. Ripley, Anthony Rossini, and Andreas Weingessel for their comments
-which helped me improve this <abbr class="acronym">FAQ</abbr>.
+<p>Special thanks go to 
+Doug Bates, 
+Peter Dalgaard, 
+Paul Gilbert,
+Stefano Iacus,
+Fritz Leisch,
+Jim Lindsey,
+Thomas Lumley,
+Martin Maechler,
+Brian D. Ripley,
+Anthony Rossini, and 
+Andreas Weingessel
+for their comments which helped me improve this <abbr class="acronym">FAQ</abbr>.
 </p>
 <p>More to come soon &hellip;
 </p>
+
 </div>
 </div>
 

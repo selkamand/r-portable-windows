@@ -99,6 +99,7 @@ graphics.off	dev
 gray	gray
 gray.colors	gray.colors
 grDevices	grDevices-package
+grDevices-defunct	grDevices-defunct
 grey	gray
 grey.colors	gray.colors
 group	plotmath
@@ -185,7 +186,7 @@ x11	x11
 X11.options	x11
 X11Font	x11Fonts
 X11Fonts	x11Fonts
-xfig	xfig
+xfig	grDevices-defunct
 xy.coords	xy.coords
 xyTable	xyTable
 xyz.coords	xyz.coords

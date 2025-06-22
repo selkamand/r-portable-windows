@@ -1,6 +1,6 @@
 Package: nlme
-Version: 3.1-162
-Date: 2023-01-30
+Version: 3.1-168
+Date: 2025-03-31
 Priority: recommended
 Title: Linear and Nonlinear Mixed Effects Models
 Authors@R: c(person("José", "Pinheiro", role = "aut", comment = "S version"),
@@ -12,12 +12,12 @@ Authors@R: c(person("José", "Pinheiro", role = "aut", comment = "S version"),
              person("Bert", "Van Willigen",role = "ctb", comment = "Programmer fixed sigma"),
              person("Johannes", "Ranke", role = "ctb", comment = "varConstProp()"),
 	     person("R Core Team", email = "R-core@R-project.org",
-                    role = c("aut", "cre")))
+                    role = c("aut", "cre"), comment = c(ROR = "02zz1nj61")))
 Contact: see 'MailingList'
 Description: Fit and compare Gaussian linear and nonlinear mixed-effects models.
-Depends: R (>= 3.5.0)
+Depends: R (>= 3.6.0)
 Imports: graphics, stats, utils, lattice
-Suggests: Hmisc, MASS, SASmixed
+Suggests: MASS, SASmixed
 LazyData: yes
 Encoding: UTF-8
 License: GPL (>= 2)
@@ -25,7 +25,7 @@ BugReports: https://bugs.r-project.org
 MailingList: R-help@r-project.org
 URL: https://svn.r-project.org/R-packages/trunk/nlme/
 NeedsCompilation: yes
-Packaged: 2023-01-31 08:57:23 UTC; maechler
+Packaged: 2025-03-31 11:19:09 UTC; ripley
 Author: José Pinheiro [aut] (S version),
   Douglas Bates [aut] (up to 2007),
   Saikat DebRoy [ctb] (up to 2002),
@@ -34,9 +34,9 @@ Author: José Pinheiro [aut] (S version),
   Siem Heisterkamp [ctb] (Author fixed sigma),
   Bert Van Willigen [ctb] (Programmer fixed sigma),
   Johannes Ranke [ctb] (varConstProp()),
-  R Core Team [aut, cre]
+  R Core Team [aut, cre] (02zz1nj61)
 Maintainer: R Core Team <R-core@R-project.org>
 Repository: CRAN
-Date/Publication: 2023-01-31 16:50:09 UTC
-Built: R 4.3.0; x86_64-w64-mingw32; 2023-04-21 09:26:44 UTC; windows
+Date/Publication: 2025-03-31 11:21:01 UTC
+Built: R 4.5.1; x86_64-w64-mingw32; 2025-06-13 07:56:48 UTC; windows
 Archs: x64

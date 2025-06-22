@@ -14,6 +14,7 @@ attrassign              Create new-style "assign" attribute
 basehaz                 Alias for the survfit function
 bladder                 Bladder Cancer Recurrences
 blogit                  Bounded link functions
+brier                   Compute the Brier score for a Cox model
 cch                     Fits proportional hazards regression model to
                         case-cohort data
 cgd                     Chronic Granulotamous Disease data
@@ -45,6 +46,7 @@ frailty                 Random effects terms
 gbsg                    Breast cancer data sets used in Royston and
                         Altman (2013)
 heart                   Stanford Heart Transplant data
+hoel                    Mouse cancer data
 is.ratetable            Verify that an object is of class ratetable.
 kidney                  Kidney catheter data
 levels.Surv             Return the states of a multi-state Surv object
@@ -59,7 +61,7 @@ model.matrix.coxph      Model.matrix method for coxph models
 myeloid                 Acute myeloid leukemia
 myeloma                 Survival times of patients with multiple
                         myeloma
-nafld1                  Non-alcohol fatty liver disease
+nafld                   Non-alcoholic fatty liver disease
 neardate                Find the index of the closest value in data set
                         2, for each entry in data set one.
 nsk                     Natural splines with knot heights as the basis.
@@ -133,6 +135,7 @@ survreg.distributions   Parametric Survival Distributions
 survreg.object          Parametric Survival Model Object
 survregDtest            Verify a survreg distribution
 tcut                    Factors for person-year calculations
+timeline                Convert to/from a timeline data set format
 tmerge                  Time based merge for survival data
 tobin                   Tobin's Tobit data
 transplant              Liver transplant waiting list

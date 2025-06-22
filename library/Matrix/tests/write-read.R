@@ -1,3 +1,6 @@
+## for R_DEFAULT_PACKAGES=NULL :
+library(utils)
+
 library(Matrix)
 
 ####  Read / Write  (sparse) Matrix objects ----------------------
@@ -6,7 +9,7 @@ library(Matrix)
 
 ### This is no longer really important, as we now use
 ### ../data/KNex.R  which creates the S4 object *every time*
-data(KNex)
+data(KNex, package = "Matrix")
 
 ## recreate 'mm' from list :
 sNms <- c("Dim", "i","p","x")

@@ -1,10 +1,14 @@
 library(nlme)
-if(require("Hmisc")) {
+## if(require("Hmisc")) { -- no longer: depending on ggplot2 -> total +22 pkgs is too much
     T.aug <- Orthodont
-    label(T.aug$age) <- 'anyL'
+## now manually   label(T.aug$age) <- 'anyL'
+## now manually:
+T.aug$age <- structure(T.aug$age, label = "anyL", class = c("labelled", "numeric"))
     foo <- augPred(lme(distance ~ age, random = ~1|Subject, data=T.aug))
     ## failed in 3.1-72
-}
+stopifnot(length(foo$age) == 1485L, inherits(foo$age, "labelled"),
+          attr(foo$age,"label") == "anyL")
+## }
 
 ## failed even if there is a variable with a class that is not being used.
 T.aug <- Orthodont

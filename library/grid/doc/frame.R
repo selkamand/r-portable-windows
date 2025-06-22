@@ -1,7 +1,7 @@
 ### R code from vignette source 'frame.Rnw'
 
 ###################################################
-### code chunk number 1: frame.Rnw:24-29
+### code chunk number 1: frame.Rnw:25-30
 ###################################################
 library(grDevices)
 library(stats) # for runif
@@ -11,13 +11,13 @@ options(width = 60)
 
 
 ###################################################
-### code chunk number 2: frame.Rnw:55-56
+### code chunk number 2: frame.Rnw:56-57
 ###################################################
 gf <- frameGrob()
 
 
 ###################################################
-### code chunk number 3: frame.Rnw:101-102
+### code chunk number 3: frame.Rnw:102-103
 ###################################################
 gf <- packGrob(gf, textGrob("Hello frame!"))
 
@@ -39,7 +39,7 @@ grid.rect(width = unit(1, "grobwidth", "st"),
 
 
 ###################################################
-### code chunk number 6: frame.Rnw:141-143 (eval = FALSE)
+### code chunk number 6: frame.Rnw:142-144 (eval = FALSE)
 ###################################################
 ## grid.edit("st", gp = gpar(fontsize = 20))
 ## 
@@ -57,7 +57,7 @@ grid.draw(my.rect)
 
 
 ###################################################
-### code chunk number 8: frame.Rnw:158-160 (eval = FALSE)
+### code chunk number 8: frame.Rnw:159-161 (eval = FALSE)
 ###################################################
 ## grid.edit("st", label="some different text")
 ## 
@@ -76,7 +76,7 @@ grid.draw(my.rect)
 
 
 ###################################################
-### code chunk number 10: frame.Rnw:252-286
+### code chunk number 10: frame.Rnw:253-287
 ###################################################
 legendGrob <- function(pch, labels, frame = TRUE,
                         hgap = unit(1, "lines"), vgap = unit(1, "lines"),

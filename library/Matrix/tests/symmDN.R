@@ -28,7 +28,7 @@ DN <- function(x) {
 }
 
 ## SDN1(dn) is documented to behave as SDN2(dn, NULL)
-SDN1 <- Matrix:::symmDN
+SDN1 <- Matrix:::symDN
 SDN2 <- function(dn, uplo = NULL) {
     J <-
         if (is.null(uplo)) {
@@ -158,7 +158,7 @@ stopifnot(exprs = {
     identical((dn2 <- rep(adn[2], 2)), dimnames(ms <- forceSymmetric(m))) # a b c for *both* rows & cols
     identical( dn2, dimnames(cMd <- cov2cor(Md)))
     identical( dn2, dimnames(cMs <- cov2cor(Ms))) # gave error in Matrix <= 1.5-1
-    all.equal(as(cMd, "sparseMatrix"), cMs, tol=1e-15) # see even tol=0
+    all.equal(as(cMd, "sparseMatrix"), cMs, tolerance=1e-15) # see even tol=0
 })
 
 dns <- rep(list(letters[1:3]), 2)
@@ -173,8 +173,10 @@ stopifnot(exprs = {
     inherits((cS <- cov2cor(S <- as(m, "sparseMatrix"))), "dsCMatrix")
     identical(dns, dimnames(cS))
     all.equal(cS, dimScale(S))
-    all.equal(as(cM, "sparseMatrix"), cS,      tol=2e-15) # see even tol=0
-    all.equal(cM, as(dimScale(M),"dpoMatrix"), tol=2e-15) # seen 1.665e-16
+    all.equal(as(cM, "sparseMatrix"), cS,
+              tolerance=2e-15) # see even tol=0
+    all.equal(as(cM, "dpoMatrix"), as(dimScale(M), "dpoMatrix"),
+              tolerance=2e-15) # seen 1.665e-16
 })
 
 

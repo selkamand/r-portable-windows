@@ -18,7 +18,7 @@ importFrom(methods, as)
 importFrom(utils, getS3method, type.convert, methods, head, tail)
 export(Surv, Surv2, Surv2data, aeqSurv, aareg, agreg.fit,
        agexact.fit, attrassign, 
-       blogit, bprobit, bcloglog, blog,
+       blogit, bprobit, bcloglog, blog, brier,
        basehaz, cch, clogit, cipoisson, cluster, concordance, concordancefit, 
        coxph, cox.zph, coxph.control, coxph.detail, coxph.fit,
        coxph.wtest, finegray, format.Surv, 
@@ -31,11 +31,11 @@ export(Surv, Surv2, Surv2data, aeqSurv, aareg, agreg.fit,
        ridge, royston, rsurvreg, rttright,statefig, strata, 
        survSplit, survcheck, survcondense, survdiff, survexp,  survfit,
        survfit0, survfit.formula,
-       coxsurv.fit, survfitKM, survfitCI,
+       coxsurv.fit, survfitKM,
        survobrien,  
        survpenal.fit, 
        survreg, survreg.control, survreg.fit,
-       survreg.distributions, survregDtest, tcut,
+       survreg.distributions, survregDtest, tcut, totimeline, fromtimeline,
        tmerge, untangle.specials, yates, yates_setup,
        survConcordance, survConcordance.fit, survfitcoxph.fit)
 S3method('[', aareg)
@@ -68,15 +68,11 @@ S3method(as.character, Surv)
 S3method(as.character, Surv2)
 S3method(as.data.frame, Surv)
 S3method(as.data.frame, Surv2)
-S3method(as.integer, Surv)
-S3method(as.integer, Surv2)
 S3method(as.logical, Surv)
 S3method(as.logical, Surv2)
 S3method(as.matrix, ratetable)
 S3method(as.matrix, Surv)
 S3method(as.matrix, Surv2)
-S3method(as.numeric, Surv)
-S3method(as.numeric, Surv2)
 S3method(attrassign, default)
 S3method(attrassign, lm)
 S3method(barplot, Surv)
@@ -84,10 +80,12 @@ S3method(c, Surv)
 S3method(c, Surv2)
 S3method(coef, concordance)
 S3method(coef, coxphms)
+S3method(coef, survfit)
 S3method(concordance, formula)
 S3method(concordance, lm)
 S3method(concordance, coxph)
 S3method(concordance, survreg)
+S3method(confint, survfit)
 S3method(density, Surv)
 S3method(dim, survfit)
 S3method(duplicated, Surv)
@@ -226,6 +224,7 @@ S3method(unique, Surv)
 S3method(vcov, cch)
 S3method(vcov, concordance)
 S3method(vcov, coxph)
+S3method(vcov, survfit)
 S3method(vcov, survreg)
 S3method(weights, coxph)
 S3method(weights, survreg)

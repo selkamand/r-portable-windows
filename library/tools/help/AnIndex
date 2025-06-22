@@ -3,6 +3,7 @@ tools-package	tools-package
 activeConcordance	matchConcordance
 add_datalist	add_datalist
 Adobe_glyphs	charsets
+analyze_license	licensetools
 as.character.Rconcordance	matchConcordance
 as.character.Rd	parse_Rd
 as.Rconcordance	matchConcordance
@@ -10,6 +11,8 @@ as.Rconcordance.default	matchConcordance
 assertCondition	assertCondition
 assertError	assertCondition
 assertWarning	assertCondition
+base_aliases_db	basetools
+base_rdxrefs_db	basetools
 bibstyle	bibstyle
 buildVignette	buildVignette
 buildVignettes	buildVignettes
@@ -31,14 +34,21 @@ checkVignettes	checkVignettes
 check_packages_in_dir	check_packages_in_dir
 check_packages_in_dir_changes	check_packages_in_dir
 check_packages_in_dir_details	check_packages_in_dir
+check_package_dois	doitools
+check_package_urls	urltools
 codoc	codoc
 codocClasses	codoc
 codocData	codoc
 compactPDF	compactPDF
+CRAN_aliases_db	CRANtools
+CRAN_archive_db	CRANtools
+CRAN_authors_db	CRANtools
 CRAN_check_details	CRANtools
 CRAN_check_issues	CRANtools
 CRAN_check_results	CRANtools
+CRAN_current_db	CRANtools
 CRAN_package_db	CRANtools
+CRAN_rdxrefs_db	CRANtools
 delimMatch	delimMatch
 deparseLatex	parseLatex
 dependsOnPkgs	dependsOnPkgs
@@ -75,6 +85,8 @@ package_dependencies	package_dependencies
 package_native_routine_registration_skeleton	package_native_routine_registration_skeleton
 parseLatex	parseLatex
 parse_Rd	parse_Rd
+parse_URI_reference	urltools
+pkg2HTML	pkg2HTML
 pkgDepends	tools-defunct
 pkgVignettes	buildVignettes
 print.checkDocFiles	QC
@@ -93,6 +105,7 @@ print.undoc	undoc
 pskill	pskill
 psnice	psnice
 QC	QC
+R	R
 Rcmd	Rcmd
 Rconcordance	matchConcordance
 Rd2ex	Rd2HTML
@@ -113,6 +126,7 @@ R_CRAN_WEB	CRANtools
 R_DISABLE_HTTPD	startDynamicHelp
 R_GSCMD	find_gs_cmd
 R_user_dir	userdir
+sha256sum	sha256sum
 showNonASCII	showNonASCII
 showNonASCIIfile	showNonASCII
 SIGCHLD	pskill
@@ -126,6 +140,7 @@ SIGTERM	pskill
 SIGTSTP	pskill
 SIGUSR1	pskill
 SIGUSR2	pskill
+standard_package_names	testInstalledPackage
 startDynamicHelp	startDynamicHelp
 summarize_check_packages_in_dir_depends	check_packages_in_dir
 summarize_check_packages_in_dir_results	check_packages_in_dir

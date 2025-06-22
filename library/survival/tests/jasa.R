@@ -37,15 +37,18 @@ newdata <- data.frame(start=c(0,50,100), stop=c(50,100, max(jasa1$stop)),
                    transplant=rep(0,3), name=c("Smith", "Smith", "Smith"))
 surv2 <- survfit(sfit.1, newdata, id=name)
 # Have to use unclass to avoid [.survfit trying to pick curves,
-#  remove the final element "call" because it won't match
-all.equal(unclass(surv1)[-length(surv1)],
-          unclass(surv2)[-length(surv2)])
+#  remove the final element "call" because it won't match, nor will newdata
+ii <- match(c("newdata", "call"), names(surv1))
+all.equal(unclass(surv1)[-ii],
+          unclass(surv2)[-ii])
 
 
 # Survival curve for a subject of age 50, with prior surgery, tx at 6 months
 #  Remember that 'age' in jasa 1 was centered at 48
 data <- data.frame(start=c(0,183), stop=c(183,3*365), event=c(1,1),
 		   age=c(2,2),  surgery=c(1,1), transplant=c(0,1), id=c(1,1))
+# This output changed in version 3.8-0; the drop in std(surv) at 183 was
+# incorrect
 summary(survfit(sfit.1, data, id=id))
 
 # These should all give the same answer

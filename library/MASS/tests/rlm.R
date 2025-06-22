@@ -8,10 +8,10 @@ hills$grad <- hills$climb/hills$dist
 ## weighted fit
 fit0 <- rlm(time ~ dist + climb - 1, data = hills,
             weights = 1/dist^2, method = "MM")
-summary(fit0, cor = FALSE)
+summary(fit0, correlation = FALSE)
 ## equivalent to
 fit1 <- rlm(ispeed ~ grad, data = hills, method = "MM")
-summary(fit1, cor = FALSE)
+summary(fit1, correlation = FALSE)
 
 cf0 <- coef(summary(fit0))
 cf1 <- coef(summary(fit1))
@@ -21,10 +21,10 @@ stopifnot(all.equal(weighted.residuals(fit0), residuals(fit1)))
 
 # test other cases
 fit0 <- rlm(time ~ dist + climb - 1, data = hills, weights = 1/dist^2)
-summary(fit0, cor = FALSE)
+summary(fit0, correlation = FALSE)
 ## equivalent to
 fit1 <- rlm(ispeed ~ grad, data = hills)
-summary(fit1, cor = FALSE)
+summary(fit1, correlation = FALSE)
 
 cf0 <- coef(summary(fit0))
 cf1 <- coef(summary(fit1))
@@ -34,10 +34,10 @@ stopifnot(all.equal(weighted.residuals(fit0), residuals(fit1)))
 
 fit0 <- rlm(time ~ dist + climb - 1, data = hills, weights = 1/dist^2,
             scale.est = "Huber")
-summary(fit0, cor = FALSE)
+summary(fit0, correlation = FALSE)
 ## equivalent to
 fit1 <- rlm(ispeed ~ grad, data = hills, scale.est = "Huber")
-summary(fit1, cor = FALSE)
+summary(fit1, correlation = FALSE)
 
 cf0 <- coef(summary(fit0))
 cf1 <- coef(summary(fit1))

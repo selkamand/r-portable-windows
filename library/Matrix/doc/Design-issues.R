@@ -4,6 +4,7 @@
 ### code chunk number 1: preliminaries
 ###################################################
 options(width=75)
+library(utils) # for R_DEFAULT_PACKAGES=NULL
 library(Matrix)
 
 

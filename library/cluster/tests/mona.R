@@ -1,7 +1,5 @@
 library(cluster)
 
-if(getRversion() < "3.4.0") source("withAutoprint.R")
-
 data(animals)
 (mani <- mona(animals, trace=TRUE))
 str(mani)

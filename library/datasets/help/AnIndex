@@ -33,6 +33,7 @@ Formaldehyde	Formaldehyde
 freeny	freeny
 freeny.x	freeny
 freeny.y	freeny
+gait	gait
 HairEyeColor	HairEyeColor
 Harman23.cor	Harman23.cor
 Harman74.cor	Harman74.cor
@@ -60,6 +61,8 @@ npk	npk
 occupationalStatus	occupationalStatus
 Orange	Orange
 OrchardSprays	OrchardSprays
+penguins	penguins
+penguins_raw	penguins
 PlantGrowth	PlantGrowth
 precip	precip
 presidents	presidents
@@ -82,6 +85,7 @@ state.division	state
 state.name	state
 state.region	state
 state.x77	state
+sunspot.m2014	sunspot.month
 sunspot.month	sunspot.month
 sunspot.year	sunspot.year
 sunspots	sunspots

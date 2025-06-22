@@ -1,7 +1,7 @@
 ### R code from vignette source 'grobs.Rnw'
 
 ###################################################
-### code chunk number 1: grobs.Rnw:30-34
+### code chunk number 1: grobs.Rnw:32-36
 ###################################################
 library(grDevices)
 library(grid)
@@ -10,14 +10,14 @@ options(width = 60)
 
 
 ###################################################
-### code chunk number 2: grobs.Rnw:48-50
+### code chunk number 2: grobs.Rnw:50-52
 ###################################################
 gl <- linesGrob()
 gl <- editGrob(gl, gp = gpar(col = "green"))
 
 
 ###################################################
-### code chunk number 3: grobs.Rnw:64-68
+### code chunk number 3: grobs.Rnw:66-70
 ###################################################
 grid.newpage()
 grid.lines(name = "lines")
@@ -26,7 +26,7 @@ grid.edit("lines", gp = gpar(col = "red"))
 
 
 ###################################################
-### code chunk number 4: grobs.Rnw:84-91
+### code chunk number 4: grobs.Rnw:86-93
 ###################################################
 grid.newpage()
 pushViewport(viewport(w = .5, h = .5))
@@ -38,7 +38,7 @@ grid.edit(gPath("myxaxis", "labels"), y = unit(-1, "lines"))
 
 
 ###################################################
-### code chunk number 5: grobs.Rnw:103-113
+### code chunk number 5: grobs.Rnw:105-115
 ###################################################
 grid.newpage()
 pushViewport(viewport(w = .5, h = .5))
@@ -53,7 +53,7 @@ grid.edit("myplot::xaxis::labels", y = unit(-1, "lines"))
 
 
 ###################################################
-### code chunk number 6: grobs.Rnw:121-124
+### code chunk number 6: grobs.Rnw:123-126
 ###################################################
 grid.newpage()
 gt <- grid.text("Hi there")
@@ -61,7 +61,7 @@ grid.rect(width = unit(1, "grobwidth", gt))
 
 
 ###################################################
-### code chunk number 7: grobs.Rnw:133-137
+### code chunk number 7: grobs.Rnw:135-139
 ###################################################
 grid.newpage()
 gt <- grid.text("Hi there", name = "sometext")
@@ -70,7 +70,7 @@ grid.edit("sometext", label = "Something different")
 
 
 ###################################################
-### code chunk number 8: grobs.Rnw:162-176
+### code chunk number 8: grobs.Rnw:164-178
 ###################################################
 grid.newpage()
 mygrob <- grob(name = "mygrob", cl = "mygrob")
@@ -89,7 +89,7 @@ grid.rect(width = unit(1, "grobwidth", mygrob))
 
 
 ###################################################
-### code chunk number 9: grobs.Rnw:194-206
+### code chunk number 9: grobs.Rnw:196-208
 ###################################################
 grid.newpage()
 mygtree <- gTree(name = "mygrob",
@@ -106,7 +106,7 @@ grid.rect(width = unit(1, "grobwidth", mygtree))
 
 
 ###################################################
-### code chunk number 10: grobs.Rnw:214-219
+### code chunk number 10: grobs.Rnw:216-221
 ###################################################
 grid.newpage()
 fg <- frameGrob(layout = grid.layout(1, 2))
@@ -116,7 +116,7 @@ grid.draw(fg)
 
 
 ###################################################
-### code chunk number 11: grobs.Rnw:224-240
+### code chunk number 11: grobs.Rnw:226-242
 ###################################################
 grid.newpage()
 pushViewport(viewport(layout = grid.layout(2, 2)))
@@ -137,7 +137,7 @@ drawIt(2, 2)
 
 
 ###################################################
-### code chunk number 12: grobs.Rnw:252-261
+### code chunk number 12: grobs.Rnw:254-263
 ###################################################
 grid.newpage()
 fg <- frameGrob()
@@ -151,7 +151,7 @@ grid.edit("midtext", label = "something much longer")
 
 
 ###################################################
-### code chunk number 13: grobs.Rnw:285-309
+### code chunk number 13: grobs.Rnw:287-311
 ###################################################
 grid.newpage()
 pushViewport(viewport(layout = grid.layout(2, 2)))
@@ -180,7 +180,7 @@ drawIt(2, 2)
 
 
 ###################################################
-### code chunk number 14: grobs.Rnw:316-337
+### code chunk number 14: grobs.Rnw:318-339
 ###################################################
 gplot <- gTree(x = NULL, y = NULL,
                childrenvp = vpTree(
@@ -206,7 +206,7 @@ popViewport()
 
 
 ###################################################
-### code chunk number 15: grobs.Rnw:348-359
+### code chunk number 15: grobs.Rnw:350-361
 ###################################################
 myplot <- gTree(name = "myplot",
                 children = gList(
@@ -222,7 +222,7 @@ grid.draw(myplot)
 
 
 ###################################################
-### code chunk number 16: grobs.Rnw:365-378
+### code chunk number 16: grobs.Rnw:367-380
 ###################################################
 myplot <- gTree(name = "myplot",
                 children = gList(
@@ -240,7 +240,7 @@ grid.get("myplot::xaxis::labels")
 
 
 ###################################################
-### code chunk number 17: grobs.Rnw:399-415
+### code chunk number 17: grobs.Rnw:401-417
 ###################################################
 myplot <- gTree(name = "myplot",
                 children = gList(rectGrob(name = "box", gp = gpar(col = "grey")),
@@ -261,7 +261,7 @@ grid.draw(myplot)
 
 
 ###################################################
-### code chunk number 18: grobs.Rnw:433-464
+### code chunk number 18: grobs.Rnw:435-466
 ###################################################
 drawIt <- function(row, col) {
   pushViewport(viewport(layout.pos.col = col, layout.pos.row = row))
@@ -297,7 +297,7 @@ grid.remove("plot1")
 
 
 ###################################################
-### code chunk number 19: grobs.Rnw:472-482
+### code chunk number 19: grobs.Rnw:474-484
 ###################################################
 grid.newpage()
 grid.frame(name = "myframe", layout = grid.layout(1, 2))

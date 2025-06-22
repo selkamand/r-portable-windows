@@ -1,4 +1,5 @@
 FFdes                   Level 5 fractional factorial designs
+NCV                     Neighbourhood Cross Validation
 Predict.matrix          Prediction methods for smooth terms in a GAM
 Predict.matrix.cr.smooth
                         Predict matrix method functions
@@ -28,6 +29,8 @@ bug.reports.mgcv        Reporting mgcv bugs.
 cSplineDes              Evaluate cyclic B spline basis
 choldrop                Deletion and rank one Cholesky factor update
 choose.k                Basis dimension choice for smooths
+clog                    GAM censored logistic distribution family for
+                        log-logistic AFT models
 cnorm                   GAM censored normal family for log-normal AFT
                         and Tobit models
 columb                  Reduced version of Columbus OH crime data
@@ -35,6 +38,7 @@ concurvity              GAM concurvity measures
 cox.ph                  Additive Cox Proportional Hazard Model
 cox.pht                 Additive Cox proportional hazard models with
                         time varying covariates
+cpois                   GAM censored Poisson family
 dDeta                   Obtaining derivative w.r.t. linear predictor
 dpnorm                  Stable evaluation of difference between normal
                         c.d.f.s
@@ -88,6 +92,7 @@ get.var                 Get named variable or evaluate expression from
                         list or data.frame
 gevlss                  Generalized Extreme Value location-scale model
                         family
+gfam                    Grouped families
 ginla                   GAM Integrated Nested Laplace Approximation
                         Newton Enhanced
 gumbls                  Gumbel location-scale model family
@@ -109,13 +114,16 @@ ldetS                   Getting log generalized determinant of penalty
 linear.functional.terms
                         Linear functionals of a smooth in GAMs
 logLik.gam              AIC and Log likelihood for a fitted GAM
+lp                      Basic linear programming
 ls.size                 Size of list elements
 magic                   Stable Multiple Smoothing Parameter Estimation
                         by GCV or UBRE
 magic.post.proc         Auxilliary information from magic fit
+mchol                   Sparse 'chol' function
 mgcv.FAQ                Frequently Asked Questions for package mgcv
-mgcv.package            Mixed GAM Computation Vehicle with GCV/AIC/REML
-                        smoothness estimation and GAMMs by REML/PQL
+mgcv.package            Mixed GAM Computation Vehicle with
+                        GCV/AIC/REML/NCV smoothness estimation and
+                        GAMMs by REML/PQL
 mgcv.parallel           Parallel computation in mgcv.
 mini.roots              Obtain square roots of penalty matrices
 missing.data            Missing data in GAMs

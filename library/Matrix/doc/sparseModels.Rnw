@@ -7,7 +7,7 @@
 \newcommand{\noFootnote}[1]{{\small (\textit{#1})}}
 \newcommand{\myOp}[1]{{$\left\langle\ensuremath{#1}\right\rangle$}}
 %%\VignetteIndexEntry{Sparse Model Matrices}
-%%\VignetteDepends{Matrix,MASS}
+%%\VignetteDepends{Matrix,MASS,datasets,grDevices,stats,utils}
 \title{Sparse Model Matrices}
 \author{Martin Maechler\\ R Core Development Team
   \\\email{maechler@R-project.org}}
@@ -26,6 +26,9 @@
 %% Note: These are explained in '?RweaveLatex' :
 <<preliminaries, echo=FALSE>>=
 options(width=75)
+library(grDevices) # for R_DEFAULT_PACKAGES=NULL
+library(stats)     # ditto
+library(utils)     # ditto
 @
 \section*{Introduction}
 Model matrices in the very widely used (generalized) linear models
@@ -90,6 +93,7 @@ t( Matrix(model.matrix(~ 0+ f1))) # model with*OUT* intercept
 @
 A more realistic small example is the \code{chickwts} data set,
 <<chickwts-ex>>=
+data(chickwts, package = "datasets")
 str(chickwts)# a standard R data set,  71 x 2
 x.feed <- as(chickwts$feed, "sparseMatrix")
 x.feed[ , (1:72)[c(TRUE,FALSE,FALSE)]] ## every  3rd  column:
@@ -129,7 +133,7 @@ The final model matrix is the concatenation of:
 
 Let us consider the \code{warpbreaks} data set of 54 observations,
 <<warpbreaks-data>>=
-data(warpbreaks)# a standard R data set
+data(warpbreaks, package = "datasets") # a standard R data set
 str(warpbreaks) # 2 x 3 (x 9) balanced two-way with 9 replicates:
 xtabs(~ wool + tension, data = warpbreaks)
 @
@@ -157,7 +161,7 @@ print(  image(tmm)  ) # print(.) the lattice object
 The matrices are even sparser when the factors have more than just two or
 three levels, e.g., for the morley data set,
 <<morley-data, fig=TRUE>>=
-data(morley) # a standard R data set
+data(morley, package = "datasets") # a standard R data set
 morley$Expt <- factor(morley$Expt)
 morley$Run <- factor(morley$Run)
 str(morley)
@@ -185,7 +189,7 @@ functions --- but we still show to build them carefully.
 The easiest---but not at memory resources efficient---way is to go via the
 dense \Rfun{model.matrix} result:
 <<npk_ex>>=
-data(npk, package="MASS")
+data(npk, package = "MASS")
 npk.mf <- model.frame(yield ~ block + N*P*K, data = npk)
 ## str(npk.mf) # the data frame + "terms" attribute
 

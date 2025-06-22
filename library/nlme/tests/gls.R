@@ -105,3 +105,21 @@ stopifnot(all.equal(
     c(0.652122, 0.454468, 1.01271, 1.20772, 1.35816, -0.207982,
       1.19959,  0.349636, 2.39818, 1.36285, 0.75055,  1.18374),
     unname(coef(gm12)), tol = 1e-5)) # Lnx x68_64: 1.18e-6
+
+
+## PR#17988: corARMA() with default p=0=q fails, now with a clear error message
+tools::assertError(
+    gls(follicles ~ 1, Ovary, correlation = corARMA(form = ~ 1 | Mare))
+  , verbose = TRUE)
+## in nlme <= 3.1-164, corARMA() returned dysfunctional corIdent() which gave
+## Error in getGroupsFormula.default(correlation) : 
+##   'form' argument must be a formula
+
+
+## PR#17227 (example originally posted by Wolfgang Viechtbauer, R-sig-ME, 2008q3)
+gnls.exp <- gnls(circumference ~ Asym/(1 + exp(-(age-xmid)/scal)),
+                 data = Orange, correlation = corExp(form = ~1 | Tree),
+                 start = c(Asym=150, xmid=750, scal=300),
+                 control = gnlsControl(returnObject = TRUE)) # warn, not stop
+## using a spatial correlation structure would sometimes crash with varying
+## memory errors in nlme <= 3.1-166

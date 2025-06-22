@@ -151,7 +151,6 @@ OME	OME
 Ops.fractions	fractions
 painters	painters
 pairs.lda	pairs.lda
-pairs.profile	plot.profile
 parcoord	parcoord
 petrol	petrol
 phones	phones
@@ -160,7 +159,6 @@ Pima.tr	Pima.tr
 Pima.tr2	Pima.tr
 plot.lda	plot.lda
 plot.mca	plot.mca
-plot.profile	plot.profile
 plot.ridgelm	lm.ridge
 polr	polr
 predict.glmmPQL	predict.glmmPQL

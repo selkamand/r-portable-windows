@@ -19,10 +19,14 @@ prune	prune.rpart
 prune.rpart	prune.rpart
 residuals.rpart	residuals.rpart
 rpart	rpart
+rpart.anova	rpart-internal
+rpart.class	rpart-internal
 rpart.control	rpart.control
 rpart.exp	rpart.exp
 rpart.matrix	rpart-internal
 rpart.object	rpart.object
+rpart.poisson	rpart-internal
+rpartco	rpart-internal
 rsq.rpart	rsq.rpart
 snip.rpart	snip.rpart
 solder	solder.balance

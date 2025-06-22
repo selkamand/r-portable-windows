@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
 <script type="text/javascript">
-const macros = { "\\R": "\\textsf{R}", "\\code": "\\texttt"};
+const macros = { "\\R": "\\textsf{R}", "\\mbox": "\\text", "\\code": "\\texttt"};
 function processMathHTML() {
     var l = document.getElementsByClassName('reqn');
     for (let e of l) { katex.render(e.textContent, e, { throwOnError: false, macros }); }
@@ -12,11 +12,11 @@ function processMathHTML() {
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"
     onload="processMathHTML();"></script>
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body><div class="container">
+</head><body><div class="container"><main>
 
 <table style="width: 100%;"><tr><td>CHANGES</td><td style="text-align: right;">R Documentation</td></tr></table>
 
-<h2 id='CHANGES'>Windows-specific changes to R</h2>
+<h2>Windows-specific changes to R</h2>
 
 <h3>CHANGES IN R VERSIONS &gt; 2.15.0</h3>
 
@@ -54,14 +54,14 @@ use <span class="option">--no-multiarch</span> to override this.
 <li> <p><code>postscript(file = "|cmd")</code> now works on Windows.
 </p>
 </li>
-<li> <p><code>file.symlink()</code> is now implemented on NTFS file
+<li> <p><code>file.symlink()</code> is now implemented on <abbr>NTFS</abbr> file
 systems on Vista or later, for accounts which have suitable
 permissions (and most will not).  It can link existing
 directories, and existing-or-not files.
 </p>
 </li>
 <li><p> There is a new function <code>Sys.junction()</code> to create
-junction points on NTFS file systems.
+junction points on <abbr>NTFS</abbr> file systems.
 </p>
 </li>
 <li><p> C-level error formats now use the trio library, and so for
@@ -187,7 +187,7 @@ and &lsquo;<span class="samp">&#8288;PKG_LIBS&#8288;</span>&rsquo;.
 </p>
 </li>
 <li><p> Some of the custom messages in the installer were corrupted:
-add a BOM mark to the file as now required by Unicode Inno Setup.
+add a <abbr>BOM</abbr> mark to the file as now required by Unicode Inno Setup.
 (<a href="https://bugs.R-project.org/show_bug.cgi?id=14816">PR#14816</a>)
 </p>
 </li></ul>
@@ -281,7 +281,7 @@ Administration Manual&rsquo;.
 <li><p> All the Windows-specific graphics devices now have a
 <code>family</code> argument.  If non-empty this specifies an initial
 family to be used for fonts 1&ndash;4.  If empty the fonts specified in
-the &lsquo;<span class="file">Rdevga</span>&rsquo; configuration file are used for the Windows GDI
+the &lsquo;<span class="file">Rdevga</span>&rsquo; configuration file are used for the Windows <abbr>GDI</abbr>
 devices and <code>"sans"</code> for cairographics-based devices.
 </p>
 <p>This will generally be a Windows font name such as
@@ -511,8 +511,8 @@ July 2010.)
 
 <ul>
 <li> <p><code>win_iconv</code> has been updated: this version has a change
-in the behaviour with BOMs on UTF-16 and UTF-32 files &ndash; it
-removes BOMs when reading and adds them when writing.  (This is
+in the behaviour with <abbr>BOM</abbr>s on UTF-16 and UTF-32 files &ndash; it
+removes <abbr>BOM</abbr>s when reading and adds them when writing.  (This is
 consistent with Microsoft applications, but Unix versions of
 <code>iconv</code> usually ignore them.)
 </p>
@@ -522,7 +522,7 @@ consistent with Microsoft applications, but Unix versions of
 </p>
 </li>
 <li><p> The installers no longer put an &lsquo;Uninstall&rsquo; item on
-the start menu (to conform to current Microsoft UI guidelines).
+the start menu (to conform to current Microsoft <abbr>UI</abbr> guidelines).
 </p>
 </li>
 <li><p> Running <span class="rlang"><b>R</b></span> always sets the environment variable <span class="env">R_ARCH</span>
@@ -703,9 +703,9 @@ to, and more cases of <code>system2()</code> are implemented.
 
 
 <ul>
-<li><p> The MSI installer is now made by an <span class="rlang"><b>R</b></span> script, and there is
+<li><p> The <abbr>MSI</abbr> installer is now made by an <span class="rlang"><b>R</b></span> script, and there is
 now support for 64-bit builds.  (Unlike the Inno Setup installer,
-there are separate MSI installers for 32- and 64-bit Windows.)
+there are separate <abbr>MSI</abbr> installers for 32- and 64-bit Windows.)
 </p>
 <p>It is now built using <code>WiX 3.x</code> rather than <code>WiX
 	2.0</code>.  (As a result it is about 25% smaller.)
@@ -1054,7 +1054,7 @@ distribution, but one is generated during the build process.
 &lsquo;<span class="file">MkRules.dist</span>&rsquo;.
 </p>
 </li>
-<li><p> The MSI installer defaults to an all-user (per machine)
+<li><p> The <abbr>MSI</abbr> installer defaults to an all-user (per machine)
 install (by setting the <code>ALLUSERS</code> property to <code>1</code>).
 This can be changed at installation, and it can be built for a
 user-mode install (see &lsquo;<span class="file">MkRules.dist</span>&rsquo;).
@@ -1251,6 +1251,7 @@ to the native encoding.
 
 
 
+</main>
 
 </div>
 </body></html>

@@ -286,7 +286,7 @@ rUnitTri <- function(n, upper = TRUE, ...)
 ##' @param n matrix dimension \eqn{n \times n}{n x n}
 ##' @param density ratio of number of non-zero entries to total number
 ##' @param d0 The sqrt of the diagonal entries of D default \code{10}, to be
-##' \dQuote{different} from \code{L} entries.
+##' \dQuote{different} from \code{L} entries.  More generally these can be negative
 ##' @param rcond logical indicating if \code{\link{rcond}(A, useInv=TRUE)}
 ##' should be returned which requires non-singular A and D.
 ##' @param condest logical indicating if \code{\link{condest}(A)$est}
@@ -302,12 +302,13 @@ mkLDL <- function(n, density = 1/3,
     stopifnot(n == round(n), density <= 1)
     n <- as.integer(n)
     stopifnot(n >= 1, is.numeric(d.half),
-              length(d.half) == n, d.half >= 0)
+              length(d.half) == n)# no longer (2023-05-24): d.half >= 0
     L <- Matrix(0, n,n)
     nnz <- round(density * n*n)
     L[sample(n*n, nnz)] <- seq_len(nnz)
     L <- tril(L, -1L)
     diag(L) <- 1
+### FIXME: allow  *negative* d.half[] entries!
     dh2 <- d.half^2
     non.sing <- sum(dh2 > 0) == n
     D <- Diagonal(x = dh2)
@@ -355,7 +356,7 @@ allCholesky <- function(A, verbose = FALSE, silentTry = FALSE)
     ##' @return an is(perm,LDL,super) matrix with interesting and *named* rownames
     CHM_to_pLs <- function(r) {
         is.perm <- function(.)
-            if(inherits(., "try-error")) NA else !all(.@perm == 0:(.@Dim[1]-1))
+            if(inherits(., "try-error")) NA else .@type[1L] != 0L
         is.LDL <- function(.)if(inherits(., "try-error")) NA else isLDL(.)
 	r.st <-
 	    cbind(perm	= sapply(r, is.perm),
@@ -446,7 +447,10 @@ checkMatrix <- function(m, m.m = if(do.matrix) as(m, "matrix"),
                         doSummary = TRUE, doCoerce = TRUE,
 			doCoerce2 = doCoerce && !isRsp, doDet = do.matrix,
 			do.prod = do.t && do.matrix && !isRsp,
-			verbose = TRUE, catFUN = cat)
+			verbose = TRUE, catFUN = cat,
+                        MSG = if(interactive() || capabilities("long.double") ||
+                                 isTRUE(get0("doExtras"))) message else function(...) {}
+                        )
 {
     ## is also called from  dotestMat()  in ../tests/Class+Meth.R
 
@@ -458,7 +462,7 @@ checkMatrix <- function(m, m.m = if(do.matrix) as(m, "matrix"),
     isGen <- extends(cld, "generalMatrix")
     isSym <- extends(cld, "symmetricMatrix")
     isTri <- extends(cld, "triangularMatrix")
-    isCor <- isSym && extends(cld, "corMatrix")
+    isCor <- isSym && (extends(cld, "corMatrix") || extends(cld, "copMatrix"))
     if(isSparse <- extends(cld, "sparseMatrix")) { # also true for these
         isCsp  <- extends(cld, "CsparseMatrix")
 	isRsp  <- extends(cld, "RsparseMatrix")
@@ -518,8 +522,8 @@ checkMatrix <- function(m, m.m = if(do.matrix) as(m, "matrix"),
 
 	## crossprod()	%*%  etc
 	if(do.prod) {
-	    c.m <-  crossprod(m)
-	    tcm <- tcrossprod(m)
+	    c.m <-  crossprod(m, boolArith = FALSE)
+	    tcm <- tcrossprod(m, boolArith = FALSE)
             tolQ <- if(isSparse) NA else eps16
 	    stopifnot(dim(c.m) == rep.int(ncol(m), 2),
 		      dim(tcm) == rep.int(nrow(m), 2),
@@ -549,12 +553,12 @@ checkMatrix <- function(m, m.m = if(do.matrix) as(m, "matrix"),
 	CatF(" Summary: ")
 	for(f in summList) {
 	    ## suppressWarnings():  e.g. any(<double>)	would warn here:
-	    r <- suppressWarnings(if(isCor) all.equal(f(m), f(m.m)) else
-				  identical(f(m), f(m.m)))
-	    if(!isTRUE(r)) {
+	    r <- suppressWarnings(identical(f(m), f(m.m)))
+	    if(!isTRUE(r)) { ## typically for prod()
 		f.nam <- sub("..$", '', sub("^\\.Primitive..", '', format(f)))
-		## prod() is delicate: NA or NaN can both happen
-		(if(f.nam == "prod") message else stop)(
+		## sum() and prod() are sensitive to order of f. p. operations
+		## particularly on systems where sizeof(long double) == sizeof(double)
+		(if(any(f.nam == c("sum", "prod"))) MSG else stop)(
 		    sprintf("%s(m) [= %g] differs from %s(m.m) [= %g]",
 			    f.nam, f(m), f.nam, f(m.m)))
 	    }
@@ -632,7 +636,7 @@ checkMatrix <- function(m, m.m = if(do.matrix) as(m, "matrix"),
 	    stopifnot(Qidentical(as(m11, "generalMatrix"),
 				 as(m12, "generalMatrix")))
     }
-    if(isSparse && !is.n) {
+    if(isSparse && !isDiag && !is.n) {
 	## ensure that as(., "nMatrix") gives nz-pattern
 	CatF("as(., \"nMatrix\") giving full nonzero-pattern: ")
 	n1 <- as(m, "nMatrix")
@@ -641,7 +645,7 @@ checkMatrix <- function(m, m.m = if(do.matrix) as(m, "matrix"),
                   ## only testing [CR]sparseMatrix and indMatrix here ...
                   ## sum(<n.T>) excludes duplicated (i,j) pairs whereas
                   ## length(diagU2N(<[^n].T>)) includes them ...
-                  isDiag || isTsp ||
+                  isTsp ||
                   (if(isSym) length(if(.hasSlot(n1, "i")) n1@i else n1@j)
                    else sum(n1)) == length(if(isInd) m@perm else diagU2N(m)@x))
         Cat("ok\n")
@@ -711,7 +715,7 @@ checkMatrix <- function(m, m.m = if(do.matrix) as(m, "matrix"),
 	else if(extends(cld, "lMatrix")) { ## should fulfill even with NA:
 	    stopifnot(all(m | !m | ina), !any(!m & m & !ina))
 	    if(isTsp) # allow modify, since at end here
-		m <- uniqTsparse(m, clNam)
+		m <- asUniqueT(m, isT = TRUE)
 	    stopifnot(identical(m, m & TRUE),
 		      identical(m, FALSE | m))
 	    ## also check the  coercions to [dln]Matrix
@@ -785,12 +789,9 @@ chk.qr.D.S <- function(d., s., y, Y = Matrix(y), force = FALSE, tol = 1e-10) {
     ## when system is rank deficient, have differing cases, not always just NA <-> 0 coef
     ## FIXME though:  resid & fitted should be well determined
     if(force || !rank.def) stopifnot(
-### FIXME: temporary:
-###	is.all.equal3(	    cc	     , drop(qr.coef  (s.,y)), drop(qr.coef  (s.,Y)), tol=tol),
-	is.all.equal3(	unname( cc ) , drop(qr.coef  (s.,y)), drop(qr.coef  (s.,Y)), tol=tol),
-### END{FIXME}
-	is.all.equal3(qr.resid (d.,y), drop(qr.resid (s.,y)), drop(qr.resid (s.,Y)), tol=tol),
-	is.all.equal3(qr.fitted(d.,y), drop(qr.fitted(s.,y)), drop(qr.fitted(s.,Y)), tol=tol)
+	is.all.equal3(	    cc	     , qr.coef  (s.,y), drop(qr.coef  (s.,Y)), tol=tol),
+	is.all.equal3(qr.resid (d.,y), qr.resid (s.,y), drop(qr.resid (s.,Y)), tol=tol),
+	is.all.equal3(qr.fitted(d.,y), qr.fitted(s.,y), drop(qr.fitted(s.,Y)), tol=tol)
 	)
 }
 
@@ -819,3 +820,18 @@ checkQR.DS.both <- function(A, Qinv.chk, QtQ.chk=NA,
     invisible(list(qA=qA, qa=qa))
 }
 
+non0.ij <- function(M) Matrix:::non0.i(as(M, "sparseMatrix"))
+
+triuChk <- function(x, k) {
+    ans <- triu(x, k)
+    ij <- non0.ij(ans)
+    stopifnot(identical(dim(x), dim(ans)), (ij %*% c(-1,1)) >= k)
+    ans
+}
+
+trilChk <- function(x, k) {
+    ans <- tril(x, k)
+    ij <- non0.ij(ans)
+    stopifnot(identical(dim(x), dim(ans)), (ij %*% c(-1,1)) <= k)
+    ans
+}

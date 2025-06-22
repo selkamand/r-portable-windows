@@ -15,13 +15,13 @@ TCL_DLL_FILE="tcl86.dll"
 TCL_VERSION='8.6'
 TCL_MAJOR_VERSION='8'
 TCL_MINOR_VERSION='6'
-TCL_PATCH_LEVEL='.13'
+TCL_PATCH_LEVEL='.16'
 
 # C compiler to use for compilation.
 TCL_CC='x86_64-w64-mingw32.static.posix-gcc'
 
 # -D flags for use with the C compiler.
-TCL_DEFS='-DPACKAGE_NAME=\"tcl\" -DPACKAGE_TARNAME=\"tcl\" -DPACKAGE_VERSION=\"8.6\" -DPACKAGE_STRING=\"tcl\ 8.6\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DSTDC_HEADERS=1 -DTCL_THREADS=1 -DUSE_THREAD_ALLOC=1 -DTCL_CFGVAL_ENCODING=\"cp1252\" -DMODULE_SCOPE=extern -DTCL_CFG_DO64BIT=1 -DHAVE_NO_SEH=1 -DHAVE_CAST_TO_UNION=1 -DHAVE_ZLIB=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_INTPTR_T=1 -DHAVE_UINTPTR_T=1 -DHAVE_INTRIN_H=1 -DHAVE_WSPIAPI_H=1 -DNDEBUG=1 -DTCL_CFG_OPTIMIZED=1'
+TCL_DEFS='-DPACKAGE_NAME=\"tcl\" -DPACKAGE_TARNAME=\"tcl\" -DPACKAGE_VERSION=\"8.6\" -DPACKAGE_STRING=\"tcl\ 8.6\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DHAVE_STDIO_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_STRINGS_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_UNISTD_H=1 -DSTDC_HEADERS=1 -DTCL_THREADS=1 -DUSE_THREAD_ALLOC=1 -DTCL_CFGVAL_ENCODING=\"cp1252\" -DMODULE_SCOPE=extern -DTCL_CFG_DO64BIT=1 -DHAVE_NO_SEH=1 -DHAVE_CAST_TO_UNION=1 -DHAVE_ZLIB=1 -DHAVE_INTPTR_T=1 -DHAVE_UINTPTR_T=1 -DHAVE_INTRIN_H=1 -DHAVE_WSPIAPI_H=1 -DNDEBUG=1 -DTCL_CFG_OPTIMIZED=1'
 
 # If TCL was built with debugging symbols, generated libraries contain
 # this string at the end of the library name (before the extension).
@@ -42,12 +42,9 @@ TCL_SHARED_BUILD=1
 TCL_LIB_FILE='libtcl86.dll.a'
 
 # Flag to indicate whether shared libraries need export files.
-TCL_NEEDS_EXP_FILE=
+TCL_NEEDS_EXP_FILE=''
 
-# String that can be evaluated to generate the part of the export file
-# name that comes after the "libxxx" (includes version number, if any,
-# extension, and anything else needed).  May depend on the variables
-# VERSION.  On most UNIX systems this is ${VERSION}.exp.
+# Deprecated. Same as TCL_UNSHARED_LIB_SUFFIX
 TCL_EXPORT_FILE_SUFFIX='${NODOT_VERSION}.a'
 
 # Additional libraries to use when linking Tcl.
@@ -107,11 +104,11 @@ TCL_COMPAT_OBJS=''
 TCL_RANLIB='x86_64-w64-mingw32.static.posix-ranlib'
 
 # -l flag to pass to the linker to pick up the Tcl library
-TCL_LIB_FLAG=''
+TCL_LIB_FLAG='-ltcl86'
 
 # String to pass to linker to pick up the Tcl library from its
 # build directory.
-TCL_BUILD_LIB_SPEC='-L/root/64bit/tcl8.6.13/win -ltcl86'
+TCL_BUILD_LIB_SPEC='-L/root/64bit/tcl8.6.16/win -ltcl86'
 
 # String to pass to linker to pick up the Tcl library from its
 # installed directory.
@@ -125,7 +122,7 @@ TCL_INCLUDE_SPEC='-I/root/Tcl/include'
 # ("ok" means it's safe to use switches like -ltcl7.5;  "nodots" means
 # use switches like -ltcl75).  SunOS and FreeBSD require "nodots", for
 # example.
-TCL_LIB_VERSIONS_OK=''
+TCL_LIB_VERSIONS_OK='nodots'
 
 # String that can be evaluated to generate the part of a shared library
 # name that comes after the "libxxx" (includes version number, if any,
@@ -146,12 +143,12 @@ TCL_UNSHARED_LIB_SUFFIX='${NODOT_VERSION}.a'
 # different place than the directory containing the source files, this
 # points to the location of the sources, not the location where Tcl was
 # compiled.
-TCL_SRC_DIR='/root/64bit/tcl8.6.13'
+TCL_SRC_DIR='/root/64bit/tcl8.6.16'
 
 # List of standard directories in which to look for packages during
 # "package require" commands.  Contains the "prefix" directory plus also
 # the "exec_prefix" directory, if it is different.
-TCL_PACKAGE_PATH='{/root/Tcl/lib}'
+TCL_PACKAGE_PATH='/root/Tcl\lib'
 
 # Tcl supports stub.
 TCL_SUPPORTS_STUBS=1
@@ -164,14 +161,14 @@ TCL_STUB_LIB_FLAG='-ltclstub86'
 
 # String to pass to linker to pick up the Tcl stub library from its
 # build directory.
-TCL_BUILD_STUB_LIB_SPEC='-L/root/64bit/tcl8.6.13/win -ltclstub86'
+TCL_BUILD_STUB_LIB_SPEC='-L/root/64bit/tcl8.6.16/win -ltclstub86'
 
 # String to pass to linker to pick up the Tcl stub library from its
 # installed directory.
 TCL_STUB_LIB_SPEC='-L/root/Tcl/lib -ltclstub86'
 
 # Path to the Tcl stub library in the build directory.
-TCL_BUILD_STUB_LIB_PATH='/root/64bit/tcl8.6.13/win/libtclstub86.a'
+TCL_BUILD_STUB_LIB_PATH='/root/64bit/tcl8.6.16/win/libtclstub86.a'
 
 # Path to the Tcl stub library in the install directory.
 TCL_STUB_LIB_PATH='/root/Tcl/lib/libtclstub86.a'
@@ -179,3 +176,5 @@ TCL_STUB_LIB_PATH='/root/Tcl/lib/libtclstub86.a'
 # Flag, 1: we built Tcl with threads enabled, 0 we didn't
 TCL_THREADS=1
 
+# Name of the zlib library that extensions should use
+TCL_ZLIB_LIB_NAME='zdll.lib'

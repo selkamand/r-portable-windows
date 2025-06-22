@@ -72,11 +72,30 @@ D6 <- structure(c(0, 0, 0, 0.4, 1, 0.05, 1, 1, 0, 1, 1, 0, 0.25, 1, 1),
                 class = "dist", Diag = FALSE, Upper = FALSE)
 D6
 kl6 <- c(1,1, 2,2, 3,3)
-silhouette(kl6, D6)# had one NaN
-summary(silhouette(kl6, D6))
+(skD6 <- silhouette(kl6, D6))# had one NaN
+summary(skD6)
 plot(silhouette(kl6, D6))# gives error in earlier cluster versions
-
 dev.off()
+
+## checking compatibility with  R-only version
+silhouetteR <- asNamespace("cluster")$silhouetteR
+noCall <- function(si) `attr<-`(si, "call", NULL) # only 'call' is different:
+stopifnot(all.equal(noCall(skD6), noCall(silhouetteR(kl6, D6))))
+
+## k=1 : pam(*, k=1) works, but silhouette() is not defined;
+## ---  FIXME: silhouette.partition() fails:  "invalid partition .."; (which is not strictly true
+##     ------  -> give something like NA ((or a *different* error message)
+##  the other methods just give NA (no object!)
+## drop "call" *and* "iOrd"
+noCliO <- function(si) noCall(`attr<-`(si, "iOrd", NULL))
+for(k in 2:7) {
+    p.k <- pam(ruspini, k=k)
+    ## order the silhouette to be *as* the default:
+    ## spk <- silhouette(p.k);  opk <- spk[order(as.numeric(rownames(spk))), ]
+    ## rather sort*() the other:
+    stopifnot(all.equal(noCall(silhouette(p.k)),
+                        noCliO(sortSilhouette(silhouetteR(p.k$clustering, p.k$diss)))))
+}
 
 ## Last Line:
 cat('Time elapsed: ', proc.time() - .proctime00,'\n')

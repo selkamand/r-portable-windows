@@ -1,12 +1,10 @@
-%&%-methods             Boolean Arithmetic Matrix Products: '%&%' and
-                        Methods
-%*%-methods             Matrix (Cross) Products (of Transpose)
-BunchKaufman-methods    Bunch-Kaufman Decomposition Methods
+BunchKaufman-class      Dense Bunch-Kaufman Factorizations
+BunchKaufman-methods    Methods for Bunch-Kaufman Factorization
 CAex                    Albers' example Matrix with "Difficult" Eigen
                         Factorization
-CHMfactor-class         CHOLMOD-based Cholesky Factorizations
-Cholesky                Cholesky Decomposition of a Sparse Matrix
-Cholesky-class          Cholesky and Bunch-Kaufman Decompositions
+CHMfactor-class         Sparse Cholesky Factorizations
+Cholesky-class          Dense Cholesky Factorizations
+Cholesky-methods        Methods for Cholesky Factorization
 CsparseMatrix-class     Class "CsparseMatrix" of Sparse Matrices in
                         Column-compressed Form
 Diagonal                Construct a Diagonal Matrix
@@ -14,53 +12,48 @@ Hilbert                 Generate a Hilbert matrix
 KNex                    Koenker-Ng Example Sparse Model Matrix and
                         Response Vector
 KhatriRao               Khatri-Rao Matrix Product
-LU-class                LU (dense) Matrix Decompositions
 Matrix                  Construct a Classed Matrix
-Matrix-class            Virtual Class "Matrix" Class of Matrices
+Matrix-class            Virtual Class "Matrix" of Matrices
+Matrix-notyet           Virtual Classes Not Yet Really Implemented and
+                        Used
 MatrixClass             The Matrix (Super-) Class of a Class
 MatrixFactorization-class
-                        Class "MatrixFactorization" of Matrix
+                        Virtual Class "MatrixFactorization" of Matrix
                         Factorizations
 RsparseMatrix-class     Class "RsparseMatrix" of Sparse Matrices in
                         Row-compressed Form
-Schur                   Schur Decomposition of a Matrix
-Schur-class             Class "Schur" of Schur Matrix Factorizations
-SparseM-coerce-methods
-                        Sparse Matrix Coercion from and to those from
-                        package 'SparseM'
+Schur-class             Schur Factorizations
+Schur-methods           Methods for Schur Factorization
 TsparseMatrix-class     Class "TsparseMatrix" of Sparse Matrices in
                         Triplet Form
-USCounties              USCounties Contiguity Matrix
-[-methods               Methods for "[": Extraction or Subsetting in
-                        Package 'Matrix'
-[<--methods             Methods for "[<-" - Assigning to Subsets for
-                        'Matrix'
+USCounties              Contiguity Matrix of U.S. Counties
 abIndex-class           Class "abIndex" of Abstract Index Vectors
 abIseq                  Sequence Generation of "abIndex", Abstract
                         Index Vectors
-all-methods             "Matrix" Methods for Functions all() and any()
 all.equal-methods       Matrix Package Methods for Function all.equal()
-atomicVector-class      Virtual Class "atomicVector" of Atomic Vectors
-band                    Extract bands of a matrix
+asUniqueT               Standardize a Sparse Matrix in Triplet Format
+band-methods            Extract bands of a matrix
 bandSparse              Construct Sparse Banded Matrix from
                         (Sup-/Super-) Diagonals
 bdiag                   Construct a Block Diagonal Matrix
-cbind2,denseMatrix,sparseMatrix-method
-                        'cbind()' and 'rbind()' recursively built on
+boolmatmult-methods     Boolean Arithmetic Matrix Products: '%&%' and
+                        Methods
+cbind2-methods          'cbind()' and 'rbind()' recursively built on
                         cbind2/rbind2
-chol                    The Cholesky Decomposition - 'Matrix' S4
-                        Generic and Methods
-chol2inv-methods        Inverse from Choleski or QR Decomposition -
-                        Matrix Methods
-colSums                 Form Row and Column Sums and Means
-compMatrix-class        Class "compMatrix" of Composite (Factorizable)
-                        Matrices
+chol-methods            Compute the Cholesky Factor of a Matrix
+chol2inv-methods        Inverse from Cholesky Factor
+coerce-methods-SparseM
+                        Sparse Matrix Coercion from and to those from
+                        package 'SparseM'
+coerce-methods-graph    Conversions "graph" <-> (sparse) Matrix
+colSums-methods         Form Row and Column Sums and Means
 condest                 Compute Approximate CONDition number and 1-Norm
                         of (Large) Matrices
 dMatrix-class           (Virtual) Class "dMatrix" of "double" Matrices
 ddenseMatrix-class      Virtual Class "ddenseMatrix" of Numeric Dense
                         Matrices
 ddiMatrix-class         Class "ddiMatrix" of Diagonal Numeric Matrices
+denseLU-class           Dense LU Factorizations
 denseMatrix-class       Virtual Class "denseMatrix" of All Dense
                         Matrices
 dgCMatrix-class         Compressed, sparse, column-oriented numeric
@@ -77,7 +70,7 @@ dimScale                Scale the Rows and Columns of a Matrix
 dmperm                  Dulmage-Mendelsohn Permutation / Decomposition
 dpoMatrix-class         Positive Semi-definite Dense (Packed |
                         Non-packed) Numeric Matrices
-drop0                   Drop "Explicit Zeroes" from a Sparse Matrix
+drop0                   Drop Non-Structural Zeros from a Sparse Matrix
 dsCMatrix-class         Numeric Symmetric Sparse (column compressed)
                         Matrices
 dsRMatrix-class         Symmetric Sparse Compressed Row Matrices
@@ -89,28 +82,26 @@ dtCMatrix-class         Triangular, (compressed) sparse column matrices
 dtRMatrix-class         Triangular Sparse Compressed Row Matrices
 dtpMatrix-class         Packed Triangular Dense Matrices - "dtpMatrix"
 dtrMatrix-class         Triangular, dense, numeric matrices
-expand                  Expand a (Matrix) Decomposition into Factors
-expm                    Matrix Exponential
-facmul                  Multiplication by Decomposition Factors
+expand-methods          Expand Matrix Factorizations
+expm-methods            Matrix Exponential
+facmul-methods          Multiplication by Factors from Matrix
+                        Factorizations
 fastMisc                "Low Level" Coercions and Methods
-forceSymmetric          Force a Matrix to 'symmetricMatrix' Without
+forceSymmetric-methods
+                        Force a Matrix to 'symmetricMatrix' Without
                         Symmetry Checks
 formatSparseM           Formatting Sparse Numeric Matrices Utilities
 generalMatrix-class     Class "generalMatrix" of General Matrices
-graph2T                 Conversions "graph" <-> (sparse) Matrix
-iMatrix-class           Virtual Classes Not Yet Really Implemented and
-                        Used
 image-methods           Methods for image() in Package 'Matrix'
 indMatrix-class         Index Matrices
-index-class             Virtual Class "index" - Simple Class for Matrix
-                        Indices
-invPerm                 Inverse Permutation Vector
+index-class             Virtual Class "index" of Index Vectors
+invertPerm              Utilities for Permutation Vectors
 is.na-methods           is.na(), is.finite() Methods for 'Matrix'
                         Objects
 is.null.DN              Are the Dimnames 'dn' NULL-like ?
 isSymmetric-methods     Methods for Function 'isSymmetric' in Package
                         'Matrix'
-isTriangular            Test whether a Matrix is Triangular or Diagonal
+isTriangular-methods    Test whether a Matrix is Triangular or Diagonal
 kronecker-methods       Methods for Function 'kronecker()' in Package
                         'Matrix'
 ldenseMatrix-class      Virtual Class "ldenseMatrix" of Dense Logical
@@ -121,58 +112,59 @@ lgeMatrix-class         Class "lgeMatrix" of General Dense Logical
 lsparseMatrix-class     Sparse logical matrices
 lsyMatrix-class         Symmetric Dense Logical Matrices
 ltrMatrix-class         Triangular Dense Logical Matrices
-lu                      (Generalized) Triangular Decomposition of a
-                        Matrix
+lu-methods              Methods for LU Factorization
 mat2triplet             Map Matrix to its Triplet Representation
+matmult-methods         Matrix (Cross) Products (of Transpose)
 nMatrix-class           Class "nMatrix" of Non-zero Pattern Matrices
 ndenseMatrix-class      Virtual Class "ndenseMatrix" of Dense Logical
                         Matrices
 nearPD                  Nearest Positive Definite Matrix
 ngeMatrix-class         Class "ngeMatrix" of General Dense
                         Nonzero-pattern Matrices
-nnzero                  The Number of Non-Zero Values of a Matrix
-norm                    Matrix Norms
+nnzero-methods          The Number of Non-Zero Values of a Matrix
+norm-methods            Matrix Norms
 nsparseMatrix-class     Sparse "pattern" Matrices
 nsyMatrix-class         Symmetric Dense Nonzero-Pattern Matrices
 ntrMatrix-class         Triangular Dense Logical Matrices
-number-class            Class "number" of Possibly Complex Numbers
 pMatrix-class           Permutation matrices
+pack-methods            Representation of Packed and Unpacked Dense
+                        Matrices
 packedMatrix-class      Virtual Class '"packedMatrix"' of Packed Dense
                         Matrices
 printSpMatrix           Format and Print Sparse Matrices Flexibly
-qr-methods              QR Decomposition - S4 Methods and Generic
+qr-methods              Methods for QR Factorization
 rankMatrix              Rank of a Matrix
-rcond                   Estimate the Reciprocal Condition Number
+rcond-methods           Estimate the Reciprocal Condition Number
 readHB                  Read and write external matrix formats
 rep2abI                 Replicate Vectors into 'abIndex' Result
-replValue-class         Virtual Class "replValue" - Simple Class for
-                        Subassignment Values
 rleDiff-class           Class "rleDiff" of rle(diff(.)) Stored Vectors
 rsparsematrix           Random Sparse Matrix
-solve-methods           Methods in Package Matrix for Function
-                        'solve()'
+solve-methods           Methods in Package 'Matrix' for Function
+                        'solve'
 spMatrix                Sparse Matrix Constructor From Triplet
 sparse.model.matrix     Construct Sparse Design / Model Matrices
-sparseLU-class          Sparse LU decomposition of a square sparse
-                        matrix
+sparseLU-class          Sparse LU Factorizations
 sparseMatrix            General Sparse Matrix Construction from Nonzero
                         Entries
 sparseMatrix-class      Virtual Class "sparseMatrix" - Mother of Sparse
                         Matrices
-sparseQR-class          Sparse QR decomposition of a sparse matrix
+sparseQR-class          Sparse QR Factorizations
 sparseVector            Sparse Vector Construction from Nonzero Entries
 sparseVector-class      Sparse Vector Classes
+subassign-methods       Methods for "[<-" - Assigning to Subsets for
+                        'Matrix'
+subscript-methods       Methods for "[": Extraction or Subsetting in
+                        Package 'Matrix'
 symmetricMatrix-class   Virtual Class of Symmetric Matrices in Package
                         Matrix
-symmpart                Symmetric Part and Skew(symmetric) Part of a
+symmpart-methods        Symmetric Part and Skew(symmetric) Part of a
                         Matrix
 triangularMatrix-class
                         Virtual Class of Triangular Matrices in Package
                         Matrix
-uniqTsparse             Unique (Sorted) TsparseMatrix Representations
-unpack                  Representation of Packed and Unpacked Dense
-                        Matrices
 unpackedMatrix-class    Virtual Class '"unpackedMatrix"' of Unpacked
                         Dense Matrices
-updown                  Up- and Down-Dating a Cholesky Decomposition
-wrld_1deg               World 1-degree grid contiguity matrix
+updown-methods          Updating and Downdating Sparse Cholesky
+                        Factorizations
+wrld_1deg               Contiguity Matrix of World One-Degree Grid
+                        Cells

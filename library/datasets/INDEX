@@ -15,7 +15,7 @@ InsectSprays            Effectiveness of Insect Sprays
 JohnsonJohnson          Quarterly Earnings per Johnson & Johnson Share
 LakeHuron               Level of Lake Huron 1875-1972
 LifeCycleSavings        Intercountry Life-Cycle Savings Data
-Loblolly                Growth of Loblolly pine trees
+Loblolly                Growth of Loblolly Pine Trees
 Nile                    Flow of the River Nile
 Orange                  Growth of Orange Trees
 OrchardSprays           Potency of Orchard Sprays
@@ -60,6 +60,7 @@ eurodist                Distances Between European Cities and Between
                         US Cities
 faithful                Old Faithful Geyser Data
 freeny                  Freeny's Revenue Data
+gait                    Hip and Knee Angle while Walking
 infert                  Infertility after Spontaneous and Induced
                         Abortion
 iris                    Edgar Anderson's Iris Data
@@ -74,7 +75,9 @@ nottem                  Average Monthly Temperatures at Nottingham,
                         1920-1939
 npk                     Classical N, P, K Factorial Experiment
 occupationalStatus      Occupational Status of Fathers and their Sons
-precip                  Annual Precipitation in US Cities
+penguins                Measurements of Penguins near Palmer Station,
+                        Antarctica
+precip                  Annual Precipitation in Selected US Cities
 presidents              Quarterly Approval Ratings of US Presidents
 pressure                Vapor Pressure of Mercury as a Function of
                         Temperature
@@ -91,7 +94,7 @@ sunspot.year            Yearly Sunspot Data, 1700-1988
 sunspots                Monthly Sunspot Numbers, 1749-1983
 swiss                   Swiss Fertility and Socioeconomic Indicators
                         (1888) Data
-treering                Yearly Treering Data, -6000-1979
+treering                Yearly Tree-Ring Data, -6000-1979
 trees                   Diameter, Height and Volume for Black Cherry
                         Trees
 uspop                   Populations Recorded by the US Census

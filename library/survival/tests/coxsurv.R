@@ -24,6 +24,13 @@ fit <- coxph(Surv(time, status) ~ age + sex + meal.cal + strata(ph.ecog),
 surv2 <- survfit(fit)
 all.equal(surv1, surv2)
 
+# Test summary
+dummy <- data.frame(age=c(50,60), sex=1:2, meal.cal=c(650, 1200))
+surv3 <- survfit(fit, newdata= dummy)
+summ <- summary(surv3, time= 1:3 * 100)
+                                         
+
+
 #
 # Now a result with a matrix of survival curves
 #
@@ -40,13 +47,14 @@ aeq(surv2$surv[zed, ], surv2[1, ]$surv)
 
 # And the depreciated form - call with a named vector as 'newdata'
 #  the resulting $call component  won't match so delete it before comparing
+# newdata will have mismatched row names due to subscripting
 surv3 <- survfit(fit, c(age=40, sex=2, meal.cal=1000))
-all.equal(unclass(surv2[,2])[-length(surv3)], unclass(surv3)[-length(surv3)])
-
+keep <- which(!(names(surv3) %in% c("newdata", "call")))
+all.equal(unclass(surv2[,2])[keep], unclass(surv3)[keep])
 
 # Test out offsets, which have recently become popular due to a Langholz paper
 fit1 <- coxph(Surv(time, status) ~ age + ph.ecog, lung)
-fit2 <- coxph(Surv(time, status) ~ age + offset(ph.ecog * fit1$coef[2]), lung)
+fit2 <- coxph(Surv(time, status) ~ age + offset(ph.ecog * fit1$coefficients[2]), lung)
  
 surv1 <- survfit(fit1, newdata=data.frame(age=50, ph.ecog=1))
 surv2 <- survfit(fit2, newdata=data.frame(age=50, ph.ecog=1))
@@ -55,9 +63,9 @@ all.equal(surv1$surv, surv2$surv)
 # And a model with only offsets.
 eta <- cbind(lung$age, lung$ph.ecog) %*% coef(fit1)
 fit3 <- coxph(Surv(time, status) ~ offset(eta), lung)
-aeq(fit3$log, fit1$log[2])
+aeq(fit3$loglik, fit1$loglik[2])
 
-surv3 <- survfit(fit3, newdata=data.frame(eta= 50*fit1$coef[1] + fit1$coef[2]))
+surv3 <- survfit(fit3, newdata=data.frame(eta= 50*fit1$coefficients[1] + fit1$coefficients[2]))
 all.equal(surv3$surv, surv1$surv)
 
 #
@@ -66,6 +74,6 @@ all.equal(surv3$surv, surv1$surv)
 surv3 <- survfit(fit1, newdata=data.frame(age=50, ph.ecog=1),
                  start.time=100)
 index <- match(surv3$time, surv1$time)
-rescale <- summary(surv1, time=100)$surv
+rescale <- summary(surv1, times=100)$surv
 all.equal(surv3$surv, surv1$surv[index]/rescale)
 

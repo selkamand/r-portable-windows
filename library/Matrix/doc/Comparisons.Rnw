@@ -3,7 +3,7 @@
 \usepackage[authoryear,round]{natbib}
 \bibliographystyle{plainnat}
 %%\VignetteIndexEntry{Comparisons of Least Squares calculation speeds}
-%%\VignetteDepends{Matrix}
+%%\VignetteDepends{Matrix,datasets,stats,utils}
 \begin{document}
 \SweaveOpts{engine=R,eps=FALSE,pdf=TRUE,width=5,height=3,strip.white=true,keep.source=TRUE}
 \setkeys{Gin}{width=\textwidth}
@@ -23,6 +23,8 @@
 \end{abstract}
 <<preliminaries, echo=FALSE>>=
 options(width=75)
+library(stats) # for R_DEFAULT_PACKAGES=NULL
+library(utils) # ditto
 @
 
 \section{Linear least squares calculations}
@@ -53,7 +55,7 @@ As an example, let's create a model matrix, \code{mm}, and corresponding
 response vector, \code{y}, for a simple linear regression model using
 the \code{Formaldehyde} data.
 <<modelMatrix>>=
-data(Formaldehyde)
+data(Formaldehyde, package = "datasets")
 str(Formaldehyde)
 (m <- cbind(1, Formaldehyde$carb))
 (yo <- Formaldehyde$optden)

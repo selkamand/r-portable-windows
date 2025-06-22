@@ -1,13 +1,11 @@
 
-R version 3.5.3 Patched (2019-03-11 r76305) -- "Great Truth"
-Copyright (C) 2019 The R Foundation for Statistical Computing
-Platform: x86_64-pc-linux-gnu (64-bit)
+R Under development (unstable) (2023-10-19 r85354) -- "Unsuffered Consequences"
+Copyright (C) 2023 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
 Type 'license()' or 'licence()' for distribution details.
-
-  Natural language support but running in an English locale
 
 R is a collaborative project with many contributors.
 Type 'contributors()' for more information and
@@ -1030,7 +1028,8 @@ Number of objects : 4
 > ## clara(ru5, k=3, met="manhattan", sampsize=3,trace=2)[clInS]
 > clara(ru5, k=3, met="manhattan", sampsize=4,trace=1)[clInS]
 C clara(): (nsam,nran,n) = (4,5,4); 'full_sample',
-C clara(): sample 1 C clara(): best sample _found_  --> dysta2(nbest), resul(), end
+ -> dysta2(); obj= 2.75
+ resul(),  black() and return() from C.
 $objective
 [1] 2.75
 

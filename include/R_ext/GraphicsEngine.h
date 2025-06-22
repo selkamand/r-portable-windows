@@ -1,6 +1,6 @@
 /*
  *  R : A Computer Language for Statistical Data Analysis
- *  Copyright (C) 2001-21 The R Core Team.
+ *  Copyright (C) 2001-24 The R Core Team.
  *
  *  This header file is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as published by
@@ -229,8 +229,15 @@ typedef struct {
 
 typedef R_GE_gcontext* pGEcontext;
 
+#ifdef __cplusplus
+}
+#endif
 
 #include <R_ext/GraphicsDevice.h> /* needed for DevDesc */
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef struct _GEDevDesc GEDevDesc;
 
@@ -272,7 +279,7 @@ struct _GEDevDesc {
     Rboolean displayListOn;  /* toggle for display list status */
     SEXP displayList;        /* display list */
     SEXP DLlastElt;          /* A pointer to the end of the display list
-				to avoid tranversing pairlists */
+				to avoid traversing pairlists */
     SEXP savedSnapshot;      /* The last element of the display list
 			      * just prior to when the display list
 			      * was last initialised
@@ -670,6 +677,8 @@ SEXP R_GE_glyphY(SEXP glyphs);
 SEXP R_GE_glyphFont(SEXP glyphs);
 SEXP R_GE_glyphSize(SEXP glyphs);
 SEXP R_GE_glyphColour(SEXP glyphs);
+SEXP R_GE_glyphRotation(SEXP glyphs);
+Rboolean R_GE_hasGlyphRotation(SEXP glyphs);
 
 const char* R_GE_glyphFontFile(SEXP glyphFont);
 int R_GE_glyphFontIndex(SEXP glyphFont);

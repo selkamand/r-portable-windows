@@ -11,7 +11,7 @@ if(require(nlme)) {
     set.seed(123)
     beav$dummy <- rnorm(nrow(beav))
     beav.gls <- gls(temp ~ activ + dummy, data = beav,
-                    corr = corAR1(0.8), method = "ML")
+                    correlation = corAR1(0.8), method = "ML")
     stepAIC(beav.gls)
 
 ## for future terms-based nlme

@@ -1,18 +1,18 @@
 Grid                    Grid Graphics
 absolute.size           Absolute Size of a Grob
-arrow                   Describe arrows to add to a line.
+arrow                   Describe arrows to add to a line
 as.mask                 Define a Soft Mask
 calcStringMetric        Calculate Metric Information for Text
 convertUnit             Convert Between Different grid Coordinate
                         Systems
 current.viewport        Get the Current Grid Viewport (Tree)
 dataViewport            Create a Viewport with Scales based on Data
-depth                   Determine the number of levels in an object.
+depth                   Determine the number of levels in an object
 deviceLoc               Convert Viewport Location to Device Location
 drawDetails             Customising grid Drawing
 editDetails             Customising grid Editing
 editViewport            Modify a Viewport
-explode                 Explode a path into its components.
+explode                 Explode a path into its components
 gEdit                   Create and Apply Edit Objects
 gPath                   Concatenate Grob Names
 getNames                List the names of grobs on the display list
@@ -85,8 +85,8 @@ pushViewport            Maintaining and Navigating the Grid Viewport
 resolveRasterSize       Utility function to resolve the size of a
                         raster grob
 roundrect               Draw a rectangle with rounded corners
-showGrob                Label grid grobs.
-showViewport            Display grid viewports.
+showGrob                Label grid grobs
+showViewport            Display grid viewports
 stringWidth             Create a Unit Describing the Width and Height
                         of a String or Math Expression
 unit                    Function to Create a Unit Object
@@ -103,4 +103,4 @@ vpPath                  Concatenate Viewport Names
 widthDetails            Width and Height of a grid grob
 xDetails                Boundary of a grid grob
 xsplinePoints           Return the points that would be used to draw an
-                        Xspline (or a Bezier curve).
+                        xspline (or a Bezier curve)

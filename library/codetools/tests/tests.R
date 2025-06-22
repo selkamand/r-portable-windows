@@ -81,15 +81,12 @@ if (getRversion() >= "2.13.0")
     assert(identical(flattenAssignment(quote(base::diag(x))),
                      list(list(quote(x)),
                           list(quote(base::`diag<-`(x, value = `*tmpv*`))))))
-assert(! "y" %in% findGlobals(function() if (is.R()) x else y))
 assert(identical(findGlobals(function() if (FALSE) x), "if"))
 # **** need more test cases here
 assert(identical(sort(findGlobals(function(x) { z <- 1; x + y + z})),
                  sort(c("<-", "{",  "+",  "y"))))
 
 assert(identical(findGlobals(function() Quote(x)), "Quote"))
-
-
 ## bquote test cases (from Dirk Schumacher)
 checkUsage(function() {
     s <- as.symbol("y")
@@ -112,3 +109,13 @@ checkUsage(function() {
 ## more bquote tests
 checkUsage(function(x) bquote(.(x) + y), report = stop)
 tools::assertError(checkUsage(function() bquote(.(x)), report = stop))
+
+## ensure within is skipped under skipWith=TRUE
+col_edit <- function(x) {
+    x <- within(x, key <- val + 1)
+    x
+}
+# NB: suppressLocal=TRUE needed to ignore 'key' being "unused". TODO: Fix this.
+checkUsage(col_edit, skipWith = TRUE, suppressLocal = TRUE, report = stop)
+# now with suppressLocal=FALSE, fail
+tools::assertError(checkUsage(col_edit, skipWith = TRUE, report = stop))

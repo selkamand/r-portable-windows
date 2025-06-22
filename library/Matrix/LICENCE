@@ -1,38 +1,39 @@
-Copyrights
-==========
-The Matrix package, an R package, available from CRAN or R-forge,
-consists of basically two parts.
+R package Matrix is developed on R-Forge and released on CRAN.  It has
+two components:
 
-1. Matrix' own C code in src/*.[ch] (apart from cs.h and cs.c),
-   R code in R/*.R, including more in ./inst/ and ./tests/ and other
-   directories including vignettes, documentation etc.
-   All these have been created by Douglas Bates and Martin Maechler and
-   hence are
+1. The source code of Matrix, excluding external libraries, is contained
+   primarily in R/*.R, src/*.[ch], man/*.Rd, tests/*.R, vignettes/*.Rnw,
+   inst/*.R, and inst/include/*.  It is licensed under the GNU GPL,
+   version 3, pasted below.  The files were created and are maintained
+   by Douglas Bates, Martin Maechler, and Mikael Jagan, hence they are:
 
-   Copyright (C) 1999-2016 Douglas Bates and Martin Maechler
+   Copyright (C) 1999-2020 Douglas Bates, Martin Maechler
+   Copyright (C) 2021-2024 Douglas Bates, Martin Maechler, Mikael Jagan
 
-2. The Matrix package includes libraries AMD, CHOLMOD,
-  COLAMD, CSparse and SPQR from the SuiteSparse collection of Tim
-  Davis.  All sections of that code are covered by the GPL or
-  LGPL licenses.  See the directory (inst/) doc/SuiteSparse/ for details.
+2. Matrix contains patched versions of external libraries CXSparse,
+   AMD, COLAMD, CCAMD, CCOLAMD, and CHOLMOD, all from the SuiteSparse
+   collection of Timothy A. Davis.  AMD, COLAMD, CAMD, and CCOLAMD
+   use the BSD 3-clause licence.  CXSparse and CHOLMOD modules Check,
+   Cholesky, Partition, and Utility use the GNU LGPL licence, version
+   2.1 or greater.  CHOLMOD modules MatrixOps, Modify, and Supernodal
+   use the GNU GPL licence, version 2 or greater.  Compiled into CHOLMOD
+   is the METIS library, which uses the Apache licence, version 2.0.
+   Licence files and copyrights are copied under inst/doc/SuiteSparse.
 
-Douglas M. Bates, University of Wisconsin, Madison, bates@stat.wisc.edu
-Martin Maechler ETH Zurich,  maechler@stat.math.ethz.ch | maechler@r-project.org
+Douglas M. Bates
+University of Wisconsin-Madison
+bates@stat.wisc.edu
+
+Martin Maechler
+ETH Zurich
+maechler@stat.math.ethz.ch | maechler@r-project.org
+
+Mikael Jagan
+McMaster University
+jaganmn@mcmaster.ca
 
 
-Licences
-========
-
-1. The Matrix package itself is licenced under "GPL-3", the GNU GENERAL
-   PUBLIC LICENCE Version 3, see "GPL-3" below.
-
-2. The licences of the libraries from the SuiteSparse collection mentioned
-   are included in the respective source directories.
-
-
-------------------
-
-GPL-3 : the following is == http://www.gnu.org/licenses/gpl-3.0.txt
+The following is obtained from http://www.gnu.org/licenses/gpl-3.0.txt :
                                ---------------------------------------
 
                     GNU GENERAL PUBLIC LICENSE

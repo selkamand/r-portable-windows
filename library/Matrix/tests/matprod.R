@@ -1,3 +1,7 @@
+## for R_DEFAULT_PACKAGES=NULL :
+library(stats)
+library(utils)
+
 library(Matrix)
 
 ### Matrix Products including  cross products
@@ -157,7 +161,7 @@ mt <- m[,2:3] %*% pT # deprecation warning in pre-1.5-4
 stopifnot(is(pT, "dtpMatrix"), validObject(pT),
           validObject(mt), is(mt, "dgeMatrix"),
           identical(as.matrix(mt),
-                    array(c(1,0,0, 5,2,1), dim = 3:2, dimnames = list(c("A","B","C"), c("b","c"))))
+                    array(c(1,0,0, 5,2,1), dim = 3:2, dimnames = list(c("A","B","C"), c("C1","C2"))))
           )
 
 A <- matrix(c(0.4, 0.1, 0, 0), 2)
@@ -233,7 +237,7 @@ assert.EQ.mat( crossprod(i5, S5), rbind( colSums(S5))) # failed in Matrix 1.1.4
 ## tcrossprod() with numeric vector RHS and LHS :
 stopifnot(identical(tcrossprod(i5, S5), # <- lost dimnames
 		    tcrossprod(i5, G5) -> m51),
-	  identical(dimnames(m51), list(NULL, LETTERS[1:5]))
+	  identical(dimnames(m51), list(NULL, Rows = LETTERS[1:5]))
 	  )
 m51 <- m5[, 1, drop=FALSE] # [6 x 1]
 m.1 <- m.[, 1, drop=FALSE] ; assert.EQ.mat(m51, m.1)
@@ -395,7 +399,7 @@ stopifnot(all.equal(sum(rowSums(B %*% mc)), 5.82424475145))
 assert.EQ.mat(tcrossprod(B, mc), as.matrix(t(tcrossprod(mc, B))))
 
 m <- kronecker(Diagonal(2), mc)
-stopifnot(is(mc, "Cholesky"),
+stopifnot(is(mc, "dtrMatrix"),
 	  is(m, "sparseMatrix"))
 im <- solve(m)
 round(im, 3)
@@ -428,8 +432,8 @@ assert.EQ.mat(tcrossprod(t(V),A), tva)
 ## [t]crossprod()  for  <sparsevector> . <sparsevector>  incl. one arg.:
 stopifnotValid(s.s <-  crossprod(sv,sv), "Matrix")
 stopifnotValid(ss. <- tcrossprod(sv,sv), "sparseMatrix")
-stopifnot(identical(s.s,  crossprod(sv)),
-	  identical(ss., tcrossprod(sv)))
+stopifnot(identical(as(s.s, "symmetricMatrix"),  crossprod(sv)),
+          identical(as(ss., "symmetricMatrix"), tcrossprod(sv)))
 assert.EQ.mat(s.s,  crossprod(v,v))
 assert.EQ.mat(ss., tcrossprod(v,v))
 
@@ -530,14 +534,17 @@ mr8 <- as(tr8,"matrix")
 m8. <- (mr8 %*% mr8 %*% mr8 %*% mr8)/16
 assert.EQ.mat(T8.2, m8.)
 
-data(KNex); mm <- KNex$mm
+data(KNex, package = "Matrix")
+mm <- KNex$mm
 M <- mm[1:500, 1:200]
 MT <- as(M, "TsparseMatrix")
 cpr   <- t(mm) %*% mm
 cpr.  <- crossprod(mm)
 cpr.. <- crossprod(mm, mm)
 stopifnot(is(cpr., "symmetricMatrix"),
-	  identical3(cpr, as(cpr., "generalMatrix"), cpr..))
+	  identical(cpr, cpr..),
+          all.equal(cpr, as(cpr., "generalMatrix"), tol = 2e-15)
+          )
 ## with dimnames:
 m <- Matrix(c(0, 0, 2:0), 3, 5)
 dimnames(m) <- list(LETTERS[1:3], letters[1:5])
@@ -548,8 +555,8 @@ t1 <- m %*% t(m)
 (t1. <- tcrossprod(m))
 stopifnot(isSymmetric(p1.),
 	  isSymmetric(t1.),
-	  identical(p1, as(p1., "generalMatrix")),
-	  identical(t1, as(t1., "generalMatrix")),
+	  all.equal(p1, as(p1., "generalMatrix"), tol = 2e-15),
+	  all.equal(t1, as(t1., "generalMatrix"), tol = 2e-15),
 	  identical(dimnames(p1), dimnames(p1.)),
 	  identical(dimnames(p1), list(colnames(m), colnames(m))),
 	  identical(dimnames(t1), dimnames(t1.))
@@ -697,10 +704,10 @@ chk.ngMatrix <- function(M, verbose = TRUE) {
     ## Part I : matrix products of pattern Matrices
     ## ------   For now [by default]: *pattern* <==> boolean arithmetic
     ## ==> FIXME ??: warning that this will change?
-    MM <- M %*% M # pattern (ngC)
+    MM <- M %*% M # numeric (dgC)
     if(verbose) { cat("M %*% M:\n"); show(MM) }
     assert.EQ.mat(MM, m %*% m)
-    assert.EQ.mat(t(M) %*% M, ## <- 'pattern', because of cholmod_ssmult()
+    assert.EQ.mat(t(M) %&% M,
                   (t(m) %*% m) > 0, tol=0)
     cM <-  crossprod(M) # pattern  {FIXME ?? warning ...}
     tM <- tcrossprod(M) # pattern  {FIXME ?? warning ...}
@@ -708,9 +715,9 @@ chk.ngMatrix <- function(M, verbose = TRUE) {
     if(verbose) {cat("tcrossprod(M):\n"); show(tM) }
     stopifnot(is(cM,"symmetricMatrix"), is(tM,"symmetricMatrix"),
 	      identical(as(as(cM, "CsparseMatrix"), "generalMatrix"),
-                        t(M) %*% M),
+                        t(M) %&% M),
 	      identical(as(as(tM, "CsparseMatrix"), "generalMatrix"),
-                        M %*% t(M)))
+                        M %&% t(M)))
     assert.EQ.mat(cM, crossprod(m) > 0)
     assert.EQ.mat(tM, as(tcrossprod(m), "matrix") > 0)
 
@@ -761,13 +768,13 @@ assert.EQ.mat( cM,     crossprod(sm))
 assert.EQ.mat( tM, as(tcrossprod(sm),"matrix"))
 dm <- as(sM, "denseMatrix")
 ## the following 6 products (dm o sM) all failed up to 2013-09-03
-stopifnotValid(dm %*% sM,            "CsparseMatrix")## failed {missing coercion}
-stopifnotValid(crossprod (dm ,   sM),"CsparseMatrix")
-stopifnotValid(tcrossprod(dm ,   sM),"CsparseMatrix")
+stopifnotValid(dm %*% sM,            "denseMatrix")## failed {missing coercion}
+stopifnotValid(crossprod (dm ,   sM),"denseMatrix")
+stopifnotValid(tcrossprod(dm ,   sM),"denseMatrix")
 dm[2,1] <- TRUE # no longer triangular
-stopifnotValid(           dm %*% sM, "CsparseMatrix")
-stopifnotValid(crossprod (dm ,   sM),"CsparseMatrix")
-stopifnotValid(tcrossprod(dm ,   sM),"CsparseMatrix")
+stopifnotValid(           dm %*% sM, "denseMatrix")
+stopifnotValid(crossprod (dm ,   sM),"denseMatrix")
+stopifnotValid(tcrossprod(dm ,   sM),"denseMatrix")
 
 ## A sparse example - with *integer* matrix:
 M <- Matrix(cbind(c(1,0,-2,0,0,0,0,0,2.2,0),
@@ -819,7 +826,7 @@ assertError(crossprod(t(mm), P)) # ditto
 stopifnotValid(tm1, "dsCMatrix")
 stopifnot(exprs = {
     all.equal(tm1, tm2, tolerance = 1e-15)
-    identical(drop0(Im2 %*% tm2[1:3,]), Matrix(cbind(diag(3), 0)))
+    all.equal(Im2 %*% tm2[1:3,], Matrix(cbind(diag(3), 0)))
     identical(p, as.matrix(P))
     all(P %*% m == as.matrix(P) %*% m)
     all(P %*% mm == P %*% m)
@@ -873,7 +880,7 @@ stopifnot(Q.C.identical(NM, ## <- failed
                      U3 %*% lM -> U3l, # ditto
                      U3 %*% nM)  # wrongly gave ngTMatrix
           ,
-          isValid(U3l, "dgCMatrix")
+          isValid(U3l, "dgRMatrix")
           )
 
 selectMethod("%*%", c("dtCMatrix", "ngTMatrix")) # x %*% .T.2.C(y) -->
@@ -925,11 +932,11 @@ assert.EQ.Mat(XtY, XtY_ok) # not true, previously
 
 x5 <- c(2,0,0,1,4)
 D5 <- Diagonal(x=x5)
-L5 <- D5 != 0 ## an "ldiMatrix"  NB: have *no*  ndiMatrix class
+N5 <- as(D5 != 0, "nMatrix") ## an "ndiMatrix"
 D. <- Diagonal(x=c(TRUE,FALSE,TRUE,TRUE,TRUE))
-stopifnot(identical(D5 %&% D., L5))
+stopifnot(identical(D5 %&% D., N5))
 stopifnot(identical(D5 %&% as(D.,"CsparseMatrix"),
-                    as(as(L5, "nMatrix"),"CsparseMatrix")))
+                    as(N5,"CsparseMatrix")))
 
 set.seed(7)
 L <- Matrix(rnorm(20) > 1,    4,5)
@@ -952,8 +959,7 @@ L.L <- crossprod(L)
 (NN <- as(L.L > 0,"nMatrix"))
 nsy <- as(NN,"denseMatrix")
 stopifnot(identical(NN, crossprod(NN)))# here
-stopifnotValid(csy <- crossprod(nsy), "dpoMatrix")
-## ?? or  FIXME ?  give 'nsy', as  {boolArith=NA -> TRUE if args are "nMatrix"}
+stopifnotValid(csy <- crossprod(nsy), "nsCMatrix")
 stopifnotValid(csy. <- crossprod(nsy, boolArith=TRUE),"nsCMatrix")
 stopifnot(all((csy > 0) == csy.),
           all(csy. == (nsy %&% nsy)))
@@ -979,16 +985,16 @@ stopifnot(identical(dim(m02 %*% Diagonal(x=c(1,2))), c(0L, 2L)),
 (m <- Matrix(c(0,0,2:0), 3,5))
 stopifnotValid(R <- as(m, "RsparseMatrix"), "RsparseMatrix")
 stopifnotValid(T <- as(m, "TsparseMatrix"), "TsparseMatrix")
-stopifnot(exprs = { ## may change, once (t)crossprod(R) returns dsC*
-    all.equal(t(R) %*% R,  crossprod(R) -> cR)
-    all.equal(R %*% t(R), tcrossprod(R) -> tR) # both dgC {latter could improve to dsC*}
-    all.equal(as(R %*% t(m),"symmetricMatrix"), tcrossprod(m))
-    all.equal(as(m %*% t(R),"symmetricMatrix"), tcrossprod(m))
+stopifnot(exprs = {
+    all.equal(as(t(R) %*% R, "symmetricMatrix"),  crossprod(R) -> cR)
+    all.equal(as(R %*% t(R), "symmetricMatrix"), tcrossprod(R) -> tR)
+    all.equal(as(R %*% t(m), "symmetricMatrix"), as(tcrossprod(m), "RsparseMatrix"))
+    all.equal(as(m %*% t(R), "symmetricMatrix"), as(tcrossprod(m), "CsparseMatrix"))
     ## failed in Matrix <= 1.4.1  (since 1.2.0, when 'boolArith' was introduced):
-    all.equal(cR,  crossprod(R,T))
-    all.equal(cR,  crossprod(T,R))
-    all.equal(tR, tcrossprod(R,T))
-    all.equal(tR, tcrossprod(T,R))
+    all.equal(as(cR, "RsparseMatrix"), as( crossprod(R, T), "symmetricMatrix"))
+    all.equal(as(cR, "CsparseMatrix"), as( crossprod(T, R), "symmetricMatrix"))
+    all.equal(as(tR, "RsparseMatrix"), as(tcrossprod(R, T), "symmetricMatrix"))
+    all.equal(as(tR, "CsparseMatrix"), as(tcrossprod(T, R), "symmetricMatrix"))
 })
 
 ## More for kronecker() ------------------------------------------------

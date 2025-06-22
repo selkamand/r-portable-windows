@@ -1,7 +1,7 @@
 ### R code from vignette source 'nonfinite.Rnw'
 
 ###################################################
-### code chunk number 1: nonfinite.Rnw:21-25
+### code chunk number 1: nonfinite.Rnw:25-29
 ###################################################
 library(grDevices)
 library(grid)

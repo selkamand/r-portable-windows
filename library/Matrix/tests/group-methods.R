@@ -1,5 +1,9 @@
 ### Testing the group methods  --- some also happens in ./Class+Meth.R
 
+## for R_DEFAULT_PACKAGES=NULL :
+library(stats)
+library(utils)
+
 library(Matrix)
 source(system.file("test-tools.R", package = "Matrix"))# identical3() etc
 assertErrV <- function(e) tools::assertError(e, verbose=TRUE)
@@ -103,14 +107,19 @@ stopifnot(all(lsy), # failed in Matrix 1.0-4
 	  all(t1),  #   "
           ## ok previously (all following):
           !all(t2),
-	  all(sqrt(lsy) == 1))
+          all(sqrt(lsy) == 1)
+          , identical(-nsy, -lsy) # "-" failed up to 2025 (<= 1.7.2)
+          , as.logical( -t1 == -1)
+          , isValid(-t2, "triangularMatrix")
+          , all(- as(lsy, "sparseMatrix") == -1)
+          )
 dsy <- lsy+1
 
 D3 <- Diagonal(x=4:2); L7 <- Diagonal(7) > 0
 validObject(xpp <- pack(round(xpx,2)))
 lsp <- xpp > 0
-(dsyU <- as(as(.diag2sT(D3), "dMatrix"), "denseMatrix"))
- lsyU <- as(as(.diag2sT(Diagonal(5) > 0), "lMatrix"), "denseMatrix")
+(dsyU <- .diag2dense(D3, ".", "s"))
+ lsyU <- .diag2dense(Diagonal(5) > 0, ".", "s")
 str(lsyU)
 stopifnot({
     isValid(dsyU,               "dsyMatrix") && dsyU@uplo == "U"
@@ -204,7 +213,9 @@ local({
                                grep("bogomips", readLines("/proc/cpuinfo"),
                                     ignore.case=TRUE, # e.g. ARM : "BogoMIPS"
                                     value=TRUE)[[1]])))
-        if(is.numeric(mips) && all(mips) > 0)
+        print(mips)
+        if(is.numeric(mips) && all(mips) > 0 && doExtras)
+                                        # doExtras: valgrind (2023-07-26) gave large 'st[1]'
         stopifnot(st[1] < 1000/mips)# ensure there was no gross inefficiency
     }
 })
@@ -234,7 +245,7 @@ stopifnot(validObject(lm1), validObject(lm2),
           identical(dsc, dsc * as(lm1, "dMatrix")))
 
 crossprod(lm1) # lm1: "lsC*"
-cnm1 <- crossprod(nm1)
+cnm1 <- crossprod(nm1, boolArith = FALSE)
 stopifnot(is(cnm1, "symmetricMatrix"), ## whereas the %*% is not:
 	  Q.eq(cnm1, nm1 %*% nm1))
 dn1 <- as(nm1, "denseMatrix")
@@ -280,7 +291,7 @@ stopifnot(sv == colSums(kC), is.na(as.vector(ddv)) == na.ddv,
 ## Subclasses (!)
 setClass("m.spV", contains = "dsparseVector")
 (m.ddv <- as(ddv, "m.spV"))
-stopifnot(all.equal(m.ddv, ddv))# failed
+stopifnot(all.equal(m.ddv, ddv, check.class = FALSE))# failed
 setClass("m.dgC", contains = "dgCMatrix")
 (m.mC <- as(mC, "m.dgC"))
 stopifnot(all(m.mC == mC))
@@ -330,7 +341,7 @@ showProc.time()
 cl <- sapply(ls(), function(.) class(get(.)))
 Mcl <- cl[vapply(cl, extends, "Matrix",       FUN.VALUE=NA) |
           vapply(cl, extends, "sparseVector", FUN.VALUE=NA)]
-table(Mcl)
+table(unlist(Mcl))
 ## choose *one* of each class:
 ## M.objs <- names(Mcl[!duplicated(Mcl)])
 ## choose all
@@ -338,6 +349,7 @@ M.objs <- names(Mcl) # == the ls() from above
 Mat.objs <- M.objs[vapply(M.objs, function(nm) is(get(nm), "Matrix"), NA)]
 MatDims <- t(vapply(Mat.objs, function(nm) dim(get(nm)), 0:1))
 ## Nice summary info :
+Mcl <- sapply(Mcl, as.vector) # dropping "package" attributes
 noquote(cbind(Mcl[Mat.objs], format(MatDims)))
 
 ## dtCMatrix, uplo="L" :
@@ -355,7 +367,7 @@ r <- M & m2 # failed in Matrix <= 1.4-1
 assert.EQ.mat(M        | m2 -> ro,
               as.mat(M)| m2, tol=0)
 D4 <- Diagonal(x=0+ 4:2)
-rd <- D4 | m2 # gave  invalid class “ltTMatrix” object: uplo='U' must not have sparse entries below the diagonal
+rd <- D4 | m2 # gave  invalid class "ltTMatrix" object: uplo='U' must not have sparse entries below the diagonal
 M2 <- Matrix(m2); T2 <- Matrix:::.diag2T.smart(D4, M2, kind="l")
 stopifnot(exprs = {
     all(!r)
@@ -366,7 +378,7 @@ stopifnot(exprs = {
 
 options(op)
 
-if(!doExtras && !interactive()) q("no") ## (saving testing time)
+if(doExtras || interactive()) { # save testing time
 
 ### Systematically look at all "Ops" group generics for "all" Matrix classes
 ### -------------- Main issue: Detect infinite recursion problems
@@ -451,28 +463,34 @@ for(gr in getGroupMembers("Ops")) {
 }
 if(length(warnings())) print(summary(warnings()))
 showProc.time()
+options(op) # reset 'warn'
+} # doExtras
 
 ###---- Now checking 0-length / 0-dim cases  <==> to R >= 3.4.0 !
 
 ## arithmetic, logic, and comparison (relop) for 0-extent arrays
 (m <- Matrix(cbind(a=1[0], b=2[0])))
-Lm <- as(m, "lMatrix")
-## Im <- as(m, "iMatrix")
-stopifnot(
-    identical(m, m + 1), identical(m, m + 1[0]),
-    identical(m, m + NULL),## now (2016-09-27) ok
-    identical(m, Lm+ 1L) ,
-    identical(m, m+2:3), ## gave error "length does not match dimension"
-    identical(Lm, m & 1),
-    identical(Lm, m | 2:3),## had Warning "In .... : data length exceeds size of matrix"
-    identical(Lm, m & TRUE[0]),
-    identical(Lm, m | FALSE[0]),
-    identical(Lm, m > NULL),
-    identical(Lm, m > 1),
-    identical(Lm, m > .1[0]),## was losing dimnames
-    identical(Lm, m > NULL), ## was not-yet-implemented
-    identical(Lm, m <= 2:3)  ## had "wrong" warning
-)
+lM <- as(m, "lMatrix")
+nM <- as(m, "nMatrix")
+stopifnot(exprs = {
+    identical(m, m + 1)
+    identical(m, m + 1[0])
+    identical(m, m + NULL)## now (2016-09-27) ok
+    identical(m, lM+ 1L)
+    identical(m, m+2:3) ## gave error "length does not match dimension"
+    identical( -m, m)
+    identical(-lM, m)
+    identical(-nM, m)
+    identical(lM, m & 1)
+    identical(lM, m | 2:3) ## had Warning "In .... : data length exceeds size of matrix"
+    identical(lM, m & TRUE [0])
+    identical(lM, m | FALSE[0])
+    identical(lM, m > NULL)
+    identical(lM, m > 1)
+    identical(lM, m > .1[0]) ## was losing dimnames
+    identical(lM, m > NULL) ## was not-yet-implemented
+    identical(lM, m <= 2:3)  ## had "wrong" warning
+})
 mm <- m[,c(1:2,2:1,2)]
 assertErrV(m + mm) # ... non-conformable arrays
 assertErrV(m | mm) # ... non-conformable arrays
@@ -498,7 +516,7 @@ stopifnot(identical(Matrix(3,1,1) > NULL, T[0]))
 stopifnot(identical(Matrix(3,1,1) & NULL, T[0]))
 ## in R >= 3.4.0: logical(0) # with *no* warning and that's correct!
 
-options(op)# reset 'warn'
+if(doExtras || interactive()) { # save testing time
 mStop <- function(...) stop(..., call. = FALSE)
 ##
 cat("Checking the Math (+ Math2) group generics for a set of arguments:\n",
@@ -520,9 +538,9 @@ for(f in c(mM, mM2)) {
     r <- fn(m <- if(is.m) as.mat(M) else as.vector(M))
     stopifnot(identical(dim(R), dim(r)))
     if(givesVec || !is.m) {
-        assert.EQ(R, r)
+        assert.EQ(R, r, check.class = FALSE)
     } else { ## (almost always:) matrix result
-        assert.EQ.mat(R, r)
+        assert.EQ.mat(R, r, check.class = FALSE)
 	## check preservation of properties, notably super class
 	if(prod(dim(M)) > 1 && is(M, "diagonalMatrix"  ) && isDiagonal(R) && !is(R, "diagonalMatrix"  )) doStop()
 	if(prod(dim(M)) > 1 && is(M, "triangularMatrix") && (iT <- isTriangular(R)) && attr(iT, "kind") == M@uplo &&
@@ -553,6 +571,7 @@ for(f in getGroupMembers("Summary")) {
   cat("\n")
   if(length(warnings())) print(summary(warnings()))
 }
+} # doExtras
 
 ## <Math>(x) behaved incorrectly in Matrix <= 1.4-1
 ## for unit diagonal 'x' when f(0) == 0 and f(1) != 1
@@ -565,5 +584,50 @@ utr <- new("dtrMatrix", Dim = c(2L, 2L), Dimnames = Dn, diag = "U",
 sinu <- `dimnames<-`(sin(diag(2L)), Dn)
 for(u in list(udi, utC, utr))
     stopifnot(identical(as(sin(u), "matrix"), sinu))
+
+## Originally in ../man/all-methods.Rd :
+M <- Matrix(1:12 +0, 3,4)
+all(M >= 1) # TRUE
+any(M < 0 ) # FALSE
+MN <- M; MN[2,3] <- NA; MN
+all(MN >= 0) # NA
+any(MN <  0) # NA
+any(MN <  0, na.rm = TRUE) # -> FALSE
+sM <- as(MN, "sparseMatrix")
+stopifnot(all(M >= 1), !any(M < 0),
+          all.equal((sM >= 1), as(MN >= 1, "sparseMatrix")),
+          ## MN:
+          any(MN < 2), !all(MN < 5),
+          is.na(all(MN >= 0)), is.na(any(MN < 0)),
+          all(MN >= 0, na.rm=TRUE), !any(MN < 0, na.rm=TRUE),
+          ## same for sM :
+          any(sM < 2), !all(sM < 5),
+          is.na(all(sM >= 0)), is.na(any(sM < 0)),
+          all(sM >= 0, na.rm=TRUE), !any(sM < 0, na.rm=TRUE)
+         )
+
+## prod(<symmetricMatrix>) does not perform multiplies in row/column order :
+x4 <- new("dspMatrix", Dim = c(4L, 4L),
+          x = c(171, 53, 79, 205, 100, 285, 98, 15, 99, 84))
+p4   <- prod(   x4)
+p4.  <- prod(as(x4, "generalMatrix"))
+p4.. <- prod(as(x4, "matrix"))
+stopifnot(all.equal(p4,  p4. , tolerance = 1e-15),
+          all.equal(p4., p4.., tolerance = 1e-15))
+all.equal(p4,  p4. , tolerance = 0)
+all.equal(p4., p4.., tolerance = 0)
+.Machine[["sizeof.longdouble"]]
+
+## <Ops>  <matrix> o <sparseVector>  stopped working
+(M73p <- L7[1:3,] + na.ddv) # 3 x 7 sparse Matrix of class "dgCMatrix"
+m73 <- as.matrix(L7[1:3,])
+(m73p <- m73 + na.ddv)
+stopifnot(is(m73p, "sparseMatrix"),
+          identical(m73p, na.ddv + m73),
+          identical(m73p, M73p))
+## badly failed, returning sparseVector  in Matrix 1.7.{0,1,2}
+
+
+
 
 cat('Time elapsed: ', proc.time(),'\n') # for ``statistical reasons''

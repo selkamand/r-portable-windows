@@ -26,7 +26,6 @@ coef.corARMA	corARMA
 coef.corARMAd	coef.corStruct
 coef.corCAR1	coef.corStruct
 coef.corCompSymm	coef.corStruct
-coef.corHF	coef.corStruct
 coef.corLin	coef.corStruct
 coef.corNatural	coef.corStruct
 coef.corSpatial	coef.corStruct
@@ -59,7 +58,6 @@ coef<-.corAR1	coef.corStruct
 coef<-.corARMA	coef.corStruct
 coef<-.corCAR1	coef.corStruct
 coef<-.corCompSymm	coef.corStruct
-coef<-.corHF	coef.corStruct
 coef<-.corLin	coef.corStruct
 coef<-.corNatural	coef.corStruct
 coef<-.corSpatial	coef.corStruct
@@ -210,7 +208,6 @@ Initialize.corAR1	Initialize.corStruct
 Initialize.corARMA	Initialize.corStruct
 Initialize.corCAR1	Initialize.corStruct
 Initialize.corCompSymm	Initialize.corStruct
-Initialize.corHF	Initialize.corStruct
 Initialize.corLin	Initialize.corStruct
 Initialize.corNatural	Initialize.corStruct
 Initialize.corSpatial	Initialize.corStruct
@@ -390,7 +387,6 @@ print.intervals.gls	intervals.gls
 print.intervals.lme	intervals.lme
 print.intervals.lmList	intervals.lmList
 print.lmList	lmList
-print.ranef	random.effects
 print.ranef.lme	ranef.lme
 print.reStruct	reStruct
 print.simulate.lme	simulate.lme
@@ -420,7 +416,6 @@ recalc.corAR1	recalc.corStruct
 recalc.corARMA	recalc.corStruct
 recalc.corCAR1	recalc.corStruct
 recalc.corCompSymm	recalc.corStruct
-recalc.corHF	recalc.corStruct
 recalc.corNatural	recalc.corStruct
 recalc.corSpatial	recalc.corStruct
 recalc.corStruct	recalc.corStruct

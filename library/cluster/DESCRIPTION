@@ -1,6 +1,8 @@
 Package: cluster
-Version: 2.1.4
-Date: 2022-08-19
+Version: 2.1.8.1
+VersionNote: Last CRAN: 2.1.8 on 2024-12-10; 2.1.7 on 2024-12-06; 2.1.6
+        on 2023-11-30; 2.1.5 on 2023-11-27
+Date: 2025-03-11
 Priority: recommended
 Title: "Finding Groups in Data": Cluster Analysis Extended Rousseeuw et
         al.
@@ -25,12 +27,15 @@ Authors@R: c(person("Martin","Maechler", role = c("aut","cre"),
  ,person("Erich",  "Schubert", role="ctb", comment = c("fastpam options for pam()",
                                                        ORCID = "0000-0001-9143-4880"))
  ,person("Keefe",  "Murphy", role="ctb", comment = "volume.ellipsoid({d >= 3})")
+ #not yet ,person("Fischer-Rasmussen", "Kasper", role = "ctb", comment = "Gower distance for CLARA")
  )
 Depends: R (>= 3.5.0)
 Imports: graphics, grDevices, stats, utils
 Suggests: MASS, Matrix
 SuggestsNote: MASS: two examples using cov.rob() and mvrnorm(); Matrix
         tools for testing
+Enhances: mvoutlier, fpc, ellipse, sfsmisc
+EnhancesNote: xref-ed in man/*.Rd
 LazyLoad: yes
 LazyData: yes
 ByteCompile: yes
@@ -38,7 +43,7 @@ BuildResaveData: no
 License: GPL (>= 2)
 URL: https://svn.r-project.org/R-packages/trunk/cluster/
 NeedsCompilation: yes
-Packaged: 2022-08-19 13:31:31 UTC; maechler
+Packaged: 2025-03-11 22:34:24 UTC; maechler
 Author: Martin Maechler [aut, cre] (<https://orcid.org/0000-0002-8685-9910>),
   Peter Rousseeuw [aut] (Fortran original,
     <https://orcid.org/0000-0002-3807-5353>),
@@ -54,6 +59,6 @@ Author: Martin Maechler [aut, cre] (<https://orcid.org/0000-0002-8685-9910>),
     <https://orcid.org/0000-0001-9143-4880>),
   Keefe Murphy [ctb] (volume.ellipsoid({d >= 3}))
 Repository: CRAN
-Date/Publication: 2022-08-22 10:10:02 UTC
-Built: R 4.3.0; x86_64-w64-mingw32; 2023-04-21 09:28:06 UTC; windows
+Date/Publication: 2025-03-12 17:20:02 UTC
+Built: R 4.5.1; x86_64-w64-mingw32; 2025-06-13 07:58:01 UTC; windows
 Archs: x64

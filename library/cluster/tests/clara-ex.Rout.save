@@ -1,0 +1,91 @@
+
+R version 3.5.0 alpha (2018-03-28 r74481)
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> #### These are *NOT* compared with output in the released version of
+> ###  'cluster'  currently
+> 
+> library(cluster)
+> 
+> source(system.file("test-tools.R", package = "cluster"), keep.source = FALSE)
+Loading required package: tools
+> ## -> showProc.time() ...  & doExtras
+> 
+> data(xclara)
+> ## Try 100 times *different* random samples -- for reliability:
+> nSim <- 100
+> nCl <- 3 # = no.classes
+> showProc.time()
+Time elapsed:  0.431 0.065 0.533 
+> 
+> ## unknown problem: this is still platform dependent to some extent:
+> set.seed(107)# << reproducibility; somewhat favorable with "small iDoubt"
+> cl <- replicate(nSim, clara(xclara, nCl, rngR = TRUE)$cluster)
+> tcl <- apply(cl,1, tabulate, nbins = nCl)
+> showProc.time()
+Time elapsed:  0.224 0.003 0.227 
+> ## those that are not always in same cluster (5 out of 3000 for this seed):
+> (iDoubt <- which(apply(tcl,2, function(n) all(n < nSim))))
+ [1]    6   71  243  245  610  708  727  770 1038 1081 1120 1248 1289 1610 1644
+[16] 1922
+> 
+> if(doExtras) {
++     if(getRversion() < "3.2.1")
++ 	lengths <- function (x, use.names = TRUE) vapply(x, length, 1L, USE.NAMES = use.names)
++     rrr <- lapply(1:128, function(iseed) {
++         set.seed(iseed)
++ 	cat(iseed, if(iseed %% 10 == 0) "\n" else "")
++         cl <- replicate(nSim, clara(xclara, nCl, rngR = TRUE)$cluster)
++         tcl <- apply(cl,1, tabulate, nbins = nCl)
++         which(apply(tcl,2, function(n) all(n < nSim)))
++     }); cat("\n")
++     showProc.time()
++     cat("Number of cases which \"changed\" clusters:\n")
++     print(lengths(rrr))
++     ## compare with "true" -- are the "changers" only those with small sil.width?
++     ## __TODO!__
++     showSys.time(px <- pam(xclara,3))# 1.84 on lynne(2013)
++ 
++ } ## doExtras
+> 
+> 
+> if(length(iDoubt)) { # (not for all seeds)
++   tabD <- tcl[,iDoubt, drop=FALSE]
++   dimnames(tabD) <- list(cluster = paste(1:nCl), obs = format(iDoubt))
++   print( t(tabD) ) # how many times in which clusters
++ }
+      cluster
+obs     1  2  3
+     6 98  2  0
+    71 99  1  0
+   243 98  0  2
+   245 86  0 14
+   610 84 16  0
+   708 87 13  0
+   727 87  0 13
+   770  0  1 99
+  1038 80 20  0
+  1081 48 52  0
+  1120  5 95  0
+  1248 21 79  0
+  1289  3 97  0
+  1610 59 41  0
+  1644 18 82  0
+  1922 10 90  0
+> 
+> proc.time()
+   user  system elapsed 
+  0.818   0.104   1.017 

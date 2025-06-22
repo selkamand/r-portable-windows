@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-<!-- Created by GNU Texinfo 7.0.2, https://www.gnu.org/software/texinfo/ -->
+<!-- Created by GNU Texinfo 7.2, https://www.gnu.org/software/texinfo/ -->
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<!-- This manual is for R, version 4.3.0 (2023-04-21).
+<!-- This manual is for R, version 4.5.1 (2025-06-13).
 
-Copyright © 2000-2023 R Core Team
+Copyright © 2000-2025 R Core Team
 
 Permission is granted to make and distribute verbatim copies of this
 manual provided the copyright notice and this permission notice are
@@ -22,7 +22,6 @@ except that this permission notice may be stated in a translation
 approved by the R Core Team. -->
 <title>R Data Import/Export</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="R Data Import/Export">
 <meta name="keywords" content="R Data Import/Export">
 <meta name="resource-type" content="document">
@@ -33,15 +32,18 @@ approved by the R Core Team. -->
 <link href="#Top" rel="start" title="Top">
 <link href="#Function-and-variable-index" rel="index" title="Function and variable index">
 <link href="#SEC_Contents" rel="contents" title="Table of Contents">
+<link href="../html/index.html" rel="up" title="(dir)">
 <link href="#Acknowledgements" rel="next" title="Acknowledgements">
 <style type="text/css">
 <!--
+a.copiable-link {visibility: hidden; text-decoration: none; line-height: 0em}
 a.summary-letter-printindex {text-decoration: none}
 div.example {margin-left: 3.2em}
+span:hover a.copiable-link {visibility: visible}
 td.printindex-index-entry {vertical-align: top}
-td.printindex-index-section {vertical-align: top}
+td.printindex-index-section {vertical-align: top; padding-left: 1em}
 th.entries-header-printindex {text-align:left}
-th.sections-header-printindex {text-align:left}
+th.sections-header-printindex {text-align:left; padding-left: 1em}
 ul.toc-numbered-mark {list-style: none}
 body {
     margin-left: 5%;
@@ -112,7 +114,8 @@ p {
     margin-bottom: 1.2ex;
 }
 
-#Top > .header, #Top > h1 {     /* for Texinfo 6.8 */
+/* hide top navigation bar in Texinfo >= 6.8 output */
+#Top > .header, #Top > .nav-panel {
     display: none
 }
 
@@ -148,15 +151,15 @@ p {
 <div class="top-level-extent" id="Top">
 <div class="nav-panel">
 <p>
-Next: <a href="#Acknowledgements" accesskey="n" rel="next">Acknowledgements</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#Acknowledgements" accesskey="n" rel="next">Acknowledgements</a>, Up: <a href="../html/index.html" accesskey="u" rel="up">(dir)</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h1 class="top" id="R-Data-Import_002fExport">R Data Import/Export</h1>
+<h1 class="top" id="R-Data-Import_002fExport"><span>R Data Import/Export<a class="copiable-link" href="#R-Data-Import_002fExport"> &para;</a></span></h1>
 
 <p>This is a guide to importing and exporting data to and from R.
 </p>
-<p>This manual is for R, version 4.3.0 (2023-04-21).
+<p>This manual is for R, version 4.5.1 (2025-06-13).
 </p>
-<p>Copyright &copy; 2000&ndash;2023 R Core Team
+<p>Copyright &copy; 2000&ndash;2025 R Core Team
 </p>
 <blockquote class="quotation">
 <p>Permission is granted to make and distribute verbatim copies of this
@@ -176,79 +179,80 @@ approved by the R Core Team.
 
 
 
-<div class="element-contents" id="SEC_Contents">
+
+<div class="region-contents" id="SEC_Contents">
 <h2 class="contents-heading">Table of Contents</h2>
 
 <div class="contents">
 
 <ul class="toc-numbered-mark">
-  <li><a id="toc-Acknowledgements-1" href="#Acknowledgements">Acknowledgements</a></li>
-  <li><a id="toc-Introduction-1" href="#Introduction">1 Introduction</a>
+  <li><a id="toc-Acknowledgements" href="#Acknowledgements">Acknowledgements</a></li>
+  <li><a id="toc-Introduction" href="#Introduction">1 Introduction</a>
   <ul class="toc-numbered-mark">
-    <li><a id="toc-Imports-1" href="#Imports">1.1 Imports</a>
+    <li><a id="toc-Imports" href="#Imports">1.1 Imports</a>
     <ul class="toc-numbered-mark">
-      <li><a id="toc-Encodings-1" href="#Encodings">1.1.1 Encodings</a></li>
+      <li><a id="toc-Encodings" href="#Encodings">1.1.1 Encodings</a></li>
     </ul></li>
-    <li><a id="toc-Export-to-text-files-1" href="#Export-to-text-files">1.2 Export to text files</a></li>
-    <li><a id="toc-XML-1" href="#XML">1.3 XML</a></li>
+    <li><a id="toc-Export-to-text-files" href="#Export-to-text-files">1.2 Export to text files</a></li>
+    <li><a id="toc-XML" href="#XML">1.3 XML</a></li>
   </ul></li>
-  <li><a id="toc-Spreadsheet_002dlike-data-1" href="#Spreadsheet_002dlike-data">2 Spreadsheet-like data</a>
+  <li><a id="toc-Spreadsheet_002dlike-data" href="#Spreadsheet_002dlike-data">2 Spreadsheet-like data</a>
   <ul class="toc-numbered-mark">
-    <li><a id="toc-Variations-on-read_002etable-1" href="#Variations-on-read_002etable">2.1 Variations on <code class="code">read.table</code></a></li>
-    <li><a id="toc-Fixed_002dwidth_002dformat-files-1" href="#Fixed_002dwidth_002dformat-files">2.2 Fixed-width-format files</a></li>
-    <li><a id="toc-Data-Interchange-Format-_0028DIF_0029-1" href="#Data-Interchange-Format-_0028DIF_0029">2.3 Data Interchange Format (DIF)</a></li>
-    <li><a id="toc-Using-scan-directly-1" href="#Using-scan-directly">2.4 Using <code class="code">scan</code> directly</a></li>
-    <li><a id="toc-Re_002dshaping-data-1" href="#Re_002dshaping-data">2.5 Re-shaping data</a></li>
-    <li><a id="toc-Flat-contingency-tables-1" href="#Flat-contingency-tables">2.6 Flat contingency tables</a></li>
+    <li><a id="toc-Variations-on-read_002etable" href="#Variations-on-read_002etable">2.1 Variations on <code class="code">read.table</code></a></li>
+    <li><a id="toc-Fixed_002dwidth_002dformat-files" href="#Fixed_002dwidth_002dformat-files">2.2 Fixed-width-format files</a></li>
+    <li><a id="toc-Data-Interchange-Format-_0028DIF_0029" href="#Data-Interchange-Format-_0028DIF_0029">2.3 Data Interchange Format (DIF)</a></li>
+    <li><a id="toc-Using-scan-directly" href="#Using-scan-directly">2.4 Using <code class="code">scan</code> directly</a></li>
+    <li><a id="toc-Re_002dshaping-data" href="#Re_002dshaping-data">2.5 Re-shaping data</a></li>
+    <li><a id="toc-Flat-contingency-tables" href="#Flat-contingency-tables">2.6 Flat contingency tables</a></li>
   </ul></li>
-  <li><a id="toc-Importing-from-other-statistical-systems-1" href="#Importing-from-other-statistical-systems">3 Importing from other statistical systems</a>
+  <li><a id="toc-Importing-from-other-statistical-systems" href="#Importing-from-other-statistical-systems">3 Importing from other statistical systems</a>
   <ul class="toc-numbered-mark">
     <li><a id="toc-EpiInfo_002c-Minitab_002c-S_002dPLUS_002c-SAS_002c-SPSS_002c-Stata_002c-Systat" href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">3.1 EpiInfo, Minitab, S-PLUS, SAS, SPSS, Stata, Systat</a></li>
-    <li><a id="toc-Octave-1" href="#Octave">3.2 Octave</a></li>
+    <li><a id="toc-Octave" href="#Octave">3.2 Octave</a></li>
   </ul></li>
-  <li><a id="toc-Relational-databases-1" href="#Relational-databases">4 Relational databases</a>
+  <li><a id="toc-Relational-databases" href="#Relational-databases">4 Relational databases</a>
   <ul class="toc-numbered-mark">
-    <li><a id="toc-Why-use-a-database_003f-1" href="#Why-use-a-database_003f">4.1 Why use a database?</a></li>
-    <li><a id="toc-Overview-of-RDBMSs-1" href="#Overview-of-RDBMSs">4.2 Overview of RDBMSs</a>
+    <li><a id="toc-Why-use-a-database_003f" href="#Why-use-a-database_003f">4.1 Why use a database?</a></li>
+    <li><a id="toc-Overview-of-RDBMSs" href="#Overview-of-RDBMSs">4.2 Overview of RDBMSs</a>
     <ul class="toc-numbered-mark">
-      <li><a id="toc-SQL-queries-1" href="#SQL-queries">4.2.1 <abbr class="acronym">SQL</abbr> queries</a></li>
-      <li><a id="toc-Data-types-1" href="#Data-types">4.2.2 Data types</a></li>
+      <li><a id="toc-SQL-queries" href="#SQL-queries">4.2.1 <abbr class="acronym">SQL</abbr> queries</a></li>
+      <li><a id="toc-Data-types" href="#Data-types">4.2.2 Data types</a></li>
     </ul></li>
-    <li><a id="toc-R-interface-packages-1" href="#R-interface-packages">4.3 R interface packages</a>
+    <li><a id="toc-R-interface-packages" href="#R-interface-packages">4.3 R interface packages</a>
     <ul class="toc-numbered-mark">
       <li><a id="toc-Packages-using-DBI" href="#DBI">4.3.1 Packages using DBI</a></li>
-      <li><a id="toc-Package-RODBC" href="#RODBC">4.3.2 Package RODBC</a></li>
+      <li><a id="toc-Package-RODBC" href="#RODBC">4.3.2 Package <strong class="strong">RODBC</strong></a></li>
     </ul></li>
   </ul></li>
-  <li><a id="toc-Binary-files-1" href="#Binary-files">5 Binary files</a>
+  <li><a id="toc-Binary-files" href="#Binary-files">5 Binary files</a>
   <ul class="toc-numbered-mark">
-    <li><a id="toc-Binary-data-formats-1" href="#Binary-data-formats">5.1 Binary data formats</a></li>
-    <li><a id="toc-dBase-files-_0028DBF_0029-1" href="#dBase-files-_0028DBF_0029">5.2 dBase files (DBF)</a></li>
+    <li><a id="toc-Binary-data-formats" href="#Binary-data-formats">5.1 Binary data formats</a></li>
+    <li><a id="toc-dBase-files-_0028DBF_0029" href="#dBase-files-_0028DBF_0029">5.2 dBase files (DBF)</a></li>
   </ul></li>
-  <li><a id="toc-Image-files-1" href="#Image-files">6 Image files</a></li>
-  <li><a id="toc-Connections-1" href="#Connections">7 Connections</a>
+  <li><a id="toc-Image-files" href="#Image-files">6 Image files</a></li>
+  <li><a id="toc-Connections" href="#Connections">7 Connections</a>
   <ul class="toc-numbered-mark">
-    <li><a id="toc-Types-of-connections-1" href="#Types-of-connections">7.1 Types of connections</a></li>
-    <li><a id="toc-Output-to-connections-1" href="#Output-to-connections">7.2 Output to connections</a></li>
-    <li><a id="toc-Input-from-connections-1" href="#Input-from-connections">7.3 Input from connections</a>
+    <li><a id="toc-Types-of-connections" href="#Types-of-connections">7.1 Types of connections</a></li>
+    <li><a id="toc-Output-to-connections" href="#Output-to-connections">7.2 Output to connections</a></li>
+    <li><a id="toc-Input-from-connections" href="#Input-from-connections">7.3 Input from connections</a>
     <ul class="toc-numbered-mark">
-      <li><a id="toc-Pushback-1" href="#Pushback">7.3.1 Pushback</a></li>
+      <li><a id="toc-Pushback" href="#Pushback">7.3.1 Pushback</a></li>
     </ul></li>
-    <li><a id="toc-Listing-and-manipulating-connections-1" href="#Listing-and-manipulating-connections">7.4 Listing and manipulating connections</a></li>
-    <li><a id="toc-Binary-connections-1" href="#Binary-connections">7.5 Binary connections</a>
+    <li><a id="toc-Listing-and-manipulating-connections" href="#Listing-and-manipulating-connections">7.4 Listing and manipulating connections</a></li>
+    <li><a id="toc-Binary-connections" href="#Binary-connections">7.5 Binary connections</a>
     <ul class="toc-numbered-mark">
-      <li><a id="toc-Special-values-1" href="#Special-values">7.5.1 Special values</a></li>
+      <li><a id="toc-Special-values" href="#Special-values">7.5.1 Special values</a></li>
     </ul></li>
   </ul></li>
-  <li><a id="toc-Network-interfaces-1" href="#Network-interfaces">8 Network interfaces</a>
+  <li><a id="toc-Network-interfaces" href="#Network-interfaces">8 Network interfaces</a>
   <ul class="toc-numbered-mark">
-    <li><a id="toc-Reading-from-sockets-1" href="#Reading-from-sockets">8.1 Reading from sockets</a></li>
-    <li><a id="toc-Using-download_002efile-1" href="#Using-download_002efile">8.2 Using <code class="code">download.file</code></a></li>
+    <li><a id="toc-Reading-from-sockets" href="#Reading-from-sockets">8.1 Reading from sockets</a></li>
+    <li><a id="toc-Using-download_002efile" href="#Using-download_002efile">8.2 Using <code class="code">download.file</code></a></li>
   </ul></li>
-  <li><a id="toc-Reading-Excel-spreadsheets-1" href="#Reading-Excel-spreadsheets">9 Reading Excel spreadsheets</a></li>
-  <li><a id="toc-References-1" href="#References">Appendix A References</a></li>
-  <li><a id="toc-Function-and-variable-index-1" href="#Function-and-variable-index" rel="index">Function and variable index</a></li>
-  <li><a id="toc-Concept-index-1" href="#Concept-index" rel="index">Concept index</a></li>
+  <li><a id="toc-Reading-Excel-spreadsheets" href="#Reading-Excel-spreadsheets">9 Reading Excel spreadsheets</a></li>
+  <li><a id="toc-References" href="#References">References</a></li>
+  <li><a id="toc-Function-and-variable-index" href="#Function-and-variable-index" rel="index">Function and variable index</a></li>
+  <li><a id="toc-Concept-index" href="#Concept-index" rel="index">Concept index</a></li>
 </ul>
 </div>
 </div>
@@ -258,11 +262,11 @@ approved by the R Core Team.
 <p>
 Next: <a href="#Introduction" accesskey="n" rel="next">Introduction</a>, Previous: <a href="#Top" accesskey="p" rel="prev">R Data Import/Export</a>, Up: <a href="#Top" accesskey="u" rel="up">R Data Import/Export</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h2 class="unnumbered" id="Acknowledgements-1">Acknowledgements</h2>
+<h2 class="unnumbered" id="Acknowledgements-1"><span>Acknowledgements<a class="copiable-link" href="#Acknowledgements-1"> &para;</a></span></h2>
 
 <p>The relational databases part of this manual is based in part on an
-earlier manual by Douglas Bates and Saikat DebRoy.  The principal author
-of this manual was Brian Ripley.
+earlier manual by Douglas Bates and Saikat DebRoy.  The
+principal author of this manual was Brian Ripley.
 </p>
 <p>Many volunteers have contributed to the packages used here.  The
 principal authors of the packages mentioned are
@@ -278,7 +282,11 @@ principal authors of the packages mentioned are
 </p>
 </dd>
 <dt><a class="url" href="https://CRAN.R-project.org/package=foreign"><strong class="strong">foreign</strong></a>:</dt>
-<dd><p>Thomas Lumley, Saikat DebRoy, Douglas Bates, Duncan Murdoch and Roger Bivand
+<dd><p>Thomas Lumley,
+Saikat DebRoy,
+Douglas Bates,
+Duncan Murdoch and 
+Roger Bivand
 </p>
 </dd>
 <dt><a class="url" href="https://CRAN.R-project.org/package=gdata"><strong class="strong">gdata</strong></a>:</dt>
@@ -298,7 +306,8 @@ principal authors of the packages mentioned are
 </p>
 </dd>
 <dt><a class="url" href="https://CRAN.R-project.org/package=RMySQL"><strong class="strong">RMySQL</strong></a>:</dt>
-<dd><p>David James and Saikat DebRoy
+<dd><p>David James and
+Saikat DebRoy
 </p>
 </dd>
 <dt><a class="url" href="https://CRAN.R-project.org/package=RNetCDF"><strong class="strong">RNetCDF</strong></a>:</dt>
@@ -306,7 +315,8 @@ principal authors of the packages mentioned are
 </p>
 </dd>
 <dt><a class="url" href="https://CRAN.R-project.org/package=RODBC"><strong class="strong">RODBC</strong></a>:</dt>
-<dd><p>Michael Lapsley and Brian Ripley
+<dd><p>Michael Lapsley and
+Brian Ripley
 </p>
 </dd>
 <dt><a class="url" href="https://CRAN.R-project.org/package=ROracle"><strong class="strong">ROracle</strong></a>:</dt>
@@ -314,7 +324,8 @@ principal authors of the packages mentioned are
 </p>
 </dd>
 <dt><a class="url" href="https://CRAN.R-project.org/package=RPostgreSQL"><strong class="strong">RPostgreSQL</strong></a>:</dt>
-<dd><p>Sameer Kumar Prayaga and Tomoaki Nishiyama
+<dd><p>Sameer Kumar Prayaga and
+Tomoaki Nishiyama
 </p>
 </dd>
 <dt><strong class="strong">RSPerl</strong>:</dt>
@@ -330,7 +341,8 @@ principal authors of the packages mentioned are
 </p>
 </dd>
 <dt><strong class="strong">SJava</strong>:</dt>
-<dd><p>John Chambers and Duncan Temple Lang
+<dd><p>John Chambers and
+Duncan Temple Lang
 </p>
 </dd>
 <dt><a class="url" href="https://CRAN.R-project.org/package=WriteXLS"><strong class="strong">WriteXLS</strong></a>:</dt>
@@ -350,6 +362,7 @@ principal authors of the packages mentioned are
 <p>Brian Ripley is the author of the support for connections.
 </p>
 
+
 <hr>
 </div>
 <div class="chapter-level-extent" id="Introduction">
@@ -357,7 +370,7 @@ principal authors of the packages mentioned are
 <p>
 Next: <a href="#Spreadsheet_002dlike-data" accesskey="n" rel="next">Spreadsheet-like data</a>, Previous: <a href="#Acknowledgements" accesskey="p" rel="prev">Acknowledgements</a>, Up: <a href="#Top" accesskey="u" rel="up">R Data Import/Export</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h2 class="chapter" id="Introduction-1">1 Introduction</h2>
+<h2 class="chapter" id="Introduction-1"><span>1 Introduction<a class="copiable-link" href="#Introduction-1"> &para;</a></span></h2>
 
 <p>Reading data into a statistical system for analysis and exporting the
 results to some other system for report writing can be frustrating tasks
@@ -379,7 +392,7 @@ another system do the work!  (For example Therneau &amp; Grambsch (2000)
 commented that they preferred to do data manipulation in SAS and then
 use package <a class="url" href="https://CRAN.R-project.org/package=survival"><strong class="strong">survival</strong></a> in S for the analysis.)  Database
 manipulation systems are often very suitable for manipulating and
-extracting data: several packages to interact with DBMSs are discussed
+extracting data: several packages to interact with <abbr class="abbr">DBMS</abbr>s are discussed
 here.
 </p>
 <p>There are packages to allow functionality developed in languages such as
@@ -413,9 +426,9 @@ it is worth searching to see if a suitable package already exists.
 <div class="section-level-extent" id="Imports">
 <div class="nav-panel">
 <p>
-Next: <a href="#Export-to-text-files" accesskey="n" rel="next">Export to text files</a>, Previous: <a href="#Introduction" accesskey="p" rel="prev">Introduction</a>, Up: <a href="#Introduction" accesskey="u" rel="up">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#Export-to-text-files" accesskey="n" rel="next">Export to text files</a>, Up: <a href="#Introduction" accesskey="u" rel="up">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h3 class="section" id="Imports-1">1.1 Imports</h3>
+<h3 class="section" id="Imports-1"><span>1.1 Imports<a class="copiable-link" href="#Imports-1"> &para;</a></span></h3>
 <a class="index-entry-id" id="index-scan"></a>
 
 <p>The easiest form of data to import into R is a simple text file, and
@@ -443,12 +456,13 @@ represented in memory, possibly preceded by a header.  Such data formats
 are discussed in <a class="ref" href="#Binary-files">Binary files</a> and <a class="ref" href="#Binary-connections">Binary connections</a>.
 </p>
 <p>For much larger databases it is common to handle the data using a
-database management system (DBMS).  There is once again the option of
-using the DBMS to extract a plain file, but for many such DBMSs the
+database management system (<abbr class="abbr">DBMS</abbr>).  There is once again the option of
+using the <abbr class="abbr">DBMS</abbr> to extract a plain file, but for many such <abbr class="abbr">DBMS</abbr>s the
 extraction operation can be done directly from an R package:
 See <a class="xref" href="#Relational-databases">Relational databases</a>.  Importing data via network connections is
 discussed in <a class="ref" href="#Network-interfaces">Network interfaces</a>.
 </p>
+
 
 <ul class="mini-toc">
 <li><a href="#Encodings" accesskey="1">Encodings</a></li>
@@ -457,9 +471,9 @@ discussed in <a class="ref" href="#Network-interfaces">Network interfaces</a>.
 <div class="subsection-level-extent" id="Encodings">
 <div class="nav-panel">
 <p>
-Previous: <a href="#Imports" accesskey="p" rel="prev">Imports</a>, Up: <a href="#Imports" accesskey="u" rel="up">Imports</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
+Up: <a href="#Imports" accesskey="u" rel="up">Imports</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h4 class="subsection" id="Encodings-1">1.1.1 Encodings</h4>
+<h4 class="subsection" id="Encodings-1"><span>1.1.1 Encodings<a class="copiable-link" href="#Encodings-1"> &para;</a></span></h4>
 <a class="index-entry-id" id="index-Encodings"></a>
 
 <p>Unless the file to be imported from is entirely in <abbr class="acronym">ASCII</abbr>, it
@@ -487,13 +501,13 @@ guesses may be possible and <code class="command">file</code> may guess as it di
 example above), so you may simply have to ask the originator for some
 clues (e.g. &lsquo;Russian on Windows&rsquo;).
 </p>
-<p>&lsquo;BOMs&rsquo; (Byte Order Marks,
+<p>&lsquo;<abbr class="abbr">BOM</abbr>s&rsquo; (Byte Order Marks,
 <a class="uref" href="https://en.wikipedia.org/wiki/Byte_order_mark">https://en.wikipedia.org/wiki/Byte_order_mark</a>) cause problems for
-Unicode files.  In the Unix world BOMs are rarely used, whereas in the
+Unicode files.  In the Unix world <abbr class="abbr">BOM</abbr>s are rarely used, whereas in the
 Windows world they almost always are for UCS-2/UTF-16 files, and often
 are for UTF-8 files.  The <code class="command">file</code> utility will not even recognize
-UCS-2 files without a BOM, but many other utilities will refuse to read
-files with a BOM and the <abbr class="acronym">IANA</abbr> standards for <code class="code">UTF-16LE</code>
+UCS-2 files without a <abbr class="abbr">BOM</abbr>, but many other utilities will refuse to read
+files with a <abbr class="abbr">BOM</abbr> and the <abbr class="abbr">IANA</abbr> standards for <code class="code">UTF-16LE</code>
 and <code class="code">UTF-16BE</code> prohibit it.  We have too often been reduced to
 looking at the file with the command-line utility <code class="command">od</code> or a hex
 editor to work out its encoding.
@@ -502,6 +516,7 @@ editor to work out its encoding.
 and <code class="code">macintosh</code> is the most portable name for what is sometimes
 called &lsquo;Mac Roman&rsquo; encoding. 
 </p>
+
 <hr>
 </div>
 </div>
@@ -510,7 +525,7 @@ called &lsquo;Mac Roman&rsquo; encoding.
 <p>
 Next: <a href="#XML" accesskey="n" rel="next">XML</a>, Previous: <a href="#Imports" accesskey="p" rel="prev">Imports</a>, Up: <a href="#Introduction" accesskey="u" rel="up">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h3 class="section" id="Export-to-text-files-1">1.2 Export to text files</h3>
+<h3 class="section" id="Export-to-text-files-1"><span>1.2 Export to text files<a class="copiable-link" href="#Export-to-text-files-1"> &para;</a></span></h3>
 <a class="index-entry-id" id="index-Exporting-to-a-text-file"></a>
 
 <p>Exporting results from R is usually a less contentious task, but
@@ -577,7 +592,7 @@ function <code class="code">write.csv</code> provides appropriate defaults.  In 
 locales the comma is used as the decimal point (set this in
 <code class="code">write.table</code> by <code class="code">dec = &quot;,&quot;</code>) and there CSV files use the
 semicolon as the field separator: use <code class="code">write.csv2</code> for appropriate
-defaults.  There is an IETF standard for CSV files (which mandates
+defaults.  There is an <abbr class="abbr">IETF</abbr> standard for CSV files (which mandates
 commas and CRLF line endings, for which use <code class="code">eol = &quot;\r\n&quot;</code>), RFC4180
 (see <a class="uref" href="https://www.rfc-editor.org/rfc/rfc4180">https://www.rfc-editor.org/rfc/rfc4180</a>), but what is more
 important in practice is that the file is readable by the application it
@@ -658,6 +673,7 @@ and the <code class="code">options(width)</code> setting may need to be increase
 that will read this text file into another statistical package. There is
 currently support for export to <code class="code">SAS</code>, <code class="code">SPSS</code> and <code class="code">Stata</code>.
 </p>
+
 <hr>
 </div>
 <div class="section-level-extent" id="XML">
@@ -665,7 +681,7 @@ currently support for export to <code class="code">SAS</code>, <code class="code
 <p>
 Previous: <a href="#Export-to-text-files" accesskey="p" rel="prev">Export to text files</a>, Up: <a href="#Introduction" accesskey="u" rel="up">Introduction</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h3 class="section" id="XML-1">1.3 XML</h3>
+<h3 class="section" id="XML-1"><span>1.3 XML<a class="copiable-link" href="#XML-1"> &para;</a></span></h3>
 <a class="index-entry-id" id="index-XML"></a>
 
 <p>When reading data from text files, it is the responsibility of the user
@@ -699,11 +715,13 @@ Package <a class="url" href="https://CRAN.R-project.org/package=StatDataML"><str
 on <a class="url" href="https://CRAN.R-project.org/package=XML"><strong class="strong">XML</strong></a>.  Another interface to the <strong class="strong">libxml2</strong> C library is
 provided by package <a class="url" href="https://CRAN.R-project.org/package=xml2"><strong class="strong">xml2</strong></a>.
 </p>
-<a class="index-entry-id" id="index-yaml"></a>
-<p><abbr class="acronym">yaml</abbr> is another system for structuring text data, with
+<a class="index-entry-id" id="index-YAML"></a>
+<p><abbr class="acronym">YAML</abbr> is another system for structuring text data, with
 emphasis on human-readability: it is supported by package
 <a class="url" href="https://CRAN.R-project.org/package=yaml"><strong class="strong">yaml</strong></a>.
 </p>
+
+
 <hr>
 </div>
 </div>
@@ -712,7 +730,7 @@ emphasis on human-readability: it is supported by package
 <p>
 Next: <a href="#Importing-from-other-statistical-systems" accesskey="n" rel="next">Importing from other statistical systems</a>, Previous: <a href="#Introduction" accesskey="p" rel="prev">Introduction</a>, Up: <a href="#Top" accesskey="u" rel="up">R Data Import/Export</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h2 class="chapter" id="Spreadsheet_002dlike-data-1">2 Spreadsheet-like data</h2>
+<h2 class="chapter" id="Spreadsheet_002dlike-data-1"><span>2 Spreadsheet-like data<a class="copiable-link" href="#Spreadsheet_002dlike-data-1"> &para;</a></span></h2>
 <a class="index-entry-id" id="index-Spreadsheet_002dlike-data"></a>
 
 
@@ -721,6 +739,7 @@ format of a spreadsheet-like text file, in which the data are presented
 in a rectangular grid, possibly with row and column labels.  In this
 section we consider importing such files into R.
 </p>
+
 <ul class="mini-toc">
 <li><a href="#Variations-on-read_002etable" accesskey="1">Variations on <code class="code">read.table</code></a></li>
 <li><a href="#Fixed_002dwidth_002dformat-files" accesskey="2">Fixed-width-format files</a></li>
@@ -733,9 +752,9 @@ section we consider importing such files into R.
 <div class="section-level-extent" id="Variations-on-read_002etable">
 <div class="nav-panel">
 <p>
-Next: <a href="#Fixed_002dwidth_002dformat-files" accesskey="n" rel="next">Fixed-width-format files</a>, Previous: <a href="#Spreadsheet_002dlike-data" accesskey="p" rel="prev">Spreadsheet-like data</a>, Up: <a href="#Spreadsheet_002dlike-data" accesskey="u" rel="up">Spreadsheet-like data</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#Fixed_002dwidth_002dformat-files" accesskey="n" rel="next">Fixed-width-format files</a>, Up: <a href="#Spreadsheet_002dlike-data" accesskey="u" rel="up">Spreadsheet-like data</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h3 class="section" id="Variations-on-read_002etable-1">2.1 Variations on <code class="code">read.table</code></h3>
+<h3 class="section" id="Variations-on-read_002etable-1"><span>2.1 Variations on <code class="code">read.table</code><a class="copiable-link" href="#Variations-on-read_002etable-1"> &para;</a></span></h3>
 <a class="index-entry-id" id="index-read_002etable"></a>
 
 <p>The function <code class="code">read.table</code> is the most convenient way to read in a
@@ -901,13 +920,13 @@ that Unicode escapes such as <code class="code">\u<var class="var">xxxx</var></c
 <p>This can be specified by the <code class="code">fileEncoding</code> argument, for example
 </p>
 <div class="example">
-<pre class="example-preformatted">fileEncoding = &quot;UCS-2LE&quot;    # Windows ‘Unicode’ files
+<pre class="example-preformatted">fileEncoding = &quot;UCS-2LE&quot;    # Windows 'Unicode' files
 fileEncoding = &quot;UTF-8&quot;
 </pre></div>
 
 <p>If you know (correctly) the file&rsquo;s encoding this will almost always
-work.  However, we know of one exception, UTF-8 files with a BOM.  Some
-people claim that UTF-8 files should never have a BOM, but some software
+work.  However, we know of one exception, UTF-8 files with a <abbr class="abbr">BOM</abbr>.  Some
+people claim that UTF-8 files should never have a <abbr class="abbr">BOM</abbr>, but some software
 (apparently including Excel:mac) uses them, and many Unix-alike OSes do
 not accept them.  So faced with a file which <code class="command">file</code> reports as
 </p>
@@ -981,7 +1000,7 @@ this at all).  See the examples in later sections.
 <p>
 Next: <a href="#Data-Interchange-Format-_0028DIF_0029" accesskey="n" rel="next">Data Interchange Format (DIF)</a>, Previous: <a href="#Variations-on-read_002etable" accesskey="p" rel="prev">Variations on <code class="code">read.table</code></a>, Up: <a href="#Spreadsheet_002dlike-data" accesskey="u" rel="up">Spreadsheet-like data</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h3 class="section" id="Fixed_002dwidth_002dformat-files-1">2.2 Fixed-width-format files</h3>
+<h3 class="section" id="Fixed_002dwidth_002dformat-files-1"><span>2.2 Fixed-width-format files<a class="copiable-link" href="#Fixed_002dwidth_002dformat-files-1"> &para;</a></span></h3>
 <a class="index-entry-id" id="index-Fixed_002dwidth_002dformat-files"></a>
 
 <p>Sometimes data files have no field delimiters but have fields in
@@ -998,11 +1017,11 @@ recommend using the facilities of a language like <code class="code">perl</code>
 pre-process the file.
 <a class="index-entry-id" id="index-perl-1"></a>
 </p>
-
 <a class="index-entry-id" id="index-read_002efortran"></a>
 <p>Function <code class="code">read.fortran</code> is a similar function for fixed-format files,
 using Fortran-style column specifications.
 </p>
+
 <hr>
 </div>
 <div class="section-level-extent" id="Data-Interchange-Format-_0028DIF_0029">
@@ -1010,10 +1029,10 @@ using Fortran-style column specifications.
 <p>
 Next: <a href="#Using-scan-directly" accesskey="n" rel="next">Using <code class="code">scan</code> directly</a>, Previous: <a href="#Fixed_002dwidth_002dformat-files" accesskey="p" rel="prev">Fixed-width-format files</a>, Up: <a href="#Spreadsheet_002dlike-data" accesskey="u" rel="up">Spreadsheet-like data</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h3 class="section" id="Data-Interchange-Format-_0028DIF_0029-1">2.3 Data Interchange Format (DIF)</h3>
+<h3 class="section" id="Data-Interchange-Format-_0028DIF_0029-1"><span>2.3 Data Interchange Format (DIF)<a class="copiable-link" href="#Data-Interchange-Format-_0028DIF_0029-1"> &para;</a></span></h3>
 <a class="index-entry-id" id="index-Data-Interchange-Format-_0028DIF_0029"></a>
 
-<p>An old format sometimes used for spreadsheet-like data is DIF, or Data Interchange 
+<p>An old format sometimes used for spreadsheet-like data is <abbr class="abbr">DIF</abbr>, or Data Interchange 
 format.  
 </p>
 <a class="index-entry-id" id="index-read_002eDIF"></a>
@@ -1026,6 +1045,7 @@ from there directly.  It is slightly more robust than
 <code class="code">read.table(&quot;clipboard&quot;)</code> in handling spreadsheets with empty
 cells.
 </p>
+
 <hr>
 </div>
 <div class="section-level-extent" id="Using-scan-directly">
@@ -1033,7 +1053,7 @@ cells.
 <p>
 Next: <a href="#Re_002dshaping-data" accesskey="n" rel="next">Re-shaping data</a>, Previous: <a href="#Data-Interchange-Format-_0028DIF_0029" accesskey="p" rel="prev">Data Interchange Format (DIF)</a>, Up: <a href="#Spreadsheet_002dlike-data" accesskey="u" rel="up">Spreadsheet-like data</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h3 class="section" id="Using-scan-directly-1">2.4 Using <code class="code">scan</code> directly</h3>
+<h3 class="section" id="Using-scan-directly-1"><span>2.4 Using <code class="code">scan</code> directly<a class="copiable-link" href="#Using-scan-directly-1"> &para;</a></span></h3>
 <a class="index-entry-id" id="index-scan-1"></a>
 
 <p>Both <code class="code">read.table</code> and <code class="code">read.fwf</code> use <code class="code">scan</code> to read the
@@ -1121,7 +1141,7 @@ times) and on the precise state of the garbage collector.
 <p>
 Next: <a href="#Flat-contingency-tables" accesskey="n" rel="next">Flat contingency tables</a>, Previous: <a href="#Using-scan-directly" accesskey="p" rel="prev">Using <code class="code">scan</code> directly</a>, Up: <a href="#Spreadsheet_002dlike-data" accesskey="u" rel="up">Spreadsheet-like data</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h3 class="section" id="Re_002dshaping-data-1">2.5 Re-shaping data</h3>
+<h3 class="section" id="Re_002dshaping-data-1"><span>2.5 Re-shaping data<a class="copiable-link" href="#Re_002dshaping-data-1"> &para;</a></span></h3>
 <a class="index-entry-id" id="index-Re_002dshaping-data"></a>
 
 <p>Sometimes spreadsheet data is in a compact format that gives the
@@ -1200,6 +1220,7 @@ than the one column in this example. With <code class="code">direction=&quot;wid
 <p>Some people prefer the tools in packages <a class="url" href="https://CRAN.R-project.org/package=reshape"><strong class="strong">reshape</strong></a>,
 <a class="url" href="https://CRAN.R-project.org/package=reshape2"><strong class="strong">reshape2</strong></a> and <a class="url" href="https://CRAN.R-project.org/package=plyr"><strong class="strong">plyr</strong></a>.
 </p>
+
 <hr>
 </div>
 <div class="section-level-extent" id="Flat-contingency-tables">
@@ -1207,7 +1228,7 @@ than the one column in this example. With <code class="code">direction=&quot;wid
 <p>
 Previous: <a href="#Re_002dshaping-data" accesskey="p" rel="prev">Re-shaping data</a>, Up: <a href="#Spreadsheet_002dlike-data" accesskey="u" rel="up">Spreadsheet-like data</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h3 class="section" id="Flat-contingency-tables-1">2.6 Flat contingency tables</h3>
+<h3 class="section" id="Flat-contingency-tables-1"><span>2.6 Flat contingency tables<a class="copiable-link" href="#Flat-contingency-tables-1"> &para;</a></span></h3>
 <a class="index-entry-id" id="index-Flat-contingency-tables"></a>
 
 <p>Displaying higher-dimensional contingency tables in array form typically
@@ -1258,6 +1279,7 @@ in the data, and create the contingency table from this using
 <code class="code">xtabs</code>.
 </p>
 
+
 <hr>
 </div>
 </div>
@@ -1266,7 +1288,7 @@ in the data, and create the contingency table from this using
 <p>
 Next: <a href="#Relational-databases" accesskey="n" rel="next">Relational databases</a>, Previous: <a href="#Spreadsheet_002dlike-data" accesskey="p" rel="prev">Spreadsheet-like data</a>, Up: <a href="#Top" accesskey="u" rel="up">R Data Import/Export</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h2 class="chapter" id="Importing-from-other-statistical-systems-1">3 Importing from other statistical systems</h2>
+<h2 class="chapter" id="Importing-from-other-statistical-systems-1"><span>3 Importing from other statistical systems<a class="copiable-link" href="#Importing-from-other-statistical-systems-1"> &para;</a></span></h2>
 <a class="index-entry-id" id="index-Importing-from-other-statistical-systems"></a>
 
 <p>In this chapter we consider the problem of reading a binary data file
@@ -1287,9 +1309,9 @@ other system.
 <div class="section-level-extent" id="EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">
 <div class="nav-panel">
 <p>
-Next: <a href="#Octave" accesskey="n" rel="next">Octave</a>, Previous: <a href="#Importing-from-other-statistical-systems" accesskey="p" rel="prev">Importing from other statistical systems</a>, Up: <a href="#Importing-from-other-statistical-systems" accesskey="u" rel="up">Importing from other statistical systems</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#Octave" accesskey="n" rel="next">Octave</a>, Up: <a href="#Importing-from-other-statistical-systems" accesskey="u" rel="up">Importing from other statistical systems</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h3 class="section" id="EpiInfo_002c-Minitab_002c-S_002dPLUS_002c-SAS_002c-SPSS_002c-Stata_002c-Systat">3.1 EpiInfo, Minitab, S-PLUS, SAS, SPSS, Stata, Systat</h3>
+<h3 class="section" id="EpiInfo_002c-Minitab_002c-S_002dPLUS_002c-SAS_002c-SPSS_002c-Stata_002c-Systat"><span>3.1 EpiInfo, Minitab, S-PLUS, SAS, SPSS, Stata, Systat<a class="copiable-link" href="#EpiInfo_002c-Minitab_002c-S_002dPLUS_002c-SAS_002c-SPSS_002c-Stata_002c-Systat"> &para;</a></span></h3>
 
 <p>The recommended package <a class="url" href="https://CRAN.R-project.org/package=foreign"><strong class="strong">foreign</strong></a> provides import facilities for
 files produced by these statistical systems, and for export to Stata. In
@@ -1384,7 +1406,7 @@ or (more recently) <samp class="file">.syd</samp>.
 <p>
 Previous: <a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat" accesskey="p" rel="prev">EpiInfo, Minitab, S-PLUS, SAS, SPSS, Stata, Systat</a>, Up: <a href="#Importing-from-other-statistical-systems" accesskey="u" rel="up">Importing from other statistical systems</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h3 class="section" id="Octave-1">3.2 Octave</h3>
+<h3 class="section" id="Octave-1"><span>3.2 Octave<a class="copiable-link" href="#Octave-1"> &para;</a></span></h3>
 <a class="index-entry-id" id="index-Octave"></a>
 <a class="index-entry-id" id="index-read_002eoctave"></a>
 
@@ -1397,6 +1419,8 @@ most of the common types of variables, including the standard atomic
 ranges, and boolean scalars and matrices) and recursive (structs, cells,
 and lists) ones.
 </p>
+
+
 <hr>
 </div>
 </div>
@@ -1405,7 +1429,7 @@ and lists) ones.
 <p>
 Next: <a href="#Binary-files" accesskey="n" rel="next">Binary files</a>, Previous: <a href="#Importing-from-other-statistical-systems" accesskey="p" rel="prev">Importing from other statistical systems</a>, Up: <a href="#Top" accesskey="u" rel="up">R Data Import/Export</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h2 class="chapter" id="Relational-databases-1">4 Relational databases</h2>
+<h2 class="chapter" id="Relational-databases-1"><span>4 Relational databases<a class="copiable-link" href="#Relational-databases-1"> &para;</a></span></h2>
 
 <a class="index-entry-id" id="index-Relational-databases"></a>
 <a class="index-entry-id" id="index-DBMS"></a>
@@ -1420,9 +1444,9 @@ Next: <a href="#Binary-files" accesskey="n" rel="next">Binary files</a>, Previou
 <div class="section-level-extent" id="Why-use-a-database_003f">
 <div class="nav-panel">
 <p>
-Next: <a href="#Overview-of-RDBMSs" accesskey="n" rel="next">Overview of RDBMSs</a>, Previous: <a href="#Relational-databases" accesskey="p" rel="prev">Relational databases</a>, Up: <a href="#Relational-databases" accesskey="u" rel="up">Relational databases</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#Overview-of-RDBMSs" accesskey="n" rel="next">Overview of RDBMSs</a>, Up: <a href="#Relational-databases" accesskey="u" rel="up">Relational databases</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h3 class="section" id="Why-use-a-database_003f-1">4.1 Why use a database?</h3>
+<h3 class="section" id="Why-use-a-database_003f-1"><span>4.1 Why use a database?<a class="copiable-link" href="#Why-use-a-database_003f-1"> &para;</a></span></h3>
 
 <p>There are limitations on the types of data that R handles well.
 Since all data being manipulated by R are resident in memory, and
@@ -1440,8 +1464,8 @@ object or an entire worksheet from one session and restore it at the
 subsequent session, but the format of the stored data is specific to
 R and not easily manipulated by other systems.
 </p>
-<p>Database management systems (DBMSs) and, in particular, relational
-DBMSs (RDBMSs) <em class="emph">are</em> designed to do all of these things well.
+<p>Database management systems (<abbr class="abbr">DBMS</abbr>s) and, in particular, relational
+<abbr class="abbr">DBMS</abbr>s (<abbr class="abbr">RDBMS</abbr>s) <em class="emph">are</em> designed to do all of these things well.
 Their strengths are
 </p>
 <ol class="enumerate">
@@ -1458,17 +1482,18 @@ enforcing security constraints on access to the data.
 </li><li> Ability to act as a server to a wide range of clients.
 </li></ol>
 
-<p>The sort of statistical applications for which DBMS might be used are to
+<p>The sort of statistical applications for which <abbr class="abbr">DBMS</abbr> might be used are to
 extract a 10% sample of the data, to cross-tabulate data to produce a
 multi-dimensional contingency table, and to extract data group by group
 from a database for separate analysis.
 </p>
-<p>Increasingly OSes are themselves making use of DBMSs for these reasons,
+<p>Increasingly OSes are themselves making use of <abbr class="abbr">DBMS</abbr>s for these reasons,
 so it is nowadays likely that one will be already installed on your
 (non-Windows) OS.  <a class="uref" href="https://en.wikipedia.org/wiki/Akonadi">Akonadi</a>
 is used by KDE4 to store personal information.  Several macOS
 applications, including Mail and Address Book, use SQLite.
 </p>
+
 <hr>
 </div>
 <div class="section-level-extent" id="Overview-of-RDBMSs">
@@ -1476,40 +1501,39 @@ applications, including Mail and Address Book, use SQLite.
 <p>
 Next: <a href="#R-interface-packages" accesskey="n" rel="next">R interface packages</a>, Previous: <a href="#Why-use-a-database_003f" accesskey="p" rel="prev">Why use a database?</a>, Up: <a href="#Relational-databases" accesskey="u" rel="up">Relational databases</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h3 class="section" id="Overview-of-RDBMSs-1">4.2 Overview of RDBMSs</h3>
+<h3 class="section" id="Overview-of-RDBMSs-1"><span>4.2 Overview of RDBMSs<a class="copiable-link" href="#Overview-of-RDBMSs-1"> &para;</a></span></h3>
 
-<p>Traditionally there had been large (and expensive) commercial RDBMSs
+<p>Traditionally there had been large (and expensive) commercial <abbr class="abbr">RDBMS</abbr>s
 (<a class="uref" href="https://www.ibm.com/products/informix">Informix</a>;
 <a class="uref" href="https://www.oracle.com">Oracle</a>; 
 Sybase;
-<a class="uref" href="https://www.ibm.com/products/db2">IBM&rsquo;s DB2</a>;
+<a class="uref" href="https://www.ibm.com/db2">IBM&rsquo;s DB2</a>;
 <a class="uref" href="https://www.microsoft.com/sql-server/">Microsoft <abbr class="acronym">SQL</abbr>
 Server</a> on Windows) and academic and small-system databases (such as
 MySQL<a class="footnote" id="DOCF4" href="#FOOT4"><sup>4</sup></a>, PostgreSQL, Microsoft
 Access, &hellip;), the former marked out by much greater emphasis on data
 security features.  The line is blurring, with MySQL and PostgreSQL
 having more and more high-end features, and free &lsquo;express&rsquo; versions
-being made available for the commercial DBMSs.
+being made available for the commercial <abbr class="abbr">DBMS</abbr>s.
 </p>
 <a class="index-entry-id" id="index-ODBC"></a>
 <a class="index-entry-id" id="index-Open-Database-Connectivity"></a>
 <p>There are other commonly used data sources, including spreadsheets,
 non-relational databases and even text files (possibly compressed).
-Open Database Connectivity (<abbr class="acronym">ODBC</abbr>) is a standard to use all of
+Open Database Connectivity (<abbr class="abbr">ODBC</abbr>) is a standard to use all of
 these data sources.  It originated on Windows (see
-<a class="uref" href="https://docs.microsoft.com/en-us/sql/odbc/microsoft-open-database-connectivity-odbc">https://docs.microsoft.com/en-us/sql/odbc/microsoft-open-database-connectivity-odbc</a>)
+<a class="uref" href="https://learn.microsoft.com/en-us/sql/odbc/microsoft-open-database-connectivity-odbc">https://learn.microsoft.com/en-us/sql/odbc/microsoft-open-database-connectivity-odbc</a>)
 but is also implemented on Linux/Unix/macOS.
 </p>
 <p>All of the packages described later in this chapter provide clients to
 client/server databases.  The database can reside on the same machine or
 (more often) remotely.  There is an <abbr class="acronym">ISO</abbr> standard (in fact
-several: <abbr class="acronym">SQL</abbr>92 is <abbr class="acronym">ISO</abbr>/IEC 9075, also known as
+several: <abbr class="acronym">SQL</abbr>92 is <abbr class="acronym">ISO</abbr>/<abbr class="acronym">IEC</abbr>&nbsp;9075, also known as
 <abbr class="acronym">ANSI</abbr> X3.135-1992, and <abbr class="acronym">SQL</abbr>99 is coming into use) for
 an interface language called <abbr class="acronym">SQL</abbr> (Structured Query Language,
 sometimes pronounced &lsquo;sequel&rsquo;: see Bowman <em class="emph">et al.</em> 1996 and Kline
-and Kline 2001) which these DBMSs support to varying degrees.
+and Kline 2001) which these <abbr class="abbr">DBMS</abbr>s support to varying degrees.
 </p>
-
 
 <ul class="mini-toc">
 <li><a href="#SQL-queries" accesskey="1"><abbr class="acronym">SQL</abbr> queries</a></li>
@@ -1519,9 +1543,9 @@ and Kline 2001) which these DBMSs support to varying degrees.
 <div class="subsection-level-extent" id="SQL-queries">
 <div class="nav-panel">
 <p>
-Next: <a href="#Data-types" accesskey="n" rel="next">Data types</a>, Previous: <a href="#Overview-of-RDBMSs" accesskey="p" rel="prev">Overview of RDBMSs</a>, Up: <a href="#Overview-of-RDBMSs" accesskey="u" rel="up">Overview of RDBMSs</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#Data-types" accesskey="n" rel="next">Data types</a>, Up: <a href="#Overview-of-RDBMSs" accesskey="u" rel="up">Overview of RDBMSs</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h4 class="subsection" id="SQL-queries-1">4.2.1 <abbr class="acronym">SQL</abbr> queries</h4>
+<h4 class="subsection" id="SQL-queries-1"><span>4.2.1 <abbr class="acronym">SQL</abbr> queries<a class="copiable-link" href="#SQL-queries-1"> &para;</a></span></h4>
 <a class="index-entry-id" id="index-SQL-queries"></a>
 
 <p>The more comprehensive R interfaces generate <abbr class="acronym">SQL</abbr> behind the
@@ -1530,7 +1554,7 @@ for complex operations in all.  Conventionally <abbr class="acronym">SQL</abbr> 
 in upper case, but many users will find it more convenient to use lower
 case in the R interface functions.
 </p>
-<p>A relational DBMS stores data as a database of <em class="emph">tables</em> (or
+<p>A relational <abbr class="abbr">DBMS</abbr> stores data as a database of <em class="emph">tables</em> (or
 <em class="emph">relations</em>) which are rather similar to R data frames, in that
 they are made up of <em class="emph">columns</em> or <em class="emph">fields</em> of one type
 (numeric, character, date, currency, &hellip;) and <em class="emph">rows</em> or
@@ -1561,7 +1585,7 @@ applied to a single column.)
 </p>
 <p>SELECT queries use FROM to select the table, WHERE to specify a
 condition for inclusion (or more than one condition separated by AND or
-OR), and ORDER BY to sort the result.  Unlike data frames, rows in RDBMS
+OR), and ORDER BY to sort the result.  Unlike data frames, rows in <abbr class="abbr">RDBMS</abbr>
 tables are best thought of as unordered, and without an ORDER BY
 statement the ordering is indeterminate.  You can sort (in
 lexicographical order) on more than one column by separating them by
@@ -1597,10 +1621,10 @@ in Microsoft SQL Server 2000, Oracle, MySQL and PostgreSQL.
 <p>
 Previous: <a href="#SQL-queries" accesskey="p" rel="prev"><abbr class="acronym">SQL</abbr> queries</a>, Up: <a href="#Overview-of-RDBMSs" accesskey="u" rel="up">Overview of RDBMSs</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h4 class="subsection" id="Data-types-1">4.2.2 Data types</h4>
+<h4 class="subsection" id="Data-types-1"><span>4.2.2 Data types<a class="copiable-link" href="#Data-types-1"> &para;</a></span></h4>
 
 <p>Data can be stored in a database in various data types.  The range of
-data types is DBMS-specific, but the <abbr class="acronym">SQL</abbr> standard defines many
+data types is <abbr class="abbr">DBMS</abbr>-specific, but the <abbr class="acronym">SQL</abbr> standard defines many
 types, including the following that are widely implemented (often not by
 the <abbr class="acronym">SQL</abbr> name).
 </p>
@@ -1643,6 +1667,7 @@ timezone</code>.  Other types widely implemented are <code class="code">text</co
 <p>The more comprehensive of the R interface packages hide the type
 conversion issues from the user.
 </p>
+
 <hr>
 </div>
 </div>
@@ -1651,24 +1676,24 @@ conversion issues from the user.
 <p>
 Previous: <a href="#Overview-of-RDBMSs" accesskey="p" rel="prev">Overview of RDBMSs</a>, Up: <a href="#Relational-databases" accesskey="u" rel="up">Relational databases</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h3 class="section" id="R-interface-packages-1">4.3 R interface packages</h3>
+<h3 class="section" id="R-interface-packages-1"><span>4.3 R interface packages<a class="copiable-link" href="#R-interface-packages-1"> &para;</a></span></h3>
 
 <p>There are several packages available on <abbr class="acronym">CRAN</abbr> to help R
-communicate with DBMSs.  They provide different levels of abstraction.
+communicate with <abbr class="abbr">DBMS</abbr>s.  They provide different levels of abstraction.
 Some provide means to copy whole data frames to and from databases.  All
 have functions to select data within the database via <abbr class="acronym">SQL</abbr>
 queries, and to retrieve the result as a whole as a
 data frame or in pieces (usually as groups of rows).  
 </p>
-<p>All except <a class="url" href="https://CRAN.R-project.org/package=RODBC"><strong class="strong">RODBC</strong></a> are tied to one DBMS, but there has been a
+<p>All except <a class="url" href="https://CRAN.R-project.org/package=RODBC"><strong class="strong">RODBC</strong></a> are tied to one <abbr class="abbr">DBMS</abbr>, but there has been a
 proposal for a unified &lsquo;front-end&rsquo; package <a class="url" href="https://CRAN.R-project.org/package=DBI"><strong class="strong">DBI</strong></a>
 (<a class="uref" href="https://developer.r-project.org/db/">https://developer.r-project.org/db/</a>) in conjunction with a
 &lsquo;back-end&rsquo;, the most developed of which is <a class="url" href="https://CRAN.R-project.org/package=RMySQL"><strong class="strong">RMySQL</strong></a>.  Also on
 <abbr class="acronym">CRAN</abbr> are the back-ends <a class="url" href="https://CRAN.R-project.org/package=ROracle"><strong class="strong">ROracle</strong></a>,
 <a class="url" href="https://CRAN.R-project.org/package=RPostgreSQL"><strong class="strong">RPostgreSQL</strong></a> and <a class="url" href="https://CRAN.R-project.org/package=RSQLite"><strong class="strong">RSQLite</strong></a> (which works with the
-bundled DBMS <code class="code">SQLite</code>, <a class="uref" href="https://www.sqlite.org/index.html">https://www.sqlite.org/index.html</a>) and
-<a class="url" href="https://CRAN.R-project.org/package=RJDBC"><strong class="strong">RJDBC</strong></a> (which uses Java and can connect to any DBMS that has a
-JDBC driver).
+bundled <abbr class="abbr">DBMS</abbr> <code class="code">SQLite</code>, <a class="uref" href="https://www.sqlite.org/index.html">https://www.sqlite.org/index.html</a>) and
+<a class="url" href="https://CRAN.R-project.org/package=RJDBC"><strong class="strong">RJDBC</strong></a> (which uses Java and can connect to any <abbr class="abbr">DBMS</abbr> that has a
+<abbr class="abbr">JDBC</abbr> driver).
 </p>
 
 <p><strong class="strong">PL/R</strong> (<a class="uref" href="https://github.com/postgres-plr/plr">https://github.com/postgres-plr/plr</a>) is a project to
@@ -1680,19 +1705,17 @@ which are queried using JavaScript rather than SQL.  Package
 <a class="url" href="https://CRAN.R-project.org/package=mongolite"><strong class="strong">mongolite</strong></a> is another client using <strong class="strong">mongodb</strong>&rsquo;s C driver.
 </p>
 
-
-
 <ul class="mini-toc">
 <li><a href="#DBI" accesskey="1">Packages using DBI</a></li>
-<li><a href="#RODBC" accesskey="2">Package RODBC</a></li>
+<li><a href="#RODBC" accesskey="2">Package <strong class="strong">RODBC</strong></a></li>
 </ul>
 <hr>
 <div class="subsection-level-extent" id="DBI">
 <div class="nav-panel">
 <p>
-Next: <a href="#RODBC" accesskey="n" rel="next">Package RODBC</a>, Previous: <a href="#R-interface-packages" accesskey="p" rel="prev">R interface packages</a>, Up: <a href="#R-interface-packages" accesskey="u" rel="up">R interface packages</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#RODBC" accesskey="n" rel="next">Package <strong class="strong">RODBC</strong></a>, Up: <a href="#R-interface-packages" accesskey="u" rel="up">R interface packages</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h4 class="subsection" id="Packages-using-DBI">4.3.1 Packages using DBI</h4>
+<h4 class="subsection" id="Packages-using-DBI"><span>4.3.1 Packages using DBI<a class="copiable-link" href="#Packages-using-DBI"> &para;</a></span></h4>
 <a class="index-entry-id" id="index-MySQL-database-system"></a>
 
 <p>Package <a class="url" href="https://CRAN.R-project.org/package=RMySQL"><strong class="strong">RMySQL</strong></a> on <abbr class="acronym">CRAN</abbr> provides an interface to the
@@ -1718,7 +1741,7 @@ object, and then a call to <code class="code">dbConnect</code> opens a database 
 which can subsequently be closed by a call to the generic function
 <code class="code">dbDisconnect</code>.  Use <code class="code">dbDriver(&quot;Oracle&quot;)</code>,
 <code class="code">dbDriver(&quot;PostgreSQL&quot;)</code> or <code class="code">dbDriver(&quot;SQLite&quot;)</code> with those
-DBMSs and packages <a class="url" href="https://CRAN.R-project.org/package=ROracle"><strong class="strong">ROracle</strong></a>, <a class="url" href="https://CRAN.R-project.org/package=RPostgreSQL"><strong class="strong">RPostgreSQL</strong></a> or <a class="url" href="https://CRAN.R-project.org/package=RSQLite"><strong class="strong">RSQLite</strong></a>
+<abbr class="abbr">DBMSs</abbr> and packages <a class="url" href="https://CRAN.R-project.org/package=ROracle"><strong class="strong">ROracle</strong></a>, <a class="url" href="https://CRAN.R-project.org/package=RPostgreSQL"><strong class="strong">RPostgreSQL</strong></a> or <a class="url" href="https://CRAN.R-project.org/package=RSQLite"><strong class="strong">RSQLite</strong></a>
 respectively.
 </p>
 <a class="index-entry-id" id="index-dbSendQuery"></a>
@@ -1789,45 +1812,45 @@ Arkansas          8.8     190       50 19.5
 <p>
 Previous: <a href="#DBI" accesskey="p" rel="prev">Packages using DBI</a>, Up: <a href="#R-interface-packages" accesskey="u" rel="up">R interface packages</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h4 class="subsection" id="Package-RODBC">4.3.2 Package RODBC</h4>
+<h4 class="subsection" id="Package-RODBC"><span>4.3.2 Package <strong class="strong">RODBC</strong><a class="copiable-link" href="#Package-RODBC"> &para;</a></span></h4>
 <a class="index-entry-id" id="index-ODBC-1"></a>
 <a class="index-entry-id" id="index-Open-Database-Connectivity-1"></a>
 
 <p>Package <a class="url" href="https://CRAN.R-project.org/package=RODBC"><strong class="strong">RODBC</strong></a> on <abbr class="acronym">CRAN</abbr> provides an interface to
-database sources supporting an <abbr class="acronym">ODBC</abbr> interface.  This is very
+database sources supporting an <abbr class="abbr">ODBC</abbr> interface.  This is very
 widely available, and allows the same R code to access different
 database systems.  <a class="url" href="https://CRAN.R-project.org/package=RODBC"><strong class="strong">RODBC</strong></a> runs on Unix/Linux, Windows and macOS,
-and almost all database systems provide support for <abbr class="acronym">ODBC</abbr>.  We
+and almost all database systems provide support for <abbr class="abbr">ODBC</abbr>.  We
 have tested Microsoft SQL Server, Access, MySQL, PostgreSQL, Oracle and
 IBM DB2 on Windows and MySQL, MariaDB, Oracle, PostgreSQL and SQLite on
 Linux.
 </p>
-<p>ODBC is a client-server system, and we have happily connected to a DBMS
+<p><abbr class="abbr">ODBC</abbr> is a client-server system, and we have happily connected to a <abbr class="abbr">DBMS</abbr>
 running on a Unix server from a Windows client, and <em class="emph">vice versa</em>.
 </p>
-<p>On Windows ODBC support is part of the OS.  On Unix/Linux you will need
-an <abbr class="acronym">ODBC</abbr> Driver Manager such as unixODBC
-(<a class="uref" href="http://www.unixODBC.org">http://www.unixODBC.org</a>) or iOBDC (<a class="uref" href="https://www.iodbc.org/">https://www.iodbc.org/</a>:
+<p>On Windows <abbr class="abbr">ODBC</abbr> support is part of the OS.  On Unix/Linux you will need
+an <abbr class="abbr">ODBC</abbr> Driver Manager such as unixODBC
+(<a class="uref" href="https://www.unixodbc.org/">https://www.unixodbc.org/</a>) or <abbr class="abbr">iODBC</abbr> (<a class="uref" href="https://www.iodbc.org/">https://www.iodbc.org/</a>:
 this is pre-installed in macOS) and an installed driver for your
 database system.
 </p>
 <a class="index-entry-id" id="index-Excel"></a>
-<a class="index-entry-id" id="index-Dbase"></a>
+<a class="index-entry-id" id="index-dBase"></a>
 <a class="index-entry-id" id="index-_002edbf"></a>
-<p>Windows provides drivers not just for DBMSs but also for Excel
-(<samp class="file">.xls</samp>) spreadsheets, DBase (<samp class="file">.dbf</samp>) files and even text
+<p>Windows provides drivers not just for <abbr class="abbr">DBMS</abbr>s but also for Excel
+(<samp class="file">.xls</samp>) spreadsheets, dBase (<samp class="file">.dbf</samp>) files and even text
 files.  (The named applications do <em class="emph">not</em> need to be
 installed. Which file formats are supported depends on the versions of
 the drivers.)  There are versions for Excel and Access 2007/2010 (go to
-<a class="uref" href="https://www.microsoft.com/en-us/download/default.aspx">https://www.microsoft.com/en-us/download/default.aspx</a>, and
-search for &lsquo;Office ODBC&rsquo;, which will lead to
+<a class="uref" href="https://www.microsoft.com/en-us/download">https://www.microsoft.com/en-us/download</a>, and
+search for &lsquo;Office <abbr class="abbr">ODBC</abbr>&rsquo;, which will lead to
 <samp class="file">AccessDatabaseEngine.exe</samp>), the &lsquo;2007 Office System Driver&rsquo; (the
 latter has a version for 64-bit Windows, and that will also read earlier
 versions).
 </p>
 <p>On macOS the Actual Technologies
 (<a class="url" href="https://www.actualtech.com/product_access.php">https://www.actualtech.com/product_access.php</a>) drivers provide
-ODBC interfaces to Access databases and to Excel spreadsheets (not
+<abbr class="abbr">ODBC</abbr> interfaces to Access databases and to Excel spreadsheets (not
 including Excel 2007/2010).
 </p>
 <a class="index-entry-id" id="index-odbcConnect"></a>
@@ -1837,7 +1860,7 @@ including Excel 2007/2010).
 call to <code class="code">odbcConnect</code> or <code class="code">odbcDriverConnect</code> (which on the
 Windows GUI allows a database to be selected via dialog boxes) which
 returns a handle used for subsequent access to the database.  Printing a
-connection will provide some details of the ODBC connection, and calling
+connection will provide some details of the <abbr class="abbr">ODBC</abbr> connection, and calling
 <code class="code">odbcGetInfo</code> will give details on the client and server.
 </p>
  
@@ -1871,13 +1894,13 @@ results.  The latter can be used within a loop to retrieve a limited
 number of rows at a time, as can function <code class="code">sqlFetchMore</code>.
 </p>
 <a class="index-entry-id" id="index-PostgreSQL-database-system"></a>
-<p>Here is an example using PostgreSQL, for which the <abbr class="acronym">ODBC</abbr> driver
+<p>Here is an example using PostgreSQL, for which the <abbr class="abbr">ODBC</abbr> driver
 maps column and data frame names to lower case.  We use a database
-<code class="code">testdb</code> we created earlier, and had the DSN (data source name) set
+<code class="code">testdb</code> we created earlier, and had the <abbr class="abbr">DSN</abbr> (data source name) set
 up in <samp class="file">~/.odbc.ini</samp> under <code class="code">unixODBC</code>.  Exactly the same code
 worked using MyODBC to access a MySQL database under Linux or Windows
 (where MySQL also maps names to lowercase).  Under Windows,
-<abbr class="acronym">DSN</abbr>s are set up in the <abbr class="acronym">ODBC</abbr> applet in the Control
+<abbr class="acronym">DSN</abbr>s are set up in the <abbr class="abbr">ODBC</abbr> applet in the Control
 Panel (&lsquo;Data Sources (ODBC)&rsquo; in the &lsquo;Administrative Tools&rsquo; section).
 <a class="index-entry-id" id="index-MySQL-database-system-1"></a>
 </p>
@@ -1920,7 +1943,7 @@ Alaska           10.0     263       48 44.5
 <a class="index-entry-id" id="index-Excel-1"></a>
 <a class="index-entry-id" id="index-_002exls"></a>
 <a class="index-entry-id" id="index-odbcConnectExcel"></a>
-<p>As a simple example of using <abbr class="acronym">ODBC</abbr> under Windows with a Excel
+<p>As a simple example of using <abbr class="abbr">ODBC</abbr> under Windows with a Excel
 spreadsheet, we can read from a spreadsheet by
 </p>
 <div class="example smallexample">
@@ -1956,6 +1979,7 @@ differences.
 
 
 
+
 <hr>
 </div>
 </div>
@@ -1965,14 +1989,12 @@ differences.
 <p>
 Next: <a href="#Image-files" accesskey="n" rel="next">Image files</a>, Previous: <a href="#Relational-databases" accesskey="p" rel="prev">Relational databases</a>, Up: <a href="#Top" accesskey="u" rel="up">R Data Import/Export</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h2 class="chapter" id="Binary-files-1">5 Binary files</h2>
+<h2 class="chapter" id="Binary-files-1"><span>5 Binary files<a class="copiable-link" href="#Binary-files-1"> &para;</a></span></h2>
 <a class="index-entry-id" id="index-Binary-files"></a>
-
 
 <p>Binary connections (<a class="ref" href="#Connections">Connections</a>) are now the preferred way to
 handle binary files.
 </p>
-
 
 <ul class="mini-toc">
 <li><a href="#Binary-data-formats" accesskey="1">Binary data formats</a></li>
@@ -1982,9 +2004,9 @@ handle binary files.
 <div class="section-level-extent" id="Binary-data-formats">
 <div class="nav-panel">
 <p>
-Next: <a href="#dBase-files-_0028DBF_0029" accesskey="n" rel="next">dBase files (DBF)</a>, Previous: <a href="#Binary-files" accesskey="p" rel="prev">Binary files</a>, Up: <a href="#Binary-files" accesskey="u" rel="up">Binary files</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#dBase-files-_0028DBF_0029" accesskey="n" rel="next">dBase files (DBF)</a>, Up: <a href="#Binary-files" accesskey="u" rel="up">Binary files</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h3 class="section" id="Binary-data-formats-1">5.1 Binary data formats</h3>
+<h3 class="section" id="Binary-data-formats-1"><span>5.1 Binary data formats<a class="copiable-link" href="#Binary-data-formats-1"> &para;</a></span></h3>
 <a class="index-entry-id" id="index-hdf5"></a>
 <a class="index-entry-id" id="index-Hierarchical-Data-Format"></a>
 
@@ -1993,25 +2015,26 @@ Next: <a href="#dBase-files-_0028DBF_0029" accesskey="n" rel="next">dBase files 
 
 <p>Packages <a class="url" href="https://CRAN.R-project.org/package=h5"><strong class="strong">h5</strong></a>, Bioconductor&rsquo;s <strong class="strong">rhdf5</strong>, <a class="url" href="https://CRAN.R-project.org/package=RNetCDF"><strong class="strong">RNetCDF</strong></a> and
 <a class="url" href="https://CRAN.R-project.org/package=ncdf4"><strong class="strong">ncdf4</strong></a> on <abbr class="acronym">CRAN</abbr> provide interfaces to <abbr class="acronym">NASA</abbr>&rsquo;s
-HDF5 (Hierarchical Data Format, see
-<a class="uref" href="https://www.hdfgroup.org/HDF5/">https://www.hdfgroup.org/HDF5/</a>) and to UCAR&rsquo;s netCDF data files
+<abbr class="abbr">HDF5</abbr> (Hierarchical Data Format, see
+<a class="uref" href="https://www.hdfgroup.org/wp-content/uploads/2017/07/HDF5.pdf">https://www.hdfgroup.org/wp-content/uploads/2017/07/HDF5.pdf</a>) and to UCAR&rsquo;s netCDF data files
 (network Common Data Form, see
 <a class="uref" href="https://www.unidata.ucar.edu/software/netcdf/">https://www.unidata.ucar.edu/software/netcdf/</a>).
 </p>
 <p>Both of these are systems to store scientific data in array-oriented
-ways, including descriptions, labels, formats, units, &hellip;.  HDF5 also
+ways, including descriptions, labels, formats, units, &hellip;.  <abbr class="abbr">HDF5</abbr> also
 allows <em class="emph">groups</em> of arrays, and the R interface maps lists
-to HDF5 groups, and can write numeric and character vectors and
+to <abbr class="abbr">HDF5</abbr> groups, and can write numeric and character vectors and
 matrices.
 </p>
 <p>NetCDF&rsquo;s version 4 format (confusingly, implemented in netCDF 4.1.1 and
-later, but not in 4.0.1) includes the use of various HDF5 formats.  This
+later, but not in 4.0.1) includes the use of various <abbr class="abbr">HDF5</abbr> formats.  This
 is handled by package <a class="url" href="https://CRAN.R-project.org/package=ncdf4"><strong class="strong">ncdf4</strong></a> whereas <a class="url" href="https://CRAN.R-project.org/package=RNetCDF"><strong class="strong">RNetCDF</strong></a> handles
 version 3 files.
 </p>
 <p>The availability of software to support these formats is somewhat
 limited by platform, especially on Windows.
 </p>
+
 <hr>
 </div>
 <div class="section-level-extent" id="dBase-files-_0028DBF_0029">
@@ -2019,9 +2042,9 @@ limited by platform, especially on Windows.
 <p>
 Previous: <a href="#Binary-data-formats" accesskey="p" rel="prev">Binary data formats</a>, Up: <a href="#Binary-files" accesskey="u" rel="up">Binary files</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h3 class="section" id="dBase-files-_0028DBF_0029-1">5.2 dBase files (DBF)</h3>
+<h3 class="section" id="dBase-files-_0028DBF_0029-1"><span>5.2 dBase files (DBF)<a class="copiable-link" href="#dBase-files-_0028DBF_0029-1"> &para;</a></span></h3>
 
-<a class="index-entry-id" id="index-dBase"></a>
+<a class="index-entry-id" id="index-dBase-1"></a>
 <a class="index-entry-id" id="index-DBF-files"></a>
 <p><code class="code">dBase</code> was a DOS program written by Ashton-Tate and later owned by
 Borland which has a binary flat-file format that became popular, with
@@ -2041,13 +2064,15 @@ and
 <a class="index-entry-id" id="index-read_002edbf"></a>
 <a class="index-entry-id" id="index-write_002edbf"></a>
 <p>Functions <code class="code">read.dbf</code> and <code class="code">write.dbf</code> provide ways to read and
-write basic DBF files on all R platforms.  For Windows users
+write basic <abbr class="abbr">DBF</abbr> files on all R platforms.  For Windows users
 <code class="code">odbcConnectDbase</code> in package <a class="url" href="https://CRAN.R-project.org/package=RODBC"><strong class="strong">RODBC</strong></a> provides more
-comprehensive facilities to read DBF files <em class="emph">via</em> Microsoft&rsquo;s dBase
-ODBC driver (and the Visual FoxPro driver can also be used via
+comprehensive facilities to read <abbr class="abbr">DBF</abbr> files <em class="emph">via</em> Microsoft&rsquo;s dBase
+<abbr class="abbr">ODBC</abbr> driver (and the Visual FoxPro driver can also be used via
 <code class="code">odbcDriverConnect</code>).
 <a class="index-entry-id" id="index-odbcConnectDbase"></a>
 </p>
+
+
 <hr>
 </div>
 </div>
@@ -2056,7 +2081,7 @@ ODBC driver (and the Visual FoxPro driver can also be used via
 <p>
 Next: <a href="#Connections" accesskey="n" rel="next">Connections</a>, Previous: <a href="#Binary-files" accesskey="p" rel="prev">Binary files</a>, Up: <a href="#Top" accesskey="u" rel="up">R Data Import/Export</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h2 class="chapter" id="Image-files-1">6 Image files</h2>
+<h2 class="chapter" id="Image-files-1"><span>6 Image files<a class="copiable-link" href="#Image-files-1"> &para;</a></span></h2>
 
 <p>A particular class of binary files are those representing images, and a
 not uncommon request is to read such a file into R as a matrix.
@@ -2072,7 +2097,7 @@ are compiled, and the supported formats can be listed by e.g.
 <code class="command">convert -list format</code>.
 </p>
 <p>Package <a class="url" href="https://CRAN.R-project.org/package=pixmap"><strong class="strong">pixmap</strong></a> has a function <code class="code">read.pnm</code> to read &lsquo;portable
-anymap&rsquo; images in PBM (black/white), PGM (grey) and PPM (RGB colour)
+anymap&rsquo; images in PBM (black/white), <abbr class="abbr">PGM</abbr> (grey) and PPM (RGB colour)
 formats.  These are also known as &lsquo;netpbm&rsquo; formats.
 </p>
 <p>Packages <a class="url" href="https://CRAN.R-project.org/package=bmp"><strong class="strong">bmp</strong></a>, <a class="url" href="https://CRAN.R-project.org/package=jpeg"><strong class="strong">jpeg</strong></a> and <a class="url" href="https://CRAN.R-project.org/package=png"><strong class="strong">png</strong></a> read the
@@ -2096,6 +2121,7 @@ different format from JPEG, and not currently supported in the macOS
 nor Windows binary versions of <a class="url" href="https://CRAN.R-project.org/package=rgdal"><strong class="strong">rgdal</strong></a>).
 </p>
 
+
 <hr>
 </div>
 <div class="chapter-level-extent" id="Connections">
@@ -2103,15 +2129,13 @@ nor Windows binary versions of <a class="url" href="https://CRAN.R-project.org/p
 <p>
 Next: <a href="#Network-interfaces" accesskey="n" rel="next">Network interfaces</a>, Previous: <a href="#Image-files" accesskey="p" rel="prev">Image files</a>, Up: <a href="#Top" accesskey="u" rel="up">R Data Import/Export</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h2 class="chapter" id="Connections-1">7 Connections</h2>
+<h2 class="chapter" id="Connections-1"><span>7 Connections<a class="copiable-link" href="#Connections-1"> &para;</a></span></h2>
 
 <a class="index-entry-id" id="index-Connections"></a>
 <p><em class="emph">Connections</em> are used in R in the sense of Chambers (1998) and
 Ripley (2001), a set of functions to replace the use of file names by a
 flexible interface to file-like objects.
 </p>
-
-
 
 <ul class="mini-toc">
 <li><a href="#Types-of-connections" accesskey="1">Types of connections</a></li>
@@ -2124,9 +2148,9 @@ flexible interface to file-like objects.
 <div class="section-level-extent" id="Types-of-connections">
 <div class="nav-panel">
 <p>
-Next: <a href="#Output-to-connections" accesskey="n" rel="next">Output to connections</a>, Previous: <a href="#Connections" accesskey="p" rel="prev">Connections</a>, Up: <a href="#Connections" accesskey="u" rel="up">Connections</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#Output-to-connections" accesskey="n" rel="next">Output to connections</a>, Up: <a href="#Connections" accesskey="u" rel="up">Connections</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h3 class="section" id="Types-of-connections-1">7.1 Types of connections</h3>
+<h3 class="section" id="Types-of-connections-1"><span>7.1 Types of connections<a class="copiable-link" href="#Types-of-connections-1"> &para;</a></span></h3>
 <a class="index-entry-id" id="index-Connections-1"></a>
 
 <a class="index-entry-id" id="index-file"></a>
@@ -2222,7 +2246,7 @@ read from, and both client and server sockets can be used.
 <p>
 Next: <a href="#Input-from-connections" accesskey="n" rel="next">Input from connections</a>, Previous: <a href="#Types-of-connections" accesskey="p" rel="prev">Types of connections</a>, Up: <a href="#Connections" accesskey="u" rel="up">Connections</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h3 class="section" id="Output-to-connections-1">7.2 Output to connections</h3>
+<h3 class="section" id="Output-to-connections-1"><span>7.2 Output to connections<a class="copiable-link" href="#Output-to-connections-1"> &para;</a></span></h3>
 <a class="index-entry-id" id="index-Connections-2"></a>
 
 <a class="index-entry-id" id="index-cat-1"></a>
@@ -2271,10 +2295,11 @@ sink(zz)
 example(lm, prompt.echo = &quot;&gt; &quot;)
 sink()
 close(zz)
-## now ‘ex.lm.out’ contains the output for futher processing.
+## now `ex.lm.out' contains the output for further processing.
 ## Look at it by, e.g.,
 cat(ex.lm.out, sep = &quot;\n&quot;)
 </pre></div>
+
 
 <hr>
 </div>
@@ -2283,7 +2308,7 @@ cat(ex.lm.out, sep = &quot;\n&quot;)
 <p>
 Next: <a href="#Listing-and-manipulating-connections" accesskey="n" rel="next">Listing and manipulating connections</a>, Previous: <a href="#Output-to-connections" accesskey="p" rel="prev">Output to connections</a>, Up: <a href="#Connections" accesskey="u" rel="up">Connections</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h3 class="section" id="Input-from-connections-1">7.3 Input from connections</h3>
+<h3 class="section" id="Input-from-connections-1"><span>7.3 Input from connections<a class="copiable-link" href="#Input-from-connections-1"> &para;</a></span></h3>
 
 <a class="index-entry-id" id="index-scan-2"></a>
 <a class="index-entry-id" id="index-read_002etable-1"></a>
@@ -2308,7 +2333,7 @@ unlink(&quot;ex.data&quot;)
 readLines(pipe(&quot;ls -1&quot;))
 
 # remove trailing commas from an input file.
-# Suppose we are given a file ‘data’ containing
+# Suppose we are given a file `data' containing
 450, 390, 467, 654,  30, 542, 334, 432, 421,
 357, 497, 493, 550, 549, 467, 575, 578, 342,
 446, 547, 534, 495, 979, 479
@@ -2318,9 +2343,10 @@ scan(pipe(&quot;sed -e s/,$// data&quot;), sep=&quot;,&quot;)
 
 <a class="index-entry-id" id="index-URL-connections-1"></a>
 <p>For convenience, if the <code class="code">file</code> argument specifies a FTP, HTTP or
-HTTPS <abbr class="acronym">URL</abbr>, the <abbr class="acronym">URL</abbr> is opened for reading via
+<abbr class="abbr">HTTPS</abbr> <abbr class="acronym">URL</abbr>, the <abbr class="acronym">URL</abbr> is opened for reading via
 <code class="code">url</code>.  Specifying files via &lsquo;<samp class="samp">file://foo.bar</samp>&rsquo; is also allowed.
 </p>
+
 
 <ul class="mini-toc">
 <li><a href="#Pushback" accesskey="1">Pushback</a></li>
@@ -2329,9 +2355,9 @@ HTTPS <abbr class="acronym">URL</abbr>, the <abbr class="acronym">URL</abbr> is 
 <div class="subsection-level-extent" id="Pushback">
 <div class="nav-panel">
 <p>
-Previous: <a href="#Input-from-connections" accesskey="p" rel="prev">Input from connections</a>, Up: <a href="#Input-from-connections" accesskey="u" rel="up">Input from connections</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
+Up: <a href="#Input-from-connections" accesskey="u" rel="up">Input from connections</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h4 class="subsection" id="Pushback-1">7.3.1 Pushback</h4>
+<h4 class="subsection" id="Pushback-1"><span>7.3.1 Pushback<a class="copiable-link" href="#Pushback-1"> &para;</a></span></h4>
 
 <a class="index-entry-id" id="index-pushBack_002e"></a>
 <a class="index-entry-id" id="index-Pushback-on-a-connection"></a>
@@ -2367,6 +2393,7 @@ Read 4 items
 
 <p>Pushback is only available for connections opened for input in text mode.
 </p>
+
 <hr>
 </div>
 </div>
@@ -2375,7 +2402,7 @@ Read 4 items
 <p>
 Next: <a href="#Binary-connections" accesskey="n" rel="next">Binary connections</a>, Previous: <a href="#Input-from-connections" accesskey="p" rel="prev">Input from connections</a>, Up: <a href="#Connections" accesskey="u" rel="up">Connections</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h3 class="section" id="Listing-and-manipulating-connections-1">7.4 Listing and manipulating connections</h3>
+<h3 class="section" id="Listing-and-manipulating-connections-1"><span>7.4 Listing and manipulating connections<a class="copiable-link" href="#Listing-and-manipulating-connections-1"> &para;</a></span></h3>
 <a class="index-entry-id" id="index-Connections-3"></a>
 
 <a class="index-entry-id" id="index-showConnections"></a>
@@ -2406,7 +2433,7 @@ connections, and is not implemented on all platforms.
 <p>
 Previous: <a href="#Listing-and-manipulating-connections" accesskey="p" rel="prev">Listing and manipulating connections</a>, Up: <a href="#Connections" accesskey="u" rel="up">Connections</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h3 class="section" id="Binary-connections-1">7.5 Binary connections</h3>
+<h3 class="section" id="Binary-connections-1"><span>7.5 Binary connections<a class="copiable-link" href="#Binary-connections-1"> &para;</a></span></h3>
 <a class="index-entry-id" id="index-Binary-files-1"></a>
 
 <a class="index-entry-id" id="index-readBin"></a>
@@ -2452,7 +2479,7 @@ platforms the only change needed is that of byte-order.  Common PCs
 (&lsquo;<samp class="samp">ix86</samp>&rsquo;-based and &lsquo;<samp class="samp">x86_64</samp>&rsquo;-based machines), Compaq Alpha
 and Vaxen are <em class="emph">little-endian</em>, whereas Sun Sparc, mc680x0 series,
 IBM R6000, SGI and most others are <em class="emph">big-endian</em>.  (Network
-byte-order (as used by XDR, eXternal Data Representation) is
+byte-order (as used by <abbr class="abbr">XDR</abbr>, eXternal Data Representation) is
 big-endian.)  To transfer to or from other programs we may need to do
 more, for example to read 16-bit integers or write single-precision real
 numbers.  This can be done using the <code class="code">size</code> argument, which
@@ -2476,9 +2503,9 @@ of bytes terminated by a zero byte.  Functions <code class="code">readChar</code
 <div class="subsection-level-extent" id="Special-values">
 <div class="nav-panel">
 <p>
-Previous: <a href="#Binary-connections" accesskey="p" rel="prev">Binary connections</a>, Up: <a href="#Binary-connections" accesskey="u" rel="up">Binary connections</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
+Up: <a href="#Binary-connections" accesskey="u" rel="up">Binary connections</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h4 class="subsection" id="Special-values-1">7.5.1 Special values</h4>
+<h4 class="subsection" id="Special-values-1"><span>7.5.1 Special values<a class="copiable-link" href="#Special-values-1"> &para;</a></span></h4>
 
 <p>Functions <code class="code">readBin</code> and <code class="code">writeBin</code> will pass missing and
 special values, although this should not be attempted if a size change
@@ -2497,16 +2524,18 @@ constants <code class="code">NA_REAL</code>, <code class="code">R_PosInf</code> 
 include the header <samp class="file">Rmath.h</samp> which defines the macros <code class="code">ISNAN</code>
 and <code class="code">R_FINITE</code>.
 </p>
-<p>If that is not possible, on all current platforms IEC 60559 (aka IEEE
-754) arithmetic is used, so standard C facilities can be used to test
-for or set <code class="code">Inf</code>, <code class="code">-Inf</code> and <code class="code">NaN</code> values.  On such
-platforms <code class="code">NA</code> is represented by the <code class="code">NaN</code> value with low-word
-<code class="code">0x7a2</code> (1954 in decimal).
+<p>If that is not possible, on all current platforms
+<abbr class="acronym">IEC</abbr>&nbsp;60559 (aka IEEE&nbsp;754) arithmetic is used, so
+standard C facilities can be used to test for or set <code class="code">Inf</code>,
+<code class="code">-Inf</code> and <code class="code">NaN</code> values.  On such platforms <code class="code">NA</code> is
+represented by the <code class="code">NaN</code> value with low-word <code class="code">0x7a2</code> (1954 in
+decimal).
 </p>
 <p>Character missing values are written as <code class="code">NA</code>, and there are no
 provision to recognize character values as missing (as this can be done
 by re-assigning them once read).
 </p>
+
 
 <hr>
 </div>
@@ -2517,12 +2546,12 @@ by re-assigning them once read).
 <p>
 Next: <a href="#Reading-Excel-spreadsheets" accesskey="n" rel="next">Reading Excel spreadsheets</a>, Previous: <a href="#Connections" accesskey="p" rel="prev">Connections</a>, Up: <a href="#Top" accesskey="u" rel="up">R Data Import/Export</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h2 class="chapter" id="Network-interfaces-1">8 Network interfaces</h2>
-
+<h2 class="chapter" id="Network-interfaces-1"><span>8 Network interfaces<a class="copiable-link" href="#Network-interfaces-1"> &para;</a></span></h2>
 
 <p>Some limited facilities are available to exchange data at a lower level
 across network connections.
 </p>
+
 <ul class="mini-toc">
 <li><a href="#Reading-from-sockets" accesskey="1">Reading from sockets</a></li>
 <li><a href="#Using-download_002efile" accesskey="2">Using <code class="code">download.file</code></a></li>
@@ -2531,9 +2560,9 @@ across network connections.
 <div class="section-level-extent" id="Reading-from-sockets">
 <div class="nav-panel">
 <p>
-Next: <a href="#Using-download_002efile" accesskey="n" rel="next">Using <code class="code">download.file</code></a>, Previous: <a href="#Network-interfaces" accesskey="p" rel="prev">Network interfaces</a>, Up: <a href="#Network-interfaces" accesskey="u" rel="up">Network interfaces</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
+Next: <a href="#Using-download_002efile" accesskey="n" rel="next">Using <code class="code">download.file</code></a>, Up: <a href="#Network-interfaces" accesskey="u" rel="up">Network interfaces</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h3 class="section" id="Reading-from-sockets-1">8.1 Reading from sockets</h3>
+<h3 class="section" id="Reading-from-sockets-1"><span>8.1 Reading from sockets<a class="copiable-link" href="#Reading-from-sockets-1"> &para;</a></span></h3>
 
 <a class="index-entry-id" id="index-Sockets-1"></a>
 <p>Base R comes with some facilities to communicate <em class="emph">via</em>
@@ -2559,15 +2588,16 @@ is suggested that socket connections are used instead.
 <p>
 Previous: <a href="#Reading-from-sockets" accesskey="p" rel="prev">Reading from sockets</a>, Up: <a href="#Network-interfaces" accesskey="u" rel="up">Network interfaces</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h3 class="section" id="Using-download_002efile-1">8.2 Using <code class="code">download.file</code></h3>
+<h3 class="section" id="Using-download_002efile-1"><span>8.2 Using <code class="code">download.file</code><a class="copiable-link" href="#Using-download_002efile-1"> &para;</a></span></h3>
 
 <p>Function <code class="code">download.file</code> is provided to read a file from a Web
-resource via FTP or HTTP (including HTTPS) and write it to a file.
+resource via FTP or HTTP (including <abbr class="abbr">HTTPS</abbr>) and write it to a file.
 Often this can be avoided, as functions such as <code class="code">read.table</code> and
 <code class="code">scan</code> can read directly from a URL, either by explicitly using
 <code class="code">url</code> to open a connection, or implicitly using it by giving a URL
 as the <code class="code">file</code> argument.
 </p>
+
 
 <hr>
 </div>
@@ -2577,7 +2607,7 @@ as the <code class="code">file</code> argument.
 <p>
 Next: <a href="#References" accesskey="n" rel="next">References</a>, Previous: <a href="#Network-interfaces" accesskey="p" rel="prev">Network interfaces</a>, Up: <a href="#Top" accesskey="u" rel="up">R Data Import/Export</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h2 class="chapter" id="Reading-Excel-spreadsheets-1">9 Reading Excel spreadsheets</h2>
+<h2 class="chapter" id="Reading-Excel-spreadsheets-1"><span>9 Reading Excel spreadsheets<a class="copiable-link" href="#Reading-Excel-spreadsheets-1"> &para;</a></span></h2>
 
 <a class="index-entry-id" id="index-_002exls-1"></a>
 <a class="index-entry-id" id="index-_002exlsx"></a>
@@ -2597,7 +2627,7 @@ access to Excel, export the data you want from Excel in tab-delimited or
 comma-separated form, and use <code class="code">read.delim</code> or <code class="code">read.csv</code> to
 import it into R.  (You may need to use <code class="code">read.delim2</code> or
 <code class="code">read.csv2</code> in a locale that uses comma as the decimal point.)
-Exporting a DIF file and reading it using <code class="code">read.DIF</code> is another
+Exporting a <abbr class="abbr">DIF</abbr> file and reading it using <code class="code">read.DIF</code> is another
 possibility.
 </p>
 <p>If you do not have Excel, many other programs are able to read such
@@ -2620,11 +2650,11 @@ and may be confused by other contents of the file.
 <p>Windows users (of 32-bit R) can use <code class="code">odbcConnectExcel</code> in
 package <a class="url" href="https://CRAN.R-project.org/package=RODBC"><strong class="strong">RODBC</strong></a>.  This can select rows and columns from any of the
 sheets in an Excel spreadsheet file (at least from Excel 97&ndash;2003,
-depending on your ODBC drivers: by calling <code class="code">odbcConnect</code> directly
+depending on your <abbr class="abbr">ODBC</abbr> drivers: by calling <code class="code">odbcConnect</code> directly
 versions back to Excel 3.0 can be read).  The version
 <code class="code">odbcConnectExcel2007</code> will read the Excel 2007 formats as well as
 earlier ones (provided the drivers are installed, including with 64-bit
-Windows R: see <a class="pxref" href="#RODBC">Package RODBC</a>).  macOS users can also use <a class="url" href="https://CRAN.R-project.org/package=RODBC"><strong class="strong">RODBC</strong></a> if
+Windows R: see <a class="pxref" href="#RODBC">Package <strong class="strong">RODBC</strong></a>).  macOS users can also use <a class="url" href="https://CRAN.R-project.org/package=RODBC"><strong class="strong">RODBC</strong></a> if
 they have a suitable driver (e.g. that from Actual Technologies).
 </p>
 <a class="index-entry-id" id="index-read_002exls"></a>
@@ -2653,47 +2683,61 @@ spreadsheets: it requires Java.
 <p>Package <a class="url" href="https://CRAN.R-project.org/package=readxl"><strong class="strong">readxl</strong></a> can read both Excel 97&ndash;2003 and Excel 2007/10
 spreadsheets, using an included C library.
 </p>
+
+
 <hr>
 </div>
-<div class="appendix-level-extent" id="References">
+<div class="unnumbered-level-extent" id="References">
 <div class="nav-panel">
 <p>
 Next: <a href="#Function-and-variable-index" accesskey="n" rel="next">Function and variable index</a>, Previous: <a href="#Reading-Excel-spreadsheets" accesskey="p" rel="prev">Reading Excel spreadsheets</a>, Up: <a href="#Top" accesskey="u" rel="up">R Data Import/Export</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h2 class="appendix" id="References-1">Appendix A References</h2>
+<h2 class="unnumbered" id="References-1"><span>References<a class="copiable-link" href="#References-1"> &para;</a></span></h2>
 
-<p>R. A. Becker, J. M. Chambers and A. R. Wilks (1988)
+<p>R. A. Becker, J. M. Chambers and A. R. Wilks (1988),
 <em class="emph">The New S Language.  A Programming Environment for Data Analysis
-and Graphics.</em>  Wadsworth &amp; Brooks/Cole.
+and Graphics.</em>  
+Wadsworth &amp; Brooks/Cole.
 </p>
-<p>J. Bowman, S. Emberson and M. Darnovsky (1996) <em class="emph">The
-Practical <abbr class="acronym">SQL</abbr> Handbook.  Using Structured Query Language.</em>
+<p>J. Bowman, S. Emberson and M. Darnovsky (1996),
+<em class="emph">The Practical <abbr class="acronym">SQL</abbr> Handbook.  Using Structured Query Language.</em>
 Addison-Wesley.
 </p>
-<p>J. M. Chambers (1998) <em class="emph">Programming with Data.  A Guide to the S
-Language.</em> Springer-Verlag.
+<p>J. M. Chambers (1998),
+<em class="emph">Programming with Data.  A Guide to the S Language.</em>
+Springer-Verlag.
 </p>
-<p>P. Dubois (2000) <em class="emph">MySQL.</em> New Riders.
+<p>P. Dubois (2000),
+<em class="emph">MySQL.</em>
+New Riders.
 </p>
-<p>M. Henning and S. Vinoski (1999) <em class="emph">Advanced CORBA Programming
-with C++.</em> Addison-Wesley.
+<p>M. Henning and S. Vinoski (1999),
+<em class="emph">Advanced CORBA Programming with C++.</em>
+Addison-Wesley.
 </p>
-<p>K. Kline and D. Kline (2001) <em class="emph">SQL in a Nutshell.</em> O&rsquo;Reilly.
+<p>K. Kline and D. Kline (2001),
+<em class="emph">SQL in a Nutshell.</em> 
+O&rsquo;Reilly.
 </p>
-<p>B. Momjian (2000) <em class="emph">PostgreSQL: Introduction and Concepts.</em>
+<p>B. Momjian (2000),
+<em class="emph">PostgreSQL: Introduction and Concepts.</em>
 Addison-Wesley.
 Also available at <a class="uref" href="https://momjian.us/main/writings/pgsql/aw_pgsql_book/">https://momjian.us/main/writings/pgsql/aw_pgsql_book/</a>.
 </p>
-<p>B. D. Ripley (2001) Connections. <em class="emph">R News</em>, <strong class="strong">1/1</strong>, 16&ndash;7.
-  <a class="uref" href="https://www.r-project.org/doc/Rnews/Rnews_2001-1.pdf">https://www.r-project.org/doc/Rnews/Rnews_2001-1.pdf</a>
+<p>B. D. Ripley (2001),
+Connections.
+<em class="emph">R News</em>, <strong class="strong">1/1</strong>, 16&ndash;7.
+<a class="uref" href="https://www.r-project.org/doc/Rnews/Rnews_2001-1.pdf">https://www.r-project.org/doc/Rnews/Rnews_2001-1.pdf</a>
 </p>
-
-<p>T. M. Therneau and P. M. Grambsch (2000) <em class="emph">Modeling Survival
-Data.  Extending the Cox Model.</em> Springer-Verlag.
+<p>T. M. Therneau and P. M. Grambsch (2000),
+<em class="emph">Modeling Survival Data.  Extending the Cox Model.</em>
+Springer-Verlag.
 </p>
-<p>E. J. Yarger, G. Reese and T.&nbsp;King (1999) <em class="emph">MySQL &amp; mSQL</em>.
+<p>E. J. Yarger, G. Reese and T.&nbsp;King (1999),
+<em class="emph">MySQL &amp; mSQL</em>.
 O&rsquo;Reilly.
 </p>
+
 <hr>
 </div>
 <div class="unnumbered-level-extent" id="Function-and-variable-index">
@@ -2701,7 +2745,7 @@ O&rsquo;Reilly.
 <p>
 Next: <a href="#Concept-index" accesskey="n" rel="next">Concept index</a>, Previous: <a href="#References" accesskey="p" rel="prev">References</a>, Up: <a href="#Top" accesskey="u" rel="up">R Data Import/Export</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h2 class="unnumbered" id="Function-and-variable-index-1">Function and variable index</h2>
+<h2 class="unnumbered" id="Function-and-variable-index-1"><span>Function and variable index<a class="copiable-link" href="#Function-and-variable-index-1"> &para;</a></span></h2>
 
 <div class="printindex vr-printindex">
 <table summary="" class="vr-letters-header-printindex"><tr><th>Jump to: &nbsp; </th><td><a class="summary-letter-printindex" href="#Function-and-variable-index_vr_symbol-1"><b>.</b></a>
@@ -2742,163 +2786,163 @@ Next: <a href="#Concept-index" accesskey="n" rel="next">Concept index</a>, Previ
 <a class="summary-letter-printindex" href="#Function-and-variable-index_vr_letter-X"><b>X</b></a>
  &nbsp; 
 </td></tr></table>
-<table summary="" class="vr-entries-printindex" border="0">
-<tr><td></td><th class="entries-header-printindex">Index Entry</th><td>&nbsp;</td><th class="sections-header-printindex"> Section</th></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Function-and-variable-index_vr_symbol-1">.</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-_002edbf"><code>.dbf</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-_002exls"><code>.xls</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-_002exls-1"><code>.xls</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-_002exlsx"><code>.xlsx</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Function-and-variable-index_vr_letter-B">B</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-bzfile"><code>bzfile</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Function-and-variable-index_vr_letter-C">C</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-cat"><code>cat</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-cat-1"><code>cat</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Output-to-connections">Output to connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-close"><code>close</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-close-1"><code>close</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-close_002esocket"><code>close.socket</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Reading-from-sockets">Reading from sockets</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-count_002efields"><code>count.fields</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Variations-on-read_002etable">Variations on read.table</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Function-and-variable-index_vr_letter-D">D</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-data_002erestore"><code>data.restore</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-dataframes2xls"><code>dataframes2xls</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-dbClearResult"><code>dbClearResult</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#DBI">DBI</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-dbConnect"><code>dbConnect</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#DBI">DBI</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-dbDisconnect"><code>dbDisconnect</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#DBI">DBI</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-dbDriver"><code>dbDriver</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#DBI">DBI</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-dbExistsTable"><code>dbExistsTable</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#DBI">DBI</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-dbGetQuery"><code>dbGetQuery</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#DBI">DBI</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-dbReadTable"><code>dbReadTable</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#DBI">DBI</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-dbRemoveTable"><code>dbRemoveTable</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#DBI">DBI</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-dbSendQuery"><code>dbSendQuery</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#DBI">DBI</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-dbWriteTable"><code>dbWriteTable</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#DBI">DBI</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Function-and-variable-index_vr_letter-F">F</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-fetch"><code>fetch</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#DBI">DBI</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-file"><code>file</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-format"><code>format</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-ftable"><code>ftable</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Flat-contingency-tables">Flat contingency tables</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Function-and-variable-index_vr_letter-G">G</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-gzfile"><code>gzfile</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Function-and-variable-index_vr_letter-H">H</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-hdf5"><code>hdf5</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Binary-data-formats">Binary data formats</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Function-and-variable-index_vr_letter-I">I</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-isSeekable"><code>isSeekable</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Listing-and-manipulating-connections">Listing and manipulating connections</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Function-and-variable-index_vr_letter-M">M</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-make_002esocket"><code>make.socket</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Reading-from-sockets">Reading from sockets</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Function-and-variable-index_vr_letter-N">N</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-netCDF"><code>netCDF</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Binary-data-formats">Binary data formats</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Function-and-variable-index_vr_letter-O">O</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-odbcClose"><code>odbcClose</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-odbcConnect"><code>odbcConnect</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-odbcConnectDbase"><code>odbcConnectDbase</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#dBase-files-_0028DBF_0029">dBase files (DBF)</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-odbcConnectExcel"><code>odbcConnectExcel</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-odbcConnectExcel-1"><code>odbcConnectExcel</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-odbcConnectExcel2007"><code>odbcConnectExcel2007</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-odbcDriverConnect"><code>odbcDriverConnect</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-odbcGetInfo"><code>odbcGetInfo</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-odbcQuery"><code>odbcQuery</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-open"><code>open</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Function-and-variable-index_vr_letter-P">P</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-pipe"><code>pipe</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-pushBack_002e"><code>pushBack.</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Pushback">Pushback</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-pushBackLength"><code>pushBackLength</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Pushback">Pushback</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Function-and-variable-index_vr_letter-R">R</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002ecsv"><code>read.csv</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Variations-on-read_002etable">Variations on read.table</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002ecsv-1"><code>read.csv</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002ecsv2"><code>read.csv2</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Variations-on-read_002etable">Variations on read.table</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002edbf"><code>read.dbf</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#dBase-files-_0028DBF_0029">dBase files (DBF)</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002edelim"><code>read.delim</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Variations-on-read_002etable">Variations on read.table</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002edelim-1"><code>read.delim</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002edelim2"><code>read.delim2</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Variations-on-read_002etable">Variations on read.table</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002eDIF"><code>read.DIF</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Data-Interchange-Format-_0028DIF_0029">Data Interchange Format (DIF)</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002eDIF-1"><code>read.DIF</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002edta"><code>read.dta</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002eepiinfo"><code>read.epiinfo</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002efortran"><code>read.fortran</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Fixed_002dwidth_002dformat-files">Fixed-width-format files</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002eftable"><code>read.ftable</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Flat-contingency-tables">Flat contingency tables</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002efwf"><code>read.fwf</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Fixed_002dwidth_002dformat-files">Fixed-width-format files</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002emtp"><code>read.mtp</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002eoctave"><code>read.octave</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Octave">Octave</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002eS"><code>read.S</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002esocket"><code>read.socket</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Reading-from-sockets">Reading from sockets</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002espss"><code>read.spss</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002esystat"><code>read.systat</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002etable"><code>read.table</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Variations-on-read_002etable">Variations on read.table</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002etable-1"><code>read.table</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Input-from-connections">Input from connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002etable-2"><code>read.table</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002exls"><code>read.xls</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002export"><code>read.xport</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-readBin"><code>readBin</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Binary-connections">Binary connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-readChar"><code>readChar</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Binary-connections">Binary connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-readClipboard"><code>readClipboard</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-readLines"><code>readLines</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Using-scan-directly">Using scan directly</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-readLines-1"><code>readLines</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Input-from-connections">Input from connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-readxl"><code>readxl</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-reshape"><code>reshape</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Re_002dshaping-data">Re-shaping data</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Function-and-variable-index_vr_letter-S">S</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-scan"><code>scan</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Imports">Imports</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-scan-1"><code>scan</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Using-scan-directly">Using scan directly</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-scan-2"><code>scan</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Input-from-connections">Input from connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-seek"><code>seek</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Listing-and-manipulating-connections">Listing and manipulating connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-showConnections"><code>showConnections</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Listing-and-manipulating-connections">Listing and manipulating connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-sink"><code>sink</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-sink-1"><code>sink</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Output-to-connections">Output to connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-socketConnection"><code>socketConnection</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-sqlCopy"><code>sqlCopy</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-sqlFetch"><code>sqlFetch</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-sqlFetchMore"><code>sqlFetchMore</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-sqlGetResults"><code>sqlGetResults</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-sqlQuery"><code>sqlQuery</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-sqlSave"><code>sqlSave</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-sqlTables"><code>sqlTables</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-stack"><code>stack</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Re_002dshaping-data">Re-shaping data</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-stderr"><code>stderr</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-stdin"><code>stdin</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-stdout"><code>stdout</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Sys_002elocaleconv"><code>Sys.localeconv</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Variations-on-read_002etable">Variations on read.table</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Function-and-variable-index_vr_letter-T">T</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-textConnection"><code>textConnection</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-truncate"><code>truncate</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Listing-and-manipulating-connections">Listing and manipulating connections</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Function-and-variable-index_vr_letter-U">U</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-unstack_002e"><code>unstack.</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Re_002dshaping-data">Re-shaping data</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-url"><code>url</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Function-and-variable-index_vr_letter-W">W</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-write"><code>write</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-write-1"><code>write</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Output-to-connections">Output to connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-write_002ecsv"><code>write.csv</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-write_002ecsv2"><code>write.csv2</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-write_002edbf"><code>write.dbf</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#dBase-files-_0028DBF_0029">dBase files (DBF)</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-write_002edta"><code>write.dta</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-write_002eforeign"><code>write.foreign</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-write_002ematrix"><code>write.matrix</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-write_002esocket"><code>write.socket</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Reading-from-sockets">Reading from sockets</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-write_002etable"><code>write.table</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-write_002etable-1"><code>write.table</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Output-to-connections">Output to connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-writeBin"><code>writeBin</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Binary-connections">Binary connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-writeChar"><code>writeChar</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Binary-connections">Binary connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-writeLines"><code>writeLines</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Output-to-connections">Output to connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-WriteXLS"><code>WriteXLS</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Function-and-variable-index_vr_letter-X">X</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-XLConnect"><code>XLConnect</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-xlsx"><code>xlsx</code></a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
+<table summary="" class="vr-entries-printindex">
+<tr><td></td><th class="entries-header-printindex">Index Entry</th><th class="sections-header-printindex">Section</th></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Function-and-variable-index_vr_symbol-1">.</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-_002edbf"><code>.dbf</code></a></td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-_002exls"><code>.xls</code></a></td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-_002exls-1"><code>.xls</code></a></td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-_002exlsx"><code>.xlsx</code></a></td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Function-and-variable-index_vr_letter-B">B</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-bzfile"><code>bzfile</code></a></td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Function-and-variable-index_vr_letter-C">C</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-cat"><code>cat</code></a></td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-cat-1"><code>cat</code></a></td><td class="printindex-index-section"><a href="#Output-to-connections">Output to connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-close"><code>close</code></a></td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-close-1"><code>close</code></a></td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-close_002esocket"><code>close.socket</code></a></td><td class="printindex-index-section"><a href="#Reading-from-sockets">Reading from sockets</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-count_002efields"><code>count.fields</code></a></td><td class="printindex-index-section"><a href="#Variations-on-read_002etable">Variations on read.table</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Function-and-variable-index_vr_letter-D">D</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-data_002erestore"><code>data.restore</code></a></td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-dataframes2xls"><code>dataframes2xls</code></a></td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-dbClearResult"><code>dbClearResult</code></a></td><td class="printindex-index-section"><a href="#DBI">DBI</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-dbConnect"><code>dbConnect</code></a></td><td class="printindex-index-section"><a href="#DBI">DBI</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-dbDisconnect"><code>dbDisconnect</code></a></td><td class="printindex-index-section"><a href="#DBI">DBI</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-dbDriver"><code>dbDriver</code></a></td><td class="printindex-index-section"><a href="#DBI">DBI</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-dbExistsTable"><code>dbExistsTable</code></a></td><td class="printindex-index-section"><a href="#DBI">DBI</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-dbGetQuery"><code>dbGetQuery</code></a></td><td class="printindex-index-section"><a href="#DBI">DBI</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-dbReadTable"><code>dbReadTable</code></a></td><td class="printindex-index-section"><a href="#DBI">DBI</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-dbRemoveTable"><code>dbRemoveTable</code></a></td><td class="printindex-index-section"><a href="#DBI">DBI</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-dbSendQuery"><code>dbSendQuery</code></a></td><td class="printindex-index-section"><a href="#DBI">DBI</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-dbWriteTable"><code>dbWriteTable</code></a></td><td class="printindex-index-section"><a href="#DBI">DBI</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Function-and-variable-index_vr_letter-F">F</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-fetch"><code>fetch</code></a></td><td class="printindex-index-section"><a href="#DBI">DBI</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-file"><code>file</code></a></td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-format"><code>format</code></a></td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-ftable"><code>ftable</code></a></td><td class="printindex-index-section"><a href="#Flat-contingency-tables">Flat contingency tables</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Function-and-variable-index_vr_letter-G">G</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-gzfile"><code>gzfile</code></a></td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Function-and-variable-index_vr_letter-H">H</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-hdf5"><code>hdf5</code></a></td><td class="printindex-index-section"><a href="#Binary-data-formats">Binary data formats</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Function-and-variable-index_vr_letter-I">I</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-isSeekable"><code>isSeekable</code></a></td><td class="printindex-index-section"><a href="#Listing-and-manipulating-connections">Listing and manipulating connections</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Function-and-variable-index_vr_letter-M">M</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-make_002esocket"><code>make.socket</code></a></td><td class="printindex-index-section"><a href="#Reading-from-sockets">Reading from sockets</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Function-and-variable-index_vr_letter-N">N</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-netCDF"><code>netCDF</code></a></td><td class="printindex-index-section"><a href="#Binary-data-formats">Binary data formats</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Function-and-variable-index_vr_letter-O">O</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-odbcClose"><code>odbcClose</code></a></td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-odbcConnect"><code>odbcConnect</code></a></td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-odbcConnectDbase"><code>odbcConnectDbase</code></a></td><td class="printindex-index-section"><a href="#dBase-files-_0028DBF_0029">dBase files (DBF)</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-odbcConnectExcel"><code>odbcConnectExcel</code></a></td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-odbcConnectExcel-1"><code>odbcConnectExcel</code></a></td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-odbcConnectExcel2007"><code>odbcConnectExcel2007</code></a></td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-odbcDriverConnect"><code>odbcDriverConnect</code></a></td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-odbcGetInfo"><code>odbcGetInfo</code></a></td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-odbcQuery"><code>odbcQuery</code></a></td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-open"><code>open</code></a></td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Function-and-variable-index_vr_letter-P">P</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-pipe"><code>pipe</code></a></td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-pushBack_002e"><code>pushBack.</code></a></td><td class="printindex-index-section"><a href="#Pushback">Pushback</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-pushBackLength"><code>pushBackLength</code></a></td><td class="printindex-index-section"><a href="#Pushback">Pushback</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Function-and-variable-index_vr_letter-R">R</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002ecsv"><code>read.csv</code></a></td><td class="printindex-index-section"><a href="#Variations-on-read_002etable">Variations on read.table</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002ecsv-1"><code>read.csv</code></a></td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002ecsv2"><code>read.csv2</code></a></td><td class="printindex-index-section"><a href="#Variations-on-read_002etable">Variations on read.table</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002edbf"><code>read.dbf</code></a></td><td class="printindex-index-section"><a href="#dBase-files-_0028DBF_0029">dBase files (DBF)</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002edelim"><code>read.delim</code></a></td><td class="printindex-index-section"><a href="#Variations-on-read_002etable">Variations on read.table</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002edelim-1"><code>read.delim</code></a></td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002edelim2"><code>read.delim2</code></a></td><td class="printindex-index-section"><a href="#Variations-on-read_002etable">Variations on read.table</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002eDIF"><code>read.DIF</code></a></td><td class="printindex-index-section"><a href="#Data-Interchange-Format-_0028DIF_0029">Data Interchange Format (DIF)</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002eDIF-1"><code>read.DIF</code></a></td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002edta"><code>read.dta</code></a></td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002eepiinfo"><code>read.epiinfo</code></a></td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002efortran"><code>read.fortran</code></a></td><td class="printindex-index-section"><a href="#Fixed_002dwidth_002dformat-files">Fixed-width-format files</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002eftable"><code>read.ftable</code></a></td><td class="printindex-index-section"><a href="#Flat-contingency-tables">Flat contingency tables</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002efwf"><code>read.fwf</code></a></td><td class="printindex-index-section"><a href="#Fixed_002dwidth_002dformat-files">Fixed-width-format files</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002emtp"><code>read.mtp</code></a></td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002eoctave"><code>read.octave</code></a></td><td class="printindex-index-section"><a href="#Octave">Octave</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002eS"><code>read.S</code></a></td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002esocket"><code>read.socket</code></a></td><td class="printindex-index-section"><a href="#Reading-from-sockets">Reading from sockets</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002espss"><code>read.spss</code></a></td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002esystat"><code>read.systat</code></a></td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002etable"><code>read.table</code></a></td><td class="printindex-index-section"><a href="#Variations-on-read_002etable">Variations on read.table</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002etable-1"><code>read.table</code></a></td><td class="printindex-index-section"><a href="#Input-from-connections">Input from connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002etable-2"><code>read.table</code></a></td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002exls"><code>read.xls</code></a></td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-read_002export"><code>read.xport</code></a></td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-readBin"><code>readBin</code></a></td><td class="printindex-index-section"><a href="#Binary-connections">Binary connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-readChar"><code>readChar</code></a></td><td class="printindex-index-section"><a href="#Binary-connections">Binary connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-readClipboard"><code>readClipboard</code></a></td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-readLines"><code>readLines</code></a></td><td class="printindex-index-section"><a href="#Using-scan-directly">Using scan directly</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-readLines-1"><code>readLines</code></a></td><td class="printindex-index-section"><a href="#Input-from-connections">Input from connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-readxl"><code>readxl</code></a></td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-reshape"><code>reshape</code></a></td><td class="printindex-index-section"><a href="#Re_002dshaping-data">Re-shaping data</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Function-and-variable-index_vr_letter-S">S</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-scan"><code>scan</code></a></td><td class="printindex-index-section"><a href="#Imports">Imports</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-scan-1"><code>scan</code></a></td><td class="printindex-index-section"><a href="#Using-scan-directly">Using scan directly</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-scan-2"><code>scan</code></a></td><td class="printindex-index-section"><a href="#Input-from-connections">Input from connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-seek"><code>seek</code></a></td><td class="printindex-index-section"><a href="#Listing-and-manipulating-connections">Listing and manipulating connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-showConnections"><code>showConnections</code></a></td><td class="printindex-index-section"><a href="#Listing-and-manipulating-connections">Listing and manipulating connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-sink"><code>sink</code></a></td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-sink-1"><code>sink</code></a></td><td class="printindex-index-section"><a href="#Output-to-connections">Output to connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-socketConnection"><code>socketConnection</code></a></td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-sqlCopy"><code>sqlCopy</code></a></td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-sqlFetch"><code>sqlFetch</code></a></td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-sqlFetchMore"><code>sqlFetchMore</code></a></td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-sqlGetResults"><code>sqlGetResults</code></a></td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-sqlQuery"><code>sqlQuery</code></a></td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-sqlSave"><code>sqlSave</code></a></td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-sqlTables"><code>sqlTables</code></a></td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-stack"><code>stack</code></a></td><td class="printindex-index-section"><a href="#Re_002dshaping-data">Re-shaping data</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-stderr"><code>stderr</code></a></td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-stdin"><code>stdin</code></a></td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-stdout"><code>stdout</code></a></td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Sys_002elocaleconv"><code>Sys.localeconv</code></a></td><td class="printindex-index-section"><a href="#Variations-on-read_002etable">Variations on read.table</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Function-and-variable-index_vr_letter-T">T</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-textConnection"><code>textConnection</code></a></td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-truncate"><code>truncate</code></a></td><td class="printindex-index-section"><a href="#Listing-and-manipulating-connections">Listing and manipulating connections</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Function-and-variable-index_vr_letter-U">U</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-unstack_002e"><code>unstack.</code></a></td><td class="printindex-index-section"><a href="#Re_002dshaping-data">Re-shaping data</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-url"><code>url</code></a></td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Function-and-variable-index_vr_letter-W">W</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-write"><code>write</code></a></td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-write-1"><code>write</code></a></td><td class="printindex-index-section"><a href="#Output-to-connections">Output to connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-write_002ecsv"><code>write.csv</code></a></td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-write_002ecsv2"><code>write.csv2</code></a></td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-write_002edbf"><code>write.dbf</code></a></td><td class="printindex-index-section"><a href="#dBase-files-_0028DBF_0029">dBase files (DBF)</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-write_002edta"><code>write.dta</code></a></td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-write_002eforeign"><code>write.foreign</code></a></td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-write_002ematrix"><code>write.matrix</code></a></td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-write_002esocket"><code>write.socket</code></a></td><td class="printindex-index-section"><a href="#Reading-from-sockets">Reading from sockets</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-write_002etable"><code>write.table</code></a></td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-write_002etable-1"><code>write.table</code></a></td><td class="printindex-index-section"><a href="#Output-to-connections">Output to connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-writeBin"><code>writeBin</code></a></td><td class="printindex-index-section"><a href="#Binary-connections">Binary connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-writeChar"><code>writeChar</code></a></td><td class="printindex-index-section"><a href="#Binary-connections">Binary connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-writeLines"><code>writeLines</code></a></td><td class="printindex-index-section"><a href="#Output-to-connections">Output to connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-WriteXLS"><code>WriteXLS</code></a></td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Function-and-variable-index_vr_letter-X">X</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-XLConnect"><code>XLConnect</code></a></td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-xlsx"><code>xlsx</code></a></td><td class="printindex-index-section"><a href="#Reading-Excel-spreadsheets">Reading Excel spreadsheets</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
 </table>
 <table summary="" class="vr-letters-footer-printindex"><tr><th>Jump to: &nbsp; </th><td><a class="summary-letter-printindex" href="#Function-and-variable-index_vr_symbol-1"><b>.</b></a>
  &nbsp; 
@@ -2940,6 +2984,7 @@ Next: <a href="#Concept-index" accesskey="n" rel="next">Concept index</a>, Previ
 </td></tr></table>
 </div>
 
+
 <hr>
 </div>
 <div class="unnumbered-level-extent" id="Concept-index">
@@ -2947,7 +2992,7 @@ Next: <a href="#Concept-index" accesskey="n" rel="next">Concept index</a>, Previ
 <p>
 Previous: <a href="#Function-and-variable-index" accesskey="p" rel="prev">Function and variable index</a>, Up: <a href="#Top" accesskey="u" rel="up">R Data Import/Export</a> &nbsp; [<a href="#SEC_Contents" title="Table of contents" rel="contents">Contents</a>][<a href="#Function-and-variable-index" title="Index" rel="index">Index</a>]</p>
 </div>
-<h2 class="unnumbered" id="Concept-index-1">Concept index</h2>
+<h2 class="unnumbered" id="Concept-index-1"><span>Concept index<a class="copiable-link" href="#Concept-index-1"> &para;</a></span></h2>
 
 <div class="printindex cp-printindex">
 <table summary="" class="cp-letters-header-printindex"><tr><th>Jump to: &nbsp; </th><td><a class="summary-letter-printindex" href="#Concept-index_cp_letter-A"><b>A</b></a>
@@ -2991,115 +3036,115 @@ Previous: <a href="#Function-and-variable-index" accesskey="p" rel="prev">Functi
 <a class="summary-letter-printindex" href="#Concept-index_cp_letter-Y"><b>Y</b></a>
  &nbsp; 
 </td></tr></table>
-<table summary="" class="cp-entries-printindex" border="0">
-<tr><td></td><th class="entries-header-printindex">Index Entry</th><td>&nbsp;</td><th class="sections-header-printindex"> Section</th></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Concept-index_cp_letter-A">A</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-awk">awk</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Introduction">Introduction</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Concept-index_cp_letter-B">B</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Binary-files">Binary files</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Binary-files">Binary files</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Binary-files-1">Binary files</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Binary-connections">Binary connections</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Concept-index_cp_letter-C">C</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-comma-separated-values">comma separated values</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Compressed-files">Compressed files</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Connections">Connections</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Connections">Connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Connections-1">Connections</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Connections-2">Connections</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Output-to-connections">Output to connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Connections-3">Connections</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Listing-and-manipulating-connections">Listing and manipulating connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-CSV-files">CSV files</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-CSV-files-1">CSV files</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Variations-on-read_002etable">Variations on read.table</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Concept-index_cp_letter-D">D</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Data-Interchange-Format-_0028DIF_0029">Data Interchange Format (DIF)</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Data-Interchange-Format-_0028DIF_0029">Data Interchange Format (DIF)</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Dbase">Dbase</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-dBase">dBase</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#dBase-files-_0028DBF_0029">dBase files (DBF)</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-DBF-files">DBF files</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#dBase-files-_0028DBF_0029">dBase files (DBF)</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-DBMS">DBMS</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Relational-databases">Relational databases</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Concept-index_cp_letter-E">E</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Encodings">Encodings</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Encodings">Encodings</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Encodings-1">Encodings</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-EpiData">EpiData</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-EpiInfo">EpiInfo</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Excel">Excel</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Excel-1">Excel</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Exporting-to-a-text-file">Exporting to a text file</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Concept-index_cp_letter-F">F</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-File-connections">File connections</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Fixed_002dwidth_002dformat-files">Fixed-width-format files</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Fixed_002dwidth_002dformat-files">Fixed-width-format files</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Flat-contingency-tables">Flat contingency tables</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Flat-contingency-tables">Flat contingency tables</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Concept-index_cp_letter-H">H</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Hierarchical-Data-Format">Hierarchical Data Format</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Binary-data-formats">Binary data formats</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Concept-index_cp_letter-I">I</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Importing-from-other-statistical-systems">Importing from other statistical systems</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Importing-from-other-statistical-systems">Importing from other statistical systems</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Concept-index_cp_letter-L">L</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-locales">locales</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Variations-on-read_002etable">Variations on read.table</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Concept-index_cp_letter-M">M</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Minitab">Minitab</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Missing-values">Missing values</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Missing-values-1">Missing values</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Variations-on-read_002etable">Variations on read.table</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-MySQL-database-system">MySQL database system</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#DBI">DBI</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-MySQL-database-system-1">MySQL database system</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Concept-index_cp_letter-N">N</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-network-Common-Data-Form">network Common Data Form</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Binary-data-formats">Binary data formats</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Concept-index_cp_letter-O">O</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Octave">Octave</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Octave">Octave</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-ODBC">ODBC</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Overview-of-RDBMSs">Overview of RDBMSs</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-ODBC-1">ODBC</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Open-Database-Connectivity">Open Database Connectivity</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Overview-of-RDBMSs">Overview of RDBMSs</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Open-Database-Connectivity-1">Open Database Connectivity</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Concept-index_cp_letter-P">P</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-perl">perl</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Introduction">Introduction</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-perl-1">perl</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Fixed_002dwidth_002dformat-files">Fixed-width-format files</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Pipe-connections">Pipe connections</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-PostgreSQL-database-system">PostgreSQL database system</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Pushback-on-a-connection">Pushback on a connection</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Pushback">Pushback</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Concept-index_cp_letter-Q">Q</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Quoting-strings">Quoting strings</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Quoting-strings-1">Quoting strings</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Variations-on-read_002etable">Variations on read.table</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Concept-index_cp_letter-R">R</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Re_002dshaping-data">Re-shaping data</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Re_002dshaping-data">Re-shaping data</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Relational-databases">Relational databases</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Relational-databases">Relational databases</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Concept-index_cp_letter-S">S</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-S_002dPLUS">S-PLUS</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-SAS">SAS</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Sockets">Sockets</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Sockets-1">Sockets</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Reading-from-sockets">Reading from sockets</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Spreadsheet_002dlike-data">Spreadsheet-like data</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Spreadsheet_002dlike-data">Spreadsheet-like data</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-SPSS">SPSS</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-SPSS-Data-Entry">SPSS Data Entry</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-SQL-queries">SQL queries</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#SQL-queries">SQL queries</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Stata">Stata</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Systat">Systat</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Concept-index_cp_letter-T">T</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Terminal-connections">Terminal connections</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Text-connections">Text connections</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Concept-index_cp_letter-U">U</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-Unix-tools">Unix tools</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Introduction">Introduction</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-URL-connections">URL connections</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-URL-connections-1">URL connections</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#Input-from-connections">Input from connections</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Concept-index_cp_letter-X">X</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-XML">XML</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#XML">XML</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
-<tr><th id="Concept-index_cp_letter-Y">Y</th><td></td><td></td></tr>
-<tr><td></td><td class="printindex-index-entry"><a href="#index-yaml">yaml</a>:</td><td>&nbsp;</td><td class="printindex-index-section"><a href="#XML">XML</a></td></tr>
-<tr><td colspan="4"> <hr></td></tr>
+<table summary="" class="cp-entries-printindex">
+<tr><td></td><th class="entries-header-printindex">Index Entry</th><th class="sections-header-printindex">Section</th></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-index_cp_letter-A">A</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-awk">awk</a></td><td class="printindex-index-section"><a href="#Introduction">Introduction</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-index_cp_letter-B">B</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Binary-files">Binary files</a></td><td class="printindex-index-section"><a href="#Binary-files">Binary files</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Binary-files-1">Binary files</a></td><td class="printindex-index-section"><a href="#Binary-connections">Binary connections</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-index_cp_letter-C">C</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-comma-separated-values">comma separated values</a></td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Compressed-files">Compressed files</a></td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Connections">Connections</a></td><td class="printindex-index-section"><a href="#Connections">Connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Connections-1">Connections</a></td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Connections-2">Connections</a></td><td class="printindex-index-section"><a href="#Output-to-connections">Output to connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Connections-3">Connections</a></td><td class="printindex-index-section"><a href="#Listing-and-manipulating-connections">Listing and manipulating connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-CSV-files">CSV files</a></td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-CSV-files-1">CSV files</a></td><td class="printindex-index-section"><a href="#Variations-on-read_002etable">Variations on read.table</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-index_cp_letter-D">D</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Data-Interchange-Format-_0028DIF_0029">Data Interchange Format (DIF)</a></td><td class="printindex-index-section"><a href="#Data-Interchange-Format-_0028DIF_0029">Data Interchange Format (DIF)</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-dBase">dBase</a></td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-dBase-1">dBase</a></td><td class="printindex-index-section"><a href="#dBase-files-_0028DBF_0029">dBase files (DBF)</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-DBF-files">DBF files</a></td><td class="printindex-index-section"><a href="#dBase-files-_0028DBF_0029">dBase files (DBF)</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-DBMS">DBMS</a></td><td class="printindex-index-section"><a href="#Relational-databases">Relational databases</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-index_cp_letter-E">E</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Encodings">Encodings</a></td><td class="printindex-index-section"><a href="#Encodings">Encodings</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Encodings-1">Encodings</a></td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-EpiData">EpiData</a></td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-EpiInfo">EpiInfo</a></td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Excel">Excel</a></td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Excel-1">Excel</a></td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Exporting-to-a-text-file">Exporting to a text file</a></td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-index_cp_letter-F">F</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-File-connections">File connections</a></td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Fixed_002dwidth_002dformat-files">Fixed-width-format files</a></td><td class="printindex-index-section"><a href="#Fixed_002dwidth_002dformat-files">Fixed-width-format files</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Flat-contingency-tables">Flat contingency tables</a></td><td class="printindex-index-section"><a href="#Flat-contingency-tables">Flat contingency tables</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-index_cp_letter-H">H</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Hierarchical-Data-Format">Hierarchical Data Format</a></td><td class="printindex-index-section"><a href="#Binary-data-formats">Binary data formats</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-index_cp_letter-I">I</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Importing-from-other-statistical-systems">Importing from other statistical systems</a></td><td class="printindex-index-section"><a href="#Importing-from-other-statistical-systems">Importing from other statistical systems</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-index_cp_letter-L">L</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-locales">locales</a></td><td class="printindex-index-section"><a href="#Variations-on-read_002etable">Variations on read.table</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-index_cp_letter-M">M</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Minitab">Minitab</a></td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Missing-values">Missing values</a></td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Missing-values-1">Missing values</a></td><td class="printindex-index-section"><a href="#Variations-on-read_002etable">Variations on read.table</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-MySQL-database-system">MySQL database system</a></td><td class="printindex-index-section"><a href="#DBI">DBI</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-MySQL-database-system-1">MySQL database system</a></td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-index_cp_letter-N">N</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-network-Common-Data-Form">network Common Data Form</a></td><td class="printindex-index-section"><a href="#Binary-data-formats">Binary data formats</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-index_cp_letter-O">O</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Octave">Octave</a></td><td class="printindex-index-section"><a href="#Octave">Octave</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-ODBC">ODBC</a></td><td class="printindex-index-section"><a href="#Overview-of-RDBMSs">Overview of RDBMSs</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-ODBC-1">ODBC</a></td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Open-Database-Connectivity">Open Database Connectivity</a></td><td class="printindex-index-section"><a href="#Overview-of-RDBMSs">Overview of RDBMSs</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Open-Database-Connectivity-1">Open Database Connectivity</a></td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-index_cp_letter-P">P</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-perl">perl</a></td><td class="printindex-index-section"><a href="#Introduction">Introduction</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-perl-1">perl</a></td><td class="printindex-index-section"><a href="#Fixed_002dwidth_002dformat-files">Fixed-width-format files</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Pipe-connections">Pipe connections</a></td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-PostgreSQL-database-system">PostgreSQL database system</a></td><td class="printindex-index-section"><a href="#RODBC">RODBC</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Pushback-on-a-connection">Pushback on a connection</a></td><td class="printindex-index-section"><a href="#Pushback">Pushback</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-index_cp_letter-Q">Q</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Quoting-strings">Quoting strings</a></td><td class="printindex-index-section"><a href="#Export-to-text-files">Export to text files</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Quoting-strings-1">Quoting strings</a></td><td class="printindex-index-section"><a href="#Variations-on-read_002etable">Variations on read.table</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-index_cp_letter-R">R</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Re_002dshaping-data">Re-shaping data</a></td><td class="printindex-index-section"><a href="#Re_002dshaping-data">Re-shaping data</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Relational-databases">Relational databases</a></td><td class="printindex-index-section"><a href="#Relational-databases">Relational databases</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-index_cp_letter-S">S</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-S_002dPLUS">S-PLUS</a></td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-SAS">SAS</a></td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Sockets">Sockets</a></td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Sockets-1">Sockets</a></td><td class="printindex-index-section"><a href="#Reading-from-sockets">Reading from sockets</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Spreadsheet_002dlike-data">Spreadsheet-like data</a></td><td class="printindex-index-section"><a href="#Spreadsheet_002dlike-data">Spreadsheet-like data</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-SPSS">SPSS</a></td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-SPSS-Data-Entry">SPSS Data Entry</a></td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-SQL-queries">SQL queries</a></td><td class="printindex-index-section"><a href="#SQL-queries">SQL queries</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Stata">Stata</a></td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Systat">Systat</a></td><td class="printindex-index-section"><a href="#EpiInfo-Minitab-SAS-S_002dPLUS-SPSS-Stata-Systat">EpiInfo Minitab SAS S-PLUS SPSS Stata Systat</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-index_cp_letter-T">T</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Terminal-connections">Terminal connections</a></td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Text-connections">Text connections</a></td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-index_cp_letter-U">U</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-Unix-tools">Unix tools</a></td><td class="printindex-index-section"><a href="#Introduction">Introduction</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-URL-connections">URL connections</a></td><td class="printindex-index-section"><a href="#Types-of-connections">Types of connections</a></td></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-URL-connections-1">URL connections</a></td><td class="printindex-index-section"><a href="#Input-from-connections">Input from connections</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-index_cp_letter-X">X</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-XML">XML</a></td><td class="printindex-index-section"><a href="#XML">XML</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
+<tr><th id="Concept-index_cp_letter-Y">Y</th></tr>
+<tr><td></td><td class="printindex-index-entry"><a href="#index-YAML">YAML</a></td><td class="printindex-index-section"><a href="#XML">XML</a></td></tr>
+<tr><td colspan="3"><hr></td></tr>
 </table>
 <table summary="" class="cp-letters-footer-printindex"><tr><th>Jump to: &nbsp; </th><td><a class="summary-letter-printindex" href="#Concept-index_cp_letter-A"><b>A</b></a>
  &nbsp; 

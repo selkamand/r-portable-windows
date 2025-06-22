@@ -5,21 +5,18 @@ if(interactive()) options(error = recover)
 options(warn=1)# show as they happen
 cat("doExtras:",doExtras,"\n")
 
-no.Mcl <- function(cl) ## TRUE if MatrixClass() returns empty, i.e., have "no Matrix-pkg class"
-    identical(MatrixClass(cl), character(0))
-
 setClass("myDGC", contains = "dgCMatrix")
-M <- new("myDGC", as(Matrix(c(-2:4, rep(0,9)), 4), "CsparseMatrix"))
-M
-stopifnot(M[-4,2] == 2:4,
-	  MatrixClass("myDGC"    ) == "dgCMatrix",
-	  MatrixClass("Cholesky" ) == "dtrMatrix",
-	  MatrixClass("pCholesky") == "dtpMatrix",
-	  MatrixClass("corMatrix") == "dpoMatrix",
-	  no.Mcl("pMatrix"),
-	  no.Mcl("indMatrix"))
-
-## FIXME:  Export  MatrixClass !!
+(M <- new("myDGC", as(Matrix(c(-2:4, rep(0,9)), 4), "CsparseMatrix")))
+stopifnot(exprs = {
+    M[-4L, 2L] == 2:4
+    MatrixClass(     "myDGC") == "dgCMatrix"
+    MatrixClass( "dpoMatrix") == "dsyMatrix"
+    MatrixClass( "dppMatrix") == "dspMatrix"
+    MatrixClass( "corMatrix") == "dsyMatrix"
+    MatrixClass( "copMatrix") == "dspMatrix"
+    identical(MatrixClass("indMatrix"), character(0L))
+    identical(MatrixClass(  "pMatrix"), character(0L))
+})
 
 ## [matrix-Bugs][6182] Coercion method doesn't work on child class
 ## Bugs item #6182, at 2015-09-01 17:49 by Vitalie Spinu
@@ -235,8 +232,9 @@ tstMatrixClass <-
             symC <- extends(clD, "symmetricMatrix")
             triC <- extends(clD, "triangularMatrix")
             diaC <- extends(clD, "diagonalMatrix")
-            if(!(genC || symC || triC || diaC))
-                stop("does not extend one of 'general', 'symmetric', 'triangular', or 'diagonal'")
+            indC <- extends(clD, "indMatrix")
+            if(!(genC || symC || triC || diaC || indC))
+                stop("does not extend one of 'general', 'symmetric', 'triangular', 'diagonal', 'ind'")
             sparseC <- extends(clD, "sparseMatrix")
             denseC  <- extends(clD, "denseMatrix")
             if(!(sparseC || denseC))
@@ -258,7 +256,8 @@ tstMatrixClass <-
 		stopifnot(Qidentical(m, m0.)); cat("ok; ")
 	    }
             is_p <- extends(clD, "indMatrix")
-            is_cor <- extends(clD, "corMatrix") # has diagonal divided out
+            is_cor <- extends(clD, "corMatrix") || extends(clD, "copMatrix")
+            ## ^^^ has diagonal divided out
 	    if(canCoerce(mm, clNam)) { ## replace 'm' by `non-empty' version
 		cat("canCoerce(mm, *) ")
 		m0 <- {
@@ -323,7 +322,8 @@ tstMatrixClass <-
 ### 1) produce 'mM'  and 'mm' for the other cases,
 ### 2) use identical code for all cases
 
-            if(is(m, "dMatrix") && is(m, "compMatrix")) {
+            if(is(m, "dMatrix") &&
+               (is(m, "generalMatrix") || is(m, "symmetricMatrix"))) {
                 if(any(clNam == not.coerce1))
                     cat.("not coercable_1\n")
                 else if(canCoerce(mM, clNam)) {

@@ -1,6 +1,6 @@
 
-R version 3.5.0 alpha (2018-03-28 r74481)
-Copyright (C) 2018 The R Foundation for Statistical Computing
+R Under development (unstable) (2023-03-07 r83950) -- "Unsuffered Consequences"
+Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -580,7 +580,7 @@ D 0.00 1.00 1.00
 E 0.40 1.00 1.00 0.25     
 F 1.00 0.00 0.00 1.00 1.00
 > kl6 <- c(1,1, 2,2, 3,3)
-> silhouette(kl6, D6)# had one NaN
+> (skD6 <- silhouette(kl6, D6))# had one NaN
      cluster neighbor sil_width
 [1,]       1        2     0.000
 [2,]       1        3     1.000
@@ -594,7 +594,7 @@ attr(,"call")
 silhouette.default(x = kl6, dist = D6)
 attr(,"class")
 [1] "silhouette"
-> summary(silhouette(kl6, D6))
+> summary(skD6)
 Silhouette of 6 units in 3 clusters from silhouette.default(x = kl6, dist = D6) :
  Cluster sizes and average silhouette widths:
       2       2       2 
@@ -603,16 +603,35 @@ Individual silhouette widths:
     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
 -0.97500 -0.50000 -0.43750 -0.22500 -0.09375  1.00000 
 > plot(silhouette(kl6, D6))# gives error in earlier cluster versions
-> 
 > dev.off()
 pdf 
   2 
 > 
+> ## checking compatibility with  R-only version
+> silhouetteR <- asNamespace("cluster")$silhouetteR
+> noCall <- function(si) `attr<-`(si, "call", NULL) # only 'call' is different:
+> stopifnot(all.equal(noCall(skD6), noCall(silhouetteR(kl6, D6))))
+> 
+> ## k=1 : pam(*, k=1) works, but silhouette() is not defined;
+> ## ---  FIXME: silhouette.partition() fails:  "invalid partition .."; (which is not strictly true
+> ##     ------  -> give something like NA ((or a *different* error message)
+> ##  the other methods just give NA (no object!)
+> ## drop "call" *and* "iOrd"
+> noCliO <- function(si) noCall(`attr<-`(si, "iOrd", NULL))
+> for(k in 2:7) {
++     p.k <- pam(ruspini, k=k)
++     ## order the silhouette to be *as* the default:
++     ## spk <- silhouette(p.k);  opk <- spk[order(as.numeric(rownames(spk))), ]
++     ## rather sort*() the other:
++     stopifnot(all.equal(noCall(silhouette(p.k)),
++                         noCliO(sortSilhouette(silhouetteR(p.k$clustering, p.k$diss)))))
++ }
+> 
 > ## Last Line:
 > cat('Time elapsed: ', proc.time() - .proctime00,'\n')
-Time elapsed:  1.855 0.026 1.892 0 0 
+Time elapsed:  1.607 0.036 1.651 0 0 
 > 
 > 
 > proc.time()
    user  system elapsed 
-  2.010   0.066   2.140 
+  1.722   0.084   1.859 

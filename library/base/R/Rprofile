@@ -2,7 +2,7 @@
 ### Additional commands can be placed in site or user Rprofile files
 ### (see ?Rprofile).
 
-### Copyright (C) 1995-2022 The R Core Team
+### Copyright (C) 1995-2023 The R Core Team
 
 ### Notice that it is a bad idea to use this file as a template for
 ### personal startup files, since things will be executed twice and in
@@ -42,6 +42,7 @@ options(add.smooth = TRUE)# currently only used in 'plot.lm'
 
 if(!interactive())
     options(showErrorCalls = TRUE)
+options(catch.script.errors = FALSE)
 
 local({dp <- Sys.getenv("R_DEFAULT_PACKAGES")
        if(identical(dp, "")) ## it fact methods is done first
@@ -191,15 +192,26 @@ local({
 })
 
 local({
-    setRtools43Path <- 0
-     setRtools43Path <- 1
+    # keep in step with Rcmd_environ
+    setRtools45Path <- 0
+     setRtools45Path <- 1
 
-    if (setRtools43Path) {
-        rthome <- Sys.getenv("RTOOLS43_HOME", "c:/rtools43")
-        rtpath <- paste0(rthome, "/x86_64-w64-mingw32.static.posix/bin;",
-                         rthome, "/usr/bin")
+    if (setRtools45Path) {
+        aarch64 <- FALSE
+        # INSTALLER-BUILD-aarch64: aarch64 <- TRUE
+
+        if (aarch64) {
+            rthome <- Sys.getenv("RTOOLS45_AARCH64_HOME",
+                                 "c:/rtools45-aarch64")
+            rtpath <- paste0(rthome, "/aarch64-w64-mingw32.static.posix/bin;",
+                             rthome, "/usr/bin")
+        } else {
+            rthome <- Sys.getenv("RTOOLS45_HOME", "c:/rtools45")
+            rtpath <- paste0(rthome, "/x86_64-w64-mingw32.static.posix/bin;",
+                             rthome, "/usr/bin")
+        }
         path <- Sys.getenv("R_CUSTOM_TOOLS_PATH", rtpath)
-        Sys.setenv(R_RTOOLS43_PATH = rtpath)
+        Sys.setenv(R_RTOOLS45_PATH = rtpath)
         Sys.setenv(PATH = paste0(path, ";", Sys.getenv("PATH")))
     }
 })

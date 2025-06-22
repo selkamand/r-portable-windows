@@ -14,13 +14,13 @@ environmental           Atmospheric environmental conditions in New
 equal.count             shingles
 ethanol                 Engine exhaust fumes from burning ethanol
 histogram               Histograms and Kernel Density Plots
+larrows                 Replacements of traditional graphics functions
 lattice.options         Low-level Options Controlling Behaviour of
                         Lattice
 latticeParseFormula     Parse Trellis formula
 level.colors            A function to compute false colors representing
                         a numeric or categorical variable
 levelplot               Level plots and contour plots
-llines                  Replacements of traditional graphics functions
 lset                    Interface to modify Trellis Settings - Defunct
 make.groups             Grouped data from multiple vectors
 melanoma                Melanoma skin cancer incidence

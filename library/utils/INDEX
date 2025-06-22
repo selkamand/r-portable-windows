@@ -13,7 +13,7 @@ Rconsole                R for Windows Configuration
 Rprof                   Enable Profiling of R's Execution
 Rprofmem                Enable Profiling of R's Memory Use
 Rscript                 Scripting Front-End for R
-Rtangle                 R Driver for Stangle
+Rtangle                 R Driver for 'Stangle'
 RweaveLatex             R/LaTeX Driver for Sweave
 SHLIB                   Build Shared Object/DLL for Dynamic Loading
 Sweave                  Automatic Generation of Reports
@@ -144,7 +144,7 @@ savehistory             Load or Save or Display the Commands History
 select.list             Select Items from a List
 sessionInfo             Collect Information About the Current R Session
 setRepositories         Select Package Repositories
-setWindowTitle          Set the Window Title or the Statusbar of the
+setWindowTitle          Set the Window Title or the Status Bar of the
                         RGui in Windows
 shortPathName           Express File Paths in Short Form on Windows
 stack                   Stack or Unstack Vectors from a Data Frame or
@@ -169,7 +169,7 @@ vignette                View, List or Get R Source of Package Vignettes
 warnErrList             Collect and Summarize Errors From List
 win.version             Get Windows Version
 winDialog               Dialog Boxes under Windows
-winMenuAdd              User Menus under MS Windows (Rgui)
+winMenuAdd              User Menus under MS Windows (RGui)
 winProgressBar          Progress Bars under MS Windows
 write.table             Data Output
 zip                     Create Zip Archives

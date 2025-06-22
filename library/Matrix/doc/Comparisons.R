@@ -4,12 +4,14 @@
 ### code chunk number 1: preliminaries
 ###################################################
 options(width=75)
+library(stats) # for R_DEFAULT_PACKAGES=NULL
+library(utils) # ditto
 
 
 ###################################################
 ### code chunk number 2: modelMatrix
 ###################################################
-data(Formaldehyde)
+data(Formaldehyde, package = "datasets")
 str(Formaldehyde)
 (m <- cbind(1, Formaldehyde$carb))
 (yo <- Formaldehyde$optden)

@@ -1,7 +1,7 @@
 
-R version 3.5.3 Patched (2019-03-11 r76305) -- "Great Truth"
-Copyright (C) 2019 The R Foundation for Statistical Computing
-Platform: x86_64-pc-linux-gnu (64-bit)
+R Under development (unstable) (2023-11-29 r85646) -- "Unsuffered Consequences"
+Copyright (C) 2023 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -64,19 +64,18 @@ Type 'q()' to quit R.
 > ## First call with "trace" (seg.fault typically later ...):
 > try( clara(x, k=2, metric="manhattan", sampsize=10, trace = 3) )
 C clara(): (nsam,nran,n) = (10,5,17); 'large_sample',
-C clara(): sample 1  finding 1st... new k{ran}:
+- clara sample  1  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 1 
- {295} [ntt=7, nunfs=0] .. nsel[1:10]= 6 7 8 9 10 12 13 14 16 17  -> dysta2()
-  dysta2() gave dyst_toomany_NA --> new sample
-C clara(): sample 2  finding 1st... new k{ran}:
+ [ntt=7, nunfs=0] .. nsel[1:10]= 6 7 8 9 10 12 13 14 16 17  -> dysta2() gave dyst_toomany_NA --> new sample.
+- clara sample  2  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 3 
- {295} [ntt=7, nunfs=1] .. nsel[1:10]= 1 4 7 9 11 12 13 15 16 17  -> dysta2()
-. clara(): s:= max dys[1..45] = 270;
-clara()'s bswap2(*, s=270):     new repr. 7
+ [ntt=7, nunfs=1] .. nsel[1:10]= 1 4 7 9 11 12 13 15 16 17  -> dysta2();
+ clara -> s:= max{dys[1..45]} = 270;
+ bswap2(*, s=270), 1. BUILD:     new repr. 7
     new repr. 1
   after build: medoids are  1  7
   and min.dist dysma[1:n] are
@@ -84,15 +83,15 @@ clara()'s bswap2(*, s=270):     new repr. 7
  --> sky = sum_j D_j= 175
    swp new 8 <-> 7 old; decreasing diss. by -18
   Last swap: new 8 <-> 7 old; decreasing diss. by 1
-end{bswap2}: sky = 157
+ end{bswap2}: sky = 157
  selec() -> 'NAfs' obj= 7.41176
-C clara(): sample 3  finding 1st... new k{ran}:
+- clara sample  3  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 6 
- {295} [ntt=7, nunfs=2] .. nsel[1:10]= 1 2 3 5 8 9 10 11 13 17  -> dysta2()
-. clara(): s:= max dys[1..45] = 270;
-clara()'s bswap2(*, s=270):     new repr. 5
+ [ntt=7, nunfs=2] .. nsel[1:10]= 1 2 3 5 8 9 10 11 13 17  -> dysta2();
+ clara -> s:= max{dys[1..45]} = 270;
+ bswap2(*, s=270), 1. BUILD:     new repr. 5
     new repr. 9
   after build: medoids are  5  9
   and min.dist dysma[1:n] are
@@ -100,29 +99,30 @@ clara()'s bswap2(*, s=270):     new repr. 5
  --> sky = sum_j D_j= 180
    swp new 1 <-> 5 old; decreasing diss. by -18
   Last swap: new 1 <-> 5 old; decreasing diss. by 1
-end{bswap2}: sky = 162
+ end{bswap2}: sky = 162
  selec() -> 'NAfs' obj= 7.41176
-C clara(): sample 4  finding 1st... new k{ran}:
+- clara sample  4  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 5 
- {295} [ntt=7, nunfs=3] .. nsel[1:10]= 1 2 3 4 7 8 9 10 13 14  -> dysta2()
-. clara(): s:= max dys[1..45] = 264;
-clara()'s bswap2(*, s=264):     new repr. 1
+ [ntt=7, nunfs=3] .. nsel[1:10]= 1 2 3 4 7 8 9 10 13 14  -> dysta2();
+ clara -> s:= max{dys[1..45]} = 264;
+ bswap2(*, s=264), 1. BUILD:     new repr. 1
     new repr. 10
   after build: medoids are  1 10
   and min.dist dysma[1:n] are
       0     13     44     44     40      8     23     19      4      0
  --> sky = sum_j D_j= 195
   Last swap: new 9 <-> 10 old; decreasing diss. by 0
-end{bswap2}: sky = 195
+ end{bswap2}: sky = 195
  selec() -> 'NAfs' obj= 7.41176
-C clara(): sample 5  finding 1st... new k{ran}:
+- clara sample  5  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 16 
- {295} [ntt=7, nunfs=4] .. nsel[1:10]= 2 3 4 6 7 8 9 10 11 17  -> dysta2()
-  dysta2() gave dyst_toomany_NA --> new sample
+ [ntt=7, nunfs=4] .. nsel[1:10]= 2 3 4 6 7 8 9 10 11 17  -> dysta2() gave dyst_toomany_NA --> new sample.
+C clara() -> best sample _found_ ; nbest[1:10] =
+ c(0,0,0,0,0,0,0,0,0,0)
 Error in clara(x, k = 2, metric = "manhattan", sampsize = 10, trace = 3) : 
   Observation 6 has *only* NAs --> omit it for clustering
 In addition: Warning message:
@@ -156,13 +156,13 @@ to suppress this warning.
  num [1:88, 1:2] 0 3 -4 62 1 3 -7 45 36 46 ...
 > try(clara(x, 2, samples = 20, trace = 3))# 2nd sample did show dysta2() problem
 C clara(): (nsam,nran,n) = (44,20,88);
-C clara(): sample 1  finding 1st... new k{ran}:
+- clara sample  1  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 2 
- {295} [ntt=44, nunfs=0] .. nsel[1:44]= 2 3 4 6 9 10 12 14 15 18 19 20 24 25 26 28 31 35 38 42 47 48 51 53 54 57 60 61 64 66 68 70 71 73 74 75 76 77 78 79 80 81 82 88  -> dysta2()
-. clara(): s:= max dys[1..946] = 78.6448;
-clara()'s bswap2(*, s=78.6448):     new repr. 19
+ [ntt=44, nunfs=0] .. nsel[1:44]= 2 3 4 6 9 10 12 14 15 18 19 20 24 25 26 28 31 35 38 42 47 48 51 53 54 57 60 61 64 66 68 70 71 73 74 75 76 77 78 79 80 81 82 88  -> dysta2();
+ clara -> s:= max{dys[1..946]} = 78.6448;
+ bswap2(*, s=78.6448), 1. BUILD:     new repr. 19
     new repr. 9
   after build: medoids are  9 19
   and min.dist dysma[1:n] are
@@ -173,15 +173,15 @@ clara()'s bswap2(*, s=78.6448):     new repr. 19
    1.41     17   9.22   12.7
  --> sky = sum_j D_j= 385.677
   Last swap: new 6 <-> 9 old; decreasing diss. by 0.939294
-end{bswap2}: sky = 385.677
+ end{bswap2}: sky = 385.677
  selec() -> 'NAfs' obj= 2.59347
-C clara(): sample 2  finding 1st... new k{ran}:
+- clara sample  2  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 12 
- {295} [ntt=44, nunfs=1] .. nsel[1:44]= 1 2 3 5 6 7 9 12 17 19 26 27 28 29 30 38 39 42 43 45 47 50 52 54 55 56 58 59 60 61 62 64 67 68 71 74 75 76 77 79 80 81 83 84  -> dysta2()
-. clara(): s:= max dys[1..946] = 81.7435;
-clara()'s bswap2(*, s=81.7435):     new repr. 16
+ [ntt=44, nunfs=1] .. nsel[1:44]= 1 2 3 5 6 7 9 12 17 19 26 27 28 29 30 38 39 42 43 45 47 50 52 54 55 56 58 59 60 61 62 64 67 68 71 74 75 76 77 79 80 81 83 84  -> dysta2();
+ clara -> s:= max{dys[1..946]} = 81.7435;
+ bswap2(*, s=81.7435), 1. BUILD:     new repr. 16
     new repr. 43
   after build: medoids are 16 43
   and min.dist dysma[1:n] are
@@ -192,15 +192,15 @@ clara()'s bswap2(*, s=81.7435):     new repr. 16
    1.41     17      0     17
  --> sky = sum_j D_j= 331.98
   Last swap: new 17 <-> 43 old; decreasing diss. by 0.492109
-end{bswap2}: sky = 331.98
+ end{bswap2}: sky = 331.98
  selec() -> 'NAfs' obj= 2.55701
-C clara(): sample 3  finding 1st... new k{ran}:
+- clara sample  3  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 14 
- {295} [ntt=44, nunfs=2] .. nsel[1:44]= 1 3 4 6 7 9 12 14 15 16 18 19 20 29 30 31 32 36 38 39 40 44 46 47 48 49 51 53 54 56 57 60 62 64 65 66 67 73 75 77 79 81 82 87  -> dysta2()
-. clara(): s:= max dys[1..946] = 77.8781;
-clara()'s bswap2(*, s=77.8781):     new repr. 19
+ [ntt=44, nunfs=2] .. nsel[1:44]= 1 3 4 6 7 9 12 14 15 16 18 19 20 29 30 31 32 36 38 39 40 44 46 47 48 49 51 53 54 56 57 60 62 64 65 66 67 73 75 77 79 81 82 87  -> dysta2();
+ clara -> s:= max{dys[1..946]} = 77.8781;
+ bswap2(*, s=77.8781), 1. BUILD:     new repr. 19
     new repr. 35
   after build: medoids are 19 35
   and min.dist dysma[1:n] are
@@ -210,15 +210,15 @@ clara()'s bswap2(*, s=77.8781):     new repr. 19
    31.1   5.66   5.66   5.66      0   4.24   4.24   22.6   7.07      0
     5.1     17   8.25   7.07
  --> sky = sum_j D_j= 338.587
-end{bswap2}: sky = 338.587
+ end{bswap2}: sky = 338.587
  selec() -> 'NAfs' obj= 2.57726
-C clara(): sample 4  finding 1st... new k{ran}:
+- clara sample  4  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 70 
- {295} [ntt=44, nunfs=3] .. nsel[1:44]= 1 3 8 9 14 15 16 17 19 20 22 23 28 30 31 32 34 35 36 37 38 39 40 41 45 46 47 49 54 56 57 65 66 67 69 70 71 74 76 77 78 84 86 88  -> dysta2()
-. clara(): s:= max dys[1..946] = 77.8781;
-clara()'s bswap2(*, s=77.8781):     new repr. 21
+ [ntt=44, nunfs=3] .. nsel[1:44]= 1 3 8 9 14 15 16 17 19 20 22 23 28 30 31 32 34 35 36 37 38 39 40 41 45 46 47 49 54 56 57 65 66 67 69 70 71 74 76 77 78 84 86 88  -> dysta2();
+ clara -> s:= max{dys[1..946]} = 77.8781;
+ bswap2(*, s=77.8781), 1. BUILD:     new repr. 21
     new repr. 32
   after build: medoids are 21 32
   and min.dist dysma[1:n] are
@@ -228,33 +228,30 @@ clara()'s bswap2(*, s=77.8781):     new repr. 21
    31.1      0   4.24   4.24   4.24   8.49   11.3   2.83   9.06      0
    7.07     17   1.41   12.7
  --> sky = sum_j D_j= 325.933
-end{bswap2}: sky = 325.933
+ end{bswap2}: sky = 325.933
  selec() -> 'NAfs' obj= 2.57726
-C clara(): sample 5  finding 1st... new k{ran}:
+- clara sample  5  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 80 
- {295} [ntt=44, nunfs=4] .. nsel[1:44]= 1 2 3 5 7 8 11 13 14 20 22 23 26 28 30 31 33 34 37 38 39 41 45 46 47 50 51 52 57 59 61 64 67 71 76 77 79 80 81 82 85 86 87 88  -> dysta2()
-  dysta2() gave dyst_toomany_NA --> new sample
-C clara(): sample 6  finding 1st... new k{ran}:
+ [ntt=44, nunfs=4] .. nsel[1:44]= 1 2 3 5 7 8 11 13 14 20 22 23 26 28 30 31 33 34 37 38 39 41 45 46 47 50 51 52 57 59 61 64 67 71 76 77 79 80 81 82 85 86 87 88  -> dysta2() gave dyst_toomany_NA --> new sample.
+- clara sample  6  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 5 
- {295} [ntt=44, nunfs=5] .. nsel[1:44]= 2 3 4 5 6 8 10 12 19 20 21 23 24 25 29 30 31 32 33 37 39 41 42 45 46 48 50 53 54 59 61 66 68 69 71 72 73 79 80 82 84 85 86 87  -> dysta2()
-  dysta2() gave dyst_toomany_NA --> new sample
-C clara(): sample 7  finding 1st... new k{ran}:
+ [ntt=44, nunfs=5] .. nsel[1:44]= 2 3 4 5 6 8 10 12 19 20 21 23 24 25 29 30 31 32 33 37 39 41 42 45 46 48 50 53 54 59 61 66 68 69 71 72 73 79 80 82 84 85 86 87  -> dysta2() gave dyst_toomany_NA --> new sample.
+- clara sample  7  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 17 
- {295} [ntt=44, nunfs=6] .. nsel[1:44]= 2 3 6 7 8 12 14 16 17 18 20 22 26 27 29 30 31 32 33 35 36 37 42 44 45 46 49 52 54 58 59 61 62 63 65 67 70 74 75 77 78 79 87 88  -> dysta2()
-  dysta2() gave dyst_toomany_NA --> new sample
-C clara(): sample 8  finding 1st... new k{ran}:
+ [ntt=44, nunfs=6] .. nsel[1:44]= 2 3 6 7 8 12 14 16 17 18 20 22 26 27 29 30 31 32 33 35 36 37 42 44 45 46 49 52 54 58 59 61 62 63 65 67 70 74 75 77 78 79 87 88  -> dysta2() gave dyst_toomany_NA --> new sample.
+- clara sample  8  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 67 
- {295} [ntt=44, nunfs=7] .. nsel[1:44]= 2 3 6 7 8 9 11 13 14 18 30 31 32 34 35 37 38 40 43 44 47 48 49 52 54 55 56 58 59 60 66 67 68 70 71 72 73 75 80 83 84 85 87 88  -> dysta2()
-. clara(): s:= max dys[1..946] = 85.5102;
-clara()'s bswap2(*, s=85.5102):     new repr. 17
+ [ntt=44, nunfs=7] .. nsel[1:44]= 2 3 6 7 8 9 11 13 14 18 30 31 32 34 35 37 38 40 43 44 47 48 49 52 54 55 56 58 59 60 66 67 68 70 71 72 73 75 80 83 84 85 87 88  -> dysta2();
+ clara -> s:= max{dys[1..946]} = 85.5102;
+ bswap2(*, s=85.5102), 1. BUILD:     new repr. 17
     new repr. 9
   after build: medoids are  9 17
   and min.dist dysma[1:n] are
@@ -264,33 +261,30 @@ clara()'s bswap2(*, s=85.5102):     new repr. 17
    4.24   4.24   1.41   8.49   11.3      0   22.6   11.3   1.41   7.07
      17   21.2   7.07   12.7
  --> sky = sum_j D_j= 384.698
-end{bswap2}: sky = 384.698
+ end{bswap2}: sky = 384.698
  selec() -> 'NAfs' obj= 2.73432
-C clara(): sample 9  finding 1st... new k{ran}:
+- clara sample  9  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 67 
- {295} [ntt=44, nunfs=8] .. nsel[1:44]= 2 4 6 7 8 11 12 13 14 15 17 19 20 21 24 27 29 30 31 33 34 35 36 39 42 45 46 48 50 51 52 54 55 58 60 61 62 65 67 78 80 84 86 88  -> dysta2()
-  dysta2() gave dyst_toomany_NA --> new sample
-C clara(): sample 10  finding 1st... new k{ran}:
+ [ntt=44, nunfs=8] .. nsel[1:44]= 2 4 6 7 8 11 12 13 14 15 17 19 20 21 24 27 29 30 31 33 34 35 36 39 42 45 46 48 50 51 52 54 55 58 60 61 62 65 67 78 80 84 86 88  -> dysta2() gave dyst_toomany_NA --> new sample.
+- clara sample 10  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 5 
- {295} [ntt=44, nunfs=9] .. nsel[1:44]= 1 3 5 6 7 9 10 14 15 16 17 18 19 20 21 23 28 29 30 32 33 36 37 39 40 44 46 47 51 53 54 55 56 57 65 69 70 74 76 81 82 84 86 87  -> dysta2()
-  dysta2() gave dyst_toomany_NA --> new sample
-C clara(): sample 11  finding 1st... new k{ran}:
+ [ntt=44, nunfs=9] .. nsel[1:44]= 1 3 5 6 7 9 10 14 15 16 17 18 19 20 21 23 28 29 30 32 33 36 37 39 40 44 46 47 51 53 54 55 56 57 65 69 70 74 76 81 82 84 86 87  -> dysta2() gave dyst_toomany_NA --> new sample.
+- clara sample 11  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 66 
- {295} [ntt=44, nunfs=10] .. nsel[1:44]= 1 3 4 5 6 11 13 14 15 18 19 21 28 30 31 32 33 34 39 40 41 42 43 46 47 57 58 59 63 65 66 67 71 72 73 74 75 78 79 80 83 84 87 88  -> dysta2()
-  dysta2() gave dyst_toomany_NA --> new sample
-C clara(): sample 12  finding 1st... new k{ran}:
+ [ntt=44, nunfs=10] .. nsel[1:44]= 1 3 4 5 6 11 13 14 15 18 19 21 28 30 31 32 33 34 39 40 41 42 43 46 47 57 58 59 63 65 66 67 71 72 73 74 75 78 79 80 83 84 87 88  -> dysta2() gave dyst_toomany_NA --> new sample.
+- clara sample 12  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 21 
- {295} [ntt=44, nunfs=11] .. nsel[1:44]= 4 5 6 8 9 10 13 14 15 16 17 21 23 25 27 28 30 35 36 41 44 46 47 49 50 54 55 56 57 59 61 62 64 65 66 68 71 72 74 75 76 81 83 84  -> dysta2()
-. clara(): s:= max dys[1..946] = 78.3135;
-clara()'s bswap2(*, s=78.3135):     new repr. 5
+ [ntt=44, nunfs=11] .. nsel[1:44]= 4 5 6 8 9 10 13 14 15 16 17 21 23 25 27 28 30 35 36 41 44 46 47 49 50 54 55 56 57 59 61 62 64 65 66 68 71 72 74 75 76 81 83 84  -> dysta2();
+ clara -> s:= max{dys[1..946]} = 78.3135;
+ bswap2(*, s=78.3135), 1. BUILD:     new repr. 5
     new repr. 2
   after build: medoids are  2  5
   and min.dist dysma[1:n] are
@@ -302,15 +296,15 @@ clara()'s bswap2(*, s=78.3135):     new repr. 5
  --> sky = sum_j D_j= 623.732
    swp new 43 <-> 5 old; decreasing diss. by -205.358
   Last swap: new 43 <-> 5 old; decreasing diss. by 1
-end{bswap2}: sky = 418.375
+ end{bswap2}: sky = 418.375
  selec() -> 'NAfs' obj= 3.17257
-C clara(): sample 13  finding 1st... new k{ran}:
+- clara sample 13  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 4 
- {295} [ntt=44, nunfs=12] .. nsel[1:44]= 3 4 5 14 15 16 17 19 20 21 24 25 26 29 30 31 34 35 38 40 41 43 47 49 50 52 55 57 58 60 61 63 64 65 66 68 72 73 74 79 81 83 86 88  -> dysta2()
-. clara(): s:= max dys[1..946] = 84.1487;
-clara()'s bswap2(*, s=84.1487):     new repr. 19
+ [ntt=44, nunfs=12] .. nsel[1:44]= 3 4 5 14 15 16 17 19 20 21 24 25 26 29 30 31 34 35 38 40 41 43 47 49 50 52 55 57 58 60 61 63 64 65 66 68 72 73 74 79 81 83 86 88  -> dysta2();
+ clara -> s:= max{dys[1..946]} = 84.1487;
+ bswap2(*, s=84.1487), 1. BUILD:     new repr. 19
     new repr. 34
   after build: medoids are 19 34
   and min.dist dysma[1:n] are
@@ -320,27 +314,25 @@ clara()'s bswap2(*, s=84.1487):     new repr. 19
    5.66   15.6   5.66      0   4.24   1.41      0   22.6   2.83    5.1
      17      2   1.41   12.7
  --> sky = sum_j D_j= 340.1
-end{bswap2}: sky = 340.1
+ end{bswap2}: sky = 340.1
  selec() -> 'NAfs' obj= 2.57726
-C clara(): sample 14  finding 1st... new k{ran}:
+- clara sample 14  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 78 
- {295} [ntt=44, nunfs=13] .. nsel[1:44]= 5 7 8 9 10 11 12 18 19 21 23 27 28 29 31 32 33 35 36 38 39 46 50 51 52 56 57 58 59 60 64 65 66 68 72 73 75 77 78 80 84 86 87 88  -> dysta2()
-  dysta2() gave dyst_toomany_NA --> new sample
-C clara(): sample 15  finding 1st... new k{ran}:
+ [ntt=44, nunfs=13] .. nsel[1:44]= 5 7 8 9 10 11 12 18 19 21 23 27 28 29 31 32 33 35 36 38 39 46 50 51 52 56 57 58 59 60 64 65 66 68 72 73 75 77 78 80 84 86 87 88  -> dysta2() gave dyst_toomany_NA --> new sample.
+- clara sample 15  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 73 
- {295} [ntt=44, nunfs=14] .. nsel[1:44]= 2 3 8 10 18 25 26 27 29 31 33 34 35 41 42 43 44 46 47 48 49 53 54 56 57 58 59 60 63 69 70 71 72 73 75 76 77 79 81 84 85 86 87 88  -> dysta2()
-  dysta2() gave dyst_toomany_NA --> new sample
-C clara(): sample 16  finding 1st... new k{ran}:
+ [ntt=44, nunfs=14] .. nsel[1:44]= 2 3 8 10 18 25 26 27 29 31 33 34 35 41 42 43 44 46 47 48 49 53 54 56 57 58 59 60 63 69 70 71 72 73 75 76 77 79 81 84 85 86 87 88  -> dysta2() gave dyst_toomany_NA --> new sample.
+- clara sample 16  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 43 
- {295} [ntt=44, nunfs=15] .. nsel[1:44]= 5 6 7 8 9 12 14 16 18 22 23 24 27 28 29 30 34 35 36 39 40 41 43 45 56 57 59 60 62 64 65 67 69 70 71 73 74 75 79 81 83 85 86 87  -> dysta2()
-. clara(): s:= max dys[1..946] = 75.1665;
-clara()'s bswap2(*, s=75.1665):     new repr. 15
+ [ntt=44, nunfs=15] .. nsel[1:44]= 5 6 7 8 9 12 14 16 18 22 23 24 27 28 29 30 34 35 36 39 40 41 43 45 56 57 59 60 62 64 65 67 69 70 71 73 74 75 79 81 83 85 86 87  -> dysta2();
+ clara -> s:= max{dys[1..946]} = 75.1665;
+ bswap2(*, s=75.1665), 1. BUILD:     new repr. 15
     new repr. 41
   after build: medoids are 15 41
   and min.dist dysma[1:n] are
@@ -350,32 +342,32 @@ clara()'s bswap2(*, s=75.1665):     new repr. 15
       2     10    9.9   22.6   25.5   8.49   11.3   5.83    5.1   2.83
       0   7.07   15.6   21.2
  --> sky = sum_j D_j= 479.721
-end{bswap2}: sky = 479.721
+ end{bswap2}: sky = 479.721
  selec() -> 'NAfs' obj= 3.31146
-C clara(): sample 17  finding 1st... new k{ran}:
+- clara sample 17  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 22 
- {295} [ntt=44, nunfs=16] .. nsel[1:44]= 4 6 9 10 11 12 13 16 19 22 26 27 29 30 33 34 37 38 39 42 43 48 51 54 55 57 60 61 62 63 64 66 69 72 73 75 76 77 78 81 82 85 86 87  -> dysta2()
-  dysta2() gave dyst_toomany_NA --> new sample
-C clara(): sample 18  finding 1st... new k{ran}:
+ [ntt=44, nunfs=16] .. nsel[1:44]= 4 6 9 10 11 12 13 16 19 22 26 27 29 30 33 34 37 38 39 42 43 48 51 54 55 57 60 61 62 63 64 66 69 72 73 75 76 77 78 81 82 85 86 87  -> dysta2() gave dyst_toomany_NA --> new sample.
+- clara sample 18  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 39 
- {295} [ntt=44, nunfs=17] .. nsel[1:44]= 1 4 8 13 15 19 20 23 25 26 27 28 30 31 33 34 36 37 39 41 42 43 44 45 46 47 50 54 55 57 59 60 62 64 65 66 67 72 73 78 79 81 82 85  -> dysta2()
-  dysta2() gave dyst_toomany_NA --> new sample
-C clara(): sample 19  finding 1st... new k{ran}:
+ [ntt=44, nunfs=17] .. nsel[1:44]= 1 4 8 13 15 19 20 23 25 26 27 28 30 31 33 34 36 37 39 41 42 43 44 45 46 47 50 54 55 57 59 60 62 64 65 66 67 72 73 78 79 81 82 85  -> dysta2() gave dyst_toomany_NA --> new sample.
+- clara sample 19  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 72 
- {295} [ntt=44, nunfs=18] .. nsel[1:44]= 1 4 5 6 10 12 13 14 17 18 19 22 23 25 27 30 31 32 33 38 39 40 41 42 44 45 46 48 55 57 58 59 60 61 66 67 69 70 72 74 83 84 85 86  -> dysta2()
-  dysta2() gave dyst_toomany_NA --> new sample
-C clara(): sample 20  finding 1st... new k{ran}:
+ [ntt=44, nunfs=18] .. nsel[1:44]= 1 4 5 6 10 12 13 14 17 18 19 22 23 25 27 30 31 32 33 38 39 40 41 42 44 45 46 48 55 57 58 59 60 61 66 67 69 70 72 74 83 84 85 86  -> dysta2() gave dyst_toomany_NA --> new sample.
+- clara sample 20  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 48 
- {295} [ntt=44, nunfs=19] .. nsel[1:44]= 1 3 4 5 7 10 11 13 14 20 22 23 31 32 33 34 35 36 37 40 41 42 43 44 48 50 52 53 55 56 62 63 68 71 72 73 74 75 81 82 83 84 86 88  -> dysta2()
-  dysta2() gave dyst_toomany_NA --> new sample
+ [ntt=44, nunfs=19] .. nsel[1:44]= 1 3 4 5 7 10 11 13 14 20 22 23 31 32 33 34 35 36 37 40 41 42 43 44 48 50 52 53 55 56 62 63 68 71 72 73 74 75 81 82 83 84 86 88  -> dysta2() gave dyst_toomany_NA --> new sample.
+C clara() -> best sample _found_ ; nbest[1:44] =
+ c(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+  0,0,0,0)
 Error in clara(x, 2, samples = 20, trace = 3) : 
   Observation 33 has *only* NAs --> omit it for clustering
 In addition: Warning message:
@@ -395,15 +387,15 @@ to suppress this warning.
 > 
 > x <- x[-33,]
 > ## still had the ** dysta2() .. OUT" problem {no longer!}
-> clara(x, 2, samples = 12, trace = 3)
+> c2  <- clara(x, 2, samples = 12, trace = 3)
 C clara(): (nsam,nran,n) = (44,12,87); 'large_sample',
-C clara(): sample 1  finding 1st... new k{ran}:
+- clara sample  1  finding 1st... new k{ran}:
 .. kall: FALSE, 
 ... nrx [0:1]= 0 0 
 ... nsel[0:0]= 2 
- {295} [ntt=43, nunfs=0] .. nsel[1:44]= 1 7 8 11 14 16 17 21 22 26 29 30 32 33 34 36 37 39 40 41 43 44 45 46 48 49 51 52 54 55 56 58 62 64 66 68 69 71 74 82 83 84 85 86  -> dysta2()
-. clara(): s:= max dys[1..946] = 76.5376;
-clara()'s bswap2(*, s=76.5376):     new repr. 17
+ [ntt=43, nunfs=0] .. nsel[1:44]= 1 7 8 11 14 16 17 21 22 26 29 30 32 33 34 36 37 39 40 41 43 44 45 46 48 49 51 52 54 55 56 58 62 64 66 68 69 71 74 82 83 84 85 86  -> dysta2();
+ clara -> s:= max{dys[1..946]} = 76.5376;
+ bswap2(*, s=76.5376), 1. BUILD:     new repr. 17
     new repr. 40
   after build: medoids are 17 40
   and min.dist dysma[1:n] are
@@ -413,15 +405,15 @@ clara()'s bswap2(*, s=76.5376):     new repr. 17
    31.1   5.66   15.6      2   4.24   4.24   8.49      0   5.83      0
      17   21.2   1.41   7.07
  --> sky = sum_j D_j= 384.62
-end{bswap2}: sky = 384.62
- 1st proper or new best: obj= 7.92464
-C clara(): sample 2  finding 1st... new k{ran}:
+ end{bswap2}: sky = 384.62
+1st proper sample obj= 7.92464
+- clara sample  2  finding 1st... new k{ran}:
 .. kall: T, 
 ... nrx [0:1]= 37 82 
 ... nsel[0:0]= 70 
- {295} [ntt=43, nunfs=0] .. nsel[1:44]= 4 8 10 11 13 15 16 18 20 21 22 23 24 25 31 32 33 34 35 36 37 40 41 43 45 46 48 50 52 55 62 64 65 68 69 71 72 77 81 82 84 85 86 87  -> dysta2()
-. clara(): s:= max dys[1..946] = 82.7103;
-clara()'s bswap2(*, s=82.7103):     new repr. 21
+ [ntt=43, nunfs=0] .. nsel[1:44]= 4 8 10 11 13 15 16 18 20 21 22 23 24 25 31 32 33 34 35 36 37 40 41 43 45 46 48 50 52 55 62 64 65 68 69 71 72 77 81 82 84 85 86 87  -> dysta2();
+ clara -> s:= max{dys[1..946]} = 82.7103;
+ bswap2(*, s=82.7103), 1. BUILD:     new repr. 21
     new repr. 40
   after build: medoids are 21 40
   and min.dist dysma[1:n] are
@@ -431,15 +423,15 @@ clara()'s bswap2(*, s=82.7103):     new repr. 21
    15.6      2   4.24   4.24   8.49      0   22.6    5.1   8.94      0
    21.2   1.41   7.07   12.7
  --> sky = sum_j D_j= 321.274
-end{bswap2}: sky = 321.274
+ end{bswap2}: sky = 321.274
  obj= 7.92464
-C clara(): sample 3  finding 1st... new k{ran}:
+- clara sample  3  finding 1st... new k{ran}:
 .. kall: T, 
 ... nrx [0:1]= 37 82 
 ... nsel[0:0]= 38 
- {295} [ntt=43, nunfs=0] .. nsel[1:44]= 2 5 10 11 14 18 21 22 23 24 25 26 27 29 33 34 36 37 39 41 42 43 45 47 49 50 55 57 58 60 62 64 67 68 71 73 75 77 79 82 83 84 85 87  -> dysta2()
-. clara(): s:= max dys[1..946] = 85.5102;
-clara()'s bswap2(*, s=85.5102):     new repr. 18
+ [ntt=43, nunfs=0] .. nsel[1:44]= 2 5 10 11 14 18 21 22 23 24 25 26 27 29 33 34 36 37 39 41 42 43 45 47 49 50 55 57 58 60 62 64 67 68 71 73 75 77 79 82 83 84 85 87  -> dysta2();
+ clara -> s:= max{dys[1..946]} = 85.5102;
+ bswap2(*, s=85.5102), 1. BUILD:     new repr. 18
     new repr. 32
   after build: medoids are 18 32
   and min.dist dysma[1:n] are
@@ -450,15 +442,15 @@ clara()'s bswap2(*, s=85.5102):     new repr. 18
      17   21.2   1.41   12.7
  --> sky = sum_j D_j= 350.699
   Last swap: new 40 <-> 32 old; decreasing diss. by 0.7867
-end{bswap2}: sky = 350.699
- 1st proper or new best: obj= 7.91099
-C clara(): sample 4  finding 1st... new k{ran}:
+ end{bswap2}: sky = 350.699
+new best obj= 7.91099
+- clara sample  4  finding 1st... new k{ran}:
 .. kall: T, 
 ... nrx [0:1]= 37 64 
 ... nsel[0:0]= 85 
- {295} [ntt=43, nunfs=0] .. nsel[1:44]= 2 4 5 6 8 10 11 12 15 18 21 24 25 26 28 31 33 37 40 42 43 47 49 50 52 54 55 57 58 59 60 61 62 63 64 71 72 73 74 78 79 81 82 86  -> dysta2()
-. clara(): s:= max dys[1..946] = 78.3135;
-clara()'s bswap2(*, s=78.3135):     new repr. 18
+ [ntt=43, nunfs=0] .. nsel[1:44]= 2 4 5 6 8 10 11 12 15 18 21 24 25 26 28 31 33 37 40 42 43 47 49 50 52 54 55 57 58 59 60 61 62 63 64 71 72 73 74 78 79 81 82 86  -> dysta2();
+ clara -> s:= max{dys[1..946]} = 78.3135;
+ bswap2(*, s=78.3135), 1. BUILD:     new repr. 18
     new repr. 43
   after build: medoids are 18 43
   and min.dist dysma[1:n] are
@@ -468,15 +460,15 @@ clara()'s bswap2(*, s=78.3135):     new repr. 18
    5.66   5.66   15.6   5.66      2      0   22.6   2.83   5.83    5.1
    1.41   8.94      0   7.07
  --> sky = sum_j D_j= 297.276
-end{bswap2}: sky = 297.276
+ end{bswap2}: sky = 297.276
  obj= 7.92464
-C clara(): sample 5  finding 1st... new k{ran}:
+- clara sample  5  finding 1st... new k{ran}:
 .. kall: T, 
 ... nrx [0:1]= 37 64 
 ... nsel[0:0]= 84 
- {295} [ntt=43, nunfs=0] .. nsel[1:44]= 4 6 9 10 12 13 15 16 17 18 20 21 24 26 27 31 34 35 36 37 40 41 42 43 45 51 52 53 54 55 56 62 64 65 67 68 69 71 72 73 74 77 79 82  -> dysta2()
-. clara(): s:= max dys[1..946] = 76.5376;
-clara()'s bswap2(*, s=76.5376):     new repr. 20
+ [ntt=43, nunfs=0] .. nsel[1:44]= 4 6 9 10 12 13 15 16 17 18 20 21 24 26 27 31 34 35 36 37 40 41 42 43 45 51 52 53 54 55 56 62 64 65 67 68 69 71 72 73 74 77 79 82  -> dysta2();
+ clara -> s:= max{dys[1..946]} = 76.5376;
+ bswap2(*, s=76.5376), 1. BUILD:     new repr. 20
     new repr. 44
   after build: medoids are 20 44
   and min.dist dysma[1:n] are
@@ -486,15 +478,15 @@ clara()'s bswap2(*, s=76.5376):     new repr. 20
    31.1   15.6      2   4.24   1.41   4.24   8.49      0   22.6   2.83
    5.83    5.1   1.41      0
  --> sky = sum_j D_j= 350.799
-end{bswap2}: sky = 350.799
+ end{bswap2}: sky = 350.799
  obj= 7.92464
-C clara(): sample 6  finding 1st... new k{ran}:
+- clara sample  6  finding 1st... new k{ran}:
 .. kall: T, 
 ... nrx [0:1]= 37 64 
 ... nsel[0:0]= 33 
- {295} [ntt=43, nunfs=0] .. nsel[1:44]= 1 5 7 9 11 13 14 15 17 18 22 26 27 28 34 35 36 37 38 43 46 47 48 50 51 54 55 56 57 61 63 64 66 69 71 73 74 75 76 77 78 80 81 82  -> dysta2()
-. clara(): s:= max dys[1..946] = 82.0244;
-clara()'s bswap2(*, s=82.0244):     new repr. 18
+ [ntt=43, nunfs=0] .. nsel[1:44]= 1 5 7 9 11 13 14 15 17 18 22 26 27 28 34 35 36 37 38 43 46 47 48 50 51 54 55 56 57 61 63 64 66 69 71 73 74 75 76 77 78 80 81 82  -> dysta2();
+ clara -> s:= max{dys[1..946]} = 82.0244;
+ bswap2(*, s=82.0244), 1. BUILD:     new repr. 18
     new repr. 19
   after build: medoids are 18 19
   and min.dist dysma[1:n] are
@@ -504,15 +496,15 @@ clara()'s bswap2(*, s=82.0244):     new repr. 18
    5.66   3.16   4.24   8.49      0   2.83   6.32   8.25      0   8.49
    2.83     17    5.1   4.24
  --> sky = sum_j D_j= 339.187
-end{bswap2}: sky = 339.187
+ end{bswap2}: sky = 339.187
  obj= 8.0873
-C clara(): sample 7  finding 1st... new k{ran}:
+- clara sample  7  finding 1st... new k{ran}:
 .. kall: T, 
 ... nrx [0:1]= 37 64 
 ... nsel[0:0]= 26 
- {295} [ntt=43, nunfs=0] .. nsel[1:44]= 1 3 4 5 9 10 11 18 19 21 23 24 25 30 37 38 39 40 46 47 50 54 55 56 59 62 64 65 66 67 68 70 71 72 75 76 79 80 81 82 83 84 85 86  -> dysta2()
-. clara(): s:= max dys[1..946] = 82.7103;
-clara()'s bswap2(*, s=82.7103):     new repr. 15
+ [ntt=43, nunfs=0] .. nsel[1:44]= 1 3 4 5 9 10 11 18 19 21 23 24 25 30 37 38 39 40 46 47 50 54 55 56 59 62 64 65 66 67 68 70 71 72 75 76 79 80 81 82 83 84 85 86  -> dysta2();
+ clara -> s:= max{dys[1..946]} = 82.7103;
+ bswap2(*, s=82.7103), 1. BUILD:     new repr. 15
     new repr. 27
   after build: medoids are 15 27
   and min.dist dysma[1:n] are
@@ -522,15 +514,15 @@ clara()'s bswap2(*, s=82.7103):     new repr. 15
    4.24   11.3      0   22.6   9.06      0   1.41     17   8.25      2
      17   21.2   1.41   7.07
  --> sky = sum_j D_j= 325.427
-end{bswap2}: sky = 325.427
+ end{bswap2}: sky = 325.427
  obj= 7.91099
-C clara(): sample 8  finding 1st... new k{ran}:
+- clara sample  8  finding 1st... new k{ran}:
 .. kall: T, 
 ... nrx [0:1]= 37 64 
 ... nsel[0:0]= 3 
- {295} [ntt=43, nunfs=0] .. nsel[1:44]= 4 5 6 10 12 15 16 17 19 20 21 22 23 24 25 26 27 28 29 31 37 39 41 42 44 45 46 49 50 51 56 57 61 62 63 64 68 73 75 77 78 80 81 85  -> dysta2()
-. clara(): s:= max dys[1..946] = 84.1487;
-clara()'s bswap2(*, s=84.1487):     new repr. 21
+ [ntt=43, nunfs=0] .. nsel[1:44]= 4 5 6 10 12 15 16 17 19 20 21 22 23 24 25 26 27 28 29 31 37 39 41 42 44 45 46 49 50 51 56 57 61 62 63 64 68 73 75 77 78 80 81 85  -> dysta2();
+ clara -> s:= max{dys[1..946]} = 84.1487;
+ bswap2(*, s=84.1487), 1. BUILD:     new repr. 21
     new repr. 36
   after build: medoids are 21 36
   and min.dist dysma[1:n] are
@@ -540,15 +532,15 @@ clara()'s bswap2(*, s=84.1487):     new repr. 21
    31.1   1.41   5.66   15.6   5.66      0   4.24   2.83   9.06   7.07
     5.1     17   8.25   1.41
  --> sky = sum_j D_j= 312.333
-end{bswap2}: sky = 312.333
+ end{bswap2}: sky = 312.333
  obj= 7.91099
-C clara(): sample 9  finding 1st... new k{ran}:
+- clara sample  9  finding 1st... new k{ran}:
 .. kall: T, 
 ... nrx [0:1]= 37 64 
 ... nsel[0:0]= 59 
- {295} [ntt=43, nunfs=0] .. nsel[1:44]= 1 3 5 9 11 13 17 22 23 25 29 31 32 34 37 38 40 42 43 44 47 49 53 55 56 58 62 63 64 66 68 69 70 71 72 73 74 75 76 78 81 82 84 86  -> dysta2()
-. clara(): s:= max dys[1..946] = 82.7103;
-clara()'s bswap2(*, s=82.7103):     new repr. 15
+ [ntt=43, nunfs=0] .. nsel[1:44]= 1 3 5 9 11 13 17 22 23 25 29 31 32 34 37 38 40 42 43 44 47 49 53 55 56 58 62 63 64 66 68 69 70 71 72 73 74 75 76 78 81 82 84 86  -> dysta2();
+ clara -> s:= max{dys[1..946]} = 82.7103;
+ bswap2(*, s=82.7103), 1. BUILD:     new repr. 15
     new repr. 29
   after build: medoids are 15 29
   and min.dist dysma[1:n] are
@@ -559,15 +551,15 @@ clara()'s bswap2(*, s=82.7103):     new repr. 15
    8.25      2   21.2   7.07
  --> sky = sum_j D_j= 356.571
   Last swap: new 16 <-> 29 old; decreasing diss. by 0.311473
-end{bswap2}: sky = 356.571
+ end{bswap2}: sky = 356.571
  obj= 7.91099
-C clara(): sample 10  finding 1st... new k{ran}:
+- clara sample 10  finding 1st... new k{ran}:
 .. kall: T, 
 ... nrx [0:1]= 37 64 
 ... nsel[0:0]= 5 
- {295} [ntt=43, nunfs=0] .. nsel[1:44]= 2 4 8 11 12 13 22 24 25 26 27 29 31 34 36 37 39 41 42 44 47 48 49 50 53 57 58 59 60 61 62 63 64 66 67 70 71 72 75 77 79 82 84 87  -> dysta2()
-. clara(): s:= max dys[1..946] = 85.5102;
-clara()'s bswap2(*, s=85.5102):     new repr. 16
+ [ntt=43, nunfs=0] .. nsel[1:44]= 2 4 8 11 12 13 22 24 25 26 27 29 31 34 36 37 39 41 42 44 47 48 49 50 53 57 58 59 60 61 62 63 64 66 67 70 71 72 75 77 79 82 84 87  -> dysta2();
+ clara -> s:= max{dys[1..946]} = 85.5102;
+ bswap2(*, s=85.5102), 1. BUILD:     new repr. 16
     new repr. 33
   after build: medoids are 16 33
   and min.dist dysma[1:n] are
@@ -578,15 +570,15 @@ clara()'s bswap2(*, s=85.5102):     new repr. 16
    1.41      2   21.2   12.7
  --> sky = sum_j D_j= 368.598
   Last swap: new 42 <-> 33 old; decreasing diss. by 0.115684
-end{bswap2}: sky = 368.598
+ end{bswap2}: sky = 368.598
  obj= 7.91099
-C clara(): sample 11  finding 1st... new k{ran}:
+- clara sample 11  finding 1st... new k{ran}:
 .. kall: T, 
 ... nrx [0:1]= 37 64 
 ... nsel[0:0]= 30 
- {295} [ntt=43, nunfs=0] .. nsel[1:44]= 2 7 8 9 10 16 17 20 22 23 24 26 27 29 34 35 36 37 38 41 44 47 48 49 50 51 52 53 54 59 60 61 63 64 67 68 69 75 76 78 80 81 84 85  -> dysta2()
-. clara(): s:= max dys[1..946] = 80.9938;
-clara()'s bswap2(*, s=80.9938):     new repr. 18
+ [ntt=43, nunfs=0] .. nsel[1:44]= 2 7 8 9 10 16 17 20 22 23 24 26 27 29 34 35 36 37 38 41 44 47 48 49 50 51 52 53 54 59 60 61 63 64 67 68 69 75 76 78 80 81 84 85  -> dysta2();
+ clara -> s:= max{dys[1..946]} = 80.9938;
+ bswap2(*, s=80.9938), 1. BUILD:     new repr. 18
     new repr. 19
   after build: medoids are 18 19
   and min.dist dysma[1:n] are
@@ -596,15 +588,15 @@ clara()'s bswap2(*, s=80.9938):     new repr. 18
    5.66   5.66   5.66   3.16   1.41   4.24   8.49   8.25      0   2.83
      17    5.1   21.2   1.41
  --> sky = sum_j D_j= 362.717
-end{bswap2}: sky = 362.717
+ end{bswap2}: sky = 362.717
  obj= 8.0873
-C clara(): sample 12  finding 1st... new k{ran}:
+- clara sample 12  finding 1st... new k{ran}:
 .. kall: T, 
 ... nrx [0:1]= 37 64 
 ... nsel[0:0]= 44 
- {295} [ntt=43, nunfs=0] .. nsel[1:44]= 1 2 3 7 11 12 14 18 19 20 21 28 30 31 32 33 34 37 38 39 40 42 49 51 52 53 55 59 63 64 68 69 70 72 74 76 77 78 79 81 84 85 86 87  -> dysta2()
-. clara(): s:= max dys[1..946] = 80.9938;
-clara()'s bswap2(*, s=80.9938):     new repr. 18
+ [ntt=43, nunfs=0] .. nsel[1:44]= 1 2 3 7 11 12 14 18 19 20 21 28 30 31 32 33 34 37 38 39 40 42 49 51 52 53 55 59 63 64 68 69 70 72 74 76 77 78 79 81 84 85 86 87  -> dysta2();
+ clara -> s:= max{dys[1..946]} = 80.9938;
+ bswap2(*, s=80.9938), 1. BUILD:     new repr. 18
     new repr. 30
   after build: medoids are 18 30
   and min.dist dysma[1:n] are
@@ -614,37 +606,69 @@ clara()'s bswap2(*, s=80.9938):     new repr. 18
    4.24   8.49   11.3   22.6   7.07      0   7.07    5.1   1.41   8.25
    21.2   1.41   7.07   12.7
  --> sky = sum_j D_j= 347.279
-end{bswap2}: sky = 347.279
+ end{bswap2}: sky = 347.279
  obj= 7.91099
-C clara(): best sample _found_ ; nbest[1:44] =
- c(2,5,10,11,14,18,21,22,23,24,25,26,27,29,33,34,36,37,39,41,42,43,45,47,49,50,55,57,58,60,62,64,67,68,71,73,75,77,79,82,83,84,85,87)
- --> dysta2(nbest), resul(), end
-Call:	 clara(x = x, k = 2, samples = 12, trace = 3) 
-Medoids:
-     [,1] [,2]
-[1,]   NA    1
-[2,]   50   14
-Objective function:	 7.910988
-Clustering vector: 	 int [1:87] 1 1 1 2 1 1 1 2 1 2 1 2 1 2 2 1 1 1 ...
-Cluster sizes:	    	 56 31 
-Best sample:
- [1]  2  5 10 11 14 18 21 22 23 24 25 26 27 29 33 34 36 37 39 41 42 43 45 47 49
-[26] 50 55 57 58 60 62 64 67 68 71 73 75 77 79 82 83 84 85 87
-
-Available components:
- [1] "sample"     "medoids"    "i.med"      "clustering" "objective" 
- [6] "clusinfo"   "diss"       "call"       "silinfo"    "data"      
+C clara() -> best sample _found_ ; nbest[1:44] =
+ c(2,5,10,11,14,18,21,22,23,24,25,26,27,29,33,34,36,37,39,41,
+  42,43,45,47,49,50,55,57,58,60,62,64,67,68,71,73,75,77,79,82,
+  83,84,85,87)
+ resul(),  black() and return() from C.
 Warning message:
 In clara(x, 2, samples = 12, trace = 3) :
   Distance computations with NAs: using correct instead of pre-2016 wrong formula.
 Use  'correct.d=FALSE'  to get previous results or set 'correct.d=TRUE' explicitly
 to suppress this warning.
+> c2. <- clara(x, 2, samples = 12, trace = 1, correct.d=TRUE)
+C clara(): (nsam,nran,n) = (44,12,87); 'large_sample',
+- clara sample  1  [ntt=43, nunfs=0]  -> dysta2();  obj= 7.92464
+- clara sample  2  [ntt=43, nunfs=0]  -> dysta2();  obj= 7.92464
+- clara sample  3  [ntt=43, nunfs=0]  -> dysta2();  obj= 7.91099
+- clara sample  4  [ntt=43, nunfs=0]  -> dysta2();  obj= 7.92464
+- clara sample  5  [ntt=43, nunfs=0]  -> dysta2();  obj= 7.92464
+- clara sample  6  [ntt=43, nunfs=0]  -> dysta2();  obj= 8.0873
+- clara sample  7  [ntt=43, nunfs=0]  -> dysta2();  obj= 7.91099
+- clara sample  8  [ntt=43, nunfs=0]  -> dysta2();  obj= 7.91099
+- clara sample  9  [ntt=43, nunfs=0]  -> dysta2();  obj= 7.91099
+- clara sample 10  [ntt=43, nunfs=0]  -> dysta2();  obj= 7.91099
+- clara sample 11  [ntt=43, nunfs=0]  -> dysta2();  obj= 8.0873
+- clara sample 12  [ntt=43, nunfs=0]  -> dysta2();  obj= 7.91099
+C clara() -> best sample _found_  resul(),  black() and return() from C.
+> p2g <- pam(daisy(x,"gower"), k=2, trace = 3)
+pam()'s bswap(*, s=0.785, pamonce=0): build 2 medoids:
+    new repr. 37
+    new repr. 64
+  after build: medoids are 37 64
+  and min.dist dysma[1:n] are
+   0.02    0.3    0.1  0.131   0.02   0.04   0.24 0.0898   0.08 0.0238
+   0.04 0.0738   0.02  0.056  0.046   0.06    0.2   0.16   0.02 0.0319
+ 0.0817   0.06      0 0.0498   0.12    0.1  0.136   0.18    0.2    0.2
+   0.02   0.06 0.0576   0.48   0.08   0.12      0 0.0279   0.08   0.08
+    0.2   0.12  0.119  0.131 0.0938    0.1  0.185   0.06   0.04 0.0838
+ 0.0717   0.06 0.0833   0.12   0.06  0.388   0.02 0.0438   0.08   0.08
+   0.08   0.22   0.08      0   0.06   0.06   0.02   0.06   0.12   0.16
+      0   0.32   0.04 0.0798  0.096      0  0.076 0.0398   0.02   0.24
+ 0.0676   0.02   0.24    0.3   0.02    0.1   0.18
+end{bswap()}, end{cstat()}
+> if(FALSE) { ## disabled clara(*, "gower") for now (2023-11-30):
++ c2g <- clara(x, 2, samples = 12, sampsize=nrow(x), trace = 2, metric = "gower", pamLike=TRUE, correct.d=TRUE)
++ (icall <- which(names(c2) == "call"))
++ ## c2g and p2g  are *quite* different !
++ table(c2g$clustering,
++       p2g$clustering)
++ ##    1  2
++ ## 1 40 32
++ ## 2 15  0  <<  not *one* pair of  {2,2}   !?!
++ 
++ stopifnot(exprs = {
++     all.equal(c2[-icall], c2.[-icall])
++ })
++ }# no "gower" for now
 > 
 > data(xclara)
 > suppressWarnings(RNGversion("3.5.0")) # back compatibility of results
 > set.seed(123)
 > xclara[sample(nrow(xclara), 50),] <- NA
-> try( clara(xclara, k = 3) ) #-> "nice" error message depicting first 12 missing obs
+> try( clara(xclara, k = 3) ) #-> "nice" error message  {.. first 12 missing obs} :
 Error in clara(xclara, k = 3) : 
   50 observations (74,126,137,308,411,423,438,451,642,686,689,735 ...) have *only* NAs --> omit them for clustering!
 In addition: Warning message:
@@ -652,7 +676,10 @@ In clara(xclara, k = 3) :
   Distance computations with NAs: using correct instead of pre-2016 wrong formula.
 Use  'correct.d=FALSE'  to get previous results or set 'correct.d=TRUE' explicitly
 to suppress this warning.
+> ## Error in clara(xclara, k = 3) :
+> ##   50 observations (74,126,137,308,411,423,438,451,642,686,689,735 ...) have *only* NAs
+> ##     --> omit them for clustering!
 > 
 > proc.time()
    user  system elapsed 
-  0.169   0.044   0.264 
+  0.149   0.039   0.205 

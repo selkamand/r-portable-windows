@@ -11,10 +11,8 @@ anova.survreglist	survreg
 anyDuplicated.Surv	Survmethods
 as.character.Surv	Survmethods
 as.data.frame.Surv	Survmethods
-as.integer.Surv	Survmethods
 as.matrix.ratetable	survival-internal
 as.matrix.Surv	Survmethods
-as.numeric.Surv	Survmethods
 attrassign	attrassign
 attrassign.default	attrassign
 attrassign.lm	attrassign
@@ -26,6 +24,8 @@ bladder2	bladder
 blog	blogit
 blogit	blogit
 bprobit	blogit
+braking	reliability
+brier	brier
 c.Surv	Survmethods
 cancer	lung
 capacitor	reliability
@@ -36,6 +36,7 @@ cgd0	cgd0
 cipoisson	cipoisson
 clogit	clogit
 cluster	cluster
+coef.survfit	survival-internal
 colon	colon
 concordance	concordance
 concordance.coxph	concordance
@@ -43,6 +44,7 @@ concordance.formula	concordance
 concordance.lm	concordance
 concordance.survreg	concordance
 concordancefit	concordancefit
+confint.survfit	survival-internal
 cox.zph	cox.zph
 coxpenal.df	survival-internal
 coxpenal.fit	survival-internal
@@ -68,10 +70,12 @@ frailty	frailty
 frailty.gamma	frailty
 frailty.gaussian	frailty
 frailty.t	frailty
+fromtimeline	timeline
 gbsg	gbsg
 genfan	reliability
 head.Surv	Survmethods
 heart	heart
+hoel	hoel
 ifluid	reliability
 imotor	reliability
 is.na.coxph.penalty	survival-internal
@@ -106,6 +110,7 @@ model.frame.survreg	survreg
 model.matrix.coxph	model.matrix.coxph
 myeloid	myeloid
 myeloma	myeloma
+nafld	nafld
 nafld1	nafld
 nafld2	nafld
 nafld3	nafld
@@ -187,6 +192,7 @@ summary.pyears	summary.pyears
 Summary.Surv	Survmethods
 summary.survexp	summary.survexp
 summary.survfit	summary.survfit
+summary.survfitms	summary.survfit
 summary.survreg	survreg.object
 Surv	Surv
 Surv2	Surv2
@@ -214,6 +220,7 @@ survfitCI	survival-internal
 survfitcoxph.fit	survfitcoxph.fit
 survfitKM	survival-internal
 survfitms.object	survfit.object
+survfitTurnbull	survival-internal
 survival-deprecated	survival-deprecated
 survival-internal	survival-internal
 survobrien	survobrien
@@ -229,8 +236,10 @@ survSplit	survSplit
 t.Surv	Survmethods
 tail.Surv	Survmethods
 tcut	tcut
+timeline	timeline
 tmerge	tmerge
 tobin	tobin
+totimeline	timeline
 transplant	transplant
 turbine	reliability
 udca	udca
@@ -241,6 +250,7 @@ untangle.specials	untangle.specials
 uspop2	uspop2
 valveSeat	reliability
 vcov.coxph	vcov.coxph
+vcov.survfit	survival-internal
 vcov.survreg	vcov.coxph
 veteran	veteran
 xtfrm.Surv	xtfrm.Surv
